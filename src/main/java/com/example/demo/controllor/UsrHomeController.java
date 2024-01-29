@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.dto.Article;
@@ -16,16 +15,10 @@ import com.example.demo.dto.Article;
 public class UsrHomeController {
 
 	private int count = 0;
-	private List<Article> articles;
-	private int lastId = 0;
 
 	public UsrHomeController() {
 		count = 0;
-		articles = new ArrayList<>();
 	}
-
-
-
 
 	@RequestMapping("/usr/home/getBoolean")
 	@ResponseBody
