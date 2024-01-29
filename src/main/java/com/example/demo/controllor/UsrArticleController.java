@@ -20,6 +20,7 @@ public class UsrArticleController {
 		makeTestData();
 	}
 
+	//서비스 메소드
 	private void makeTestData() {
 		for (int i = 1; i <= 10; i++) {
 			String title = "제목" + i;
@@ -38,18 +39,33 @@ public class UsrArticleController {
 		return article;
 	}
 
+	private Article getArticle(int id) {
+		for (Article article : articles) {
+			if (article.getId() == id) {
+				return article;
+			}
+		}
+		return null;
+	}
+
+	private void deleteArticle(int id) {
+		Article article = getArticle(id);
+		articles.remove(article);
+	}
+
+	//액션 메소드
 	@RequestMapping("/usr/home/doModify")
 	@ResponseBody
-	public String doModify(int id, String title, String body) {
+	public Object doModify(int id, String title, String body) {
 		for (Article article : articles) {
-			if (articles.get(id - 1) == null) {
+			if (article.getId() != id) {
 				return id + "번 글은 없습니다.";
 
 			} else if (article.getId() == id) {
 				articles.get(id - 1).setTitle(title);
 				articles.get(id - 1).setBody(body);
 			}
-			return id + "번 글은 수정되었습니다.";
+			return id + "번 글이 수정되었습니다." + article;
 		}
 		return null;
 	}
@@ -57,18 +73,17 @@ public class UsrArticleController {
 	@RequestMapping("/usr/home/doDelete")
 	@ResponseBody
 	public String doDelete(int id) {
-		if (articles.get(id - 1) == null) {
+		Article article = getArticle(id);
+
+		if(article == null) {
 			return id + "번 글은 없습니다.";
 		}
 
-		for (Article article : articles) {
-			if (article.getId() == id) {
-				articles.remove(id - 1);
-			}
-			return id + "번 글은 삭제되었습니다.";
-		}
-		return null;
+		deleteArticle(id);
+		
+		return id + "번 글이 삭제되었습니다.";
 	}
+
 
 	@RequestMapping("/usr/home/doAdd")
 	@ResponseBody
