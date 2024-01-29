@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.demo.dto.Article;
+import com.example.demo.vo.Article;
 
 @Controller
 public class UsrArticleController {
@@ -20,7 +20,7 @@ public class UsrArticleController {
 		makeTestData();
 	}
 
-	//서비스 메소드
+	// 서비스 메소드
 	private void makeTestData() {
 		for (int i = 1; i <= 10; i++) {
 			String title = "제목" + i;
@@ -53,21 +53,37 @@ public class UsrArticleController {
 		articles.remove(article);
 	}
 
-	//액션 메소드
+	private Article modifyArticle(int id, String title, String body) {
+		Article article = getArticle(id);
+		article.setTitle(title);
+		article.setBody(body);
+
+		return article;
+	}
+
+	// 액션 메소드
+	@RequestMapping("/usr/home/getArticle")
+	@ResponseBody
+	public Object getArticleAction(int id) {
+		Article article = getArticle(id);
+
+		if (article == null) {
+			return id + "번 글은 없습니다.";
+		}
+		return article;
+	}
+	
 	@RequestMapping("/usr/home/doModify")
 	@ResponseBody
 	public Object doModify(int id, String title, String body) {
-		for (Article article : articles) {
-			if (article.getId() != id) {
-				return id + "번 글은 없습니다.";
+		Article article = getArticle(id);
 
-			} else if (article.getId() == id) {
-				articles.get(id - 1).setTitle(title);
-				articles.get(id - 1).setBody(body);
-			}
-			return id + "번 글이 수정되었습니다." + article;
+		if (article == null) {
+			return id + "번 글은 없습니다.";
 		}
-		return null;
+
+		article = modifyArticle(id, title, body);
+		return article;
 	}
 
 	@RequestMapping("/usr/home/doDelete")
@@ -75,15 +91,13 @@ public class UsrArticleController {
 	public String doDelete(int id) {
 		Article article = getArticle(id);
 
-		if(article == null) {
+		if (article == null) {
 			return id + "번 글은 없습니다.";
 		}
 
 		deleteArticle(id);
-		
 		return id + "번 글이 삭제되었습니다.";
 	}
-
 
 	@RequestMapping("/usr/home/doAdd")
 	@ResponseBody

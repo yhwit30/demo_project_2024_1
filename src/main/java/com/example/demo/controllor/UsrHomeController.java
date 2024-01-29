@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.demo.dto.Article;
+import com.example.demo.vo.Article;
 
 @Controller
 public class UsrHomeController {
@@ -53,11 +53,11 @@ public class UsrHomeController {
 		return map;
 	}
 
-	@RequestMapping("/usr/home/getArticle")
-	@ResponseBody
-	public Article getArticle() {
-		return new Article(1, "giving automatic?! constructor", "amazing~");
-	}
+//	@RequestMapping("/usr/home/getArticle")
+//	@ResponseBody
+//	public Article getArticle() {
+//		return new Article(1, "giving automatic?! constructor", "amazing~");
+//	}
 
 	@RequestMapping("/usr/home/getList")
 	@ResponseBody
