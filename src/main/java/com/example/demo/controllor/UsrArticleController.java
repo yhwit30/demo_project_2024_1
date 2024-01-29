@@ -12,10 +12,9 @@ import com.example.demo.vo.Article;
 
 @Controller
 public class UsrArticleController {
-	
+
 	@Autowired
 	private ArticleService articleService;
-	
 
 	// 액션 메소드
 	@RequestMapping("/usr/home/getArticle")
@@ -28,7 +27,7 @@ public class UsrArticleController {
 		}
 		return article;
 	}
-	
+
 	@RequestMapping("/usr/home/doModify")
 	@ResponseBody
 	public Object doModify(int id, String title, String body) {
