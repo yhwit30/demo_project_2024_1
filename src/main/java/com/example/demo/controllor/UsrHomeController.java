@@ -7,38 +7,50 @@ import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.dto.Article;
 
 @Controller
 public class UsrHomeController {
-	
+
 	private int count = 0;
-	
-	public UsrHomeController(){
+	private List<Article> articles;
+	private int lastId = 0;
+
+	public UsrHomeController() {
 		count = 0;
+		articles = new ArrayList<>();
 	}
+
+
+
+
 	@RequestMapping("/usr/home/getBoolean")
 	@ResponseBody
 	public boolean getBoolean() {
 		return false;
 	}
+
 	@RequestMapping("/usr/home/getInt")
 	@ResponseBody
 	public int getInt() {
 		return 12;
 	}
+
 	@RequestMapping("/usr/home/getString")
 	@ResponseBody
 	public String getString() {
 		return "string data";
 	}
+
 	@RequestMapping("/usr/home/getDouble")
 	@ResponseBody
 	public double getDouble() {
 		return 3.14;
 	}
+
 	@RequestMapping("/usr/home/getMap")
 	@ResponseBody
 	public Map<String, Object> getMap() {
@@ -47,13 +59,13 @@ public class UsrHomeController {
 		map.put("second", 12);
 		return map;
 	}
-	
+
 	@RequestMapping("/usr/home/getArticle")
 	@ResponseBody
 	public Article getArticle() {
-		return new Article(1, "giving automatic?! constructor");
+		return new Article(1, "giving automatic?! constructor", "amazing~");
 	}
-	
+
 	@RequestMapping("/usr/home/getList")
 	@ResponseBody
 	public List<String> getList() {
@@ -62,7 +74,7 @@ public class UsrHomeController {
 		list.add("list data2");
 		return list;
 	}
-		
+
 	@RequestMapping("/usr/home/setCount")
 	@ResponseBody
 	public String setCount(int count) {
@@ -75,15 +87,11 @@ public class UsrHomeController {
 	public int getCount() {
 		return count++;
 	}
-	
+
 	@RequestMapping("/usr/home/main")
 	@ResponseBody
 	public String showMain() {
 		return "Don Quixote";
 	}
-	
 
 }
-
-
-
