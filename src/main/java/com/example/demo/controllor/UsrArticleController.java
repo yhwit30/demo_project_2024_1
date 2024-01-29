@@ -38,7 +38,7 @@ public class UsrArticleController {
 			return id + "번 글은 없습니다.";
 		}
 
-		article = articleService.modifyArticle(id, title, body);
+		articleService.modifyArticle(id, title, body);
 		return article;
 	}
 
@@ -65,7 +65,7 @@ public class UsrArticleController {
 	@RequestMapping("/usr/home/getArticles")
 	@ResponseBody
 	public List<Article> getArticles() {
-		return articleService.articles;
+		return articleService.getArticles();
 	}
 
 }
