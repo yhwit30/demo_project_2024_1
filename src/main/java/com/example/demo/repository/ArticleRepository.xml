@@ -10,7 +10,7 @@
 		id DESC
 	</select>
 
-	<select id="getArticle" resultType="Article">
+	<select id ="getArticle" resultType="Article">
 		SELECT *
 		FROM article
 		WHERE id
@@ -27,3 +27,4 @@
 		WHERE id = #{id}
 	</update>
 </mapper>
+
