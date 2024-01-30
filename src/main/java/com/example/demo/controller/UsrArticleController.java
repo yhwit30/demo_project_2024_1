@@ -19,6 +19,12 @@ public class UsrArticleController {
 	private ArticleService articleService;
 
 	// 액션 메소드
+	@RequestMapping("/usr/article/getArticles")
+	@ResponseBody
+	public ResultData getArticles() {
+		return ResultData.from("S-1", "게시글 목록입니다.", articleService.getArticles());
+	}
+
 	@RequestMapping("/usr/article/getArticle")
 	@ResponseBody
 	public ResultData getArticleAction(int id) {
@@ -32,45 +38,36 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
-	public Object doModify(int id, String title, String body) {
+	public ResultData doModify(int id, String title, String body) {
 		Article article = articleService.getArticle(id);
 
 		if (article == null) {
-			return id + "번 글은 없습니다.";
+			return ResultData.from("F-1", Ut.f("%d번 글은 없습니다.", id));
 		}
 
 		articleService.modifyArticle(id, title, body);
-		return article;
+		return ResultData.from("S-1", Ut.f("%d번 게시글입니다.", id), article);
 	}
 
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
-	public String doDelete(int id) {
+	public ResultData doDelete(int id) {
 		Article article = articleService.getArticle(id);
 
 		if (article == null) {
-			return id + "번 글은 없습니다.";
+			return ResultData.from("F-1", Ut.f("%d번 글은 없습니다.", id));
 		}
 
 		articleService.deleteArticle(id);
-		return id + "번 글이 삭제되었습니다.";
+		return ResultData.from("S-1", Ut.f("%d번 글은 삭제되었습니다.", id));
 	}
 
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public Article doWrite(String title, String body) {
+	public ResultData doWrite(String title, String body) {
 		int id = articleService.writeArticle(title, body);
 		Article article = articleService.getArticle(id);
-		return article;
-	}
-
-	@RequestMapping("/usr/article/getArticles")
-	@ResponseBody
-	public List<Article> getArticles() {
-		return articleService.getArticles();
+		return ResultData.from("S-1", Ut.f("%d번 글이 등록되었습니다.", id), article);
 	}
 
 }
-
-
-
