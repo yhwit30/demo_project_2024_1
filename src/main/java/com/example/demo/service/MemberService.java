@@ -22,8 +22,8 @@ public class MemberService {
 		return memberRepository.getLastInsertId();
 
 	}
-	public Member getMember(String loginId) {
-		Member member = memberRepository.getMember(loginId);
+	public Member getMemberByLoginId(String loginId) {
+		Member member = memberRepository.getMemberByLoginId(loginId);
 		return member;
 	}
 

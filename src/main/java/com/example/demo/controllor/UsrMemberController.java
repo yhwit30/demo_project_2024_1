@@ -17,25 +17,31 @@ public class UsrMemberController {
 	// 액션 메소드
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
-	public Member doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNum,
+	public Object doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNum,
 			String email) {
+
+		if (loginId == null || loginPw == null || name == null || nickname == null || cellphoneNum == null
+				|| email == null) {
+			return "다시 입력하시오";
+		}
+
+		if (memberService.getMemberByLoginId(loginId).getLoginId().equals(loginId)) {
+			return "해당 아이디는 이미 사용 중입니다.";
+		}
+		;
 
 		int id = memberService.doJoin(loginId, loginPw, name, nickname, cellphoneNum, email);
 
 		Member member = memberService.getMemberById(id);
-
 		return member;
 	}
 
 	@RequestMapping("/usr/member/getMember")
 	@ResponseBody
-	public Object getMember(String loginId) {
-		Member member = memberService.getMember(loginId);
+	public Object getMemberByLoginId(String loginId) {
+		Member member = memberService.getMemberByLoginId(loginId);
 
 		return member;
 	}
 
 }
-
-
-
