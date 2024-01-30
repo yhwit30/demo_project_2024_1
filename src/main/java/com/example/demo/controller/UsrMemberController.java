@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.service.MemberService;
 import com.example.demo.util.Ut;
+import com.example.demo.vo.LoginContainer;
 import com.example.demo.vo.Member;
 
 @Controller
@@ -15,6 +16,32 @@ public class UsrMemberController {
 	@Autowired
 	private MemberService memberService;
 
+	//액션 메소드
+	@RequestMapping("/usr/member/doLogout")
+	@ResponseBody
+	public Object doLogout(String loginId, String loginPw) {
+
+		if (LoginContainer.isLogined == 1) {
+			LoginContainer.isLogined = 0;
+			return "로그아웃되었습니다.";
+		} else {
+			LoginContainer.isLogined = 0;
+			return "로그인하고 이용하세요.";
+		}
+	}
+
+	@RequestMapping("/usr/member/doLogin")
+	@ResponseBody
+	public Object doLogin(String loginId, String loginPw) {
+
+		Member member = memberService.getMemberByLoginId(loginId);
+		if (member.getLoginId().equals(loginId) && member.getLoginPw().equals(loginPw)) {
+			LoginContainer.isLogined = 1;
+			return member.getName() + "님 환영합니다. 로그인 완료";
+		} else {
+			return "로그인 실패";
+		}
+	}
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
 	public Object doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNum,
