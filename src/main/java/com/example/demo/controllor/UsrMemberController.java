@@ -47,9 +47,23 @@ public class UsrMemberController {
 	public Object doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNum,
 			String email) {
 
-		if (Ut.isNullOrEmpty(loginId) || Ut.isNullOrEmpty(loginPw) || Ut.isNullOrEmpty(name)
-				|| Ut.isNullOrEmpty(nickname) || Ut.isNullOrEmpty(cellphoneNum) || Ut.isNullOrEmpty(email)) {
-			return "빈칸 없이 다시 입력하시오";
+		if (Ut.isNullOrEmpty(loginId)) {
+			return "아이디를 입력해주세요";
+		}
+		if (Ut.isNullOrEmpty(loginPw)) {
+			return "비밀번호를 입력해주세요";
+		}
+		if (Ut.isNullOrEmpty(name)) {
+			return "이름을 입력해주세요";
+		}
+		if (Ut.isNullOrEmpty(nickname)) {
+			return "닉네임을 입력해주세요";
+		}
+		if (Ut.isNullOrEmpty(cellphoneNum)) {
+			return "전화번호를 입력해주세요";
+		}
+		if (Ut.isNullOrEmpty(email)) {
+			return "이메일을 입력해주세요";
 		}
 
 		int id = memberService.join(loginId, loginPw, name, nickname, cellphoneNum, email);
