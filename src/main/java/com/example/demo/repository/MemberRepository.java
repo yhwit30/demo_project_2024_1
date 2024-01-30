@@ -1,6 +1,8 @@
 package com.example.demo.repository;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import com.example.demo.vo.Member;
 
@@ -8,6 +10,22 @@ import com.example.demo.vo.Member;
 public interface MemberRepository {
 
 	public Member getMember(String loginId);
-	
+
+	@Insert("""
+			INSERT INTO
+			`member` SET
+			regDate = NOW(),
+			updateDate = NOW(),
+			loginId = #{loginId},
+			loginPw = #{loginPw},
+			name = #{name},
+			nickname = #{nickname},
+			cellphoneNum = #{cellphoneNum},
+			email = #{email}
+			""")
+	public void join(String loginId, String loginPw, String name, String nickname, String cellphoneNum, String email);
+
+	@Select("SELECT LAST_INSERT_ID()")
+	public int getLastInsertId();
 
 }
