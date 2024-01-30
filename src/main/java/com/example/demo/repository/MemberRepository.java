@@ -25,7 +25,6 @@ public interface MemberRepository {
 	@Select("SELECT LAST_INSERT_ID()")
 	public int getLastInsertId();
 	
-	@Select("SELECT * FROM `member` WHERE id = #{id}")
 	public Member getMemberById(int id);
 
 	public Member getMemberByLoginId(String loginId);
