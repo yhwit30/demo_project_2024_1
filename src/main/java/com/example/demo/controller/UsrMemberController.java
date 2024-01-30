@@ -18,31 +18,35 @@ public class UsrMemberController {
 	private MemberService memberService;
 
 	// 액션 메소드
-//	@RequestMapping("/usr/member/doLogout")
-//	@ResponseBody
-//	public ResultData doLogout(String loginId, String loginPw) {
-//
-//		if (LoginContainer.isLogined == 1) {
-//			LoginContainer.isLogined = 0;
-//			return "로그아웃되었습니다.";
-//		} else {
-//			LoginContainer.isLogined = 0;
-//			return "로그인하고 이용하세요.";
-//		}
-//	}
-//
-//	@RequestMapping("/usr/member/doLogin")
-//	@ResponseBody
-//	public ResultData doLogin(String loginId, String loginPw) {
-//
-//		Member member = memberService.getMemberByLoginId(loginId);
-//		if (member.getLoginId().equals(loginId) && member.getLoginPw().equals(loginPw)) {
-//			LoginContainer.isLogined = 1;
-//			return member.getName() + "님 환영합니다. 로그인 완료";
-//		} else {
-//			return "로그인 실패";
-//		}
-//	}
+	@RequestMapping("/usr/member/doLogout")
+	@ResponseBody
+	public ResultData doLogout(String loginId, String loginPw) {
+
+		if (LoginContainer.isLogined == 1) {
+			LoginContainer.isLogined = 0;
+			return ResultData.from("S-1", "로그아웃되었습니다");
+		} else {
+			LoginContainer.isLogined = 0;
+			return ResultData.from("F-1", "로그인하고 이용하세요.");
+		}
+	}
+
+	@RequestMapping("/usr/member/doLogin")
+	@ResponseBody
+	public ResultData doLogin(String loginId, String loginPw) {
+		
+		if(LoginContainer.isLogined == 1) {
+			return  ResultData.from("F-1", "이미 로그인 상태입니다.");
+		}
+
+		Member member = memberService.getMemberByLoginId(loginId);
+		if (member.getLoginId().equals(loginId) && member.getLoginPw().equals(loginPw)) {
+			LoginContainer.isLogined = 1;
+			return ResultData.from("S-1", Ut.f("%s님 환영합니다. 로그인 완료", member.getName()));
+		} else {
+			return ResultData.from("F-1", "로그인 실패");
+		}
+	}
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
 	public ResultData doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNum,
