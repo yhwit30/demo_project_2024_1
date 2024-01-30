@@ -22,17 +22,20 @@ public class UsrMemberController {
 
 		if (loginId == null || loginPw == null || name == null || nickname == null || cellphoneNum == null
 				|| email == null) {
-			return "다시 입력하시오";
+			return "빈칸 없이 다시 입력하시오";
 		}
+		Member member = memberService.getMemberByLoginId(loginId);
 
-		if (memberService.getMemberByLoginId(loginId).getLoginId().equals(loginId)) {
-			return "해당 아이디는 이미 사용 중입니다.";
+		try {
+			if (member.getLoginId().equals(loginId)) {
+				return loginId + " 해당 아이디는 이미 사용 중입니다.";
+			}
+		} catch (NullPointerException e) {
 		}
-		;
 
 		int id = memberService.doJoin(loginId, loginPw, name, nickname, cellphoneNum, email);
+		member = memberService.getMemberById(id);
 
-		Member member = memberService.getMemberById(id);
 		return member;
 	}
 
