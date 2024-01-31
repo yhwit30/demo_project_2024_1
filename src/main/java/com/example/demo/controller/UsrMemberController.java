@@ -34,9 +34,9 @@ public class UsrMemberController {
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
 	public ResultData doLogin(String loginId, String loginPw) {
-		
-		if(LoginContainer.isLogined == 1) {
-			return  ResultData.from("F-1", "이미 로그인 상태입니다.");
+
+		if (LoginContainer.isLogined == 1) {
+			return ResultData.from("F-1", "이미 로그인 상태입니다.");
 		}
 
 		Member member = memberService.getMemberByLoginId(loginId);
@@ -47,9 +47,10 @@ public class UsrMemberController {
 			return ResultData.from("F-1", "로그인 실패");
 		}
 	}
+
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
-	public ResultData doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNum,
+	public ResultData<Member> doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNum,
 			String email) {
 		if (Ut.isNullOrEmpty(loginId)) {
 			return ResultData.from("F-1", "아이디를 입력해주세요.");
@@ -70,15 +71,15 @@ public class UsrMemberController {
 			return ResultData.from("F-6", "이메일을 입력해주세요.");
 		}
 
-		ResultData joinRd = memberService.join(loginId, loginPw, name, nickname, cellphoneNum, email);
+		ResultData<Integer> joinRd = memberService.join(loginId, loginPw, name, nickname, cellphoneNum, email);
 
-		if(joinRd.isFail()) {
-			return joinRd;
+		if (joinRd.isFail()) {
+			return (ResultData) joinRd;
 		}
 
-		Member member = memberService.getMember((int) joinRd.getData1());
+		// 회원가입 성공 시 member 데이터 보여주기 위해서
+		Member member = memberService.getMember(joinRd.getData1());
 
 		return ResultData.newData(joinRd, member);
 	}
 }
-
