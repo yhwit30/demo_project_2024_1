@@ -74,6 +74,7 @@ public class UsrArticleController {
 
 		int id = (int) writeArticleRd.getData1();
 
+		//결과 출력 시 해당 article도 나오게
 		Article article = articleService.getArticle(id);
 
 		return ResultData.from(writeArticleRd.getResultCode(), writeArticleRd.getMsg(), article);

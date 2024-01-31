@@ -23,30 +23,31 @@ public class UsrMemberController {
 	// 액션 메소드
 	@RequestMapping("/usr/member/doLogout")
 	@ResponseBody
-	public ResultData doLogout(String loginId, String loginPw, HttpServletRequest request,
-			HttpServletResponse response) {
+	public ResultData doLogout(String loginId, String loginPw, HttpSession httpSession) {
 
-		// 로그인이 되어 있는지 확인
-		HttpSession session = request.getSession();
-		if (session.getAttribute("loginedMember") == null) {
+		// 로그인 상태 체크
+		if (httpSession.getAttribute("loginedMember") == null) {
 			return ResultData.from("F-1", "로그인하고 이용하세요.");
 		}
 
 		// 세션에 로그인 정보 없애기
-		session.removeAttribute("loginedMember");
+		httpSession.removeAttribute("loginedMember");
 		return ResultData.from("S-1", "로그아웃되었습니다");
 
 	}
 
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
-	public ResultData doLogin(String loginId, String loginPw, HttpServletRequest request,
-			HttpServletResponse response) {
-		
-		HttpSession session = request.getSession();
-		if (session.getAttribute("loginedMember") != null) {
+	public ResultData doLogin(String loginId, String loginPw, HttpSession httpSession) {
+
+		boolean isLogined = httpSession.getAttribute("loginedMember") != null;
+
+		// 로그인 상태 체크
+		if (isLogined) {
 			return ResultData.from("F-9", "이미 로그인 상태입니다.");
 		}
+
+		// 빈칸 체크
 		if (Ut.isEmpty(loginId)) {
 			return ResultData.from("F-1", "아이디를 입력해주세요.");
 		}
@@ -54,13 +55,18 @@ public class UsrMemberController {
 			return ResultData.from("F-2", "비밀번호를 입력해주세요.");
 		}
 
-		ResultData loginRd = memberService.login(loginId, loginPw);
-		Member loginedMember = (Member) loginRd.getData1();
+		Member member = memberService.getMemberByLoginId(loginId);
 
-		// 세션에 로그인 정보 넣기
-		session.setAttribute("loginedMember", loginedMember);
+		if (Ut.isEmpty(member)) {
+			return ResultData.from("F-7", Ut.f("그런 아이디(%s)는 없습니다", loginId));
+		}
+		if (member.getLoginPw().equals(loginPw) == false) {
+			return ResultData.from("F-10", "비밀번호가 틀렸습니다.");
+		}
 
-		return loginRd;
+		httpSession.setAttribute("loginedMemberId", member.getId());
+
+		return ResultData.from("S-1", Ut.f("%s님 환영합니다", member.getNickname()));
 	}
 
 	@RequestMapping("/usr/member/doJoin")

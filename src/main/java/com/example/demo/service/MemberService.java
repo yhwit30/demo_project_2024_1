@@ -8,6 +8,10 @@ import com.example.demo.util.Ut;
 import com.example.demo.vo.Member;
 import com.example.demo.vo.ResultData;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 @Service
 public class MemberService {
 	@Autowired
@@ -15,21 +19,6 @@ public class MemberService {
 
 	public MemberService(MemberRepository memberRepository) {
 		this.memberRepository = memberRepository;
-	}
-
-	public ResultData login(String loginId, String loginPw) {
-
-		Member existsMember = getMemberByLoginId(loginId);
-
-		if (Ut.isEmpty(existsMember)) {
-			return ResultData.from("F-7", Ut.f("그런 아이디(%s)는 없습니다", loginId));
-		}
-		if (existsMember.getLoginPw().equals(loginPw) == false) {
-			return ResultData.from("F-10", "비밀번호가 틀렸습니다.");
-		}
-
-		return ResultData.from("S-2", "로그인이 완료되었습니다.", existsMember);
-		
 	}
 
 	public ResultData<Integer> join(String loginId, String loginPw, String name, String nickname, String cellphoneNum,
@@ -58,7 +47,7 @@ public class MemberService {
 		return memberRepository.getMemberByNameAndEmail(name, email);
 	}
 
-	private Member getMemberByLoginId(String loginId) {
+	public Member getMemberByLoginId(String loginId) {
 		return memberRepository.getMemberByLoginId(loginId);
 	}
 
