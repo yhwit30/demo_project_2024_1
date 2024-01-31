@@ -67,14 +67,12 @@ public class UsrArticleController {
 			return ResultData.from("F-1", Ut.f("%d번 글은 없습니다.", id), id);
 		}
 
-		// 로그인 중인 아이디인지 확인
-		if (article.getMemberId() != loginedMemberId) {
-			return ResultData.from("F-B", "해당 게시글에 권한 없음");
-		}
+		// 로그인 중인 아이디인지 확인(서비스에 요청)
+		ResultData loginedMemberCanModifyRd = articleService.loginedMemberCanModifyRd(loginedMemberId, article);
 
 		// 글 수정 작업
 		articleService.modifyArticle(id, title, body);
-		return ResultData.from("S-1", Ut.f("%d번 글을 수정했습니다.", id), id);
+		return ResultData.from(loginedMemberCanModifyRd.getResultCode(), loginedMemberCanModifyRd.getMsg(), id);
 	}
 
 	@RequestMapping("/usr/article/doDelete")
@@ -100,7 +98,7 @@ public class UsrArticleController {
 
 		// 로그인 중인 아이디인지 확인
 		if (article.getMemberId() != loginedMemberId) {
-			return ResultData.from("F-B", "해당 게시글에 권한 없음");
+			return ResultData.from("F-2", Ut.f("%d번 글에 대한 권한이 없습니다", id), id);
 		}
 
 		// 글 삭제 작업
