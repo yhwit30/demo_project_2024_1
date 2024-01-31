@@ -8,10 +8,6 @@ import com.example.demo.util.Ut;
 import com.example.demo.vo.Member;
 import com.example.demo.vo.ResultData;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-
 @Service
 public class MemberService {
 	@Autowired
@@ -39,6 +35,7 @@ public class MemberService {
 		memberRepository.join(loginId, loginPw, name, nickname, cellphoneNum, email);
 
 		int id = memberRepository.getLastInsertId();
+
 		return ResultData.from("S-1", "회원가입이 완료되었습니다.", id);
 
 	}

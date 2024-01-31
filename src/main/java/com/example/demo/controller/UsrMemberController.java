@@ -10,8 +10,6 @@ import com.example.demo.util.Ut;
 import com.example.demo.vo.Member;
 import com.example.demo.vo.ResultData;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -23,15 +21,15 @@ public class UsrMemberController {
 	// 액션 메소드
 	@RequestMapping("/usr/member/doLogout")
 	@ResponseBody
-	public ResultData doLogout(String loginId, String loginPw, HttpSession httpSession) {
+	public ResultData doLogout(HttpSession httpSession) {
 
 		// 로그인 상태 체크
-		if (httpSession.getAttribute("loginedMember") == null) {
-			return ResultData.from("F-1", "로그인하고 이용하세요.");
+		if (httpSession.getAttribute("loginedMemberId") == null) {
+			return ResultData.from("F-1", "이미 로그아웃 상태입니다");
 		}
 
 		// 세션에 로그인 정보 없애기
-		httpSession.removeAttribute("loginedMember");
+		httpSession.removeAttribute("loginedMemberId");
 		return ResultData.from("S-1", "로그아웃되었습니다");
 
 	}
@@ -40,28 +38,32 @@ public class UsrMemberController {
 	@ResponseBody
 	public ResultData doLogin(String loginId, String loginPw, HttpSession httpSession) {
 
-		boolean isLogined = httpSession.getAttribute("loginedMember") != null;
-
 		// 로그인 상태 체크
+		boolean isLogined = false;
+
+		if (httpSession.getAttribute("loginedMemberId") != null) {
+			isLogined = true;
+		}
 		if (isLogined) {
-			return ResultData.from("F-9", "이미 로그인 상태입니다.");
+			return ResultData.from("F-A", "이미 로그인 상태입니다");
 		}
 
-		// 빈칸 체크
-		if (Ut.isEmpty(loginId)) {
-			return ResultData.from("F-1", "아이디를 입력해주세요.");
+		// 빈 칸 체크
+		if (Ut.isNullOrEmpty(loginId)) {
+			return ResultData.from("F-1", "아이디를 입력해주세요");
 		}
-		if (Ut.isEmpty(loginPw)) {
-			return ResultData.from("F-2", "비밀번호를 입력해주세요.");
+		if (Ut.isNullOrEmpty(loginPw)) {
+			return ResultData.from("F-2", "비밀번호를 입력해주세요");
 		}
 
 		Member member = memberService.getMemberByLoginId(loginId);
 
-		if (Ut.isEmpty(member)) {
-			return ResultData.from("F-7", Ut.f("그런 아이디(%s)는 없습니다", loginId));
+		if (member == null) {
+			return ResultData.from("F-3", Ut.f("%s(은)는 존재하지 않는 아이디입니다", loginId));
 		}
+
 		if (member.getLoginPw().equals(loginPw) == false) {
-			return ResultData.from("F-10", "비밀번호가 틀렸습니다.");
+			return ResultData.from("F-4", Ut.f("비밀번호가 일치하지 않습니다"));
 		}
 
 		httpSession.setAttribute("loginedMemberId", member.getId());
