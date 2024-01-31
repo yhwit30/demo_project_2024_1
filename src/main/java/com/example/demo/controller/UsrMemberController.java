@@ -7,9 +7,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.service.MemberService;
 import com.example.demo.util.Ut;
-import com.example.demo.vo.Session;
 import com.example.demo.vo.Member;
 import com.example.demo.vo.ResultData;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UsrMemberController {
@@ -20,21 +23,28 @@ public class UsrMemberController {
 	// 액션 메소드
 	@RequestMapping("/usr/member/doLogout")
 	@ResponseBody
-	public ResultData doLogout(String loginId, String loginPw) {
+	public ResultData doLogout(String loginId, String loginPw, HttpServletRequest request,
+			HttpServletResponse response) {
 
-		if (Session.isLogined == 1) {
-			Session.isLogined = 0;
-			return ResultData.from("S-1", "로그아웃되었습니다");
-		} else {
-			Session.isLogined = 0;
+		// 로그인이 되어 있는지 확인
+		HttpSession session = request.getSession();
+		if (session.getAttribute("loginedMember") == null) {
 			return ResultData.from("F-1", "로그인하고 이용하세요.");
 		}
+
+		// 세션에 로그인 정보 없애기
+		session.removeAttribute("loginedMember");
+		return ResultData.from("S-1", "로그아웃되었습니다");
+
 	}
 
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
-	public ResultData doLogin(String loginId, String loginPw) {
-		if (Session.isLogined == 1) {
+	public ResultData doLogin(String loginId, String loginPw, HttpServletRequest request,
+			HttpServletResponse response) {
+		
+		HttpSession session = request.getSession();
+		if (session.getAttribute("loginedMember") != null) {
 			return ResultData.from("F-9", "이미 로그인 상태입니다.");
 		}
 		if (Ut.isEmpty(loginId)) {
@@ -43,10 +53,14 @@ public class UsrMemberController {
 		if (Ut.isEmpty(loginPw)) {
 			return ResultData.from("F-2", "비밀번호를 입력해주세요.");
 		}
-		
+
 		ResultData loginRd = memberService.login(loginId, loginPw);
-		
-		return loginRd;		
+		Member loginedMember = (Member) loginRd.getData1();
+
+		// 세션에 로그인 정보 넣기
+		session.setAttribute("loginedMember", loginedMember);
+
+		return loginRd;
 	}
 
 	@RequestMapping("/usr/member/doJoin")

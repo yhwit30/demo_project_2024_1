@@ -7,7 +7,6 @@ import com.example.demo.repository.MemberRepository;
 import com.example.demo.util.Ut;
 import com.example.demo.vo.Member;
 import com.example.demo.vo.ResultData;
-import com.example.demo.vo.Session;
 
 @Service
 public class MemberService {
@@ -29,8 +28,8 @@ public class MemberService {
 			return ResultData.from("F-10", "비밀번호가 틀렸습니다.");
 		}
 
-		Session.isLogined = 1;
-		return ResultData.from("S-2", "로그인이 완료되었습니다.");
+		return ResultData.from("S-2", "로그인이 완료되었습니다.", existsMember);
+		
 	}
 
 	public ResultData<Integer> join(String loginId, String loginPw, String name, String nickname, String cellphoneNum,
