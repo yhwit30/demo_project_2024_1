@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.service.MemberService;
 import com.example.demo.util.Ut;
-import com.example.demo.vo.LoginContainer;
+import com.example.demo.vo.Session;
 import com.example.demo.vo.Member;
 import com.example.demo.vo.ResultData;
 
@@ -22,11 +22,11 @@ public class UsrMemberController {
 	@ResponseBody
 	public ResultData doLogout(String loginId, String loginPw) {
 
-		if (LoginContainer.isLogined == 1) {
-			LoginContainer.isLogined = 0;
+		if (Session.isLogined == 1) {
+			Session.isLogined = 0;
 			return ResultData.from("S-1", "로그아웃되었습니다");
 		} else {
-			LoginContainer.isLogined = 0;
+			Session.isLogined = 0;
 			return ResultData.from("F-1", "로그인하고 이용하세요.");
 		}
 	}
@@ -34,18 +34,19 @@ public class UsrMemberController {
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
 	public ResultData doLogin(String loginId, String loginPw) {
-
-		if (LoginContainer.isLogined == 1) {
-			return ResultData.from("F-1", "이미 로그인 상태입니다.");
+		if (Session.isLogined == 1) {
+			return ResultData.from("F-9", "이미 로그인 상태입니다.");
 		}
-
-		Member member = memberService.getMemberByLoginId(loginId);
-		if (member.getLoginId().equals(loginId) && member.getLoginPw().equals(loginPw)) {
-			LoginContainer.isLogined = 1;
-			return ResultData.from("S-1", Ut.f("%s님 환영합니다. 로그인 완료", member.getName()));
-		} else {
-			return ResultData.from("F-1", "로그인 실패");
+		if (Ut.isEmpty(loginId)) {
+			return ResultData.from("F-1", "아이디를 입력해주세요.");
 		}
+		if (Ut.isEmpty(loginPw)) {
+			return ResultData.from("F-2", "비밀번호를 입력해주세요.");
+		}
+		
+		ResultData loginRd = memberService.login(loginId, loginPw);
+		
+		return loginRd;		
 	}
 
 	@RequestMapping("/usr/member/doJoin")
