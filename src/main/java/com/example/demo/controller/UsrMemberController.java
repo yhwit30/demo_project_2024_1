@@ -55,33 +55,30 @@ public class UsrMemberController {
 			return ResultData.from("F-1", "아이디를 입력해주세요.");
 		}
 		if (Ut.isNullOrEmpty(loginPw)) {
-			return ResultData.from("F-1", "비밀번호를 입력해주세요.");
+			return ResultData.from("F-2", "비밀번호를 입력해주세요.");
 		}
 		if (Ut.isNullOrEmpty(name)) {
-			return ResultData.from("F-1", "이름을 입력해주세요.");
+			return ResultData.from("F-3", "이름을 입력해주세요.");
 		}
 		if (Ut.isNullOrEmpty(nickname)) {
-			return ResultData.from("F-1", "닉네임을 입력해주세요.");
+			return ResultData.from("F-4", "닉네임을 입력해주세요.");
 		}
 		if (Ut.isNullOrEmpty(cellphoneNum)) {
-			return ResultData.from("F-1", "전화번호를 입력해주세요.");
+			return ResultData.from("F-5", "전화번호를 입력해주세요.");
 		}
 		if (Ut.isNullOrEmpty(email)) {
-			return ResultData.from("F-1", "이메일을 입력해주세요.");
+			return ResultData.from("F-6", "이메일을 입력해주세요.");
 		}
 
-		int id = memberService.join(loginId, loginPw, name, nickname, cellphoneNum, email);
+		ResultData joinRd = memberService.join(loginId, loginPw, name, nickname, cellphoneNum, email);
 
-		if (id == -1) {
-			return ResultData.from("F-1", Ut.f("이미 사용중인 아이디(%s)입니다"));
+		if(joinRd.isFail()) {
+			return joinRd;
 		}
 
-		if (id == -2) {
-			return ResultData.from("F-1", Ut.f("이미 사용중인 이름(%s)과 이메일(%s)입니다", name, email));
-		}
+		Member member = memberService.getMember((int) joinRd.getData1());
 
-		Member member = memberService.getMember(id);
-
-		return ResultData.from("S-1", Ut.f("%d번 멤버가 등록되었습니다.", id), member);
+		return ResultData.newData(joinRd, member);
 	}
 }
+
