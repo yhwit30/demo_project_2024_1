@@ -74,7 +74,19 @@ public class UsrMemberController {
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
 	public ResultData<Member> doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNum,
-			String email) {
+			String email, HttpSession httpSession) {
+		
+		// 로그인 상태 체크
+		boolean isLogined = false;
+
+		if (httpSession.getAttribute("loginedMemberId") != null) {
+			isLogined = true;
+		}
+		if (isLogined) {
+			return ResultData.from("F-A", "로그아웃하고 가입하세요");
+		}
+		
+		// 회원가입 빈 칸 확인
 		if (Ut.isNullOrEmpty(loginId)) {
 			return ResultData.from("F-1", "아이디를 입력해주세요.");
 		}
@@ -94,6 +106,7 @@ public class UsrMemberController {
 			return ResultData.from("F-6", "이메일을 입력해주세요.");
 		}
 
+		// 회원가입 작업
 		ResultData<Integer> joinRd = memberService.join(loginId, loginPw, name, nickname, cellphoneNum, email);
 
 		if (joinRd.isFail()) {
