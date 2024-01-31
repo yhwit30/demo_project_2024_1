@@ -35,14 +35,14 @@ public class UsrArticleController {
 		if (article == null) {
 			return ResultData.from("F-1", Ut.f("%d번 게시물은 존재하지 않습니다.", id));
 		}
-		return ResultData.from("S-1", Ut.f("%d번 게시물입니다.", id), article);
+		return ResultData.from("S-1", Ut.f("%d번 게시물입니다.", id), "article",article);
 	}
 
 	@RequestMapping("/usr/article/getArticles")
 	@ResponseBody
 	public ResultData<List<Article>> getArticles() {
 		List<Article> articles = articleService.getArticles();
-		return ResultData.from("S-1", "게시글 목록입니다.", articles);
+		return ResultData.from("S-1", "게시글 목록입니다.", "List<Article>",articles);
 	}
 
 	@RequestMapping("/usr/article/doModify")
@@ -64,7 +64,7 @@ public class UsrArticleController {
 
 		// 게시글 존재여부 체크
 		if (article == null) {
-			return ResultData.from("F-1", Ut.f("%d번 글은 없습니다.", id), id);
+			return ResultData.from("F-1", Ut.f("%d번 글은 없습니다.", id), "id", id);
 		}
 
 		// 로그인 중인 아이디인지 확인(서비스에 요청)
@@ -72,7 +72,7 @@ public class UsrArticleController {
 
 		// 글 수정 작업
 		articleService.modifyArticle(id, title, body);
-		return ResultData.from(loginedMemberCanModifyRd.getResultCode(), loginedMemberCanModifyRd.getMsg(), id);
+		return ResultData.from(loginedMemberCanModifyRd.getResultCode(), loginedMemberCanModifyRd.getMsg(), "id", id);
 	}
 
 	@RequestMapping("/usr/article/doDelete")
@@ -93,17 +93,17 @@ public class UsrArticleController {
 		// 게시글 존재여부 체크
 		Article article = articleService.getArticle(id);
 		if (article == null) {
-			return ResultData.from("F-1", Ut.f("%d번 글은 없습니다.", id), id);
+			return ResultData.from("F-1", Ut.f("%d번 글은 없습니다.", id), "id", id);
 		}
 
 		// 로그인 중인 아이디인지 확인
 		if (article.getMemberId() != loginedMemberId) {
-			return ResultData.from("F-2", Ut.f("%d번 글에 대한 권한이 없습니다", id), id);
+			return ResultData.from("F-2", Ut.f("%d번 글에 대한 권한이 없습니다", id),"id", id);
 		}
 
 		// 글 삭제 작업
 		articleService.deleteArticle(id);
-		return ResultData.from("S-1", Ut.f("%d번 글은 삭제되었습니다.", id), id);
+		return ResultData.from("S-1", Ut.f("%d번 글은 삭제되었습니다.", id), "id", id);
 	}
 
 	@RequestMapping("/usr/article/doWrite")
@@ -136,7 +136,7 @@ public class UsrArticleController {
 
 		// 결과 출력 시 해당 article도 나오게
 		Article article = articleService.getArticle(id);
-		return ResultData.newData(writeArticleRd, article);
+		return ResultData.newData(writeArticleRd, "article", article);
 	}
 
 }

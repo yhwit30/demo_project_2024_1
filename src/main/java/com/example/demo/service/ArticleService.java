@@ -24,7 +24,7 @@ public class ArticleService {
 	public ResultData<Integer> writeArticle(String title, String body, int loginedMemberId) {
 		articleRepository.writeArticle(title, body, loginedMemberId);
 		int id = articleRepository.getLastInsertId();
-		return ResultData.from("S-1", Ut.f("%d번 글이 생성되었습니다", id), id);
+		return ResultData.from("S-1", Ut.f("%d번 글이 생성되었습니다", id), "id", id);
 	}
 
 	public void deleteArticle(int id) {

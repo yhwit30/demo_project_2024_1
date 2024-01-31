@@ -116,6 +116,6 @@ public class UsrMemberController {
 		// 회원가입 성공 시 member 데이터 보여주기 위해서
 		Member member = memberService.getMember(joinRd.getData1());
 
-		return ResultData.newData(joinRd, member);
+		return ResultData.newData(joinRd, "member", member);
 	}
 }
