@@ -16,7 +16,7 @@
 				<th>번호</th>
 				<th>날짜</th>
 				<th>제목</th>
-				<th>작성자</th>
+				<th>작성자(닉네임)</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -27,7 +27,7 @@
 					<td>
 						<a href="detail?id=${article.id }">${article.title }</a>
 					</td>
-					<td>${article.memberId }</td>
+					<td>${article.memberName }</td>
 				</tr>
 			</c:forEach>
 		</tbody>

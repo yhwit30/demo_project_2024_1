@@ -22,28 +22,33 @@ public class UsrArticleController {
 	private ArticleService articleService;
 
 	// 액션 메소드
-	@RequestMapping("/usr/article/getArticle")
-	@ResponseBody
-	public ResultData<Article> getArticleAction(Integer id) { //null 체크하려고 Integer로 바꿨다.
+	@RequestMapping("/usr/article/detail")
+	public String getArticleAction(Integer id, Model model) { // null 체크하려고 Integer로 바꿨다.
 
-		//그냥 getArticle 들어오는 경우 체크
+		// 그냥 getArticle 들어오는 경우 체크
 		if (id == null) {
-			return ResultData.from("F-1", "게시글 번호를 입력하세요");
+			model.addAttribute("checkId", "게시글 번호를 입력하세요");
+			return "usr/article/detail";
 		}
 
+		// 게시글 db에서 가져오기
 		Article article = articleService.getArticle(id);
+		
 		if (article == null) {
-			return ResultData.from("F-1", Ut.f("%d번 게시물은 존재하지 않습니다.", id));
+			model.addAttribute("noArticle", Ut.f("%d번 게시물은 존재하지 않습니다.", id));
+			return "usr/article/detail";
 		}
-		return ResultData.from("S-1", Ut.f("%d번 게시물입니다.", id), "article",article);
+		
+		model.addAttribute("article", article);
+		return "usr/article/detail";
 	}
 
 	@RequestMapping("/usr/article/list")
 	public String showList(Model model) {
 		List<Article> articles = articleService.getArticles();
-		
+
 		model.addAttribute("articles", articles);
-		
+
 		return "usr/article/list";
 	}
 
@@ -100,7 +105,7 @@ public class UsrArticleController {
 
 		// 로그인 중인 아이디인지 확인
 		if (article.getMemberId() != loginedMemberId) {
-			return ResultData.from("F-2", Ut.f("%d번 글에 대한 권한이 없습니다", id),"id", id);
+			return ResultData.from("F-2", Ut.f("%d번 글에 대한 권한이 없습니다", id), "id", id);
 		}
 
 		// 글 삭제 작업

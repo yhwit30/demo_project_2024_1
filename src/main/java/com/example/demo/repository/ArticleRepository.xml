@@ -4,14 +4,14 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.repository.ArticleRepository">
 	<select id="getArticles" resultType="Article">
-		SELECT article.*, `member`.name AS memberName
+		SELECT article.*, `member`.nickname AS memberName
 		FROM article
 		JOIN `member`
 		ON article.memberId = `member`.id
 	</select>
 
 	<select id="getArticle" resultType="Article">
-		SELECT article.*, `member`.name AS memberName
+		SELECT article.*, `member`.nickname AS memberName
 		FROM article
 		JOIN `member`
 		ON article.memberId = `member`.id
