@@ -18,5 +18,7 @@ public class Article {
 	private String body;
 	
 	private String memberName;
+	
+	private boolean userCanModify;
 
 }

@@ -23,24 +23,36 @@ public class UsrArticleController {
 
 	// 액션 메소드
 	@RequestMapping("/usr/article/detail")
-	public String getArticleAction(Integer id, Model model) { // null 체크하려고 Integer로 바꿨다.
-
+	public String getArticleAction(Integer id, HttpSession httpSession, Model model) { // null 체크하려고 Integer로 바꿨다.
+		
 		// 그냥 getArticle 들어오는 경우 체크
 		if (id == null) {
 			model.addAttribute("checkId", "게시글 번호를 입력하세요");
 			return "usr/article/detail";
 		}
 
-		// 게시글 db에서 가져오기
-		Article article = articleService.getArticle(id);
+		// 로그인 상태 체크
+		boolean isLogined = false;
+		int loginedMemberId = 0;
+		if (httpSession.getAttribute("loginedMemberId") != null) {
+			isLogined = true;
+			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
+		}
 		
+
+		// 게시글 db에서 가져오기
+		Article article = articleService.getForArticle(loginedMemberId, id);
+		
+		model.addAttribute("article", article);
+
 		if (article == null) {
 			model.addAttribute("noArticle", Ut.f("%d번 게시물은 존재하지 않습니다.", id));
 			return "usr/article/detail";
 		}
-		
+
 		model.addAttribute("article", article);
 		return "usr/article/detail";
+
 	}
 
 	@RequestMapping("/usr/article/list")
@@ -52,9 +64,9 @@ public class UsrArticleController {
 		return "usr/article/list";
 	}
 
-	@RequestMapping("/usr/article/doModify")
+	@RequestMapping("/usr/article/modify")
 	@ResponseBody
-	public ResultData<Integer> doModify(int id, String title, String body, HttpSession httpSession) {
+	public ResultData<Integer> doModify(int id, String title, String body, HttpSession httpSession, Model model) {
 		// 로그인 상태 체크
 		boolean isLogined = false;
 		int loginedMemberId = 0;
@@ -75,11 +87,11 @@ public class UsrArticleController {
 		}
 
 		// 로그인 중인 아이디인지 확인(서비스에 요청)
-		ResultData loginedMemberCanModifyRd = articleService.loginedMemberCanModifyRd(loginedMemberId, article);
+		ResultData userCanModifyRd = articleService.userCanModify(loginedMemberId, article);
 
 		// 글 수정 작업
 		articleService.modifyArticle(id, title, body);
-		return ResultData.from(loginedMemberCanModifyRd.getResultCode(), loginedMemberCanModifyRd.getMsg(), "id", id);
+		return ResultData.from(userCanModifyRd.getResultCode(), userCanModifyRd.getMsg(), "id", id);
 	}
 
 	@RequestMapping("/usr/article/doDelete")

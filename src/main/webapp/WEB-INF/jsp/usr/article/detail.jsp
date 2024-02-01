@@ -3,6 +3,9 @@
 <c:set var="pageTitle" value="Article DETAIL"></c:set>
 <%@ include file="../common/head.jspf"%>
 
+
+<div>${checkId}</div>
+
 <section class="mt-8 text-lg px-4">
 	<div class="mx-auto">
 		<table class="table-box-1" border="1">
@@ -35,6 +38,10 @@
 		</table>
 		<div class="btns">
 			<button type="button" onclick="history.back();">뒤로가기</button>
+			<c:if test="${article.userCanModify }">
+				<a href="../article/modify?id=${article.id }">수정</a>
+			</c:if>
+			<a href="../article/doDelete?id=${article.id }">삭제</a>
 		</div>
 	</div>
 </section>

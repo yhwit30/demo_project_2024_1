@@ -32,11 +32,21 @@ public interface ArticleRepository {
 //	@Select("SELECT * FROM article ORDER BY id DESC")
 	public List<Article> getArticles();
 
+	@Select("""
+			SELECT A.*, M.nickname AS memberName
+			FROM article AS A
+			INNER JOIN `member` AS M
+			ON A.memberId = M.id
+			WHERE A.id = #{id}
+				""")
+	public Article getForPrintArticle(int id);
+	
 	@Delete("DELETE FROM article WHERE id = #{id}")
 	public void deleteArticle(int id);
 
 //	@Update("UPDATE article SET updateDate = NOW(), title = #{title}, `body` = #{body} WHERE id = #{id}")
 	public void modifyArticle(int id, String title, String body);
+
 
 }
 

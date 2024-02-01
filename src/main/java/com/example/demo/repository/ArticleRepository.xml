@@ -8,6 +8,7 @@
 		FROM article
 		JOIN `member`
 		ON article.memberId = `member`.id
+		ORDER BY article.id DESC
 	</select>
 
 	<select id="getArticle" resultType="Article">
