@@ -89,17 +89,24 @@ email = 'test3@test.com';
 ############################################
 SELECT *
 FROM article
-order by id desc;
+ORDER BY id DESC;
 
-select *
-from `member`
-order by id desc;
+SELECT *
+FROM `member`
+ORDER BY id DESC;
 
-select last_insert_id();
+SELECT LAST_INSERT_ID();
 
-show full columns from `member`; 
+SHOW FULL COLUMNS FROM `member`; 
 
 SELECT a.*, m.name
 FROM article a
 JOIN `member` m
 ON a.memberId = m.id;
+
+INSERT INTO article
+SET regDate = NOW(),
+memberId = CEILING((RAND() * 9) / 3),
+title = CONCAT('제목__', RAND()),
+`body` = CONCAT('내용__',RAND());
+
