@@ -24,10 +24,10 @@ public class UsrArticleController {
 	// 액션 메소드
 	@RequestMapping("/usr/article/detail")
 	public String getArticleAction(Integer id, HttpSession httpSession, Model model) { // null 체크하려고 Integer로 바꿨다.
-		
+
 		// 그냥 getArticle 들어오는 경우 체크
 		if (id == null) {
-			model.addAttribute("checkId", "게시글 번호를 입력하세요");
+			model.addAttribute("checkUrlId", "게시글 번호를 입력하세요");
 			return "usr/article/detail";
 		}
 
@@ -38,19 +38,12 @@ public class UsrArticleController {
 			isLogined = true;
 			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
 		}
-		
 
-		// 게시글 db에서 가져오기
+		// 게시글 db에서 가져오기 + 로그인 중인 아이디 권한체크까지 다 끝내고 가져온다.
 		Article article = articleService.getForArticle(loginedMemberId, id);
-		
-		model.addAttribute("article", article);
-
-		if (article == null) {
-			model.addAttribute("noArticle", Ut.f("%d번 게시물은 존재하지 않습니다.", id));
-			return "usr/article/detail";
-		}
 
 		model.addAttribute("article", article);
+
 		return "usr/article/detail";
 
 	}
@@ -64,8 +57,8 @@ public class UsrArticleController {
 		return "usr/article/list";
 	}
 
+	// 로그인 체크 -> 유무 체크 -> 권한 체크 -> 수정
 	@RequestMapping("/usr/article/modify")
-	@ResponseBody
 	public ResultData<Integer> doModify(int id, String title, String body, HttpSession httpSession, Model model) {
 		// 로그인 상태 체크
 		boolean isLogined = false;
@@ -75,8 +68,8 @@ public class UsrArticleController {
 			isLogined = true;
 			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
 		}
-		if (!isLogined) {
-			return ResultData.from("F-A", "로그인하고 이용하세요");
+		if (isLogined == false) {
+			return ResultData.from("F-A", "로그인 후 이용해주세요");
 		}
 
 		Article article = articleService.getArticle(id); // 해당 게시글 가져오기
@@ -86,15 +79,19 @@ public class UsrArticleController {
 			return ResultData.from("F-1", Ut.f("%d번 글은 없습니다.", id), "id", id);
 		}
 
-		// 로그인 중인 아이디인지 확인(서비스에 요청)
-		ResultData userCanModifyRd = articleService.userCanModify(loginedMemberId, article);
+		// 로그인 중인 아이디 권한체크(서비스에 요청)
+		ResultData loginedMemberCanModifyRd = articleService.userCanModify(loginedMemberId, article);
 
 		// 글 수정 작업
-		articleService.modifyArticle(id, title, body);
-		return ResultData.from(userCanModifyRd.getResultCode(), userCanModifyRd.getMsg(), "id", id);
+		if (loginedMemberCanModifyRd.isSuccess()) {
+			articleService.modifyArticle(id, title, body);
+		}
+
+		return ResultData.from(loginedMemberCanModifyRd.getResultCode(), loginedMemberCanModifyRd.getMsg(), "id", id);
 	}
 
-	@RequestMapping("/usr/article/doDelete")
+	// 로그인 체크 -> 유무 체크 -> 권한 체크 -> 삭제
+	@RequestMapping("/usr/article/delete")
 	@ResponseBody
 	public ResultData<Integer> doDelete(int id, HttpSession httpSession) {
 		// 로그인 상태 체크
@@ -115,14 +112,15 @@ public class UsrArticleController {
 			return ResultData.from("F-1", Ut.f("%d번 글은 없습니다.", id), "id", id);
 		}
 
-		// 로그인 중인 아이디인지 확인
-		if (article.getMemberId() != loginedMemberId) {
-			return ResultData.from("F-2", Ut.f("%d번 글에 대한 권한이 없습니다", id), "id", id);
-		}
+		// 로그인 중인 아이디 권한체크(서비스에 요청)
+		ResultData loginedMemberCanDeleteRd = articleService.userCanDelete(loginedMemberId, article);
 
 		// 글 삭제 작업
-		articleService.deleteArticle(id);
-		return ResultData.from("S-1", Ut.f("%d번 글은 삭제되었습니다.", id), "id", id);
+		if (loginedMemberCanDeleteRd.isSuccess()) {
+			articleService.deleteArticle(id);
+		}
+
+		return ResultData.from(loginedMemberCanDeleteRd.getResultCode(), loginedMemberCanDeleteRd.getMsg(), "id", id);
 	}
 
 	@RequestMapping("/usr/article/doWrite")

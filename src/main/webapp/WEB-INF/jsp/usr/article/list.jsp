@@ -13,9 +13,6 @@
 					<th>날짜</th>
 					<th>제목</th>
 					<th>작성자</th>
-					<th>수정</th>
-					<th>삭제</th>
-
 				</tr>
 			</thead>
 			<tbody>
@@ -27,12 +24,6 @@
 							<a href ="detail?id=${article.id }" class="hover:underline">${article.title }</a>
 						</td>
 						<td>${article.memberName }</td>
-						<td>
-							<a href="#" class="hover:underline">수정</a>
-						</td>
-						<td>
-							<a href="#" class="hover:underline">삭제</a>
-						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

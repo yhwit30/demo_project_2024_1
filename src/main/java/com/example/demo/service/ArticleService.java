@@ -45,31 +45,43 @@ public class ArticleService {
 		return articleRepository.getArticles();
 	}
 
-	// 로그인 중인 아이디인지 확인
+	// 게시글 가져와서 아이디 권한체크
 	public Article getForArticle(int loginedMemberId, Integer id) {
 		Article article = articleRepository.getForPrintArticle(id);
 		
-		updateForPrintArticle(loginedMemberId, article);
+		controlForPrintArticle(loginedMemberId, article);
 		
 		return article;
 	}
 	
-	private void updateForPrintArticle(int loginedMemberId, Article article) {
+	// Article dto에다가 참,거짓값 심어주기 -> jsp 버튼 권한체크용
+	private void controlForPrintArticle(int loginedMemberId, Article article) {
 		if (article == null) {
 			return;
 		}
 		ResultData userCanModifyRd = userCanModify(loginedMemberId, article);
+		ResultData userCanDeleteRd = userCanDelete(loginedMemberId, article);
 		article.setUserCanModify(userCanModifyRd.isSuccess());
+		article.setUserCanDelete(userCanDeleteRd.isSuccess());
 	}
 
+	// 로그인 중인 아이디 권한체크
 	public ResultData userCanModify(int loginedMemberId, Article article) {
 
 		if (article.getMemberId() != loginedMemberId) {
-			return ResultData.from("F-2", Ut.f("%d번 글에 대한 권한이 없습니다", article.getId()));
+			return ResultData.from("F-2", Ut.f("%d번 글에 대한 수정 권한이 없습니다", article.getId()));
 		}
 		return ResultData.from("S-1", Ut.f("%d번 글을 수정했습니다", article.getId()));
 	}
+	
+	public ResultData userCanDelete(int loginedMemberId, Article article) {
 
+		if (article.getMemberId() != loginedMemberId) {
+			return ResultData.from("F-2", Ut.f("%d번 글에 대한 삭제 권한이 없습니다", article.getId()));
+		}
+
+		return ResultData.from("S-1", Ut.f("%d번 글이 삭제 되었습니다", article.getId()));
+	}
 	
 
 }

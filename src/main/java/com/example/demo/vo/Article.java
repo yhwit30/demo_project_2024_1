@@ -20,5 +20,6 @@ public class Article {
 	private String memberName;
 	
 	private boolean userCanModify;
+	private boolean userCanDelete;
 
 }
