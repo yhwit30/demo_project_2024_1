@@ -11,6 +11,7 @@ CREATE TABLE article(
     `body` TEXT NOT NULL
 );
 
+ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER `body`;
 
 # member 테이블 생성
 CREATE TABLE `member`(
@@ -28,25 +29,27 @@ CREATE TABLE `member`(
     delDate DATETIME COMMENT '탈퇴 날짜'
 );
 
-ALTER TABLE `member` MODIFY COLUMN loginId CHAR(100) UNIQUE;
 
 
 # article TD 생성
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
+memberId = 1,
 title = '제목1',
 `body` = '내용1';
 
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
+memberId = 1,
 title = '제목2',
 `body` = '내용2';
 
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
+memberId = 2,
 title = '제목3',
 `body` = '내용3';
 
@@ -60,8 +63,8 @@ loginPw = 'admin',
 `authlevel`  = 7,
 `name` = '관리자',
 nickname = '관리자',
-cellphoneNum = 01012341234,
-email = 'test@test.com';
+cellphoneNum = '01012341234',
+email = 'test1@test.com';
 
 INSERT INTO `member`
 SET regDate = NOW(),
@@ -70,8 +73,8 @@ loginId = 'test1',
 loginPw = 'test1',
 `name` = 'testName1',
 nickname = 'testNickname1',
-cellphoneNum = 01012341234,
-email = 'test@test.com';
+cellphoneNum = '01023451234',
+email = 'test2@test.com';
 
 INSERT INTO `member`
 SET regDate = NOW(),
@@ -80,19 +83,23 @@ loginId = 'test2',
 loginPw = 'test2',
 `name` = 'testName2',
 nickname = 'testNickname2',
-cellphoneNum = 01012341234,
-email = 'test@test.com';
+cellphoneNum = '01034561234',
+email = 'test3@test.com';
 
 ############################################
 SELECT *
 FROM article
-ORDER BY id DESC;
+order by id desc;
 
-SELECT *
-FROM `member`
-ORDER BY id DESC;
+select *
+from `member`
+order by id desc;
 
-SELECT LAST_INSERT_ID();
+select last_insert_id();
 
-SHOW FULL COLUMNS FROM `member`; 
+show full columns from `member`; 
 
+SELECT a.*, m.name
+FROM article a
+JOIN `member` m
+ON a.memberId = m.id;
