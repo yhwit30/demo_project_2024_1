@@ -34,7 +34,7 @@ public class UsrArticleController {
 		}
 
 		// 수정, 삭제 버튼용 로그인 데이터 가져오기
-		Rq rq = new Rq(req);
+		Rq rq = (Rq)req.getAttribute("rq");
 
 		// 게시글 db에서 가져오기 + 로그인 중인 아이디 권한체크까지 다 끝내고 가져온다.
 		Article article = articleService.getForArticle(rq.getLoginedMemberId(), id);
@@ -57,7 +57,7 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/modify")
 	public ResultData<Integer> doModify(int id, String title, String body, HttpServletRequest req, Model model) {
 		// 로그인 상태 체크
-		Rq rq = new Rq(req);
+		Rq rq = (Rq)req.getAttribute("rq");
 
 		if (!rq.isLogined()) {
 			return ResultData.from("F-A", "로그인 후 이용해주세요");
@@ -85,7 +85,7 @@ public class UsrArticleController {
 	@ResponseBody
 	public String doDelete(int id, HttpServletRequest req) {
 		// 로그인 상태 체크
-		Rq rq = new Rq(req);
+		Rq rq = (Rq)req.getAttribute("rq");
 
 		if (!rq.isLogined()) {
 			return Ut.jsReplace("F-A", "로그인 후 이용해주세요", "../member/login");
@@ -112,7 +112,7 @@ public class UsrArticleController {
 	@ResponseBody
 	public ResultData<Article> doWrite(String title, String body, HttpServletRequest req) {
 		// 로그인 상태 체크
-		Rq rq = new Rq(req);
+		Rq rq = (Rq)req.getAttribute("rq");
 
 		if (!rq.isLogined()) {
 			return ResultData.from("F-A", "로그인하고 이용하세요");
