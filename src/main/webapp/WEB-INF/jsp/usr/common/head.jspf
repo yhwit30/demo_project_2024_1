@@ -22,14 +22,14 @@
 			<a class ="pl-5"   href="/"><i class="fa-solid fa-guitar"></i></a>
 			<div class="flex-grow"></div>
 			<ul class="flex">
-				<li><a class="hover:underline" href="/"><i class="fa-solid fa-house-flag"></i></a></li>
+<!-- 				<li><a class="hover:underline" href="/"><i class="fa-solid fa-house-chimney-window"></i></a></li> -->
 				<c:if test="${rq.isLogined()}">
-				<li><a class="hover:underline" href="/">${rq.loginedMemberNickname }님 환영<i class="fa-regular fa-face-smile"></i></a></li>
+				<li><a class="hover:underline" href="/">${rq.loginedMemberNickname }님 어서오고<i class="fa-solid fa-handshake"></i></a></li>
 				</c:if>
-				<li><a class="hover:underline" href="../article/list">LIST</a></li>
+				<li><a class="hover:underline" href="../article/list"><i class="fa-solid fa-table-list"></i></a></li>
 				<c:if test="${!rq.isLogined()}">
+				<li><a class="hover:underline" href="../member/join"><i class="fa-solid fa-user-plus"></i></a></li>
 				<li><a class="hover:underline" href="../member/login">LOGIN</a></li>
-				<li><a class="hover:underline" href="../member/join">JOIN</a></li>
 				</c:if>
 				<c:if test="${rq.isLogined()}">
 				<li><a onclick="if(confirm('로그아웃하시겠습니까?') == false) return false;" class="hover:underline" href="../member/doLogout">LOGOUT</a></li>

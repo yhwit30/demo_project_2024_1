@@ -72,7 +72,7 @@ updateDate = NOW(),
 loginId = 'test1',
 loginPw = 'test1',
 `name` = 'testName1',
-nickname = 'testNickname1',
+nickname = 'testNick1',
 cellphoneNum = '01023451234',
 email = 'test2@test.com';
 
@@ -82,7 +82,7 @@ updateDate = NOW(),
 loginId = 'test2',
 loginPw = 'test2',
 `name` = 'testName2',
-nickname = 'testNickname2',
+nickname = 'testNick2',
 cellphoneNum = '01034561234',
 email = 'test3@test.com';
 
@@ -102,10 +102,12 @@ SHOW FULL COLUMNS FROM `member`;
 SELECT a.*, m.name
 FROM article a
 JOIN `member` m
-ON a.memberId = m.id;
+ON a.memberId = m.id
+ORDER BY a.id DESC;
 
 INSERT INTO article
 SET regDate = NOW(),
+updateDate = NOW(),
 memberId = CEILING((RAND() * 9) / 3),
 title = CONCAT('제목__', RAND()),
 `body` = CONCAT('내용__',RAND());
