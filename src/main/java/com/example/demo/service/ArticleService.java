@@ -60,8 +60,9 @@ public class ArticleService {
 			return;
 		}
 		ResultData userCanModifyRd = userCanModify(loginedMemberId, article);
-		ResultData userCanDeleteRd = userCanDelete(loginedMemberId, article);
 		article.setUserCanModify(userCanModifyRd.isSuccess());
+
+		ResultData userCanDeleteRd = userCanDelete(loginedMemberId, article);
 		article.setUserCanDelete(userCanDeleteRd.isSuccess());
 	}
 
