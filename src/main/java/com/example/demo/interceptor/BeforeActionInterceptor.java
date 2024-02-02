@@ -13,7 +13,7 @@ public class BeforeActionInterceptor implements HandlerInterceptor{
 
 	@Override
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object handler) throws Exception {
-		System.out.println("==============================================================intercept!==============================================================");
+		System.out.println("=========================intercept!=========================");
 		
 		Rq rq = new Rq(req, resp);
 		req.setAttribute("rq", rq);

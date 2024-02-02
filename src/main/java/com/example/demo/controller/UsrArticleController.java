@@ -53,17 +53,28 @@ public class UsrArticleController {
 		return "usr/article/list";
 	}
 
+	@RequestMapping("/usr/article/modify")
+	public String showModify(int id, HttpServletRequest req, Model model) {
+
+		Rq rq = (Rq) req.getAttribute("rq");
+		Article article = articleService.getForArticle(rq.getLoginedMemberId(), id);
+
+		model.addAttribute("article", article);
+		
+		return "usr/article/modify";
+	}
+
 	// 로그인 체크 -> 유무 체크 -> 권한 체크 -> 수정
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
-	public ResultData<Integer> doModify(int id, String title, String body, HttpServletRequest req, Model model) {
+	public String doModify(int id, String title, String body, HttpServletRequest req, Model model) {
 		// 로그인 상태 체크 - 인터셉터에서
 
 		Article article = articleService.getArticle(id); // 해당 게시글 가져오기
 
 		// 게시글 존재여부 체크
 		if (article == null) {
-			return ResultData.from("F-1", Ut.f("%d번 글은 없습니다.", id), "id", id);
+			return Ut.jsHistoryBack("F-1", Ut.f("%d번 글은 없습니다.", id));
 		}
 
 		// 로그인 정보 가져오기
@@ -76,7 +87,8 @@ public class UsrArticleController {
 		if (loginedMemberCanModifyRd.isSuccess()) {
 			articleService.modifyArticle(id, title, body);
 		}
-		return ResultData.from(loginedMemberCanModifyRd.getResultCode(), loginedMemberCanModifyRd.getMsg(), "id", id);
+		return Ut.jsReplace(loginedMemberCanModifyRd.getResultCode(), loginedMemberCanModifyRd.getMsg(),
+				"../article/list");
 	}
 
 	// 로그인 체크 -> 유무 체크 -> 권한 체크 -> 삭제

@@ -3,34 +3,37 @@
 <c:set var="pageTitle" value="Article MODIFY"></c:set>
 <%@ include file="../common/head.jspf"%>
 
-<section class="mt-8 text-lg px-4">
+
+
+<section class="mt-8 mb-5 text-lg px-4">
 	<div class="mx-auto">
-
-	
-	<div>
-		번호 :
-		${article.id }</div>
-	<div>
-		날짜 :
-		${article.regDate }
-	</div>
-<%-- 		<input type="hidden" value="<%=loginedMemberId%>" name="loginedMemberId" />  --%>
-<%-- 		<input type="hidden" value="<%=articleRow.get("id")%>" name="id" />  --%>
-		<div>
-			제목 : <input type="text" name="title"	value="${article.title }" />
+		<div>modify page</div>
+		<form action="../article/doModify" method="POST">
+			<table class="login-box table-box-1" border="1">
+				<tbody>
+					<tr>
+						<th>제목</th>
+						<td>
+							<input autocomplete="off" type="text" value="${article.title }" name="title" /></td>
+					</tr>
+					<tr>
+						<th>내용</th>
+						<td>
+							<input autocomplete="off" type="text" value="${article.body }" name="body" /></td>
+					</tr>
+					<tr>
+						<th></th>
+						<td>
+							<input type="submit" value="수정" />
+						</td>
+					</tr>
+					<input type="hidden" value="${article.id }" name="id" />
+				</tbody>
+			</table>
+		</form>
+		<div class="btns">
+			<button class="hover:underline" type="button" onclick="history.back();">뒤로가기</button>
 		</div>
-		<div>
-			내용 :
-			<textarea type="text" name="body"> ${article.body }</textarea>
-		</div>
-		<br />
-		<input type="button" value="수정">
-	</form>
-	
-	
-	
-
-
 	</div>
 </section>
 

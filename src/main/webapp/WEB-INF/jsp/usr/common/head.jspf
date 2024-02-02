@@ -19,12 +19,12 @@
 <body>
 	<header>
 		<div class="h-20 flex mx-auto items-center text-3xl">
-			<a href="/">LOGO</a>
+			<a class ="pl-5"   href="/"><i class="fa-solid fa-guitar"></i></a>
 			<div class="flex-grow"></div>
 			<ul class="flex">
-				<li><a class="hover:underline" href="/">HOME</a></li>
+				<li><a class="hover:underline" href="/"><i class="fa-solid fa-house-flag"></i></a></li>
 				<c:if test="${rq.isLogined()}">
-				<li><a class="hover:underline" href="/">${rq.loginedMemberNickname }님 환영</a></li>
+				<li><a class="hover:underline" href="/">${rq.loginedMemberNickname }님 환영<i class="fa-regular fa-face-smile"></i></a></li>
 				</c:if>
 				<li><a class="hover:underline" href="../article/list">LIST</a></li>
 				<c:if test="${!rq.isLogined()}">
