@@ -31,7 +31,7 @@ public class Rq {
 		}
 	}
 
-	public void pringHistoryBack(String msg) {
+	public void printHistoryBack(String msg) {
 		resp.setContentType("text/html; charset=UTF-8");
 		println("<script>");
 		if(!Ut.isEmpty(msg)) {

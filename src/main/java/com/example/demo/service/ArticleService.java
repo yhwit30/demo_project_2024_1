@@ -45,7 +45,7 @@ public class ArticleService {
 		return articleRepository.getArticles();
 	}
 
-	// 게시글 가져와서 아이디 권한체크
+	// 게시글 가져와서 아이디 권한체크 메소드 실행
 	public Article getForArticle(int loginedMemberId, Integer id) {
 		Article article = articleRepository.getForPrintArticle(id);
 		
@@ -66,7 +66,7 @@ public class ArticleService {
 		article.setUserCanDelete(userCanDeleteRd.isSuccess());
 	}
 
-	// 로그인 중인 아이디 권한체크
+	// 가져온 게시글 번호와 로그인 중인 아이디 권한체크
 	public ResultData userCanModify(int loginedMemberId, Article article) {
 
 		if (article.getMemberId() != loginedMemberId) {

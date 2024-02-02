@@ -34,7 +34,7 @@ public class UsrArticleController {
 		}
 
 		// 수정, 삭제 버튼용 로그인 데이터 가져오기
-		Rq rq = (Rq)req.getAttribute("rq");
+		Rq rq = (Rq) req.getAttribute("rq");
 
 		// 게시글 db에서 가져오기 + 로그인 중인 아이디 권한체크까지 다 끝내고 가져온다.
 		Article article = articleService.getForArticle(rq.getLoginedMemberId(), id);
@@ -54,14 +54,10 @@ public class UsrArticleController {
 	}
 
 	// 로그인 체크 -> 유무 체크 -> 권한 체크 -> 수정
-	@RequestMapping("/usr/article/modify")
+	@RequestMapping("/usr/article/doModify")
+	@ResponseBody
 	public ResultData<Integer> doModify(int id, String title, String body, HttpServletRequest req, Model model) {
-		// 로그인 상태 체크
-		Rq rq = (Rq)req.getAttribute("rq");
-
-		if (!rq.isLogined()) {
-			return ResultData.from("F-A", "로그인 후 이용해주세요");
-		}
+		// 로그인 상태 체크 - 인터셉터에서
 
 		Article article = articleService.getArticle(id); // 해당 게시글 가져오기
 
@@ -69,6 +65,9 @@ public class UsrArticleController {
 		if (article == null) {
 			return ResultData.from("F-1", Ut.f("%d번 글은 없습니다.", id), "id", id);
 		}
+
+		// 로그인 정보 가져오기
+		Rq rq = (Rq) req.getAttribute("rq");
 
 		// 로그인 중인 아이디 권한체크(서비스에 요청)
 		ResultData loginedMemberCanModifyRd = articleService.userCanModify(rq.getLoginedMemberId(), article);
@@ -84,18 +83,17 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
 	public String doDelete(int id, HttpServletRequest req) {
-		// 로그인 상태 체크
-		Rq rq = (Rq)req.getAttribute("rq");
+		// 로그인 상태 체크 - 인터셉터에서
 
-		if (!rq.isLogined()) {
-			return Ut.jsReplace("F-A", "로그인 후 이용해주세요", "../member/login");
-		}
+		Article article = articleService.getArticle(id);
 
 		// 게시글 존재여부 체크
-		Article article = articleService.getArticle(id);
 		if (article == null) {
 			return Ut.jsHistoryBack("F-1", Ut.f("%d번 글은 존재하지 않습니다", id));
 		}
+
+		// 로그인 정보 가져오기
+		Rq rq = (Rq) req.getAttribute("rq");
 
 		// 로그인 중인 아이디 권한체크(서비스에 요청)
 		ResultData loginedMemberCanDeleteRd = articleService.userCanDelete(rq.getLoginedMemberId(), article);
@@ -112,7 +110,7 @@ public class UsrArticleController {
 	@ResponseBody
 	public ResultData<Article> doWrite(String title, String body, HttpServletRequest req) {
 		// 로그인 상태 체크
-		Rq rq = (Rq)req.getAttribute("rq");
+		Rq rq = (Rq) req.getAttribute("rq");
 
 		if (!rq.isLogined()) {
 			return ResultData.from("F-A", "로그인하고 이용하세요");
