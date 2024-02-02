@@ -9,7 +9,9 @@ import com.example.demo.service.MemberService;
 import com.example.demo.util.Ut;
 import com.example.demo.vo.Member;
 import com.example.demo.vo.ResultData;
+import com.example.demo.vo.Rq;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -21,17 +23,14 @@ public class UsrMemberController {
 	// 액션 메소드
 	@RequestMapping("/usr/member/doLogout")
 	@ResponseBody
-	public ResultData doLogout(HttpSession httpSession) {
+	public String doLogout(HttpServletRequest req, HttpSession httpSession) {
 
-		// 로그인 상태 체크
-		if (httpSession.getAttribute("loginedMemberId") == null) {
-			return ResultData.from("F-1", "이미 로그아웃 상태입니다");
-		}
-
-		// 세션에 로그인 정보 없애기
+		// 이미 로그아웃 상태체크 - 인터셉터에서
+		
+		// 로그아웃 작업
 		httpSession.removeAttribute("loginedMemberId");
-		return ResultData.from("S-1", "로그아웃되었습니다");
 
+		return Ut.jsReplace("S-1", Ut.f("로그아웃 되었습니다"), "/");
 	}
 
 	@RequestMapping("/usr/member/login")
@@ -73,10 +72,18 @@ public class UsrMemberController {
 		}
 
 		httpSession.setAttribute("loginedMemberId", member.getId());
+		httpSession.setAttribute("loginedMemberNickname", member.getNickname());
 
 		return Ut.jsReplace("S-1", Ut.f("%s님 환영합니다", member.getNickname()), "/");
 	}
 
+	@RequestMapping("/usr/member/join")
+	public String showJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNum,
+			String email, HttpSession httpSession) {
+
+		return "usr/member/join";
+	}
+	
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
 	public ResultData<Member> doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNum,

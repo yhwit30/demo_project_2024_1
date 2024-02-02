@@ -6,6 +6,7 @@
 
 <section class="mt-8 mb-5 text-lg px-4">
 	<div class="mx-auto">
+	<div>login page</div>
 	<form action="../member/doLogin" method="POST">
 			<table class="login-box table-box-1" border="1">
 				<tbody>

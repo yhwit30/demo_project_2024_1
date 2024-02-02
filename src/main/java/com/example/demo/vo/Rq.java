@@ -15,6 +15,8 @@ public class Rq {
 	private boolean isLogined;
 	@Getter
 	private int loginedMemberId;
+	@Getter
+	private String loginedMemberNickname;
 	
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
@@ -28,6 +30,7 @@ public class Rq {
 		if (httpSession.getAttribute("loginedMemberId") != null) {
 			isLogined = true;
 			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
+			loginedMemberNickname = (String) httpSession.getAttribute("loginedMemberNickname");
 		}
 	}
 
