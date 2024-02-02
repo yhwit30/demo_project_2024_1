@@ -12,7 +12,9 @@ import com.example.demo.service.ArticleService;
 import com.example.demo.util.Ut;
 import com.example.demo.vo.Article;
 import com.example.demo.vo.ResultData;
+import com.example.demo.vo.Rq;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -23,7 +25,7 @@ public class UsrArticleController {
 
 	// 액션 메소드
 	@RequestMapping("/usr/article/detail")
-	public String getArticleAction(Integer id, HttpSession httpSession, Model model) { // null 체크하려고 Integer로 바꿨다.
+	public String getArticleAction(Integer id, HttpServletRequest req, Model model) { // null 체크하려고 Integer로 바꿨다.
 
 		// 그냥 getArticle 들어오는 경우 체크
 		if (id == null) {
@@ -31,16 +33,11 @@ public class UsrArticleController {
 			return "usr/article/detail";
 		}
 
-		// 로그인 상태 체크
-		boolean isLogined = false;
-		int loginedMemberId = 0;
-		if (httpSession.getAttribute("loginedMemberId") != null) {
-			isLogined = true;
-			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
-		}
-
+		// 수정, 삭제 버튼용 로그인 데이터 가져오기
+		Rq rq = new Rq(req);
+		
 		// 게시글 db에서 가져오기 + 로그인 중인 아이디 권한체크까지 다 끝내고 가져온다.
-		Article article = articleService.getForArticle(loginedMemberId, id);
+		Article article = articleService.getForArticle(rq.getLoginedMemberId(), id);
 
 		model.addAttribute("article", article);
 
@@ -59,16 +56,11 @@ public class UsrArticleController {
 
 	// 로그인 체크 -> 유무 체크 -> 권한 체크 -> 수정
 	@RequestMapping("/usr/article/modify")
-	public ResultData<Integer> doModify(int id, String title, String body, HttpSession httpSession, Model model) {
+	public ResultData<Integer> doModify(int id, String title, String body, HttpServletRequest req, Model model) {
 		// 로그인 상태 체크
-		boolean isLogined = false;
-		int loginedMemberId = 0;
-
-		if (httpSession.getAttribute("loginedMemberId") != null) {
-			isLogined = true;
-			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
-		}
-		if (isLogined == false) {
+		Rq rq = new Rq(req);
+		
+		if (!rq.isLogined()) {
 			return ResultData.from("F-A", "로그인 후 이용해주세요");
 		}
 
@@ -80,7 +72,7 @@ public class UsrArticleController {
 		}
 
 		// 로그인 중인 아이디 권한체크(서비스에 요청)
-		ResultData loginedMemberCanModifyRd = articleService.userCanModify(loginedMemberId, article);
+		ResultData loginedMemberCanModifyRd = articleService.userCanModify(rq.getLoginedMemberId(), article);
 
 		// 글 수정 작업
 		if (loginedMemberCanModifyRd.isSuccess()) {
@@ -93,16 +85,11 @@ public class UsrArticleController {
 	// 로그인 체크 -> 유무 체크 -> 권한 체크 -> 삭제
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
-	public String doDelete(int id, HttpSession httpSession) {
+	public String doDelete(int id, HttpServletRequest req) {
 		// 로그인 상태 체크
-		boolean isLogined = false;
-		int loginedMemberId = 0;
-
-		if (httpSession.getAttribute("loginedMemberId") != null) {
-			isLogined = true;
-			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
-		}
-		if (!isLogined) {
+		Rq rq = new Rq(req);
+		
+		if (!rq.isLogined()) {
 			return Ut.jsReplace("F-A", "로그인 후 이용해주세요", "../member/login");
 		}
 
@@ -113,7 +100,7 @@ public class UsrArticleController {
 		}
 
 		// 로그인 중인 아이디 권한체크(서비스에 요청)
-		ResultData loginedMemberCanDeleteRd = articleService.userCanDelete(loginedMemberId, article);
+		ResultData loginedMemberCanDeleteRd = articleService.userCanDelete(rq.getLoginedMemberId(), article);
 
 		// 글 삭제 작업
 		if (loginedMemberCanDeleteRd.isSuccess()) {
@@ -126,16 +113,11 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public ResultData<Article> doWrite(String title, String body, HttpSession httpSession) {
+	public ResultData<Article> doWrite(String title, String body, HttpServletRequest req) {
 		// 로그인 상태 체크
-		boolean isLogined = false;
-		int loginedMemberId = 0;
-
-		if (httpSession.getAttribute("loginedMemberId") != null) {
-			isLogined = true;
-			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
-		}
-		if (!isLogined) {
+		Rq rq = new Rq(req);
+				
+		if (!rq.isLogined()) {
 			return ResultData.from("F-A", "로그인하고 이용하세요");
 		}
 
@@ -148,7 +130,7 @@ public class UsrArticleController {
 		}
 
 		// 게시글 작성 작업
-		ResultData<Integer> writeArticleRd = articleService.writeArticle(title, body, loginedMemberId);
+		ResultData<Integer> writeArticleRd = articleService.writeArticle(title, body, rq.getLoginedMemberId());
 
 		int id = (int) writeArticleRd.getData1();
 
