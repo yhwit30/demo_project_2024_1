@@ -71,6 +71,7 @@ public class UsrMemberController {
 			return Ut.jsHistoryBack("F-4", Ut.f("비밀번호가 일치하지 않습니다"));
 		}
 
+		// 세션에 로그인 중인 정보 올리기
 		httpSession.setAttribute("loginedMemberId", member.getId());
 		httpSession.setAttribute("loginedMemberNickname", member.getNickname());
 

@@ -56,11 +56,12 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/modify")
 	public String showModify(int id, HttpServletRequest req, Model model) {
 
+		// 로그인 정보 가져오기
 		Rq rq = (Rq) req.getAttribute("rq");
 		Article article = articleService.getForArticle(rq.getLoginedMemberId(), id);
 
 		model.addAttribute("article", article);
-		
+
 		return "usr/article/modify";
 	}
 
@@ -121,13 +122,8 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
 	public ResultData<Article> doWrite(String title, String body, HttpServletRequest req) {
-		// 로그인 상태 체크
-		Rq rq = (Rq) req.getAttribute("rq");
-
-		if (!rq.isLogined()) {
-			return ResultData.from("F-A", "로그인하고 이용하세요");
-		}
-
+		// 로그인 상태 체크 - 인터셉터에서
+		
 		// 제목 내용 빈 칸 확인
 		if (Ut.isNullOrEmpty(title)) {
 			return ResultData.from("F-1", "제목을 입력해주세요");
@@ -135,6 +131,9 @@ public class UsrArticleController {
 		if (Ut.isNullOrEmpty(body)) {
 			return ResultData.from("F-2", "내용을 입력해주세요");
 		}
+
+		// 로그인 정보 가져오기
+		Rq rq = (Rq) req.getAttribute("rq");
 
 		// 게시글 작성 작업
 		ResultData<Integer> writeArticleRd = articleService.writeArticle(title, body, rq.getLoginedMemberId());
