@@ -27,8 +27,16 @@ public class UsrMemberController {
 
 		// 이미 로그아웃 상태체크 - 인터셉터에서
 		
+		// 로그인 상태 체크
+		Rq rq = (Rq) req.getAttribute("rq");
+		
+		if (!rq.isLogined()) {
+			return Ut.jsHistoryBack("F-A", "이미 로그아웃 상태입니다");
+		}
+		
 		// 로그아웃 작업
-		httpSession.removeAttribute("loginedMemberId");
+		
+		rq.logout();
 
 		return Ut.jsReplace("S-1", Ut.f("로그아웃 되었습니다"), "/");
 	}
@@ -41,15 +49,13 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
-	public String doLogin(String loginId, String loginPw, HttpSession httpSession) {
+	public String doLogin(String loginId, String loginPw, HttpSession httpSession, HttpServletRequest req) {
 
-		// 로그인 상태 체크
-		boolean isLogined = false;
-
-		if (httpSession.getAttribute("loginedMemberId") != null) {
-			isLogined = true;
-		}
-		if (isLogined) {
+		// 로그인 상태 체크 -인터셉터에서
+		
+		Rq rq = (Rq) req.getAttribute("rq");
+		
+		if (rq.isLogined()) {
 			return Ut.jsHistoryBack("F-A", "이미 로그인 상태입니다");
 		}
 
@@ -72,9 +78,8 @@ public class UsrMemberController {
 		}
 
 		// 세션에 로그인 중인 정보 올리기
-		httpSession.setAttribute("loginedMemberId", member.getId());
-		httpSession.setAttribute("loginedMemberNickname", member.getNickname());
-
+		rq.login(member);
+		
 		return Ut.jsReplace("S-1", Ut.f("%s님 환영합니다", member.getNickname()), "/");
 	}
 

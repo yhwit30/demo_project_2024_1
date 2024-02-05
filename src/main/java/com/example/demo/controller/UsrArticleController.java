@@ -37,7 +37,7 @@ public class UsrArticleController {
 		Rq rq = (Rq) req.getAttribute("rq");
 
 		// 게시글 db에서 가져오기 + 로그인 중인 아이디 권한체크까지 다 끝내고 가져온다.
-		Article article = articleService.getForArticle(rq.getLoginedMemberId(), id);
+		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
 		model.addAttribute("article", article);
 
@@ -58,7 +58,7 @@ public class UsrArticleController {
 
 		// 로그인 정보 가져오기
 		Rq rq = (Rq) req.getAttribute("rq");
-		Article article = articleService.getForArticle(rq.getLoginedMemberId(), id);
+		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
 		model.addAttribute("article", article);
 
