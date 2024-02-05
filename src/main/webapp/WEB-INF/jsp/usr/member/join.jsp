@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="LOGIN"></c:set>
+<c:set var="pageTitle" value="JOIN"></c:set>
 <%@ include file="../common/head.jspf"%>
 
 
 <section class="mt-8 mb-5 text-lg px-4">
 	<div class="mx-auto">
-		<div>join page</div>
-		<form action="../member/doLogin" method="POST">
+		<form action="../member/doJoin" method="POST">
 			<div>
 				아이디 :
 				<input autocomplete="off" type="text" placeholder="아이디 입력" name="loginId" />
@@ -23,6 +22,18 @@
 			<div>
 				이름 :
 				<input autocomplete="off" type="text" placeholder="이름 입력" name="name" />
+			</div>
+			<div>
+				닉네임 :
+				<input autocomplete="off" type="text" placeholder="닉네임 입력" name="nickname" />
+			</div>
+			<div>
+				전화번호 :
+				<input autocomplete="off" type="text" placeholder="전화번호 입력" name="cellphoneNum" />
+			</div>
+			<div>
+				이메일 :
+				<input autocomplete="off" type="text" placeholder="이메일 입력" name="email" />
 			</div>
 			<button type="submit">회원가입</button>
 		</form>
