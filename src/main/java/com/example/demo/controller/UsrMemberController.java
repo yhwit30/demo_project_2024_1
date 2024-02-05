@@ -23,19 +23,12 @@ public class UsrMemberController {
 	// 액션 메소드
 	@RequestMapping("/usr/member/doLogout")
 	@ResponseBody
-	public String doLogout(HttpServletRequest req, HttpSession httpSession) {
+	public String doLogout(HttpServletRequest req) {
 
 		// 이미 로그아웃 상태체크 - 인터셉터에서
-		
-		// 로그인 상태 체크
-		Rq rq = (Rq) req.getAttribute("rq");
-		
-		if (!rq.isLogined()) {
-			return Ut.jsHistoryBack("F-A", "이미 로그아웃 상태입니다");
-		}
-		
+
 		// 로그아웃 작업
-		
+		Rq rq = (Rq) req.getAttribute("rq");
 		rq.logout();
 
 		return Ut.jsReplace("S-1", Ut.f("로그아웃 되었습니다"), "/");
@@ -46,15 +39,15 @@ public class UsrMemberController {
 
 		return "usr/member/login";
 	}
-	
+
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
-	public String doLogin(String loginId, String loginPw, HttpSession httpSession, HttpServletRequest req) {
+	public String doLogin(String loginId, String loginPw, HttpServletRequest req) {
 
 		// 로그인 상태 체크 -인터셉터에서
-		
+
 		Rq rq = (Rq) req.getAttribute("rq");
-		
+
 		if (rq.isLogined()) {
 			return Ut.jsHistoryBack("F-A", "이미 로그인 상태입니다");
 		}
@@ -79,7 +72,7 @@ public class UsrMemberController {
 
 		// 세션에 로그인 중인 정보 올리기
 		rq.login(member);
-		
+
 		return Ut.jsReplace("S-1", Ut.f("%s님 환영합니다", member.getNickname()), "/");
 	}
 
@@ -88,22 +81,18 @@ public class UsrMemberController {
 
 		return "usr/member/join";
 	}
-	
+
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
 	public ResultData<Member> doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNum,
-			String email, HttpSession httpSession) {
-		
-		// 로그인 상태 체크
-		boolean isLogined = false;
+			String email, HttpSession httpSession, HttpServletRequest req) {
 
-		if (httpSession.getAttribute("loginedMemberId") != null) {
-			isLogined = true;
+		// 로그인 상태 체크
+		Rq rq = (Rq) req.getAttribute("rq");
+		if (rq.isLogined()) {
+			return ResultData.from("F-A", "이미 로그인 상태입니다");
 		}
-		if (isLogined) {
-			return ResultData.from("F-A", "로그아웃하고 가입하세요");
-		}
-		
+
 		// 회원가입 빈 칸 확인
 		if (Ut.isNullOrEmpty(loginId)) {
 			return ResultData.from("F-1", "아이디를 입력해주세요.");

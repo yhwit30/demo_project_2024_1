@@ -17,7 +17,7 @@ public class Rq {
 	private int loginedMemberId;
 	@Getter
 	private String loginedMemberNickname;
-	
+
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
 	private HttpSession session;
@@ -27,9 +27,11 @@ public class Rq {
 		this.resp = resp;
 		this.session = req.getSession();
 
-		if (session.getAttribute("loginedMemberId") != null) {
+		HttpSession httpSession = req.getSession();
+
+		if (httpSession.getAttribute("loginedMemberId") != null) {
 			isLogined = true;
-			loginedMemberId = (int) session.getAttribute("loginedMemberId");
+			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
 			loginedMemberNickname = (String) session.getAttribute("loginedMemberNickname");
 		}
 	}
@@ -37,23 +39,23 @@ public class Rq {
 	public void printHistoryBack(String msg) {
 		resp.setContentType("text/html; charset=UTF-8");
 		println("<script>");
-		if(!Ut.isEmpty(msg)) {
-			println("alert('"+ msg + "');");
+		if (!Ut.isEmpty(msg)) {
+			println("alert('" + msg + "');");
 		}
 		println("history.back();");
 		println("</script>");
-		
+
 	}
 
 	private void println(String str) {
 		print(str + "\n");
-		
+
 	}
 
-	private void print(String str){
-		try{
+	private void print(String str) {
+		try {
 			resp.getWriter().append(str);
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -65,6 +67,6 @@ public class Rq {
 	public void login(Member member) {
 		session.setAttribute("loginedMemberId", member.getId());
 		session.setAttribute("loginedMemberNickname", member.getNickname());
-		
+
 	}
 }

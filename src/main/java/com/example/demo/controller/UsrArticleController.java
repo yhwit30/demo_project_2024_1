@@ -123,7 +123,7 @@ public class UsrArticleController {
 	@ResponseBody
 	public ResultData<Article> doWrite(String title, String body, HttpServletRequest req) {
 		// 로그인 상태 체크 - 인터셉터에서
-		
+
 		// 제목 내용 빈 칸 확인
 		if (Ut.isNullOrEmpty(title)) {
 			return ResultData.from("F-1", "제목을 입력해주세요");
