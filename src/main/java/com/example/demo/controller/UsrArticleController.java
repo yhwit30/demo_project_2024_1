@@ -9,19 +9,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.service.ArticleService;
+import com.example.demo.service.BoardService;
 import com.example.demo.util.Ut;
 import com.example.demo.vo.Article;
+import com.example.demo.vo.Board;
 import com.example.demo.vo.ResultData;
 import com.example.demo.vo.Rq;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UsrArticleController {
 
 	@Autowired
+	private Rq rq;
+
+	@Autowired
 	private ArticleService articleService;
+
+	@Autowired
+	private BoardService boardService;
 
 	// 액션 메소드
 	@RequestMapping("/usr/article/detail")
@@ -45,9 +52,13 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/list")
-	public String showList(Model model) {
+	public String showList(Model model, HttpServletRequest req, int boardId) {
+
+		Board board = boardService.getBoardById(boardId);
+
 		List<Article> articles = articleService.getArticles();
 
+		model.addAttribute("board", board);
 		model.addAttribute("articles", articles);
 
 		return "usr/article/list";
@@ -147,7 +158,7 @@ public class UsrArticleController {
 		// 작성된 게시글 번호 가져오기
 		int id = (int) writeArticleRd.getData1();
 
-		return Ut.jsReplace(writeArticleRd.getResultCode(), writeArticleRd.getMsg(), "../article/detail?id="+id);
+		return Ut.jsReplace(writeArticleRd.getResultCode(), writeArticleRd.getMsg(), "../article/detail?id=" + id);
 	}
 
 }
