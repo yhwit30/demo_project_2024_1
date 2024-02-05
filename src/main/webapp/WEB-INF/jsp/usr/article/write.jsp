@@ -3,8 +3,6 @@
 <c:set var="pageTitle" value="Article WRITE"></c:set>
 <%@ include file="../common/head.jspf"%>
 
-
-
 <section class="mt-8 mb-5 text-lg px-4">
 	<div class="mx-auto">
 		<form action="../article/doWrite" method="POST">
@@ -13,24 +11,24 @@
 					<tr>
 						<th>제목</th>
 						<td>
-							<input autocomplete="off" type="text" placeholder="제목을 입력해주세요" name="title" /></td>
+							<input class="input input-bordered input-secondary w-full max-w-xs" autocomplete="off" type="text" placeholder="제목을 입력해주세요" name="title" /></td>
 					</tr>
 					<tr>
 						<th>내용</th>
 						<td>
-							<input autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="body" /></td>
+							<input class="input input-bordered input-secondary w-full max-w-xs" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="body" /></td>
 					</tr>
 					<tr>
 						<th></th>
 						<td>
-							<input type="submit" value="글쓰기" />
+							<input class="btn btn-outline btn-info" type="submit" value="글쓰기" />
 						</td>
 					</tr>
 				</tbody>
 			</table>
 		</form>
 		<div class="btns">
-			<button class="hover:underline" type="button" onclick="history.back();">뒤로가기</button>
+			<button class="btn btn-outline" type="button" onclick="history.back();">뒤로가기</button>
 		</div>
 	</div>
 </section>

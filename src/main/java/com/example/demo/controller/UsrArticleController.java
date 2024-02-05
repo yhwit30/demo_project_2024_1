@@ -144,12 +144,10 @@ public class UsrArticleController {
 		// 게시글 작성 작업
 		ResultData<Integer> writeArticleRd = articleService.writeArticle(title, body, rq.getLoginedMemberId());
 
+		// 작성된 게시글 번호 가져오기
 		int id = (int) writeArticleRd.getData1();
 
-//		// 결과 출력 시 해당 article도 나오게
-//		Article article = articleService.getArticle(id);
-//		return ResultData.newData(writeArticleRd, "article", article);
-		return Ut.jsReplace("S-A", Ut.f("%d번 글이 생성되었습니다", id), "../article/list");
+		return Ut.jsReplace(writeArticleRd.getResultCode(), writeArticleRd.getMsg(), "../article/detail?id="+id);
 	}
 
 }

@@ -15,32 +15,29 @@ header>div>ul>li {
 	margin-right: 30px;
 }
 
-.login-box>tbody>tr>td>input {
-	border: 1px solid black;
-	padding-left: 10px;
-}
+/* .login-box>tbody>tr>td>input { */
+/* 	padding-left: 10px; */
+/* } */
 
-.login-box>tbody>tr:nth-child(3)>td>input {
-	padding-left: 0;
-}
+/* .login-box>tbody>tr:nth-child(3)>td>input { */
+/* 	padding-left: 0; */
+/* } */
 
-.join-box>tbody>tr:nth-child(7)>td>input {
-	padding-left: 0;
-}
+/* .join-box>tbody>tr:nth-child(7)>td>input { */
+/* 	padding-left: 0; */
+/* } */
 
-.modify-box>tbody>tr:nth-child(5)>td>input, .modify-box>tbody>tr:nth-child(6)>td>input,
-	.modify-box>tbody>tr:nth-child(7)>td>input {
-	border-radius: 3px;
-	border: 1px solid red;
-}
+/* .modify-box>tbody>tr:nth-child(5)>td>input, .modify-box>tbody>tr:nth-child(6)>td>input, */
+/* 	.modify-box>tbody>tr:nth-child(7)>td>input { */
+/* } */
 
 .table-box-1 th, .table-box-1 td {
 	border: 1px solid black;
-	padding: 5px;
+	padding: 10px;
 	text-align: center;
 }
 
-.table-box-1 {
+.table-box-1{
 	margin-left: auto;
 	margin-right: auto;
 }
