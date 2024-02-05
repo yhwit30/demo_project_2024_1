@@ -38,6 +38,7 @@ public interface ArticleRepository {
 			INNER JOIN `member` AS M
 			ON A.memberId = M.id
 			WHERE A.id = #{id}
+			ORDER BY A.id DESC
 				""")
 	public Article getForPrintArticle(int id);
 
@@ -46,5 +47,16 @@ public interface ArticleRepository {
 
 //	@Update("UPDATE article SET updateDate = NOW(), title = #{title}, `body` = #{body} WHERE id = #{id}")
 	public void modifyArticle(int id, String title, String body);
+
+	@Select("""
+			SELECT A.*, M.nickname AS extra__writer
+			FROM article AS A
+			INNER JOIN `member` AS M
+			ON A.memberId = M.id
+			WHERE boardId = #{boardId}
+			ORDER BY A.id DESC
+				""")
+	public List<Article> getForPrintArticles(Integer boardId);
+	
 
 }

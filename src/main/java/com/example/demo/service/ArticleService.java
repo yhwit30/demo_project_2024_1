@@ -36,7 +36,6 @@ public class ArticleService {
 		articleRepository.modifyArticle(id, title, body);
 	}
 
-	
 	public Article getArticle(int id) {
 		return articleRepository.getArticle(id);
 	}
@@ -44,6 +43,12 @@ public class ArticleService {
 	public List<Article> getArticles() {
 		return articleRepository.getArticles();
 	}
+
+	// 게시판 번호로 가져오기
+	public List<Article> getForPrintArticles(Integer boardId) {
+		return articleRepository.getForPrintArticles(boardId);
+	}
+
 
 	// 게시글 가져와서 아이디 권한체크 메소드 실행
 	public Article getForPrintArticle(int loginedMemberId, int id) {
@@ -83,6 +88,11 @@ public class ArticleService {
 
 		return ResultData.from("S-1", Ut.f("%d번 글이 삭제 되었습니다", article.getId()));
 	}
+
+
+
+	
+
 	
 
 }

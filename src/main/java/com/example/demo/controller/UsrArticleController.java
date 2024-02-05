@@ -46,17 +46,27 @@ public class UsrArticleController {
 		// 게시글 db에서 가져오기 + 로그인 중인 아이디 권한체크까지 다 끝내고 가져온다.
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
+//		model.addAttribute("board", board);
 		model.addAttribute("article", article);
 
 		return "usr/article/detail";
 	}
 
 	@RequestMapping("/usr/article/list")
-	public String showList(Model model, HttpServletRequest req, int boardId) {
+	public String showList(Model model, HttpServletRequest req, Integer boardId) {
 
+		// 전체 게시판 경우
+		if(boardId == null) {
+			List<Article> articles = articleService.getArticles();
+			model.addAttribute("articles", articles);
+			return "usr/article/list";
+		}
+		
+		// 게시판 버튼용 데이터
 		Board board = boardService.getBoardById(boardId);
-
-		List<Article> articles = articleService.getArticles();
+		
+		// 게시판 번호로 게시글 가져오기
+		List<Article> articles = articleService.getForPrintArticles(boardId);
 
 		model.addAttribute("board", board);
 		model.addAttribute("articles", articles);
@@ -138,7 +148,7 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public String doWrite(String title, String body, HttpServletRequest req) {
+	public String doWrite(String title, String body, int boardId, HttpServletRequest req) {
 		// 로그인 상태 체크 - 인터셉터에서
 
 		// 제목 내용 빈 칸 확인

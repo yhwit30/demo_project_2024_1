@@ -3,12 +3,16 @@
 <c:set var="pageTitle" value="ARTICLE DETAIL"></c:set>
 <%@ include file="../common/head.jspf"%>
 
-	<div class = "text-center">${checkUrlId}</div>
+<div class="text-center">${checkUrlId}</div>
 
 <section class="mt-8 text-xl px-4">
 	<div class="mx-auto">
 		<table class="table-box-1" border="1">
 			<tbody>
+				<tr>
+					<th>게시판</th>
+					<td>${article.boardId }</td>
+				</tr>
 				<tr>
 					<th>번호</th>
 					<td>${article.id }</td>
@@ -42,7 +46,8 @@
 			</c:if>
 			<c:if test="${article.userCanDelete }">
 				<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;"
-					href="../article/doDelete?id=${article.id }">삭제</a>
+					href="../article/doDelete?id=${article.id }"
+				>삭제</a>
 			</c:if>
 		</div>
 	</div>
