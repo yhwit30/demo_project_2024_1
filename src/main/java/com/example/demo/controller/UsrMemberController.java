@@ -24,11 +24,14 @@ public class UsrMemberController {
 	@RequestMapping("/usr/member/doLogout")
 	@ResponseBody
 	public String doLogout(HttpServletRequest req) {
-
 		// 이미 로그아웃 상태체크 - 인터셉터에서
 
-		// 로그아웃 작업
 		Rq rq = (Rq) req.getAttribute("rq");
+		if (!rq.isLogined()) {
+			return Ut.jsHistoryBack("F-A", "이미 로그아웃 상태입니다");
+		}
+		
+		// 로그아웃 작업
 		rq.logout();
 
 		return Ut.jsReplace("S-1", Ut.f("로그아웃 되었습니다"), "/");

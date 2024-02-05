@@ -2,6 +2,10 @@ package com.example.demo.vo;
 
 import java.io.IOException;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
+
 import com.example.demo.util.Ut;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,6 +13,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.Getter;
 
+@Component
+@Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class Rq {
 
 	@Getter
@@ -34,6 +40,7 @@ public class Rq {
 			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
 			loginedMemberNickname = (String) session.getAttribute("loginedMemberNickname");
 		}
+		this.req.setAttribute("rq", this);
 	}
 
 	public void printHistoryBack(String msg) {
@@ -69,4 +76,9 @@ public class Rq {
 		session.setAttribute("loginedMemberNickname", member.getNickname());
 
 	}
+
+	public void initBeforeActionInterceptor() {
+		
+	}
+
 }
