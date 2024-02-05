@@ -7,19 +7,37 @@
 
 <section class="mt-8 mb-5 text-lg px-4">
 	<div class="mx-auto">
-		<div>modify page</div>
 		<form action="../article/doModify" method="POST">
-			<table class="login-box table-box-1" border="1">
+			<input type="hidden" value="${article.id }" name="id" />
+			<table class="modify-box table-box-1" border="1">
 				<tbody>
+					<tr>
+						<th>번호</th>
+						<td>${article.id }</td>
+					</tr>
+					<tr>
+						<th>작성날짜</th>
+						<td>${article.regDate }</td>
+					</tr>
+					<tr>
+						<th>수정날짜</th>
+						<td>${article.updateDate }</td>
+					</tr>
+					<tr>
+						<th>작성자</th>
+						<td>${article.extra__writer }</td>
+					</tr>
 					<tr>
 						<th>제목</th>
 						<td>
-							<input autocomplete="off" type="text" value="${article.title }" name="title" /></td>
+							<input autocomplete="off" type="text" value="${article.title }" name="title" />
+						</td>
 					</tr>
 					<tr>
 						<th>내용</th>
 						<td>
-							<input autocomplete="off" type="text" value="${article.body }" name="body" /></td>
+							<input autocomplete="off" type="text" value="${article.body }" name="body" />
+						</td>
 					</tr>
 					<tr>
 						<th></th>
@@ -27,7 +45,6 @@
 							<input type="submit" value="수정" />
 						</td>
 					</tr>
-					<input type="hidden" value="${article.id }" name="id" />
 				</tbody>
 			</table>
 		</form>

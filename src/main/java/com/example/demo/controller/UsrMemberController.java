@@ -30,7 +30,7 @@ public class UsrMemberController {
 		if (!rq.isLogined()) {
 			return Ut.jsHistoryBack("F-A", "이미 로그아웃 상태입니다");
 		}
-		
+
 		// 로그아웃 작업
 		rq.logout();
 

@@ -5,7 +5,7 @@
 <mapper namespace="com.example.demo.repository.ArticleRepository">
 	<select id="getArticles" resultType="Article">
 		SELECT article.*,
-		`member`.nickname AS memberName
+		`member`.nickname AS extra__writer
 		FROM article
 		JOIN `member`
 		ON

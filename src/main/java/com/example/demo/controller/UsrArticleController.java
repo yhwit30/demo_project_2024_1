@@ -62,6 +62,11 @@ public class UsrArticleController {
 
 		model.addAttribute("article", article);
 
+		// 게시글 존재여부 체크
+		if (article == null) {
+			return Ut.jsHistoryBack("F-1", Ut.f("%d번 글은 없습니다.", id));
+		}
+
 		return "usr/article/modify";
 	}
 
@@ -72,11 +77,6 @@ public class UsrArticleController {
 		// 로그인 상태 체크 - 인터셉터에서
 
 		Article article = articleService.getArticle(id); // 해당 게시글 가져오기
-
-		// 게시글 존재여부 체크
-		if (article == null) {
-			return Ut.jsHistoryBack("F-1", Ut.f("%d번 글은 없습니다.", id));
-		}
 
 		// 로그인 정보 가져오기
 		Rq rq = (Rq) req.getAttribute("rq");
@@ -89,7 +89,7 @@ public class UsrArticleController {
 			articleService.modifyArticle(id, title, body);
 		}
 		return Ut.jsReplace(loginedMemberCanModifyRd.getResultCode(), loginedMemberCanModifyRd.getMsg(),
-				"../article/list");
+				"../article/detail?id=" + id);
 	}
 
 	// 로그인 체크 -> 유무 체크 -> 권한 체크 -> 삭제
@@ -119,17 +119,23 @@ public class UsrArticleController {
 				"../article/list");
 	}
 
+	@RequestMapping("/usr/article/write")
+	public String showWrite() {
+
+		return "usr/article/write";
+	}
+
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public ResultData<Article> doWrite(String title, String body, HttpServletRequest req) {
+	public String doWrite(String title, String body, HttpServletRequest req) {
 		// 로그인 상태 체크 - 인터셉터에서
 
 		// 제목 내용 빈 칸 확인
 		if (Ut.isNullOrEmpty(title)) {
-			return ResultData.from("F-1", "제목을 입력해주세요");
+			return Ut.jsHistoryBack("F-1", "제목을 입력해주세요");
 		}
 		if (Ut.isNullOrEmpty(body)) {
-			return ResultData.from("F-2", "내용을 입력해주세요");
+			return Ut.jsHistoryBack("F-2", "내용을 입력해주세요");
 		}
 
 		// 로그인 정보 가져오기
@@ -140,9 +146,10 @@ public class UsrArticleController {
 
 		int id = (int) writeArticleRd.getData1();
 
-		// 결과 출력 시 해당 article도 나오게
-		Article article = articleService.getArticle(id);
-		return ResultData.newData(writeArticleRd, "article", article);
+//		// 결과 출력 시 해당 article도 나오게
+//		Article article = articleService.getArticle(id);
+//		return ResultData.newData(writeArticleRd, "article", article);
+		return Ut.jsReplace("S-A", Ut.f("%d번 글이 생성되었습니다", id), "../article/list");
 	}
 
 }

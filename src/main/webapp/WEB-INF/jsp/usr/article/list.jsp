@@ -23,7 +23,7 @@
 						<td>
 							<a href ="detail?id=${article.id }" class="hover:underline">${article.title }</a>
 						</td>
-						<td>${article.memberName }</td>
+						<td>${article.extra__writer }</td>
 					</tr>
 				</c:forEach>
 			</tbody>

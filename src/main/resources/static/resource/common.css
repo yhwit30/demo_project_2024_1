@@ -10,8 +10,6 @@ html>body {
 	font-family: 'SOGANGUNIVERSITYTTF';
 }
 
-/* 라이브러리 */
-
 /* 커스텀 */
 header>div>ul>li {
 	margin-right: 30px;
@@ -26,9 +24,23 @@ header>div>ul>li {
 	padding-left: 0;
 }
 
+.join-box>tbody>tr:nth-child(7)>td>input {
+	padding-left: 0;
+}
+
+.modify-box>tbody>tr:nth-child(5)>td>input, .modify-box>tbody>tr:nth-child(6)>td>input,
+	.modify-box>tbody>tr:nth-child(7)>td>input {
+	border-radius: 3px;
+	border: 1px solid red;
+}
+
 .table-box-1 th, .table-box-1 td {
 	border: 1px solid black;
 	padding: 5px;
 	text-align: center;
 }
 
+.table-box-1 {
+	margin-left: auto;
+	margin-right: auto;
+}

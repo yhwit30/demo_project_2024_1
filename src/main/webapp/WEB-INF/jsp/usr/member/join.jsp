@@ -7,35 +7,39 @@
 <section class="mt-8 mb-5 text-lg px-4">
 	<div class="mx-auto">
 		<form action="../member/doJoin" method="POST">
-			<div>
-				아이디 :
-				<input autocomplete="off" type="text" placeholder="아이디 입력" name="loginId" />
-			</div>
-			<div>
-				비밀번호 :
-				<input autocomplete="off" type="text" placeholder="비밀번호 입력" name="loginPw" />
-			</div>
-			<div>
-				비밀번호 확인 :
-				<input autocomplete="off" type="text" placeholder="비밀번호 확인 입력" name="loginPwConfirm" />
-			</div>
-			<div>
-				이름 :
-				<input autocomplete="off" type="text" placeholder="이름 입력" name="name" />
-			</div>
-			<div>
-				닉네임 :
-				<input autocomplete="off" type="text" placeholder="닉네임 입력" name="nickname" />
-			</div>
-			<div>
-				전화번호 :
-				<input autocomplete="off" type="text" placeholder="전화번호 입력" name="cellphoneNum" />
-			</div>
-			<div>
-				이메일 :
-				<input autocomplete="off" type="text" placeholder="이메일 입력" name="email" />
-			</div>
-			<button type="submit">회원가입</button>
+			<table class="join-box table-box-1" border="1">
+				<tbody>
+					<tr>
+						<th>아이디</th>
+						<td><input autocomplete="off" type="text" placeholder="아이디를 입력해주세요" name="loginId" /></td>
+					</tr>
+					<tr>
+						<th>비밀번호</th>
+						<td><input autocomplete="off" type="text" placeholder="비밀번호를 입력해주세요" name="loginPw" /></td>
+					</tr>
+					<tr>
+						<th>이름</th>
+						<td><input autocomplete="off" type="text" placeholder="이름을 입력해주세요" name="name" /></td>
+					</tr>
+					<tr>
+						<th>닉네임</th>
+						<td><input autocomplete="off" type="text" placeholder="닉네임을 입력해주세요" name="nickname" /></td>
+					</tr>
+					<tr>
+						<th>전화번호</th>
+						<td><input autocomplete="off" type="text" placeholder="전화번호를 입력해주세요" name="cellphoneNum" /></td>
+					</tr>
+					<tr>
+						<th>이메일</th>
+						<td><input autocomplete="off" type="text" placeholder="이메일을 입력해주세요" name="email" /></td>
+					</tr>
+
+					<tr>
+						<th></th>
+						<td><input type="submit" value="가입" /></td>
+					</tr>
+				</tbody>
+			</table>
 		</form>
 		<div class="btns">
 			<button class="hover:underline" type="button" onclick="history.back();">뒤로가기</button>

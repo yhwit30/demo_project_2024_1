@@ -18,7 +18,7 @@ public interface ArticleRepository {
 			regDate = NOW(),
 			updateDate = NOW(),
 			memberId = #{loginedMemberId},
-			title = #{title}, 
+			title = #{title},
 			`body` = #{body}
 			""")
 	public void writeArticle(String title, String body, int loginedMemberId);
@@ -33,20 +33,18 @@ public interface ArticleRepository {
 	public List<Article> getArticles();
 
 	@Select("""
-			SELECT A.*, M.nickname AS memberName
+			SELECT A.*, M.nickname AS extra__writer
 			FROM article AS A
 			INNER JOIN `member` AS M
 			ON A.memberId = M.id
 			WHERE A.id = #{id}
 				""")
 	public Article getForPrintArticle(int id);
-	
+
 	@Delete("DELETE FROM article WHERE id = #{id}")
 	public void deleteArticle(int id);
 
 //	@Update("UPDATE article SET updateDate = NOW(), title = #{title}, `body` = #{body} WHERE id = #{id}")
 	public void modifyArticle(int id, String title, String body);
 
-
 }
-

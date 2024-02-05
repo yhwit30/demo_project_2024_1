@@ -24,7 +24,10 @@
 			<ul class="flex">
 <!-- 				<li><a class="hover:underline" href="/"><i class="fa-solid fa-house-chimney-window"></i></a></li> -->
 				<c:if test="${rq.isLogined()}">
-				<li><a class="hover:underline" href="/">${rq.loginedMemberNickname }님 어서오고<i class="fa-solid fa-handshake"></i></a></li>
+				<li><a class="hover:underline" href="/">${rq.loginedMemberNickname }님<i class="fa-solid fa-handshake"></i></a></li>
+				</c:if>
+				<c:if test="${rq.isLogined()}">
+				<li><a class="hover:underline" href="../article/write"><i class="fa-solid fa-pen-nib"></i></a></li>
 				</c:if>
 				<li><a class="hover:underline" href="../article/list"><i class="fa-solid fa-table-list"></i></a></li>
 				<c:if test="${!rq.isLogined()}">

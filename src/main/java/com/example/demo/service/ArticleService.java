@@ -46,7 +46,7 @@ public class ArticleService {
 	}
 
 	// 게시글 가져와서 아이디 권한체크 메소드 실행
-	public Article getForPrintArticle(int loginedMemberId, Integer id) {
+	public Article getForPrintArticle(int loginedMemberId, int id) {
 		Article article = articleRepository.getForPrintArticle(id);
 		
 		controlForPrintArticle(loginedMemberId, article);

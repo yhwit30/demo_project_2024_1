@@ -3,11 +3,11 @@
 <c:set var="pageTitle" value="Article DETAIL"></c:set>
 <%@ include file="../common/head.jspf"%>
 
-
-<div>${checkUrlId}</div>
-
 <section class="mt-8 text-lg px-4">
 	<div class="mx-auto">
+	
+	<div class = "text-center">${checkUrlId}</div>
+	
 		<table class="table-box-1" border="1">
 			<tbody>
 				<tr>
@@ -24,7 +24,7 @@
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td>${article.memberName }</td>
+					<td>${article.extra__writer }</td>
 				</tr>
 				<tr>
 					<th>제목</th>
@@ -37,12 +37,12 @@
 			</tbody>
 		</table>
 		<div class="btns">
-			<button type="button" onclick="history.back();">뒤로가기</button>
+			<button class="hover:underline" type="button" onclick="history.back();">뒤로가기</button>
 			<c:if test="${article.userCanModify }">
-				<a href="../article/modify?id=${article.id }">수정</a>
+				<a class="hover:underline" href="../article/modify?id=${article.id }">수정</a>
 			</c:if>
 			<c:if test="${article.userCanDelete }">
-				<a onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="../article/doDelete?id=${article.id }">삭제</a>
+				<a class="hover:underline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="../article/doDelete?id=${article.id }">삭제</a>
 			</c:if>
 		</div>
 	</div>
