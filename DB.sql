@@ -166,3 +166,14 @@ memberId = CEILING((RAND() * 9) / 3),
 boardId = CEILING((RAND() * 9) / 3),
 title = CONCAT('제목__', RAND()),
 `body` = CONCAT('내용__',RAND());
+
+INSERT INTO article
+(
+    regDate, updateDate, memberId, boardId, title, `body`
+)
+SELECT NOW(),NOW(), FLOOR(RAND() * 2) + 2, FLOOR(RAND() * 3) + 1, CONCAT('제목_',RAND()), CONCAT('내용_',RAND())
+FROM article;
+
+SELECT FLOOR(RAND() * 2) + 2
+
+SELECT FLOOR(RAND() * 3) + 1
