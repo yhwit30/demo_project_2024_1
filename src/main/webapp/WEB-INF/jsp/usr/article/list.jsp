@@ -69,26 +69,25 @@
 	<!-- 버전2 동적 페이징-->
 	<div class="pagination flex justify-center mt-3">
 		<c:set var="paginationLen" value="3" />
-		<c:set var="startPage" value="${page - paginationLen >= 1 ? page - paginationLen : 1 }" />
-		<c:set var="endPage" value="${page + paginationLen <= totalPage ? page + paginationLen : totalPage }" />
+		<c:set var="startPage" value="${page -  paginationLen  >= 1 ? page - paginationLen : 1}" />
+		<c:set var="endPage" value="${page +  paginationLen  <= pagination.totalPage ? page + paginationLen : pagination.totalPage}" />
 
 		<c:if test="${startPage > 1 }">
-			<a class="btn btn-sm" href="?page=1%boardId=${boardId }">1</a>
+			<a class="btn btn-sm" href="?page=1&boardId=${boardId }">1</a>
 			<button class="btn btn-sm btn-disabled">...</button>
 		</c:if>
 
-		<c:forEach begin="${startPage }" end="${endPage}" var="i">
-			<a class="btn btn-sm ${page == i ? 'btn-active' : '' }" href="?boardId=${boardId }&page=${i }">${i }</a>
+		<c:forEach begin="${startPage }" end="${endPage }" var="i">
+			<a class="btn btn-sm ${page == i ? 'btn-active' : '' }" href="?page=${i }&boardId=${boardId}">${i }</a>
 		</c:forEach>
 
-
-		<c:if test="${endPage < totalPage }">
+		<c:if test="${endPage < pagination.totalPage }">
 			<button class="btn btn-sm btn-disabled">...</button>
-			<a class="btn btn-sm" href="?page=1%boardId=${boardId }">${totalPage }</a>
+			<a class="btn btn-sm" href="?page=${pagesCount }&boardId=${boardId }">${pagination.totalPage }</a>
 		</c:if>
 
 	</div>
-
+	
 	<!-- 버전1  -->
 	<div class="pagination flex justify-center mt-3">
 		<div class="btn-group">
