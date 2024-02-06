@@ -22,12 +22,11 @@ public class ArticleService {
 
 	// 서비스 메서드
 	public ResultData<Integer> writeArticle(String title, String body, int loginedMemberId) {
-		articleRepository.writeArticle(title, body, loginedMemberId);
+		articleRepository.writeArticle(loginedMemberId, body, title);
 		int id = articleRepository.getLastInsertId();
 		return ResultData.from("S-1", Ut.f("%d번 글이 생성되었습니다", id), "id", id);
 	}
 
-	
 	public void deleteArticle(int id) {
 		articleRepository.deleteArticle(id);
 	}
@@ -59,7 +58,7 @@ public class ArticleService {
 		return article;
 	}
 	
-	// Article dto에다가 참,거짓값 심어주기 -> jsp 버튼 권한체크용
+	// ArticleVO에다가 참,거짓값 심어주기 -> jsp 버튼 권한체크용
 	private void controlForPrintArticle(int loginedMemberId, Article article) {
 		if (article == null) {
 			return;

@@ -81,4 +81,12 @@ public class Rq {
 		
 	}
 
+	public String printHistoryBackOnView(String msg) {
+		req.setAttribute("msg", msg);
+		req.setAttribute("historyBack", true);
+		return "usr/common/js";
+	}
 }
+
+
+

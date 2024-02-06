@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.example.demo.vo.Article;
 
@@ -17,20 +18,20 @@ public interface ArticleRepository {
 			article SET
 			regDate = NOW(),
 			updateDate = NOW(),
-			memberId = #{loginedMemberId},
-			title = #{title},
-			`body` = #{body}
+			memberId = #{memberId},
+			title = #{title}, `body` = #{body}
 			""")
-	public void writeArticle(String title, String body, int loginedMemberId);
+	public void writeArticle(int memberId, String title, String body);
 
 	@Select("SELECT LAST_INSERT_ID()")
 	public int getLastInsertId();
 
-//	@Select("SELECT * FROM article WHERE id = #{id}")
+	@Select("""
+			SELECT *
+			FROM article
+			WHERE id = #{id}
+			""")
 	public Article getArticle(int id);
-
-//	@Select("SELECT * FROM article ORDER BY id DESC")
-	public List<Article> getArticles();
 
 	@Select("""
 			SELECT A.*, M.nickname AS extra__writer
@@ -38,15 +39,31 @@ public interface ArticleRepository {
 			INNER JOIN `member` AS M
 			ON A.memberId = M.id
 			WHERE A.id = #{id}
-			ORDER BY A.id DESC
 				""")
 	public Article getForPrintArticle(int id);
 
 	@Delete("DELETE FROM article WHERE id = #{id}")
 	public void deleteArticle(int id);
 
-//	@Update("UPDATE article SET updateDate = NOW(), title = #{title}, `body` = #{body} WHERE id = #{id}")
+	@Update("""
+			UPDATE article
+				<set>
+					<if test="title != null and title != ''">title = #{title},</if>
+					<if test="body != null and body != ''">`body` = #{body},</if>
+					updateDate = NOW()
+				</set>
+			WHERE id = #{id}
+				""")
 	public void modifyArticle(int id, String title, String body);
+
+	@Select("""
+			SELECT A.*, M.nickname AS extra__writer
+			FROM article AS A
+			INNER JOIN `member` AS M
+			ON A.memberId = M.id
+			ORDER BY A.id DESC
+			""")
+	public List<Article> getArticles();
 
 	@Select("""
 			SELECT A.*, M.nickname AS extra__writer
@@ -55,8 +72,7 @@ public interface ArticleRepository {
 			ON A.memberId = M.id
 			WHERE boardId = #{boardId}
 			ORDER BY A.id DESC
-				""")
-	public List<Article> getForPrintArticles(Integer boardId);
-	
+			""")
+	public List<Article> getForPrintArticles(int boardId);
 
 }

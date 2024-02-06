@@ -56,15 +56,21 @@ public class UsrArticleController {
 	public String showList(Model model, HttpServletRequest req, Integer boardId) {
 
 		// 전체 게시판 경우
-		if(boardId == null) {
+		if (boardId == null) {
 			List<Article> articles = articleService.getArticles();
 			model.addAttribute("articles", articles);
 			return "usr/article/list";
 		}
-		
+
 		// 게시판 버튼용 데이터
 		Board board = boardService.getBoardById(boardId);
-		
+
+		// 게시판 번호가 없는 경우
+		if (board == null) {
+			Rq rq = (Rq) req.getAttribute("rq");
+			return rq.printHistoryBackOnView("없는 게시판이야");
+		}
+
 		// 게시판 번호로 게시글 가져오기
 		List<Article> articles = articleService.getForPrintArticles(boardId);
 
