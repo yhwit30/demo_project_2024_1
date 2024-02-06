@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.Getter;
 
+//로그인 세션 관련
 @Component
 @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class Rq {
@@ -38,7 +39,7 @@ public class Rq {
 		if (httpSession.getAttribute("loginedMemberId") != null) {
 			isLogined = true;
 			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
-			loginedMemberNickname = (String) session.getAttribute("loginedMemberNickname");
+			loginedMemberNickname = (String) httpSession.getAttribute("loginedMemberNickname");
 		}
 		this.req.setAttribute("rq", this);
 	}

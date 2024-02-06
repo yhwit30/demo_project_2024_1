@@ -72,7 +72,15 @@ public interface ArticleRepository {
 			ON A.memberId = M.id
 			WHERE boardId = #{boardId}
 			ORDER BY A.id DESC
+			LIMIT #{limitFrom}, #{limitTake}
 			""")
-	public List<Article> getForPrintArticles(int boardId);
+	public List<Article> getForPrintArticles(int boardId, int limitFrom, int limitTake);
+
+	@Select("""
+			SELECT COUNT(*) AS cnt
+			FROM article
+			WHERE boardId = #{boardID}
+			""")
+	public int getArticlesCount(Integer boardId);
 
 }

@@ -18,6 +18,9 @@ import jakarta.servlet.http.HttpSession;
 public class UsrMemberController {
 
 	@Autowired
+	private Rq rq;
+	
+	@Autowired
 	private MemberService memberService;
 
 	// 액션 메소드
@@ -26,7 +29,7 @@ public class UsrMemberController {
 	public String doLogout(HttpServletRequest req) {
 		// 이미 로그아웃 상태체크 - 인터셉터에서
 
-		Rq rq = (Rq) req.getAttribute("rq");
+//		Rq rq = (Rq) req.getAttribute("rq");
 		if (!rq.isLogined()) {
 			return Ut.jsHistoryBack("F-A", "이미 로그아웃 상태입니다");
 		}
@@ -49,7 +52,7 @@ public class UsrMemberController {
 
 		// 로그인 상태 체크 -인터셉터에서
 
-		Rq rq = (Rq) req.getAttribute("rq");
+//		Rq rq = (Rq) req.getAttribute("rq");
 
 		if (rq.isLogined()) {
 			return Ut.jsHistoryBack("F-A", "이미 로그인 상태입니다");
@@ -91,7 +94,7 @@ public class UsrMemberController {
 			String email, HttpSession httpSession, HttpServletRequest req) {
 
 		// 로그인 상태 체크
-		Rq rq = (Rq) req.getAttribute("rq");
+//		Rq rq = (Rq) req.getAttribute("rq");
 		if (rq.isLogined()) {
 			return Ut.jsHistoryBack("F-A", "이미 로그인 상태입니다");
 		}

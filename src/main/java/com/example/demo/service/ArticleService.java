@@ -43,9 +43,12 @@ public class ArticleService {
 		return articleRepository.getArticles();
 	}
 
-	// 게시판 번호로 가져오기
-	public List<Article> getForPrintArticles(Integer boardId) {
-		return articleRepository.getForPrintArticles(boardId);
+	// 게시판 번호로 가져오기 및 페이지네이션
+	public List<Article> getForPrintArticles(Integer boardId, int itemsInAPage, int page) {
+		int limitFrom = (page - 1) * itemsInAPage;
+		int limitTake = itemsInAPage;
+		
+		return articleRepository.getForPrintArticles(boardId, limitFrom, limitTake);
 	}
 
 
@@ -86,6 +89,11 @@ public class ArticleService {
 		}
 
 		return ResultData.from("S-1", Ut.f("%d번 글이 삭제 되었습니다", article.getId()));
+	}
+
+	// 게시글 전체 개수 구하기
+	public int getArticlesCount(Integer boardId) {
+		return articleRepository.getArticlesCount(boardId);
 	}
 
 

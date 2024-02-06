@@ -41,7 +41,7 @@ public class UsrArticleController {
 		}
 
 		// 수정, 삭제 버튼용 로그인 데이터 가져오기
-		Rq rq = (Rq) req.getAttribute("rq");
+//		Rq rq = (Rq) req.getAttribute("rq");
 
 		// 게시글 db에서 가져오기 + 로그인 중인 아이디 권한체크까지 다 끝내고 가져온다.
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
@@ -53,7 +53,7 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/list")
-	public String showList(Model model, HttpServletRequest req, Integer boardId) {
+	public String showList(Model model, HttpServletRequest req, Integer boardId, int page) {
 
 		// 전체 게시판 경우
 		if (boardId == null) {
@@ -64,16 +64,24 @@ public class UsrArticleController {
 
 		// 게시판 버튼용 데이터
 		Board board = boardService.getBoardById(boardId);
+		
+		// 게시글 전체 개수 구하기
+		int articlesCount = articleService.getArticlesCount(boardId);
 
 		// 게시판 번호가 없는 경우
 		if (board == null) {
-			Rq rq = (Rq) req.getAttribute("rq");
+//			Rq rq = (Rq) req.getAttribute("rq");
 			return rq.printHistoryBackOnView("없는 게시판이야");
 		}
 
+		// 페이지네이션
+		int itemsInAPage = 10;
+		
 		// 게시판 번호로 게시글 가져오기
-		List<Article> articles = articleService.getForPrintArticles(boardId);
+		List<Article> articles = articleService.getForPrintArticles(boardId, itemsInAPage, page);
 
+		model.addAttribute("page", page);
+		model.addAttribute("articlesCount", articlesCount);
 		model.addAttribute("board", board);
 		model.addAttribute("articles", articles);
 
@@ -81,18 +89,19 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/modify")
-	public String showModify(int id, HttpServletRequest req, Model model) {
+	public String showModify(Integer id, HttpServletRequest req, Model model) {
 
 		// 로그인 정보 가져오기
-		Rq rq = (Rq) req.getAttribute("rq");
+//		Rq rq = (Rq) req.getAttribute("rq");
+
+		// 게시글 존재여부 체크
+		if (id == null) {
+			return rq.printHistoryBackOnView("없는 게시글이야");
+		}
+
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
 		model.addAttribute("article", article);
-
-		// 게시글 존재여부 체크
-		if (article == null) {
-			return Ut.jsHistoryBack("F-1", Ut.f("%d번 글은 없습니다.", id));
-		}
 
 		return "usr/article/modify";
 	}
@@ -106,7 +115,7 @@ public class UsrArticleController {
 		Article article = articleService.getArticle(id); // 해당 게시글 가져오기
 
 		// 로그인 정보 가져오기
-		Rq rq = (Rq) req.getAttribute("rq");
+//		Rq rq = (Rq) req.getAttribute("rq");
 
 		// 로그인 중인 아이디 권한체크(서비스에 요청)
 		ResultData loginedMemberCanModifyRd = articleService.userCanModify(rq.getLoginedMemberId(), article);
@@ -133,7 +142,7 @@ public class UsrArticleController {
 		}
 
 		// 로그인 정보 가져오기
-		Rq rq = (Rq) req.getAttribute("rq");
+//		Rq rq = (Rq) req.getAttribute("rq");
 
 		// 로그인 중인 아이디 권한체크(서비스에 요청)
 		ResultData loginedMemberCanDeleteRd = articleService.userCanDelete(rq.getLoginedMemberId(), article);
@@ -166,7 +175,7 @@ public class UsrArticleController {
 		}
 
 		// 로그인 정보 가져오기
-		Rq rq = (Rq) req.getAttribute("rq");
+//		Rq rq = (Rq) req.getAttribute("rq");
 
 		// 게시글 작성 작업
 		ResultData<Integer> writeArticleRd = articleService.writeArticle(title, body, rq.getLoginedMemberId());

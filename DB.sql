@@ -158,3 +158,11 @@ SELECT *
 FROM `board`;
 
 SELECT LAST_INSERT_ID();
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = CEILING((RAND() * 9) / 3),
+boardId = CEILING((RAND() * 9) / 3),
+title = CONCAT('제목__', RAND()),
+`body` = CONCAT('내용__',RAND());
