@@ -14,6 +14,7 @@ import com.example.demo.service.BoardService;
 import com.example.demo.util.Ut;
 import com.example.demo.vo.Article;
 import com.example.demo.vo.Board;
+import com.example.demo.vo.Page;
 import com.example.demo.vo.ResultData;
 import com.example.demo.vo.Rq;
 
@@ -60,33 +61,16 @@ public class UsrArticleController {
 		// 게시글 전체 개수 구하기
 		int articlesCount = articleService.getArticlesCount(boardId);
 
-		// 페이지네이션 한 페이지에 보여줄 게시글 수
-		int itemsInAPage = 10;
-
-		// 페이지네이션 전체 버튼 수
-		int totalPage = (int) Math.ceil((double) articlesCount / itemsInAPage);
-
-		// 페이지네이션 한 페이지 버튼 수
-		int pageSize = 10;
-
-		// 페이지네이션 한 페이지 버튼 첫번째와 마지막 수
-		int from = ((page - 1) / pageSize) * pageSize + 1;
-		int end = from + pageSize - 1;
-		if (end > totalPage) {
-			end = totalPage;
-		}
+		Page pagination = new Page(articlesCount, page);
 		
 		// 전체 게시글 가져오기
 		if(boardId == 0) {
 			// 게시판 번호로 게시글 가져오기 및 페이지네이션
-			List<Article> articles = articleService.getForPrintArticles(boardId, itemsInAPage, page);
+			List<Article> articles = articleService.getForPrintArticles(boardId, pagination.getItemsInAPage(), page);
 
 			model.addAttribute("articlesCount", articlesCount);
 			model.addAttribute("page", page);
-			model.addAttribute("totalPage", totalPage);
-			model.addAttribute("pageSize", pageSize);
-			model.addAttribute("from", from);
-			model.addAttribute("end", end);
+			model.addAttribute("pagination", pagination);
 //			model.addAttribute("board", board);
 			model.addAttribute("boardId", boardId);
 			model.addAttribute("articles", articles);
@@ -103,14 +87,11 @@ public class UsrArticleController {
 		}
 
 		// 게시판 번호로 게시글 가져오기 및 페이지네이션
-		List<Article> articles = articleService.getForPrintArticles(boardId, itemsInAPage, page);
+		List<Article> articles = articleService.getForPrintArticles(boardId, pagination.getItemsInAPage(), page);
 
 		model.addAttribute("articlesCount", articlesCount);
 		model.addAttribute("page", page);
-		model.addAttribute("totalPage", totalPage);
-		model.addAttribute("pageSize", pageSize);
-		model.addAttribute("from", from);
-		model.addAttribute("end", end);
+		model.addAttribute("pagination", pagination);
 		model.addAttribute("board", board);
 		model.addAttribute("boardId", boardId);
 		model.addAttribute("articles", articles);
