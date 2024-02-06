@@ -39,13 +39,22 @@
 		</table>
 	</div>
 
+<!-- 수정중 -->
+	<nav class="menu-box">
+		<ul>
+			<li><a href="#">제목 기준</a></li>
+			<li><a href="#">내용 기준</a></li>
+			<li><a href="#">작성자 기준</a></li>
+		</ul>
+	</nav>
+
+
 	<div>
 		<form action="POST" action="list">
 			<tr>
 				<td>
 					<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-						placeholder="내용을 입력해주세요" name="searchKeyword" value="${article.body }"
-					/>
+						placeholder="내용을 입력해주세요" name="searchKeyword" value=""/>
 				</td>
 			</tr>
 			<th></th>
@@ -69,7 +78,7 @@
 		</c:if>
 
 		<c:forEach begin="${startPage }" end="${endPage}" var="i">
-			<a class="btn btn-sm ${param.page == i ? 'btn-active' : '' }" href="?boardId=${boardId }&page=${i }">${i }</a>
+			<a class="btn btn-sm ${page == i ? 'btn-active' : '' }" href="?boardId=${boardId }&page=${i }">${i }</a>
 		</c:forEach>
 
 
@@ -84,24 +93,19 @@
 	<div class="pagination flex justify-center mt-3">
 		<div class="btn-group">
 
-			<a href="list??boardId=${param.boardId }&page=1">맨앞</a>
-
-			<c:if test="${param.page > pageSize }">
-				<a href="list??boardId=${param.boardId }&page=${from - 1}">◀</a>
+			<a href="list??boardId=${boardId }&page=1">맨앞</a>
+			<c:if test="${page > pageSize }">
+				<a href="list??boardId=${boardId }&page=${from - 1}">◀</a>
 			</c:if>
 
 			<c:forEach begin="${from }" end="${end}" var="i">
-				<a class="btn btn-sm ${param.page == i ? 'btn-active' : '' }" href="?boardId=${param.boardId }&page=${i }">${i }</a>
+				<a class="btn btn-sm ${page == i ? 'btn-active' : '' }" href="?boardId=${boardId }&page=${i }">${i }</a>
 			</c:forEach>
 
 			<c:if test="${end < totalPage }">
-				<a href="list??boardId=${param.boardId }&page=${from + pageSize}">▶</a>
+				<a href="list??boardId=${boardId }&page=${from + pageSize}">▶</a>
 			</c:if>
-
-			<a href="list??boardId=${param.boardId }&page=${totalPage}">맨뒤</a>
-
-
-
+			<a href="list??boardId=${boardId }&page=${totalPage}">맨뒤</a>
 
 		</div>
 	</div>

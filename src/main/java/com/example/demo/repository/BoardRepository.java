@@ -9,10 +9,12 @@ import com.example.demo.vo.Board;
 public interface BoardRepository {
 
 	@Select("""
+				<script>
 				SELECT *
 				FROM board
 				WHERE id = #{boardId}
 				AND delStatus = 0;
+				</script>
 			""")
 	public Board getBoardById(int boardId);
 

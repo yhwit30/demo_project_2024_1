@@ -54,40 +54,57 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/list")
-	public String showList(Model model, HttpServletRequest req, @RequestParam(defaultValue = "1") int boardId, @RequestParam(defaultValue = "1") int page) {
+	public String showList(Model model, HttpServletRequest req, @RequestParam(defaultValue = "0") int boardId,
+			@RequestParam(defaultValue = "1") int page) {
 
-		// 게시판 버튼용 데이터
-		Board board = boardService.getBoardById(boardId);
-		
 		// 게시글 전체 개수 구하기
 		int articlesCount = articleService.getArticlesCount(boardId);
 
-		// 게시판 번호가 없는 경우
-		if (board == null) {
-//			Rq rq = (Rq) req.getAttribute("rq");
-			return rq.printHistoryBackOnView("없는 게시판이야");
-		}
-
 		// 페이지네이션 한 페이지에 보여줄 게시글 수
 		int itemsInAPage = 10;
-		
+
 		// 페이지네이션 전체 버튼 수
 		int totalPage = (int) Math.ceil((double) articlesCount / itemsInAPage);
-		
+
 		// 페이지네이션 한 페이지 버튼 수
 		int pageSize = 10;
-		
+
 		// 페이지네이션 한 페이지 버튼 첫번째와 마지막 수
 		int from = ((page - 1) / pageSize) * pageSize + 1;
 		int end = from + pageSize - 1;
-		if(end > totalPage) {
+		if (end > totalPage) {
 			end = totalPage;
 		}
 		
+		// 전체 게시글 가져오기
+		if(boardId == 0) {
+			// 게시판 번호로 게시글 가져오기 및 페이지네이션
+			List<Article> articles = articleService.getForPrintArticles(boardId, itemsInAPage, page);
+
+			model.addAttribute("articlesCount", articlesCount);
+			model.addAttribute("page", page);
+			model.addAttribute("totalPage", totalPage);
+			model.addAttribute("pageSize", pageSize);
+			model.addAttribute("from", from);
+			model.addAttribute("end", end);
+//			model.addAttribute("board", board);
+			model.addAttribute("boardId", boardId);
+			model.addAttribute("articles", articles);
+
+			return "usr/article/list";
+		}
+		
+		// 게시판 이름표용 데이터
+		Board board = boardService.getBoardById(boardId);
+
+		// 게시판 번호가 없는 경우
+		if (board == null) {
+			return rq.printHistoryBackOnView("없는 게시판이야");
+		}
+
 		// 게시판 번호로 게시글 가져오기 및 페이지네이션
 		List<Article> articles = articleService.getForPrintArticles(boardId, itemsInAPage, page);
-		
-		
+
 		model.addAttribute("articlesCount", articlesCount);
 		model.addAttribute("page", page);
 		model.addAttribute("totalPage", totalPage);
