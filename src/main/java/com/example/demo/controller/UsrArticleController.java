@@ -75,13 +75,31 @@ public class UsrArticleController {
 			return rq.printHistoryBackOnView("없는 게시판이야");
 		}
 
-		// 페이지네이션
+		// 페이지네이션 한 페이지에 보여줄 게시글 수
 		int itemsInAPage = 10;
 		
-		// 게시판 번호로 게시글 가져오기
+		// 페이지네이션 전체 버튼 수
+		int totalPage = (int) Math.ceil((double) articlesCount / itemsInAPage);
+		
+		// 페이지네이션 한 페이지 버튼 수
+		int pageSize = 10;
+		
+		// 페이지네이션 한 페이지 버튼 첫번째와 마지막 수
+		int from = ((page - 1) / pageSize) * pageSize + 1;
+		int end = from + pageSize - 1;
+		if(end > totalPage) {
+			end = totalPage;
+		}
+		
+		// 게시판 번호로 게시글 가져오기 및 페이지네이션
 		List<Article> articles = articleService.getForPrintArticles(boardId, itemsInAPage, page);
-
+		
+		
 		model.addAttribute("articlesCount", articlesCount);
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("from", from);
+		model.addAttribute("end", end);
 		model.addAttribute("board", board);
 		model.addAttribute("articles", articles);
 

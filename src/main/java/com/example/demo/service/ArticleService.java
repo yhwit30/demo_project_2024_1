@@ -47,10 +47,14 @@ public class ArticleService {
 	public List<Article> getForPrintArticles(Integer boardId, int itemsInAPage, int page) {
 		int limitFrom = (page - 1) * itemsInAPage;
 		int limitTake = itemsInAPage;
-		
+				
 		return articleRepository.getForPrintArticles(boardId, limitFrom, limitTake);
 	}
-
+	
+	// 게시글 전체 개수 구하기
+	public int getArticlesCount(Integer boardId) {
+		return articleRepository.getArticlesCount(boardId);
+	}
 
 	// 게시글 가져와서 아이디 권한체크 메소드 실행
 	public Article getForPrintArticle(int loginedMemberId, int id) {
@@ -90,13 +94,6 @@ public class ArticleService {
 
 		return ResultData.from("S-1", Ut.f("%d번 글이 삭제 되었습니다", article.getId()));
 	}
-
-	// 게시글 전체 개수 구하기
-	public int getArticlesCount(Integer boardId) {
-		return articleRepository.getArticlesCount(boardId);
-	}
-
-
 
 	
 
