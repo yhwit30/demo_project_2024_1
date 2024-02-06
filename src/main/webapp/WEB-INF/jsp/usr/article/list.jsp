@@ -56,28 +56,56 @@
 	</div>
 
 
+
+	<!-- 버전2 동적 페이징-->
+	<div class="pagination flex justify-center mt-3">
+		<c:set var="paginationLen" value="3"/>
+		<c:set var="startPage" value="${page - paginationLen >= 1 ? page - paginationLen : 1 }"/>
+		<c:set var="endPage" value="${page + paginationLen <= totalPage ? page + paginationLen : totalPage }"/>
+		
+		<c:if test="${startPage > 1 }">
+			<a class="btn btn-sm" href="?page=1%boardId=${boardId }" >1</a>
+			<button class="btn btn-sm btn-disabled">...</button>
+		</c:if>
+		
+		<c:forEach begin="${startPage }" end="${endPage}" var="i">
+				<a class="btn btn-sm ${param.page == i ? 'btn-active' : '' }" href="?boardId=${boardId }&page=${i }">${i }</a>
+			</c:forEach>
+		
+		
+		<c:if test="${endPage < totalPage }">
+			<button class="btn btn-sm btn-disabled">...</button>
+			<a class="btn btn-sm" href="?page=1%boardId=${boardId }" >${totalPage }</a>
+		</c:if>
+		
+	</div>
+
+	<!-- 버전1  -->
 	<div class="pagination flex justify-center mt-3">
 		<div class="btn-group">
 
 			<c:if test="${param.page> 1 }">
-				<a href="list??boardId=${board.id }&page=1">맨앞</a>
+				<a href="list??boardId=${param.boardId }&page=1">맨앞</a>
 			</c:if>
 
 			<c:if test="${param.page > pageSize }">
-				<a href="list??boardId=${board.id }&page=${from - 1}">◀</a>
+				<a href="list??boardId=${param.boardId }&page=${from - 1}">◀</a>
 			</c:if>
 
 			<c:forEach begin="${from }" end="${end}" var="i">
-				<a class="btn btn-sm ${param.page == i ? 'btn-active' : '' }" href="?boardId=${board.id }&page=${i }">${i }</a>
+				<a class="btn btn-sm ${param.page == i ? 'btn-active' : '' }" href="?boardId=${param.boardId }&page=${i }">${i }</a>
 			</c:forEach>
 
 			<c:if test="${end < totalPage }">
-				<a href="list??boardId=${board.id }&page=${from + pageSize}">▶</a>
+				<a href="list??boardId=${param.boardId }&page=${from + pageSize}">▶</a>
 			</c:if>
 
 			<c:if test="${param.page > 1 }">
-				<a href="list??boardId=${board.id }&page=${totalPage}">맨뒤</a>
+				<a href="list??boardId=${param.boardId }&page=${totalPage}">맨뒤</a>
 			</c:if>
+
+
+
 
 		</div>
 	</div>

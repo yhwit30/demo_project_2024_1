@@ -96,11 +96,13 @@ public class UsrArticleController {
 		
 		
 		model.addAttribute("articlesCount", articlesCount);
+		model.addAttribute("page", page);
 		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("pageSize", pageSize);
 		model.addAttribute("from", from);
 		model.addAttribute("end", end);
 		model.addAttribute("board", board);
+		model.addAttribute("boardId", boardId);
 		model.addAttribute("articles", articles);
 
 		return "usr/article/list";
