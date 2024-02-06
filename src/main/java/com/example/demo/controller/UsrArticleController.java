@@ -54,14 +54,7 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/list")
-	public String showList(Model model, HttpServletRequest req, Integer boardId, @RequestParam(defaultValue = "1") int page) {
-
-		// 전체 게시판 경우
-		if (boardId == null) {
-			List<Article> articles = articleService.getArticles();
-			model.addAttribute("articles", articles);
-			return "usr/article/list";
-		}
+	public String showList(Model model, HttpServletRequest req, @RequestParam(defaultValue = "1") int boardId, @RequestParam(defaultValue = "1") int page) {
 
 		// 게시판 버튼용 데이터
 		Board board = boardService.getBoardById(boardId);
