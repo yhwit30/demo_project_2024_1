@@ -79,17 +79,17 @@
 		/>
 
 		<c:if test="${startPage > 1 }">
-			<a class="btn btn-sm" href="?page=1&boardId=${boardId }">1</a>
+			<a class="btn btn-sm" href="?page=1&boardId=${boardId }&searchKeywordTypeCode=${param.searchKeywordTypeCode}&searchKeyword=${param.searchKeyword}">1</a>
 			<button class="btn btn-sm btn-disabled">...</button>
 		</c:if>
 
 		<c:forEach begin="${startPage }" end="${endPage }" var="i">
-			<a class="btn btn-sm ${page == i ? 'btn-active' : '' }" href="?page=${i }&boardId=${boardId}">${i }</a>
+			<a class="btn btn-sm ${page == i ? 'btn-active' : '' }" href="?page=${i }&boardId=${boardId}&searchKeywordTypeCode=${param.searchKeywordTypeCode}&searchKeyword=${param.searchKeyword}">${i }</a>
 		</c:forEach>
 
 		<c:if test="${endPage < pagination.totalPage }">
 			<button class="btn btn-sm btn-disabled">...</button>
-			<a class="btn btn-sm" href="?page=${pagesCount }&boardId=${boardId }">${pagination.totalPage }</a>
+			<a class="btn btn-sm" href="?page=1&boardId=${boardId }&searchKeywordTypeCode=${param.searchKeywordTypeCode}&searchKeyword=${param.searchKeyword}">${pagination.totalPage }</a>
 		</c:if>
 
 	</div>
@@ -100,17 +100,17 @@
 
 			<a href="list??boardId=${boardId }&page=1">맨앞</a>
 			<c:if test="${page > pagination.pageSize }">
-				<a href="list??boardId=${boardId }&page=${pagination.from - 1}">◀</a>
+				<a href="list?boardId=${boardId }&page=${pagination.from - 1}&searchKeywordTypeCode=${param.searchKeywordTypeCode}&searchKeyword=${param.searchKeyword}">◀</a>
 			</c:if>
 
 			<c:forEach begin="${pagination.from }" end="${pagination.end}" var="i">
-				<a class="btn btn-sm ${page == i ? 'btn-active' : '' }" href="?boardId=${boardId }&page=${i }">${i }</a>
+				<a class="btn btn-sm ${page == i ? 'btn-active' : '' }" href="?boardId=${boardId }&page=${i }&searchKeywordTypeCode=${param.searchKeywordTypeCode}&searchKeyword=${param.searchKeyword}">${i }</a>
 			</c:forEach>
 
 			<c:if test="${pagination.end < pagination.totalPage }">
-				<a href="list??boardId=${boardId }&page=${pagination.from + pagination.pageSize}">▶</a>
+				<a href="list?boardId=${boardId }&page=${pagination.from + pagination.pageSize}&searchKeywordTypeCode=${param.searchKeywordTypeCode}&searchKeyword=${param.searchKeyword}">▶</a>
 			</c:if>
-			<a href="list??boardId=${boardId }&page=${pagination.totalPage}">맨뒤</a>
+			<a href="list?boardId=${boardId }&page=${pagination.totalPage}&searchKeywordTypeCode=${param.searchKeywordTypeCode}&searchKeyword=${param.searchKeyword}">맨뒤</a>
 
 		</div>
 	</div>
