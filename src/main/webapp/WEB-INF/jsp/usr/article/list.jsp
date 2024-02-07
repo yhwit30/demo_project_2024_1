@@ -4,7 +4,7 @@
 <%@ include file="../common/head.jspf"%>
 
 
-<section class="mt-8 text-xl px-4">
+<section class="mt-3 text-xl px-4">
 	<div class="mx-auto overflow-x-auto">
 		<div class="badge badge-outline">${articlesCount }개</div>
 		<table class="table-box-1 table" border="1">
