@@ -44,11 +44,11 @@ public class ArticleService {
 	}
 
 	// 게시판 번호로 가져오기 및 페이지네이션
-	public List<Article> getForPrintArticles(Integer boardId, int itemsInAPage, int page) {
+	public List<Article> getForPrintArticles(Integer boardId, int itemsInAPage, int page, String searchKeywordTypeCode, String searchKeyword) {
 		int limitFrom = (page - 1) * itemsInAPage;
 		int limitTake = itemsInAPage;
 
-		return articleRepository.getForPrintArticles(boardId, limitFrom, limitTake);
+		return articleRepository.getForPrintArticles(boardId, limitFrom, limitTake, searchKeywordTypeCode, searchKeyword);
 	}
 
 	// 게시글 전체 개수 구하기

@@ -39,28 +39,32 @@
 		</table>
 	</div>
 
-<!-- 수정중 -->
-	<nav class="menu-box">
-		<ul>
-			<li><a href="#">제목 기준</a></li>
-			<li><a href="#">내용 기준</a></li>
-			<li><a href="#">작성자 기준</a></li>
-		</ul>
-	</nav>
-
 
 	<div>
 		<form action="../article/list" method="GET">
-			<tr>
-				<td>
-					<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-						placeholder="내용을 입력해주세요" name="searchKeyword" />
-				</td>
-			</tr>
-			<th></th>
-			<td>
-				<input class="btn btn-info" type="submit" value="검색" />
-			</td>
+			<input type="hidden" name="page" value="${page }" />
+			<input type="hidden" name="boardId" value="${boardId }" />
+
+			<select class="select select-primary w-s max-w-xs" name="searchKeywordTypeCode">
+				<option value="title">제목</option>
+				<option value="extra__writer">작성자</option>
+				<option value="body">내용</option>
+			</select>
+
+			<table class="search-box table-box-1" border="1">
+				<tbody>
+					<tr>
+						<td>
+							<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
+								placeholder="내용을 입력해주세요" name="searchKeyword"
+							/>
+						</td>
+						<td>
+							<input class="btn btn-info" type="submit" value="검색" />
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</form>
 	</div>
 
@@ -70,7 +74,9 @@
 	<div class="pagination flex justify-center mt-3">
 		<c:set var="paginationLen" value="3" />
 		<c:set var="startPage" value="${page -  paginationLen  >= 1 ? page - paginationLen : 1}" />
-		<c:set var="endPage" value="${page +  paginationLen  <= pagination.totalPage ? page + paginationLen : pagination.totalPage}" />
+		<c:set var="endPage"
+			value="${page +  paginationLen  <= pagination.totalPage ? page + paginationLen : pagination.totalPage}"
+		/>
 
 		<c:if test="${startPage > 1 }">
 			<a class="btn btn-sm" href="?page=1&boardId=${boardId }">1</a>
@@ -87,7 +93,7 @@
 		</c:if>
 
 	</div>
-	
+
 	<!-- 버전1  -->
 	<div class="pagination flex justify-center mt-3">
 		<div class="btn-group">

@@ -68,7 +68,7 @@ public class UsrArticleController {
 		// 전체 게시글 가져오기
 		if (boardId == 0) {
 			// 게시판 번호로 게시글 가져오기 및 페이지네이션
-			List<Article> articles = articleService.getForPrintArticles(boardId, pagination.getItemsInAPage(), page);
+			List<Article> articles = articleService.getForPrintArticles(boardId, pagination.getItemsInAPage(), page, searchKeywordTypeCode, searchKeyword);
 
 			model.addAttribute("articlesCount", articlesCount);
 			model.addAttribute("page", page);
@@ -89,7 +89,7 @@ public class UsrArticleController {
 		}
 
 		// 게시판 번호로 게시글 가져오기 및 페이지네이션
-		List<Article> articles = articleService.getForPrintArticles(boardId, pagination.getItemsInAPage(), page);
+		List<Article> articles = articleService.getForPrintArticles(boardId, pagination.getItemsInAPage(), page, searchKeywordTypeCode, searchKeyword);
 
 		model.addAttribute("articlesCount", articlesCount);
 		model.addAttribute("page", page);
