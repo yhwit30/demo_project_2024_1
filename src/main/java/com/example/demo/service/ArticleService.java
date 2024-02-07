@@ -47,24 +47,24 @@ public class ArticleService {
 	public List<Article> getForPrintArticles(Integer boardId, int itemsInAPage, int page) {
 		int limitFrom = (page - 1) * itemsInAPage;
 		int limitTake = itemsInAPage;
-				
+
 		return articleRepository.getForPrintArticles(boardId, limitFrom, limitTake);
 	}
-	
+
 	// 게시글 전체 개수 구하기
-	public int getArticlesCount(Integer boardId) {
-		return articleRepository.getArticlesCount(boardId);
+	public int getArticlesCount(Integer boardId, String searchKeywordTypeCode, String searchKeyword) {
+		return articleRepository.getArticlesCount(boardId, searchKeywordTypeCode, searchKeyword);
 	}
 
 	// 게시글 가져와서 아이디 권한체크 메소드 실행
 	public Article getForPrintArticle(int loginedMemberId, int id) {
 		Article article = articleRepository.getForPrintArticle(id);
-		
+
 		controlForPrintArticle(loginedMemberId, article);
-		
+
 		return article;
 	}
-	
+
 	// ArticleVO에다가 참,거짓값 심어주기 -> jsp 버튼 권한체크용
 	private void controlForPrintArticle(int loginedMemberId, Article article) {
 		if (article == null) {
@@ -85,7 +85,7 @@ public class ArticleService {
 		}
 		return ResultData.from("S-1", Ut.f("%d번 글을 수정했습니다", article.getId()));
 	}
-	
+
 	public ResultData userCanDelete(int loginedMemberId, Article article) {
 
 		if (article.getMemberId() != loginedMemberId) {
@@ -94,9 +94,5 @@ public class ArticleService {
 
 		return ResultData.from("S-1", Ut.f("%d번 글이 삭제 되었습니다", article.getId()));
 	}
-
-	
-
-	
 
 }

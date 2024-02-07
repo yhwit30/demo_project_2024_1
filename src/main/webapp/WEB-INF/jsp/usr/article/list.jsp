@@ -50,11 +50,11 @@
 
 
 	<div>
-		<form action="POST" action="list">
+		<form action="../article/list" method="GET">
 			<tr>
 				<td>
 					<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-						placeholder="내용을 입력해주세요" name="searchKeyword" value=""/>
+						placeholder="내용을 입력해주세요" name="searchKeyword" />
 				</td>
 			</tr>
 			<th></th>

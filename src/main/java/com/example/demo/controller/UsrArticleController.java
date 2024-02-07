@@ -56,15 +56,17 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/list")
 	public String showList(Model model, HttpServletRequest req, @RequestParam(defaultValue = "0") int boardId,
-			@RequestParam(defaultValue = "1") int page) {
+			@RequestParam(defaultValue = "1") int page,
+			@RequestParam(defaultValue = "title,body") String searchKeywordTypeCode,
+			@RequestParam(defaultValue = "") String searchKeyword) {
 
 		// 게시글 전체 개수 구하기
-		int articlesCount = articleService.getArticlesCount(boardId);
+		int articlesCount = articleService.getArticlesCount(boardId, searchKeywordTypeCode, searchKeyword);
 
 		Page pagination = new Page(articlesCount, page);
-		
+
 		// 전체 게시글 가져오기
-		if(boardId == 0) {
+		if (boardId == 0) {
 			// 게시판 번호로 게시글 가져오기 및 페이지네이션
 			List<Article> articles = articleService.getForPrintArticles(boardId, pagination.getItemsInAPage(), page);
 
@@ -77,7 +79,7 @@ public class UsrArticleController {
 
 			return "usr/article/list";
 		}
-		
+
 		// 게시판 이름표용 데이터
 		Board board = boardService.getBoardById(boardId);
 
