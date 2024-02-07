@@ -65,7 +65,7 @@ public class ArticleService {
 		return article;
 	}
 
-	// ArticleVO에다가 참,거짓값 심어주기 -> jsp 버튼 권한체크용
+	// ArticleVO에다가 참,거짓값 심어주기 -> jsp 수정,삭제 버튼 권한체크용
 	private void controlForPrintArticle(int loginedMemberId, Article article) {
 		if (article == null) {
 			return;

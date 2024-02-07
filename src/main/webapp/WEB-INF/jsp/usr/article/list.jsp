@@ -4,7 +4,7 @@
 <%@ include file="../common/head.jspf"%>
 
 
-<section class="mt-3 text-xl px-4">
+<section class="mt-2 text-xl px-4">
 	<div class="mx-auto overflow-x-auto">
 		<div class="badge badge-outline">${articlesCount }개</div>
 		<table class="table-box-1 table" border="1">
@@ -52,8 +52,8 @@
 				<option value="body">내용</option>
 			</select>
 			<input value="${param.searchKeyword }" name="searchKeyword" type="text" placeholder="What is your searchKeyword?"
-				class="input-sm input input-bordered w-48 max-w-xs" />
-			<button class="btn btn-ghost btn-sm" type="submit">검색</button>
+				class="input-sm input input-bordered w-60 max-w-xs mt-3" />
+			<button class="btn btn-primary btn-sm" type="submit">검색</button>
 		</form>
 	</div>
 
