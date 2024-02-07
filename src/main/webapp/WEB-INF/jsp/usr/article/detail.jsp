@@ -11,7 +11,7 @@
 			<tbody>
 				<tr>
 					<th>게시판</th>
-					<td>${article.boardId }</td>
+					<td>${board.code }</td>
 				</tr>
 				<tr>
 					<th>번호</th>

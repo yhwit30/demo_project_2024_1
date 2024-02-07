@@ -30,7 +30,7 @@
 						<td>${article.id }</td>
 						<td>${article.regDate.substring(0,10) }</td>
 						<td>
-							<a href="detail?id=${article.id }">${article.title }</a>
+							<a href="detail?id=${article.id }&boardId=${boardId}">${article.title }</a>
 						</td>
 						<td>${article.extra__writer }</td>
 					</tr>
