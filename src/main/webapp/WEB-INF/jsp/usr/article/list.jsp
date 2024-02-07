@@ -80,18 +80,22 @@
 			value="${page +  paginationLen  <= pagination.totalPage ? page + paginationLen : pagination.totalPage}"
 		/>
 
+		<c:set var="baseUri" value="?boardId=${boardId}"/>
+		<c:set var="baseUri" value="${baseUri}&searchKeywordTypeCode=${param.searchKeywordTypeCode}"/>
+		<c:set var="baseUri" value="${baseUri}&searchKeyword=${param.searchKeyword}"/>
+
 		<c:if test="${startPage > 1 }">
-			<a class="btn btn-sm" href="?page=1&boardId=${boardId }&searchKeywordTypeCode=${param.searchKeywordTypeCode}&searchKeyword=${param.searchKeyword}">1</a>
+			<a class="btn btn-sm" href="?page=1&${baseUri}">1</a>
 			<button class="btn btn-sm btn-disabled">...</button>
 		</c:if>
 
 		<c:forEach begin="${startPage }" end="${endPage }" var="i">
-			<a class="btn btn-sm ${page == i ? 'btn-active' : '' }" href="?page=${i }&boardId=${boardId}&searchKeywordTypeCode=${param.searchKeywordTypeCode}&searchKeyword=${param.searchKeyword}">${i }</a>
+			<a class="btn btn-sm ${page == i ? 'btn-active' : '' }" href="?page=${i }&${baseUri}">${i }</a>
 		</c:forEach>
 
 		<c:if test="${endPage < pagination.totalPage }">
 			<button class="btn btn-sm btn-disabled">...</button>
-			<a class="btn btn-sm" href="?page=1&boardId=${boardId }&searchKeywordTypeCode=${param.searchKeywordTypeCode}&searchKeyword=${param.searchKeyword}">${pagination.totalPage }</a>
+			<a class="btn btn-sm" href="?page=1&${baseUri}">${pagination.totalPage }</a>
 		</c:if>
 
 	</div>
