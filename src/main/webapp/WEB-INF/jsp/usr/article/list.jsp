@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="pageTitle" value="#{board.code } ARTICLE LIST"></c:set>
 <%@ include file="../common/head.jspf"%>
 
@@ -43,30 +42,18 @@
 
 
 	<div>
-		<form action="../article/list" method="GET">
-			<input type="hidden" name="page" value="${page }" />
-			<input type="hidden" name="boardId" value="${boardId }" />
+		<form action="">
+			<input type="hidden" name="boardId" value="${param.boardId }" />
 
-			<select class="select select-primary w-s max-w-xs" name="searchKeywordTypeCode">
+			<select data-value="${param.searchKeywordTypeCode }" class="select select-bordered select-sm max-w-xs"
+				name="searchKeywordTypeCode">
 				<option value="title">제목</option>
 				<option value="extra__writer">작성자</option>
 				<option value="body">내용</option>
 			</select>
-
-			<table class="search-box table-box-1" border="1">
-				<tbody>
-					<tr>
-						<td>
-							<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="내용을 입력해주세요" name="searchKeyword"
-							/>
-						</td>
-						<td>
-							<input class="btn btn-info" type="submit" value="검색" />
-						</td>
-					</tr>
-				</tbody>
-			</table>
+			<input value="${param.searchKeyword }" name="searchKeyword" type="text" placeholder="What is your searchKeyword?"
+				class="input-sm input input-bordered w-48 max-w-xs" />
+			<button class="btn btn-ghost btn-sm" type="submit">검색</button>
 		</form>
 	</div>
 
@@ -77,12 +64,11 @@
 		<c:set var="paginationLen" value="3" />
 		<c:set var="startPage" value="${page -  paginationLen  >= 1 ? page - paginationLen : 1}" />
 		<c:set var="endPage"
-			value="${page +  paginationLen  <= pagination.totalPage ? page + paginationLen : pagination.totalPage}"
-		/>
+			value="${page +  paginationLen  <= pagination.totalPage ? page + paginationLen : pagination.totalPage}" />
 
-		<c:set var="baseUri" value="?boardId=${boardId}"/>
-		<c:set var="baseUri" value="${baseUri}&searchKeywordTypeCode=${param.searchKeywordTypeCode}"/>
-		<c:set var="baseUri" value="${baseUri}&searchKeyword=${param.searchKeyword}"/>
+		<c:set var="baseUri" value="?boardId=${boardId}" />
+		<c:set var="baseUri" value="${baseUri}&searchKeywordTypeCode=${param.searchKeywordTypeCode}" />
+		<c:set var="baseUri" value="${baseUri}&searchKeyword=${param.searchKeyword}" />
 
 		<c:if test="${startPage > 1 }">
 			<a class="btn btn-sm" href="?page=1&${baseUri}">1</a>
@@ -106,17 +92,21 @@
 
 			<a href="list??boardId=${boardId }&page=1">맨앞</a>
 			<c:if test="${page > pagination.pageSize }">
-				<a href="list?boardId=${boardId }&page=${pagination.from - 1}&searchKeywordTypeCode=${param.searchKeywordTypeCode}&searchKeyword=${param.searchKeyword}">◀</a>
+				<a
+					href="list?boardId=${boardId }&page=${pagination.from - 1}&searchKeywordTypeCode=${param.searchKeywordTypeCode}&searchKeyword=${param.searchKeyword}">◀</a>
 			</c:if>
 
 			<c:forEach begin="${pagination.from }" end="${pagination.end}" var="i">
-				<a class="btn btn-sm ${page == i ? 'btn-active' : '' }" href="?boardId=${boardId }&page=${i }&searchKeywordTypeCode=${param.searchKeywordTypeCode}&searchKeyword=${param.searchKeyword}">${i }</a>
+				<a class="btn btn-sm ${page == i ? 'btn-active' : '' }"
+					href="?boardId=${boardId }&page=${i }&searchKeywordTypeCode=${param.searchKeywordTypeCode}&searchKeyword=${param.searchKeyword}">${i }</a>
 			</c:forEach>
 
 			<c:if test="${pagination.end < pagination.totalPage }">
-				<a href="list?boardId=${boardId }&page=${pagination.from + pagination.pageSize}&searchKeywordTypeCode=${param.searchKeywordTypeCode}&searchKeyword=${param.searchKeyword}">▶</a>
+				<a
+					href="list?boardId=${boardId }&page=${pagination.from + pagination.pageSize}&searchKeywordTypeCode=${param.searchKeywordTypeCode}&searchKeyword=${param.searchKeyword}">▶</a>
 			</c:if>
-			<a href="list?boardId=${boardId }&page=${pagination.totalPage}&searchKeywordTypeCode=${param.searchKeywordTypeCode}&searchKeyword=${param.searchKeyword}">맨뒤</a>
+			<a
+				href="list?boardId=${boardId }&page=${pagination.totalPage}&searchKeywordTypeCode=${param.searchKeywordTypeCode}&searchKeyword=${param.searchKeyword}">맨뒤</a>
 
 		</div>
 	</div>

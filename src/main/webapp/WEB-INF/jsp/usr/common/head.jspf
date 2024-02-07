@@ -20,42 +20,66 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 
-<!-- 상단 애니메이션 -->
-<div class="loader"></div>
+
 
 <body>
 	<header>
 		<div class="h-20 flex mx-auto items-center text-3xl">
-			<a class ="pl-5"   href="/">LOGO</a>
+			<a class="pl-5" href="/">LOGO</a>
+			<!-- 상단 애니메이션 -->
+			<div class="loader"></div>
 			<div class="flex-grow"></div>
 			<ul class="flex">
-<!-- 				<li><a class="hover:underline" href="/"><i class="fa-solid fa-house-chimney-window"></i></a></li> -->
-				
-				
+				<!-- 				<li><a class="hover:underline" href="/"><i class="fa-solid fa-house-chimney-window"></i></a></li> -->
+
+
 				<c:if test="${rq.isLogined()}">
-				<li><a class="hover:underline" href="/">${rq.loginedMemberNickname }님<i class="fa-solid fa-handshake"></i></a></li>
+					<li>
+						<a class="hover:underline" href="/">${rq.loginedMemberNickname }님<i class="fa-solid fa-handshake"></i>
+						</a>
+					</li>
 				</c:if>
 				<c:if test="${rq.isLogined()}">
-				<li><a class="hover:underline" href="../article/write"><i class="fa-solid fa-pen-nib"></i></a></li>
+					<li>
+						<a class="hover:underline" href="../article/write">
+							<i class="fa-solid fa-pen-nib"></i>
+						</a>
+					</li>
 				</c:if>
-				
-				<li><a class="hover:underline" href="../article/list?boardId=0"><i class="fa-solid fa-table-list"></i></a>
+
+				<li>
+					<a class="hover:underline" href="../article/list?boardId=0">
+						<i class="fa-solid fa-table-list"></i>
+					</a>
 					<ul>
-						<li><a class="hover:underline" href="../article/list?boardId=1&page=1">NOTICE</a></li>
-						<li><a class="hover:underline" href="../article/list?boardId=2&page=1">FREE</a></li>
-						<li><a class="hover:underline" href="../article/list?boardId=3&page=1">QnA</a></li>
-					</ul></li>
+						<li>
+							<a class="hover:underline" href="../article/list?boardId=1&page=1">NOTICE</a>
+						</li>
+						<li>
+							<a class="hover:underline" href="../article/list?boardId=2&page=1">FREE</a>
+						</li>
+						<li>
+							<a class="hover:underline" href="../article/list?boardId=3&page=1">QnA</a>
+						</li>
+					</ul>
+				</li>
 				<c:if test="${!rq.isLogined()}">
-				<li><a class="hover:underline" href="../member/join"><i class="fa-solid fa-user-plus"></i></a></li>
-				<li><a class="hover:underline" href="../member/login">LOGIN</a></li>
+					<li>
+						<a class="hover:underline" href="../member/join">
+							<i class="fa-solid fa-user-plus"></i>
+						</a>
+					</li>
+					<li>
+						<a class="hover:underline" href="../member/login">LOGIN</a>
+					</li>
 				</c:if>
 				<c:if test="${rq.isLogined()}">
-				<li><a onclick="if(confirm('로그아웃하시겠습니까?') == false) return false;" class="hover:underline" href="../member/doLogout">LOGOUT</a></li>
+					<li>
+						<a onclick="if(confirm('로그아웃하시겠습니까?') == false) return false;" class="hover:underline" href="../member/doLogout">LOGOUT</a>
+					</li>
 				</c:if>
 			</ul>
 		</div>
 	</header>
 	<h1>${pageTitle }</h1>
 	<hr />
-	
-	
