@@ -34,10 +34,12 @@ public interface ArticleRepository {
 	public Article getArticle(int id);
 
 	@Select("""
-			SELECT A.*, M.nickname AS extra__writer
+			SELECT A.*, M.nickname AS extra__writer, B.code AS board_code
 			FROM article AS A
 			INNER JOIN `member` AS M
 			ON A.memberId = M.id
+			INNER JOIN board AS B
+			ON A.boardId = B.id
 			WHERE A.id = #{id}
 				""")
 	public Article getForPrintArticle(int id);
@@ -78,14 +80,18 @@ public interface ArticleRepository {
 			<if test="searchKeyword != ''">
 				<choose>
 					<when test = "searchKeywordTypeCode == 'title'">
-						AND title LIKE CONCAT('%',#{searchKeyword},'%')
+						AND A.title LIKE CONCAT('%',#{searchKeyword},'%')
 					</when>
 					<when test = "searchKeywordTypeCode == 'extra__writer'">
 						AND M.nickname LIKE CONCAT('%',#{searchKeyword},'%')
 					</when>
 					<when test="searchKeywordTypeCode == 'body'">
-						AND `body` LIKE CONCAT('%',#{searchKeyword},'%')
+						AND A.`body` LIKE CONCAT('%',#{searchKeyword},'%')
 					</when>
+					<otherwise>
+						AND A.title LIKE CONCAT('%',#{searchKeyword},'%')
+						OR A.body LIKE CONCAT('%',#{searchKeyword},'%')
+					</otherwise>
 					</choose>
 			</if>
 
@@ -95,7 +101,8 @@ public interface ArticleRepository {
 			</if>
 			</script>
 			""")
-	public List<Article> getForPrintArticles(int boardId, int limitFrom, int limitTake, String searchKeywordTypeCode, String searchKeyword);
+	public List<Article> getForPrintArticles(int boardId, int limitFrom, int limitTake, String searchKeywordTypeCode,
+			String searchKeyword);
 
 	@Select("""
 			<script>

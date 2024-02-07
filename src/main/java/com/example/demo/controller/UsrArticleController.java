@@ -34,9 +34,9 @@ public class UsrArticleController {
 
 	// 액션 메소드
 	@RequestMapping("/usr/article/detail")
-	public String getArticleAction(Integer id, int boardId, HttpServletRequest req, Model model) { // null 체크하려고 Integer로 바꿨다.
+	public String getArticleAction(Integer id, HttpServletRequest req, Model model) { // null 체크하려고 Integer로 바꿨다.
 
-		// 그냥 getArticle 들어오는 경우 체크
+		// 그냥 article/detail 치고 들어오는 경우 체크
 		if (id == null) {
 			model.addAttribute("checkUrlId", "게시글 번호를 입력하세요");
 			return "usr/article/detail";
@@ -48,10 +48,6 @@ public class UsrArticleController {
 		// 게시글 db에서 가져오기 + 로그인 중인 아이디 권한체크까지 다 끝내고 가져온다.
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
-		// 게시판 이름표용 데이터
-		Board board = boardService.getBoardById(boardId);
-				
-		model.addAttribute("board", board);
 		model.addAttribute("article", article);
 
 		return "usr/article/detail";

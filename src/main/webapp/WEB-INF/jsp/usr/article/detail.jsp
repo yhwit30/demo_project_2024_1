@@ -7,11 +7,14 @@
 
 <section class="mt-8 text-xl px-4">
 	<div class="mx-auto">
+	
+	
+	
 		<table class="table-box-1" border="1">
 			<tbody>
 				<tr>
 					<th>게시판</th>
-					<td>${board.code }</td>
+					<td>${article.board_code }</td>
 				</tr>
 				<tr>
 					<th>번호</th>
