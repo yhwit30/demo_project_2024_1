@@ -90,7 +90,7 @@
 	<div class="pagination flex justify-center mt-3">
 		<div class="btn-group">
 
-			<a href="list??boardId=${boardId }&page=1">맨앞</a>
+			<a href="list??boardId=${boardId }&page=1&searchKeywordTypeCode=${param.searchKeywordTypeCode}&searchKeyword=${param.searchKeyword}">맨앞</a>
 			<c:if test="${page > pagination.pageSize }">
 				<a
 					href="list?boardId=${boardId }&page=${pagination.from - 1}&searchKeywordTypeCode=${param.searchKeywordTypeCode}&searchKeyword=${param.searchKeyword}">◀</a>
