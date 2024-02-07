@@ -136,4 +136,14 @@ public interface ArticleRepository {
 			""")
 	public int getArticlesCount(Integer boardId, String searchKeywordTypeCode, String searchKeyword);
 
+	@Update("""
+			UPDATE article
+			SET	hit = hit + 1
+			WHERE id = #{id}
+			""")
+	public void hit(int id);
 }
+
+
+
+

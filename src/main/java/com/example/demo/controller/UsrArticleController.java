@@ -44,7 +44,9 @@ public class UsrArticleController {
 
 		// 수정, 삭제 버튼용 로그인 데이터 가져오기
 //		Rq rq = (Rq) req.getAttribute("rq");
-
+		
+		articleService.hit(id);
+		
 		// 게시글 db에서 가져오기 + 로그인 중인 아이디 권한체크까지 다 끝내고 가져온다.
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
