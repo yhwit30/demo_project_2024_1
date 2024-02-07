@@ -81,7 +81,7 @@
 
 		<c:if test="${endPage < pagination.totalPage }">
 			<button class="btn btn-sm btn-disabled">...</button>
-			<a class="btn btn-sm" href="?page=1&${baseUri}">${pagination.totalPage }</a>
+			<a class="btn btn-sm" href="?page=${pagination.totalPage }&${baseUri}">${pagination.totalPage }</a>
 		</c:if>
 
 	</div>
