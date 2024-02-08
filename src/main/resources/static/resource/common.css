@@ -56,81 +56,33 @@ header>div>ul>li:hover>ul {
 
 /* 상단 애니메이션 */
 .loader {
- position: relative;
- width: 2.5em;
- height: 2.5em;
- transform: rotate(165deg);
+  width: 40px;
+  height: 40px;
+  position: relative;
+  transform: rotate(45deg);
+  left: 10px;
+  top:-10px;
 }
 
-.loader:before, .loader:after {
- content: "";
- position: absolute;
- top: 50%;
- left: 50%;
- display: block;
- width: 0.5em;
- height: 0.5em;
- border-radius: 0.25em;
- transform: translate(-50%, -50%);
-}
-
-.loader:before {
- animation: before8 2s infinite;
+.loader:before,
+.loader:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50% 50% 0 50%;
+  background: #0000;
+  background-image: radial-gradient(circle 11.2px at 50% 50%,#0000 94%, #ff4747);
 }
 
 .loader:after {
- animation: after6 2s infinite;
+  animation: pulse-ytk0dhmd 2s infinite;
+  transform: perspective(336px) translateZ(0px);
 }
 
-@keyframes before8 {
- 0% {
-  width: 0.5em;
-  box-shadow: 1em -0.5em rgba(225, 20, 98, 0.75), -1em 0.5em rgba(111, 202, 220, 0.75);
- }
-
- 35% {
-  width: 2.5em;
-  box-shadow: 0 -0.5em rgba(225, 20, 98, 0.75), 0 0.5em rgba(111, 202, 220, 0.75);
- }
-
- 70% {
-  width: 0.5em;
-  box-shadow: -1em -0.5em rgba(225, 20, 98, 0.75), 1em 0.5em rgba(111, 202, 220, 0.75);
- }
-
- 100% {
-  box-shadow: 1em -0.5em rgba(225, 20, 98, 0.75), -1em 0.5em rgba(111, 202, 220, 0.75);
- }
+@keyframes pulse-ytk0dhmd {
+  to {
+    transform: perspective(336px) translateZ(168px);
+    opacity: 0;
+  }
 }
-
-@keyframes after6 {
- 0% {
-  height: 0.5em;
-  box-shadow: 0.5em 1em rgba(61, 184, 143, 0.75), -0.5em -1em rgba(233, 169, 32, 0.75);
- }
-
- 35% {
-  height: 2.5em;
-  box-shadow: 0.5em 0 rgba(61, 184, 143, 0.75), -0.5em 0 rgba(233, 169, 32, 0.75);
- }
-
- 70% {
-  height: 0.5em;
-  box-shadow: 0.5em -1em rgba(61, 184, 143, 0.75), -0.5em 1em rgba(233, 169, 32, 0.75);
- }
-
- 100% {
-  box-shadow: 0.5em 1em rgba(61, 184, 143, 0.75), -0.5em -1em rgba(233, 169, 32, 0.75);
- }
-}
-
-.loader {
- position: absolute;
- top: 0;
- left: 0;
- bottom: auto;
- right: auto;
- z-index: -1;
-/*  top: calc(50% - 1.25em); */
-/*  left: calc(50% - 1.25em); */
-}
+  

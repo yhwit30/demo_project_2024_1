@@ -27,10 +27,13 @@
 		<div class="h-20 flex mx-auto items-center text-3xl">
 			<a class="pl-5" href="/">LOGO</a>
 			<!-- 상단 애니메이션 -->
-			<div class="loader"></div>
+<div class="loader"></div>
+
+
+			<!-- 게시판 헤드 -->
 			<div class="flex-grow"></div>
 			<ul class="flex">
-				<!-- 				<li><a class="hover:underline" href="/"><i class="fa-solid fa-house-chimney-window"></i></a></li> -->
+				<!-- 					<li><a class="hover:underline" href="/"><i class="fa-solid fa-house-chimney-window"></i></a></li> -->
 
 
 				<c:if test="${rq.isLogined()}">
