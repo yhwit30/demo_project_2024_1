@@ -23,7 +23,7 @@
 	}
 	$(function() {
 // 		ArticleDetail__doIncreaseHitCount();
-		setTimeout(ArticleDetail__doIncreaseHitCount, 2000);
+		setTimeout(ArticleDetail__doIncreaseHitCount, 1000);
 	})
 </script>
 
