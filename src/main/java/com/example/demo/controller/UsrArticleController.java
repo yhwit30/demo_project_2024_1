@@ -42,21 +42,27 @@ public class UsrArticleController {
 			return "usr/article/detail";
 		}
 
-		// 수정, 삭제 버튼용 로그인 데이터 가져오기
-//		Rq rq = (Rq) req.getAttribute("rq");
-		
-		ResultData increaseHitCountRd = articleService.increaseHitCount(id);
-
-		if (increaseHitCountRd.isFail()) {
-			return rq.historyBackOnView(increaseHitCountRd.getMsg());
-		}
-		
 		// 게시글 db에서 가져오기 + 로그인 중인 아이디 권한체크까지 다 끝내고 가져온다.
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
 		model.addAttribute("article", article);
 
 		return "usr/article/detail";
+	}
+
+	@RequestMapping("/usr/article/doIncreaseHitCountRd")
+	@ResponseBody
+	public ResultData doIncreaseHitCountRd(int id) {
+
+		// 조회수 증가
+		ResultData increaseHitCountRd = articleService.increaseHitCount(id);
+
+		// 가져올 게시글 없는 경우 체크
+		if (increaseHitCountRd.isFail()) {
+			return increaseHitCountRd;
+		}
+
+		return ResultData.newData(increaseHitCountRd, "hitCount", articleService.getArticleHitCount(id));
 	}
 
 	@RequestMapping("/usr/article/list")
@@ -73,7 +79,8 @@ public class UsrArticleController {
 		// 전체 게시글 가져오기
 		if (boardId == 0) {
 			// 게시판 번호로 게시글 가져오기 및 페이지네이션
-			List<Article> articles = articleService.getForPrintArticles(boardId, pagination.getItemsInAPage(), page, searchKeywordTypeCode, searchKeyword);
+			List<Article> articles = articleService.getForPrintArticles(boardId, pagination.getItemsInAPage(), page,
+					searchKeywordTypeCode, searchKeyword);
 
 			model.addAttribute("articlesCount", articlesCount);
 			model.addAttribute("page", page);
@@ -94,7 +101,8 @@ public class UsrArticleController {
 		}
 
 		// 게시판 번호로 게시글 가져오기 및 페이지네이션
-		List<Article> articles = articleService.getForPrintArticles(boardId, pagination.getItemsInAPage(), page, searchKeywordTypeCode, searchKeyword);
+		List<Article> articles = articleService.getForPrintArticles(boardId, pagination.getItemsInAPage(), page,
+				searchKeywordTypeCode, searchKeyword);
 
 		model.addAttribute("articlesCount", articlesCount);
 		model.addAttribute("page", page);
