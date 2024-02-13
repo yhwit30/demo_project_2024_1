@@ -33,7 +33,7 @@
 							<a href="detail?id=${article.id }">${article.title }</a>
 						</td>
 						<td>${article.extra__writer }</td>
-						<td>${article.hit }</td>
+						<td>${article.hitCount }</td>
 					</tr>
 				</c:forEach>
 			</tbody>

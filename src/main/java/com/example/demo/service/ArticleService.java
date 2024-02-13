@@ -95,8 +95,14 @@ public class ArticleService {
 		return ResultData.from("S-1", Ut.f("%d번 글이 삭제 되었습니다", article.getId()));
 	}
 
-	public void hit(int id) {
-		articleRepository.hit(id);
+	public ResultData increaseHitCount(int id) {
+		int affectedRow = articleRepository.increaseHitCount(id);
+
+		if (affectedRow == 0) {
+			return ResultData.from("F-1", "해당 게시물 없음", "id", id);
+		}
+
+		return ResultData.from("S-1", "해당 게시물 조회수 증가", "id", id);
 	}
 
 }

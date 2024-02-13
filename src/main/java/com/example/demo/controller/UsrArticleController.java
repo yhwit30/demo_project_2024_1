@@ -45,7 +45,11 @@ public class UsrArticleController {
 		// 수정, 삭제 버튼용 로그인 데이터 가져오기
 //		Rq rq = (Rq) req.getAttribute("rq");
 		
-		articleService.hit(id);
+		ResultData increaseHitCountRd = articleService.increaseHitCount(id);
+
+		if (increaseHitCountRd.isFail()) {
+			return rq.historyBackOnView(increaseHitCountRd.getMsg());
+		}
 		
 		// 게시글 db에서 가져오기 + 로그인 중인 아이디 권한체크까지 다 끝내고 가져온다.
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
@@ -86,7 +90,7 @@ public class UsrArticleController {
 
 		// 게시판 번호가 없는 경우
 		if (board == null) {
-			return rq.printHistoryBackOnView("없는 게시판이야");
+			return rq.historyBackOnView("없는 게시판이야");
 		}
 
 		// 게시판 번호로 게시글 가져오기 및 페이지네이션
@@ -110,7 +114,7 @@ public class UsrArticleController {
 
 		// 게시글 존재여부 체크
 		if (id == null) {
-			return rq.printHistoryBackOnView("없는 게시글이야");
+			return rq.historyBackOnView("없는 게시글이야");
 		}
 
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);

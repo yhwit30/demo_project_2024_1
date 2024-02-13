@@ -138,10 +138,10 @@ public interface ArticleRepository {
 
 	@Update("""
 			UPDATE article
-			SET	hit = hit + 1
+			SET	hitCount = hitCount + 1
 			WHERE id = #{id}
 			""")
-	public void hit(int id);
+	public int increaseHitCount(int id);
 }
 
 

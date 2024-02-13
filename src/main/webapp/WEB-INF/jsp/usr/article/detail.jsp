@@ -40,10 +40,15 @@
 					<th>내용</th>
 					<td>${article.body }</td>
 				</tr>
+				<tr>
+					<th>조회수</th>
+					<td>${article.hitCount }</td>
+				</tr>
 			</tbody>
 		</table>
 		<div class="btns mt-5">
 			<button class="btn btn-outline" type="button" onclick="history.back();">뒤로가기</button>
+<!-- 			<a class="btn btn-outline" href="../article/list">뒤로가기</a> -->
 			<c:if test="${article.userCanModify }">
 				<a class="btn btn-outline" href="../article/modify?id=${article.id }">수정</a>
 			</c:if>

@@ -110,6 +110,8 @@ CREATE TABLE board(
     delDate DATETIME COMMENT '삭제 날짜'
 );
 
+
+
 # board TD 생성
 INSERT INTO board
 SET regDate = NOW(),
@@ -143,7 +145,9 @@ UPDATE article
 SET boardId = 3
 WHERE id = 4;
 
-ALTER TABLE article ADD COLUMN hit INT(10) UNSIGNED NOT NULL;
+#ALTER TABLE article ADD COLUMN hitCount INT(10) UNSIGNED not null;
+ALTER TABLE article ADD COLUMN hitCount INT(10) UNSIGNED NOT NULL DEFAULT 0 AFTER `body`;
+
 
 ###############################################
 
@@ -161,6 +165,12 @@ FROM `board`;
 
 SELECT LAST_INSERT_ID();
 
+
+SELECT *
+FROM article
+WHERE boardId = 1;
+
+
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
@@ -168,6 +178,7 @@ memberId = CEILING((RAND() * 9) / 3),
 boardId = CEILING((RAND() * 9) / 3),
 title = CONCAT('제목__', RAND()),
 `body` = CONCAT('내용__',RAND());
+
 
 INSERT INTO article
 (
@@ -179,3 +190,38 @@ FROM article;
 SELECT FLOOR(RAND() * 2) + 2
 
 SELECT FLOOR(RAND() * 3) + 1
+
+
+#실험
+SELECT A.*, M.nickname AS extra__writer, B.code AS board_code
+FROM article AS A
+INNER JOIN `member` AS M
+ON A.memberId = M.id
+INNER JOIN board AS B
+ON A.boardId = B.id
+WHERE A.id = 1
+			
+UPDATE article
+SET hitCount = hitCount + 1
+WHERE id = 1;
+
+SELECT hitCount 
+FROM article
+WHERE id = 190;
+
+DROP TABLE `like`
+CREATE TABLE `like`(
+	like_no INT(30) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    articleId INT(30),
+    memberId INT(30),
+    likeNum INT(5)
+);
+
+SELECT *
+FROM `like`
+
+INSERT INTO `like`
+SET articleId = 1,
+memberId = 2
+
+
