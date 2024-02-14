@@ -34,14 +34,20 @@ public interface ArticleRepository {
 	public Article getArticle(int id);
 
 	@Select("""
-			SELECT A.*, M.nickname AS extra__writer, B.code AS board_code
+			SELECT A.*, M.nickname AS extra__writer, B.code AS board_code, 
+			IFNULL(SUM(R.point),0) AS extra__sumReactionPoint,
+			IFNULL(SUM(IF((R.point)>0, R.point, 0)) ,0) AS extra__goodReactionPoint,
+			IFNULL(SUM(IF((R.point)<0, R.point, 0)) ,0) AS extra__badReactionPoint
 			FROM article AS A
 			INNER JOIN `member` AS M
 			ON A.memberId = M.id
 			INNER JOIN board AS B
 			ON A.boardId = B.id
-			WHERE A.id = #{id}
-				""")
+			LEFT JOIN reactionPoint AS R
+			ON A.id = R.relId AND R.relTypeCode = 'article'
+			GROUP BY A.id
+			HAVING A.id = #{id}
+			""")
 	public Article getForPrintArticle(int id);
 
 	@Delete("DELETE FROM article WHERE id = #{id}")
