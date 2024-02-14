@@ -16,15 +16,11 @@
 	function ArticleDetail__doIncreaseHitCount() {
 		const localStorageKey = 'article__'+params.id+'__alreadyView';
 		
-		console.log(localStorageKey);
-		
 		if(localStorage.getItem(localStorageKey)){
 			return;
 		}
 		
 		localStorage.setItem(localStorageKey, true);
-		
-		
 		
 		
 		$.get('../article/doIncreaseHitCountRd', {
@@ -68,6 +64,18 @@
 				<tr>
 					<th>작성자</th>
 					<td>${article.extra__writer }</td>
+				</tr>
+				<tr>
+					<th>좋아요</th>
+					<td>?</td>
+				</tr>
+				<tr>
+					<th>싫어요</th>
+					<td>?</td>
+				</tr>
+				<tr>
+					<th>추천 합</th>
+					<td>?</td>
 				</tr>
 				<tr>
 					<th>제목</th>

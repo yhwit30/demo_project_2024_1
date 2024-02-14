@@ -19,6 +19,12 @@ public class Article {
 	private String extra__writer;
 	private String board_code;
 	private int hitCount;
+
+	private String extra__sumReactionPoint;
+	private String extra__goodReactionPoint;
+	private String extra__badReactionPoint;
+	
+	
 	
 	private boolean userCanModify;
 	private boolean userCanDelete;
