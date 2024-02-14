@@ -75,10 +75,12 @@ public interface ArticleRepository {
 
 	@Select("""
 			<script>
-			SELECT A.*, M.nickname AS extra__writer
+			SELECT A.*, M.nickname AS extra__writer, IFNULL(SUM(R.point),0) AS extra__sumReactionPoint
 			FROM article AS A
 			INNER JOIN `member` AS M
 			ON A.memberId = M.id
+			LEFT JOIN reactionPoint AS R
+			ON A.id = R.relId AND R.relTypeCode = 'article'
 			WHERE 1
 			<if test="boardId != 0">
 				AND A.boardId = #{boardId}
@@ -100,11 +102,12 @@ public interface ArticleRepository {
 					</otherwise>
 					</choose>
 			</if>
-
+			GROUP BY A.id
 			ORDER BY A.id DESC
 			<if test="limitFrom >= 0 ">
 				LIMIT #{limitFrom}, #{limitTake}
 			</if>
+
 			</script>
 			""")
 	public List<Article> getForPrintArticles(int boardId, int limitFrom, int limitTake, String searchKeywordTypeCode,
