@@ -50,7 +50,7 @@ public class UsrArticleController {
 		// 게시글 db에서 가져오기 + 로그인 중인 아이디 권한체크까지 다 끝내고 가져온다.
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 		
-		// 좋아요 싫어요 할 수 있는지
+		// -1 싫어요, 0 표현 x, 1 좋아요
 		int usersReaction = reactionPointService.usersReaction(rq.getLoginedMemberId(), "article", id);
 
 		model.addAttribute("article", article);

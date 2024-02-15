@@ -7,6 +7,9 @@
 
 <!-- <iframe src="http://localhost:8081/usr/article/doIncreaseHitCountRd?id=373" frameborder="0"></iframe> -->
 
+
+
+
 <script>
 	const params = {};
 	params.id = parseInt('${param.id}');
@@ -75,9 +78,13 @@
 				<tr>
 					<th>추천</th>
 					<td>
-						<span class="btn btn-outline btn-success">좋아요</span>
+						<a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.currentUri}"
+							class="reaction btn btn-outline btn-success"
+						>좋아요</a>
 						&nbsp;&nbsp;
-						<span class="btn btn-outline btn-error">싫어요</span>
+						<a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.currentUri}"
+							class="reaction btn btn-outline btn-error"
+						>싫어요</a>
 					</td>
 				</tr>
 				<tr>

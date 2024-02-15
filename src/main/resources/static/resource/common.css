@@ -46,7 +46,8 @@ header>div>ul>li {
 header>div>ul>li>ul {
 	display: none;
 	position: absolute;
-	background-color: whitCounte;
+	background-color: white;
+	z-index: 1;
 }
 
 header>div>ul>li:hover>ul {
