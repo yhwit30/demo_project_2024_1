@@ -79,12 +79,16 @@
 					<th>추천</th>
 					<td>
 						<a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.currentUri}"
-							class="reaction btn btn-outline btn-success"
-						>좋아요</a>
+							class="reaction btn btn-outline btn-success">좋아요</a>
 						&nbsp;&nbsp;
 						<a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.currentUri}"
-							class="reaction btn btn-outline btn-error"
-						>싫어요</a>
+							class="reaction btn btn-outline btn-error">싫어요</a>
+					</td>
+				</tr>
+				<tr>
+					<th>조회수</th>
+					<td>
+						<span class="article-detail__hit-count">${article.hitCount }</span>
 					</td>
 				</tr>
 				<tr>
@@ -95,12 +99,7 @@
 					<th>내용</th>
 					<td>${article.body }</td>
 				</tr>
-				<tr>
-					<th>조회수</th>
-					<td>
-						<span class="article-detail__hit-count">${article.hitCount }</span>
-					</td>
-				</tr>
+				
 			</tbody>
 		</table>
 		<div class="btns mt-5">
