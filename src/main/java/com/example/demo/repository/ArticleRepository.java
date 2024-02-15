@@ -34,17 +34,12 @@ public interface ArticleRepository {
 	public Article getArticle(int id);
 
 	@Select("""
-			SELECT A.*, M.nickname AS extra__writer, B.code AS board_code, 
-			IFNULL(SUM(R.point),0) AS extra__sumReactionPoint,
-			IFNULL(SUM(IF((R.point)>0, R.point, 0)) ,0) AS extra__goodReactionPoint,
-			IFNULL(SUM(IF((R.point)<0, R.point, 0)) ,0) AS extra__badReactionPoint
+			SELECT A.*, M.nickname AS extra__writer, B.code AS board_code
 			FROM article AS A
 			INNER JOIN `member` AS M
 			ON A.memberId = M.id
 			INNER JOIN board AS B
 			ON A.boardId = B.id
-			LEFT JOIN reactionPoint AS R
-			ON A.id = R.relId AND R.relTypeCode = 'article'
 			GROUP BY A.id
 			HAVING A.id = #{id}
 			""")
@@ -75,12 +70,10 @@ public interface ArticleRepository {
 
 	@Select("""
 			<script>
-			SELECT A.*, M.nickname AS extra__writer, IFNULL(SUM(R.point),0) AS extra__sumReactionPoint
+			SELECT A.*, M.nickname AS extra__writer
 			FROM article AS A
 			INNER JOIN `member` AS M
 			ON A.memberId = M.id
-			LEFT JOIN reactionPoint AS R
-			ON A.id = R.relId AND R.relTypeCode = 'article'
 			WHERE 1
 			<if test="boardId != 0">
 				AND A.boardId = #{boardId}

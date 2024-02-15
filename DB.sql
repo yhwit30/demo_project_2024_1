@@ -308,8 +308,8 @@ ORDER BY A.id DESC;
 # 서브쿼리
 SELECT A.*,
 IFNULL(SUM(RP.point),0) AS extra__sumReactionPoint,
-IFNULL(SUM(IF(RP.point > 0, RP.point, 0)),0) AS extra__goodReactionPoint,
-IFNULL(SUM(IF(RP.point < 0, RP.point, 0)),0) AS extra__badReactionPoint
+IFNULL(SUM(IF(RP.point > 0, RP.point, 0)),0) AS goodReactionPoint,
+IFNULL(SUM(IF(RP.point < 0, RP.point, 0)),0) AS badReactionPoint
 FROM (
     SELECT A.*, M.nickname AS extra__writer 
     FROM article AS A
@@ -324,8 +324,8 @@ ORDER BY A.id DESC;
 # 조인
 SELECT A.*, M.nickname AS extra__writer,
 IFNULL(SUM(RP.point),0) AS extra__sumReactionPoint,
-IFNULL(SUM(IF(RP.point > 0, RP.point, 0)),0) AS extra__goodReactionPoint,
-IFNULL(SUM(IF(RP.point < 0, RP.point, 0)),0) AS extra__badReactionPoint
+IFNULL(SUM(IF(RP.point > 0, RP.point, 0)),0) AS goodReactionPoint,
+IFNULL(SUM(IF(RP.point < 0, RP.point, 0)),0) AS badReactionPoint
 FROM article AS A
 INNER JOIN `member` AS M
 ON A.memberId = M.id

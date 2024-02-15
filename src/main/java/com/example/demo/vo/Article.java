@@ -15,14 +15,12 @@ public class Article {
 	private int boardId;
 	private String title;
 	private String body;
+	private int goodReactionPoint;
+	private int badReactionPoint;
 	
 	private String extra__writer;
 	private String board_code;
 	private int hitCount;
-
-	private String extra__sumReactionPoint;
-	private String extra__goodReactionPoint;
-	private String extra__badReactionPoint;
 	
 	
 	

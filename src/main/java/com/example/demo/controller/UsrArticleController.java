@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.service.ArticleService;
 import com.example.demo.service.BoardService;
+import com.example.demo.service.ReactionPointService;
 import com.example.demo.util.Ut;
 import com.example.demo.vo.Article;
 import com.example.demo.vo.Board;
@@ -32,6 +33,10 @@ public class UsrArticleController {
 	@Autowired
 	private BoardService boardService;
 
+	@Autowired
+	private ReactionPointService reactionPointService;
+	
+
 	// 액션 메소드
 	@RequestMapping("/usr/article/detail")
 	public String getArticleAction(Integer id, HttpServletRequest req, Model model) { // null 체크하려고 Integer로 바꿨다.
@@ -44,8 +49,12 @@ public class UsrArticleController {
 
 		// 게시글 db에서 가져오기 + 로그인 중인 아이디 권한체크까지 다 끝내고 가져온다.
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
+		
+		// 좋아요 싫어요 할 수 있는지
+		int usersReaction = reactionPointService.usersReaction(rq.getLoginedMemberId(), "article", id);
 
 		model.addAttribute("article", article);
+		model.addAttribute("usersReaction", usersReaction);
 
 		return "usr/article/detail";
 	}
