@@ -25,8 +25,8 @@ public class ReactionPointService {
 			return ResultData.from("F-L", "로그인 하고 써야해");
 		}
 
-		int sumReactionPointByMemberId = reactionPointRepository.getSumReactionPoint(loginedMemberId, relTypeCode,
-				relId);
+		// 1 좋아요, -1 싫어요, 0 둘다 가능
+		int sumReactionPointByMemberId = reactionPointRepository.getSumReactionPoint(loginedMemberId, relTypeCode, relId);
 
 		if (sumReactionPointByMemberId != 0) {
 			return ResultData.from("F-1", "추천 불가능", "sumReactionPointByMemberId", sumReactionPointByMemberId);

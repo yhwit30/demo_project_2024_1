@@ -44,11 +44,13 @@ public class ArticleService {
 	}
 
 	// 게시판 번호로 가져오기 및 페이지네이션
-	public List<Article> getForPrintArticles(Integer boardId, int itemsInAPage, int page, String searchKeywordTypeCode, String searchKeyword) {
+	public List<Article> getForPrintArticles(Integer boardId, int itemsInAPage, int page, String searchKeywordTypeCode,
+			String searchKeyword) {
 		int limitFrom = (page - 1) * itemsInAPage;
 		int limitTake = itemsInAPage;
 
-		return articleRepository.getForPrintArticles(boardId, limitFrom, limitTake, searchKeywordTypeCode, searchKeyword);
+		return articleRepository.getForPrintArticles(boardId, limitFrom, limitTake, searchKeywordTypeCode,
+				searchKeyword);
 	}
 
 	// 게시글 전체 개수 구하기
@@ -95,6 +97,7 @@ public class ArticleService {
 		return ResultData.from("S-1", Ut.f("%d번 글이 삭제 되었습니다", article.getId()));
 	}
 
+	// 조회수 증가
 	public ResultData increaseHitCount(int id) {
 		int affectedRow = articleRepository.increaseHitCount(id);
 
@@ -105,10 +108,12 @@ public class ArticleService {
 		return ResultData.from("S-1", "해당 게시물 조회수 증가", "id", id);
 	}
 
+	// 조회수 개수
 	public Object getArticleHitCount(int id) {
 		return articleRepository.getArticleHitCount(id);
 	}
-	
+
+	// 좋아요 증가
 	public ResultData increaseGoodReactionPoint(int relId) {
 		int affectedRow = articleRepository.increaseGoodReactionPoint(relId);
 
@@ -119,6 +124,7 @@ public class ArticleService {
 		return ResultData.from("S-1", "좋아요 증가", "affectedRow", affectedRow);
 	}
 
+	// 싫어요 증가
 	public ResultData increaseBadReactionPoint(int relId) {
 		int affectedRow = articleRepository.increaseBadReactionPoint(relId);
 
@@ -129,6 +135,7 @@ public class ArticleService {
 		return ResultData.from("S-1", "싫어요 증가", "affectedRow", affectedRow);
 	}
 
+	// 좋아요 취소
 	public ResultData decreaseGoodReactionPoint(int relId) {
 		int affectedRow = articleRepository.decreaseGoodReactionPoint(relId);
 
@@ -139,6 +146,7 @@ public class ArticleService {
 		return ResultData.from("S-1", "좋아요 감소", "affectedRow", affectedRow);
 	}
 
+	// 싫어요 취소
 	public ResultData decreaseBadReactionPoint(int relId) {
 		int affectedRow = articleRepository.decreaseBadReactionPoint(relId);
 

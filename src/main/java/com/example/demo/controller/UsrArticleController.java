@@ -35,7 +35,6 @@ public class UsrArticleController {
 
 	@Autowired
 	private ReactionPointService reactionPointService;
-	
 
 	// 액션 메소드
 	@RequestMapping("/usr/article/detail")
@@ -49,20 +48,18 @@ public class UsrArticleController {
 
 		// 게시글 db에서 가져오기 + 로그인 중인 아이디 권한체크까지 다 끝내고 가져온다.
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
-		
-		// -1 싫어요, 0 표현 x, 1 좋아요
+
+		// 좋아요 싫어요 중 가능한 거 판단
 		ResultData usersReactionRd = reactionPointService.usersReaction(rq.getLoginedMemberId(), "article", id);
 
 		if (usersReactionRd.isSuccess()) {
 			model.addAttribute("userCanMakeReaction", usersReactionRd.isSuccess());
 		}
-		
+
 		model.addAttribute("article", article);
-		model.addAttribute("isAlreadyAddGoodRp",
-				reactionPointService.isAlreadyAddGoodRp(rq.getLoginedMemberId(), id, "article"));
-		model.addAttribute("isAlreadyAddBadRp",
-				reactionPointService.isAlreadyAddBadRp(rq.getLoginedMemberId(), id, "article"));
-		
+		model.addAttribute("isAlreadyAddGoodRp", reactionPointService.isAlreadyAddGoodRp(rq.getLoginedMemberId(), id, "article"));
+		model.addAttribute("isAlreadyAddBadRp",	reactionPointService.isAlreadyAddBadRp(rq.getLoginedMemberId(), id, "article"));
+
 		return "usr/article/detail";
 	}
 

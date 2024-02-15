@@ -7,9 +7,6 @@
 
 <!-- <iframe src="http://localhost:8081/usr/article/doIncreaseHitCountRd?id=373" frameborder="0"></iframe> -->
 
-
-
-
 <script>
 	const params = {};
 	params.id = parseInt('${param.id}');
