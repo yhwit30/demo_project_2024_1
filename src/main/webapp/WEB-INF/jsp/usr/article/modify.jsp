@@ -11,6 +11,10 @@
 			<table class="modify-box table-box-1" border="1">
 				<tbody>
 					<tr>
+						<th>게시판</th>
+						<td>${article.board_code }</td>
+					</tr>
+					<tr>
 						<th>번호</th>
 						<td>${article.id }</td>
 					</tr>
@@ -28,17 +32,23 @@
 					</tr>
 					<tr>
 						<th>제목</th>
-						<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-							placeholder="제목을 입력해주세요" name="title" value="${article.title }" /></td>
+						<td>
+							<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
+								placeholder="제목을 입력해주세요" name="title" value="${article.title }" />
+						</td>
 					</tr>
 					<tr>
 						<th>내용</th>
-						<td><input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-							placeholder="내용을 입력해주세요" name="body" value="${article.body }" /></td>
+						<td>
+							<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
+								placeholder="내용을 입력해주세요" name="body" value="${article.body }" />
+						</td>
 					</tr>
 					<tr>
 						<th></th>
-						<td><input class="btn btn-info" type="submit" value="수정" /></td>
+						<td>
+							<input class="btn btn-info" type="submit" value="수정" />
+						</td>
 					</tr>
 				</tbody>
 			</table>

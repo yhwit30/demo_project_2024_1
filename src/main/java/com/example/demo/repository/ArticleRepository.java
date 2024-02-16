@@ -19,7 +19,7 @@ public interface ArticleRepository {
 			regDate = NOW(),
 			updateDate = NOW(),
 			memberId = #{memberId},
-			title = #{title}, 
+			title = #{title},
 			`body` = #{body},
 			boardId = #{boardId}
 			""")
@@ -52,11 +52,9 @@ public interface ArticleRepository {
 
 	@Update("""
 			UPDATE article
-				<set>
-					<if test="title != null and title != ''">title = #{title},</if>
-					<if test="body != null and body != ''">`body` = #{body},</if>
-					updateDate = NOW()
-				</set>
+			SET title = #{title},
+			`body` = #{body},
+			updateDate = NOW()
 			WHERE id = #{id}
 				""")
 	public void modifyArticle(int id, String title, String body);
@@ -147,21 +145,20 @@ public interface ArticleRepository {
 			""")
 	public int increaseHitCount(int id);
 
-	
 	@Select("""
 			SELECT hitCount
 			FROM article
 			WHERE id = #{id}
 			""")
 	public int getArticleHitCount(int id);
-	
+
 	@Update("""
 			UPDATE article
 			SET goodReactionPoint = goodReactionPoint + 1
 			WHERE id = #{relId}
 			""")
 	public int increaseGoodReactionPoint(int relId);
-	
+
 	@Update("""
 			UPDATE article
 			SET goodReactionPoint = goodReactionPoint - 1
@@ -197,7 +194,3 @@ public interface ArticleRepository {
 			""")
 	public int getBadRP(int relId);
 }
-
-
-
-

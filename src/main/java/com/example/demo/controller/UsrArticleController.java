@@ -19,8 +19,6 @@ import com.example.demo.vo.Page;
 import com.example.demo.vo.ResultData;
 import com.example.demo.vo.Rq;
 
-import jakarta.servlet.http.HttpServletRequest;
-
 @Controller
 public class UsrArticleController {
 
@@ -38,7 +36,7 @@ public class UsrArticleController {
 
 	// 액션 메소드
 	@RequestMapping("/usr/article/detail")
-	public String getArticleAction(Integer id, HttpServletRequest req, Model model) { // null 체크하려고 Integer로 바꿨다.
+	public String getArticleAction(Integer id, Model model) { // null 체크하려고 Integer로 바꿨다.
 
 		// 그냥 article/detail 치고 들어오는 경우 체크
 		if (id == null) {
@@ -83,7 +81,7 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/list")
-	public String showList(Model model, HttpServletRequest req, @RequestParam(defaultValue = "0") int boardId,
+	public String showList(Model model, @RequestParam(defaultValue = "0") int boardId,
 			@RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "title,body") String searchKeywordTypeCode,
 			@RequestParam(defaultValue = "") String searchKeyword) {
@@ -132,7 +130,7 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/modify")
-	public String showModify(Integer id, HttpServletRequest req, Model model) {
+	public String showModify(Integer id, Model model) {
 
 		// 로그인 정보 가져오기
 //		Rq rq = (Rq) req.getAttribute("rq");
@@ -152,7 +150,7 @@ public class UsrArticleController {
 	// 로그인 체크 -> 유무 체크 -> 권한 체크 -> 수정
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
-	public String doModify(int id, String title, String body, HttpServletRequest req, Model model) {
+	public String doModify(int id, String title, String body) {
 		// 로그인 상태 체크 - 인터셉터에서
 
 		Article article = articleService.getArticle(id); // 해당 게시글 가져오기
@@ -174,7 +172,7 @@ public class UsrArticleController {
 	// 로그인 체크 -> 유무 체크 -> 권한 체크 -> 삭제
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
-	public String doDelete(int id, HttpServletRequest req) {
+	public String doDelete(int id) {
 		// 로그인 상태 체크 - 인터셉터에서
 
 		Article article = articleService.getArticle(id);
@@ -206,7 +204,7 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public String doWrite(String title, String body, int boardId, HttpServletRequest req) {
+	public String doWrite(String title, String body, int boardId) {
 		// 로그인 상태 체크 - 인터셉터에서
 
 		// 제목 내용 빈 칸 확인
