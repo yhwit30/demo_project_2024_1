@@ -221,7 +221,7 @@ public class UsrArticleController {
 //		Rq rq = (Rq) req.getAttribute("rq");
 
 		// 게시글 작성 작업
-		ResultData<Integer> writeArticleRd = articleService.writeArticle(title, body, rq.getLoginedMemberId());
+		ResultData<Integer> writeArticleRd = articleService.writeArticle(title, body, rq.getLoginedMemberId(), boardId);
 
 		// 작성된 게시글 번호 가져오기
 		int id = (int) writeArticleRd.getData1();
