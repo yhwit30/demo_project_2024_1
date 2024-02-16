@@ -12,6 +12,10 @@
 <script>
 	const params = {};
 	params.id = parseInt('${param.id}');
+	params.memberId = parseInt('${loginedMemberId}');
+	
+	console.log(params);
+	console.log(params.memberId);
 	
 	var isAlreadyAddGoodRp = ${isAlreadyAddGoodRp};
 	var isAlreadyAddBadRp = ${isAlreadyAddBadRp};
@@ -54,8 +58,14 @@
 		}
 	}
 
-	//////////////// articleContoller에서 애초에 count 값을 같이 model에 포함시켜서 보내자
 	function doGoodReaction(articleId) {
+		if(isNaN(params.memberId) == true){
+			if(confirm('로그인 해야해. 로그인 페이지로 가실???')){
+				var currentUri = encodeURIComponent(window.location.href);
+				window.location.href = '../member/login?afterLoginUri=' + currentUri; // 로그인 페이지에 원래 페이지의 uri를 같이 보냄
+			}
+			return;
+		}
 		
 		$.ajax({
 			url: '/usr/reactionPoint/doGoodReaction',
@@ -103,6 +113,13 @@
 	
 	
 	function doBadReaction(articleId) {
+		if(isNaN(params.memberId) == true){
+			if(confirm('로그인 해야해. 로그인 페이지로 가실???')){
+				var currentUri = encodeURIComponent(window.location.href);
+				window.location.href = '../member/login?afterLoginUri=' + currentUri; // 로그인 페이지에 원래 페이지의 uri를 같이 보냄
+			}
+			return;
+		}
 		
 	 $.ajax({
 			url: '/usr/reactionPoint/doBadReaction',

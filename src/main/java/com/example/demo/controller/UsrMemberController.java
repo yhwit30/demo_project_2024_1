@@ -48,7 +48,7 @@ public class UsrMemberController {
 
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
-	public String doLogin(String loginId, String loginPw, HttpServletRequest req) {
+	public String doLogin(String loginId, String loginPw, HttpServletRequest req, String afterLoginUri) {
 
 		// 로그인 상태 체크 -인터셉터에서
 
@@ -79,6 +79,11 @@ public class UsrMemberController {
 		// 세션에 로그인 중인 정보 올리기
 		rq.login(member);
 
+		// 좋아요 싫어요 누른 페이지로 보내기
+		if (afterLoginUri.length() > 0) {
+			return Ut.jsReplace("S-1", Ut.f("%s님 환영합니다", member.getNickname()), afterLoginUri);
+		}
+		
 		return Ut.jsReplace("S-1", Ut.f("%s님 환영합니다", member.getNickname()), "/");
 	}
 
