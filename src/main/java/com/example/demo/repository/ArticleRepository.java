@@ -180,6 +180,20 @@ public interface ArticleRepository {
 			WHERE id = #{relId}
 			""")
 	public int decreaseBadReactionPoint(int relId);
+
+	@Select("""
+			SELECT goodReactionPoint
+			FROM article
+			WHERE id = #{relId}
+			""")
+	public int getGoodRP(int relId);
+
+	@Select("""
+			SELECT badReactionPoint
+			FROM article
+			WHERE id = #{relId}
+			""")
+	public int getBadRP(int relId);
 }
 
 

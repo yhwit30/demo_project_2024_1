@@ -53,14 +53,21 @@
 			return;
 		}
 	}
-	
+
+	//////////////// articleContoller에서 애초에 count 값을 같이 model에 포함시켜서 보내자
 	function doGoodReaction(articleId) {
+		
 		$.ajax({
 			url: '/usr/reactionPoint/doGoodReaction',
 			type: 'POST',
 			data: {relTypeCode: 'article', relId: articleId},
 			dataType: 'json',
 			success: function(data){
+				console.log(data);
+				console.log('data.data1Name : ' + data.data1Name);
+				console.log('data.data1 : ' + data.data1);
+				console.log('data.data2Name : ' + data.data2Name);
+				console.log('data.data2 : ' + data.data2);
 				if(data.resultCode.startsWith('S-')){
 					var likeButton = $('#likeButton');
 					var likeCount = $('#likeCount');
@@ -69,34 +76,45 @@
 					
 					if(data.resultCode == 'S-1'){
 						likeButton.toggleClass('btn-outline');
-						likeCount.text(parseInt(likeCount.text()) - 1);
+						likeCount.text(data.data1);
 					}else if(data.resultCode == 'S-2'){
 						DislikeButton.toggleClass('btn-outline');
-						DislikeCount.text(parseInt(DislikeCount.text()) - 1);
+						DislikeCount.text(data.data2);
 						likeButton.toggleClass('btn-outline');
-						likeCount.text(parseInt(likeCount.text()) + 1);
+						likeCount.text(data.data1);
 					}else {
 						likeButton.toggleClass('btn-outline');
-						likeCount.text(parseInt(likeCount.text()) + 1);
+						likeCount.text(data.data1);
 					}
+					
 				}else {
 					alert(data.msg);
 				}
+		
 			},
 			error: function(jqXHR,textStatus,errorThrown) {
 				alert('좋아요 오류 발생 : ' + textStatus);
+
 			}
 			
 		});
 	}
 	
+	
+	
 	function doBadReaction(articleId) {
-		$.ajax({
+		
+	 $.ajax({
 			url: '/usr/reactionPoint/doBadReaction',
 			type: 'POST',
 			data: {relTypeCode: 'article', relId: articleId},
 			dataType: 'json',
 			success: function(data){
+				console.log(data);
+				console.log('data.data1Name : ' + data.data1Name);
+				console.log('data.data1 : ' + data.data1);
+				console.log('data.data2Name : ' + data.data2Name);
+				console.log('data.data2 : ' + data.data2);
 				if(data.resultCode.startsWith('S-')){
 					var likeButton = $('#likeButton');
 					var likeCount = $('#likeCount');
@@ -105,16 +123,18 @@
 					
 					if(data.resultCode == 'S-1'){
 						DislikeButton.toggleClass('btn-outline');
-						DislikeButton.text(parseInt(DislikeButton.text()) - 1);
+						DislikeCount.text(data.data2);
 					}else if(data.resultCode == 'S-2'){
 						likeButton.toggleClass('btn-outline');
-						likeCount.text(parseInt(DislikeCount.text()) - 1);
+						likeCount.text(data.data1);
 						DislikeButton.toggleClass('btn-outline');
-						DislikeCount.text(parseInt(DislikeCount.text()) + 1);
+						DislikeCount.text(data.data2);
+		
 					}else {
 						DislikeButton.toggleClass('btn-outline');
-						DislikeCount.text(parseInt(DislikeCount.text()) + 1);
+						DislikeCount.text(data.data2);
 					}
+			
 				}else {
 					alert(data.msg);
 				}
@@ -146,7 +166,7 @@
 				</tr>
 				<tr>
 					<th>번호</th>
-					<td>${article.id }</td>
+					<td>${article.id }${goodRP}${badRP}</td>
 				</tr>
 				<tr>
 					<th>작성날짜</th>
@@ -162,14 +182,14 @@
 				</tr>
 				<tr>
 					<th>좋아요</th>
-					<td>${article.goodReactionPoint }</td>
+					<td id="likeCount">${article.goodReactionPoint }</td>
 				</tr>
 				<tr>
 					<th>싫어요</th>
-					<td>${article.badReactionPoint }</td>
+					<td id="DislikeCount">${article.badReactionPoint }</td>
 				</tr>
 				<tr>
-					<th>추천 ${usersReaction }</th>
+					<th>추천</th>
 					<td>
 						<!-- href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.currentUri}" -->
 						<button id="likeButton" class="btn btn-outline btn-success" onclick="doGoodReaction(${param.id})">좋아요</button>
@@ -191,7 +211,7 @@
 					<th>내용</th>
 					<td>${article.body }</td>
 				</tr>
-				
+
 			</tbody>
 		</table>
 		<div class="btns mt-5">
