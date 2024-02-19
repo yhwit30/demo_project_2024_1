@@ -27,41 +27,17 @@
 		<div class="h-20 flex mx-auto items-center text-3xl">
 			<a class="pl-3" href="/">
 				<!-- 상단애니메이션 -->
-				<div class="loader">
-					<div class="container">
-						<div class="carousel">
-							<div class="love"></div>
-							<div class="love"></div>
-							<div class="love"></div>
-							<div class="love"></div>
-							<div class="love"></div>
-							<div class="love"></div>
-							<div class="love"></div>
-						</div>
-					</div>
-					<div class="container">
-						<div class="carousel">
-							<div class="death"></div>
-							<div class="death"></div>
-							<div class="death"></div>
-							<div class="death"></div>
-							<div class="death"></div>
-							<div class="death"></div>
-							<div class="death"></div>
-						</div>
-					</div>
-					<div class="container">
-						<div class="carousel">
-							<div class="robots"></div>
-							<div class="robots"></div>
-							<div class="robots"></div>
-							<div class="robots"></div>
-							<div class="robots"></div>
-							<div class="robots"></div>
-							<div class="robots"></div>
-						</div>
-					</div>
-				</div>
+				<button class="button">
+					<div class="button-overlay"></div>
+					<span>
+						MAIN
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 53 58" height="58" width="53">
+<path stroke-width="9" stroke="currentColor"
+								d="M44.25 36.3612L17.25 51.9497C11.5833 55.2213 4.5 51.1318 4.50001 44.5885L4.50001 13.4115C4.50001 6.86824 11.5833 2.77868 17.25 6.05033L44.25 21.6388C49.9167 24.9104 49.9167 33.0896 44.25 36.3612Z"></path>
+</svg>
+					</span>
+
+				</button>
 			</a>
 
 
@@ -79,7 +55,7 @@
 						</a>
 					</li>
 				</c:if>
-				
+
 				<c:if test="${rq.isLogined()}">
 					<li>
 						<a class="hover:underline" href="../article/write">
@@ -106,7 +82,7 @@
 						</ul>
 					</li>
 				</c:if>
-				
+
 				<c:if test="${!rq.isLogined()}">
 					<li>
 						<a class="hover:underline" href="../member/join">
@@ -117,7 +93,7 @@
 						<a class="hover:underline" href="../member/login">LOGIN</a>
 					</li>
 				</c:if>
-				
+
 				<c:if test="${rq.isLogined()}">
 					<li>
 						<a onclick="if(confirm('로그아웃하시겠습니까?') == false) return false;" class="hover:underline" href="../member/doLogout">LOGOUT</a>
