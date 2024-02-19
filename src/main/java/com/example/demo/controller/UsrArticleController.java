@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.demo.service.ArticleService;
 import com.example.demo.service.BoardService;
 import com.example.demo.service.ReactionPointService;
+import com.example.demo.service.ReplyService;
 import com.example.demo.util.Ut;
 import com.example.demo.vo.Article;
 import com.example.demo.vo.Board;
 import com.example.demo.vo.Page;
+import com.example.demo.vo.Reply;
 import com.example.demo.vo.ResultData;
 import com.example.demo.vo.Rq;
 
@@ -34,6 +36,9 @@ public class UsrArticleController {
 	@Autowired
 	private ReactionPointService reactionPointService;
 
+	@Autowired
+	private ReplyService replyService;
+
 	// 액션 메소드
 	@RequestMapping("/usr/article/detail")
 	public String getArticleAction(Integer id, Model model) { // null 체크하려고 Integer로 바꿨다.
@@ -46,6 +51,10 @@ public class UsrArticleController {
 
 		// 게시글 db에서 가져오기 + 로그인 중인 아이디 권한체크까지 다 끝내고 가져온다.
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
+		
+		// 댓글 db에서 가져오기
+		List<Reply> replies = replyService.getForPrintReplies(rq.getLoginedMemberId(), "article", id);
+		int repliesCount = replies.size();
 
 		// 좋아요 싫어요 중 가능한 거 판단
 		ResultData usersReactionRd = reactionPointService.usersReaction(rq.getLoginedMemberId(), "article", id);
@@ -55,8 +64,10 @@ public class UsrArticleController {
 		}
 
 		model.addAttribute("article", article);
-		model.addAttribute("isAlreadyAddGoodRp", reactionPointService.isAlreadyAddGoodRp(rq.getLoginedMemberId(), id, "article"));
-		model.addAttribute("isAlreadyAddBadRp",	reactionPointService.isAlreadyAddBadRp(rq.getLoginedMemberId(), id, "article"));
+		model.addAttribute("replies", replies);
+		model.addAttribute("repliesCount", repliesCount);
+//		model.addAttribute("isAlreadyAddGoodRp", reactionPointService.isAlreadyAddGoodRp(rq.getLoginedMemberId(), id, "article"));
+//		model.addAttribute("isAlreadyAddBadRp",	reactionPointService.isAlreadyAddBadRp(rq.getLoginedMemberId(), id, "article"));
 
 		return "usr/article/detail";
 	}

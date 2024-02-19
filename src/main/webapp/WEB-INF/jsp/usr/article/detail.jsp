@@ -246,5 +246,46 @@
 	</div>
 </section>
 
+<section class="mt-5 px-3">
+	<div class="mx-auto">
+		<h2>댓글 리스트(${repliesCount })</h2>
+	<table class="table-box-1 table" border="1">
+			<colgroup>
+				<col style="width: 10%" />
+				<col style="width: 20%" />
+				<col style="width: 50%" />
+				<col style="width: 10%" />
+			</colgroup>
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>날짜</th>
+					<th>댓글</th>
+					<th>작성자</th>
+					<th>좋아요</th>
+					<th>싫어요</th>
+				</tr>
+			</thead>
+			<tbody>
+<c:forEach var="reply" items="${replies }">
+	<tr class="hover">
+		<td>${reply.id }</td>
+		<td>${reply.regDate.substring(0,10) }</td>
+		<td>${reply.body } </td>
+		<td>${reply.extra__writer }</td>
+		<td>${reply.goodReactionPoint }</td>
+		<td>${reply.badReactionPoint }</td>
+	</tr>
+</c:forEach>
+
+</tbody>
+</table>
+
+</div>
+</section>
+
+
+
+
 
 <%@ include file="../common/foot.jspf"%>
