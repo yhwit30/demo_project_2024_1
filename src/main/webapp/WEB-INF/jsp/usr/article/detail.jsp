@@ -168,6 +168,25 @@
 	});
 </script>
 
+<!-- 댓글 -->
+<script>
+		var ReplyWrite__submitDone = false;
+		function ReplyWrite__submit(form) {
+			if (ReplyWrite__submitDone) {
+				alert('이미 처리중입니다');
+				return;
+			}
+			console.log(form.body.value);
+			
+			if (form.body.value.length < 3) {
+				alert('댓글은 3글자 이상 입력해');
+				form.body.focus();
+				return;
+			}
+			ReplyWrite__submitDone = true;
+			form.submit();
+		}
+	</script>
 
 
 <section class="mt-8 text-xl px-4">
@@ -250,7 +269,7 @@
 <section class="mt-5 px-3">
 <!-- 로그인체크 버튼 -->
 <c:if test="${rq.isLogined() }">
-		<form action="../reply/doWrite" method="POST">
+		<form action="../reply/doWrite" method="POST" onsubmit="ReplyWrite__submit(this); return false;">
 			<input type="hidden" name="relTypeCode" value="article" />
 			<input type="hidden" name="relId" value="${article.id }" />
 			<table class="write-box table-box-1" border="1">
@@ -258,8 +277,8 @@
 					<tr>
 						<th>댓글</th>
 						<td>
-							<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="댓글을 입력해주세요" name="body" />
+						<textarea class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
+								placeholder="내용을 입력해주세요" name="body"> </textarea>
 						</td>
 					
 						<td>

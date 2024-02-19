@@ -17,8 +17,8 @@ public class Article {
 	private String body;
 	private int goodReactionPoint;
 	private int badReactionPoint;
-	private int repliesCount;
 	
+	private int extra__repliesCnt;
 	private String extra__writer;
 	private String board_code;
 	private int hitCount;

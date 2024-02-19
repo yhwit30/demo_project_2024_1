@@ -29,8 +29,6 @@ public class UsrReplyController {
 	@ResponseBody
 	public String doWrite(HttpServletRequest req, String relTypeCode, int relId, String body) {
 
-		Rq rq = (Rq) req.getAttribute("rq");
-
 		if (Ut.isNullOrEmpty(relTypeCode)) {
 			return Ut.jsHistoryBack("F-1", "내용을 입력해주세요");
 		}

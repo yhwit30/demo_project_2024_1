@@ -32,7 +32,11 @@
 						<td>${article.id }</td>
 						<td>${article.regDate.substring(0,10) }</td>
 						<td>
-							<a href="detail?id=${article.id }">${article.title } [${article.repliesCount }]</a>
+							<a href="detail?id=${article.id }">${article.title }
+							<c:if test="${article.extra__repliesCnt > 0 }">
+								<span style="color: red;">[${article.extra__repliesCnt }]</span>
+							</c:if>
+						</a>
 						</td>
 						<td>${article.extra__writer }</td>
 						<td>${article.goodReactionPoint }</td>
