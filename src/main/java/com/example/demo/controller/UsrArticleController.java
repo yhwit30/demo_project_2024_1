@@ -51,9 +51,11 @@ public class UsrArticleController {
 
 		// 게시글 db에서 가져오기 + 로그인 중인 아이디 권한체크까지 다 끝내고 가져온다.
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
-		
+
 		// 댓글 db에서 가져오기
 		List<Reply> replies = replyService.getForPrintReplies(rq.getLoginedMemberId(), "article", id);
+
+		// 댓글 개수
 		int repliesCount = replies.size();
 
 		// 좋아요 싫어요 중 가능한 거 판단
@@ -66,8 +68,9 @@ public class UsrArticleController {
 		model.addAttribute("article", article);
 		model.addAttribute("replies", replies);
 		model.addAttribute("repliesCount", repliesCount);
-//		model.addAttribute("isAlreadyAddGoodRp", reactionPointService.isAlreadyAddGoodRp(rq.getLoginedMemberId(), id, "article"));
-//		model.addAttribute("isAlreadyAddBadRp",	reactionPointService.isAlreadyAddBadRp(rq.getLoginedMemberId(), id, "article"));
+		// 좋아요 싫어요 기능 위한 데이터
+		model.addAttribute("isAlreadyAddGoodRp", reactionPointService.isAlreadyAddGoodRp(rq.getLoginedMemberId(), id, "article"));
+		model.addAttribute("isAlreadyAddBadRp",	reactionPointService.isAlreadyAddBadRp(rq.getLoginedMemberId(), id, "article"));
 
 		return "usr/article/detail";
 	}

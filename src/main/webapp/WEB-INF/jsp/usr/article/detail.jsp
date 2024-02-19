@@ -175,7 +175,7 @@
 
 
 
-		<table class="table-box-1" border="1">
+		<table class="table-box-1  mx-auto" border="1">
 			<tbody>
 				<tr>
 					<th>게시판</th>
@@ -246,7 +246,35 @@
 	</div>
 </section>
 
+<!-- 댓글 -->
 <section class="mt-5 px-3">
+<!-- 로그인체크 버튼 -->
+<c:if test="${rq.isLogined() }">
+		<form action="../reply/doWrite" method="POST">
+			<input type="hidden" name="relTypeCode" value="article" />
+			<input type="hidden" name="relId" value="${article.id }" />
+			<table class="write-box table-box-1" border="1">
+				<tbody>
+					<tr>
+						<th>댓글</th>
+						<td>
+							<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
+								placeholder="댓글을 입력해주세요" name="body" />
+						</td>
+					
+						<td>
+							<input class="btn btn-outline btn-info" type="submit" value="댓글 작성" />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	</c:if>
+	<c:if test="${!rq.isLogined() }">
+		<a class="btn btn-outline btn-ghost" href="../member/login">LOGIN</a> 하고 댓글 써
+	</c:if>
+	
+<!-- 댓글 목록 -->
 	<div class="mx-auto">
 		<h2>댓글 리스트(${repliesCount })</h2>
 	<table class="table-box-1 table" border="1">
@@ -270,7 +298,7 @@
 <c:forEach var="reply" items="${replies }">
 	<tr class="hover">
 		<td>${reply.id }</td>
-		<td>${reply.regDate.substring(0,10) }</td>
+		<td>${reply.regDate }</td>
 		<td>${reply.body } </td>
 		<td>${reply.extra__writer }</td>
 		<td>${reply.goodReactionPoint }</td>

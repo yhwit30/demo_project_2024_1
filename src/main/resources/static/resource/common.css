@@ -37,11 +37,6 @@ header>div>ul>li {
 	text-align: center;
 }
 
-.table-box-1{
-	margin-left: auto;
-	margin-right: auto;
-}
-
 /*네비게이션 2차메뉴 */
 header>div>ul>li>ul {
 	display: none;

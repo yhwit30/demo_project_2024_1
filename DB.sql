@@ -329,6 +329,20 @@ ON R.id = RP_SUM.relId
 SET R.goodReactionPoint = RP_SUM.goodReactionPoint,
 R.badReactionPoint = RP_SUM.badReactionPoint;
 
+
+# article 테이블에 좋아요 관련 컬럼 추가
+ALTER TABLE article ADD COLUMN repliesCount INT(10) UNSIGNED NOT NULL DEFAULT 0;
+
+# update article -> 기존 게시물의 good,bad RP 값을 RP 테이블에서 가져온 데이터로 채운다
+UPDATE article AS A
+INNER JOIN (
+    SELECT  relId, count(*) as repliesNum
+    FROM reply AS R
+    GROUP BY R.relId
+) AS repliesCount
+ON A.id = repliesCount.relId
+SET A.repliesCount = repliesCount.repliesNum;
+
 ###############################################
 
 SELECT * FROM article;
@@ -473,3 +487,8 @@ SUM(IF(RP.point > 0,RP.point,0)) AS goodReactionPoint,
 SUM(IF(RP.point < 0,RP.point * -1,0)) AS badReactionPoint
 FROM reactionPoint AS RP
 GROUP BY RP.relTypeCode,RP.relId
+
+
+
+
+

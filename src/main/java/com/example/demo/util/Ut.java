@@ -18,6 +18,10 @@ public class Ut {
 			return true;
 		}
 
+		if (obj instanceof Integer) {
+			return (int) obj == 0;
+		}
+
 		if (obj instanceof String) {
 			return ((String) obj).trim().length() == 0;
 		}
