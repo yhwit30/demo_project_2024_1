@@ -5,7 +5,7 @@
 
 <section class="mt-8 mb-5 text-lg px-4">
 	<div class="mx-auto">
-		<form action="../article/doWrite" method="POST">
+		<form action="../article/doWrite" method="GET">
 			<table class="write-box table-box-1" border="1">
 				<tbody>
 					<tr>
