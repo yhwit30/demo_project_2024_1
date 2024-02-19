@@ -3,7 +3,7 @@
 <c:set var="pageTitle" value="MAIN"></c:set>
 <%@ include file="../common/head.jspf"%>
 
-<div class="page mt-40 main-page">
+<div class="page mt-20 main-page mx-auto">
 	<div>
 		임대현황
 		<div class="menu">건물 총 현황</div>
@@ -33,6 +33,7 @@
 	display: flex;
 	border: 5px solid red;
 	height: 500px;
+	width: 1000px;
 	justify-content: space-around;
 }
 
