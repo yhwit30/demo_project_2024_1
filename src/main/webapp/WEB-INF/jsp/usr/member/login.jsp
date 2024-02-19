@@ -4,11 +4,11 @@
 <%@ include file="../common/head.jspf"%>
 
 
-<section class="mt-8 text-xl px-4">
-	<div class="mx-auto">
+<section class="login-back text-xl">
+	<div class="px-4  mt-48">
 		<form action="../member/doLogin" method="POST">
 			<input type="hidden" name="afterLoginUri" value="${param.afterLoginUri }" />
-			<table class="login-box table-box-1" border="1">
+			<table class=" table-box-1 mx-auto" border="1">
 				<tbody>
 					<tr>
 						<th>아이디</th>

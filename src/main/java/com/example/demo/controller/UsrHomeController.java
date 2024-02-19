@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -9,17 +10,28 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class UsrHomeController {
+	
+	@Autowired
+	private Rq rq;
 
 	@RequestMapping("/usr/home/main")
 	public String showMain() {
 
-		return "/usr/home/main";
+		if(rq.isLogined()) {
+			return "/usr/home/main";
+		}
+		
+		return "/usr/member/login";
 	}
 
 	@RequestMapping("/")
 	public String showRoot() {
 
-		return "redirect:/usr/home/main";
+		if(rq.isLogined()) {
+			return "redirect:/usr/home/main";
+		}
+		
+		return "redirect:/usr/member/login";
 	}
 }
 

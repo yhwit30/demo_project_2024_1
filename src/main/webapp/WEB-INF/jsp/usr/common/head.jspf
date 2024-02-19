@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html >
+<html>
 <head>
 <meta charset="UTF-8">
 <title>${pageTitle }</title>
@@ -25,14 +25,51 @@
 <body>
 	<header>
 		<div class="h-20 flex mx-auto items-center text-3xl">
-			<a class="pl-5" href="/">LOGO</a>
-			<!-- 상단 애니메이션 -->
-<div class="loader"></div>
+			<a class="pl-3" href="/">
+				<!-- 상단애니메이션 -->
+				<div class="loader">
+					<div class="container">
+						<div class="carousel">
+							<div class="love"></div>
+							<div class="love"></div>
+							<div class="love"></div>
+							<div class="love"></div>
+							<div class="love"></div>
+							<div class="love"></div>
+							<div class="love"></div>
+						</div>
+					</div>
+					<div class="container">
+						<div class="carousel">
+							<div class="death"></div>
+							<div class="death"></div>
+							<div class="death"></div>
+							<div class="death"></div>
+							<div class="death"></div>
+							<div class="death"></div>
+							<div class="death"></div>
+						</div>
+					</div>
+					<div class="container">
+						<div class="carousel">
+							<div class="robots"></div>
+							<div class="robots"></div>
+							<div class="robots"></div>
+							<div class="robots"></div>
+							<div class="robots"></div>
+							<div class="robots"></div>
+							<div class="robots"></div>
+						</div>
+					</div>
+				</div>
+			</a>
+
+
 
 
 			<!-- 게시판 헤드 -->
-			<div class="flex-grow"></div>
-			<ul class="flex">
+			<div class="flex-grow "></div>
+			<ul class="flex ">
 				<!-- 					<li><a class="hover:underline" href="/"><i class="fa-solid fa-house-chimney-window"></i></a></li> -->
 
 
@@ -42,6 +79,7 @@
 						</a>
 					</li>
 				</c:if>
+				
 				<c:if test="${rq.isLogined()}">
 					<li>
 						<a class="hover:underline" href="../article/write">
@@ -50,22 +88,25 @@
 					</li>
 				</c:if>
 
-				<li>
-					<a class="hover:underline" href="../article/list?boardId=0">
-						<i class="fa-solid fa-table-list"></i>
-					</a>
-					<ul>
-						<li>
-							<a class="hover:underline" href="../article/list?boardId=1&page=1">NOTICE</a>
-						</li>
-						<li>
-							<a class="hover:underline" href="../article/list?boardId=2&page=1">FREE</a>
-						</li>
-						<li>
-							<a class="hover:underline" href="../article/list?boardId=3&page=1">QnA</a>
-						</li>
-					</ul>
-				</li>
+				<c:if test="${rq.isLogined()}">
+					<li>
+						<a class="hover:underline" href="../article/list?boardId=0">
+							<i class="fa-solid fa-table-list"></i>
+						</a>
+						<ul>
+							<li>
+								<a class="hover:underline" href="../article/list?boardId=1&page=1">NOTICE</a>
+							</li>
+							<li>
+								<a class="hover:underline" href="../article/list?boardId=2&page=1">FREE</a>
+							</li>
+							<li>
+								<a class="hover:underline" href="../article/list?boardId=3&page=1">QnA</a>
+							</li>
+						</ul>
+					</li>
+				</c:if>
+				
 				<c:if test="${!rq.isLogined()}">
 					<li>
 						<a class="hover:underline" href="../member/join">
@@ -76,6 +117,7 @@
 						<a class="hover:underline" href="../member/login">LOGIN</a>
 					</li>
 				</c:if>
+				
 				<c:if test="${rq.isLogined()}">
 					<li>
 						<a onclick="if(confirm('로그아웃하시겠습니까?') == false) return false;" class="hover:underline" href="../member/doLogout">LOGOUT</a>
