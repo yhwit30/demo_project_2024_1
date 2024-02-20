@@ -50,23 +50,19 @@
 
 .main-page>div {
 	text-align: center;
+	width: 250px;
+	height: 400px;
 }
 
 .main-page>div:nth-child(1) {
-	width: 200px;
-	height: 400px;
 	background-color: blue;
 }
 
 .main-page>div:nth-child(2) {
-	width: 200px;
-	height: 400px;
 	background-color: gold;
 }
 
 .main-page>div:nth-child(3) {
-	width: 200px;
-	height: 400px;
 	background-color: green;
 }
 </style>

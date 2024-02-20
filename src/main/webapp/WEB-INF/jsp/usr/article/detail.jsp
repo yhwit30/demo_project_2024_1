@@ -267,8 +267,8 @@
 
 <!-- 댓글 -->
 <section class="mt-5 px-3">
-<!-- 로그인체크 버튼 -->
-<c:if test="${rq.isLogined() }">
+	<!-- 로그인체크 버튼 -->
+	<c:if test="${rq.isLogined() }">
 		<form action="../reply/doWrite" method="POST" onsubmit="ReplyWrite__submit(this); return false;">
 			<input type="hidden" name="relTypeCode" value="article" />
 			<input type="hidden" name="relId" value="${article.id }" />
@@ -277,10 +277,11 @@
 					<tr>
 						<th>댓글</th>
 						<td>
-						<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="내용을 입력해주세요" name="body"/>
+							<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
+								placeholder="내용을 입력해주세요" name="body"
+							/>
 						</td>
-					
+
 						<td>
 							<input class="btn btn-outline btn-info" type="submit" value="댓글 작성" />
 						</td>
@@ -292,11 +293,11 @@
 	<c:if test="${!rq.isLogined() }">
 		<a class="btn btn-outline btn-ghost" href="../member/login">LOGIN</a> 하고 댓글 써
 	</c:if>
-	
-<!-- 댓글 목록 -->
+
+	<!-- 댓글 목록 -->
 	<div class="mb-5">
 		<h2>댓글 리스트(${repliesCount })</h2>
-	<table class="table-box-1 table" border="1">
+		<table class="table-box-1 table" border="1">
 			<colgroup>
 				<col style="width: 10%" />
 				<col style="width: 20%" />
@@ -311,24 +312,38 @@
 					<th>작성자</th>
 					<th>좋아요</th>
 					<th>싫어요</th>
+					<th>수정</th>
+					<th>삭제</th>
 				</tr>
 			</thead>
 			<tbody>
-<c:forEach var="reply" items="${replies }">
-	<tr class="hover">
-		<td>${reply.id }</td>
-		<td>${reply.regDate }</td>
-		<td>${reply.body } </td>
-		<td>${reply.extra__writer }</td>
-		<td>${reply.goodReactionPoint }</td>
-		<td>${reply.badReactionPoint }</td>
-	</tr>
-</c:forEach>
+				<c:forEach var="reply" items="${replies }">
+					<tr class="hover">
+						<td>${reply.id }</td>
+						<td>${reply.regDate }</td>
+						<td>${reply.body }</td>
+						<td>${reply.extra__writer }</td>
+						<td>${reply.goodReactionPoint }</td>
+						<td>${reply.badReactionPoint }</td>
+						<td>
+							<c:if test="${reply.userCanModify }">
+								<a style="white-space: nowrap;" class="btn btn-outline" href="../reply/modify?id=${article.id }">수정</a>
+							</c:if>
+						</td>
+						<td>
+							<c:if test="${reply.userCanDelete }">
+								<a style="white-space: nowrap;" class="btn btn-outline"
+									onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="../reply/doDelete?id=${article.id }"
+								>삭제</a>
+							</c:if>
+						</td>
+					</tr>
+				</c:forEach>
 
-</tbody>
-</table>
+			</tbody>
+		</table>
 
-</div>
+	</div>
 </section>
 
 
