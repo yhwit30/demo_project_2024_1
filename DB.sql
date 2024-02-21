@@ -524,70 +524,100 @@ INSERT INTO room
 SET bldgId = 1,
 roomNum = 101,
 roomType = '원룸',
-roomMemo = '호실별 메모 101';
+roomMemo = '호실별 메모 101'
+standardDeposit = 5000000
+standardRent = 400000
+standardJeonse = 50000000;
 
 # room testdata
 INSERT INTO room
 SET bldgId = 1,
 roomNum = 102,
 roomType = '원룸',
-roomMemo = '호실별 메모 102';
+roomMemo = '호실별 메모 102'
+standardDeposit = 5000000
+standardRent = 400000
+standardJeonse = 50000000;
 
 # room testdata
 INSERT INTO room
 SET bldgId = 1,
 roomNum = 201,
 roomType = '1.5룸',
-roomMemo = '호실별 메모 201';
+roomMemo = '호실별 메모 201'
+standardDeposit = 5000000
+standardRent = 500000
+standardJeonse = 80000000;
 
 # room testdata
 INSERT INTO room
 SET bldgId = 1,
 roomNum = 202,
 roomType = '1.5룸',
-roomMemo = '호실별 메모 202';
+roomMemo = '호실별 메모 202'
+standardDeposit = 5000000
+standardRent = 500000
+standardJeonse = 80000000;
 
 # room testdata
 INSERT INTO room
 SET bldgId = 1,
 roomNum = 203,
 roomType = '투룸',
-roomMemo = '호실별 메모 203';
+roomMemo = '호실별 메모 203'
+standardDeposit = 5000000
+standardRent = 600000
+standardJeonse = 100000000;
 
 # room testdata
 INSERT INTO room
 SET bldgId = 2,
 roomNum = 101,
 roomType = '원룸',
-roomMemo = '호실별 메모 101';
+roomMemo = '호실별 메모 101'
+standardDeposit = 5000000
+standardRent = 400000
+standardJeonse = 50000000;
 
 # room testdata
 INSERT INTO room
 SET bldgId = 2,
 roomNum = 102,
 roomType = '원룸',
-roomMemo = '호실별 메모 102';
+roomMemo = '호실별 메모 102'
+standardDeposit = 5000000
+standardRent = 400000
+standardJeonse = 50000000;
 
 # room testdata
 INSERT INTO room
 SET bldgId = 2,
 roomNum = 201,
 roomType = '1.5룸',
-roomMemo = '호실별 메모 201';
+roomMemo = '호실별 메모 201'
+standardDeposit = 5000000
+standardRent = 500000
+standardJeonse = 80000000;
 
 # room testdata
 INSERT INTO room
 SET bldgId = 2,
 roomNum = 202,
 roomType = '1.5룸',
-roomMemo = '호실별 메모 202';
+roomMemo = '호실별 메모 202'
+standardDeposit = 5000000
+standardRent = 500000
+standardJeonse = 80000000;
 
 # room testdata
 INSERT INTO room
 SET bldgId = 2,
 roomNum = 203,
 roomType = '투룸',
-roomMemo = '호실별 메모 203';
+roomMemo = '호실별 메모 203'
+standardDeposit = 5000000
+standardRent = 600000
+standardJeonse = 100000000;
 
 
 SELECT room.* , building.bldgName
@@ -716,10 +746,16 @@ contractMemo = '계약3 메모';
 
 SELECT * FROM contract;
 
-SELECT r.*, c.leaseType, c.deposit, c.rent, c.maintenanceFee, c.contractStartDate, c.contractEndDate, c.rentDate
-FROM room AS r
-INNER JOIN contract AS c
-ON r.id = c.roomId;
+SELECT *
+FROM contract AS C
+LEFT JOIN building AS B
+ON C.bldgId = B.id
+LEFT JOIN room AS R
+ON C.roomId = R.id
+LEFT JOIN tenant AS T
+ON C.tenantId = T.id
+GROUP BY C.id
+;
 
 
 

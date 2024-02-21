@@ -15,8 +15,10 @@ public class Room {
 	private int roomNum;
 	private String roomType;
 	private String roomMemo;
-	
-	
+	private int standardDeposit;
+	private int standardRent;
+	private int standardJeonse;
+
 	private String bldgName;
 
 }

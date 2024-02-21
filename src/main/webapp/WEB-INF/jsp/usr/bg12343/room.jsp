@@ -18,6 +18,9 @@
 					<th>호실</th>
 					<th>호실형태</th>
 					<th>호실메모</th>
+					<th>기준보증금</th>
+					<th>기준월세</th>
+					<th>기준전세</th>
 
 				</tr>
 			</thead>
@@ -30,6 +33,9 @@
 						<td>${room.roomNum }</td>
 						<td>${room.roomType }</td>
 						<td>${room.roomMemo }</td>
+						<td>${room.standardDeposit }</td>
+						<td>${room.standardRent }</td>
+						<td>${room.standardJeonse }</td>
 
 					</tr>
 				</c:forEach>
