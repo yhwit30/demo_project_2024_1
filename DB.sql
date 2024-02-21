@@ -329,37 +329,28 @@ ON R.id = RP_SUM.relId
 SET R.goodReactionPoint = RP_SUM.goodReactionPoint,
 R.badReactionPoint = RP_SUM.badReactionPoint;
 
-
-# article 테이블에 좋아요 관련 컬럼 추가
-ALTER TABLE article ADD COLUMN repliesCount INT(10) UNSIGNED NOT NULL DEFAULT 0;
-
-# update article -> 기존 게시물의 good,bad RP 값을 RP 테이블에서 가져온 데이터로 채운다
-UPDATE article AS A
-INNER JOIN (
-    SELECT  relId, count(*) as repliesNum
-    FROM reply AS R
-    GROUP BY R.relId
-) AS repliesCount
-ON A.id = repliesCount.relId
-SET A.repliesCount = repliesCount.repliesNum;
-
 ###############################################
 
+
 SELECT * FROM article;
+SHOW COLUMNS FROM article;
 
 SELECT * FROM `member`;
+SHOW COLUMNS FROM `member`;
 
 SELECT * FROM `board`;
+SHOW COLUMNS FROM `board`;
 
 SELECT * FROM reactionPoint;
+SHOW COLUMNS FROM reactionPoint;
 
 SELECT * FROM `reply`;
-
+SHOW COLUMNS FROM `reply`;
 
 
 SELECT goodReactionPoint
 FROM article 
-WHERE id = 1
+WHERE id = 1;
 
 INSERT INTO article
 (
@@ -387,9 +378,9 @@ UPDATE article
 SET title = '제목45'
 WHERE id = 7;
 
-SELECT FLOOR(RAND() * 2) + 2
+SELECT FLOOR(RAND() * 2) + 2;
 
-SELECT FLOOR(RAND() * 3) + 1
+SELECT FLOOR(RAND() * 3) + 1;
 
 
 SHOW FULL COLUMNS FROM `member`;
@@ -399,16 +390,6 @@ DESC `member`;
 
 SELECT LAST_INSERT_ID();
 
-SELECT *
-FROM article AS A
-WHERE 1
-
-	AND boardId = 1
-
-			AND A.title LIKE CONCAT('%','0000','%')
-			OR A.body LIKE CONCAT('%','0000','%')
-
-ORDER BY id DESC
 
 SELECT COUNT(*)
 FROM article AS A
@@ -416,7 +397,7 @@ WHERE 1
 AND boardId = 1
 AND A.title LIKE CONCAT('%','0000','%')
 OR A.body LIKE CONCAT('%','0000','%')
-ORDER BY id DESC
+ORDER BY id DESC;
 
 
 SELECT hitCount
@@ -486,7 +467,384 @@ SELECT RP.relTypeCode, RP.relId,
 SUM(IF(RP.point > 0,RP.point,0)) AS goodReactionPoint,
 SUM(IF(RP.point < 0,RP.point * -1,0)) AS badReactionPoint
 FROM reactionPoint AS RP
-GROUP BY RP.relTypeCode,RP.relId
+GROUP BY RP.relTypeCode,RP.relId;
+
+
+###############################################################
+# building 테이블 생성
+CREATE TABLE building(
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    bldgName CHAR(20) NOT NULL,
+    bldgAdd CHAR(20) NOT NULL,
+    roomTotal INT(10) NOT NULL,
+    bldgMemo CHAR(20) NOT NULL
+ );
+
+SELECT * FROM building;
+
+# building testdata
+INSERT INTO building
+SET regDate = NOW(),
+updateDate = NOW(),
+bldgName = '가나',
+bldgAdd = '대전시 송림',
+roomTotal = 5, 
+bldgMemo = '가나 건물은 2005년에 지어짐 메모';
+
+# building testdata
+INSERT INTO building
+SET regDate = NOW(),
+updateDate = NOW(),
+bldgName = '다라',
+bldgAdd = '대전시 정림',
+roomTotal = 5, 
+bldgMemo = '다라 건물은 2015년에 지어짐 메모';
+
+# room 테이블 생성
+CREATE TABLE room(
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    bldgId INT(10) NOT NULL,
+    roomNum INT(10) NOT NULL,
+    roomType CHAR(20) NOT NULL, 
+    roomMemo CHAR(20) NOT NULL
+);
+
+
+
+SELECT * FROM room;
+
+
+# room testdata
+INSERT INTO room
+SET regDate = NOW(),
+updateDate = NOW(),
+bldgId = 1,
+roomNum = 101,
+roomType = '원룸',
+roomMemo = '호실별 메모 101';
+
+# room testdata
+INSERT INTO room
+SET regDate = NOW(),
+updateDate = NOW(),
+bldgId = 1,
+roomNum = 102,
+roomType = '원룸',
+roomMemo = '호실별 메모 102';
+
+# room testdata
+INSERT INTO room
+SET regDate = NOW(),
+updateDate = NOW(),
+bldgId = 1,
+roomNum = 201,
+roomType = '1.5룸',
+roomMemo = '호실별 메모 201';
+
+# room testdata
+INSERT INTO room
+SET regDate = NOW(),
+updateDate = NOW(),
+bldgId = 1,
+roomNum = 202,
+roomType = '1.5룸',
+roomMemo = '호실별 메모 202';
+
+# room testdata
+INSERT INTO room
+SET regDate = NOW(),
+updateDate = NOW(),
+bldgId = 1,
+roomNum = 203,
+roomType = '투룸',
+roomMemo = '호실별 메모 203';
+
+# room testdata
+INSERT INTO room
+SET regDate = NOW(),
+updateDate = NOW(),
+bldgId = 2,
+roomNum = 101,
+roomType = '원룸',
+roomMemo = '호실별 메모 101';
+
+# room testdata
+INSERT INTO room
+SET regDate = NOW(),
+updateDate = NOW(),
+bldgId = 2,
+roomNum = 102,
+roomType = '원룸',
+roomMemo = '호실별 메모 102';
+
+# room testdata
+INSERT INTO room
+SET regDate = NOW(),
+updateDate = NOW(),
+bldgId = 2,
+roomNum = 201,
+roomType = '1.5룸',
+roomMemo = '호실별 메모 201';
+
+# room testdata
+INSERT INTO room
+SET regDate = NOW(),
+updateDate = NOW(),
+bldgId = 2,
+roomNum = 202,
+roomType = '1.5룸',
+roomMemo = '호실별 메모 202';
+
+# room testdata
+INSERT INTO room
+SET regDate = NOW(),
+updateDate = NOW(),
+bldgId = 2,
+roomNum = 203,
+roomType = '투룸',
+roomMemo = '호실별 메모 203';
+
+
+SELECT room.* , building.bldgName
+FROM room
+INNER JOIN building
+ON room.bldgId = building.id;
+
+
+
+# tenant 테이블 생성
+CREATE TABLE tenant(
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    tenantName CHAR(20) NOT NULL,
+    tenantPhone INT(10) NOT NULL,
+    tenantCarNum CHAR(20) NOT NULL,
+    tenantMemo CHAR(20) NOT NULL,
+    roomId INT(10) NOT NULL
+);
+
+
+# tenant testdata
+INSERT INTO tenant
+SET regDate = NOW(),
+updateDate = NOW(),
+tenantName = '홍길동',
+tenantPhone = 01093939393,
+tenantCarNum = '02라2032',
+tenantMemo = '세입자1 메모',
+roomId = 1;
+
+# tenant testdata
+INSERT INTO tenant
+SET regDate = NOW(),
+updateDate = NOW(),
+tenantName = '홍길순',
+tenantPhone = 0103453533,
+tenantCarNum = '02다3454',
+tenantMemo = '세입자2 메모',
+roomId = 2;
+
+# tenant testdata
+INSERT INTO tenant
+SET regDate = NOW(),
+updateDate = NOW(),
+tenantName = '이상호',
+tenantPhone = 0106562324,
+tenantCarNum = '05마4218',
+tenantMemo = '세입자3 메모',
+roomId = 6;
+
+
+SELECT * FROM tenant;
+
+# contract 테이블 생성
+CREATE TABLE contract(
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    bldgId INT(10) NOT NULL,
+    roomId INT(10) NOT NULL,
+    tenantId INT(10) NOT NULL,
+    leaseType CHAR(20) NOT NULL,
+    deposit CHAR(20) NOT NULL,
+    rent CHAR(20) NOT NULL,
+    maintenanceFee CHAR(20) NOT NULL,
+    contractStartDate CHAR(20) NOT NULL,
+    contractEndDate CHAR(20) NOT NULL,
+    depositDate CHAR(20) NOT NULL,
+    rentDate CHAR(20) NOT NULL,
+    contractMemo CHAR(20) NOT NULL
+);
+
+
+# contract testdata
+INSERT INTO contract
+SET regDate = NOW(),
+updateDate = NOW(),
+bldgId =1,
+roomId = 1,
+tenantId = 1,
+leaseType = '월세',
+deposit = 5000000,
+rent= 500000,
+maintenanceFee = 60000,
+contractStartDate = '2023.2.2',
+contractEndDate= '2025.2.1',
+depositDate = 10,
+rentDate = 10,
+contractMemo = '계약1 메모';
+
+# contract testdata
+INSERT INTO contract
+SET regDate = NOW(),
+updateDate = NOW(),
+bldgId =1,
+roomId = 2,
+tenantId = 2,
+leaseType = '월세',
+deposit = 5000000,
+rent= 500000,
+maintenanceFee = 60000,
+contractStartDate = '2022.2.2',
+contractEndDate= '2024.6.1',
+depositDate = 15,
+rentDate = 10,
+contractMemo = '계약2 메모';
+
+# contract testdata
+INSERT INTO contract
+SET regDate = NOW(),
+updateDate = NOW(),
+bldgId =2,
+roomId = 6,
+tenantId = 3,
+leaseType = '전세',
+deposit = 55000000,
+maintenanceFee = 100000,
+contractStartDate = '2023.12.2',
+contractEndDate= '2025.12.1',
+depositDate = 15,
+rentDate = 10,
+contractMemo = '계약3 메모';
+
+
+SELECT * FROM contract;
+
+# contract_status 테이블 생성
+CREATE TABLE contract_status(
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    rentDate DATE NOT  NULL,
+    roomId INT(10) NOT NULL,
+    tenantId INT(10) NOT NULL,
+    paymentStatus CHAR(20) NOT NULL,
+    extraIncome CHAR(20),
+    extraExpense CHAR(20)
+);
+
+# contract_status testdata
+INSERT INTO contract_status
+SET regDate = NOW(),
+updateDate = NOW(),
+rentDate = '2024.1.10',
+roomId = 1,
+tenantId = 1,
+paymentStatus = '완납',
+extraIncome = '없음',
+extraExpense = '없음';
+
+# contract_status testdata
+INSERT INTO contract_status
+SET regDate = NOW(),
+updateDate = NOW(),
+rentDate = '2024.2.10',
+roomId = 1,
+tenantId = 1,
+paymentStatus = '완납',
+extraIncome = '없음',
+extraExpense = '없음';
+
+# contract_status testdata
+INSERT INTO contract_status
+SET regDate = NOW(),
+updateDate = NOW(),
+rentDate = '2024.3.10',
+roomId = 1,
+tenantId = 1,
+paymentStatus = '미납',
+extraIncome = '없음',
+extraExpense = '없음';
+
+# contract_status testdata
+INSERT INTO contract_status
+SET regDate = NOW(),
+updateDate = NOW(),
+rentDate = '2024.1.10',
+roomId = 2,
+tenantId = 2,
+paymentStatus = '완납',
+extraIncome = '없음',
+extraExpense = '없음';
+
+# contract_status testdata
+INSERT INTO contract_status
+SET regDate = NOW(),
+updateDate = NOW(),
+rentDate = '2024.2.10',
+roomId = 2,
+tenantId = 2,
+paymentStatus = '완납',
+extraIncome = '없음',
+extraExpense = '없음';
+
+SELECT * FROM contract_status;
+
+# tenant 테이블 생성
+CREATE TABLE memo(
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    memberId CHAR(20) NOT NULL,
+    boardId CHAR(20) NOT NULL,
+    title CHAR(20) NOT NULL,
+    `body` CHAR(20) NOT NULL
+);
+
+# tenant 테이블 생성
+CREATE TABLE memo_board(
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    memoCode CHAR(20) NOT NULL,
+    memoName CHAR(20) NOT NULL,
+    tenantCarNum CHAR(20) NOT NULL,
+    tenantMemo CHAR(20) NOT NULL,
+    delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '삭제 여부 (0=삭제 전, 1=삭제 후)',
+    delDate DATETIME COMMENT '삭제 날짜'
+);
+
+
+
+select * from building;
+
+select * from room;
+
+SELECT * FROM tenant;
+
+SELECT * FROM contract;
+
+SELECT * FROM contract_status;
+
+SELECT * FROM memo;
+
+SELECT * FROM memo_board;
+
 
 
 
