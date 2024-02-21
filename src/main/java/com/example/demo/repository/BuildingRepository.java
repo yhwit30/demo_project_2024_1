@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import com.example.demo.vo.Building;
+import com.example.demo.vo.Room;
 
 @Mapper
 public interface BuildingRepository {
@@ -15,6 +16,12 @@ public interface BuildingRepository {
 			FROM building
 			""")
 	List<Building> getForPrintBuildings();
+
+	@Select("""
+			SELECT *
+			FROM room
+			""")
+	List<Room> getForPrintRooms();
 
 	
 	

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.repository.BuildingRepository;
 import com.example.demo.vo.Building;
+import com.example.demo.vo.Room;
 
 @Service
 public class BuildingService {
@@ -16,6 +17,10 @@ public class BuildingService {
 
 	public List<Building> getForPrintBuildings() {
 		return buildingRepository.getForPrintBuildings();
+	}
+
+	public List<Room> getForPrintRooms() {
+		return buildingRepository.getForPrintRooms();
 	}
 	
 	

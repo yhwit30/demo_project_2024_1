@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.service.BuildingService;
 import com.example.demo.vo.Building;
+import com.example.demo.vo.Room;
 
 @Controller
 public class UsrBuildingController {
@@ -18,7 +19,7 @@ public class UsrBuildingController {
 	
 	
 	// 액션 메소드
-		@RequestMapping("/usr/building/dashboard")
+		@RequestMapping("/usr/building/detail")
 		public String getDashboard(Model model) { 
 
 			List<Building> buildings = buildingService.getForPrintBuildings();
@@ -27,10 +28,20 @@ public class UsrBuildingController {
 			
 			model.addAttribute("buildings", buildings);
 			model.addAttribute("buildingsCnt", buildingsCnt);
-			return "usr/building/dashboard";
+			return "usr/building/detail";
 		}
 	
-	
+		@RequestMapping("/usr/building/room")
+		public String getRoom(Model model) { 
+
+			List<Room> rooms = buildingService.getForPrintRooms();
+			
+			int roomsCnt = rooms.size();
+			
+			model.addAttribute("roomsCnt", roomsCnt);
+			model.addAttribute("rooms", rooms);
+			return "usr/building/room";
+		}
 	
 	
 	
