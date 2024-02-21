@@ -505,12 +505,13 @@ bldgMemo = '다라 건물은 2015년에 지어짐 메모';
 # room 테이블 생성
 CREATE TABLE room(
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    regDate DATETIME NOT NULL,
-    updateDate DATETIME NOT NULL,
     bldgId INT(10) NOT NULL,
     roomNum INT(10) NOT NULL,
     roomType CHAR(20) NOT NULL, 
-    roomMemo CHAR(20) NOT NULL
+    roomMemo CHAR(20) NOT NULL,
+    standardDeposit INT(10) NOT NULL,
+    standardRent INT(10) NOT NULL,
+    standardJeonse INT(10) NOT NULL
 );
 
 
@@ -520,90 +521,70 @@ SELECT * FROM room;
 
 # room testdata
 INSERT INTO room
-SET regDate = NOW(),
-updateDate = NOW(),
-bldgId = 1,
+SET bldgId = 1,
 roomNum = 101,
 roomType = '원룸',
 roomMemo = '호실별 메모 101';
 
 # room testdata
 INSERT INTO room
-SET regDate = NOW(),
-updateDate = NOW(),
-bldgId = 1,
+SET bldgId = 1,
 roomNum = 102,
 roomType = '원룸',
 roomMemo = '호실별 메모 102';
 
 # room testdata
 INSERT INTO room
-SET regDate = NOW(),
-updateDate = NOW(),
-bldgId = 1,
+SET bldgId = 1,
 roomNum = 201,
 roomType = '1.5룸',
 roomMemo = '호실별 메모 201';
 
 # room testdata
 INSERT INTO room
-SET regDate = NOW(),
-updateDate = NOW(),
-bldgId = 1,
+SET bldgId = 1,
 roomNum = 202,
 roomType = '1.5룸',
 roomMemo = '호실별 메모 202';
 
 # room testdata
 INSERT INTO room
-SET regDate = NOW(),
-updateDate = NOW(),
-bldgId = 1,
+SET bldgId = 1,
 roomNum = 203,
 roomType = '투룸',
 roomMemo = '호실별 메모 203';
 
 # room testdata
 INSERT INTO room
-SET regDate = NOW(),
-updateDate = NOW(),
-bldgId = 2,
+SET bldgId = 2,
 roomNum = 101,
 roomType = '원룸',
 roomMemo = '호실별 메모 101';
 
 # room testdata
 INSERT INTO room
-SET regDate = NOW(),
-updateDate = NOW(),
-bldgId = 2,
+SET bldgId = 2,
 roomNum = 102,
 roomType = '원룸',
 roomMemo = '호실별 메모 102';
 
 # room testdata
 INSERT INTO room
-SET regDate = NOW(),
-updateDate = NOW(),
-bldgId = 2,
+SET bldgId = 2,
 roomNum = 201,
 roomType = '1.5룸',
 roomMemo = '호실별 메모 201';
 
 # room testdata
 INSERT INTO room
-SET regDate = NOW(),
-updateDate = NOW(),
-bldgId = 2,
+SET bldgId = 2,
 roomNum = 202,
 roomType = '1.5룸',
 roomMemo = '호실별 메모 202';
 
 # room testdata
 INSERT INTO room
-SET regDate = NOW(),
-updateDate = NOW(),
-bldgId = 2,
+SET bldgId = 2,
 roomNum = 203,
 roomType = '투룸',
 roomMemo = '호실별 메모 203';
@@ -735,6 +716,13 @@ contractMemo = '계약3 메모';
 
 SELECT * FROM contract;
 
+SELECT r.*, c.leaseType, c.deposit, c.rent, c.maintenanceFee, c.contractStartDate, c.contractEndDate, c.rentDate
+FROM room AS r
+INNER JOIN contract AS c
+ON r.id = c.roomId;
+
+
+
 # contract_status 테이블 생성
 CREATE TABLE contract_status(
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -805,7 +793,7 @@ extraExpense = '없음';
 
 SELECT * FROM contract_status;
 
-# tenant 테이블 생성
+# memo 테이블 생성
 CREATE TABLE memo(
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
@@ -816,7 +804,7 @@ CREATE TABLE memo(
     `body` CHAR(20) NOT NULL
 );
 
-# tenant 테이블 생성
+# memo_board 테이블 생성
 CREATE TABLE memo_board(
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
@@ -831,9 +819,9 @@ CREATE TABLE memo_board(
 
 
 
-select * from building;
+SELECT * FROM building;
 
-select * from room;
+SELECT * FROM room;
 
 SELECT * FROM tenant;
 

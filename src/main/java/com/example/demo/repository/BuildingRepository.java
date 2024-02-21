@@ -18,8 +18,10 @@ public interface BuildingRepository {
 	List<Building> getForPrintBuildings();
 
 	@Select("""
-			SELECT *
-			FROM room
+			SELECT R.*, B.bldgName
+			FROM room AS R
+			INNER JOIN building AS B
+			ON R.bldgId = B.id
 			""")
 	List<Room> getForPrintRooms();
 

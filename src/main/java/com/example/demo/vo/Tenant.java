@@ -7,14 +7,15 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Room {
+public class Tenant {
 	private int id;
 	private String regDate;
 	private String updateDate;
-	private int bldgId;
-	private int roomNum;
-	private String roomType;
-	private String roomMemo;
+	private String tenantName;
+	private int tenantPhone;
+	private String tenantCarNum;
+	private String tenantMemo;
+	private int roomId;
 	
 	
 	private String bldgName;

@@ -19,7 +19,7 @@ public class UsrBuildingController {
 	
 	
 	// 액션 메소드
-		@RequestMapping("/usr/building/detail")
+		@RequestMapping("/usr/bg12343/building")
 		public String getDashboard(Model model) { 
 
 			List<Building> buildings = buildingService.getForPrintBuildings();
@@ -28,10 +28,10 @@ public class UsrBuildingController {
 			
 			model.addAttribute("buildings", buildings);
 			model.addAttribute("buildingsCnt", buildingsCnt);
-			return "usr/building/detail";
+			return "usr/bg12343/building";
 		}
 	
-		@RequestMapping("/usr/building/room")
+		@RequestMapping("/usr/bg12343/room")
 		public String getRoom(Model model) { 
 
 			List<Room> rooms = buildingService.getForPrintRooms();
@@ -40,7 +40,7 @@ public class UsrBuildingController {
 			
 			model.addAttribute("roomsCnt", roomsCnt);
 			model.addAttribute("rooms", rooms);
-			return "usr/building/room";
+			return "usr/bg12343/room";
 		}
 	
 	
