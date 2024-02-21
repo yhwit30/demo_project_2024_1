@@ -16,9 +16,9 @@
 					<th>계약관리번호</th>
 					<th>등록일</th>
 					<th>갱신일</th>
-					<th>건물관리번호</th>
-					<th>호실관리번호</th>
-					<th>세입자관리번호</th>
+					<th>건물명</th>
+					<th>호실번호</th>
+					<th>세입자명</th>
 					<th>임대형태</th>
 					<th>보증금</th>
 					<th>월세</th>
@@ -37,9 +37,9 @@
 						<td>${contract.id }</td>
 						<td>${contract.regDate.substring(0,10) }</td>
 						<td>${contract.updateDate.substring(0,10) }</td>
-						<td>${contract.bldgId }</td>
-						<td>${contract.roomId }</td>
-						<td>${contract.tenantId }</td>
+						<td>${contract.bldgName }</td>
+						<td>${contract.roomNum }</td>
+						<td>${contract.tenantName }</td>
 						<td>${contract.leaseType }</td>
 						<td>${contract.deposit }</td>
 						<td>${contract.rent }</td>

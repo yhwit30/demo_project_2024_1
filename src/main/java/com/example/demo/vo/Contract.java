@@ -24,6 +24,10 @@ public class Contract {
 	private String rentDate;
 	private String contractMemo;
 	
+	private String bldgName;
+	private String roomNum;
+	private String tenantName;
+	
 	
 	
 
