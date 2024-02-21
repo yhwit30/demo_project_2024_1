@@ -6,9 +6,11 @@
 <div class="page mt-20 main-page mx-auto">
 	<div>
 		임대현황
-		<div class="menu">건물 총 현황</div>
-		<div class="menu">건물 1</div>
-		<div class="menu">건물 2</div>
+		<div class="menu">
+		<a href="/usr/bg12343/building">
+		건물 총 현황</a></div>
+		<div class="menu"><a href="/usr/bg12343/room">건물 가나</a></div>
+		<div class="menu"><a href="/usr/bg12343/room">건물 다라</a></div>
 
 	</div>
 	<div>
