@@ -11,7 +11,6 @@ public class Room {
 	private int id;
 	private String regDate;
 	private String updateDate;
-	private int bldgId;
 	private int roomNum;
 	private String roomType;
 	private String roomMemo;

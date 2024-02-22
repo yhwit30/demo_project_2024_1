@@ -514,7 +514,7 @@ CREATE TABLE room(
     standardJeonse INT(10) NOT NULL
 );
 
-ALTER TABLE room ADD COLUMN contractId INT(10) UNSIGNED NOT NULL AFTER bldgId;
+#ALTER TABLE room ADD COLUMN contractId INT(10) UNSIGNED NOT NULL AFTER bldgId;
 
 SELECT * FROM room;
 
@@ -890,7 +890,7 @@ CREATE TABLE maintenance_fee(
 );
 
 
-#dashboard join query 월별 납부현황
+#dashboard join query 월별 납부현황 추가 
 SELECT *
 FROM room AS R
 LEFT JOIN contract AS C
@@ -899,23 +899,9 @@ LEFT JOIN building AS B
 ON R.bldgId = B.id
 LEFT JOIN tenant AS T
 ON C.tenantId = T.id
-LEFT JOIN (SELECT * FROM contract_status WHERE rentDate LIKE '2024-02%' )AS CS
-ON C.tenantId = CS.tenantId
-GROUP BY R.id;
-
-
-#dashboard 월별 납부현황 쿼리 
-SELECT *
-FROM room AS R
-LEFT JOIN contract AS C 
-ON R.id = C.roomId
-LEFT JOIN tenant AS T 
-ON C.tenantId = T.id
 LEFT JOIN contract_status AS CS 
 ON C.tenantId = CS.tenantId AND CS.rentDate LIKE '2024-02%'
 GROUP BY R.id;
-
-
 
 
 
@@ -934,7 +920,6 @@ SELECT * FROM memo;
 SELECT * FROM memo_board;
 
 SELECT * FROM maintenance_fee;
-
 
 
 
