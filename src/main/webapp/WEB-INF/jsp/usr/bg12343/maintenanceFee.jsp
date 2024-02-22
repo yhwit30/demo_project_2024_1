@@ -4,8 +4,9 @@
 <%@ include file="../common/head.jspf"%>
 
 
-
-<h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam provident laboriosam ad temporibus ipsa iusto aspernatur vero labore. Pariatur dolorum natus cumque repellat quo officiis quae. Dolores odio repellendus nobis.</h1>
+<div>
+	관리비 산정을 위한 페이지
+</div>
 
 
 

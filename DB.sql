@@ -781,7 +781,7 @@ CREATE TABLE contract_status(
     regDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL,
     rentDate DATE NOT  NULL,
-    roomId INT(10) NOT NULL,
+    #roomId INT(10) NOT NULL,
     tenantId INT(10) NOT NULL,
     paymentStatus CHAR(20) NOT NULL,
     extraIncome CHAR(20),
@@ -793,7 +793,7 @@ INSERT INTO contract_status
 SET regDate = NOW(),
 updateDate = NOW(),
 rentDate = '2024.1.10',
-roomId = 1,
+#roomId = 1,
 tenantId = 1,
 paymentStatus = '완납',
 extraIncome = '없음',
@@ -804,7 +804,7 @@ INSERT INTO contract_status
 SET regDate = NOW(),
 updateDate = NOW(),
 rentDate = '2024.2.10',
-roomId = 1,
+#roomId = 1,
 tenantId = 1,
 paymentStatus = '완납',
 extraIncome = '없음',
@@ -815,7 +815,7 @@ INSERT INTO contract_status
 SET regDate = NOW(),
 updateDate = NOW(),
 rentDate = '2024.3.10',
-roomId = 1,
+#roomId = 1,
 tenantId = 1,
 paymentStatus = '미납',
 extraIncome = '없음',
@@ -826,7 +826,7 @@ INSERT INTO contract_status
 SET regDate = NOW(),
 updateDate = NOW(),
 rentDate = '2024.1.10',
-roomId = 2,
+#roomId = 2,
 tenantId = 2,
 paymentStatus = '완납',
 extraIncome = '없음',
@@ -837,8 +837,19 @@ INSERT INTO contract_status
 SET regDate = NOW(),
 updateDate = NOW(),
 rentDate = '2024.2.10',
-roomId = 2,
+#roomId = 2,
 tenantId = 2,
+paymentStatus = '완납',
+extraIncome = '없음',
+extraExpense = '없음';
+
+# contract_status testdata
+INSERT INTO contract_status
+SET regDate = NOW(),
+updateDate = NOW(),
+rentDate = '2024.2.10',
+#roomId = 2,
+tenantId = 3,
 paymentStatus = '완납',
 extraIncome = '없음',
 extraExpense = '없음';
@@ -879,7 +890,7 @@ CREATE TABLE maintenance_fee(
 );
 
 
-#dashboard join query
+#dashboard join query 월별 납부현황
 SELECT *
 FROM room AS R
 LEFT JOIN contract AS C
@@ -888,6 +899,20 @@ LEFT JOIN building AS B
 ON R.bldgId = B.id
 LEFT JOIN tenant AS T
 ON C.tenantId = T.id
+LEFT JOIN (SELECT * FROM contract_status WHERE rentDate LIKE '2024-02%' )AS CS
+ON C.tenantId = CS.tenantId
+GROUP BY R.id;
+
+
+#dashboard 월별 납부현황 쿼리 
+SELECT *
+FROM room AS R
+LEFT JOIN contract AS C 
+ON R.id = C.roomId
+LEFT JOIN tenant AS T 
+ON C.tenantId = T.id
+LEFT JOIN contract_status AS CS 
+ON C.tenantId = CS.tenantId AND CS.rentDate LIKE '2024-02%'
 GROUP BY R.id;
 
 

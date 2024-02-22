@@ -27,6 +27,7 @@ public class UsrDashboardController {
 			List<Dashboard> dashboard = dashboardService.getDashboard();
 			
 			
+			
 			model.addAttribute("dashboard", dashboard);
 			return "usr/bg12343/dashboard";
 		}

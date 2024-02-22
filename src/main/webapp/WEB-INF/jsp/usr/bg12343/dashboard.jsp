@@ -13,7 +13,9 @@
 			</colgroup>
 			<thead>
 				<tr>
-					<th>건물명</th>
+					<th>
+						<a href="/usr/bg12343/building">건물명</a>
+					</th>
 					<th>
 						<a href="/usr/bg12343/room">호실번호</a>
 					</th>
@@ -69,6 +71,7 @@
 						<td>${dashboard.depositDate }</td>
 						<td>${dashboard.rentDate }</td>
 						<td>${dashboard.tenantPhone }</td>
+						<td>${dashboard.paymentStatus }</td>
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -5,7 +5,7 @@
 
 <div class="page mt-20 main-page mx-auto">
 	<div>
-		임대현황
+		<a href="/usr/bg12343/dashboard"> 임대현황</a>
 		<div class="menu">
 			<a href="/usr/bg12343/building"> 건물 현황</a>
 			<a href="/usr/bg12343/buildingAdd"> 건물 추가</a>

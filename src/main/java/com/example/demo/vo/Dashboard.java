@@ -28,5 +28,6 @@ public class Dashboard {
 	private String roomNum;
 	private String tenantName;
 	private String tenantPhone;
+	private String paymentStatus;
 
 }
