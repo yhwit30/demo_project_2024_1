@@ -46,13 +46,13 @@ public class UsrBuildingController {
 
 		// 제목 내용 빈 칸 확인
 		if (Ut.isNullOrEmpty(bldgName)) {
-			return Ut.jsHistoryBack("F-1", "제목을 입력해주세요");
+			return Ut.jsHistoryBack("F-1", "건물명을 입력해주세요");
 		}
 		if (Ut.isNullOrEmpty(bldgAdd)) {
-			return Ut.jsHistoryBack("F-2", "내용을 입력해주세요");
+			return Ut.jsHistoryBack("F-2", "건물주소를 입력해주세요");
 		}
 		if (Ut.isEmpty(roomTotal)) {
-			return Ut.jsHistoryBack("F-2", "내용을 입력해주세요");
+			return Ut.jsHistoryBack("F-2", "세대수를 입력해주세요");
 		}
 
 		// 게시글 작성 작업
@@ -89,19 +89,19 @@ public class UsrBuildingController {
 
 		// 제목 내용 빈 칸 확인
 		if (Ut.isEmpty(roomNum)) {
-			return Ut.jsHistoryBack("F-1", "제목을 입력해주세요");
+			return Ut.jsHistoryBack("F-1", "호실을 입력해주세요");
 		}
 		if (Ut.isNullOrEmpty(roomType)) {
-			return Ut.jsHistoryBack("F-2", "내용을 입력해주세요");
+			return Ut.jsHistoryBack("F-2", "호실형태를 입력해주세요");
 		}
 		if (Ut.isEmpty(standardDeposit)) {
-			return Ut.jsHistoryBack("F-2", "내용을 입력해주세요");
+			return Ut.jsHistoryBack("F-2", "기준 보증금을 입력해주세요");
 		}
 		if (Ut.isEmpty(standardRent)) {
-			return Ut.jsHistoryBack("F-2", "내용을 입력해주세요");
+			return Ut.jsHistoryBack("F-2", "기준 월세를 입력해주세요");
 		}
 		if (Ut.isEmpty(standardJeonse)) {
-			return Ut.jsHistoryBack("F-2", "내용을 입력해주세요");
+			return Ut.jsHistoryBack("F-2", "기준 전세를 입력해주세요");
 		}
 		
 
