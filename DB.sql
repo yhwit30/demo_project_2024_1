@@ -514,9 +514,19 @@ CREATE TABLE room(
     standardJeonse INT(10) NOT NULL
 );
 
-
+ALTER TABLE room ADD COLUMN contractId INT(10) UNSIGNED NOT NULL AFTER bldgId;
 
 SELECT * FROM room;
+
+SELECT *
+FROM room AS R
+LEFT JOIN contract AS C
+ON R.id = C.roomId
+LEFT JOIN building AS B
+ON R.bldgId = B.id
+LEFT JOIN tenant AS T
+ON C.tenantId = T.id
+GROUP BY R.id;
 
 
 # room testdata
@@ -524,9 +534,9 @@ INSERT INTO room
 SET bldgId = 1,
 roomNum = 101,
 roomType = '원룸',
-roomMemo = '호실별 메모 101'
-standardDeposit = 5000000
-standardRent = 400000
+roomMemo = '호실별 메모 101',
+standardDeposit = 5000000,
+standardRent = 400000,
 standardJeonse = 50000000;
 
 # room testdata
@@ -534,9 +544,9 @@ INSERT INTO room
 SET bldgId = 1,
 roomNum = 102,
 roomType = '원룸',
-roomMemo = '호실별 메모 102'
-standardDeposit = 5000000
-standardRent = 400000
+roomMemo = '호실별 메모 102',
+standardDeposit = 5000000,
+standardRent = 400000,
 standardJeonse = 50000000;
 
 # room testdata
@@ -544,9 +554,9 @@ INSERT INTO room
 SET bldgId = 1,
 roomNum = 201,
 roomType = '1.5룸',
-roomMemo = '호실별 메모 201'
-standardDeposit = 5000000
-standardRent = 500000
+roomMemo = '호실별 메모 201',
+standardDeposit = 5000000,
+standardRent = 500000,
 standardJeonse = 80000000;
 
 # room testdata
@@ -554,9 +564,9 @@ INSERT INTO room
 SET bldgId = 1,
 roomNum = 202,
 roomType = '1.5룸',
-roomMemo = '호실별 메모 202'
-standardDeposit = 5000000
-standardRent = 500000
+roomMemo = '호실별 메모 202',
+standardDeposit = 5000000,
+standardRent = 500000,
 standardJeonse = 80000000;
 
 # room testdata
@@ -564,9 +574,9 @@ INSERT INTO room
 SET bldgId = 1,
 roomNum = 203,
 roomType = '투룸',
-roomMemo = '호실별 메모 203'
-standardDeposit = 5000000
-standardRent = 600000
+roomMemo = '호실별 메모 203',
+standardDeposit = 5000000,
+standardRent = 600000,
 standardJeonse = 100000000;
 
 # room testdata
@@ -574,9 +584,9 @@ INSERT INTO room
 SET bldgId = 2,
 roomNum = 101,
 roomType = '원룸',
-roomMemo = '호실별 메모 101'
-standardDeposit = 5000000
-standardRent = 400000
+roomMemo = '호실별 메모 101',
+standardDeposit = 5000000,
+standardRent = 400000,
 standardJeonse = 50000000;
 
 # room testdata
@@ -584,9 +594,9 @@ INSERT INTO room
 SET bldgId = 2,
 roomNum = 102,
 roomType = '원룸',
-roomMemo = '호실별 메모 102'
-standardDeposit = 5000000
-standardRent = 400000
+roomMemo = '호실별 메모 102',
+standardDeposit = 5000000,
+standardRent = 400000,
 standardJeonse = 50000000;
 
 # room testdata
@@ -594,9 +604,9 @@ INSERT INTO room
 SET bldgId = 2,
 roomNum = 201,
 roomType = '1.5룸',
-roomMemo = '호실별 메모 201'
-standardDeposit = 5000000
-standardRent = 500000
+roomMemo = '호실별 메모 201',
+standardDeposit = 5000000,
+standardRent = 500000,
 standardJeonse = 80000000;
 
 # room testdata
@@ -604,9 +614,9 @@ INSERT INTO room
 SET bldgId = 2,
 roomNum = 202,
 roomType = '1.5룸',
-roomMemo = '호실별 메모 202'
-standardDeposit = 5000000
-standardRent = 500000
+roomMemo = '호실별 메모 202',
+standardDeposit = 5000000,
+standardRent = 500000,
 standardJeonse = 80000000;
 
 # room testdata
@@ -614,9 +624,9 @@ INSERT INTO room
 SET bldgId = 2,
 roomNum = 203,
 roomType = '투룸',
-roomMemo = '호실별 메모 203'
-standardDeposit = 5000000
-standardRent = 600000
+roomMemo = '호실별 메모 203',
+standardDeposit = 5000000,
+standardRent = 600000,
 standardJeonse = 100000000;
 
 
@@ -671,14 +681,21 @@ tenantMemo = '세입자3 메모',
 roomId = 6;
 
 
-SELECT * FROM tenant;
+SELECT * 
+FROM tenant AS T
+INNER JOIN contract AS C
+ON T.roomId = C.roomId
+INNER JOIN room AS R
+ON T.roomId = R.id
+LEFT JOIN building AS B
+ON R.bldgId = B.id;
 
 # contract 테이블 생성
 CREATE TABLE contract(
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL,
-    bldgId INT(10) NOT NULL,
+    #bldgId INT(10) NOT NULL,
     roomId INT(10) NOT NULL,
     tenantId INT(10) NOT NULL,
     leaseType CHAR(20) NOT NULL,
@@ -697,7 +714,7 @@ CREATE TABLE contract(
 INSERT INTO contract
 SET regDate = NOW(),
 updateDate = NOW(),
-bldgId =1,
+#bldgId =1,
 roomId = 1,
 tenantId = 1,
 leaseType = '월세',
@@ -714,7 +731,7 @@ contractMemo = '계약1 메모';
 INSERT INTO contract
 SET regDate = NOW(),
 updateDate = NOW(),
-bldgId =1,
+#bldgId =1,
 roomId = 2,
 tenantId = 2,
 leaseType = '월세',
@@ -731,7 +748,7 @@ contractMemo = '계약2 메모';
 INSERT INTO contract
 SET regDate = NOW(),
 updateDate = NOW(),
-bldgId =2,
+#bldgId =2,
 roomId = 6,
 tenantId = 3,
 leaseType = '전세',
@@ -754,8 +771,7 @@ LEFT JOIN room AS R
 ON C.roomId = R.id
 LEFT JOIN tenant AS T
 ON C.tenantId = T.id
-GROUP BY C.id
-;
+GROUP BY C.id;
 
 
 
@@ -854,6 +870,29 @@ CREATE TABLE memo_board(
 );
 
 
+# maintenance_fee 테이블 생성
+CREATE TABLE maintenance_fee(
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    #컬럼 구상 중
+);
+
+
+#dashboard join query
+SELECT *
+FROM room AS R
+LEFT JOIN contract AS C
+ON R.id = C.roomId
+LEFT JOIN building AS B
+ON R.bldgId = B.id
+LEFT JOIN tenant AS T
+ON C.tenantId = T.id
+GROUP BY R.id;
+
+
+
+
 
 SELECT * FROM building;
 
@@ -869,6 +908,7 @@ SELECT * FROM memo;
 
 SELECT * FROM memo_board;
 
+SELECT * FROM maintenance_fee;
 
 
 

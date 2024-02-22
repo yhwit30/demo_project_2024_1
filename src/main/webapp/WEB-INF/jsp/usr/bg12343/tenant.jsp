@@ -14,11 +14,19 @@
 			<thead>
 				<tr>
 					<th>세입자관리번호</th>
-					<th>날짜</th>
 					<th>세입자명</th>
 					<th>세입자휴대폰</th>
 					<th>세입자차량</th>
 					<th>세입자메모</th>
+					<th>건물명</th>
+					<th>호실</th>
+					<th>보증금</th>
+					<th>월세</th>
+					<th>관리비</th>
+					<th>계약시작일</th>
+					<th>계약만료일</th>
+					<th>보증금납부일</th>
+					<th>세 납기일</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -26,11 +34,19 @@
 				<c:forEach var="tenant" items="${tenants }">
 					<tr class="hover">
 						<td>${tenant.id }</td>
-						<td>${tenant.regDate.substring(0,10) }</td>
 						<td>${tenant.tenantName }</td>
 						<td>${tenant.tenantPhone }</td>
 						<td>${tenant.tenantCarNum }</td>
 						<td>${tenant.tenantMemo }</td>
+						<td>${tenant.bldgName }</td>
+						<td>${tenant.roomNum }</td>
+						<td>${tenant.deposit }</td>
+						<td>${tenant.rent }</td>
+						<td>${tenant.maintenanceFee }</td>
+						<td>${tenant.contractStartDate }</td>
+						<td>${tenant.contractEndDate }</td>
+						<td>${tenant.depositDate }</td>
+						<td>${tenant.rentDate }</td>
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -7,10 +7,17 @@
 	<div>
 		임대현황
 		<div class="menu">
-		<a href="/usr/bg12343/building">
-		건물 총 현황</a></div>
-		<div class="menu"><a href="/usr/bg12343/room">건물 가나</a></div>
-		<div class="menu"><a href="/usr/bg12343/room">건물 다라</a></div>
+			<a href="/usr/bg12343/building"> 건물 현황</a>
+			<a href="/usr/bg12343/buildingAdd"> 건물 추가</a>
+		</div>
+		<div class="menu">
+			<a href="/usr/bg12343/room">호실 현황</a>
+			<a href="/usr/bg12343/roomAdd"> 호실 추가</a>
+		</div>
+		<div class="menu">
+			<a href="/usr/bg12343/tenant">세입자 현황</a>
+			<a href="/usr/bg12343/tenantAdd"> 세입자 추가</a>
+		</div>
 
 	</div>
 	<div>
@@ -48,6 +55,7 @@
 	margin-bottom: 20px;
 	margin-top: 10px;
 	border-radius: 5px;
+	color: black;
 }
 
 .main-page>div {

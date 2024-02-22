@@ -15,9 +15,15 @@ public class Tenant {
 	private int tenantPhone;
 	private String tenantCarNum;
 	private String tenantMemo;
-	private int roomId;
 	
-	
+	private int deposit;
+	private int rent;
+	private int maintenanceFee;
+	private String contractStartDate;
+	private String contractEndDate;
+	private String depositDate;
+	private String rentDate;
+	private int roomNum;
 	private String bldgName;
 
 }

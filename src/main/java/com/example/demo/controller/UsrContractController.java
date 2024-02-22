@@ -18,7 +18,7 @@ public class UsrContractController {
 
 	// 액션 메소드
 	@RequestMapping("/usr/bg12343/contract")
-	public String getDashboard(Model model) {
+	public String getContract(Model model) {
 
 		List<Contract> contracts = contractService.getForPrintContracts();
 

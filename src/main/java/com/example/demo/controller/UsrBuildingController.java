@@ -20,7 +20,7 @@ public class UsrBuildingController {
 	
 	// 액션 메소드
 		@RequestMapping("/usr/bg12343/building")
-		public String getDashboard(Model model) { 
+		public String getBuilding(Model model) { 
 
 			List<Building> buildings = buildingService.getForPrintBuildings();
 			

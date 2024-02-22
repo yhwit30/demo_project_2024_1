@@ -7,10 +7,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Contract {
+public class Dashboard {
+
 	private int id;
 	private String regDate;
 	private String updateDate;
+	private int standardDeposit;
+	private int standardRent;
+	private int standardJeonse;
 	private String leaseType;
 	private String deposit;
 	private String rent;
@@ -19,13 +23,10 @@ public class Contract {
 	private String contractEndDate;
 	private String depositDate;
 	private String rentDate;
-	private String contractMemo;
-	
+
 	private String bldgName;
 	private String roomNum;
 	private String tenantName;
-	
-	
-	
+	private String tenantPhone;
 
 }
