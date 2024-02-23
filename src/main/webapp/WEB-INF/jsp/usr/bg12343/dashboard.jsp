@@ -22,7 +22,9 @@
 					<th>기준 보증금</th>
 					<th>기준 월세</th>
 					<th>기준 전세</th>
-					<th>세입자명</th>
+					<th>
+						<a class="btn btn-outline"  href="/usr/bg12343/tenant">세입자명</a>
+					</th>
 					<th>임대형태</th>
 					<th>현 보증금</th>
 					<th>현 월세</th>

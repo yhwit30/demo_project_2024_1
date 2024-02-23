@@ -6,33 +6,35 @@
 
 <section class="mt-2 text-xl px-4">
 	<div class="mx-auto overflow-x-auto">
-		<div class="badge badge-outline">${buildingsCnt }개</div>
+		<div class="badge badge-outline">${roomsCnt }개</div>
 
 
-		<form action="../room/doModify" method="POST">
+		<form action="../bg12343/doRoomModify" method="POST">
 
 			<table class="modify-box table-box-1" border="1">
 				<thead>
-				<tr>
-					<th>호실관리번호</th>
-					<th>건물명</th>
-					<th>호실</th>
-					<th>호실형태</th>
-					<th>호실메모</th>
-					<th>기준보증금</th>
-					<th>기준월세</th>
-					<th>기준전세</th>
-				</tr>
+					<tr>
+						<th>호실관리번호</th>
+						<th>건물명</th>
+						<th>호실</th>
+						<th>호실형태</th>
+						<th>호실메모</th>
+						<th>기준보증금</th>
+						<th>기준월세</th>
+						<th>기준전세</th>
+					</tr>
 				</thead>
 
 				<tbody>
 
-				<c:forEach var="room" items="${rooms }">
+					<c:forEach var="room" items="${rooms }">
 						<tr>
-							<td>${room.id }</td>
-							<input type="hidden" name="id" value="${room.id }" />
-							<td>${room.bldgName }</td>
-							<input type="hidden" name="bldgId" value="${room.bldgId }" />
+							<td>${room.id }
+								<input type="hidden" name="id" value="${room.id }" />
+							</td>
+							<td>${room.bldgName }
+								<input type="hidden" name="bldgId" value="${room.bldgId }" />
+							</td>
 							<td>
 								<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
 									placeholder="내용을 입력해주세요" name="roomNum" value="${room.roomNum }"

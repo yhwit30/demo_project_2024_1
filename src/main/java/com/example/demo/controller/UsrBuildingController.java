@@ -65,7 +65,7 @@ public class UsrBuildingController {
 		return Ut.jsReplace(BuildingAddRd.getResultCode(), BuildingAddRd.getMsg(), "../bg12343/building");
 	}
 
-	@RequestMapping("/usr/building/modify")
+	@RequestMapping("/usr/bg12343/buildingModify")
 	public String showBuildingModify(Model model) {
 
 		List<Building> buildings = buildingService.getForPrintBuildings();
@@ -78,7 +78,7 @@ public class UsrBuildingController {
 		return "usr/bg12343/buildingModify";
 	}
 
-	@RequestMapping("/usr/building/doModify")
+	@RequestMapping("/usr/bg12343/doBuildingModify")
 	@ResponseBody
 	public String doBuildingModify(int[] id, String[] bldgName, String[] bldgAdd, int[] roomTotal, String[] bldgMemo) {
 
@@ -142,7 +142,7 @@ public class UsrBuildingController {
 		return Ut.jsReplace(RoomAddRd.getResultCode(), RoomAddRd.getMsg(), "../bg12343/room");
 	}
 
-	@RequestMapping("/usr/room/modify")
+	@RequestMapping("/usr/bg12343/roomModify")
 	public String showRoomModify(Model model) {
 
 		List<Room> rooms = buildingService.getForPrintRooms();
@@ -154,7 +154,7 @@ public class UsrBuildingController {
 		return "usr/bg12343/roomModify";
 	}
 
-	@RequestMapping("/usr/room/doModify")
+	@RequestMapping("/usr/bg12343/doRoomModify")
 	@ResponseBody
 	public String doRoomModify(int[] id, int[] bldgId, int[] roomNum, String[] roomType, String[] roomMemo,
 			int[] standardDeposit, int[] standardRent, int[] standardJeonse) {

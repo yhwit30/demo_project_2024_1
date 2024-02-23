@@ -45,7 +45,7 @@
 
 <div class="btns mt-5">
 		<button class="btn btn-outline" type="button" onclick="history.back();">뒤로가기</button>
-		<a class="btn btn-outline" href="../room/modify">수정</a>
+		<a class="btn btn-outline" href="../bg12343/roomModify">수정</a>
 		<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="#">삭제</a>
 	</div>
 

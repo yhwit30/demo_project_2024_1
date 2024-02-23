@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.example.demo.vo.Tenant;
 
@@ -38,5 +39,15 @@ public interface TenantRepository {
 
 	@Select("SELECT LAST_INSERT_ID()")
 	public int getLastInsertId();
+
+	@Update("""
+			UPDATE tenant
+			SET tenantName = #{tenantName},
+			tenantPhone = #{tenantPhone},
+			tenantCarNum = #{tenantCarNum},
+			tenantMemo = #{tenantMemo}
+			WHERE id = #{id}
+			""")
+	public void modifyBuilding(int id, String tenantName, int tenantPhone, String tenantCarNum, String tenantMemo);
 
 }

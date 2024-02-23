@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.demo.service.TenantService;
 import com.example.demo.util.Ut;
 import com.example.demo.vo.ResultData;
+import com.example.demo.vo.Room;
 import com.example.demo.vo.Tenant;
 
 @Controller
@@ -62,6 +63,30 @@ public class UsrTenantController {
 		int id = (int) TenantAddRd.getData1();
 
 		return Ut.jsReplace(TenantAddRd.getResultCode(), TenantAddRd.getMsg(), "../bg12343/tenant");
+	}
+	
+	@RequestMapping("/usr/bg12343/tenantModify")
+	public String showTenantModify(Model model) {
+
+		List<Tenant> tenants = tenantService.getForPrintTenants();
+
+		int tenantsCnt = tenants.size();
+
+		model.addAttribute("tenantsCnt", tenantsCnt);
+		model.addAttribute("tenants", tenants);
+		return "usr/bg12343/tenantModify";
+	}
+
+	@RequestMapping("/usr/bg12343/doTenantModify")
+	@ResponseBody
+	public String doTenantModify(int[] id, String[] tenantName, int[] tenantPhone, String[] tenantCarNum, String[] tenantMemo) {
+
+		ResultData roomModifyRd = null;
+		for (int i = 0; i < id.length; i++) {
+			roomModifyRd = tenantService.modifyTenant(id[i], tenantName[i], tenantPhone[i], tenantCarNum[i], tenantMemo[i]);
+		}
+
+		return Ut.jsReplace(roomModifyRd.getResultCode(), roomModifyRd.getMsg(), "../bg12343/tenant");
 	}
 	
 }

@@ -9,7 +9,7 @@
 		<div class="badge badge-outline">${buildingsCnt }개</div>
 
 
-		<form action="../building/doModify" method="POST">
+		<form action="../bg12343/doBuildingModify" method="POST">
 
 			<table class="modify-box table-box-1" border="1">
 				<thead>
@@ -27,8 +27,9 @@
 
 					<c:forEach var="building" items="${buildings }">
 						<tr>
-							<td>${building.id }</td>
-							<input type="hidden" name="id" value="${building.id }" />
+							<td>${building.id }
+								<input type="hidden" name="id" value="${building.id }" />
+							</td>
 							<td>${building.regDate.substring(0,10) }</td>
 							<td>
 								<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
