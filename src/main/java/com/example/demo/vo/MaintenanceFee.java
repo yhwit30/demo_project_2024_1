@@ -30,6 +30,7 @@ public class MaintenanceFee {
 	private int lateFee;
 	private int lateMaintenanceFee;
 	private int maintenanceFeeDate;
+	private int tenantId;
 	
 	
 	private String bldgName;

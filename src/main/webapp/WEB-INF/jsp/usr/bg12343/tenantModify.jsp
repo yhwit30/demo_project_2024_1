@@ -11,7 +11,7 @@
 
 		<form action="../bg12343/doTenantModify" method="POST">
 
-			<table class="modify-box table-box-1" border="1">
+			<table class="modify-box table-box-1 table" border="1">
 				<thead>
 					<tr>
 						<th>세입자관리번호</th>
