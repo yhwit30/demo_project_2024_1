@@ -78,15 +78,15 @@ public class UsrBuildingController {
 		return "usr/bg12343/buildingModify";
 	}
 
-	@RequestMapping("/usr/building/doModify") //반복실행되야해.
+	@RequestMapping("/usr/building/doModify")
 	@ResponseBody
 	public String doBuildingModify(int[] id, String[] bldgName, String[] bldgAdd, int[] roomTotal, String[] bldgMemo) {
-		
+
 		ResultData buildingModifyRd = null;
-		for(int i = 0; i < id.length; i++) {
-			buildingModifyRd = buildingService.modifyBuilding(id[i], bldgName[i], bldgAdd[i], roomTotal[i], bldgMemo[i]);
+		for (int i = 0; i < id.length; i++) {
+			buildingModifyRd = buildingService.modifyBuilding(id[i], bldgName[i], bldgAdd[i], roomTotal[i],
+					bldgMemo[i]);
 		}
-		
 
 		return Ut.jsReplace(buildingModifyRd.getResultCode(), buildingModifyRd.getMsg(), "../bg12343/building");
 	}
@@ -111,7 +111,7 @@ public class UsrBuildingController {
 
 	@RequestMapping("/usr/bg12343/doRoomAdd")
 	@ResponseBody
-	public String doRoomAdd(String bldgId, int roomNum, String roomType, int standardDeposit, int standardRent,
+	public String doRoomAdd(int bldgId, int roomNum, String roomType, int standardDeposit, int standardRent,
 			int standardJeonse) {
 		// 로그인 상태 체크 - 인터셉터에서
 
@@ -140,6 +140,32 @@ public class UsrBuildingController {
 		int id = (int) RoomAddRd.getData1();
 
 		return Ut.jsReplace(RoomAddRd.getResultCode(), RoomAddRd.getMsg(), "../bg12343/room");
+	}
+
+	@RequestMapping("/usr/room/modify")
+	public String showRoomModify(Model model) {
+
+		List<Room> rooms = buildingService.getForPrintRooms();
+
+		int roomsCnt = rooms.size();
+
+		model.addAttribute("roomsCnt", roomsCnt);
+		model.addAttribute("rooms", rooms);
+		return "usr/bg12343/roomModify";
+	}
+
+	@RequestMapping("/usr/room/doModify")
+	@ResponseBody
+	public String doRoomModify(int[] id, int[] bldgId, int[] roomNum, String[] roomType, String[] roomMemo,
+			int[] standardDeposit, int[] standardRent, int[] standardJeonse) {
+
+		ResultData roomModifyRd = null;
+		for (int i = 0; i < id.length; i++) {
+			roomModifyRd = buildingService.modifyRoom(id[i], bldgId[i], roomNum[i], roomType[i], roomMemo[i],
+					standardDeposit[i], standardRent[i], standardJeonse[i]);
+		}
+
+		return Ut.jsReplace(roomModifyRd.getResultCode(), roomModifyRd.getMsg(), "../bg12343/room");
 	}
 
 }

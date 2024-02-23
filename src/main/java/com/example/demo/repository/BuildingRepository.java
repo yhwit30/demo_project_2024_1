@@ -53,7 +53,7 @@ public interface BuildingRepository {
 			standardJeonse = #{standardJeonse},
 			roomMemo = '호실메모 테스트'
 			""")
-	void addRoom(String bldgId, int roomNum, String roomType, int standardDeposit, int standardRent,
+	void addRoom(int bldgId, int roomNum, String roomType, int standardDeposit, int standardRent,
 			int standardJeonse);
 
 	@Update("""
@@ -66,5 +66,19 @@ public interface BuildingRepository {
 			WHERE id = #{id}
 			""")
 	void modifyBuilding(int id, String bldgName, String bldgAdd, int roomTotal, String bldgMemo);
+
+	@Update("""
+			UPDATE room
+			SET	roomNum = #{roomNum},
+			roomType = #{roomType},
+			roomMemo = #{roomMemo},
+			standardDeposit = #{standardDeposit},
+			standardRent = #{standardRent},
+			standardJeonse = #{standardJeonse}
+			WHERE id = #{id}
+			AND bldgId = #{bldgId}
+			""")
+	void modifyRoom(int id, int bldgId, int roomNum, String roomType, String roomMemo, int standardDeposit, int standardRent,
+			int standardJeonse);
 
 }

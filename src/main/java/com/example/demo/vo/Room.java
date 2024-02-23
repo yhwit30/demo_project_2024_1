@@ -17,7 +17,8 @@ public class Room {
 	private int standardDeposit;
 	private int standardRent;
 	private int standardJeonse;
-
+	private int bldgId;
+	
 	private String bldgName;
 
 }
