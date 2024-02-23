@@ -5,23 +5,23 @@
 
 <div class="page mt-20 main-page mx-auto">
 	<div>
-		<a href="/usr/bg12343/dashboard"> 임대현황</a>
+		<a class="btn btn-outline" href="/usr/bg12343/dashboard"> 임대현황</a>
 		<div class="menu">
-			<a href="/usr/bg12343/building"> 건물 현황</a>
-			<a href="/usr/bg12343/buildingAdd"> 건물 추가</a>
+			<a class="btn btn-outline" href="/usr/bg12343/building"> 건물 현황</a>
+			<a class="btn btn-outline" href="/usr/bg12343/buildingAdd"> 건물 추가</a>
 		</div>
 		<div class="menu">
-			<a href="/usr/bg12343/room">호실 현황</a>
-			<a href="/usr/bg12343/roomAdd"> 호실 추가</a>
+			<a class="btn btn-outline" href="/usr/bg12343/room">호실 현황</a>
+			<a class="btn btn-outline" href="/usr/bg12343/roomAdd"> 호실 추가</a>
 		</div>
 		<div class="menu">
-			<a href="/usr/bg12343/tenant">세입자 현황</a>
-			<a href="/usr/bg12343/tenantAdd"> 세입자 추가</a>
+			<a class="btn btn-outline" href="/usr/bg12343/tenant">세입자 현황</a>
+			<a class="btn btn-outline" href="/usr/bg12343/tenantAdd"> 세입자 추가</a>
 		</div>
 
 	</div>
 	<div>
-		<a href="/usr/article/list">커뮤니티</a>
+		<a class="btn btn-outline" href="/usr/article/list">커뮤니티</a>
 		<div class="menu">인기글</div>
 		<div class="menu">최신글</div>
 		<div class="menu">자유글</div>
@@ -49,13 +49,12 @@
 .menu {
 	width: 180px;
 	height: 90px;
-	background-color: pink;
+	border: 3px solid pink;
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 20px;
 	margin-top: 10px;
 	border-radius: 5px;
-	color: black;
 }
 
 .main-page>div {
@@ -65,15 +64,15 @@
 }
 
 .main-page>div:nth-child(1) {
-	background-color: blue;
+	border: 3px solid blue;
 }
 
 .main-page>div:nth-child(2) {
-	background-color: gold;
+	border: 3px solid gold;
 }
 
 .main-page>div:nth-child(3) {
-	background-color: green;
+	border: 3px solid green;
 }
 </style>
 

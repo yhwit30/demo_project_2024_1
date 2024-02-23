@@ -649,6 +649,7 @@ CREATE TABLE tenant(
     roomId INT(10) NOT NULL
 );
 
+SELECT * FROM tenant;
 
 # tenant testdata
 INSERT INTO tenant
@@ -886,9 +887,103 @@ CREATE TABLE maintenance_fee(
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL,
-    #컬럼 구상 중
+    commonElec INT(10) NOT NULL,
+    commonWater INT(10) NOT NULL,
+    elevater INT(10) NOT NULL,
+    internetTV INT(10) NOT NULL,
+    fireSafety INT(10) NOT NULL,
+    waterUse INT(10) NOT NULL,
+    waterCost INT(10) NOT NULL,
+    waterBill INT(10) NOT NULL,
+    elecUse INT(10) NOT NULL,
+    elecCost INT(10) NOT NULL,
+    elecBill INT(10) NOT NULL,
+    gasUse INT(10) NOT NULL,
+    gasCost INT(10) NOT NULL, 
+    gasBill INT(10) NOT NULL,
+    monthlyMaintenanceFee INT(10) NOT NULL,
+    lateFee INT(10) NOT NULL,
+    lateMaintenanceFee INT(10) NOT NULL, 
+    maintenanceFeeDate INT(10) NOT NULL,
+    tenantId INT(10) NOT NULL
 );
 
+
+SELECT * FROM maintenance_fee AS MF
+LEFT JOIN tenant AS T
+ON MF.tenantId = T.id;
+
+# maintenance_fee testdata
+INSERT INTO maintenance_fee
+SET regDate = NOW(),
+updateDate = NOW(),
+commonElec = 23000,
+commonWater =10000,
+elevater =165000,
+internetTV =280000,
+fireSafety=75000,
+waterUse =5,
+waterCost =1990,
+waterBill=9950,
+elecUse =68,
+elecCost =240,
+elecBill =16390,
+gasUse = 40,
+gasCost = 900,
+gasBill =32970,
+monthlyMaintenanceFee=26340,
+lateFee =1320,
+lateMaintenanceFee =27660,
+maintenanceFeeDate =10,
+tenantId =1;
+
+# maintenance_fee testdata
+INSERT INTO maintenance_fee
+SET regDate = NOW(),
+updateDate = NOW(),
+commonElec = 23000,
+commonWater =10000,
+elevater =165000,
+internetTV =280000,
+fireSafety=75000,
+waterUse =4,
+waterCost =1990,
+waterBill=7960,
+elecUse =86,
+elecCost =240,
+elecBill =19680,
+gasUse = 40,
+gasCost = 900,
+gasBill =32970,
+monthlyMaintenanceFee=27640,
+lateFee =1380,
+lateMaintenanceFee =29020,
+maintenanceFeeDate =28,
+tenantId =2;
+
+# maintenance_fee testdata
+INSERT INTO maintenance_fee
+SET regDate = NOW(),
+updateDate = NOW(),
+commonElec = 23000,
+commonWater =10000,
+elevater =165000,
+internetTV =280000,
+fireSafety=75000,
+waterUse =7,
+waterCost =1990,
+waterBill=13930,
+elecUse =52,
+elecCost =240,
+elecBill =13460,
+gasUse = 40,
+gasCost = 900,
+gasBill =32970,
+monthlyMaintenanceFee=27390,
+lateFee =3870,
+lateMaintenanceFee =31260,
+maintenanceFeeDate =16,
+tenantId =3;
 
 #dashboard join query 월별 납부현황 추가 
 SELECT *

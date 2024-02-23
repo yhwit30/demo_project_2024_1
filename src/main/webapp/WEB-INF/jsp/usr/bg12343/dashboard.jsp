@@ -14,10 +14,10 @@
 			<thead>
 				<tr>
 					<th>
-						<a href="/usr/bg12343/building">건물명</a>
+						<a class="btn btn-outline" href="/usr/bg12343/building">건물명</a>
 					</th>
 					<th>
-						<a href="/usr/bg12343/room">호실번호</a>
+						<a class="btn btn-outline"  href="/usr/bg12343/room">호실번호</a>
 					</th>
 					<th>기준 보증금</th>
 					<th>기준 월세</th>
@@ -29,7 +29,7 @@
 					<th>보증금</th>
 					<th>월세</th>
 					<th>
-						<a href="/usr/bg12343/maintenanceFee">관리비</a>
+						<a class="btn btn-outline"  href="/usr/bg12343/maintenanceFee">관리비</a>
 					</th>
 					<th>계약시작일</th>
 					<th>계약만료일</th>
