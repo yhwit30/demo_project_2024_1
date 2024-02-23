@@ -189,6 +189,45 @@
 	</script>
 
 
+<!-- 댓글 수정 -->
+<script>
+$(document).ready(function() {
+    $('.edit-btn').click(function() {
+    	console.log($(this).data(${reply.id}));
+    	
+        var replyId = $(this).data('reply-id');
+        $('#reply-' + replyId).hide();
+        $('#edit-form-' + replyId).show();
+    });
+    $('.save-btn').click(function() {
+        var replyId = $(this).data(${reply.id});
+        var replyText = $('#comment-text-' + replyId).val();
+        $.ajax({
+            url: '/updateComment', // Spring Controller로 요청을 보냄
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                commentId: commentId,
+                commentText: commentText
+            }),
+            dataType: 'json',
+            success: function(response) {
+                if(response.status === 'success') {
+                    alert('댓글이 수정되었습니다.');
+                    $('#comment-' + commentId + ' p').text(commentText);
+                    $('#edit-form-' + commentId).hide();
+                    $('#comment-' + commentId).show();
+                }
+            },
+            error: function(xhr, status, error) {
+                alert('댓글 수정에 실패했습니다.');
+            }
+        });
+    });
+});
+</script>
+
+
 <section class="mt-8 text-xl px-4">
 	<div class="mx-auto">
 
@@ -321,13 +360,20 @@
 					<tr class="hover">
 						<td>${reply.id }</td>
 						<td>${reply.regDate }</td>
-						<td>${reply.body }</td>
+						<td>
+							<span id="reply-${reply.id }">${reply.body }</span>
+							<div class="edit-form-${reply.id }">
+								<input type="text" value="${reply.body }" class="reply-text" style="display: none;" />
+							</div>
+						</td>
 						<td>${reply.extra__writer }</td>
 						<td>${reply.goodReactionPoint }</td>
 						<td>${reply.badReactionPoint }</td>
 						<td>
 							<c:if test="${reply.userCanModify }">
-								<a style="white-space: nowrap;" class="btn btn-outline" href="../reply/modify?id=${reply.id }">수정</a>
+								<%-- 							href="../reply/modify?id=${reply.id }" --%>
+								<a style="white-space: nowrap;" class="edit-btn btn btn-outline">수정</a>
+								<a style="white-space: nowrap; display: none;" class="edit-save btn btn-outline">저장</a>
 							</c:if>
 						</td>
 						<td>
