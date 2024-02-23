@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.service.BuildingService;
 import com.example.demo.util.Ut;
+import com.example.demo.vo.Article;
 import com.example.demo.vo.Building;
 import com.example.demo.vo.ResultData;
 import com.example.demo.vo.Room;
@@ -64,6 +65,32 @@ public class UsrBuildingController {
 		return Ut.jsReplace(BuildingAddRd.getResultCode(), BuildingAddRd.getMsg(), "../bg12343/building");
 	}
 
+	@RequestMapping("/usr/building/modify")
+	public String showBuildingModify(Model model) {
+
+		List<Building> buildings = buildingService.getForPrintBuildings();
+
+		int buildingsCnt = buildings.size();
+
+		model.addAttribute("buildings", buildings);
+		model.addAttribute("buildingsCnt", buildingsCnt);
+
+		return "usr/bg12343/buildingModify";
+	}
+
+	@RequestMapping("/usr/building/doModify") //반복실행되야해.
+	@ResponseBody
+	public String doBuildingModify(int[] id, String[] bldgName, String[] bldgAdd, int[] roomTotal, String[] bldgMemo) {
+		
+		ResultData buildingModifyRd = null;
+		for(int i = 0; i < id.length; i++) {
+			buildingModifyRd = buildingService.modifyBuilding(id[i], bldgName[i], bldgAdd[i], roomTotal[i], bldgMemo[i]);
+		}
+		
+
+		return Ut.jsReplace(buildingModifyRd.getResultCode(), buildingModifyRd.getMsg(), "../bg12343/building");
+	}
+
 	@RequestMapping("/usr/bg12343/room")
 	public String getRoom(Model model) {
 
@@ -84,7 +111,8 @@ public class UsrBuildingController {
 
 	@RequestMapping("/usr/bg12343/doRoomAdd")
 	@ResponseBody
-	public String doRoomAdd(String bldgId, int roomNum, String roomType, int standardDeposit, int standardRent, int standardJeonse) {
+	public String doRoomAdd(String bldgId, int roomNum, String roomType, int standardDeposit, int standardRent,
+			int standardJeonse) {
 		// 로그인 상태 체크 - 인터셉터에서
 
 		// 제목 내용 빈 칸 확인
@@ -103,10 +131,10 @@ public class UsrBuildingController {
 		if (Ut.isEmpty(standardJeonse)) {
 			return Ut.jsHistoryBack("F-2", "기준 전세를 입력해주세요");
 		}
-		
 
 		// 게시글 작성 작업
-		ResultData RoomAddRd = buildingService.addRoom(bldgId, roomNum, roomType, standardDeposit, standardRent, standardJeonse);
+		ResultData RoomAddRd = buildingService.addRoom(bldgId, roomNum, roomType, standardDeposit, standardRent,
+				standardJeonse);
 
 		// 작성된 게시글 번호 가져오기
 		int id = (int) RoomAddRd.getData1();

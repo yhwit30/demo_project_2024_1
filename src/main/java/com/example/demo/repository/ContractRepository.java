@@ -14,10 +14,10 @@ public interface ContractRepository {
 	@Select("""
 			SELECT *
 			FROM contract AS C
-			LEFT JOIN building AS B
-			ON C.bldgId = B.id
 			LEFT JOIN room AS R
 			ON C.roomId = R.id
+			LEFT JOIN building AS B
+			ON R.bldgId = B.id
 			LEFT JOIN tenant AS T
 			ON C.tenantId = T.id
 			GROUP BY C.id;

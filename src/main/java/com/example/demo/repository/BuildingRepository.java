@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.example.demo.vo.Building;
 import com.example.demo.vo.Room;
@@ -52,17 +53,18 @@ public interface BuildingRepository {
 			standardJeonse = #{standardJeonse},
 			roomMemo = '호실메모 테스트'
 			""")
-	void addRoom(String bldgId, int roomNum, String roomType, int standardDeposit, int standardRent, int standardJeonse);
+	void addRoom(String bldgId, int roomNum, String roomType, int standardDeposit, int standardRent,
+			int standardJeonse);
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@Update("""
+			UPDATE building
+			SET updateDate = NOW(),
+			bldgName = #{bldgName},
+			bldgAdd = #{bldgAdd},
+			roomTotal = #{roomTotal},
+			bldgMemo = #{bldgMemo}
+			WHERE id = #{id}
+			""")
+	void modifyBuilding(int id, String bldgName, String bldgAdd, int roomTotal, String bldgMemo);
+
 }
