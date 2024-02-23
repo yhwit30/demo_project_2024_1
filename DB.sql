@@ -911,7 +911,13 @@ CREATE TABLE maintenance_fee(
 
 SELECT * FROM maintenance_fee AS MF
 LEFT JOIN tenant AS T
-ON MF.tenantId = T.id;
+ON MF.tenantId = T.id
+LEFT JOIN contract AS C
+ON T.roomId = C.roomId
+LEFT JOIN room AS R
+ON C.roomId = R.id
+LEFT JOIN building AS B
+ON R.bldgId = B.id;
 
 # maintenance_fee testdata
 INSERT INTO maintenance_fee
