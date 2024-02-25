@@ -29,4 +29,20 @@ public class MaintenanceFeeService {
 		return ResultData.from("S-1", "관리비정보가 수정되었습니다");
 	}
 
+	public int calculateBill(int use, int cost) {
+		return use * cost;
+	}
+
+	public int sumMaintenanceFee(int waterBill, int elecBill, int gasBill) {
+		return waterBill + elecBill + gasBill;
+	}
+
+	public int sumMaintenanceFee(int monthlyMaintenanceFee, int lateFee) {
+		return monthlyMaintenanceFee + lateFee;
+	}
+
+	public int caculateLateFee(int monthlyMaintenanceFee) {
+		return Math.round(monthlyMaintenanceFee / 20);
+	}
+
 }

@@ -9,15 +9,13 @@
 		<input type="hidden" name="boardId" value="${param.boardId }" />
 
 		<select data-value="${param.searchKeywordTypeCode }" class="select select-bordered select-sm max-w-xs"
-			name="searchKeywordTypeCode"
-		>
+			name="searchKeywordTypeCode">
 			<option value="title">제목</option>
 			<option value="extra__writer">작성자</option>
 			<option value="body">내용</option>
 		</select>
 		<input value="${param.searchKeyword }" name="searchKeyword" type="text" placeholder="What is your searchKeyword?"
-			class="input-sm input input-bordered w-60 max-w-xs mt-3"
-		/>
+			class="input-sm input input-bordered w-60 max-w-xs mt-3" />
 		<button class="btn btn-primary btn-sm" type="submit">검색</button>
 	</form>
 </div>
@@ -32,15 +30,12 @@
 		</div>
 		<div class="menu">
 			<a class="btn btn-outline" href="/usr/bg12343/building"> 건물 현황</a>
-			<a class="btn btn-outline" href="/usr/bg12343/buildingAdd"> 건물 추가</a>
 		</div>
 		<div class="menu">
 			<a class="btn btn-outline" href="/usr/bg12343/room">호실 현황</a>
-			<a class="btn btn-outline" href="/usr/bg12343/roomAdd"> 호실 추가</a>
 		</div>
 		<div class="menu">
 			<a class="btn btn-outline" href="/usr/bg12343/tenant">세입자 현황</a>
-			<a class="btn btn-outline" href="/usr/bg12343/tenantAdd"> 세입자 추가</a>
 		</div>
 
 	</div>

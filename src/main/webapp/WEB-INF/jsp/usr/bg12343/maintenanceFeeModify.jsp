@@ -49,60 +49,49 @@
 							<td>${maintenanceFee.leaseType }</td>
 							<td>
 								<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-									placeholder="내용을 입력해주세요" name="commonElec" value="${maintenanceFee.commonElec }"
-								/>
+									placeholder="내용을 입력해주세요" name="commonElec" value="${maintenanceFee.commonElec }" />
 							</td>
 							<td>
 								<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-									placeholder="내용을 입력해주세요" name="commonWater" value="${maintenanceFee.commonWater }"
-								/>
+									placeholder="내용을 입력해주세요" name="commonWater" value="${maintenanceFee.commonWater }" />
 							</td>
 							<td>
 								<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-									placeholder="내용을 입력해주세요" name="elevater" value="${maintenanceFee.elevater }"
-								/>
+									placeholder="내용을 입력해주세요" name="elevater" value="${maintenanceFee.elevater }" />
 							</td>
 							<td>
 								<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-									placeholder="내용을 입력해주세요" name="internetTV" value="${maintenanceFee.internetTV }"
-								/>
+									placeholder="내용을 입력해주세요" name="internetTV" value="${maintenanceFee.internetTV }" />
 							</td>
 							<td>
 								<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-									placeholder="내용을 입력해주세요" name="fireSafety" value="${maintenanceFee.fireSafety }"
-								/>
+									placeholder="내용을 입력해주세요" name="fireSafety" value="${maintenanceFee.fireSafety }" />
 							</td>
 							<td>
 								<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-									placeholder="내용을 입력해주세요" name="waterUse" value="${maintenanceFee.waterUse }"
-								/>
+									placeholder="내용을 입력해주세요" name="waterUse" value="${maintenanceFee.waterUse }" />
 							</td>
 							<td>
 								<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-									placeholder="내용을 입력해주세요" name="waterCost" value="${maintenanceFee.waterCost }"
-								/>
+									placeholder="내용을 입력해주세요" name="waterCost" value="${maintenanceFee.waterCost }" />
 							</td>
 							<td>${maintenanceFee.waterBill }</td>
 							<td>
 								<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-									placeholder="내용을 입력해주세요" name="elecUse" value="${maintenanceFee.elecUse }"
-								/>
+									placeholder="내용을 입력해주세요" name="elecUse" value="${maintenanceFee.elecUse }" />
 							</td>
 							<td>
 								<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-									placeholder="내용을 입력해주세요" name="elecCost" value="${maintenanceFee.elecCost }"
-								/>
+									placeholder="내용을 입력해주세요" name="elecCost" value="${maintenanceFee.elecCost }" />
 							</td>
 							<td>${maintenanceFee.elecBill }</td>
 							<td>
 								<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-									placeholder="내용을 입력해주세요" name="gasUse" value="${maintenanceFee.gasUse }"
-								/>
+									placeholder="내용을 입력해주세요" name="gasUse" value="${maintenanceFee.gasUse }" />
 							</td>
 							<td>
 								<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-									placeholder="내용을 입력해주세요" name="gasCost" value="${maintenanceFee.gasCost }"
-								/>
+									placeholder="내용을 입력해주세요" name="gasCost" value="${maintenanceFee.gasCost }" />
 							</td>
 							<td>${maintenanceFee.gasBill }</td>
 							<td>${maintenanceFee.monthlyMaintenanceFee }</td>
@@ -110,8 +99,7 @@
 							<td>${maintenanceFee.lateMaintenanceFee }</td>
 							<td>
 								<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-									placeholder="내용을 입력해주세요" name="maintenanceFeeDate" value="${maintenanceFee.maintenanceFeeDate }"
-								/>
+									placeholder="내용을 입력해주세요" name="maintenanceFeeDate" value="${maintenanceFee.maintenanceFeeDate }" />
 							</td>
 						</tr>
 					</c:forEach>

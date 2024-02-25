@@ -55,12 +55,12 @@ public class UsrMaintenanceFeeController {
 		ResultData maintenanceFeeModifyRd = null;
 		for (int i = 0; i < tenantId.length; i++) {
 
-			waterBill[i] = waterUse[i] * waterCost[i];
-			elecBill[i] = elecUse[i] * elecCost[i];
-			gasBill[i] = gasUse[i] * gasCost[i];
-			monthlyMaintenanceFee[i] = waterBill[i] + elecBill[i] + gasBill[i];
-			lateFee[i] = Math.round(monthlyMaintenanceFee[i] / 20);
-			lateMaintenanceFee[i] = monthlyMaintenanceFee[i] + lateFee[i];
+			waterBill[i] = maintenanceFeeService.calculateBill(waterUse[i], waterCost[i]);
+			elecBill[i] = maintenanceFeeService.calculateBill(elecUse[i], elecCost[i]);
+			gasBill[i] = maintenanceFeeService.calculateBill(gasUse[i], gasCost[i]);
+			monthlyMaintenanceFee[i] = maintenanceFeeService.sumMaintenanceFee(waterBill[i], elecBill[i], gasBill[i]);
+			lateFee[i] = maintenanceFeeService.caculateLateFee(monthlyMaintenanceFee[i]);
+			lateMaintenanceFee[i] = maintenanceFeeService.sumMaintenanceFee(monthlyMaintenanceFee[i], lateFee[i]);
 
 			maintenanceFeeModifyRd = maintenanceFeeService.modifyMaintenanceFee(tenantId[i], commonElec[i],
 					commonWater[i], elevater[i], internetTV[i], fireSafety[i], waterUse[i], waterCost[i], waterBill[i],

@@ -39,6 +39,7 @@
 		<a class="btn btn-outline" href="../bg12343/buildingModify">수정</a>
 		<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="#">삭제</a>
 	</div>
+	<a class="btn btn-outline" href="/usr/bg12343/buildingAdd"> 건물 추가</a>
 
 
 
