@@ -4,7 +4,7 @@
 <%@ include file="../common/head.jspf"%>
 
 
-
+<a class="btn btn-outline"  href="/usr/bg12343/memoAdd">메모</a>
 <section class="mt-2 text-xl px-4">
 	<div class="mx-auto overflow-x-auto">
 		<table class="table-box-1 table" border="1">

@@ -22,7 +22,7 @@ public class UsrTenantController {
 
 	// 액션 메소드
 	@RequestMapping("/usr/bg12343/tenant")
-	public String getRoom(Model model) {
+	public String getTenant(Model model) {
 
 		List<Tenant> tenants = tenantService.getForPrintTenants();
 

@@ -479,7 +479,7 @@ CREATE TABLE building(
     bldgName CHAR(20) NOT NULL,
     bldgAdd CHAR(20) NOT NULL,
     roomTotal INT(10) NOT NULL,
-    bldgMemo CHAR(50) NOT NULL
+    bldgMemo TEXT NOT NULL
  );
 
 SELECT * FROM building;
@@ -873,13 +873,79 @@ CREATE TABLE memo_board(
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL,
-    memoCode CHAR(20) NOT NULL,
-    memoName CHAR(20) NOT NULL,
-    tenantCarNum CHAR(20) NOT NULL,
-    tenantMemo CHAR(20) NOT NULL,
+    memoCode CHAR(50) NOT NULL COMMENT '건물별(1), 호실별(2), 세입자별(3), ...',
     delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '삭제 여부 (0=삭제 전, 1=삭제 후)',
     delDate DATETIME COMMENT '삭제 날짜'
 );
+
+SELECT * FROM memo_board;
+
+SELECT * FROM memo;
+
+# memo_board testdata
+INSERT INTO memo_board
+SET regDate = NOW(),
+updateDate = NOW(),
+memoCode = '건물메모';
+
+# memo_board testdata
+INSERT INTO memo_board
+SET regDate = NOW(),
+updateDate = NOW(),
+memoCode = '호실메모';
+
+# memo_board testdata
+INSERT INTO memo_board
+SET regDate = NOW(),
+updateDate = NOW(),
+memoCode = '세입자메모';
+
+# memo_board testdata
+INSERT INTO memo_board
+SET regDate = NOW(),
+updateDate = NOW(),
+memoCode = '계약메모';
+
+
+# memo testdata
+INSERT INTO memo
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+boardId = 1,
+title = '1번 회원이 1번 건물 게시판에 글',
+`body`= '1번 회원 1번 건물 게시판 내용';
+
+# memo testdata
+INSERT INTO memo
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+boardId = 2,
+title = '1번 회원이 2번 호실 게시판에 글',
+`body`= '1번 회원 2번 호실 게시판 내용';
+
+
+# memo testdata
+INSERT INTO memo
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 1,
+title = '2번 회원이 1번 건물 게시판에 글',
+`body`= '2번 회원 1번 건물 게시판 내용';
+
+
+# memo testdata
+INSERT INTO memo
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 3,
+title = '2번 회원이 3번 세입자 게시판에 글',
+`body`= '2번 회원 3번 세입자 게시판 내용';
+
+
 
 
 # maintenance_fee 테이블 생성
