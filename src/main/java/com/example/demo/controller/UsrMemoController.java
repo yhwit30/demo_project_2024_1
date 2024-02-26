@@ -49,7 +49,6 @@ public class UsrMemoController {
 			return Ut.jsHistoryBack("F-2", "세입자차량번호를 입력해주세요");
 		}
 
-		// 게시글 작성 작업
 		ResultData memoAddRd = memoService.addMemo(rq.getLoginedMemberId(), boardId, title, body);
 
 		// 작성된 게시글 번호 가져오기
@@ -64,12 +63,6 @@ public class UsrMemoController {
 	@RequestMapping("/usr/bg12343/memoModify")
 	public String showMemoModify(Model model) {
 
-		List<Tenant> tenants = tenantService.getForPrintTenants();
-
-		int tenantsCnt = tenants.size();
-
-		model.addAttribute("tenantsCnt", tenantsCnt);
-		model.addAttribute("tenants", tenants);
 		return "usr/bg12343/memoModify";
 	}
 
@@ -78,11 +71,6 @@ public class UsrMemoController {
 	public String doMemoModify(int[] id, String[] tenantName, int[] tenantPhone, String[] tenantCarNum,
 			String[] tenantMemo) {
 
-		ResultData roomModifyRd = null;
-		for (int i = 0; i < id.length; i++) {
-			roomModifyRd = tenantService.modifyTenant(id[i], tenantName[i], tenantPhone[i], tenantCarNum[i],
-					tenantMemo[i]);
-		}
 
 		return Ut.jsReplace(roomModifyRd.getResultCode(), roomModifyRd.getMsg(), "../bg12343/tenant");
 	}
