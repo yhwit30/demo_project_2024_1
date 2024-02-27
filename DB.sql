@@ -502,6 +502,7 @@ bldgAdd = '대전시 정림',
 roomTotal = 5, 
 bldgMemo = '다라 건물은 2015년에 지어짐 메모';
 
+#------------------------------------------------------
 # room 테이블 생성
 CREATE TABLE room(
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -636,7 +637,7 @@ INNER JOIN building
 ON room.bldgId = building.id;
 
 
-
+#------------------------------------------------------
 # tenant 테이블 생성
 CREATE TABLE tenant(
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -691,6 +692,7 @@ ON T.roomId = R.id
 LEFT JOIN building AS B
 ON R.bldgId = B.id;
 
+#------------------------------------------------------
 # contract 테이블 생성
 CREATE TABLE contract(
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -775,7 +777,7 @@ ON C.tenantId = T.id
 GROUP BY C.id;
 
 
-
+#------------------------------------------------------
 # contract_status 테이블 생성
 CREATE TABLE contract_status(
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -857,6 +859,8 @@ extraExpense = '없음';
 
 SELECT * FROM contract_status;
 
+
+#------------------------------------------------------
 # memo 테이블 생성
 CREATE TABLE memo(
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -946,8 +950,24 @@ title = '2번 회원이 3번 세입자 게시판에 글',
 `body`= '2번 회원 3번 세입자 게시판 내용';
 
 
+#------------------------------------------------------
+# repair 테이블 생성
+CREATE TABLE `repair`(
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    repairDate  DATETIME NOT NULL,
+    roomId INT(10) NOT NULL,
+    repairCost CHAR(20) NOT NULL,
+    boardId CHAR(20) NOT NULL,
+    title CHAR(20) NOT NULL,
+    `body` CHAR(20) NOT NULL
+);
+
+SELECT * FROM `repair`;
 
 
+#------------------------------------------------------
 # maintenance_fee 테이블 생성
 CREATE TABLE maintenance_fee(
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -1086,8 +1106,7 @@ SELECT * FROM memo;
 
 SELECT * FROM memo_board;
 
+SELECT * FROM `repair`;
+
 SELECT * FROM maintenance_fee;
-
-
-
 

@@ -75,4 +75,38 @@ public class UsrMemoController {
 		return Ut.jsReplace(roomModifyRd.getResultCode(), roomModifyRd.getMsg(), "../bg12343/tenant");
 	}
 
+	
+	@RequestMapping("/usr/bg12343/repair")
+	public String showRepair(Model model) {
+
+		return "usr/bg12343/repair";
+	}
+
+	@RequestMapping("/usr/bg12343/addRepair")
+	@ResponseBody
+	public String doRepairAdd(int boardId, String title, String body, String afterLoginUri) { // 매개변수 뭘 줄지
+		// 로그인 체크 인터셉터에서
+
+		// 제목 내용 빈 칸 확인
+		if (Ut.isEmpty(boardId)) {
+			return Ut.jsHistoryBack("F-1", "세입자이름을 입력해주세요");
+		}
+		if (Ut.isNullOrEmpty(title)) {
+			return Ut.jsHistoryBack("F-2", "세입자휴대폰번호를 입력해주세요");
+		}
+		if (Ut.isNullOrEmpty(body)) {
+			return Ut.jsHistoryBack("F-2", "세입자차량번호를 입력해주세요");
+		}
+
+		ResultData memoAddRd = memoService.addMemo(rq.getLoginedMemberId(), boardId, title, body);
+
+		// 작성된 게시글 번호 가져오기
+		int id = (int) memoAddRd.getData1();
+
+		if (afterLoginUri.length() > 0) {
+			return Ut.jsReplace(memoAddRd.getResultCode(), memoAddRd.getMsg(), afterLoginUri);
+		}
+		return Ut.jsReplace(memoAddRd.getResultCode(), memoAddRd.getMsg(), "../bg12343/dashboard");
+	}
+	
 }

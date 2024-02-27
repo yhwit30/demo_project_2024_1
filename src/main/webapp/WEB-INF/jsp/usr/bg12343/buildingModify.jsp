@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="BUILDING MODIFY"></c:set>
 <%@ include file="../common/head.jspf"%>
-
+<%@ include file="../common/sidebar.jspf"%>
 
 <section class="mt-2 text-xl px-4">
 	<div class="mx-auto overflow-x-auto">

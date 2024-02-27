@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<div class="side_bar">
+
+<nav class="side_menu">
+	<ul>
+		<li>
+			<a href="/usr/bg12343/dashboard">대쉬보드</a>
+			<a href="/usr/bg12343/status">수납관리</a>
+			<a href="/usr/bg12343/maintenanceFee">관리비</a>
+			<a href="/usr/bg12343/building">건물정보</a>
+			<a href="/usr/bg12343/room">호실정보</a>
+			<a href="/usr/bg12343/contract">계약정보</a>
+			<a href="/usr/bg12343/tenant">세입자정보</a>
+			<a href="/usr/bg12343/repair">작업일지</a>
+			<a href="#">공지사항</a>
+		</li>
+	</ul>
+</nav>
+
+</div>
+
+<div class="side_bar_push"> 
+<!-- foot.jspf에 엔딩태그 -->
+
+

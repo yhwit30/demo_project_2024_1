@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="BUILDING DETAIL"></c:set>
 <%@ include file="../common/head.jspf"%>
-
+<%@ include file="../common/sidebar.jspf"%>
 
 
 <section class="mt-8 mb-5 text-lg px-4">
