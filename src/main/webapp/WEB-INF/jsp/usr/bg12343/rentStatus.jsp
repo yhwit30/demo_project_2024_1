@@ -4,10 +4,14 @@
 <%@ include file="../common/head.jspf"%>
 <%@ include file="../common/sidebar.jspf"%>
 
+
+<!-- 건물 개수대로 가져오는 함수로 수정해야함 -->
 <div>
 	<a class="btn btn-outline ${param.bldgId == 1 ? 'btn-active' : '' }" href="../bg12343/rentStatus?bldgId=1">건물1 가나</a>
 	<a class="btn btn-outline ${param.bldgId == 2 ? 'btn-active' : '' }" href="../bg12343/rentStatus?bldgId=2">건물2 다라</a>
 </div>
+
+2024
 
 
 <section class="mt-2 text-xl px-4">
@@ -18,41 +22,38 @@
 			</colgroup>
 			<thead>
 				<tr>
-					<th>건물명</th>
 					<th>호실번호</th>
-					<th>기준 보증금</th>
-					<th>기준 월세</th>
-					<th>기준 전세</th>
 					<th>세입자명</th>
 					<th>임대형태</th>
 					<th>현 보증금</th>
 					<th>현 월세</th>
-					<th>보증금</th>
-					<th>월세</th>
 					<th>관리비</th>
 					<th>계약시작일</th>
 					<th>계약만료일</th>
 					<th>보증금 납부일</th>
-					<th>세 납기일</th>
+					<th>납부일</th>
 					<th>세입자휴대폰</th>
 					<th>1월</th>
 					<th>2</th>
 					<th>3</th>
+					<th>4</th>
+					<th>5</th>
+					<th>6</th>
+					<th>7</th>
+					<th>8</th>
+					<th>9</th>
+					<th>10</th>
+					<th>11</th>
+					<th>12</th>
 				</tr>
 			</thead>
 			<tbody>
 
 				<c:forEach var="rentStatus" items="${rentStatus }">
 					<tr class="hover">
-						<td>${rentStatus.bldgName }</td>
 						<td>${rentStatus.roomNum }</td>
-						<td>${rentStatus.standardDeposit }</td>
-						<td>${rentStatus.standardRent }</td>
-						<td>${rentStatus.standardJeonse }</td>
 						<td>${rentStatus.tenantName }</td>
 						<td>${rentStatus.leaseType }</td>
-						<td>${rentStatus.deposit }</td>
-						<td>${rentStatus.rent }</td>
 						<td>${rentStatus.deposit }</td>
 						<td>${rentStatus.rent }</td>
 						<td>${rentStatus.maintenanceFee }</td>
@@ -61,7 +62,18 @@
 						<td>${rentStatus.depositDate }</td>
 						<td>${rentStatus.rentDate }</td>
 						<td>${rentStatus.tenantPhone }</td>
-						<td>${rentStatus.paymentStatus }</td>
+						<td>${rentStatus.januaryPaymentStatus }</td>
+						<td>${rentStatus.februaryPaymentStatus }</td>
+						<td>${rentStatus.marchPaymentStatus }</td>
+						<td>${rentStatus.aprilPaymentStatus }</td>
+						<td>${rentStatus.mayPaymentStatus }</td>
+						<td>${rentStatus.junePaymentStatus }</td>
+						<td>${rentStatus.julyPaymentStatus }</td>
+						<td>${rentStatus.augustPaymentStatus }</td>
+						<td>${rentStatus.septemberPaymentStatus }</td>
+						<td>${rentStatus.octoberPaymentStatus }</td>
+						<td>${rentStatus.novemberPaymentStatus }</td>
+						<td>${rentStatus.decemberPaymentStatus }</td>
 					</tr>
 				</c:forEach>
 			</tbody>

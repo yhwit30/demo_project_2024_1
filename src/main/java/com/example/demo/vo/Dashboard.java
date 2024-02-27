@@ -24,10 +24,22 @@ public class Dashboard {
 	private String depositDate;
 	private String rentDate;
 
+	private int bldgId;
 	private String bldgName;
 	private String roomNum;
 	private String tenantName;
 	private String tenantPhone;
-	private String paymentStatus;
+	private String januaryPaymentStatus;
+	private String februaryPaymentStatus;
+	private String marchPaymentStatus;
+	private String aprilPaymentStatus;
+	private String mayPaymentStatus;
+	private String junePaymentStatus;
+	private String julyPaymentStatus;
+	private String augustPaymentStatus;
+	private String septemberPaymentStatus;
+	private String octoberPaymentStatus;
+	private String novemberPaymentStatus;
+	private String decemberPaymentStatus;
 
 }

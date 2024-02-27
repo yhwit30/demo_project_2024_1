@@ -19,29 +19,24 @@ public class UsrDashboardController {
 
 	@Autowired
 	private DashboardService dashboardService;
-	
-	
-	// 액션 메소드
-		@RequestMapping("/usr/bg12343/dashboard")
-		public String getDashboard(Model model) { 
 
-			List<Dashboard> dashboard = dashboardService.getDashboard();
-			
-			
-			
-			model.addAttribute("dashboard", dashboard);
-			return "usr/bg12343/dashboard";
-		}
-	
-		@RequestMapping("/usr/bg12343/rentStatus")
-		public String getStatus(Model model, @RequestParam(defaultValue = "1") int bldgId) { 
-			
-			List<Dashboard> rentStatus = dashboardService.getRentStatus(bldgId);
-			
-			model.addAttribute("rentStatus", rentStatus);
-			return "usr/bg12343/rentStatus";
-		}
-		
-	
-	
+	// 액션 메소드
+	@RequestMapping("/usr/bg12343/dashboard")
+	public String getDashboard(Model model) {
+
+		List<Dashboard> dashboard = dashboardService.getDashboard();
+
+		model.addAttribute("dashboard", dashboard);
+		return "usr/bg12343/dashboard";
+	}
+
+	@RequestMapping("/usr/bg12343/rentStatus")
+	public String getStatus(Model model, @RequestParam(defaultValue = "1") int bldgId) {
+
+		List<Dashboard> rentStatus = dashboardService.getRentStatus(bldgId);
+
+		model.addAttribute("rentStatus", rentStatus);
+		return "usr/bg12343/rentStatus";
+	}
+
 }
