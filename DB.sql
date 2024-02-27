@@ -490,7 +490,7 @@ SET regDate = NOW(),
 updateDate = NOW(),
 bldgName = '가나',
 bldgAdd = '대전시 송림',
-roomTotal = 5, 
+roomTotal = 10, 
 bldgMemo = '가나 건물은 2005년에 지어짐 메모';
 
 # building testdata
@@ -499,7 +499,7 @@ SET regDate = NOW(),
 updateDate = NOW(),
 bldgName = '다라',
 bldgAdd = '대전시 정림',
-roomTotal = 5, 
+roomTotal = 10, 
 bldgMemo = '다라 건물은 2015년에 지어짐 메모';
 
 #------------------------------------------------------
@@ -580,6 +580,58 @@ standardDeposit = 5000000,
 standardRent = 600000,
 standardJeonse = 100000000;
 
+
+# room testdata
+INSERT INTO room
+SET bldgId = 1,
+roomNum = 301,
+roomType = '원룸',
+roomMemo = '호실별 메모 101',
+standardDeposit = 5000000,
+standardRent = 400000,
+standardJeonse = 50000000;
+
+# room testdata
+INSERT INTO room
+SET bldgId = 1,
+roomNum = 302,
+roomType = '원룸',
+roomMemo = '호실별 메모 101',
+standardDeposit = 5000000,
+standardRent = 400000,
+standardJeonse = 50000000;
+
+
+# room testdata
+INSERT INTO room
+SET bldgId = 1,
+roomNum = 303,
+roomType = '원룸',
+roomMemo = '호실별 메모 101',
+standardDeposit = 5000000,
+standardRent = 400000,
+standardJeonse = 50000000;
+
+# room testdata
+INSERT INTO room
+SET bldgId = 1,
+roomNum = 401,
+roomType = '원룸',
+roomMemo = '호실별 메모 101',
+standardDeposit = 5000000,
+standardRent = 400000,
+standardJeonse = 50000000;
+
+# room testdata
+INSERT INTO room
+SET bldgId = 1,
+roomNum = 402,
+roomType = '원룸',
+roomMemo = '호실별 메모 101',
+standardDeposit = 5000000,
+standardRent = 400000,
+standardJeonse = 50000000;
+
 # room testdata
 INSERT INTO room
 SET bldgId = 2,
@@ -629,6 +681,56 @@ roomMemo = '호실별 메모 203',
 standardDeposit = 5000000,
 standardRent = 600000,
 standardJeonse = 100000000;
+
+# room testdata
+INSERT INTO room
+SET bldgId = 2,
+roomNum = 301,
+roomType = '원룸',
+roomMemo = '호실별 메모 101',
+standardDeposit = 5000000,
+standardRent = 400000,
+standardJeonse = 50000000;
+
+# room testdata
+INSERT INTO room
+SET bldgId = 2,
+roomNum = 302,
+roomType = '원룸',
+roomMemo = '호실별 메모 101',
+standardDeposit = 5000000,
+standardRent = 400000,
+standardJeonse = 50000000;
+
+# room testdata
+INSERT INTO room
+SET bldgId = 2,
+roomNum = 303,
+roomType = '원룸',
+roomMemo = '호실별 메모 101',
+standardDeposit = 5000000,
+standardRent = 400000,
+standardJeonse = 50000000;
+
+# room testdata
+INSERT INTO room
+SET bldgId = 2,
+roomNum = 401,
+roomType = '원룸',
+roomMemo = '호실별 메모 101',
+standardDeposit = 5000000,
+standardRent = 400000,
+standardJeonse = 50000000;
+
+# room testdata
+INSERT INTO room
+SET bldgId = 2,
+roomNum = 402,
+roomType = '원룸',
+roomMemo = '호실별 메모 101',
+standardDeposit = 5000000,
+standardRent = 400000,
+standardJeonse = 50000000;
 
 
 SELECT room.* , building.bldgName
@@ -682,6 +784,46 @@ tenantCarNum = '05마4218',
 tenantMemo = '세입자3 메모',
 roomId = 6;
 
+
+# tenant testdata
+INSERT INTO tenant
+SET regDate = NOW(),
+updateDate = NOW(),
+tenantName = '김철수',
+tenantPhone = 0103453533,
+tenantCarNum = '02다3454',
+tenantMemo = '세입자2 메모',
+roomId = 10;
+
+# tenant testdata
+INSERT INTO tenant
+SET regDate = NOW(),
+updateDate = NOW(),
+tenantName = '이보라',
+tenantPhone = 0103453533,
+tenantCarNum = '02다3454',
+tenantMemo = '세입자2 메모',
+roomId = 15;
+
+# tenant testdata
+INSERT INTO tenant
+SET regDate = NOW(),
+updateDate = NOW(),
+tenantName = '강산해',
+tenantPhone = 0103453533,
+tenantCarNum = '02다3454',
+tenantMemo = '세입자2 메모',
+roomId = 16;
+
+# tenant testdata
+INSERT INTO tenant
+SET regDate = NOW(),
+updateDate = NOW(),
+tenantName = '김미자',
+tenantPhone = 0103453533,
+tenantCarNum = '02다3454',
+tenantMemo = '세입자2 메모',
+roomId = 17;
 
 SELECT * 
 FROM tenant AS T
@@ -763,6 +905,73 @@ depositDate = 15,
 rentDate = 10,
 contractMemo = '계약3 메모';
 
+# contract testdata
+INSERT INTO contract
+SET regDate = NOW(),
+updateDate = NOW(),
+#bldgId =2,
+roomId = 10,
+tenantId = 4,
+leaseType = '전세',
+deposit = 55000000,
+maintenanceFee = 100000,
+contractStartDate = '2023.12.2',
+contractEndDate= '2025.12.1',
+depositDate = 15,
+rentDate = 10,
+contractMemo = '계약3 메모';
+
+# contract testdata
+INSERT INTO contract
+SET regDate = NOW(),
+updateDate = NOW(),
+#bldgId =2,
+roomId = 15,
+tenantId = 5,
+leaseType = '월세',
+deposit = 5500000,
+rent= 400000,
+maintenanceFee = 100000,
+contractStartDate = '2023.12.2',
+contractEndDate= '2025.12.1',
+depositDate = 15,
+rentDate = 10,
+contractMemo = '계약3 메모';
+
+
+# contract testdata
+INSERT INTO contract
+SET regDate = NOW(),
+updateDate = NOW(),
+#bldgId =2,
+roomId = 16,
+tenantId = 6,
+leaseType = '전세',
+deposit = 55000000,
+maintenanceFee = 100000,
+contractStartDate = '2023.12.2',
+contractEndDate= '2025.12.1',
+depositDate = 15,
+rentDate = 10,
+contractMemo = '계약3 메모';
+
+
+# contract testdata
+INSERT INTO contract
+SET regDate = NOW(),
+updateDate = NOW(),
+#bldgId =2,
+roomId = 17,
+tenantId = 7,
+leaseType = '월세',
+deposit = 5500000,
+rent= 500000,
+maintenanceFee = 100000,
+contractStartDate = '2023.12.2',
+contractEndDate= '2025.12.1',
+depositDate = 15,
+rentDate = 10,
+contractMemo = '계약3 메모';
 
 SELECT * FROM contract;
 

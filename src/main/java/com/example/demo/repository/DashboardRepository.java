@@ -23,7 +23,23 @@ public interface DashboardRepository {
 			ON C.tenantId = CS.tenantId AND CS.rentDate LIKE '2024-02%'
 			GROUP BY R.id
 			""")
-	List<Dashboard> getDashboard();
+	List<Dashboard> getDashboard(); //수정예정 합계로
+ 
+	
+	@Select("""
+			SELECT *
+			FROM room AS R
+			LEFT JOIN contract AS C
+			ON R.id = C.roomId
+			LEFT JOIN building AS B
+			ON R.bldgId = B.id
+			LEFT JOIN tenant AS T
+			ON C.tenantId = T.id
+			LEFT JOIN contract_status AS CS 
+			ON C.tenantId = CS.tenantId AND CS.rentDate LIKE '2024-02%'
+			GROUP BY R.id
+			""")
+	List<Dashboard> getRentStatus();
 
 
 }

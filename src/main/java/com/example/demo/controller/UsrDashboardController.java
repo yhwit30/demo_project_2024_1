@@ -35,6 +35,9 @@ public class UsrDashboardController {
 		@RequestMapping("/usr/bg12343/rentStatus")
 		public String getStatus(Model model) { 
 			
+			List<Dashboard> rentStatus = dashboardService.getRentStatus();
+			
+			model.addAttribute("rentStatus", rentStatus);
 			return "usr/bg12343/rentStatus";
 		}
 		
