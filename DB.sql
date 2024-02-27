@@ -1388,6 +1388,34 @@ CREATE TABLE maintenance_fee(
     tenantId INT(10) NOT NULL
 );
 
+SELECT * FROM maintenance_fee
+WHERE updateDate LIKE '2024-02%';
+
+SELECT *
+FROM room AS R
+LEFT JOIN contract AS C
+ON R.id = C.roomId
+LEFT JOIN building AS B
+ON R.bldgId = B.id
+LEFT JOIN tenant AS T
+ON C.tenantId = T.id
+LEFT JOIN maintenance_fee AS MF
+ON MF.tenantId = T.id
+#GROUP BY R.id
+HAVING MF.updateDate LIKE '2024-02%';
+
+# 잘 안되는 쿼리인 듯..
+SELECT * FROM maintenance_fee AS MF
+LEFT JOIN tenant AS T
+ON MF.tenantId = T.id
+LEFT JOIN contract AS C
+ON T.roomId = C.roomId
+RIGHT JOIN room AS R
+ON C.roomId = R.id
+LEFT JOIN building AS B
+ON R.bldgId = B.id
+GROUP BY R.id
+HAVING MF.updateDate LIKE '2024-02%';
 
 # 관리비 월별로 출력
 SELECT MF.*,T.*, C.*, R.*, B.*,  MF1.monthlyMaintenanceFee AS monthlyMaintenanceFee1,
@@ -1614,7 +1642,7 @@ tenantId =7;
 INSERT INTO maintenance_fee
 SET regDate = NOW(),
 updateDate = '2024-02',
-commonElec = 23000,
+commonElec = 50000,
 commonWater =10000,
 elevater =165000,
 internetTV =280000,
@@ -1638,7 +1666,7 @@ tenantId =1;
 INSERT INTO maintenance_fee
 SET regDate = NOW(),
 updateDate = '2024-02',
-commonElec = 23000,
+commonElec = 50000,
 commonWater =10000,
 elevater =165000,
 internetTV =280000,
@@ -1662,7 +1690,7 @@ tenantId =2;
 INSERT INTO maintenance_fee
 SET regDate = NOW(),
 updateDate = '2024-02',
-commonElec = 23000,
+commonElec = 50000,
 commonWater =10000,
 elevater =165000,
 internetTV =280000,
@@ -1686,7 +1714,7 @@ tenantId =3;
 INSERT INTO maintenance_fee
 SET regDate = NOW(),
 updateDate = '2024-02',
-commonElec = 23000,
+commonElec = 50000,
 commonWater =10000,
 elevater =165000,
 internetTV =280000,
@@ -1710,7 +1738,7 @@ tenantId =4;
 INSERT INTO maintenance_fee
 SET regDate = NOW(),
 updateDate = '2024-02',
-commonElec = 23000,
+commonElec = 50000,
 commonWater =10000,
 elevater =165000,
 internetTV =280000,
@@ -1735,7 +1763,7 @@ tenantId =5;
 INSERT INTO maintenance_fee
 SET regDate = NOW(),
 updateDate = '2024-02',
-commonElec = 23000,
+commonElec = 50000,
 commonWater =10000,
 elevater =165000,
 internetTV =280000,
@@ -1759,7 +1787,7 @@ tenantId =6;
 INSERT INTO maintenance_fee
 SET regDate = NOW(),
 updateDate = '2024-02',
-commonElec = 23000,
+commonElec = 50000,
 commonWater =10000,
 elevater =165000,
 internetTV =280000,
