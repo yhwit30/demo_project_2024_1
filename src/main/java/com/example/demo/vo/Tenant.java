@@ -25,5 +25,6 @@ public class Tenant {
 	private String rentDate;
 	private int roomNum;
 	private String bldgName;
+	private String leaseType;
 
 }

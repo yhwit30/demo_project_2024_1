@@ -1072,7 +1072,7 @@ SET regDate = NOW(),
 updateDate = NOW(),
 rentDate = '2024.1.10',
 #roomId = 2,
-tenantId = 11,
+tenantId = 4,
 paymentStatus = '완납',
 extraIncome = '없음',
 extraExpense = '없음';
@@ -1083,7 +1083,7 @@ SET regDate = NOW(),
 updateDate = NOW(),
 rentDate = '2024.2.10',
 #roomId = 2,
-tenantId = 11,
+tenantId = 4,
 paymentStatus = '완납',
 extraIncome = '없음',
 extraExpense = '없음';
@@ -1095,7 +1095,7 @@ SET regDate = NOW(),
 updateDate = NOW(),
 rentDate = '2024.3.10',
 #roomId = 2,
-tenantId = 11,
+tenantId = 4,
 paymentStatus = '완납',
 extraIncome = '없음',
 extraExpense = '없음';
@@ -1106,7 +1106,7 @@ SET regDate = NOW(),
 updateDate = NOW(),
 rentDate = '2024.4.10',
 #roomId = 2,
-tenantId = 11,
+tenantId = 4,
 paymentStatus = '완납',
 extraIncome = '없음',
 extraExpense = '없음';
@@ -1117,7 +1117,7 @@ SET regDate = NOW(),
 updateDate = NOW(),
 rentDate = '2024.5.10',
 #roomId = 2,
-tenantId = 11,
+tenantId = 4,
 paymentStatus = '미납',
 extraIncome = '없음',
 extraExpense = '없음';
@@ -1128,7 +1128,7 @@ SET regDate = NOW(),
 updateDate = NOW(),
 rentDate = '2024.1.10',
 #roomId = 2,
-tenantId = 15,
+tenantId = 5,
 paymentStatus = '완납',
 extraIncome = '없음',
 extraExpense = '없음';
@@ -1139,7 +1139,7 @@ SET regDate = NOW(),
 updateDate = NOW(),
 rentDate = '2024.2.10',
 #roomId = 2,
-tenantId = 15,
+tenantId = 5,
 paymentStatus = '완납',
 extraIncome = '없음',
 extraExpense = '없음';
@@ -1150,7 +1150,7 @@ SET regDate = NOW(),
 updateDate = NOW(),
 rentDate = '2024.3.10',
 #roomId = 2,
-tenantId = 15,
+tenantId = 5,
 paymentStatus = '완납',
 extraIncome = '없음',
 extraExpense = '없음';
@@ -1161,7 +1161,7 @@ SET regDate = NOW(),
 updateDate = NOW(),
 rentDate = '2024.4.10',
 #roomId = 2,
-tenantId = 15,
+tenantId = 5,
 paymentStatus = '미납',
 extraIncome = '없음',
 extraExpense = '없음';
@@ -1172,11 +1172,54 @@ SET regDate = NOW(),
 updateDate = NOW(),
 rentDate = '2024.5.10',
 #roomId = 2,
-tenantId = 15,
+tenantId = 5,
 paymentStatus = '미납',
 extraIncome = '없음',
 extraExpense = '없음';
 
+# contract_status testdata
+INSERT INTO contract_status
+SET regDate = NOW(),
+updateDate = NOW(),
+rentDate = '2024.1.10',
+#roomId = 2,
+tenantId = 6,
+paymentStatus = '완납',
+extraIncome = '없음',
+extraExpense = '없음';
+
+# contract_status testdata
+INSERT INTO contract_status
+SET regDate = NOW(),
+updateDate = NOW(),
+rentDate = '2024.1.10',
+#roomId = 2,
+tenantId = 7,
+paymentStatus = '미납',
+extraIncome = '없음',
+extraExpense = '없음';
+
+# contract_status testdata
+INSERT INTO contract_status
+SET regDate = NOW(),
+updateDate = NOW(),
+rentDate = '2023.12.10',
+#roomId = 2,
+tenantId = 7,
+paymentStatus = '완납',
+extraIncome = '없음',
+extraExpense = '없음';
+
+# contract_status testdata
+INSERT INTO contract_status
+SET regDate = NOW(),
+updateDate = NOW(),
+rentDate = '2023.11.10',
+#roomId = 2,
+tenantId = 7,
+paymentStatus = '완납',
+extraIncome = '없음',
+extraExpense = '없음';
 
 
 
@@ -1438,37 +1481,36 @@ WHERE rentDate LIKE '2024-03%') AS CS3
 ON C.tenantId = CS3.tenantId
 GROUP BY R.id;
 
-#GPT한테 서브쿼리 풀어달라고 한 쿼리
-SELECT B.id,
-    R.id,
-    C.tenantId,
-    MAX(CASE WHEN CS.rentDate LIKE '2024-01%' THEN CS.paymentStatus ELSE NULL END) AS januaryPaymentStatus,
-    MAX(CASE WHEN CS.rentDate LIKE '2024-02%' THEN CS.paymentStatus ELSE NULL END) AS februaryPaymentStatus,
-    MAX(CASE WHEN CS.rentDate LIKE '2024-03%' THEN CS.paymentStatus ELSE NULL END) AS marchPaymentStatus,
-    MAX(CASE WHEN CS.rentDate LIKE '2024-04%' THEN CS.paymentStatus ELSE NULL END) AS aprilPaymentStatus,
-    MAX(CASE WHEN CS.rentDate LIKE '2024-05%' THEN CS.paymentStatus ELSE NULL END) AS mayPaymentStatus,
-    MAX(CASE WHEN CS.rentDate LIKE '2024-06%' THEN CS.paymentStatus ELSE NULL END) AS junePaymentStatus,
-    MAX(CASE WHEN CS.rentDate LIKE '2024-07%' THEN CS.paymentStatus ELSE NULL END) AS julyPaymentStatus,
-    MAX(CASE WHEN CS.rentDate LIKE '2024-08%' THEN CS.paymentStatus ELSE NULL END) AS augustPaymentStatus,
-    MAX(CASE WHEN CS.rentDate LIKE '2024-09%' THEN CS.paymentStatus ELSE NULL END) AS septemberPaymentStatus,
-    MAX(CASE WHEN CS.rentDate LIKE '2024-10%' THEN CS.paymentStatus ELSE NULL END) AS octoberPaymentStatus,
-    MAX(CASE WHEN CS.rentDate LIKE '2024-11%' THEN CS.paymentStatus ELSE NULL END) AS novemberPaymentStatus,
-    MAX(CASE WHEN CS.rentDate LIKE '2024-12%' THEN CS.paymentStatus ELSE NULL END) AS decemberPaymentStatus
-FROM 
-    room AS R
-    LEFT JOIN building AS B
-	ON R.bldgId = B.id
-LEFT JOIN 
-    contract AS C ON R.id = C.roomId
-LEFT JOIN 
-    contract_Status AS CS ON C.tenantId = CS.tenantId
-    AND (CS.rentDate LIKE '2024-01%' OR CS.rentDate LIKE '2024-02%' OR CS.rentDate LIKE '2024-03%' OR
-         CS.rentDate LIKE '2024-04%' OR CS.rentDate LIKE '2024-05%' OR CS.rentDate LIKE '2024-06%' OR
-         CS.rentDate LIKE '2024-07%' OR CS.rentDate LIKE '2024-08%' OR CS.rentDate LIKE '2024-09%' OR
-         CS.rentDate LIKE '2024-10%' OR CS.rentDate LIKE '2024-11%' OR CS.rentDate LIKE '2024-12%')
-GROUP BY 
-    R.id
-    HAVING B.id = 1;
+#GPT한테 서브쿼리 풀어달라고 한 쿼리 약간 변경
+SELECT *,
+MAX(CASE WHEN CS.rentDate LIKE '2024-01%' THEN CS.paymentStatus ELSE NULL END) AS JanuaryPaymentStatus,
+MAX(CASE WHEN CS.rentDate LIKE '2024-02%' THEN CS.paymentStatus ELSE NULL END) AS FebruaryPaymentStatus,
+MAX(CASE WHEN CS.rentDate LIKE '2024-03%' THEN CS.paymentStatus ELSE NULL END) AS MarchPaymentStatus,
+MAX(CASE WHEN CS.rentDate LIKE '2024-04%' THEN CS.paymentStatus ELSE NULL END) AS AprilPaymentStatus,
+MAX(CASE WHEN CS.rentDate LIKE '2024-05%' THEN CS.paymentStatus ELSE NULL END) AS MayPaymentStatus,
+MAX(CASE WHEN CS.rentDate LIKE '2024-06%' THEN CS.paymentStatus ELSE NULL END) AS JunePaymentStatus,
+MAX(CASE WHEN CS.rentDate LIKE '2024-07%' THEN CS.paymentStatus ELSE NULL END) AS JulyPaymentStatus,
+MAX(CASE WHEN CS.rentDate LIKE '2024-08%' THEN CS.paymentStatus ELSE NULL END) AS AugustPaymentStatus,
+MAX(CASE WHEN CS.rentDate LIKE '2024-09%' THEN CS.paymentStatus ELSE NULL END) AS SeptemberPaymentStatus,
+MAX(CASE WHEN CS.rentDate LIKE '2024-10%' THEN CS.paymentStatus ELSE NULL END) AS OctoberPaymentStatus,
+MAX(CASE WHEN CS.rentDate LIKE '2024-11%' THEN CS.paymentStatus ELSE NULL END) AS NovemberPaymentStatus,
+MAX(CASE WHEN CS.rentDate LIKE '2024-12%' THEN CS.paymentStatus ELSE NULL END) AS DecemberPaymentStatus
+FROM room AS R
+LEFT JOIN contract AS C
+ON R.id = C.roomId
+LEFT JOIN building AS B
+ON R.bldgId = B.id
+LEFT JOIN tenant AS T
+ON C.tenantId = T.id
+LEFT JOIN contract_Status AS CS 
+ON C.tenantId = CS.tenantId
+AND (CS.rentDate LIKE '2024-01%' OR CS.rentDate LIKE '2024-02%' OR CS.rentDate LIKE '2024-03%' OR
+	 CS.rentDate LIKE '2024-04%' OR CS.rentDate LIKE '2024-05%' OR CS.rentDate LIKE '2024-06%' OR
+	 CS.rentDate LIKE '2024-07%' OR CS.rentDate LIKE '2024-08%' OR CS.rentDate LIKE '2024-09%' OR
+     CS.rentDate LIKE '2024-10%' OR CS.rentDate LIKE '2024-11%' OR CS.rentDate LIKE '2024-12%')
+GROUP BY R.id
+HAVING B.id = 2;
+
 
 SELECT * FROM building;
 

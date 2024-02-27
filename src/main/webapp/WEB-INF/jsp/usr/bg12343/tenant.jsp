@@ -9,7 +9,7 @@
 		<div class="badge badge-outline">${tenantsCnt }개</div>
 		<table class="table-box-1 table" border="1">
 			<colgroup>
-				<col style="width: 10%" />
+				<col style="width: 5%" />
 			</colgroup>
 			<thead>
 				<tr>
@@ -20,13 +20,14 @@
 					<th>세입자메모</th>
 					<th>건물명</th>
 					<th>호실</th>
+					<th>임대형태</th>
 					<th>보증금</th>
 					<th>월세</th>
 					<th>관리비</th>
 					<th>계약시작일</th>
 					<th>계약만료일</th>
 					<th>보증금납부일</th>
-					<th>세 납기일</th>
+					<th>납부일</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -40,6 +41,7 @@
 						<td>${tenant.tenantMemo }</td>
 						<td>${tenant.bldgName }</td>
 						<td>${tenant.roomNum }</td>
+						<td>${tenant.leaseType }</td>
 						<td>${tenant.deposit }</td>
 						<td>${tenant.rent }</td>
 						<td>${tenant.maintenanceFee }</td>
