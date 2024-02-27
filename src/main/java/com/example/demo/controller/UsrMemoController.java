@@ -1,7 +1,5 @@
 package com.example.demo.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,13 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.service.MemoService;
-import com.example.demo.service.TenantService;
 import com.example.demo.util.Ut;
-import com.example.demo.vo.Memo;
-import com.example.demo.vo.ResultData;
-import com.example.demo.vo.Room;
 import com.example.demo.vo.Rq;
-import com.example.demo.vo.Tenant;
 
 @Controller
 public class UsrMemoController {
@@ -49,15 +42,16 @@ public class UsrMemoController {
 			return Ut.jsHistoryBack("F-2", "세입자차량번호를 입력해주세요");
 		}
 
-		ResultData memoAddRd = memoService.addMemo(rq.getLoginedMemberId(), boardId, title, body);
-
-		// 작성된 게시글 번호 가져오기
-		int id = (int) memoAddRd.getData1();
-
-		if (afterLoginUri.length() > 0) {
-			return Ut.jsReplace(memoAddRd.getResultCode(), memoAddRd.getMsg(), afterLoginUri);
-		}
-		return Ut.jsReplace(memoAddRd.getResultCode(), memoAddRd.getMsg(), "../bg12343/dashboard");
+//		ResultData memoAddRd = memoService.addMemo(rq.getLoginedMemberId(), boardId, title, body);
+//
+//		// 작성된 게시글 번호 가져오기
+//		int id = (int) memoAddRd.getData1();
+//
+//		if (afterLoginUri.length() > 0) {
+//			return Ut.jsReplace(memoAddRd.getResultCode(), memoAddRd.getMsg(), afterLoginUri);
+//		}
+//		return Ut.jsReplace(memoAddRd.getResultCode(), memoAddRd.getMsg(), "../bg12343/dashboard");
+		return null;
 	}
 
 	@RequestMapping("/usr/bg12343/memoModify")
@@ -71,8 +65,8 @@ public class UsrMemoController {
 	public String doMemoModify(int[] id, String[] tenantName, int[] tenantPhone, String[] tenantCarNum,
 			String[] tenantMemo) {
 
-
-		return Ut.jsReplace(roomModifyRd.getResultCode(), roomModifyRd.getMsg(), "../bg12343/tenant");
+return null;
+//		return Ut.jsReplace(roomModifyRd.getResultCode(), roomModifyRd.getMsg(), "../bg12343/tenant");
 	}
 
 	
@@ -98,15 +92,16 @@ public class UsrMemoController {
 			return Ut.jsHistoryBack("F-2", "세입자차량번호를 입력해주세요");
 		}
 
-		ResultData memoAddRd = memoService.addMemo(rq.getLoginedMemberId(), boardId, title, body);
-
-		// 작성된 게시글 번호 가져오기
-		int id = (int) memoAddRd.getData1();
-
-		if (afterLoginUri.length() > 0) {
-			return Ut.jsReplace(memoAddRd.getResultCode(), memoAddRd.getMsg(), afterLoginUri);
-		}
-		return Ut.jsReplace(memoAddRd.getResultCode(), memoAddRd.getMsg(), "../bg12343/dashboard");
+//		ResultData memoAddRd = memoService.addMemo(rq.getLoginedMemberId(), boardId, title, body);
+//
+//		// 작성된 게시글 번호 가져오기
+//		int id = (int) memoAddRd.getData1();
+//
+//		if (afterLoginUri.length() > 0) {
+//			return Ut.jsReplace(memoAddRd.getResultCode(), memoAddRd.getMsg(), afterLoginUri);
+//		}
+//		return Ut.jsReplace(memoAddRd.getResultCode(), memoAddRd.getMsg(), "../bg12343/dashboard");
+		return null;
 	}
 	
 }

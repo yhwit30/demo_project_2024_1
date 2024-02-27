@@ -41,5 +41,6 @@ public class Dashboard {
 	private String octoberPaymentStatus;
 	private String novemberPaymentStatus;
 	private String decemberPaymentStatus;
+	private double roomArea;
 
 }

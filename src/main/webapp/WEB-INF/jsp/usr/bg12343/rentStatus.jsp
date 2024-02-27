@@ -24,6 +24,7 @@ ${nowYear }년
 					<th>세입자명</th>
 					<th>세입자휴대폰</th>
 					<th>임대형태</th>
+					<th>면적(m2)</th>
 					<th>현 보증금</th>
 					<th>현 월세</th>
 					<th>관리비</th>
@@ -53,6 +54,7 @@ ${nowYear }년
 						<td>${rentStatus.tenantName }</td>
 						<td>${rentStatus.tenantPhone }</td>
 						<td>${rentStatus.leaseType }</td>
+						<td>${rentStatus.roomArea }</td>
 						<td>${rentStatus.deposit }</td>
 						<td>${rentStatus.rent }</td>
 						<td>${rentStatus.maintenanceFee }</td>
