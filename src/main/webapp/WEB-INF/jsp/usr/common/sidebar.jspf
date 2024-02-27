@@ -12,10 +12,10 @@
 				<a href="/usr/bg12343/rentStatus?bldgId=1">수납관리</a>
 			</li>
 			<li>
-				<a href="/usr/bg12343/maintenanceFee">관리비</a>
+				<a href="/usr/bg12343/maintenanceFee?bldgId=1">관리비</a>
 			</li>
 			<li>
-				<a href="/usr/bg12343/building">건물정보</a>
+				<a href="/usr/bg12343/building?bldgId=1">건물정보</a>
 			</li>
 			<li>
 				<a href="/usr/bg12343/room">호실정보</a>

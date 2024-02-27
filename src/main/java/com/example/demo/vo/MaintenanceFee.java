@@ -33,9 +33,22 @@ public class MaintenanceFee {
 	private int tenantId;
 	
 	
+	private int bldgId;
 	private String bldgName;
 	private String roomNum;
 	private String tenantName;
 	private String leaseType;
+	private int monthlyMaintenanceFee1;
+	private int monthlyMaintenanceFee2;
+	private int monthlyMaintenanceFee3;
+	private int monthlyMaintenanceFee4;
+	private int monthlyMaintenanceFee5;
+	private int monthlyMaintenanceFee6;
+	private int monthlyMaintenanceFee7;
+	private int monthlyMaintenanceFee8;
+	private int monthlyMaintenanceFee9;
+	private int monthlyMaintenanceFee10;
+	private int monthlyMaintenanceFee11;
+	private int monthlyMaintenanceFee12;
 
 }

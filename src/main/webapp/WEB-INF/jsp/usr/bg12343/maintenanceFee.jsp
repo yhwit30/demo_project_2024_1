@@ -4,6 +4,14 @@
 <%@ include file="../common/head.jspf"%>
 <%@ include file="../common/sidebar.jspf"%>
 
+<!-- 건물 개수대로 가져오는 함수로 수정해야함 -->
+<div>
+	<a class="btn btn-outline ${param.bldgId == 1 ? 'btn-active' : '' }" href="../bg12343/maintenanceFee?bldgId=1">건물1
+		가나</a>
+	<a class="btn btn-outline ${param.bldgId == 2 ? 'btn-active' : '' }" href="../bg12343/maintenanceFee?bldgId=2">건물2
+		다라</a>
+</div>
+
 
 <section class="mt-2 text-xl px-4">
 	<div class="mx-auto overflow-x-auto">
@@ -13,58 +21,46 @@
 			</colgroup>
 			<thead>
 				<tr>
-					<th>건물명</th>
 					<th>호실</th>
 					<th>세입자</th>
 					<th>임대형태</th>
-					<th>공동전기</th>
-					<th>공동수도</th>
-					<th>엘레베이터</th>
-					<th>인터넷티비</th>
-					<th>소방안전</th>
-					<th>수도사용</th>
-					<th>수도단가</th>
-					<th>수도금액</th>
-					<th>전기사용</th>
-					<th>전기단가</th>
-					<th>전기금액</th>
-					<th>가스사용</th>
-					<th>가스단가</th>
-					<th>가스금액</th>
-					<th>당월계</th>
-					<th>연체료</th>
-					<th>납기후 금액</th>
-					<th>납부일</th>
-
+					<th>1월</th>
+					<th>2월</th>
+					<th>3월</th>
+					<th>4월</th>
+					<th>5월</th>
+					<th>6월</th>
+					<th>7월</th>
+					<th>8월</th>
+					<th>9월</th>
+					<th>10월</th>
+					<th>11월</th>
+					<th>12월</th>
+					<th>메모</th>
 				</tr>
 			</thead>
 			<tbody>
 
 				<c:forEach var="maintenanceFee" items="${maintenanceFee }">
 					<tr class="hover">
-						<td>${maintenanceFee.bldgName }</td>
 						<td>${maintenanceFee.roomNum }</td>
 						<td>${maintenanceFee.tenantName }</td>
 						<td>${maintenanceFee.leaseType }</td>
-						<td>${maintenanceFee.commonElec }</td>
-						<td>${maintenanceFee.commonWater }</td>
-						<td>${maintenanceFee.elevater }</td>
-						<td>${maintenanceFee.internetTV }</td>
-						<td>${maintenanceFee.fireSafety }</td>
-						<td>${maintenanceFee.waterUse }</td>
-						<td>${maintenanceFee.waterCost }</td>
-						<td>${maintenanceFee.waterBill }</td>
-						<td>${maintenanceFee.elecUse }</td>
-						<td>${maintenanceFee.elecCost }</td>
-						<td>${maintenanceFee.elecBill }</td>
-						<td>${maintenanceFee.gasUse }</td>
-						<td>${maintenanceFee.gasCost }</td>
-						<td>${maintenanceFee.gasBill }</td>
-						<td>${maintenanceFee.monthlyMaintenanceFee }</td>
-						<td>${maintenanceFee.lateFee }</td>
-						<td>${maintenanceFee.lateMaintenanceFee }</td>
-						<td>${maintenanceFee.maintenanceFeeDate }</td>
-
+						<td>
+							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }">${maintenanceFee.monthlyMaintenanceFee1 }</a>
+						</td>
+						<td>${maintenanceFee.monthlyMaintenanceFee2 }</td>
+						<td>${maintenanceFee.monthlyMaintenanceFee3 }</td>
+						<td>${maintenanceFee.monthlyMaintenanceFee4 }</td>
+						<td>${maintenanceFee.monthlyMaintenanceFee5 }</td>
+						<td>${maintenanceFee.monthlyMaintenanceFee6 }</td>
+						<td>${maintenanceFee.monthlyMaintenanceFee7 }</td>
+						<td>${maintenanceFee.monthlyMaintenanceFee8 }</td>
+						<td>${maintenanceFee.monthlyMaintenanceFee9 }</td>
+						<td>${maintenanceFee.monthlyMaintenanceFee10 }</td>
+						<td>${maintenanceFee.monthlyMaintenanceFee11 }</td>
+						<td>${maintenanceFee.monthlyMaintenanceFee12 }</td>
+						<td>#</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -72,7 +68,10 @@
 	</div>
 
 	<div class="btns mt-5">
-		<button class="btn btn-outline" type="button" onclick="history.back();">뒤로가기</button>
+		<a class="btn btn-outline" href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }">자세히 보기</a>
+	</div>
+
+	<div class="btns mt-5">
 		<a class="btn btn-outline" href="../bg12343/maintenanceFeeModify">수정</a>
 		<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="#">삭제</a>
 	</div>

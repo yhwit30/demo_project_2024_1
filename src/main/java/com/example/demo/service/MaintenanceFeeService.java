@@ -15,8 +15,8 @@ public class MaintenanceFeeService {
 	@Autowired
 	private MaintenanceFeeRepository maintenanceFeeRepository;
 
-	public List<MaintenanceFee> getMaintenanceFee() {
-		return maintenanceFeeRepository.getMaintenanceFee();
+	public List<MaintenanceFee> getMaintenanceFee(int bldgId, Integer year) {
+		return maintenanceFeeRepository.getMaintenanceFee(bldgId, year);
 	}
 
 	public ResultData modifyMaintenanceFee(int tenantId, int commonElec, int commonWater, int elevater, int internetTV,

@@ -1,11 +1,13 @@
 package com.example.demo.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.service.MaintenanceFeeService;
@@ -17,23 +19,50 @@ import com.example.demo.vo.Tenant;
 @Controller
 public class UsrMaintenanceFeeController {
 
+	LocalDate now = LocalDate.now();
+	int nowYear = now.getYear();
+
 	@Autowired
 	private MaintenanceFeeService maintenanceFeeService;
 
 	// 액션 메소드
 	@RequestMapping("/usr/bg12343/maintenanceFee")
-	public String getDashboard(Model model) {
+	public String getMaintenanceFee(Model model, @RequestParam(defaultValue = "1") int bldgId, Integer year) {
 
-		List<MaintenanceFee> maintenanceFee = maintenanceFeeService.getMaintenanceFee();
+		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
+		if (year == null) {
+			year = nowYear;
+		}
+
+		List<MaintenanceFee> maintenanceFee = maintenanceFeeService.getMaintenanceFee(bldgId, year);
 
 		model.addAttribute("maintenanceFee", maintenanceFee);
 		return "usr/bg12343/maintenanceFee";
 	}
 
-	@RequestMapping("/usr/bg12343/maintenanceFeeModify")
-	public String showMaintenanceFeeModify(Model model) {
+	@RequestMapping("/usr/bg12343/maintenanceFeeDetail")
+	public String getMaintenanceFeeDetail(Model model, @RequestParam(defaultValue = "1") int bldgId, Integer year) {
 
-		List<MaintenanceFee> maintenanceFee = maintenanceFeeService.getMaintenanceFee();
+		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
+		if (year == null) {
+			year = nowYear;
+		}
+
+		List<MaintenanceFee> maintenanceFee = maintenanceFeeService.getMaintenanceFee(bldgId, year);
+
+		model.addAttribute("maintenanceFee", maintenanceFee);
+		return "usr/bg12343/maintenanceFeeDetail";
+	}
+
+	@RequestMapping("/usr/bg12343/maintenanceFeeModify")
+	public String showMaintenanceFeeModify(Model model, @RequestParam(defaultValue = "1") int bldgId, Integer year) {
+
+		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
+		if (year == null) {
+			year = nowYear;
+		}
+
+		List<MaintenanceFee> maintenanceFee = maintenanceFeeService.getMaintenanceFee(bldgId, year);
 
 		model.addAttribute("maintenanceFee", maintenanceFee);
 		return "usr/bg12343/maintenanceFeeModify";

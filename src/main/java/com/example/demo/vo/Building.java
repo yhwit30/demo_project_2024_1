@@ -23,4 +23,5 @@ public class Building {
 	private int standardRent;
 	private int standardJeonse;
 	private int bldgId;
+	private double roomArea;
 }

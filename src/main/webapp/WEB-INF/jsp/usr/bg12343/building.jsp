@@ -47,6 +47,7 @@
 				<tr>
 					<th>호실</th>
 					<th>형태</th>
+					<th>면적(m2)</th>
 					<th>기준 보증금</th>
 					<th>기준 월세</th>
 					<th>기준 전세</th>
@@ -59,6 +60,7 @@
 					<tr class="hover">
 						<td>${building.roomNum }</td>
 						<td>${building.roomType }</td>
+						<td>${building.roomArea }</td>
 						<td>${building.standardDeposit }</td>
 						<td>${building.standardRent }</td>
 						<td>${building.standardJeonse }</td>
@@ -72,7 +74,6 @@
 
 
 	<div class="btns mt-5">
-		<button class="btn btn-outline" type="button" onclick="history.back();">뒤로가기</button>
 		<a class="btn btn-outline" href="../bg12343/buildingModify?bldgId=${param.bldgId }">수정</a>
 		<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="#">삭제</a>
 	</div>

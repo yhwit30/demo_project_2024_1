@@ -517,10 +517,10 @@ CREATE TABLE room(
     roomMemo CHAR(20) NOT NULL,
     standardDeposit INT(10) NOT NULL,
     standardRent INT(10) NOT NULL,
-    standardJeonse INT(10) NOT NULL
+    standardJeonse INT(10) NOT NULL,
+    roomArea DOUBLE NOT NULL
 );
 
-#ALTER TABLE room ADD COLUMN contractId INT(10) UNSIGNED NOT NULL AFTER bldgId;
 
 SELECT * FROM room;
 
@@ -543,7 +543,8 @@ roomType = '원룸',
 roomMemo = '호실별 메모 101',
 standardDeposit = 5000000,
 standardRent = 400000,
-standardJeonse = 50000000;
+standardJeonse = 50000000,
+roomArea = 26.10;
 
 # room testdata
 INSERT INTO room
@@ -553,7 +554,8 @@ roomType = '원룸',
 roomMemo = '호실별 메모 102',
 standardDeposit = 5000000,
 standardRent = 400000,
-standardJeonse = 50000000;
+standardJeonse = 50000000,
+roomArea = 30.25;
 
 # room testdata
 INSERT INTO room
@@ -563,7 +565,8 @@ roomType = '1.5룸',
 roomMemo = '호실별 메모 201',
 standardDeposit = 5000000,
 standardRent = 500000,
-standardJeonse = 80000000;
+standardJeonse = 80000000,
+roomArea = 48.34;
 
 # room testdata
 INSERT INTO room
@@ -573,7 +576,8 @@ roomType = '1.5룸',
 roomMemo = '호실별 메모 202',
 standardDeposit = 5000000,
 standardRent = 500000,
-standardJeonse = 80000000;
+standardJeonse = 80000000,
+roomArea = 48.34;
 
 # room testdata
 INSERT INTO room
@@ -583,7 +587,8 @@ roomType = '투룸',
 roomMemo = '호실별 메모 203',
 standardDeposit = 5000000,
 standardRent = 600000,
-standardJeonse = 100000000;
+standardJeonse = 100000000,
+roomArea = 30.25;
 
 
 # room testdata
@@ -594,7 +599,8 @@ roomType = '원룸',
 roomMemo = '호실별 메모 101',
 standardDeposit = 5000000,
 standardRent = 400000,
-standardJeonse = 50000000;
+standardJeonse = 50000000,
+roomArea = 48.34;
 
 # room testdata
 INSERT INTO room
@@ -604,7 +610,8 @@ roomType = '원룸',
 roomMemo = '호실별 메모 101',
 standardDeposit = 5000000,
 standardRent = 400000,
-standardJeonse = 50000000;
+standardJeonse = 50000000,
+roomArea = 48.34;
 
 
 # room testdata
@@ -615,7 +622,8 @@ roomType = '원룸',
 roomMemo = '호실별 메모 101',
 standardDeposit = 5000000,
 standardRent = 400000,
-standardJeonse = 50000000;
+standardJeonse = 50000000,
+roomArea = 30.25;
 
 # room testdata
 INSERT INTO room
@@ -625,7 +633,8 @@ roomType = '원룸',
 roomMemo = '호실별 메모 101',
 standardDeposit = 5000000,
 standardRent = 400000,
-standardJeonse = 50000000;
+standardJeonse = 50000000,
+roomArea = 30.25;
 
 # room testdata
 INSERT INTO room
@@ -635,7 +644,8 @@ roomType = '원룸',
 roomMemo = '호실별 메모 101',
 standardDeposit = 5000000,
 standardRent = 400000,
-standardJeonse = 50000000;
+standardJeonse = 50000000,
+roomArea = 87.38;
 
 # room testdata
 INSERT INTO room
@@ -645,7 +655,8 @@ roomType = '원룸',
 roomMemo = '호실별 메모 101',
 standardDeposit = 6000000,
 standardRent = 400000,
-standardJeonse = 50000000;
+standardJeonse = 50000000,
+roomArea = 30.25;
 
 # room testdata
 INSERT INTO room
@@ -655,7 +666,8 @@ roomType = '원룸',
 roomMemo = '호실별 메모 102',
 standardDeposit = 6000000,
 standardRent = 400000,
-standardJeonse = 50000000;
+standardJeonse = 50000000,
+roomArea = 30.25;
 
 # room testdata
 INSERT INTO room
@@ -665,7 +677,8 @@ roomType = '1.5룸',
 roomMemo = '호실별 메모 201',
 standardDeposit = 6000000,
 standardRent = 400000,
-standardJeonse = 80000000;
+standardJeonse = 80000000,
+roomArea = 30.25;
 
 # room testdata
 INSERT INTO room
@@ -675,7 +688,8 @@ roomType = '1.5룸',
 roomMemo = '호실별 메모 202',
 standardDeposit = 6000000,
 standardRent =400000,
-standardJeonse = 80000000;
+standardJeonse = 80000000,
+roomArea = 30.25;
 
 # room testdata
 INSERT INTO room
@@ -685,7 +699,8 @@ roomType = '투룸',
 roomMemo = '호실별 메모 203',
 standardDeposit = 5000000,
 standardRent = 400000,
-standardJeonse = 100000000;
+standardJeonse = 100000000,
+roomArea = 48.34;
 
 # room testdata
 INSERT INTO room
@@ -695,7 +710,8 @@ roomType = '원룸',
 roomMemo = '호실별 메모 101',
 standardDeposit = 6000000,
 standardRent = 400000,
-standardJeonse = 50000000;
+standardJeonse = 50000000,
+roomArea = 48.34;
 
 # room testdata
 INSERT INTO room
@@ -705,7 +721,8 @@ roomType = '원룸',
 roomMemo = '호실별 메모 101',
 standardDeposit = 6000000,
 standardRent = 400000,
-standardJeonse = 50000000;
+standardJeonse = 50000000,
+roomArea = 48.34;
 
 # room testdata
 INSERT INTO room
@@ -715,7 +732,8 @@ roomType = '원룸',
 roomMemo = '호실별 메모 101',
 standardDeposit = 6000000,
 standardRent = 400000,
-standardJeonse = 100000000;
+standardJeonse = 100000000,
+roomArea = 48.34;
 
 # room testdata
 INSERT INTO room
@@ -725,7 +743,8 @@ roomType = '원룸',
 roomMemo = '호실별 메모 101',
 standardDeposit = 5000000,
 standardRent = 400000,
-standardJeonse = 100000000;
+standardJeonse = 100000000,
+roomArea = 48.34;
 
 # room testdata
 INSERT INTO room
@@ -735,7 +754,8 @@ roomType = '원룸',
 roomMemo = '호실별 메모 101',
 standardDeposit = 5000000,
 standardRent = 400000,
-standardJeonse = 100000000;
+standardJeonse = 100000000,
+roomArea = 87.38;
 
 
 SELECT room.* , building.bldgName
@@ -1346,7 +1366,7 @@ SELECT * FROM `repair`;
 CREATE TABLE maintenance_fee(
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
-    updateDate DATETIME NOT NULL,
+    updateDate CHAR(20) NOT NULL,
     commonElec INT(10) NOT NULL,
     commonWater INT(10) NOT NULL,
     elevater INT(10) NOT NULL,
@@ -1369,20 +1389,61 @@ CREATE TABLE maintenance_fee(
 );
 
 
-SELECT * FROM maintenance_fee AS MF
+# 관리비 월별로 출력
+SELECT MF.*,T.*, C.*, R.*, B.*,  MF1.monthlyMaintenanceFee AS monthlyMaintenanceFee1,
+    MF2.monthlyMaintenanceFee AS monthlyMaintenanceFee2,
+    MF3.monthlyMaintenanceFee AS monthlyMaintenanceFee3,
+    MF4.monthlyMaintenanceFee AS monthlyMaintenanceFee4,
+    MF5.monthlyMaintenanceFee AS monthlyMaintenanceFee5,
+    MF6.monthlyMaintenanceFee AS monthlyMaintenanceFee6,
+    MF7.monthlyMaintenanceFee AS monthlyMaintenanceFee7,
+    MF8.monthlyMaintenanceFee AS monthlyMaintenanceFee8,
+    MF9.monthlyMaintenanceFee AS monthlyMaintenanceFee9,
+    MF10.monthlyMaintenanceFee AS monthlyMaintenanceFee10,
+    MF11.monthlyMaintenanceFee AS monthlyMaintenanceFee11,
+    MF12.monthlyMaintenanceFee AS monthlyMaintenanceFee12
+FROM maintenance_fee AS MF
 LEFT JOIN tenant AS T
 ON MF.tenantId = T.id
 LEFT JOIN contract AS C
 ON T.roomId = C.roomId
-LEFT JOIN room AS R
+RIGHT JOIN room AS R
 ON C.roomId = R.id
 LEFT JOIN building AS B
-ON R.bldgId = B.id;
+ON R.bldgId = B.id
+LEFT JOIN 
+    maintenance_fee AS MF1 ON C.tenantId = MF1.tenantId AND MF1.updateDate LIKE '2024-01%'
+LEFT JOIN 
+    maintenance_fee AS MF2 ON C.tenantId = MF2.tenantId AND MF2.updateDate LIKE '2024-02%'
+LEFT JOIN 
+    maintenance_fee AS MF3 ON C.tenantId = MF3.tenantId AND MF3.updateDate LIKE '2024-03%'
+LEFT JOIN 
+    maintenance_fee AS MF4 ON C.tenantId = MF4.tenantId AND MF4.updateDate LIKE '2024-04%'
+LEFT JOIN 
+    maintenance_fee AS MF5 ON C.tenantId = MF5.tenantId AND MF5.updateDate LIKE '2024-05%'
+LEFT JOIN 
+    maintenance_fee AS MF6 ON C.tenantId = MF6.tenantId AND MF6.updateDate LIKE '2024-06%'
+LEFT JOIN 
+    maintenance_fee AS MF7 ON C.tenantId = MF7.tenantId AND MF7.updateDate LIKE '2024-07%'
+LEFT JOIN 
+    maintenance_fee AS MF8 ON C.tenantId = MF8.tenantId AND MF8.updateDate LIKE '2024-08%'
+LEFT JOIN 
+    maintenance_fee AS MF9 ON C.tenantId = MF9.tenantId AND MF9.updateDate LIKE '2024-09%'
+LEFT JOIN 
+    maintenance_fee AS MF10 ON C.tenantId = MF10.tenantId AND MF10.updateDate LIKE '2024-10%'
+LEFT JOIN 
+    maintenance_fee AS MF11 ON C.tenantId = MF11.tenantId AND MF11.updateDate LIKE '2024-11%'
+LEFT JOIN 
+    maintenance_fee AS MF12 ON C.tenantId = MF12.tenantId AND MF12.updateDate LIKE '2024-12%'
+GROUP BY R.id
+HAVING B.id = 1;
+
+
 
 # maintenance_fee testdata
 INSERT INTO maintenance_fee
 SET regDate = NOW(),
-updateDate = NOW(),
+updateDate = '2024-01',
 commonElec = 23000,
 commonWater =10000,
 elevater =165000,
@@ -1406,7 +1467,7 @@ tenantId =1;
 # maintenance_fee testdata
 INSERT INTO maintenance_fee
 SET regDate = NOW(),
-updateDate = NOW(),
+updateDate = '2024-01',
 commonElec = 23000,
 commonWater =10000,
 elevater =165000,
@@ -1430,7 +1491,7 @@ tenantId =2;
 # maintenance_fee testdata
 INSERT INTO maintenance_fee
 SET regDate = NOW(),
-updateDate = NOW(),
+updateDate = '2024-01',
 commonElec = 23000,
 commonWater =10000,
 elevater =165000,
@@ -1450,6 +1511,274 @@ lateFee =3870,
 lateMaintenanceFee =31260,
 maintenanceFeeDate =16,
 tenantId =3;
+
+# maintenance_fee testdata
+INSERT INTO maintenance_fee
+SET regDate = NOW(),
+updateDate = '2024-01',
+commonElec = 23000,
+commonWater =10000,
+elevater =165000,
+internetTV =280000,
+fireSafety=75000,
+waterUse =7,
+waterCost =1990,
+waterBill=13930,
+elecUse =52,
+elecCost =240,
+elecBill =13460,
+gasUse = 40,
+gasCost = 900,
+gasBill =32970,
+monthlyMaintenanceFee=27390,
+lateFee =3870,
+lateMaintenanceFee =31260,
+maintenanceFeeDate =16,
+tenantId =4;
+
+# maintenance_fee testdata
+INSERT INTO maintenance_fee
+SET regDate = NOW(),
+updateDate = '2024-01',
+commonElec = 23000,
+commonWater =10000,
+elevater =165000,
+internetTV =280000,
+fireSafety=75000,
+waterUse =7,
+waterCost =1990,
+waterBill=13930,
+elecUse =52,
+elecCost =240,
+elecBill =13460,
+gasUse = 40,
+gasCost = 900,
+gasBill =32970,
+monthlyMaintenanceFee=27390,
+lateFee =3870,
+lateMaintenanceFee =31260,
+maintenanceFeeDate =16,
+tenantId =5;
+
+
+# maintenance_fee testdata
+INSERT INTO maintenance_fee
+SET regDate = NOW(),
+updateDate = '2024-01',
+commonElec = 23000,
+commonWater =10000,
+elevater =165000,
+internetTV =280000,
+fireSafety=75000,
+waterUse =7,
+waterCost =1990,
+waterBill=13930,
+elecUse =52,
+elecCost =240,
+elecBill =13460,
+gasUse = 40,
+gasCost = 900,
+gasBill =32970,
+monthlyMaintenanceFee=27390,
+lateFee =3870,
+lateMaintenanceFee =31260,
+maintenanceFeeDate =16,
+tenantId =6;
+
+# maintenance_fee testdata
+INSERT INTO maintenance_fee
+SET regDate = NOW(),
+updateDate = '2024-01',
+commonElec = 23000,
+commonWater =10000,
+elevater =165000,
+internetTV =280000,
+fireSafety=75000,
+waterUse =7,
+waterCost =1990,
+waterBill=13930,
+elecUse =52,
+elecCost =240,
+elecBill =13460,
+gasUse = 40,
+gasCost = 900,
+gasBill =32970,
+monthlyMaintenanceFee=27390,
+lateFee =3870,
+lateMaintenanceFee =31260,
+maintenanceFeeDate =16,
+tenantId =7;
+
+#-- 월별 위한 관리비 테스트데이터 
+# maintenance_fee testdata
+INSERT INTO maintenance_fee
+SET regDate = NOW(),
+updateDate = '2024-02',
+commonElec = 23000,
+commonWater =10000,
+elevater =165000,
+internetTV =280000,
+fireSafety=75000,
+waterUse =5,
+waterCost =1990,
+waterBill=9950,
+elecUse =68,
+elecCost =240,
+elecBill =16390,
+gasUse = 40,
+gasCost = 900,
+gasBill =32970,
+monthlyMaintenanceFee=26340,
+lateFee =1320,
+lateMaintenanceFee =27660,
+maintenanceFeeDate =10,
+tenantId =1;
+
+# maintenance_fee testdata
+INSERT INTO maintenance_fee
+SET regDate = NOW(),
+updateDate = '2024-02',
+commonElec = 23000,
+commonWater =10000,
+elevater =165000,
+internetTV =280000,
+fireSafety=75000,
+waterUse =4,
+waterCost =1990,
+waterBill=7960,
+elecUse =86,
+elecCost =240,
+elecBill =19680,
+gasUse = 40,
+gasCost = 900,
+gasBill =32970,
+monthlyMaintenanceFee=27640,
+lateFee =1380,
+lateMaintenanceFee =29020,
+maintenanceFeeDate =28,
+tenantId =2;
+
+# maintenance_fee testdata
+INSERT INTO maintenance_fee
+SET regDate = NOW(),
+updateDate = '2024-02',
+commonElec = 23000,
+commonWater =10000,
+elevater =165000,
+internetTV =280000,
+fireSafety=75000,
+waterUse =7,
+waterCost =1990,
+waterBill=13930,
+elecUse =52,
+elecCost =240,
+elecBill =13460,
+gasUse = 40,
+gasCost = 900,
+gasBill =32970,
+monthlyMaintenanceFee=27390,
+lateFee =3870,
+lateMaintenanceFee =31260,
+maintenanceFeeDate =16,
+tenantId =3;
+
+# maintenance_fee testdata
+INSERT INTO maintenance_fee
+SET regDate = NOW(),
+updateDate = '2024-02',
+commonElec = 23000,
+commonWater =10000,
+elevater =165000,
+internetTV =280000,
+fireSafety=75000,
+waterUse =7,
+waterCost =1990,
+waterBill=13930,
+elecUse =52,
+elecCost =240,
+elecBill =13460,
+gasUse = 40,
+gasCost = 900,
+gasBill =32970,
+monthlyMaintenanceFee=27390,
+lateFee =3870,
+lateMaintenanceFee =31260,
+maintenanceFeeDate =16,
+tenantId =4;
+
+# maintenance_fee testdata
+INSERT INTO maintenance_fee
+SET regDate = NOW(),
+updateDate = '2024-02',
+commonElec = 23000,
+commonWater =10000,
+elevater =165000,
+internetTV =280000,
+fireSafety=75000,
+waterUse =7,
+waterCost =1990,
+waterBill=13930,
+elecUse =52,
+elecCost =240,
+elecBill =13460,
+gasUse = 40,
+gasCost = 900,
+gasBill =32970,
+monthlyMaintenanceFee=27390,
+lateFee =3870,
+lateMaintenanceFee =31260,
+maintenanceFeeDate =16,
+tenantId =5;
+
+
+# maintenance_fee testdata
+INSERT INTO maintenance_fee
+SET regDate = NOW(),
+updateDate = '2024-02',
+commonElec = 23000,
+commonWater =10000,
+elevater =165000,
+internetTV =280000,
+fireSafety=75000,
+waterUse =7,
+waterCost =1990,
+waterBill=13930,
+elecUse =52,
+elecCost =240,
+elecBill =13460,
+gasUse = 40,
+gasCost = 900,
+gasBill =32970,
+monthlyMaintenanceFee=27390,
+lateFee =3870,
+lateMaintenanceFee =31260,
+maintenanceFeeDate =16,
+tenantId =6;
+
+# maintenance_fee testdata
+INSERT INTO maintenance_fee
+SET regDate = NOW(),
+updateDate = '2024-02',
+commonElec = 23000,
+commonWater =10000,
+elevater =165000,
+internetTV =280000,
+fireSafety=75000,
+waterUse =7,
+waterCost =1990,
+waterBill=13930,
+elecUse =52,
+elecCost =240,
+elecBill =13460,
+gasUse = 40,
+gasCost = 900,
+gasBill =32970,
+monthlyMaintenanceFee=27390,
+lateFee =3870,
+lateMaintenanceFee =31260,
+maintenanceFeeDate =16,
+tenantId =7;
+
 
 #dashboard join query 월별 납부현황 추가 -> 안 쓸 것 같다
 SELECT *

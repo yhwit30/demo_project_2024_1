@@ -27,6 +27,7 @@
 					<th>계약만료일</th>
 					<th>보증금납부일</th>
 					<th>납부일</th>
+					<th>메모</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -54,7 +55,6 @@
 	</div>
 
 	<div class="btns mt-5">
-		<button class="btn btn-outline" type="button" onclick="history.back();">뒤로가기</button>
 		<a class="btn btn-outline" href="../bg12343/tenantModify">수정</a>
 		<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="#">삭제</a>
 	</div>
