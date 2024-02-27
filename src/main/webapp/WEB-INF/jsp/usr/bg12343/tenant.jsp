@@ -6,20 +6,19 @@
 
 <section class="mt-2 text-xl px-4">
 	<div class="mx-auto overflow-x-auto">
-		<div class="badge badge-outline">${tenantsCnt }개</div>
+		<div class="badge badge-outline">${tenantsCnt }명</div>
 		<table class="table-box-1 table" border="1">
 			<colgroup>
 				<col style="width: 5%" />
 			</colgroup>
 			<thead>
 				<tr>
-					<th>세입자관리번호</th>
+					<th>건물명</th>
+					<th>호실</th>
 					<th>세입자명</th>
 					<th>세입자휴대폰</th>
 					<th>세입자차량</th>
 					<th>세입자메모</th>
-					<th>건물명</th>
-					<th>호실</th>
 					<th>임대형태</th>
 					<th>보증금</th>
 					<th>월세</th>
@@ -34,13 +33,12 @@
 
 				<c:forEach var="tenant" items="${tenants }">
 					<tr class="hover">
-						<td>${tenant.id }</td>
+						<td>${tenant.bldgName }</td>
+						<td>${tenant.roomNum }</td>
 						<td>${tenant.tenantName }</td>
 						<td>${tenant.tenantPhone }</td>
 						<td>${tenant.tenantCarNum }</td>
 						<td>${tenant.tenantMemo }</td>
-						<td>${tenant.bldgName }</td>
-						<td>${tenant.roomNum }</td>
 						<td>${tenant.leaseType }</td>
 						<td>${tenant.deposit }</td>
 						<td>${tenant.rent }</td>
