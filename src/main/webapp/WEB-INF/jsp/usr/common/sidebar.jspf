@@ -7,7 +7,7 @@
 	<ul>
 		<li>
 			<a href="/usr/bg12343/dashboard">대쉬보드</a>
-			<a href="/usr/bg12343/status">수납관리</a>
+			<a href="/usr/bg12343/rentStatus">수납관리</a>
 			<a href="/usr/bg12343/maintenanceFee">관리비</a>
 			<a href="/usr/bg12343/building">건물정보</a>
 			<a href="/usr/bg12343/room">호실정보</a>

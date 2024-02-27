@@ -1,15 +1,20 @@
 /* 폰트 */
+
 @font-face {
-	font-family: 'SOGANGUNIVERSITYTTF';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/SOGANGUNIVERSITYTTF.woff2')
-		format('woff2');
-	font-weight: normal;
-	font-style: normal;
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
 }
 
 html>body {
-	font-family: 'SOGANGUNIVERSITYTTF';
+	font-family: 'Pretendard-Regular';
 }
 
 /* 커스텀 */
@@ -41,20 +46,29 @@ header>div>ul>li:hover>ul {
 	height: 100%;
 	overflow:auto;
 	position: fixed;
+	border-right: thin solid gold; /* 	색깔 임시로 */
+
 }
 
 .side_menu > ul > li > a{
 	display: block;
 	padding: 10px;
 	background-color: skyblue;
-	margin-bottom: 10px;
+	margin-bottom: 15px;
 	color: black;
 }
 
-
-
 .side_bar_push{
 	margin-left: 100px;
+	margin-right: 50px;
+}
+
+/* 대쉬보드 날씨 */ 
+.weather{ /* 위치 조정 todo */
+	width: 100px;
+	height: 100%;
+	display: inline-block;
+	border: 2px solid gold;
 }
 
 

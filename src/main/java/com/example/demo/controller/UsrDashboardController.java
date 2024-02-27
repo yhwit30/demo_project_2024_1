@@ -32,10 +32,10 @@ public class UsrDashboardController {
 			return "usr/bg12343/dashboard";
 		}
 	
-		@RequestMapping("/usr/bg12343/status")
+		@RequestMapping("/usr/bg12343/rentStatus")
 		public String getStatus(Model model) { 
 			
-			return "usr/bg12343/status";
+			return "usr/bg12343/rentStatus";
 		}
 		
 	
