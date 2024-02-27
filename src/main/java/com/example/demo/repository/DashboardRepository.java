@@ -35,11 +35,10 @@ public interface DashboardRepository {
 			ON R.bldgId = B.id
 			LEFT JOIN tenant AS T
 			ON C.tenantId = T.id
-			LEFT JOIN contract_status AS CS 
-			ON C.tenantId = CS.tenantId AND CS.rentDate LIKE '2024-02%'
 			GROUP BY R.id
+			HAVING B.id = #{bldgId}
 			""")
-	List<Dashboard> getRentStatus();
+	List<Dashboard> getRentStatus(int bldgId);
 
 
 }

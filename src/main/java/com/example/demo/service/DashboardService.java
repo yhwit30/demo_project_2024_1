@@ -18,8 +18,8 @@ public class DashboardService {
 		return dashboardRepository.getDashboard();
 	}
 
-	public List<Dashboard> getRentStatus() {
-		return dashboardRepository.getRentStatus();
+	public List<Dashboard> getRentStatus(int bldgId) {
+		return dashboardRepository.getRentStatus(bldgId);
 	}
 
 

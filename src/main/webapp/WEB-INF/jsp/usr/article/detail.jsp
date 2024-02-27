@@ -191,41 +191,49 @@
 
 <!-- 댓글 수정 -->
 <script>
-$(document).ready(function() {
-    $('.edit-btn').click(function() {
-    	console.log($(this).data(${reply.id}));
-    	
-        var replyId = $(this).data('reply-id');
-        $('#reply-' + replyId).hide();
-        $('#edit-form-' + replyId).show();
-    });
-    $('.save-btn').click(function() {
-        var replyId = $(this).data(${reply.id});
-        var replyText = $('#comment-text-' + replyId).val();
-        $.ajax({
-            url: '/updateComment', // Spring Controller로 요청을 보냄
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                commentId: commentId,
-                commentText: commentText
-            }),
-            dataType: 'json',
-            success: function(response) {
-                if(response.status === 'success') {
-                    alert('댓글이 수정되었습니다.');
-                    $('#comment-' + commentId + ' p').text(commentText);
-                    $('#edit-form-' + commentId).hide();
-                    $('#comment-' + commentId).show();
-                }
-            },
-            error: function(xhr, status, error) {
-                alert('댓글 수정에 실패했습니다.');
-            }
-        });
-    });
-});
+function toggleModifybtn(replyId) {
+	
+	console.log(replyId);
+	
+	$('#modify-btn-'+replyId).hide();
+	$('#save-btn-'+replyId).show();
+	$('#reply-'+replyId).hide();
+	$('#modify-form-'+replyId).show();
+}
+
+function doModifyReply(replyId) {
+	 console.log(replyId); // 디버깅을 위해 replyId를 콘솔에 출력
+	    
+	    // form 요소를 정확하게 선택
+	    var form = $('#modify-form-' + replyId);
+	    console.log(form); // 디버깅을 위해 form을 콘솔에 출력
+
+	    // form 내의 input 요소의 값을 가져옵니다
+	    var text = form.find('input[name="reply-text-' + replyId + '"]').val();
+	    console.log(text); // 디버깅을 위해 text를 콘솔에 출력
+
+	    // form의 action 속성 값을 가져옵니다
+	    var action = form.attr('action');
+	    console.log(action); // 디버깅을 위해 action을 콘솔에 출력
+	
+    $.post({
+    	url: '/usr/reply/doModify', // 수정된 URL
+        type: 'POST', // GET에서 POST로 변경
+        data: { id: replyId, body: text }, // 서버에 전송할 데이터
+        success: function(data) {
+        	$('#modify-form-'+replyId).hide();
+        	$('#reply-'+replyId).text(data);
+        	$('#reply-'+replyId).show();
+        	$('#save-btn-'+replyId).hide();
+        	$('#modify-btn-'+replyId).show();
+        },
+        error: function(xhr, status, error) {
+            alert('댓글 수정에 실패했습니다: ' + error);
+        }
+	})
+}
 </script>
+
 
 
 <section class="mt-8 text-xl px-4">
@@ -359,12 +367,12 @@ $(document).ready(function() {
 				<c:forEach var="reply" items="${replies }">
 					<tr class="hover">
 						<td>${reply.id }</td>
-						<td>${reply.regDate }</td>
+						<td>${reply.regDate.substring(0,10) }</td>
 						<td>
 							<span id="reply-${reply.id }">${reply.body }</span>
-							<div class="edit-form-${reply.id }">
-								<input type="text" value="${reply.body }" class="reply-text" style="display: none;" />
-							</div>
+							<form method="POST" id="modify-form-${reply.id }" style="display: none;" action="/usr/reply/doModify">
+								<input type="text" value="${reply.body }" name="reply-text-${reply.id }" />
+							</form>
 						</td>
 						<td>${reply.extra__writer }</td>
 						<td>${reply.goodReactionPoint }</td>
@@ -372,15 +380,16 @@ $(document).ready(function() {
 						<td>
 							<c:if test="${reply.userCanModify }">
 								<%-- 							href="../reply/modify?id=${reply.id }" --%>
-								<a style="white-space: nowrap;" class="edit-btn btn btn-outline">수정</a>
-								<a style="white-space: nowrap; display: none;" class="edit-save btn btn-outline">저장</a>
+								<button onclick="toggleModifybtn('${reply.id}');" id="modify-btn-${reply.id }" style="white-space: nowrap;"
+									class="btn btn-outline">수정</button>
+								<button onclick="doModifyReply('${reply.id}');" style="white-space: nowrap; display: none;"
+									id="save-btn-${reply.id }" class="btn btn-outline">저장</button>
 							</c:if>
 						</td>
 						<td>
 							<c:if test="${reply.userCanDelete }">
 								<a style="white-space: nowrap;" class="btn btn-outline"
-									onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="../reply/doDelete?id=${reply.id }"
-								>삭제</a>
+									onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="../reply/doDelete?id=${reply.id }">삭제</a>
 							</c:if>
 						</td>
 					</tr>

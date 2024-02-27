@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.service.BuildingService;
 import com.example.demo.service.DashboardService;
@@ -33,9 +34,9 @@ public class UsrDashboardController {
 		}
 	
 		@RequestMapping("/usr/bg12343/rentStatus")
-		public String getStatus(Model model) { 
+		public String getStatus(Model model, @RequestParam(defaultValue = "1") int bldgId) { 
 			
-			List<Dashboard> rentStatus = dashboardService.getRentStatus();
+			List<Dashboard> rentStatus = dashboardService.getRentStatus(bldgId);
 			
 			model.addAttribute("rentStatus", rentStatus);
 			return "usr/bg12343/rentStatus";

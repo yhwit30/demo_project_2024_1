@@ -4,7 +4,10 @@
 <%@ include file="../common/head.jspf"%>
 <%@ include file="../common/sidebar.jspf"%>
 
-<h1>수납관리 페이지</h1>
+<div>
+	<a class="btn btn-outline ${param.bldgId == 1 ? 'btn-active' : '' }" href="../bg12343/rentStatus?bldgId=1">건물1 가나</a>
+	<a class="btn btn-outline ${param.bldgId == 2 ? 'btn-active' : '' }" href="../bg12343/rentStatus?bldgId=2">건물2 다라</a>
+</div>
 
 
 <section class="mt-2 text-xl px-4">
