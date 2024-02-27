@@ -17,8 +17,11 @@ public class BuildingService {
 	@Autowired
 	private BuildingRepository buildingRepository;
 
-	public List<Building> getForPrintBuildings() {
-		return buildingRepository.getForPrintBuildings();
+	public Building getForPrintBuilding(int bldgId) {
+		return buildingRepository.getForPrintBuilding(bldgId);
+	}
+	public List<Building> getForPrintBuildings(int bldgId) {
+		return buildingRepository.getForPrintBuildings(bldgId);
 	}
 
 	public List<Room> getForPrintRooms() {
@@ -48,5 +51,7 @@ public class BuildingService {
 		buildingRepository.modifyRoom(id, bldgId, roomNum, roomType,roomMemo, standardDeposit, standardRent, standardJeonse);
 		return ResultData.from("S-1", "호실정보가 수정되었습니다");
 	}
+
+	
 
 }

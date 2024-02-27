@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.service.BuildingService;
@@ -23,14 +24,16 @@ public class UsrBuildingController {
 
 	// 액션 메소드
 	@RequestMapping("/usr/bg12343/building")
-	public String getBuilding(Model model) {
+	public String getBuilding(Model model, @RequestParam(defaultValue = "1") int bldgId) {
 
-		List<Building> buildings = buildingService.getForPrintBuildings();
+		
+		Building buildingRd = buildingService.getForPrintBuilding(bldgId);
+		
+		List<Building> buildings = buildingService.getForPrintBuildings(bldgId);
 
-		int buildingsCnt = buildings.size();
 
+		model.addAttribute("buildingRd", buildingRd);
 		model.addAttribute("buildings", buildings);
-		model.addAttribute("buildingsCnt", buildingsCnt);
 		return "usr/bg12343/building";
 	}
 
@@ -66,9 +69,9 @@ public class UsrBuildingController {
 	}
 
 	@RequestMapping("/usr/bg12343/buildingModify")
-	public String showBuildingModify(Model model) {
+	public String showBuildingModify(Model model,@RequestParam(defaultValue = "1") int bldgId ) {
 
-		List<Building> buildings = buildingService.getForPrintBuildings();
+		List<Building> buildings = buildingService.getForPrintBuildings(bldgId);
 
 		int buildingsCnt = buildings.size();
 

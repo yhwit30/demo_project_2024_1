@@ -15,9 +15,19 @@ public interface BuildingRepository {
 
 	@Select("""
 			SELECT *
-			FROM building
+			FROM building 
+			WHERE id = #{bldgId};
 			""")
-	List<Building> getForPrintBuildings();
+	Building getForPrintBuilding(int bldgId);
+	
+	@Select("""
+			SELECT *
+			FROM building AS B
+			INNER JOIN room AS R
+			ON B.id = R.bldgId
+			WHERE B.id = #{bldgId};
+			""")
+	List<Building> getForPrintBuildings(int bldgId);
 
 	@Select("""
 			SELECT R.*, B.bldgName
@@ -80,5 +90,7 @@ public interface BuildingRepository {
 			""")
 	void modifyRoom(int id, int bldgId, int roomNum, String roomType, String roomMemo, int standardDeposit, int standardRent,
 			int standardJeonse);
+
+	
 
 }
