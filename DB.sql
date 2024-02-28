@@ -1260,10 +1260,16 @@ CREATE TABLE memo(
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL,
-    memberId CHAR(20) NOT NULL,
-    boardId CHAR(20) NOT NULL,
+    memberId INT(10) NOT NULL,
+    boardId INT(10) NOT NULL,
+    bldgId INT(10) NOT NULL,
+    roomId INT(10) NOT NULL,
+    tenantId INT(10) NOT NULL,
+    contractId INT(10) NOT NULL,
     title CHAR(20) NOT NULL,
-    `body` CHAR(20) NOT NULL
+    `body` TEXT NOT NULL,
+    repairDate CHAR(20) NOT NULL,
+    repairCost INT(10) NOT NULL
 );
 
 # memo_board 테이블 생성
@@ -1271,38 +1277,100 @@ CREATE TABLE memo_board(
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL,
-    memoCode CHAR(50) NOT NULL COMMENT '건물별(1), 호실별(2), 세입자별(3), ...',
+    memoCode CHAR(50) NOT NULL COMMENT '건물(1), 호실(2), 세입자(3), 계약(4), 작업(5)',
     delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '삭제 여부 (0=삭제 전, 1=삭제 후)',
     delDate DATETIME COMMENT '삭제 날짜'
 );
 
 SELECT * FROM memo_board;
 
-SELECT * FROM memo;
+SELECT * 
+FROM memo AS M
+LEFT JOIN building AS B
+ON M.bldgId = B.id
+LEFT JOIN room AS R
+ON M.roomId = R.id
+LEFT JOIN tenant AS T
+ON M.tenantId = T.id
+LEFT JOIN contract AS C
+ON M.contractId = C.id;
 
-# memo_board testdata
+# memo_board 1
 INSERT INTO memo_board
 SET regDate = NOW(),
 updateDate = NOW(),
 memoCode = '건물메모';
 
-# memo_board testdata
+# memo_board 2
 INSERT INTO memo_board
 SET regDate = NOW(),
 updateDate = NOW(),
 memoCode = '호실메모';
 
-# memo_board testdata
+# memo_board 3
 INSERT INTO memo_board
 SET regDate = NOW(),
 updateDate = NOW(),
 memoCode = '세입자메모';
 
-# memo_board testdata
+# memo_board 4
 INSERT INTO memo_board
 SET regDate = NOW(),
 updateDate = NOW(),
 memoCode = '계약메모';
+
+# memo_board 5
+INSERT INTO memo_board
+SET regDate = NOW(),
+updateDate = NOW(),
+memoCode = '작업일지';
+
+# memo testdata
+INSERT INTO memo
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+boardId = 5,
+contractId = 3,
+title = '계약에 메모 테스트',
+`body`= '3번 계약에 메모임';
+
+# memo-repair testdata
+INSERT INTO memo
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+boardId = 5,
+roomId = 1,
+title = '타일공사작업',
+`body`= '101호 타일작업',
+repairDate = '2024-1-3',
+repairCost = 30000;
+
+# memo-repair testdata
+INSERT INTO memo
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+boardId = 5,
+roomId = 2,
+title = '바닥장판공사작업',
+`body`= '102호 타일작업',
+repairDate = '2024-1-5',
+repairCost = 50000;
+
+# memo-repair testdata
+INSERT INTO memo
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+boardId = 5,
+roomId = 7,
+title = '장판공사작업',
+`body`= '302호 타일작업',
+repairDate = '2024-1-10',
+repairCost = 65000;
+
 
 
 # memo testdata
@@ -1311,6 +1379,7 @@ SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 1,
 boardId = 1,
+bldgId = 1,
 title = '1번 회원이 1번 건물 게시판에 글',
 `body`= '1번 회원 1번 건물 게시판 내용';
 
@@ -1320,6 +1389,7 @@ SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 1,
 boardId = 2,
+roomId = 2,
 title = '1번 회원이 2번 호실 게시판에 글',
 `body`= '1번 회원 2번 호실 게시판 내용';
 
@@ -1330,6 +1400,7 @@ SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 2,
 boardId = 1,
+bldgId = 1,
 title = '2번 회원이 1번 건물 게시판에 글',
 `body`= '2번 회원 1번 건물 게시판 내용';
 
@@ -1340,25 +1411,10 @@ SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 2,
 boardId = 3,
+tenantId = 3,
 title = '2번 회원이 3번 세입자 게시판에 글',
 `body`= '2번 회원 3번 세입자 게시판 내용';
 
-
-#------------------------------------------------------
-# repair 테이블 생성
-CREATE TABLE `repair`(
-    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    regDate DATETIME NOT NULL,
-    updateDate DATETIME NOT NULL,
-    repairDate  DATETIME NOT NULL,
-    roomId INT(10) NOT NULL,
-    repairCost CHAR(20) NOT NULL,
-    boardId CHAR(20) NOT NULL,
-    title CHAR(20) NOT NULL,
-    `body` CHAR(20) NOT NULL
-);
-
-SELECT * FROM `repair`;
 
 
 #------------------------------------------------------

@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.service.MemoService;
 import com.example.demo.util.Ut;
+import com.example.demo.vo.Memo;
 import com.example.demo.vo.Rq;
 
 @Controller
@@ -73,7 +76,23 @@ return null;
 	@RequestMapping("/usr/bg12343/repair")
 	public String showRepair(Model model) {
 
+		List<Memo> memoRepair = memoService.getMemoRepair();
+		int memoRepairCnt = memoRepair.size();
+		
+		model.addAttribute("memoRepair", memoRepair);
+		model.addAttribute("memoRepairCnt", memoRepairCnt);
 		return "usr/bg12343/repair";
+	}
+
+	@RequestMapping("/usr/bg12343/repairDetail")
+	public String showRepairDetail(Model model) {
+		
+		List<Memo> memoRepair = memoService.getMemoRepair();
+		int memoRepairCnt = memoRepair.size();
+		
+		model.addAttribute("memoRepair", memoRepair);
+		model.addAttribute("memoRepairCnt", memoRepairCnt);
+		return "usr/bg12343/repairDetail";
 	}
 
 	@RequestMapping("/usr/bg12343/addRepair")
