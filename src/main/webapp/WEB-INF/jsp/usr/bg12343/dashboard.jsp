@@ -6,7 +6,7 @@
 
 <section class="mt-2 text-xl px-4 flex justify-around">
 	<div class="overflow-x-auto">
-		<table class="table-box-1 table" border="1">
+		<table class="table-box-1 table " border="1">
 			<thead>
 				<tr>
 					<th>건물명</th>
@@ -48,6 +48,11 @@
 <div>
 	<a class="btn btn-sm btn-outline ${param.bldgId == 1 ? 'btn-active' : '' }" href="../bg12343/dashboard?bldgId=1">건물1 가나</a>
 	<a class="btn btn-sm btn-outline ${param.bldgId == 2 ? 'btn-active' : '' }" href="../bg12343/dashboard?bldgId=2">건물2 다라</a>
+	
+	1: 전자렌지 2: 냉장고 3: 침대 4: 전기렌지 
+	
+	
+	
 </div>
 <section class="mt-2 text-xl px-4">
 	<div class="badge badge-outline">${roomsCnt }개</div>
@@ -78,11 +83,11 @@
 					<td>${room.rent }</td>
 					<td>${room.maintenanceFee }</td>
 					<td>
-						전자렌지
+						1
+						<input  />
+						2
 						<input type="checkbox" class="toggle toggle-sm" checked />
-						냉장고
-						<input type="checkbox" class="toggle toggle-sm" checked />
-						침대
+						3
 						<input type="checkbox" class="toggle toggle-sm" checked />
 						기타
 					</td>

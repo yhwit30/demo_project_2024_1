@@ -993,7 +993,7 @@ updateDate = NOW(),
 rentDate = '2024.1.10',
 #roomId = 1,
 tenantId = 1,
-paymentStatus = '완납',
+paymentStatus = '1/11',
 extraIncome = '없음',
 extraExpense = '없음';
 
@@ -1004,7 +1004,7 @@ updateDate = NOW(),
 rentDate = '2024.2.10',
 #roomId = 1,
 tenantId = 1,
-paymentStatus = '완납',
+paymentStatus = '2/10',
 extraIncome = '없음',
 extraExpense = '없음';
 
