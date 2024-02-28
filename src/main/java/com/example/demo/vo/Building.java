@@ -14,14 +14,4 @@ public class Building {
 	private String bldgName;
 	private String bldgAdd;
 	private int roomTotal;
-	private String bldgMemo;
-
-	private int roomNum;
-	private String roomType;
-	private String roomMemo;
-	private int standardDeposit;
-	private int standardRent;
-	private int standardJeonse;
-	private int bldgId;
-	private double roomArea;
 }

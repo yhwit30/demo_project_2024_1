@@ -478,9 +478,8 @@ CREATE TABLE building(
     updateDate DATETIME NOT NULL,
     bldgName CHAR(20) NOT NULL,
     bldgAdd CHAR(20) NOT NULL,
-    roomTotal INT(10) NOT NULL,
-    bldgMemo TEXT NOT NULL
- );
+    roomTotal INT(10) NOT NULL
+    );
 
 SELECT * FROM building;
 
@@ -495,8 +494,7 @@ SET regDate = NOW(),
 updateDate = NOW(),
 bldgName = '가나',
 bldgAdd = '대전시 송림',
-roomTotal = 10, 
-bldgMemo = '가나 건물은 2005년에 지어짐 메모';
+roomTotal = 10;
 
 # building testdata
 INSERT INTO building
@@ -504,8 +502,7 @@ SET regDate = NOW(),
 updateDate = NOW(),
 bldgName = '다라',
 bldgAdd = '대전시 정림',
-roomTotal = 10, 
-bldgMemo = '다라 건물은 2015년에 지어짐 메모';
+roomTotal = 10;
 
 #------------------------------------------------------
 # room 테이블 생성
@@ -514,7 +511,6 @@ CREATE TABLE room(
     bldgId INT(10) NOT NULL,
     roomNum INT(10) NOT NULL,
     roomType CHAR(20) NOT NULL, 
-    roomMemo CHAR(20) NOT NULL,
     standardDeposit INT(10) NOT NULL,
     standardRent INT(10) NOT NULL,
     standardJeonse INT(10) NOT NULL,
@@ -541,7 +537,6 @@ INSERT INTO room
 SET bldgId = 1,
 roomNum = 101,
 roomType = '원룸',
-roomMemo = '호실별 메모 101',
 standardDeposit = 5000000,
 standardRent = 400000,
 standardJeonse = 50000000,
@@ -552,7 +547,6 @@ INSERT INTO room
 SET bldgId = 1,
 roomNum = 102,
 roomType = '원룸',
-roomMemo = '호실별 메모 102',
 standardDeposit = 5000000,
 standardRent = 400000,
 standardJeonse = 50000000,
@@ -563,7 +557,6 @@ INSERT INTO room
 SET bldgId = 1,
 roomNum = 201,
 roomType = '1.5룸',
-roomMemo = '호실별 메모 201',
 standardDeposit = 5000000,
 standardRent = 500000,
 standardJeonse = 80000000,
@@ -574,7 +567,6 @@ INSERT INTO room
 SET bldgId = 1,
 roomNum = 202,
 roomType = '1.5룸',
-roomMemo = '호실별 메모 202',
 standardDeposit = 5000000,
 standardRent = 500000,
 standardJeonse = 80000000,
@@ -585,7 +577,6 @@ INSERT INTO room
 SET bldgId = 1,
 roomNum = 203,
 roomType = '투룸',
-roomMemo = '호실별 메모 203',
 standardDeposit = 5000000,
 standardRent = 600000,
 standardJeonse = 100000000,
@@ -597,7 +588,6 @@ INSERT INTO room
 SET bldgId = 1,
 roomNum = 301,
 roomType = '원룸',
-roomMemo = '호실별 메모 101',
 standardDeposit = 5000000,
 standardRent = 400000,
 standardJeonse = 50000000,
@@ -608,7 +598,6 @@ INSERT INTO room
 SET bldgId = 1,
 roomNum = 302,
 roomType = '원룸',
-roomMemo = '호실별 메모 101',
 standardDeposit = 5000000,
 standardRent = 400000,
 standardJeonse = 50000000,
@@ -620,7 +609,6 @@ INSERT INTO room
 SET bldgId = 1,
 roomNum = 303,
 roomType = '원룸',
-roomMemo = '호실별 메모 101',
 standardDeposit = 5000000,
 standardRent = 400000,
 standardJeonse = 50000000,
@@ -631,7 +619,6 @@ INSERT INTO room
 SET bldgId = 1,
 roomNum = 401,
 roomType = '원룸',
-roomMemo = '호실별 메모 101',
 standardDeposit = 5000000,
 standardRent = 400000,
 standardJeonse = 50000000,
@@ -642,7 +629,6 @@ INSERT INTO room
 SET bldgId = 1,
 roomNum = 402,
 roomType = '원룸',
-roomMemo = '호실별 메모 101',
 standardDeposit = 5000000,
 standardRent = 400000,
 standardJeonse = 50000000,
@@ -653,7 +639,6 @@ INSERT INTO room
 SET bldgId = 2,
 roomNum = 101,
 roomType = '원룸',
-roomMemo = '호실별 메모 101',
 standardDeposit = 6000000,
 standardRent = 400000,
 standardJeonse = 50000000,
@@ -664,7 +649,6 @@ INSERT INTO room
 SET bldgId = 2,
 roomNum = 102,
 roomType = '원룸',
-roomMemo = '호실별 메모 102',
 standardDeposit = 6000000,
 standardRent = 400000,
 standardJeonse = 50000000,
@@ -675,7 +659,6 @@ INSERT INTO room
 SET bldgId = 2,
 roomNum = 201,
 roomType = '1.5룸',
-roomMemo = '호실별 메모 201',
 standardDeposit = 6000000,
 standardRent = 400000,
 standardJeonse = 80000000,
@@ -686,7 +669,6 @@ INSERT INTO room
 SET bldgId = 2,
 roomNum = 202,
 roomType = '1.5룸',
-roomMemo = '호실별 메모 202',
 standardDeposit = 6000000,
 standardRent =400000,
 standardJeonse = 80000000,
@@ -697,7 +679,6 @@ INSERT INTO room
 SET bldgId = 2,
 roomNum = 203,
 roomType = '투룸',
-roomMemo = '호실별 메모 203',
 standardDeposit = 5000000,
 standardRent = 400000,
 standardJeonse = 100000000,
@@ -708,7 +689,6 @@ INSERT INTO room
 SET bldgId = 2,
 roomNum = 301,
 roomType = '원룸',
-roomMemo = '호실별 메모 101',
 standardDeposit = 6000000,
 standardRent = 400000,
 standardJeonse = 50000000,
@@ -719,7 +699,6 @@ INSERT INTO room
 SET bldgId = 2,
 roomNum = 302,
 roomType = '원룸',
-roomMemo = '호실별 메모 101',
 standardDeposit = 6000000,
 standardRent = 400000,
 standardJeonse = 50000000,
@@ -730,7 +709,6 @@ INSERT INTO room
 SET bldgId = 2,
 roomNum = 303,
 roomType = '원룸',
-roomMemo = '호실별 메모 101',
 standardDeposit = 6000000,
 standardRent = 400000,
 standardJeonse = 100000000,
@@ -741,7 +719,6 @@ INSERT INTO room
 SET bldgId = 2,
 roomNum = 401,
 roomType = '원룸',
-roomMemo = '호실별 메모 101',
 standardDeposit = 5000000,
 standardRent = 400000,
 standardJeonse = 100000000,
@@ -752,7 +729,6 @@ INSERT INTO room
 SET bldgId = 2,
 roomNum = 402,
 roomType = '원룸',
-roomMemo = '호실별 메모 101',
 standardDeposit = 5000000,
 standardRent = 400000,
 standardJeonse = 100000000,
@@ -774,7 +750,6 @@ CREATE TABLE tenant(
     tenantName CHAR(20) NOT NULL,
     tenantPhone INT(10) NOT NULL,
     tenantCarNum CHAR(20) NOT NULL,
-    tenantMemo CHAR(20) NOT NULL,
     roomId INT(10) NOT NULL
 );
 
@@ -787,7 +762,6 @@ updateDate = NOW(),
 tenantName = '홍길동',
 tenantPhone = 01093939393,
 tenantCarNum = '02라2032',
-tenantMemo = '세입자1 메모',
 roomId = 1;
 
 # tenant testdata
@@ -797,7 +771,6 @@ updateDate = NOW(),
 tenantName = '홍길순',
 tenantPhone = 0103453533,
 tenantCarNum = '02다3454',
-tenantMemo = '세입자2 메모',
 roomId = 2;
 
 # tenant testdata
@@ -807,7 +780,6 @@ updateDate = NOW(),
 tenantName = '이상호',
 tenantPhone = 0106562324,
 tenantCarNum = '05마4218',
-tenantMemo = '세입자3 메모',
 roomId = 6;
 
 
@@ -818,7 +790,6 @@ updateDate = NOW(),
 tenantName = '김철수',
 tenantPhone = 0103453533,
 tenantCarNum = '02다3454',
-tenantMemo = '세입자2 메모',
 roomId = 10;
 
 # tenant testdata
@@ -828,7 +799,6 @@ updateDate = NOW(),
 tenantName = '이보라',
 tenantPhone = 0103453533,
 tenantCarNum = '02다3454',
-tenantMemo = '세입자2 메모',
 roomId = 15;
 
 # tenant testdata
@@ -838,7 +808,6 @@ updateDate = NOW(),
 tenantName = '강산해',
 tenantPhone = 0103453533,
 tenantCarNum = '02다3454',
-tenantMemo = '세입자2 메모',
 roomId = 16;
 
 # tenant testdata
@@ -848,7 +817,6 @@ updateDate = NOW(),
 tenantName = '김미자',
 tenantPhone = 0103453533,
 tenantCarNum = '02다3454',
-tenantMemo = '세입자2 메모',
 roomId = 17;
 
 SELECT * 
@@ -876,8 +844,7 @@ CREATE TABLE contract(
     contractStartDate CHAR(20) NOT NULL,
     contractEndDate CHAR(20) NOT NULL,
     depositDate CHAR(20) NOT NULL,
-    rentDate CHAR(20) NOT NULL,
-    contractMemo CHAR(20) NOT NULL
+    rentDate CHAR(20) NOT NULL
 );
 
 
@@ -895,8 +862,7 @@ maintenanceFee = 60000,
 contractStartDate = '2023.2.2',
 contractEndDate= '2025.2.1',
 depositDate = 10,
-rentDate = 10,
-contractMemo = '계약1 메모';
+rentDate = 10;
 
 # contract testdata
 INSERT INTO contract
@@ -912,8 +878,7 @@ maintenanceFee = 60000,
 contractStartDate = '2022.2.2',
 contractEndDate= '2024.6.1',
 depositDate = 15,
-rentDate = 10,
-contractMemo = '계약2 메모';
+rentDate = 10;
 
 # contract testdata
 INSERT INTO contract
@@ -928,8 +893,7 @@ maintenanceFee = 100000,
 contractStartDate = '2023.12.2',
 contractEndDate= '2025.12.1',
 depositDate = 15,
-rentDate = 10,
-contractMemo = '계약3 메모';
+rentDate = 10;
 
 # contract testdata
 INSERT INTO contract
@@ -944,8 +908,7 @@ maintenanceFee = 100000,
 contractStartDate = '2023.12.2',
 contractEndDate= '2025.12.1',
 depositDate = 15,
-rentDate = 15,
-contractMemo = '계약3 메모';
+rentDate = 15;
 
 # contract testdata
 INSERT INTO contract
@@ -961,8 +924,7 @@ maintenanceFee = 100000,
 contractStartDate = '2023.12.2',
 contractEndDate= '2025.12.1',
 depositDate = 15,
-rentDate = 10,
-contractMemo = '계약3 메모';
+rentDate = 10;
 
 
 # contract testdata
@@ -978,8 +940,7 @@ maintenanceFee = 100000,
 contractStartDate = '2023.12.2',
 contractEndDate= '2025.12.1',
 depositDate = 15,
-rentDate = 20,
-contractMemo = '계약3 메모';
+rentDate = 20;
 
 
 # contract testdata
@@ -996,8 +957,7 @@ maintenanceFee = 100000,
 contractStartDate = '2023.12.2',
 contractEndDate= '2025.12.1',
 depositDate = 15,
-rentDate = 20,
-contractMemo = '계약3 메모';
+rentDate = 20;
 
 SELECT * FROM contract;
 
@@ -1971,3 +1931,14 @@ SELECT * FROM `repair`;
 
 SELECT * FROM maintenance_fee;
 
+
+# 조인업데이트 예시
+UPDATE building AS B INNER JOIN room AS R
+ON B.id = R.bldgId
+SET R.standardDeposit = 100
+WHERE R.id = 1;
+
+UPDATE building AS B INNER JOIN room AS R
+ON B.id = R.bldgId
+SET R.standardDeposit = 100
+WHERE R.id = 15;

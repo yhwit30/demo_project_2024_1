@@ -72,28 +72,26 @@ public interface BuildingRepository {
 	void addRoom(int bldgId, int roomNum, String roomType, int standardDeposit, int standardRent, int standardJeonse);
 
 	@Update("""
-			UPDATE building
+			UPDATE building 
 			SET updateDate = NOW(),
 			bldgName = #{bldgName},
 			bldgAdd = #{bldgAdd},
-			roomTotal = #{roomTotal},
-			bldgMemo = #{bldgMemo}
-			WHERE id = #{id}
+			roomTotal = #{roomTotal}
+			WHERE id = #{bldgId}
 			""")
-	void modifyBuilding(int id, String bldgName, String bldgAdd, int roomTotal, String bldgMemo);
+	void modifyBuilding(int bldgId, String bldgName, String bldgAdd, int roomTotal);
 
 	@Update("""
 			UPDATE room
 			SET	roomNum = #{roomNum},
 			roomType = #{roomType},
-			roomMemo = #{roomMemo},
+			roomArea = #{roomArea},
 			standardDeposit = #{standardDeposit},
 			standardRent = #{standardRent},
 			standardJeonse = #{standardJeonse}
-			WHERE id = #{id}
-			AND bldgId = #{bldgId}
+			WHERE id = #{roomId}
 			""")
-	void modifyRoom(int id, int bldgId, int roomNum, String roomType, String roomMemo, int standardDeposit,
-			int standardRent, int standardJeonse);
+	void modifyRoom(int roomId, int roomNum, String roomType, double roomArea, int standardDeposit, int standardRent,
+			int standardJeonse);
 
 }

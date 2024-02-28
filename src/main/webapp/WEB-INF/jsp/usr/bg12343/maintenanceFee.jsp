@@ -6,12 +6,22 @@
 
 <!-- 건물 개수대로 가져오는 함수로 수정해야함 -->
 <div>
-	<a class="btn btn-outline ${param.bldgId == 1 ? 'btn-active' : '' }" href="../bg12343/maintenanceFee?bldgId=1">건물1
+	<a class="btn btn-sm btn-outline ${param.bldgId == 1 ? 'btn-active' : '' }" href="../bg12343/maintenanceFee?bldgId=1">건물1
 		가나</a>
-	<a class="btn btn-outline ${param.bldgId == 2 ? 'btn-active' : '' }" href="../bg12343/maintenanceFee?bldgId=2">건물2
+	<a class="btn btn-sm btn-outline ${param.bldgId == 2 ? 'btn-active' : '' }" href="../bg12343/maintenanceFee?bldgId=2">건물2
 		다라</a>
 </div>
 
+<a class="btn btn-sm btn-outline ${param.year == nowYear -1 ? 'btn-active' : '' }" href="maintenanceFee?bldgId=${param.bldgId }&year=${nowYear -1}">전년도 보기</a>
+<a class="btn btn-sm btn-outline ${param.year == nowYear ? 'btn-active' : '' }" href="maintenanceFee?bldgId=${param.bldgId }&year=${nowYear}">올해(${nowYear}) 보기</a>
+
+
+<style type="text/css">
+	.underlineClick > td > a:hover{
+		background-color: skyblue;
+		text-decoration: underline;
+	}
+</style>
 
 <section class="mt-2 text-xl px-4">
 	<div class="mx-auto overflow-x-auto">
@@ -42,7 +52,7 @@
 			<tbody>
 
 				<c:forEach var="maintenanceFeeMonthly" items="${maintenanceFeeMonthly }">
-					<tr class="hover">
+					<tr class="hover underlineClick">
 						<td>${maintenanceFeeMonthly.roomNum }</td>
 						<td>${maintenanceFeeMonthly.tenantName }</td>
 						<td>${maintenanceFeeMonthly.leaseType }</td>

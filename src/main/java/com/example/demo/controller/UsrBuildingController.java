@@ -27,10 +27,12 @@ public class UsrBuildingController {
 
 		Building buildingRd = buildingService.getForPrintBuilding(bldgId);
 
-		List<Building> buildings = buildingService.getForPrintBuildings(bldgId);
+		List<Room> rooms = buildingService.getForPrintRooms(bldgId);
+		int roomsCnt = rooms.size();
 
 		model.addAttribute("buildingRd", buildingRd);
-		model.addAttribute("buildings", buildings);
+		model.addAttribute("rooms", rooms);
+		model.addAttribute("roomsCnt", roomsCnt);
 		return "usr/bg12343/building";
 	}
 
@@ -68,40 +70,42 @@ public class UsrBuildingController {
 	@RequestMapping("/usr/bg12343/buildingModify")
 	public String showBuildingModify(Model model, @RequestParam(defaultValue = "1") int bldgId) {
 
-		List<Building> buildings = buildingService.getForPrintBuildings(bldgId);
+		Building buildingRd = buildingService.getForPrintBuilding(bldgId);
 
-		int buildingsCnt = buildings.size();
+		List<Room> rooms = buildingService.getForPrintRooms(bldgId);
 
-		model.addAttribute("buildings", buildings);
-		model.addAttribute("buildingsCnt", buildingsCnt);
+		model.addAttribute("buildingRd", buildingRd);
+		model.addAttribute("rooms", rooms);
 
 		return "usr/bg12343/buildingModify";
 	}
 
 	@RequestMapping("/usr/bg12343/doBuildingModify")
 	@ResponseBody
-	public String doBuildingModify(int[] id, String[] bldgName, String[] bldgAdd, int[] roomTotal, String[] bldgMemo) {
+	public String doBuildingModify(int[] roomId, String bldgName, String bldgAdd, int roomTotal, int[] roomNum, String[] roomType, double[] roomArea, int[] standardDeposit, int[] standardRent, int[] standardJeonse, int bldgId) {
 
 		ResultData buildingModifyRd = null;
-		for (int i = 0; i < id.length; i++) {
-			buildingModifyRd = buildingService.modifyBuilding(id[i], bldgName[i], bldgAdd[i], roomTotal[i],
-					bldgMemo[i]);
+		ResultData roomModifyRd = null;
+		for (int i = 0; i < roomId.length; i++) {
+			roomModifyRd = buildingService.modifyRoom(roomId[i], roomNum[i], roomType[i], roomArea[i], standardDeposit[i], standardRent[i],  standardJeonse[i]);
 		}
+		
+		buildingModifyRd = buildingService.modifyBuilding(bldgId, bldgName, bldgAdd, roomTotal);
 
-		return Ut.jsReplace(buildingModifyRd.getResultCode(), buildingModifyRd.getMsg(), "../bg12343/building");
+		return Ut.jsReplace(buildingModifyRd.getResultCode(), buildingModifyRd.getMsg(), "../bg12343/building?bldgId="+ bldgId);
 	}
 
-	@RequestMapping("/usr/bg12343/room")
-	public String getRoom(Model model, @RequestParam(defaultValue = "1") int bldgId) {
-
-		List<Room> rooms = buildingService.getForPrintRooms(bldgId);
-
-		int roomsCnt = rooms.size();
-
-		model.addAttribute("roomsCnt", roomsCnt);
-		model.addAttribute("rooms", rooms);
-		return "usr/bg12343/room";
-	}
+//	@RequestMapping("/usr/bg12343/room")
+//	public String getRoom(Model model, @RequestParam(defaultValue = "1") int bldgId) {
+//
+//		List<Room> rooms = buildingService.getForPrintRooms(bldgId);
+//
+//		int roomsCnt = rooms.size();
+//
+//		model.addAttribute("roomsCnt", roomsCnt);
+//		model.addAttribute("rooms", rooms);
+//		return "usr/bg12343/room";
+//	}
 
 	@RequestMapping("/usr/bg12343/roomAdd")
 	public String showRoomAdd(Model model) {
@@ -141,31 +145,8 @@ public class UsrBuildingController {
 
 		return Ut.jsReplace(RoomAddRd.getResultCode(), RoomAddRd.getMsg(), "../bg12343/room");
 	}
+	
 
-	@RequestMapping("/usr/bg12343/roomModify")
-	public String showRoomModify(Model model) {
 
-//		List<Room> rooms = buildingService.getForPrintRooms();
-//
-//		int roomsCnt = rooms.size();
-//
-//		model.addAttribute("roomsCnt", roomsCnt);
-//		model.addAttribute("rooms", rooms);
-		return "usr/bg12343/roomModify";
-	}
-
-	@RequestMapping("/usr/bg12343/doRoomModify")
-	@ResponseBody
-	public String doRoomModify(int[] id, int[] bldgId, int[] roomNum, String[] roomType, String[] roomMemo,
-			int[] standardDeposit, int[] standardRent, int[] standardJeonse) {
-
-		ResultData roomModifyRd = null;
-		for (int i = 0; i < id.length; i++) {
-			roomModifyRd = buildingService.modifyRoom(id[i], bldgId[i], roomNum[i], roomType[i], roomMemo[i],
-					standardDeposit[i], standardRent[i], standardJeonse[i]);
-		}
-
-		return Ut.jsReplace(roomModifyRd.getResultCode(), roomModifyRd.getMsg(), "../bg12343/room");
-	}
-
+	
 }

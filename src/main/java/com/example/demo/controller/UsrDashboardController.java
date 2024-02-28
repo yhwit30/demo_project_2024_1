@@ -9,8 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.service.BuildingService;
 import com.example.demo.service.DashboardService;
 import com.example.demo.vo.Dashboard;
+import com.example.demo.vo.Room;
 
 @Controller
 public class UsrDashboardController {
@@ -21,13 +23,21 @@ public class UsrDashboardController {
 	@Autowired
 	private DashboardService dashboardService;
 
+	@Autowired
+	private BuildingService buildingService;
+
 	// 액션 메소드
 	@RequestMapping("/usr/bg12343/dashboard")
-	public String getDashboard(Model model) {
+	public String getDashboard(Model model, @RequestParam(defaultValue = "1") int bldgId) {
 
 		List<Dashboard> dashboard = dashboardService.getDashboard();
 
+		List<Room> rooms = buildingService.getForPrintRooms(bldgId);
+		int roomsCnt = rooms.size();
+		
 		model.addAttribute("dashboard", dashboard);
+		model.addAttribute("rooms", rooms);
+		model.addAttribute("roomsCnt", roomsCnt);
 		return "usr/bg12343/dashboard";
 	}
 

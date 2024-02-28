@@ -13,7 +13,6 @@ public class Room {
 	private String updateDate;
 	private int roomNum;
 	private String roomType;
-	private String roomMemo;
 	private int standardDeposit;
 	private int standardRent;
 	private int standardJeonse;

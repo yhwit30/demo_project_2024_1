@@ -7,12 +7,12 @@
 
 <!-- 건물 개수대로 가져오는 함수로 수정해야함 -->
 <div>
-	<a class="btn btn-outline ${param.bldgId == 1 ? 'btn-active' : '' }" href="../bg12343/rentStatus?bldgId=1&year=${param.year }">건물1 가나</a>
-	<a class="btn btn-outline ${param.bldgId == 2 ? 'btn-active' : '' }" href="../bg12343/rentStatus?bldgId=2&year=${param.year }">건물2 다라</a>
+	<a class="btn btn-sm btn-outline ${param.bldgId == 1 ? 'btn-active' : '' }" href="../bg12343/rentStatus?bldgId=1&year=${param.year }">건물1 가나</a>
+	<a class="btn btn-sm btn-outline ${param.bldgId == 2 ? 'btn-active' : '' }" href="../bg12343/rentStatus?bldgId=2&year=${param.year }">건물2 다라</a>
 </div>
 
-<a class="btn btn-outline ${param.year == nowYear -1 ? 'btn-active' : '' }" href="rentStatus?bldgId=${param.bldgId }&year=${nowYear -1}">전년도 보기</a>
-<a class="btn btn-outline ${param.year == nowYear ? 'btn-active' : '' }" href="rentStatus?bldgId=${param.bldgId }&year=${nowYear}">올해(${nowYear}) 보기</a>
+<a class="btn btn-sm btn-outline ${param.year == nowYear -1 ? 'btn-active' : '' }" href="rentStatus?bldgId=${param.bldgId }&year=${nowYear -1}">전년도 보기</a>
+<a class="btn btn-sm btn-outline ${param.year == nowYear ? 'btn-active' : '' }" href="rentStatus?bldgId=${param.bldgId }&year=${nowYear}">올해(${nowYear}) 보기</a>
 
 
 <section class="mt-2 text-xl px-4">

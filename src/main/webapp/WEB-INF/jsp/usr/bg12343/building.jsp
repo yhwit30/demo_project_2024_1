@@ -7,8 +7,8 @@
 
 <!-- 건물 개수대로 가져오는 함수로 수정해야함 -->
 <div>
-	<a class="btn btn-outline ${param.bldgId == 1 ? 'btn-active' : '' }" href="../bg12343/building?bldgId=1">건물1 가나</a>
-	<a class="btn btn-outline ${param.bldgId == 2 ? 'btn-active' : '' }" href="../bg12343/building?bldgId=2">건물2 다라</a>
+	<a class="btn btn-sm btn-outline ${param.bldgId == 1 ? 'btn-active' : '' }" href="../bg12343/building?bldgId=1">건물1 가나</a>
+	<a class="btn btn-sm btn-outline ${param.bldgId == 2 ? 'btn-active' : '' }" href="../bg12343/building?bldgId=2">건물2 다라</a>
 </div>
 
 
@@ -32,7 +32,7 @@
 						<td>${buildingRd.bldgName }</td>
 						<td>${buildingRd.bldgAdd }</td>
 						<td>${buildingRd.roomTotal }</td>
-						<td>${buildingRd.bldgMemo }</td>
+						<td>#</td>
 					</tr>
 			</tbody>
 		</table>
@@ -40,6 +40,7 @@
 	
 	<br />
 
+<div class="badge badge-outline">${roomsCnt }개</div>
 <!-- 호실정보 가져오기 -->
 <div class="mx-auto overflow-x-auto">
 		<table class="table-box-1 table" border="1">
@@ -56,14 +57,14 @@
 			</thead>
 			<tbody>
 
-				<c:forEach var="building" items="${buildings }">
+				<c:forEach var="room" items="${rooms }">
 					<tr class="hover">
-						<td>${building.roomNum }</td>
-						<td>${building.roomType }</td>
-						<td>${building.roomArea }</td>
-						<td>${building.standardDeposit }</td>
-						<td>${building.standardRent }</td>
-						<td>${building.standardJeonse }</td>
+						<td>${room.roomNum }</td>
+						<td>${room.roomType }</td>
+						<td>${room.roomArea }</td>
+						<td>${room.standardDeposit }</td>
+						<td>${room.standardRent }</td>
+						<td>${room.standardJeonse }</td>
 						<td>#</td>
 					</tr>
 				</c:forEach>
