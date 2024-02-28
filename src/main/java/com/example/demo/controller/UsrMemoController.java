@@ -94,7 +94,7 @@ return null;
 	}
 	
 	@RequestMapping("/usr/bg12343/repairModify")
-	public String showRepairModify(Model model, int id) {
+	public String showRepairModify(Model model) {
 		
 		return "usr/bg12343/repairModify";
 	}

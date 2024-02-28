@@ -19,7 +19,7 @@ public interface DashboardRepository {
 			ON R.bldgId = B.id
 			GROUP BY B.id
 			""")
-	List<Dashboard> getDashboard(); // 수정예정 합계로
+	List<Dashboard> getDashboard();
 
 	@Select("""
 			SELECT *,
