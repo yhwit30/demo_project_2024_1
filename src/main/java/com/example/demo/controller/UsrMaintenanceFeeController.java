@@ -21,6 +21,7 @@ public class UsrMaintenanceFeeController {
 
 	LocalDate now = LocalDate.now();
 	int nowYear = now.getYear();
+	int nowMonth = now.getMonthValue();
 
 	@Autowired
 	private MaintenanceFeeService maintenanceFeeService;
@@ -34,21 +35,24 @@ public class UsrMaintenanceFeeController {
 			year = nowYear;
 		}
 
-		List<MaintenanceFee> maintenanceFee = maintenanceFeeService.getMaintenanceFee(bldgId, year);
+		List<MaintenanceFee> maintenanceFeeMonthly = maintenanceFeeService.getMaintenanceFeeMonthly(bldgId, year);
 
-		model.addAttribute("maintenanceFee", maintenanceFee);
+		model.addAttribute("maintenanceFeeMonthly", maintenanceFeeMonthly);
 		return "usr/bg12343/maintenanceFee";
 	}
 
 	@RequestMapping("/usr/bg12343/maintenanceFeeDetail")
-	public String getMaintenanceFeeDetail(Model model, @RequestParam(defaultValue = "1") int bldgId, Integer year) {
+	public String getMaintenanceFeeDetail(Model model, @RequestParam(defaultValue = "1") int bldgId, Integer year, Integer month) {
 
 		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
 		if (year == null) {
 			year = nowYear;
 		}
+		if (month == null) {
+			month = nowMonth;
+		}
 
-		List<MaintenanceFee> maintenanceFee = maintenanceFeeService.getMaintenanceFee(bldgId, year);
+		List<MaintenanceFee> maintenanceFee = maintenanceFeeService.getMaintenanceFee(bldgId, year, month);
 
 		model.addAttribute("maintenanceFee", maintenanceFee);
 		return "usr/bg12343/maintenanceFeeDetail";
@@ -62,9 +66,8 @@ public class UsrMaintenanceFeeController {
 			year = nowYear;
 		}
 
-		List<MaintenanceFee> maintenanceFee = maintenanceFeeService.getMaintenanceFee(bldgId, year);
-
-		model.addAttribute("maintenanceFee", maintenanceFee);
+//		List<MaintenanceFee> maintenanceFee = maintenanceFeeService.getMaintenanceFee(bldgId, year);
+//		model.addAttribute("maintenanceFee", maintenanceFee);
 		return "usr/bg12343/maintenanceFeeModify";
 	}
 

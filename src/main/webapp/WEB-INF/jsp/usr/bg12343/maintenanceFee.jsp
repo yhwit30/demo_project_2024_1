@@ -41,25 +41,47 @@
 			</thead>
 			<tbody>
 
-				<c:forEach var="maintenanceFee" items="${maintenanceFee }">
+				<c:forEach var="maintenanceFeeMonthly" items="${maintenanceFeeMonthly }">
 					<tr class="hover">
-						<td>${maintenanceFee.roomNum }</td>
-						<td>${maintenanceFee.tenantName }</td>
-						<td>${maintenanceFee.leaseType }</td>
+						<td>${maintenanceFeeMonthly.roomNum }</td>
+						<td>${maintenanceFeeMonthly.tenantName }</td>
+						<td>${maintenanceFeeMonthly.leaseType }</td>
 						<td>
-							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }">${maintenanceFee.monthlyMaintenanceFee1 }</a>
+							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=1">${maintenanceFeeMonthly.monthlyMaintenanceFee1 }</a>
 						</td>
-						<td>${maintenanceFee.monthlyMaintenanceFee2 }</td>
-						<td>${maintenanceFee.monthlyMaintenanceFee3 }</td>
-						<td>${maintenanceFee.monthlyMaintenanceFee4 }</td>
-						<td>${maintenanceFee.monthlyMaintenanceFee5 }</td>
-						<td>${maintenanceFee.monthlyMaintenanceFee6 }</td>
-						<td>${maintenanceFee.monthlyMaintenanceFee7 }</td>
-						<td>${maintenanceFee.monthlyMaintenanceFee8 }</td>
-						<td>${maintenanceFee.monthlyMaintenanceFee9 }</td>
-						<td>${maintenanceFee.monthlyMaintenanceFee10 }</td>
-						<td>${maintenanceFee.monthlyMaintenanceFee11 }</td>
-						<td>${maintenanceFee.monthlyMaintenanceFee12 }</td>
+						<td>
+							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=2">${maintenanceFeeMonthly.monthlyMaintenanceFee2 }</a>
+						</td>
+						<td>
+							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=3">${maintenanceFeeMonthly.monthlyMaintenanceFee3 }</a>
+						</td>
+						<td>
+							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=4">${maintenanceFeeMonthly.monthlyMaintenanceFee4 }</a>
+						</td>
+						<td>
+							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=5">${maintenanceFeeMonthly.monthlyMaintenanceFee5 }</a>
+						</td>
+						<td>
+							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=6">${maintenanceFeeMonthly.monthlyMaintenanceFee6 }</a>
+						</td>
+						<td>
+							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=7">${maintenanceFeeMonthly.monthlyMaintenanceFee7 }</a>
+						</td>
+						<td>
+							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=8">${maintenanceFeeMonthly.monthlyMaintenanceFee8 }</a>
+						</td>
+						<td>
+							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=9">${maintenanceFeeMonthly.monthlyMaintenanceFee9 }</a>
+						</td>
+						<td>
+							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=10">${maintenanceFeeMonthly.monthlyMaintenanceFee10 }</a>
+						</td>
+						<td>
+							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=11">${maintenanceFeeMonthly.monthlyMaintenanceFee11 }</a>
+						</td>
+						<td>
+							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=12">${maintenanceFeeMonthly.monthlyMaintenanceFee12 }</a>
+						</td>
 						<td>#</td>
 					</tr>
 				</c:forEach>

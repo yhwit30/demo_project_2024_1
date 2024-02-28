@@ -15,8 +15,13 @@ public class MaintenanceFeeService {
 	@Autowired
 	private MaintenanceFeeRepository maintenanceFeeRepository;
 
-	public List<MaintenanceFee> getMaintenanceFee(int bldgId, Integer year) {
-		return maintenanceFeeRepository.getMaintenanceFee(bldgId, year);
+	public List<MaintenanceFee> getMaintenanceFeeMonthly(int bldgId, Integer year) {
+		return maintenanceFeeRepository.getMaintenanceFeeMonthly(bldgId, year);
+	}
+	
+
+	public List<MaintenanceFee> getMaintenanceFee(int bldgId, Integer year, Integer month) {
+		return maintenanceFeeRepository.getMaintenanceFee(bldgId, year, month);
 	}
 
 	public ResultData modifyMaintenanceFee(int tenantId, int commonElec, int commonWater, int elevater, int internetTV,
@@ -44,5 +49,6 @@ public class MaintenanceFeeService {
 	public int caculateLateFee(int monthlyMaintenanceFee) {
 		return Math.round(monthlyMaintenanceFee / 20);
 	}
+
 
 }

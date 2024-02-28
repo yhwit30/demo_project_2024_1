@@ -5,7 +5,7 @@
 <%@ include file="../common/sidebar.jspf"%>
 
 
-1월
+${param.month }월
 <section class="mt-2 text-xl px-4">
 	<div class="mx-auto overflow-x-auto">
 		<table class="table-box-1 table" border="1">

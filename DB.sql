@@ -1388,10 +1388,23 @@ CREATE TABLE maintenance_fee(
     tenantId INT(10) NOT NULL
 );
 
-SELECT * FROM maintenance_fee
-WHERE updateDate LIKE '2024-02%';
+# 관리비 월별 상세보기
+SELECT * 
+FROM room AS R
+LEFT JOIN contract AS C
+ON R.id = C.roomId
+LEFT JOIN building AS B
+ON R.bldgId = B.id
+LEFT JOIN tenant AS T
+ON C.tenantId = T.id
+LEFT JOIN maintenance_fee AS MF 
+ON MF.tenantId = T.id AND MF.updateDate LIKE '2024-%2%'
+GROUP BY R.id
+HAVING B.id = 1;
 
-# 관리비도 호실기준 정렬하니까
+
+
+# 관리비 월별 전체보기 (관리비도 호실기준 정렬)
 SELECT R.*, MF1.monthlyMaintenanceFee AS monthlyMaintenanceFee1
 FROM room AS R
 LEFT JOIN contract AS C
@@ -1457,7 +1470,29 @@ LEFT JOIN
 GROUP BY 
     R.id;
   
-
+# maintenance_fee testdata
+INSERT INTO maintenance_fee
+SET regDate = NOW(),
+updateDate = '2024-12',
+commonElec = 1212,
+commonWater =1212,
+elevater =11212,
+internetTV =121200,
+fireSafety=12120,
+waterUse =5,
+waterCost =12120,
+waterBill=12120,
+elecUse =68,
+elecCost =240,
+elecBill =16390,
+gasUse = 40,
+gasCost = 900,
+gasBill =12121212,
+monthlyMaintenanceFee=121212,
+lateFee =1320,
+lateMaintenanceFee =121212,
+maintenanceFeeDate =10,
+tenantId =1;
 
 
 # maintenance_fee testdata
