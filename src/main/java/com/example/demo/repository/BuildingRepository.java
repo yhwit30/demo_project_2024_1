@@ -15,11 +15,11 @@ public interface BuildingRepository {
 
 	@Select("""
 			SELECT *
-			FROM building 
+			FROM building
 			WHERE id = #{bldgId};
 			""")
 	Building getForPrintBuilding(int bldgId);
-	
+
 	@Select("""
 			SELECT *
 			FROM building AS B
@@ -30,12 +30,18 @@ public interface BuildingRepository {
 	List<Building> getForPrintBuildings(int bldgId);
 
 	@Select("""
-			SELECT R.*, B.bldgName
+			SELECT *
 			FROM room AS R
-			INNER JOIN building AS B
+			LEFT JOIN contract AS C
+			ON R.id = C.roomId
+			LEFT JOIN building AS B
 			ON R.bldgId = B.id
+			LEFT JOIN tenant AS T
+			ON C.tenantId = T.id
+			GROUP BY R.id
+			HAVING B.id = #{bldgId}
 			""")
-	List<Room> getForPrintRooms();
+	List<Room> getForPrintRooms(int bldgId);
 
 	@Insert("""
 			INSERT INTO
@@ -63,8 +69,7 @@ public interface BuildingRepository {
 			standardJeonse = #{standardJeonse},
 			roomMemo = '호실메모 테스트'
 			""")
-	void addRoom(int bldgId, int roomNum, String roomType, int standardDeposit, int standardRent,
-			int standardJeonse);
+	void addRoom(int bldgId, int roomNum, String roomType, int standardDeposit, int standardRent, int standardJeonse);
 
 	@Update("""
 			UPDATE building
@@ -88,9 +93,7 @@ public interface BuildingRepository {
 			WHERE id = #{id}
 			AND bldgId = #{bldgId}
 			""")
-	void modifyRoom(int id, int bldgId, int roomNum, String roomType, String roomMemo, int standardDeposit, int standardRent,
-			int standardJeonse);
-
-	
+	void modifyRoom(int id, int bldgId, int roomNum, String roomType, String roomMemo, int standardDeposit,
+			int standardRent, int standardJeonse);
 
 }

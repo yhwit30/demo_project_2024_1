@@ -18,7 +18,7 @@
 				<a href="/usr/bg12343/building?bldgId=1">건물정보</a>
 			</li>
 			<li>
-				<a href="/usr/bg12343/room">호실정보</a>
+				<a href="/usr/bg12343/room?bldgId=1">호실정보</a>
 			</li>
 			<li>
 				<a href="/usr/bg12343/contract">계약정보</a>

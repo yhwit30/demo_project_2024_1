@@ -60,15 +60,6 @@ header>div>ul>li:hover>ul {
 
 .side_bar_push{
 	margin-left: 100px;
-	margin-right: 50px;
-}
-
-/* 대쉬보드 날씨 */ 
-.weather{ /* 위치 조정 todo */
-	width: 100px;
-	height: 100%;
-	display: inline-block;
-	border: 2px solid gold;
 }
 
 

@@ -21,5 +21,9 @@ public class Room {
 	private double roomArea;
 	
 	private String bldgName;
+	private int deposit;
+	private int rent;
+	private int maintenanceFee;
+	private String tenantName;
 
 }

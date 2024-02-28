@@ -36,6 +36,7 @@ ${param.month }월
 					<th>연체료</th>
 					<th>납기후 금액</th>
 					<th>납부일</th>
+					<th>고지서 출력</th>
 
 				</tr>
 			</thead>
@@ -65,7 +66,7 @@ ${param.month }월
 						<td>${maintenanceFee.lateFee }</td>
 						<td>${maintenanceFee.lateMaintenanceFee }</td>
 						<td>${maintenanceFee.maintenanceFeeDate }</td>
-
+						<td>PDF 저장</td>
 					</tr>
 				</c:forEach>
 			</tbody>

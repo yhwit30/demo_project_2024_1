@@ -4,8 +4,8 @@
 <%@ include file="../common/head.jspf"%>
 <%@ include file="../common/sidebar.jspf"%>
 
-<section class="mt-2 text-xl px-4 ">
-	<div class="mx-auto overflow-x-auto inline-block">
+<section class="mt-2 text-xl px-4">
+	<div class="mx-auto overflow-x-auto">
 		<table class="table-box-1 table " border="1">
 			<colgroup>
 				<col style="width: 5%" />
@@ -26,9 +26,9 @@
 				<c:forEach var="dashboard" items="${dashboard }">
 					<tr class="hover">
 						<td>${dashboard.bldgName }</td>
-						<td>#</td>
-						<td>#</td>
-						<td>#</td>
+						<td>${dashboard.depositSum }</td>
+						<td>${dashboard.rentSum }</td>
+						<td>${dashboard.maintenanceFeeSum }</td>
 						<td>#</td>
 						<td>#</td>
 					</tr>
@@ -37,7 +37,7 @@
 		</table>
 		
 	</div>
-		<div class="weather">
+		<div class="inline-block bg-yellow-400">
 날씨 부분
 <i class="fa-solid fa-sun"></i>
 </div>

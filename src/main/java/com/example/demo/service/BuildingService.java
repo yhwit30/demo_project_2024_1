@@ -24,8 +24,8 @@ public class BuildingService {
 		return buildingRepository.getForPrintBuildings(bldgId);
 	}
 
-	public List<Room> getForPrintRooms() {
-		return buildingRepository.getForPrintRooms();
+	public List<Room> getForPrintRooms(int bldgId) {
+		return buildingRepository.getForPrintRooms(bldgId);
 	}
 
 	public ResultData addBuilding(String bldgName, String bldgAdd, int roomTotal) {

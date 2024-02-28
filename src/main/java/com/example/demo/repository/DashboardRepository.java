@@ -11,17 +11,13 @@ import com.example.demo.vo.Dashboard;
 public interface DashboardRepository {
 
 	@Select("""
-			SELECT *
-			FROM room AS R
-			LEFT JOIN contract AS C
-			ON R.id = C.roomId
-			LEFT JOIN building AS B
+			SELECT SUM(deposit) AS depositSum, SUM(rent) AS rentSum, SUM(maintenanceFee) AS maintenanceFeeSum, C.*, R.*, B.*
+			FROM contract AS C
+			INNER JOIN room AS R
+			ON C.roomId = R.id
+			INNER JOIN building AS B
 			ON R.bldgId = B.id
-			LEFT JOIN tenant AS T
-			ON C.tenantId = T.id
-			LEFT JOIN contract_status AS CS
-			ON C.tenantId = CS.tenantId AND CS.rentDate LIKE '2024-02%'
-			GROUP BY R.id
+			GROUP BY B.id
 			""")
 	List<Dashboard> getDashboard(); // 수정예정 합계로
 
@@ -46,7 +42,7 @@ public interface DashboardRepository {
 			ON R.bldgId = B.id
 			LEFT JOIN tenant AS T
 			ON C.tenantId = T.id
-			LEFT JOIN contract_Status AS CS 
+			LEFT JOIN contract_Status AS CS
 			ON C.tenantId = CS.tenantId
 			AND (CS.rentDate LIKE '${year}-01%' OR CS.rentDate LIKE '${year}-02%' OR CS.rentDate LIKE '${year}-03%' OR
 			     CS.rentDate LIKE '${year}-04%' OR CS.rentDate LIKE '${year}-05%' OR CS.rentDate LIKE '${year}-06%' OR
@@ -56,7 +52,5 @@ public interface DashboardRepository {
 			HAVING B.id = #{bldgId}
 			""")
 	List<Dashboard> getRentStatus(int bldgId, int year);
-
-	
 
 }

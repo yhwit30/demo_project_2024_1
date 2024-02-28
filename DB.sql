@@ -535,6 +535,7 @@ ON C.tenantId = T.id
 GROUP BY R.id;
 
 
+
 # room testdata
 INSERT INTO room
 SET bldgId = 1,
@@ -1891,19 +1892,14 @@ maintenanceFeeDate =16,
 tenantId =7;
 
 
-#dashboard join query 월별 납부현황 추가 -> 안 쓸 것 같다
-SELECT *
-FROM room AS R
-LEFT JOIN contract AS C
-ON R.id = C.roomId
-LEFT JOIN building AS B
+#dashboard join query 
+SELECT SUM(deposit) AS depositSum, SUM(rent) AS rentSum, SUM(maintenanceFee) AS maintenanceFeeSum, C.*, R.*, B.*
+FROM contract AS C
+INNER JOIN room AS R
+ON C.roomId = R.id
+INNER JOIN building AS B
 ON R.bldgId = B.id
-LEFT JOIN tenant AS T
-ON C.tenantId = T.id
-LEFT JOIN contract_status AS CS 
-ON C.tenantId = CS.tenantId AND CS.rentDate LIKE '2024-01%'
-GROUP BY R.id
-HAVING B.id = 1;
+GROUP BY B.id;
 
 
 #dashboard rentStatus 월별 납부현황

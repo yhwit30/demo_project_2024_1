@@ -42,5 +42,9 @@ public class Dashboard {
 	private String novemberPaymentStatus;
 	private String decemberPaymentStatus;
 	private double roomArea;
+	
+	private int depositSum;
+	private int rentSum;
+	private int maintenanceFeeSum;
 
 }

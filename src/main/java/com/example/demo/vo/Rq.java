@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
+import com.example.demo.service.MemberService;
 import com.example.demo.util.Ut;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,13 +24,15 @@ public class Rq {
 	@Getter
 	private int loginedMemberId;
 	@Getter
+	private Member loginedMember;
+	@Getter
 	private String loginedMemberNickname;
 
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
 	private HttpSession session;
 
-	public Rq(HttpServletRequest req, HttpServletResponse resp) {
+	public Rq(HttpServletRequest req, HttpServletResponse resp, MemberService memberService) {
 		this.req = req;
 		this.resp = resp;
 		this.session = req.getSession();
@@ -40,6 +43,7 @@ public class Rq {
 			isLogined = true;
 			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
 			loginedMemberNickname = (String) httpSession.getAttribute("loginedMemberNickname");
+			loginedMember = memberService.getMember(loginedMemberId);
 		}
 		this.req.setAttribute("rq", this);
 	}

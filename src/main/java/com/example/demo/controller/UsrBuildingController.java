@@ -26,11 +26,9 @@ public class UsrBuildingController {
 	@RequestMapping("/usr/bg12343/building")
 	public String getBuilding(Model model, @RequestParam(defaultValue = "1") int bldgId) {
 
-		
 		Building buildingRd = buildingService.getForPrintBuilding(bldgId);
-		
-		List<Building> buildings = buildingService.getForPrintBuildings(bldgId);
 
+		List<Building> buildings = buildingService.getForPrintBuildings(bldgId);
 
 		model.addAttribute("buildingRd", buildingRd);
 		model.addAttribute("buildings", buildings);
@@ -69,7 +67,7 @@ public class UsrBuildingController {
 	}
 
 	@RequestMapping("/usr/bg12343/buildingModify")
-	public String showBuildingModify(Model model,@RequestParam(defaultValue = "1") int bldgId ) {
+	public String showBuildingModify(Model model, @RequestParam(defaultValue = "1") int bldgId) {
 
 		List<Building> buildings = buildingService.getForPrintBuildings(bldgId);
 
@@ -95,9 +93,9 @@ public class UsrBuildingController {
 	}
 
 	@RequestMapping("/usr/bg12343/room")
-	public String getRoom(Model model) {
+	public String getRoom(Model model, @RequestParam(defaultValue = "1") int bldgId) {
 
-		List<Room> rooms = buildingService.getForPrintRooms();
+		List<Room> rooms = buildingService.getForPrintRooms(bldgId);
 
 		int roomsCnt = rooms.size();
 
@@ -148,12 +146,12 @@ public class UsrBuildingController {
 	@RequestMapping("/usr/bg12343/roomModify")
 	public String showRoomModify(Model model) {
 
-		List<Room> rooms = buildingService.getForPrintRooms();
-
-		int roomsCnt = rooms.size();
-
-		model.addAttribute("roomsCnt", roomsCnt);
-		model.addAttribute("rooms", rooms);
+//		List<Room> rooms = buildingService.getForPrintRooms();
+//
+//		int roomsCnt = rooms.size();
+//
+//		model.addAttribute("roomsCnt", roomsCnt);
+//		model.addAttribute("rooms", rooms);
 		return "usr/bg12343/roomModify";
 	}
 
