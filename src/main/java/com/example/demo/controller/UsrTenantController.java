@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.demo.service.TenantService;
 import com.example.demo.util.Ut;
 import com.example.demo.vo.ResultData;
-import com.example.demo.vo.Room;
 import com.example.demo.vo.Tenant;
 
 @Controller

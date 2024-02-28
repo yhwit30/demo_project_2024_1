@@ -23,23 +23,14 @@
 
 <body>
 	<header>
-		<div class="h-20 flex mx-auto items-center text-3xl">
+		<div class="h-16 flex items-center text-3xl">
 			<a class="pl-3" href="/">
-				<!-- 상단애니메이션 -->
-				<button class="button">
-					<div class="button-overlay"></div>
-					BG12343
-				</button>
+				<button class="button">BG12343</button>
 			</a>
-
-
-
 
 			<!-- 게시판 헤드 -->
 			<div class="flex-grow "></div>
 			<ul class="flex ">
-				<!-- 					<li><a class="hover:underline" href="/"><i class="fa-solid fa-house-chimney-window"></i></a></li> -->
-
 
 				<c:if test="${rq.isLogined()}">
 					<li>
@@ -87,8 +78,8 @@
 				</c:if>
 
 				<c:if test="${rq.isLogined()}">
-					<li class="hover:underline">
-						<a class="h-full px-3 flex items-center" href="/usr/member/myPage">MYPAGE</a>
+					<li>
+						<a class="hover:underline" href="/usr/member/myPage">MYPAGE</a>
 					</li>
 					<li>
 						<a onclick="if(confirm('로그아웃하시겠습니까?') == false) return false;" class="hover:underline" href="../member/doLogout">LOGOUT</a>

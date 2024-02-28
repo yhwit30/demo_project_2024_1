@@ -14,7 +14,6 @@ import com.example.demo.service.MaintenanceFeeService;
 import com.example.demo.util.Ut;
 import com.example.demo.vo.MaintenanceFee;
 import com.example.demo.vo.ResultData;
-import com.example.demo.vo.Tenant;
 
 @Controller
 public class UsrMaintenanceFeeController {
