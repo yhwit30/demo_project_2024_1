@@ -85,14 +85,18 @@ return null;
 	}
 
 	@RequestMapping("/usr/bg12343/repairDetail")
-	public String showRepairDetail(Model model) {
+	public String showRepairDetail(Model model, int id) {
 		
-		List<Memo> memoRepair = memoService.getMemoRepair();
-		int memoRepairCnt = memoRepair.size();
+		Memo memoRepairRd = memoService.getMemoRepairRd(id);
 		
-		model.addAttribute("memoRepair", memoRepair);
-		model.addAttribute("memoRepairCnt", memoRepairCnt);
+		model.addAttribute("memoRepairRd", memoRepairRd);
 		return "usr/bg12343/repairDetail";
+	}
+	
+	@RequestMapping("/usr/bg12343/repairModify")
+	public String showRepairModify(Model model, int id) {
+		
+		return "usr/bg12343/repairModify";
 	}
 
 	@RequestMapping("/usr/bg12343/addRepair")

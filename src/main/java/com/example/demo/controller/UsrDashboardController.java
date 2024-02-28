@@ -45,4 +45,9 @@ public class UsrDashboardController {
 		return "usr/bg12343/rentStatus";
 	}
 
+	@RequestMapping("/usr/bg12343/notice")
+	public String showNotice(Model model) {
+
+		return "usr/bg12343/notice";
+	}
 }

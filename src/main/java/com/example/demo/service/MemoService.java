@@ -18,4 +18,8 @@ public class MemoService {
 		return memoRepository.getMemoRepair();
 	}
 
+	public Memo getMemoRepairRd(int id) {
+		return memoRepository.getMemoRepairRd(id);
+	}
+
 }
