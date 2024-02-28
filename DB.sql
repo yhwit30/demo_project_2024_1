@@ -1391,7 +1391,8 @@ CREATE TABLE maintenance_fee(
 SELECT * FROM maintenance_fee
 WHERE updateDate LIKE '2024-02%';
 
-SELECT *
+# 관리비도 호실기준 정렬하니까
+SELECT R.*, MF1.monthlyMaintenanceFee AS monthlyMaintenanceFee1
 FROM room AS R
 LEFT JOIN contract AS C
 ON R.id = C.roomId
@@ -1399,26 +1400,17 @@ LEFT JOIN building AS B
 ON R.bldgId = B.id
 LEFT JOIN tenant AS T
 ON C.tenantId = T.id
-LEFT JOIN maintenance_fee AS MF
-ON MF.tenantId = T.id
-#GROUP BY R.id
-HAVING MF.updateDate LIKE '2024-02%';
+LEFT JOIN (SELECT tenantId, monthlyMaintenanceFee FROM maintenance_fee WHERE updateDate LIKE '2024-01%') AS MF1
+ON MF1.tenantId = T.id
+LEFT JOIN (SELECT tenantId, monthlyMaintenanceFee FROM maintenance_fee WHERE updateDate LIKE '2024-02%') AS MF2
+ON MF2.tenantId = T.id
+GROUP BY R.id;
 
-# 잘 안되는 쿼리인 듯..
-SELECT * FROM maintenance_fee AS MF
-LEFT JOIN tenant AS T
-ON MF.tenantId = T.id
-LEFT JOIN contract AS C
-ON T.roomId = C.roomId
-RIGHT JOIN room AS R
-ON C.roomId = R.id
-LEFT JOIN building AS B
-ON R.bldgId = B.id
-GROUP BY R.id
-HAVING MF.updateDate LIKE '2024-02%';
-
-# 관리비 월별로 출력
-SELECT MF.*,T.*, C.*, R.*, B.*,  MF1.monthlyMaintenanceFee AS monthlyMaintenanceFee1,
+  
+# 위 코드 GPT한테 필터링
+SELECT 
+    R.*, C.*, B.*, T.*,
+    MF1.monthlyMaintenanceFee AS monthlyMaintenanceFee1,
     MF2.monthlyMaintenanceFee AS monthlyMaintenanceFee2,
     MF3.monthlyMaintenanceFee AS monthlyMaintenanceFee3,
     MF4.monthlyMaintenanceFee AS monthlyMaintenanceFee4,
@@ -1430,41 +1422,41 @@ SELECT MF.*,T.*, C.*, R.*, B.*,  MF1.monthlyMaintenanceFee AS monthlyMaintenance
     MF10.monthlyMaintenanceFee AS monthlyMaintenanceFee10,
     MF11.monthlyMaintenanceFee AS monthlyMaintenanceFee11,
     MF12.monthlyMaintenanceFee AS monthlyMaintenanceFee12
-FROM maintenance_fee AS MF
-LEFT JOIN tenant AS T
-ON MF.tenantId = T.id
-LEFT JOIN contract AS C
-ON T.roomId = C.roomId
-RIGHT JOIN room AS R
-ON C.roomId = R.id
-LEFT JOIN building AS B
-ON R.bldgId = B.id
+FROM 
+    room AS R
 LEFT JOIN 
-    maintenance_fee AS MF1 ON C.tenantId = MF1.tenantId AND MF1.updateDate LIKE '2024-01%'
+    contract AS C ON R.id = C.roomId
 LEFT JOIN 
-    maintenance_fee AS MF2 ON C.tenantId = MF2.tenantId AND MF2.updateDate LIKE '2024-02%'
+    building AS B ON R.bldgId = B.id
 LEFT JOIN 
-    maintenance_fee AS MF3 ON C.tenantId = MF3.tenantId AND MF3.updateDate LIKE '2024-03%'
+    tenant AS T ON C.tenantId = T.id
 LEFT JOIN 
-    maintenance_fee AS MF4 ON C.tenantId = MF4.tenantId AND MF4.updateDate LIKE '2024-04%'
+    maintenance_fee AS MF1 ON MF1.tenantId = T.id AND MF1.updateDate LIKE '2024-01%'
 LEFT JOIN 
-    maintenance_fee AS MF5 ON C.tenantId = MF5.tenantId AND MF5.updateDate LIKE '2024-05%'
+    maintenance_fee AS MF2 ON MF2.tenantId = T.id AND MF2.updateDate LIKE '2024-02%'
 LEFT JOIN 
-    maintenance_fee AS MF6 ON C.tenantId = MF6.tenantId AND MF6.updateDate LIKE '2024-06%'
+    maintenance_fee AS MF3 ON MF3.tenantId = T.id AND MF3.updateDate LIKE '2024-03%'
 LEFT JOIN 
-    maintenance_fee AS MF7 ON C.tenantId = MF7.tenantId AND MF7.updateDate LIKE '2024-07%'
+    maintenance_fee AS MF4 ON MF4.tenantId = T.id AND MF4.updateDate LIKE '2024-04%'
 LEFT JOIN 
-    maintenance_fee AS MF8 ON C.tenantId = MF8.tenantId AND MF8.updateDate LIKE '2024-08%'
+    maintenance_fee AS MF5 ON MF5.tenantId = T.id AND MF5.updateDate LIKE '2024-05%'
 LEFT JOIN 
-    maintenance_fee AS MF9 ON C.tenantId = MF9.tenantId AND MF9.updateDate LIKE '2024-09%'
+    maintenance_fee AS MF6 ON MF6.tenantId = T.id AND MF6.updateDate LIKE '2024-06%'
 LEFT JOIN 
-    maintenance_fee AS MF10 ON C.tenantId = MF10.tenantId AND MF10.updateDate LIKE '2024-10%'
+    maintenance_fee AS MF7 ON MF7.tenantId = T.id AND MF7.updateDate LIKE '2024-07%'
 LEFT JOIN 
-    maintenance_fee AS MF11 ON C.tenantId = MF11.tenantId AND MF11.updateDate LIKE '2024-11%'
+    maintenance_fee AS MF8 ON MF8.tenantId = T.id AND MF8.updateDate LIKE '2024-08%'
 LEFT JOIN 
-    maintenance_fee AS MF12 ON C.tenantId = MF12.tenantId AND MF12.updateDate LIKE '2024-12%'
-GROUP BY R.id
-HAVING B.id = 1;
+    maintenance_fee AS MF9 ON MF9.tenantId = T.id AND MF9.updateDate LIKE '2024-09%'
+LEFT JOIN 
+    maintenance_fee AS MF10 ON MF10.tenantId = T.id AND MF10.updateDate LIKE '2024-10%'
+LEFT JOIN 
+    maintenance_fee AS MF11 ON MF11.tenantId = T.id AND MF11.updateDate LIKE '2024-11%'
+LEFT JOIN 
+    maintenance_fee AS MF12 ON MF12.tenantId = T.id AND MF12.updateDate LIKE '2024-12%'
+GROUP BY 
+    R.id;
+  
 
 
 
@@ -1558,7 +1550,7 @@ elecBill =13460,
 gasUse = 40,
 gasCost = 900,
 gasBill =32970,
-monthlyMaintenanceFee=27390,
+monthlyMaintenanceFee=30210,
 lateFee =3870,
 lateMaintenanceFee =31260,
 maintenanceFeeDate =16,
@@ -1582,7 +1574,7 @@ elecBill =13460,
 gasUse = 40,
 gasCost = 900,
 gasBill =32970,
-monthlyMaintenanceFee=27390,
+monthlyMaintenanceFee=40527,
 lateFee =3870,
 lateMaintenanceFee =31260,
 maintenanceFeeDate =16,
@@ -1607,7 +1599,7 @@ elecBill =13460,
 gasUse = 40,
 gasCost = 900,
 gasBill =32970,
-monthlyMaintenanceFee=27390,
+monthlyMaintenanceFee=42424,
 lateFee =3870,
 lateMaintenanceFee =31260,
 maintenanceFeeDate =16,
@@ -1728,7 +1720,7 @@ elecBill =13460,
 gasUse = 40,
 gasCost = 900,
 gasBill =32970,
-monthlyMaintenanceFee=27390,
+monthlyMaintenanceFee=58631,
 lateFee =3870,
 lateMaintenanceFee =31260,
 maintenanceFeeDate =16,
@@ -1752,7 +1744,7 @@ elecBill =13460,
 gasUse = 40,
 gasCost = 900,
 gasBill =32970,
-monthlyMaintenanceFee=27390,
+monthlyMaintenanceFee=53521,
 lateFee =3870,
 lateMaintenanceFee =31260,
 maintenanceFeeDate =16,
@@ -1777,7 +1769,7 @@ elecBill =13460,
 gasUse = 40,
 gasCost = 900,
 gasBill =32970,
-monthlyMaintenanceFee=27390,
+monthlyMaintenanceFee=67854,
 lateFee =3870,
 lateMaintenanceFee =31260,
 maintenanceFeeDate =16,
