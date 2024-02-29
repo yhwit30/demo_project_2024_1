@@ -73,7 +73,7 @@
 							<form method="POST" id="modify-form-${rentStatus.tenantId }" style="display: none"
 								action="/usr/bg12343/doRentStatusModify"
 							>
-								<input type="text" value="${rentStatus.januaryPaymentStatus }" name="reply-text-${rentStatus.tenantId }" />
+								<input size ="1" type="text" value="${rentStatus.januaryPaymentStatus }" name="reply-text-${rentStatus.tenantId }" />
 							</form>
 							<button onclick="toggleModifybtn('${rentStatus.tenantId}');" id="modify-btn-${rentStatus.tenantId }"
 								style="white-space: nowrap" class="btn btn-xs btn-outline"
@@ -84,17 +84,17 @@
 						</td>
 
 						<td>
-							<span id="reply-${rentStatus.tenantId }">${rentStatus.februaryPaymentStatus }</span>
-							<form method="POST" id="modify-form-${rentStatus.tenantId }" style="display: none"
+							<span id="2reply-${rentStatus.tenantId }">${rentStatus.februaryPaymentStatus }</span>
+							<form method="POST" id="2modify-form-${rentStatus.tenantId }" style="display: none"
 								action="/usr/bg12343/doRentStatusModify"
 							>
-								<input type="text" value="${rentStatus.februaryPaymentStatus }" name="reply-text-${rentStatus.tenantId }" />
+								<input size ="1" type="text" value="${rentStatus.februaryPaymentStatus }" name="2reply-text-${rentStatus.tenantId }" />
 							</form>
-							<button onclick="toggleModifybtn('${rentStatus.tenantId}');" id="modify-btn-${rentStatus.tenantId }"
+							<button onclick="toggleModifybtn2('${rentStatus.tenantId}');" id="2modify-btn-${rentStatus.tenantId }"
 								style="white-space: nowrap" class="btn btn-xs btn-outline"
 							>수정</button>
-							<button onclick="doModifyRentStatus('${rentStatus.tenantId}', '01');" style="white-space: nowrap; display: none"
-								id="save-btn-${rentStatus.tenantId }" class="btn btn-xs btn-outline"
+							<button onclick="doModifyRentStatus2('${rentStatus.tenantId}', '02');" style="white-space: nowrap; display: none"
+								id="2save-btn-${rentStatus.tenantId }" class="btn btn-xs btn-outline"
 							>저장</button>
 						</td>
 						<td>${rentStatus.marchPaymentStatus }</td>
@@ -126,6 +126,15 @@
 		$('#reply-' + rentStatusId).hide();
 		$('#modify-form-' + rentStatusId).show();
 	}
+	function toggleModifybtn2(rentStatusId) {
+
+		console.log(rentStatusId);
+
+		$('#2modify-btn-' + rentStatusId).hide();
+		$('#2save-btn-' + rentStatusId).show();
+		$('#2reply-' + rentStatusId).hide();
+		$('#2modify-form-' + rentStatusId).show();
+	}
 
 	function doModifyRentStatus(rentStatusId, month) {
 		console.log(rentStatusId); // 디버깅을 위해 replyId를 콘솔에 출력
@@ -143,12 +152,7 @@
 		var action = form.attr('action');
 		console.log(action); // 디버깅을 위해 action을 콘솔에 출력
 
-		var year = $
-		{
-			nowYear
-		}
-		;
-		console.log(year);
+		var year = ${nowYear};
 
 		$.post({
 			url : '/usr/bg12343/doRentStatusModify', // 수정된 URL
@@ -165,6 +169,34 @@
 				$('#reply-' + rentStatusId).show();
 				$('#save-btn-' + rentStatusId).hide();
 				$('#modify-btn-' + rentStatusId).show();
+			},
+			error : function(xhr, status, error) {
+				alert('댓글 수정에 실패했습니다: ' + error);
+			}
+		})
+	}
+
+	function doModifyRentStatus2(rentStatusId, month) {
+		var form = $('#2modify-form-' + rentStatusId);
+		var text = form.find('input[name="2reply-text-' + rentStatusId + '"]').val();
+		var action = form.attr('action');
+		var year = ${nowYear};
+		
+		$.post({
+			url : '/usr/bg12343/doRentStatusModify', // 수정된 URL
+			type : 'POST', // GET에서 POST로 변경
+			data : {
+				tenantId : rentStatusId,
+				body : text,
+				year : year,
+				month : month
+			}, // 서버에 전송할 데이터
+			success : function(data) {
+				$('#2modify-form-' + rentStatusId).hide();
+				$('#2reply-' + rentStatusId).text(data);
+				$('#2reply-' + rentStatusId).show();
+				$('#2save-btn-' + rentStatusId).hide();
+				$('#2modify-btn-' + rentStatusId).show();
 			},
 			error : function(xhr, status, error) {
 				alert('댓글 수정에 실패했습니다: ' + error);
