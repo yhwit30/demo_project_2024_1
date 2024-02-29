@@ -12,14 +12,13 @@ public class Contract {
 	private String regDate;
 	private String updateDate;
 	private String leaseType;
-	private String deposit;
-	private String rent;
-	private String maintenanceFee;
+	private int deposit;
+	private int rent;
+	private int maintenanceFee;
 	private String contractStartDate;
 	private String contractEndDate;
 	private String depositDate;
 	private String rentDate;
-	private String contractMemo;
 	
 	private String bldgName;
 	private String roomNum;

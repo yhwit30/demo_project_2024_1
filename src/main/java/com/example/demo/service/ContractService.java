@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.repository.ContractRepository;
 import com.example.demo.vo.Contract;
+import com.example.demo.vo.ResultData;
 
 @Service
 public class ContractService {
@@ -17,5 +18,12 @@ public class ContractService {
 	public List<Contract> getForPrintContracts() {
 		return contractRepository.getForPrintContracts();
 	}
-	
+
+	public ResultData modifyContract(int id, String tenantName, String leaseType, int deposit, int rent, int maintenanceFee,
+			String contractStartDate, String contractEndDate, String depositDate, String rentDate) {
+		contractRepository.modifyContract(id, tenantName, leaseType, deposit, rent, maintenanceFee, contractStartDate,
+				contractEndDate, depositDate, rentDate);
+		return ResultData.from("S-1", "계약정보가 수정되었습니다");
+	}
+
 }

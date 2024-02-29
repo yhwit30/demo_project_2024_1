@@ -4,13 +4,13 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.example.demo.vo.Contract;
 
 @Mapper
 public interface ContractRepository {
 
-	
 	@Select("""
 			SELECT *
 			FROM contract AS C
@@ -23,5 +23,24 @@ public interface ContractRepository {
 			GROUP BY C.id;
 			""")
 	List<Contract> getForPrintContracts();
+
+	@Update("""
+			<script>
+			UPDATE contract AS C INNER JOIN Tenant AS T
+			ON C.tenantId = T.id
+			SET T.tenantName = #{tenantName},
+			C.leaseType = #{leaseType},
+			C.deposit = #{deposit},
+			C.rent = #{rent},
+			C.maintenanceFee = #{maintenanceFee},
+			C.contractStartDate = #{contractStartDate},
+			C.contractEndDate = #{contractEndDate},
+			C.depositDate = #{depositDate},
+			C.rentDate = #{rentDate}
+			WHERE C.id = #{id}
+			</script>
+			""")
+	void modifyContract(int id, String tenantName, String leaseType, int deposit, int rent, int maintenanceFee,
+			String contractStartDate, String contractEndDate, String depositDate, String rentDate);
 
 }

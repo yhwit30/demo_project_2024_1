@@ -48,7 +48,7 @@
 						<td>${contract.contractEndDate }</td>
 						<td>${contract.depositDate }</td>
 						<td>${contract.rentDate }</td>
-						<td>${contract.contractMemo }</td>
+						<td>#</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -56,6 +56,11 @@
 	</div>
 
 
+<div class="btns mt-5">
+		<a class="btn btn-outline" href="#">추가</a>
+		<a class="btn btn-outline" href="../bg12343/contractModify">수정</a>
+		<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="#">삭제</a>
+	</div>
 
 
 
