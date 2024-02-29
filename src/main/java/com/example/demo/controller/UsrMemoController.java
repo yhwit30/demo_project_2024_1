@@ -8,8 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.service.BuildingService;
 import com.example.demo.service.MemoService;
 import com.example.demo.util.Ut;
+import com.example.demo.vo.Building;
 import com.example.demo.vo.Memo;
 import com.example.demo.vo.Rq;
 
@@ -21,6 +23,9 @@ public class UsrMemoController {
 
 	@Autowired
 	private MemoService memoService;
+	
+	@Autowired
+	private BuildingService buildingService;
 
 	// 액션 메소드
 	@RequestMapping("/usr/bg12343/notice")
@@ -31,7 +36,10 @@ public class UsrMemoController {
 	
 	@RequestMapping("/usr/bg12343/expenses")
 	public String showExpenses(Model model) {
+//		건물 변환 버튼용
+		List<Building> buildings = buildingService.getForPrintBuildings();
 
+		model.addAttribute("buildings", buildings);
 		return "usr/bg12343/expenses";
 	}
 	

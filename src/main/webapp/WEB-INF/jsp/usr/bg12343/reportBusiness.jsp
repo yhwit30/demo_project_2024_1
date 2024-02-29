@@ -63,11 +63,16 @@
 						<td>${rentStatus.tenantPhone }</td>
 					</tr>
 				</tbody>
+				<tr>
+					<td colspan="16">
+						<br>
+						<!-- 단위별로 줄바꿈 -->
+					</td>
+				</tr>
 			</c:forEach>
 		</table>
 	</div>
 </section>
-
 
 
 
