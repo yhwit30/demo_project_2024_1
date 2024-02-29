@@ -3,10 +3,7 @@
 <c:set var="pageTitle" value="ARTICLE DETAIL"></c:set>
 <%@ include file="../common/head.jspf"%>
 
-<div class="text-center">${checkUrlId}</div>
-
-<!-- <iframe src="http://localhost:8081/usr/article/doIncreaseHitCountRd?id=373" frameborder="0"></iframe> -->
-
+<!-- <iframe src="http://localhost:8081/usr/article/doIncreaseHitCountRd?id=372" frameborder="0"></iframe> -->
 
 <!-- 변수 -->
 <script>
@@ -19,6 +16,8 @@
 	
 	var isAlreadyAddGoodRp = ${isAlreadyAddGoodRp};
 	var isAlreadyAddBadRp = ${isAlreadyAddBadRp};
+	
+	
 </script>
 
 <!-- 조회수 -->
@@ -39,10 +38,11 @@
 			$('.article-detail__hit-count').empty().html(data.data1);
 		}, 'json');
 	}
+
 	$(function() {
 		// 		ArticleDetail__doIncreaseHitCount();
-		setTimeout(ArticleDetail__doIncreaseHitCount, 1000);
-	})
+		setTimeout(ArticleDetail__doIncreaseHitCount, 2000);
+	});
 </script>
 
 <!-- 좋아요 싫어요  -->
@@ -57,7 +57,7 @@
 			return;
 		}
 	}
-
+	
 	function doGoodReaction(articleId) {
 		if(isNaN(params.memberId) == true){
 			if(confirm('로그인 해야해. 로그인 페이지로 가실???')){
@@ -113,6 +113,7 @@
 	
 	
 	function doBadReaction(articleId) {
+		
 		if(isNaN(params.memberId) == true){
 			if(confirm('로그인 해야해. 로그인 페이지로 가실???')){
 				var currentUri = encodeURIComponent(window.location.href);
@@ -171,11 +172,14 @@
 <!-- 댓글 -->
 <script>
 		var ReplyWrite__submitDone = false;
+
 		function ReplyWrite__submit(form) {
 			if (ReplyWrite__submitDone) {
 				alert('이미 처리중입니다');
 				return;
 			}
+			console.log(123);
+			
 			console.log(form.body.value);
 			
 			if (form.body.value.length < 3) {
@@ -183,12 +187,12 @@
 				form.body.focus();
 				return;
 			}
+
 			ReplyWrite__submitDone = true;
 			form.submit();
+
 		}
-	</script>
-
-
+</script>
 <!-- 댓글 수정 -->
 <script>
 function toggleModifybtn(replyId) {
@@ -235,18 +239,10 @@ function doModifyReply(replyId) {
 </script>
 
 
-
-<section class="mt-8 text-xl px-4">
-	<div class="mx-auto">
-
-
-
-		<table class="table-box-1  mx-auto" border="1">
+<section class="mt-8 text-xl px-4 ">
+	<div class="">
+		<table class="table-box-1 " border="1">
 			<tbody>
-				<tr>
-					<th>게시판</th>
-					<td>${article.board_code }</td>
-				</tr>
 				<tr>
 					<th>번호</th>
 					<td>${article.id }${goodRP}${badRP}</td>
@@ -272,7 +268,7 @@ function doModifyReply(replyId) {
 					<td id="DislikeCount">${article.badReactionPoint }</td>
 				</tr>
 				<tr>
-					<th>추천</th>
+					<th>추천 ${usersReaction }</th>
 					<td>
 						<!-- href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.currentUri}" -->
 						<button id="likeButton" class="btn btn-outline btn-success" onclick="doGoodReaction(${param.id})">좋아요</button>
@@ -299,22 +295,18 @@ function doModifyReply(replyId) {
 		</table>
 		<div class="btns mt-5">
 			<button class="btn btn-outline" type="button" onclick="history.back();">뒤로가기</button>
-			<!-- 			<a class="btn btn-outline" href="../article/list">뒤로가기</a> -->
 			<c:if test="${article.userCanModify }">
 				<a class="btn btn-outline" href="../article/modify?id=${article.id }">수정</a>
 			</c:if>
 			<c:if test="${article.userCanDelete }">
 				<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;"
-					href="../article/doDelete?id=${article.id }"
-				>삭제</a>
+					href="../article/doDelete?id=${article.id }">삭제</a>
 			</c:if>
 		</div>
 	</div>
 </section>
 
-<!-- 댓글 -->
 <section class="mt-5 px-3">
-	<!-- 로그인체크 버튼 -->
 	<c:if test="${rq.isLogined() }">
 		<form action="../reply/doWrite" method="POST" onsubmit="ReplyWrite__submit(this); return false;">
 			<input type="hidden" name="relTypeCode" value="article" />
@@ -322,13 +314,14 @@ function doModifyReply(replyId) {
 			<table class="write-box table-box-1" border="1">
 				<tbody>
 					<tr>
-						<th>댓글</th>
+						<th>내용</th>
 						<td>
-							<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="내용을 입력해주세요" name="body"
-							/>
+							<textarea class="input input-bordered input-primary w-full max-w-xs" autocomplete="off"
+								placeholder="내용을 입력해주세요" name="body"> </textarea>
 						</td>
-
+					</tr>
+					<tr>
+						<th></th>
 						<td>
 							<input class="btn btn-outline btn-info" type="submit" value="댓글 작성" />
 						</td>
@@ -340,22 +333,20 @@ function doModifyReply(replyId) {
 	<c:if test="${!rq.isLogined() }">
 		<a class="btn btn-outline btn-ghost" href="../member/login">LOGIN</a> 하고 댓글 써
 	</c:if>
-
-	<!-- 댓글 목록 -->
-	<div class="mb-5">
+	<div class="mx-auto">
 		<h2>댓글 리스트(${repliesCount })</h2>
 		<table class="table-box-1 table" border="1">
 			<colgroup>
 				<col style="width: 10%" />
 				<col style="width: 20%" />
-				<col style="width: 50%" />
+				<col style="width: 60%" />
 				<col style="width: 10%" />
 			</colgroup>
 			<thead>
 				<tr>
 					<th>번호</th>
 					<th>날짜</th>
-					<th>댓글</th>
+					<th>내용</th>
 					<th>작성자</th>
 					<th>좋아요</th>
 					<th>싫어요</th>
@@ -364,6 +355,7 @@ function doModifyReply(replyId) {
 				</tr>
 			</thead>
 			<tbody>
+
 				<c:forEach var="reply" items="${replies }">
 					<tr class="hover">
 						<td>${reply.id }</td>
@@ -394,14 +386,11 @@ function doModifyReply(replyId) {
 						</td>
 					</tr>
 				</c:forEach>
-
 			</tbody>
 		</table>
-
 	</div>
+
 </section>
-
-
 
 
 
