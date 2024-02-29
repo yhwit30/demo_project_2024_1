@@ -16,7 +16,7 @@ ${param.month }월
 					<tr>
 						<th>건물명</th>
 						<th>호실</th>
-						<th>세입자</th>
+						<th>세입자명</th>
 						<th>임대형태</th>
 						<th>공동전기</th>
 						<th>공동수도</th>
@@ -60,17 +60,17 @@ ${param.month }월
 								/>
 							</td>
 							<td>
-								<input size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="elevater"
+								<input size="2" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="elevater"
 									value="${maintenanceFee.elevater }"
 								/>
 							</td>
 							<td>
-								<input size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="internetTV"
+								<input size="2" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="internetTV"
 									value="${maintenanceFee.internetTV }"
 								/>
 							</td>
 							<td>
-								<input size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="fireSafety"
+								<input size="2" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="fireSafety"
 									value="${maintenanceFee.fireSafety }"
 								/>
 							</td>

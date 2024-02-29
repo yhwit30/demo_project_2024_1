@@ -86,8 +86,20 @@ public class UsrDashboardController {
 	}
 	
 	@RequestMapping("/usr/bg12343/reportBusiness")
-	public String showNotice(Model model) {
+	public String showNotice(Model model, @RequestParam(defaultValue = "1") int bldgId, Integer year) {
 
+		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
+				if(year == null) {
+					year = nowYear;
+				}
+				List<Dashboard> rentStatus = dashboardService.getRentStatus(bldgId, year);
+				
+//				건물 변환 버튼용
+				List<Building> buildings = buildingService.getForPrintBuildings();
+
+				model.addAttribute("buildings", buildings);
+				model.addAttribute("rentStatus", rentStatus);
+				model.addAttribute("nowYear", nowYear);
 		return "usr/bg12343/reportBusiness";
 	}
 	

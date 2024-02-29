@@ -32,9 +32,9 @@
 				<tbody>
 
 					<c:forEach var="contract" items="${contracts }">
+						<input type="hidden" name="id" value="${contract.id }" />
 						<tr class="hover">
 							<td>${contract.id }</td>
-						<input type="hidden" name="id" value="${contract.id }" />
 							<td>${contract.regDate.substring(0,10) }</td>
 							<td>${contract.updateDate.substring(0,10) }</td>
 							<td>${contract.bldgName }</td>
