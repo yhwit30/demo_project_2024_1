@@ -1238,7 +1238,7 @@ CREATE TABLE memo_board(
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL,
-    memoCode CHAR(50) NOT NULL COMMENT '건물(1), 호실(2), 세입자(3), 계약(4), 작업(5)',
+    memoCode CHAR(50) NOT NULL COMMENT '건물(1), 호실(2), 세입자(3), 계약(4), 작업(5), 지출내역(6)',
     delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '삭제 여부 (0=삭제 전, 1=삭제 후)',
     delDate DATETIME COMMENT '삭제 날짜'
 );
@@ -1286,6 +1286,13 @@ SET regDate = NOW(),
 updateDate = NOW(),
 memoCode = '작업일지';
 
+# memo_board 6
+INSERT INTO memo_board
+SET regDate = NOW(),
+updateDate = NOW(),
+memoCode = '지출내역';
+
+#------------------------
 # memo testdata
 INSERT INTO memo
 SET regDate = NOW(),
@@ -1913,6 +1920,19 @@ GROUP BY R.id
 HAVING B.id = 2;
 
 
+# 월별현황 하나 가져오기
+SELECT *
+FROM room AS R
+LEFT JOIN contract AS C ON R.id = C.roomId
+LEFT JOIN building AS B ON R.bldgId = B.id
+LEFT JOIN tenant AS T ON C.tenantId = T.id
+LEFT JOIN contract_Status AS CS ON C.tenantId = CS.tenantId
+AND (CS.rentDate LIKE '2024-01%')
+GROUP BY R.id
+HAVING T.id = 1;
+
+
+
 SELECT * FROM building;
 
 SELECT * FROM room;
@@ -1945,8 +1965,14 @@ WHERE C.id = 6;
 
 UPDATE contract AS C INNER JOIN Tenant AS T
 ON C.tenantId = T.id
-SET C.leaseType = '반전세',
+SET C.updateDate = NOW(),
+C.leaseType = '반전세',
 C.deposit = 40,
 T.tenantName = '수정김'
 WHERE C.id = 6;
 
+
+
+SELECT *
+FROM contract_Status 
+WHERE rentDate LIKE '2024-%1%' AND tenantId = 2;

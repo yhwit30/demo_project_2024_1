@@ -85,9 +85,10 @@ public class UsrDashboardController {
 		return rentStatusRd.getPaymentStatus();
 	}
 	
-	@RequestMapping("/usr/bg12343/notice")
+	@RequestMapping("/usr/bg12343/reportBusiness")
 	public String showNotice(Model model) {
 
-		return "usr/bg12343/notice";
+		return "usr/bg12343/reportBusiness";
 	}
+	
 }

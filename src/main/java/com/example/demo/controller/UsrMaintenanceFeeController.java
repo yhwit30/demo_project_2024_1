@@ -22,7 +22,6 @@ public class UsrMaintenanceFeeController {
 
 	LocalDate now = LocalDate.now();
 	int nowYear = now.getYear();
-	int nowMonth = now.getMonthValue();
 
 	@Autowired
 	private MaintenanceFeeService maintenanceFeeService;
@@ -50,14 +49,11 @@ public class UsrMaintenanceFeeController {
 	}
 
 	@RequestMapping("/usr/bg12343/maintenanceFeeDetail")
-	public String getMaintenanceFeeDetail(Model model, @RequestParam(defaultValue = "1") int bldgId, Integer year, Integer month) {
+	public String getMaintenanceFeeDetail(Model model, @RequestParam(defaultValue = "1") int bldgId, Integer year, String month) {
 
 		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
 		if (year == null) {
 			year = nowYear;
-		}
-		if (month == null) {
-			month = nowMonth;
 		}
 
 		List<MaintenanceFee> maintenanceFee = maintenanceFeeService.getMaintenanceFee(bldgId, year, month);
@@ -67,15 +63,16 @@ public class UsrMaintenanceFeeController {
 	}
 
 	@RequestMapping("/usr/bg12343/maintenanceFeeModify")
-	public String showMaintenanceFeeModify(Model model, @RequestParam(defaultValue = "1") int bldgId, Integer year) {
+	public String showMaintenanceFeeModify(Model model, @RequestParam(defaultValue = "1") int bldgId, Integer year, String month) {
 
 		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
 		if (year == null) {
 			year = nowYear;
 		}
 
-//		List<MaintenanceFee> maintenanceFee = maintenanceFeeService.getMaintenanceFee(bldgId, year);
-//		model.addAttribute("maintenanceFee", maintenanceFee);
+		List<MaintenanceFee> maintenanceFee = maintenanceFeeService.getMaintenanceFee(bldgId, year, month);
+
+		model.addAttribute("maintenanceFee", maintenanceFee);
 		return "usr/bg12343/maintenanceFeeModify";
 	}
 
@@ -83,7 +80,12 @@ public class UsrMaintenanceFeeController {
 	@ResponseBody
 	public String doMaintenanceFeeModify(int[] tenantId, int[] commonElec, int[] commonWater, int[] elevater,
 			int[] internetTV, int[] fireSafety, int[] waterUse, int[] waterCost, int[] elecUse, int[] elecCost,
-			int[] gasUse, int[] gasCost, int[] maintenanceFeeDate) {
+			int[] gasUse, int[] gasCost, int[] maintenanceFeeDate, @RequestParam(defaultValue = "1") int bldgId, Integer year, String month) {
+
+		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
+		if (year == null) {
+			year = nowYear;
+		}
 
 		int[] waterBill = new int[tenantId.length];
 		int[] elecBill = new int[tenantId.length];
@@ -105,11 +107,11 @@ public class UsrMaintenanceFeeController {
 			maintenanceFeeModifyRd = maintenanceFeeService.modifyMaintenanceFee(tenantId[i], commonElec[i],
 					commonWater[i], elevater[i], internetTV[i], fireSafety[i], waterUse[i], waterCost[i], waterBill[i],
 					elecUse[i], elecCost[i], elecBill[i], gasUse[i], gasCost[i], gasBill[i], monthlyMaintenanceFee[i],
-					lateFee[i], lateMaintenanceFee[i], maintenanceFeeDate[i]);
+					lateFee[i], lateMaintenanceFee[i], maintenanceFeeDate[i], year, month);
 		}
 
 		return Ut.jsReplace(maintenanceFeeModifyRd.getResultCode(), maintenanceFeeModifyRd.getMsg(),
-				"../bg12343/maintenanceFee");
+				"../bg12343/maintenanceFeeDetail?bldgId="+bldgId+"&month="+month);
 	}
 
 }

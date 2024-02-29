@@ -63,31 +63,31 @@
 						<td>${maintenanceFeeMonthly.tenantName }</td>
 						<td>${maintenanceFeeMonthly.leaseType }</td>
 						<td>
-							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=1">${maintenanceFeeMonthly.monthlyMaintenanceFee1 }</a>
+							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=01">${maintenanceFeeMonthly.monthlyMaintenanceFee1 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=2">${maintenanceFeeMonthly.monthlyMaintenanceFee2 }</a>
+							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=02">${maintenanceFeeMonthly.monthlyMaintenanceFee2 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=3">${maintenanceFeeMonthly.monthlyMaintenanceFee3 }</a>
+							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=03">${maintenanceFeeMonthly.monthlyMaintenanceFee3 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=4">${maintenanceFeeMonthly.monthlyMaintenanceFee4 }</a>
+							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=04">${maintenanceFeeMonthly.monthlyMaintenanceFee4 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=5">${maintenanceFeeMonthly.monthlyMaintenanceFee5 }</a>
+							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=05">${maintenanceFeeMonthly.monthlyMaintenanceFee5 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=6">${maintenanceFeeMonthly.monthlyMaintenanceFee6 }</a>
+							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=06">${maintenanceFeeMonthly.monthlyMaintenanceFee6 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=7">${maintenanceFeeMonthly.monthlyMaintenanceFee7 }</a>
+							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=07">${maintenanceFeeMonthly.monthlyMaintenanceFee7 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=8">${maintenanceFeeMonthly.monthlyMaintenanceFee8 }</a>
+							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=08">${maintenanceFeeMonthly.monthlyMaintenanceFee8 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=9">${maintenanceFeeMonthly.monthlyMaintenanceFee9 }</a>
+							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=09">${maintenanceFeeMonthly.monthlyMaintenanceFee9 }</a>
 						</td>
 						<td>
 							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=10">${maintenanceFeeMonthly.monthlyMaintenanceFee10 }</a>
@@ -103,15 +103,6 @@
 				</c:forEach>
 			</tbody>
 		</table>
-	</div>
-
-	<div class="btns mt-5">
-		<a class="btn btn-outline" href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }">자세히 보기</a>
-	</div>
-
-	<div class="btns mt-5">
-		<a class="btn btn-outline" href="../bg12343/maintenanceFeeModify">수정</a>
-		<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="#">삭제</a>
 	</div>
 
 </section>

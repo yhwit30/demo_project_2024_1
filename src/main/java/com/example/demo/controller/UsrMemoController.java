@@ -23,6 +23,18 @@ public class UsrMemoController {
 	private MemoService memoService;
 
 	// 액션 메소드
+	@RequestMapping("/usr/bg12343/notice")
+	public String showNotice(Model model) {
+
+		return "usr/bg12343/notice";
+	}
+	
+	@RequestMapping("/usr/bg12343/expenses")
+	public String showExpenses(Model model) {
+
+		return "usr/bg12343/expenses";
+	}
+	
 	@RequestMapping("/usr/bg12343/memoAdd")
 	public String showMemoAdd(Model model) {
 

@@ -74,11 +74,11 @@ public interface MaintenanceFeeRepository {
 			LEFT JOIN tenant AS T
 			ON C.tenantId = T.id
 			LEFT JOIN maintenance_fee AS MF
-			ON MF.tenantId = T.id AND MF.updateDate LIKE '${year}-%${month}%'
+			ON MF.tenantId = T.id AND MF.updateDate LIKE '${year}-${month}%'
 			GROUP BY R.id
 			HAVING B.id = #{bldgId};
-						""")
-	List<MaintenanceFee> getMaintenanceFee(int bldgId, Integer year, Integer month);
+			""")
+	List<MaintenanceFee> getMaintenanceFee(int bldgId, Integer year, String month);
 
 	@Update("""
 			UPDATE maintenance_fee
@@ -100,11 +100,12 @@ public interface MaintenanceFeeRepository {
 			lateFee = #{lateFee},
 			lateMaintenanceFee = #{lateMaintenanceFee},
 			maintenanceFeeDate = #{maintenanceFeeDate}
-			WHERE tenantId = #{tenantId}
+			WHERE tenantId = #{tenantId} 
+			AND updateDate LIKE '${year}-${month}%'
 			""")
 	void modifyMaintenanceFee(int tenantId, int commonElec, int commonWater, int elevater, int internetTV,
 			int fireSafety, int waterUse, int waterCost, int waterBill, int elecUse, int elecCost, int elecBill,
 			int gasUse, int gasCost, int gasBill, int monthlyMaintenanceFee, int lateFee, int lateMaintenanceFee,
-			int maintenanceFeeDate);
+			int maintenanceFeeDate, int year, String month);
 
 }

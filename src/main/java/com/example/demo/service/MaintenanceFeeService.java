@@ -20,17 +20,17 @@ public class MaintenanceFeeService {
 	}
 	
 
-	public List<MaintenanceFee> getMaintenanceFee(int bldgId, Integer year, Integer month) {
+	public List<MaintenanceFee> getMaintenanceFee(int bldgId, Integer year, String month) {
 		return maintenanceFeeRepository.getMaintenanceFee(bldgId, year, month);
 	}
 
 	public ResultData modifyMaintenanceFee(int tenantId, int commonElec, int commonWater, int elevater, int internetTV,
 			int fireSafety, int waterUse, int waterCost, int waterBill, int elecUse, int elecCost, int elecBill,
 			int gasUse, int gasCost, int gasBill, int monthlyMaintenanceFee, int lateFee, int lateMaintenanceFee,
-			int maintenanceFeeDate) {
+			int maintenanceFeeDate, int year, String month) {
 		maintenanceFeeRepository.modifyMaintenanceFee(tenantId, commonElec, commonWater, elevater, internetTV,
 				fireSafety, waterUse, waterCost, waterBill, elecUse, elecCost, elecBill, gasUse, gasCost, gasBill,
-				monthlyMaintenanceFee, lateFee, lateMaintenanceFee, maintenanceFeeDate);
+				monthlyMaintenanceFee, lateFee, lateMaintenanceFee, maintenanceFeeDate, year, month);
 		return ResultData.from("S-1", "관리비정보가 수정되었습니다");
 	}
 

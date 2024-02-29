@@ -34,10 +34,10 @@
 				<a href="/usr/bg12343/notice">공지사항</a>
 			</li>
 			<li>
-				<a href="/usr/bg12343/notice">지출내역</a>
+				<a href="/usr/bg12343/expenses">지출내역</a>
 			</li>
 			<li>
-				<a href="/usr/bg12343/notice">사업장<br> 현황신고</a>
+				<a href="/usr/bg12343/reportBusiness">사업장<br> 현황신고</a>
 			</li>
 
 

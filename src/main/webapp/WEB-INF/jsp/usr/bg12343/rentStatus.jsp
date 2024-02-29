@@ -4,11 +4,11 @@
 <%@ include file="../common/head.jspf"%>
 <%@ include file="../common/sidebar.jspf"%>
 
-스크립트 개행오류 있음 nowYear 데이터에
+스크립트 개행오류 있음 nowYear 데이터에.
+나중에 납부현황 hover로 수정삭제 넣기
 
 <!-- 월별 수납 수정기능 및 버튼토글 -->
 <script>
-
 	// 1월 버튼 토글 함수
 	function toggleModifybtn(rentStatusId, month) {
 		console.log(rentStatusId);
@@ -23,7 +23,7 @@
 		var form = $('#modify-form-' + rentStatusId);
 		var text = form.find('input[name="reply-text-' + rentStatusId + '"]')
 				.val();
-		var year = ${nowYear};
+		var year = 2024;
 
 		$.post({
 			url : '/usr/bg12343/doRentStatusModify',
@@ -61,7 +61,7 @@
 		var form = $('#2modify-form-' + rentStatusId);
 		var text = form.find('input[name="2reply-text-' + rentStatusId + '"]')
 				.val();
-		var year = ${nowYear};
+		var year = 2024;
 
 		$.post({
 			url : '/usr/bg12343/doRentStatusModify',
@@ -99,7 +99,7 @@
 		var form = $('#3modify-form-' + rentStatusId);
 		var text = form.find('input[name="3reply-text-' + rentStatusId + '"]')
 				.val();
-		var year = ${nowYear};
+		var year = 2024;
 
 		$.post({
 			url : '/usr/bg12343/doRentStatusModify',
@@ -137,7 +137,7 @@
 		var form = $('#4modify-form-' + rentStatusId);
 		var text = form.find('input[name="4reply-text-' + rentStatusId + '"]')
 				.val();
-		var year = ${nowYear};
+		var year = 2024;
 
 		$.post({
 			url : '/usr/bg12343/doRentStatusModify',
@@ -175,7 +175,7 @@
 		var form = $('#5modify-form-' + rentStatusId);
 		var text = form.find('input[name="5reply-text-' + rentStatusId + '"]')
 				.val();
-		var year = ${nowYear};
+		var year = 2024;
 
 		$.post({
 			url : '/usr/bg12343/doRentStatusModify',
@@ -212,7 +212,7 @@
 		var form = $('#6modify-form-' + rentStatusId);
 		var text = form.find('input[name="6reply-text-' + rentStatusId + '"]')
 				.val();
-		var year = ${nowYear};
+		var year = 2024;
 
 		$.post({
 			url : '/usr/bg12343/doRentStatusModify',
@@ -250,7 +250,7 @@
 		var form = $('#7modify-form-' + rentStatusId);
 		var text = form.find('input[name="7reply-text-' + rentStatusId + '"]')
 				.val();
-		var year = ${nowYear};
+		var year = 2024;
 
 		$.post({
 			url : '/usr/bg12343/doRentStatusModify',
@@ -288,7 +288,7 @@
 		var form = $('#8modify-form-' + rentStatusId);
 		var text = form.find('input[name="8reply-text-' + rentStatusId + '"]')
 				.val();
-		var year = ${nowYear};
+		var year = 2024;
 
 		$.post({
 			url : '/usr/bg12343/doRentStatusModify',
@@ -326,7 +326,7 @@
 		var form = $('#9modify-form-' + rentStatusId);
 		var text = form.find('input[name="9reply-text-' + rentStatusId + '"]')
 				.val();
-		var year = ${nowYear};
+		var year = 2024;
 
 		$.post({
 			url : '/usr/bg12343/doRentStatusModify',
@@ -364,7 +364,7 @@
 		var form = $('#10modify-form-' + rentStatusId);
 		var text = form.find('input[name="10reply-text-' + rentStatusId + '"]')
 				.val();
-		var year = ${nowYear};
+		var year = 2024;
 
 		$.post({
 			url : '/usr/bg12343/doRentStatusModify',
@@ -402,7 +402,7 @@
 		var form = $('#11modify-form-' + rentStatusId);
 		var text = form.find('input[name="11reply-text-' + rentStatusId + '"]')
 				.val();
-		var year = ${nowYear};
+		var year = 2024;
 
 		$.post({
 			url : '/usr/bg12343/doRentStatusModify',
@@ -440,7 +440,7 @@
 		var form = $('#12modify-form-' + rentStatusId);
 		var text = form.find('input[name="12reply-text-' + rentStatusId + '"]')
 				.val();
-		var year = ${nowYear};
+		var year = 2024;
 
 		$.post({
 			url : '/usr/bg12343/doRentStatusModify',
@@ -463,7 +463,6 @@
 			}
 		})
 	}
-
 </script>
 
 
@@ -533,6 +532,9 @@
 						<td>${rentStatus.contractStartDate }</td>
 						<td>${rentStatus.contractEndDate }</td>
 						<td>${rentStatus.rentDate }</td>
+
+
+
 						<!-- January -->
 						<td>
 							<span id="reply-${rentStatus.tenantId }">${rentStatus.januaryPaymentStatus }</span>
