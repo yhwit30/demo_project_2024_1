@@ -5,14 +5,21 @@
 <%@ include file="../common/sidebar.jspf"%>
 
 
-<!-- 건물 개수대로 가져오는 함수로 수정해야함 -->
+<!-- 건물 카테고리 버튼 -->
 <div>
-	<a class="btn btn-sm btn-outline ${param.bldgId == 1 ? 'btn-active' : '' }" href="../bg12343/rentStatus?bldgId=1&year=${param.year }">건물1 가나</a>
-	<a class="btn btn-sm btn-outline ${param.bldgId == 2 ? 'btn-active' : '' }" href="../bg12343/rentStatus?bldgId=2&year=${param.year }">건물2 다라</a>
+	<c:forEach var="building" items="${buildings }">
+		<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
+			href="../bg12343/rentStatus?bldgId=${building.id }"
+		>${building.bldgName }</a>
+	</c:forEach>
 </div>
 
-<a class="btn btn-sm btn-outline ${param.year == nowYear -1 ? 'btn-active' : '' }" href="rentStatus?bldgId=${param.bldgId }&year=${nowYear -1}">전년도 보기</a>
-<a class="btn btn-sm btn-outline ${param.year == nowYear ? 'btn-active' : '' }" href="rentStatus?bldgId=${param.bldgId }&year=${nowYear}">올해(${nowYear}) 보기</a>
+<a class="btn btn-sm btn-outline ${param.year == nowYear -1 ? 'btn-active' : '' }"
+	href="rentStatus?bldgId=${param.bldgId }&year=${nowYear -1}"
+>전년도 보기</a>
+<a class="btn btn-sm btn-outline ${param.year == nowYear ? 'btn-active' : '' }"
+	href="rentStatus?bldgId=${param.bldgId }&year=${nowYear}"
+>올해(${nowYear}) 보기</a>
 
 
 <section class="mt-2 text-xl px-4">
@@ -61,8 +68,35 @@
 						<td>${rentStatus.contractStartDate }</td>
 						<td>${rentStatus.contractEndDate }</td>
 						<td>${rentStatus.rentDate }</td>
-						<td>${rentStatus.januaryPaymentStatus }</td>
-						<td>${rentStatus.februaryPaymentStatus }</td>
+						<td>
+							<span id="reply-${rentStatus.tenantId }">${rentStatus.januaryPaymentStatus }</span>
+							<form method="POST" id="modify-form-${rentStatus.tenantId }" style="display: none"
+								action="/usr/bg12343/doRentStatusModify"
+							>
+								<input type="text" value="${rentStatus.januaryPaymentStatus }" name="reply-text-${rentStatus.tenantId }" />
+							</form>
+							<button onclick="toggleModifybtn('${rentStatus.tenantId}');" id="modify-btn-${rentStatus.tenantId }"
+								style="white-space: nowrap" class="btn btn-xs btn-outline"
+							>수정</button>
+							<button onclick="doModifyRentStatus('${rentStatus.tenantId}', '01');" style="white-space: nowrap; display: none"
+								id="save-btn-${rentStatus.tenantId }" class="btn btn-xs btn-outline"
+							>저장</button>
+						</td>
+
+						<td>
+							<span id="reply-${rentStatus.tenantId }">${rentStatus.februaryPaymentStatus }</span>
+							<form method="POST" id="modify-form-${rentStatus.tenantId }" style="display: none"
+								action="/usr/bg12343/doRentStatusModify"
+							>
+								<input type="text" value="${rentStatus.februaryPaymentStatus }" name="reply-text-${rentStatus.tenantId }" />
+							</form>
+							<button onclick="toggleModifybtn('${rentStatus.tenantId}');" id="modify-btn-${rentStatus.tenantId }"
+								style="white-space: nowrap" class="btn btn-xs btn-outline"
+							>수정</button>
+							<button onclick="doModifyRentStatus('${rentStatus.tenantId}', '01');" style="white-space: nowrap; display: none"
+								id="save-btn-${rentStatus.tenantId }" class="btn btn-xs btn-outline"
+							>저장</button>
+						</td>
 						<td>${rentStatus.marchPaymentStatus }</td>
 						<td>${rentStatus.aprilPaymentStatus }</td>
 						<td>${rentStatus.mayPaymentStatus }</td>
@@ -80,14 +114,64 @@
 	</div>
 
 
-
-
-
-
-
 </section>
 
+<script>
+	function toggleModifybtn(rentStatusId) {
 
+		console.log(rentStatusId);
+
+		$('#modify-btn-' + rentStatusId).hide();
+		$('#save-btn-' + rentStatusId).show();
+		$('#reply-' + rentStatusId).hide();
+		$('#modify-form-' + rentStatusId).show();
+	}
+
+	function doModifyRentStatus(rentStatusId, month) {
+		console.log(rentStatusId); // 디버깅을 위해 replyId를 콘솔에 출력
+
+		// form 요소를 정확하게 선택
+		var form = $('#modify-form-' + rentStatusId);
+		console.log(form); // 디버깅을 위해 form을 콘솔에 출력
+
+		// form 내의 input 요소의 값을 가져옵니다
+		var text = form.find('input[name="reply-text-' + rentStatusId + '"]')
+				.val();
+		console.log(text); // 디버깅을 위해 text를 콘솔에 출력
+
+		// form의 action 속성 값을 가져옵니다
+		var action = form.attr('action');
+		console.log(action); // 디버깅을 위해 action을 콘솔에 출력
+
+		var year = $
+		{
+			nowYear
+		}
+		;
+		console.log(year);
+
+		$.post({
+			url : '/usr/bg12343/doRentStatusModify', // 수정된 URL
+			type : 'POST', // GET에서 POST로 변경
+			data : {
+				tenantId : rentStatusId,
+				body : text,
+				year : year,
+				month : month
+			}, // 서버에 전송할 데이터
+			success : function(data) {
+				$('#modify-form-' + rentStatusId).hide();
+				$('#reply-' + rentStatusId).text(data);
+				$('#reply-' + rentStatusId).show();
+				$('#save-btn-' + rentStatusId).hide();
+				$('#modify-btn-' + rentStatusId).show();
+			},
+			error : function(xhr, status, error) {
+				alert('댓글 수정에 실패했습니다: ' + error);
+			}
+		})
+	}
+</script>
 
 
 

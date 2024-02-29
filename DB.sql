@@ -1938,7 +1938,15 @@ ON B.id = R.bldgId
 SET R.standardDeposit = 100
 WHERE R.id = 1;
 
-UPDATE building AS B INNER JOIN room AS R
-ON B.id = R.bldgId
-SET R.standardDeposit = 100
-WHERE R.id = 15;
+UPDATE contract AS C INNER JOIN Tenant AS T
+ON C.tenantId = T.id
+SET T.tenantName = '수정이름'
+WHERE C.id = 6;
+
+UPDATE contract AS C INNER JOIN Tenant AS T
+ON C.tenantId = T.id
+SET C.leaseType = '반전세',
+C.deposit = 40,
+T.tenantName = '수정김'
+WHERE C.id = 6;
+

@@ -28,7 +28,8 @@ public interface ContractRepository {
 			<script>
 			UPDATE contract AS C INNER JOIN Tenant AS T
 			ON C.tenantId = T.id
-			SET T.tenantName = #{tenantName},
+			SET C.updateDate = NOW(),
+			T.tenantName = #{tenantName},
 			C.leaseType = #{leaseType},
 			C.deposit = #{deposit},
 			C.rent = #{rent},

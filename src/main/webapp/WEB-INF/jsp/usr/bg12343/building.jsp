@@ -5,13 +5,6 @@
 <%@ include file="../common/sidebar.jspf"%>
 
 
-<!-- 건물 개수대로 가져오는 함수로 수정해야함 -->
-<div>
-	<a class="btn btn-sm btn-outline ${param.bldgId == 1 ? 'btn-active' : '' }" href="../bg12343/building?bldgId=1">건물1 가나</a>
-	<a class="btn btn-sm btn-outline ${param.bldgId == 2 ? 'btn-active' : '' }" href="../bg12343/building?bldgId=2">건물2 다라</a>
-</div>
-
-
 <section class="mt-2 text-xl px-4">
 	<div class="mx-auto overflow-x-auto">
 		<table class="table-box-1 table" border="1">
@@ -23,26 +16,41 @@
 					<th>건물주소</th>
 					<th>전체호실수</th>
 					<th>건물메모</th>
+					<th>수정</th>
 				</tr>
 			</thead>
 			<tbody>
+				<c:forEach var="building" items="${buildings }">
 					<tr class="hover">
-						<td>${buildingRd.id }</td>
-						<td>${buildingRd.regDate.substring(0,10) }</td>
-						<td>${buildingRd.bldgName }</td>
-						<td>${buildingRd.bldgAdd }</td>
-						<td>${buildingRd.roomTotal }</td>
+						<td>${building.id }</td>
+						<td>${building.regDate.substring(0,10) }</td>
+						<td>${building.bldgName }</td>
+						<td>${building.bldgAdd }</td>
+						<td>${building.roomTotal }</td>
 						<td>#</td>
+						<td>
+							<a class="btn btn-sm btn-outline" href="../bg12343/buildingModify?bldgId=${building.id }">수정</a>
+						</td>
 					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>
-	
+
 	<br />
 
-<div class="badge badge-outline">${roomsCnt }개</div>
-<!-- 호실정보 가져오기 -->
-<div class="mx-auto overflow-x-auto">
+	<!-- 건물 카테고리 버튼 -->
+	<div>
+		<c:forEach var="building" items="${buildings }">
+			<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
+				href="../bg12343/building?bldgId=${building.id }"
+			>${building.bldgName }</a>
+		</c:forEach>
+	</div>
+
+	<div class="badge badge-outline">${roomsCnt }개</div>
+	<!-- 호실정보 가져오기 -->
+	<div class="mx-auto overflow-x-auto">
 		<table class="table-box-1 table" border="1">
 			<thead>
 				<tr>
@@ -75,8 +83,7 @@
 
 
 	<div class="btns mt-5">
-		<a class="btn btn-outline" href="../bg12343/buildingModify?bldgId=${param.bldgId }">수정</a>
-		<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="#">삭제</a>
+		<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="#">삭제(todo)</a>
 	</div>
 	<a class="btn btn-outline" href="/usr/bg12343/buildingAdd"> 건물 추가</a>
 

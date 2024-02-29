@@ -20,8 +20,8 @@ public class BuildingService {
 	public Building getForPrintBuilding(int bldgId) {
 		return buildingRepository.getForPrintBuilding(bldgId);
 	}
-	public List<Building> getForPrintBuildings(int bldgId) {
-		return buildingRepository.getForPrintBuildings(bldgId);
+	public List<Building> getForPrintBuildings() {
+		return buildingRepository.getForPrintBuildings();
 	}
 
 	public List<Room> getForPrintRooms(int bldgId) {

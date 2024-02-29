@@ -91,7 +91,7 @@
 		<div>
 			<button class="btn btn-outline" type="button" onclick="history.back();">뒤로가기</button>
 			<input class="btn btn-info" type="submit" value="수정" />
-			<input class="btn btn-info" value="추가" />
+			<input class="btn btn-info" value="추가(todo)" />
 		</div>
 	</form>
 

@@ -45,14 +45,17 @@
 </section>
 
 <br />
+
+<!-- 건물 카테고리 버튼 -->
 <div>
-	<a class="btn btn-sm btn-outline ${param.bldgId == 1 ? 'btn-active' : '' }" href="../bg12343/dashboard?bldgId=1">건물1 가나</a>
-	<a class="btn btn-sm btn-outline ${param.bldgId == 2 ? 'btn-active' : '' }" href="../bg12343/dashboard?bldgId=2">건물2 다라</a>
-	
-	1: 전자렌지 2: 냉장고 3: 침대 4: 전기렌지 
-	
-	
-	
+	<c:forEach var="building" items="${buildings }">
+		<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
+			href="../bg12343/dashboard?bldgId=${building.id }"
+		>${building.bldgName }</a>
+	</c:forEach>
+
+	1: 전자렌지 2: 냉장고 3: 침대 4: 전기렌지
+
 </div>
 <section class="mt-2 text-xl px-4">
 	<div class="badge badge-outline">${roomsCnt }개</div>
@@ -84,7 +87,7 @@
 					<td>${room.maintenanceFee }</td>
 					<td>
 						1
-						<input  />
+						<input />
 						2
 						<input type="checkbox" class="toggle toggle-sm" checked />
 						3

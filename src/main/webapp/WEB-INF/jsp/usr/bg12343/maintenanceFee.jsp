@@ -4,23 +4,29 @@
 <%@ include file="../common/head.jspf"%>
 <%@ include file="../common/sidebar.jspf"%>
 
-<!-- 건물 개수대로 가져오는 함수로 수정해야함 -->
+<!-- 건물 카테고리 버튼 -->
 <div>
-	<a class="btn btn-sm btn-outline ${param.bldgId == 1 ? 'btn-active' : '' }" href="../bg12343/maintenanceFee?bldgId=1">건물1
-		가나</a>
-	<a class="btn btn-sm btn-outline ${param.bldgId == 2 ? 'btn-active' : '' }" href="../bg12343/maintenanceFee?bldgId=2">건물2
-		다라</a>
+	<c:forEach var="building" items="${buildings }">
+		<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
+			href="../bg12343/maintenanceFee?bldgId=${building.id }"
+		>${building.bldgName }</a>
+	</c:forEach>
 </div>
 
-<a class="btn btn-sm btn-outline ${param.year == nowYear -1 ? 'btn-active' : '' }" href="maintenanceFee?bldgId=${param.bldgId }&year=${nowYear -1}">전년도 보기</a>
-<a class="btn btn-sm btn-outline ${param.year == nowYear ? 'btn-active' : '' }" href="maintenanceFee?bldgId=${param.bldgId }&year=${nowYear}">올해(${nowYear}) 보기</a>
+<!-- 연도 변경 버튼todo -->
+<a class="btn btn-sm btn-outline ${param.year == nowYear -1 ? 'btn-active' : '' }"
+	href="maintenanceFee?bldgId=${param.bldgId }&year=${nowYear -1}"
+>전년도 보기(todo)</a>
+<a class="btn btn-sm btn-outline ${param.year == nowYear ? 'btn-active' : '' }"
+	href="maintenanceFee?bldgId=${param.bldgId }&year=${nowYear}"
+>올해(todo) 보기</a>
 
 
 <style type="text/css">
-	.underlineClick > td > a:hover{
-		background-color: skyblue;
-		text-decoration: underline;
-	}
+.underlineClick>td>a:hover {
+	background-color: skyblue;
+	text-decoration: underline;
+}
 </style>
 
 <section class="mt-2 text-xl px-4">

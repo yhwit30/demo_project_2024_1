@@ -26,8 +26,8 @@ public class TenantService {
 		return ResultData.from("S-1", Ut.f("%d번 글이 생성되었습니다", id), "id", id);
 	}
 
-	public ResultData modifyTenant(int id, String tenantName, int tenantPhone, String tenantCarNum, String tenantMemo) {
-		tenantRepository.modifyBuilding(id, tenantName, tenantPhone, tenantCarNum, tenantMemo);
+	public ResultData modifyTenant(int id, String tenantName, int tenantPhone, String tenantCarNum) {
+		tenantRepository.modifyBuilding(id, tenantName, tenantPhone, tenantCarNum);
 		return ResultData.from("S-1", "세입자정보가 수정되었습니다");
 	}
 

@@ -14,13 +14,12 @@
 			<table class="modify-box table-box-1 table" border="1">
 				<thead>
 					<tr>
-						<th>세입자관리번호</th>
+<!-- 						<th>세입자관리번호</th> -->
+						<th>건물명</th>
+						<th>호실</th>
 						<th>세입자명</th>
 						<th>세입자휴대폰</th>
 						<th>세입자차량</th>
-						<th>세입자메모</th>
-						<th>건물명</th>
-						<th>호실</th>
 						<th>보증금</th>
 						<th>월세</th>
 						<th>관리비</th>
@@ -34,64 +33,46 @@
 				<tbody>
 
 					<c:forEach var="tenant" items="${tenants }">
+						<input type="hidden" name="id" value="${tenant.id }" />
 						<tr>
-							<td>${tenant.id }
-							<input type="hidden" name="id" value="${tenant.id }" />
-							</td>
-							<td>
-							<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="내용을 입력해주세요" name="tenantName" value="${tenant.tenantName }"
-							/>
-							<td>
-								<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-									placeholder="내용을 입력해주세요" name="tenantPhone" value="${tenant.tenantPhone }"
-								/>
-							</td>
-							<td>
-								<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-									placeholder="내용을 입력해주세요" name="tenantCarNum" value="${tenant.tenantCarNum }"
-								/>
-							</td>
-							<td>
-								<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
-									placeholder="내용을 입력해주세요" name="tenantMemo" value="${tenant.tenantMemo }"
-								/>
-							</td>
-<!-- 							이 아래로 hidden으로 값은 넘겨줬지만 사용은 안했다. 나중에 쓸지도? -->
+<%-- 							<td>${tenant.id }</td> --%>
 							<td>${tenant.bldgName }
-								<input type="hidden" name="bldgName" value="${tenant.bldgName }"/>
+								<input type="hidden" name="bldgName" value="${tenant.bldgName }" />
 							</td>
 							<td>${tenant.roomNum }
-								<input type="hidden" name="roomNum" value="${tenant.roomNum }"
+								<input type="hidden" name="roomNum" value="${tenant.roomNum }" />
+							<td>
+								<input autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="tenantName" value="${tenant.tenantName }" />
+							<td>
+								<input autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="tenantPhone" value="${tenant.tenantPhone }" />
+							</td>
+							<td>
+								<input autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="tenantCarNum"
+									value="${tenant.tenantCarNum }"
 								/>
+							</td>
+							<!-- 							이 아래로 hidden으로 값은 넘겨줬지만 사용은 안했다. 나중에 쓸지도? -->
 							</td>
 							<td>${tenant.deposit }
-								<input type="hidden" name="deposit" value="${tenant.deposit }"
-								/>
+								<input type="hidden" name="deposit" value="${tenant.deposit }" />
 							</td>
 							<td>${tenant.rent }
-								<input type="hidden" name="rent" value="${tenant.rent }"
-								/>
+								<input type="hidden" name="rent" value="${tenant.rent }" />
 							</td>
 							<td>${tenant.maintenanceFee }
-								<input type="hidden" name="maintenanceFee" value="${tenant.maintenanceFee }"
-								/>
+								<input type="hidden" name="maintenanceFee" value="${tenant.maintenanceFee }" />
 							</td>
 							<td>${tenant.contractStartDate }
-								<input type="hidden" name="contractStartDate" value="${tenant.contractStartDate }"
-								/>
+								<input type="hidden" name="contractStartDate" value="${tenant.contractStartDate }" />
 							</td>
 							<td>${tenant.contractEndDate }
-								<input type="hidden"  name="contractEndDate" value="${tenant.contractEndDate }"
-								/>
+								<input type="hidden" name="contractEndDate" value="${tenant.contractEndDate }" />
 							</td>
 							<td>${tenant.depositDate }
-								<input type="hidden" name="depositDate" value="${tenant.depositDate }"
-								/>
+								<input type="hidden" name="depositDate" value="${tenant.depositDate }" />
 							</td>
 							<td>${tenant.rentDate }
-								<input  type="hidden" name="rentDate" value="${tenant.rentDate }"
-								/>
+								<input type="hidden" name="rentDate" value="${tenant.rentDate }" />
 							</td>
 						</tr>
 					</c:forEach>

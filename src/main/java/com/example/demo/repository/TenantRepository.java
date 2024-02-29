@@ -44,10 +44,9 @@ public interface TenantRepository {
 			UPDATE tenant
 			SET tenantName = #{tenantName},
 			tenantPhone = #{tenantPhone},
-			tenantCarNum = #{tenantCarNum},
-			tenantMemo = #{tenantMemo}
+			tenantCarNum = #{tenantCarNum}
 			WHERE id = #{id}
 			""")
-	public void modifyBuilding(int id, String tenantName, int tenantPhone, String tenantCarNum, String tenantMemo);
+	public void modifyBuilding(int id, String tenantName, int tenantPhone, String tenantCarNum);
 
 }

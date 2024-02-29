@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.service.BuildingService;
 import com.example.demo.service.MaintenanceFeeService;
 import com.example.demo.util.Ut;
+import com.example.demo.vo.Building;
 import com.example.demo.vo.MaintenanceFee;
 import com.example.demo.vo.ResultData;
 
@@ -25,6 +27,9 @@ public class UsrMaintenanceFeeController {
 	@Autowired
 	private MaintenanceFeeService maintenanceFeeService;
 
+	@Autowired
+	private BuildingService buildingService;
+
 	// 액션 메소드
 	@RequestMapping("/usr/bg12343/maintenanceFee")
 	public String getMaintenanceFee(Model model, @RequestParam(defaultValue = "1") int bldgId, Integer year) {
@@ -36,6 +41,10 @@ public class UsrMaintenanceFeeController {
 
 		List<MaintenanceFee> maintenanceFeeMonthly = maintenanceFeeService.getMaintenanceFeeMonthly(bldgId, year);
 
+//		건물 변환 버튼용
+		List<Building> buildings = buildingService.getForPrintBuildings();
+
+		model.addAttribute("buildings", buildings);
 		model.addAttribute("maintenanceFeeMonthly", maintenanceFeeMonthly);
 		return "usr/bg12343/maintenanceFee";
 	}

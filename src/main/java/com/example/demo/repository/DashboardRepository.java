@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.example.demo.vo.Dashboard;
 
@@ -52,5 +53,19 @@ public interface DashboardRepository {
 			HAVING B.id = #{bldgId}
 			""")
 	List<Dashboard> getRentStatus(int bldgId, int year);
+
+	@Select("""
+			SELECT *
+			FROM contract_Status
+			WHERE rentDate LIKE '${year}-${month}%' AND tenantId = #{tenantId};
+			""")
+	Dashboard getRentStatusRd(int tenantId, int year, String month);
+
+	@Update("""
+			UPDATE contract_Status
+			SET paymentStatus = #{body}
+			WHERE rentDate LIKE '${year}-${month}%' AND tenantId = #{tenantId};
+			""")
+	void modifyRentStatus(int tenantId, String body, int year, String month);
 
 }

@@ -22,6 +22,15 @@ public class DashboardService {
 		return dashboardRepository.getRentStatus(bldgId, year);
 	}
 
+	public Dashboard getRentStatusRd(int tenantId, int year, String month) {
+		return dashboardRepository.getRentStatusRd(tenantId, year, month);
+	}
+
+	public void modifyRentStatus(int tenantId, String body, int year, String month) {
+		dashboardRepository.modifyRentStatus(tenantId, body, year, month);
+		
+	}
+
 
 
 

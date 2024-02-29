@@ -8,10 +8,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.service.BuildingService;
 import com.example.demo.service.DashboardService;
+import com.example.demo.util.Ut;
+import com.example.demo.vo.Building;
 import com.example.demo.vo.Dashboard;
+import com.example.demo.vo.Reply;
+import com.example.demo.vo.ResultData;
 import com.example.demo.vo.Room;
 
 @Controller
@@ -34,7 +39,11 @@ public class UsrDashboardController {
 
 		List<Room> rooms = buildingService.getForPrintRooms(bldgId);
 		int roomsCnt = rooms.size();
-		
+
+//		건물 변환 버튼용
+		List<Building> buildings = buildingService.getForPrintBuildings();
+
+		model.addAttribute("buildings", buildings);
 		model.addAttribute("dashboard", dashboard);
 		model.addAttribute("rooms", rooms);
 		model.addAttribute("roomsCnt", roomsCnt);
@@ -50,11 +59,32 @@ public class UsrDashboardController {
 		}
 		List<Dashboard> rentStatus = dashboardService.getRentStatus(bldgId, year);
 		
+//		건물 변환 버튼용
+		List<Building> buildings = buildingService.getForPrintBuildings();
+
+		model.addAttribute("buildings", buildings);
 		model.addAttribute("rentStatus", rentStatus);
 		model.addAttribute("nowYear", nowYear);
 		return "usr/bg12343/rentStatus";
 	}
 
+	@RequestMapping("/usr/bg12343/doRentStatusModify")
+	@ResponseBody
+	public String doRentStatusModify(int tenantId, String body, int year, String month) {
+		
+		Dashboard rentStatusRd = dashboardService.getRentStatusRd(tenantId, year, month); 
+
+		if (rentStatusRd == null) {
+			return Ut.jsHistoryBack("F-1", Ut.f("%d번 세입자는 존재하지 않습니다", tenantId));
+		}
+
+		dashboardService.modifyRentStatus(tenantId, body, year, month);
+	
+		rentStatusRd = dashboardService.getRentStatusRd(tenantId, year, month); 
+
+		return rentStatusRd.getPaymentStatus();
+	}
+	
 	@RequestMapping("/usr/bg12343/notice")
 	public String showNotice(Model model) {
 

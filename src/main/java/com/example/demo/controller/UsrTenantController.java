@@ -78,11 +78,11 @@ public class UsrTenantController {
 
 	@RequestMapping("/usr/bg12343/doTenantModify")
 	@ResponseBody
-	public String doTenantModify(int[] id, String[] tenantName, int[] tenantPhone, String[] tenantCarNum, String[] tenantMemo) {
+	public String doTenantModify(int[] id, String[] tenantName, int[] tenantPhone, String[] tenantCarNum) {
 
 		ResultData roomModifyRd = null;
 		for (int i = 0; i < id.length; i++) {
-			roomModifyRd = tenantService.modifyTenant(id[i], tenantName[i], tenantPhone[i], tenantCarNum[i], tenantMemo[i]);
+			roomModifyRd = tenantService.modifyTenant(id[i], tenantName[i], tenantPhone[i], tenantCarNum[i]);
 		}
 
 		return Ut.jsReplace(roomModifyRd.getResultCode(), roomModifyRd.getMsg(), "../bg12343/tenant");

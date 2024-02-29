@@ -25,9 +25,9 @@ public interface BuildingRepository {
 			FROM building AS B
 			INNER JOIN room AS R
 			ON B.id = R.bldgId
-			WHERE B.id = #{bldgId};
+			GROUP BY B.id;
 			""")
-	List<Building> getForPrintBuildings(int bldgId);
+	List<Building> getForPrintBuildings();
 
 	@Select("""
 			SELECT *

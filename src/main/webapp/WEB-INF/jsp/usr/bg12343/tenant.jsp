@@ -18,7 +18,6 @@
 					<th>세입자명</th>
 					<th>세입자휴대폰</th>
 					<th>세입자차량</th>
-					<th>세입자메모</th>
 					<th>임대형태</th>
 					<th>보증금</th>
 					<th>월세</th>
@@ -39,7 +38,6 @@
 						<td>${tenant.tenantName }</td>
 						<td>${tenant.tenantPhone }</td>
 						<td>${tenant.tenantCarNum }</td>
-						<td>${tenant.tenantMemo }</td>
 						<td>${tenant.leaseType }</td>
 						<td>${tenant.deposit }</td>
 						<td>${tenant.rent }</td>
@@ -48,6 +46,7 @@
 						<td>${tenant.contractEndDate }</td>
 						<td>${tenant.depositDate }</td>
 						<td>${tenant.rentDate }</td>
+						<td>#</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -58,7 +57,7 @@
 		<a class="btn btn-outline" href="../bg12343/tenantModify">수정</a>
 		<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="#">삭제</a>
 	</div>
-	<a class="btn btn-outline" href="/usr/bg12343/tenantAdd"> 세입자 추가</a>
+	<a class="btn btn-outline" href="/usr/bg12343/tenantAdd"> 세입자 추가(todo)</a>
 
 </section>
 

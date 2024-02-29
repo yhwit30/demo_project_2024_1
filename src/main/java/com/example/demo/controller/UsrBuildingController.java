@@ -26,11 +26,14 @@ public class UsrBuildingController {
 	public String getBuilding(Model model, @RequestParam(defaultValue = "1") int bldgId) {
 
 		Building buildingRd = buildingService.getForPrintBuilding(bldgId);
+		
+		List<Building> buildings = buildingService.getForPrintBuildings();
 
 		List<Room> rooms = buildingService.getForPrintRooms(bldgId);
 		int roomsCnt = rooms.size();
 
 		model.addAttribute("buildingRd", buildingRd);
+		model.addAttribute("buildings", buildings);
 		model.addAttribute("rooms", rooms);
 		model.addAttribute("roomsCnt", roomsCnt);
 		return "usr/bg12343/building";

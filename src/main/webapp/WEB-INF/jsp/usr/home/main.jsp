@@ -25,9 +25,6 @@
 <div class="page mt-20 main-page mx-auto">
 	<div>
 		<a class="btn btn-outline" href="/usr/bg12343/dashboard"> 임대현황DAHBOARD</a>
-		<div>
-			<a class="btn btn-outline" href="/usr/bg12343/contract"> 계약 현황</a>
-		</div>
 		<div class="menu">
 			<a class="btn btn-outline" href="/usr/bg12343/building"> 건물 현황</a>
 		</div>
@@ -71,7 +68,7 @@
 
 .menu {
 	width: 180px;
-	height: 90px;
+	height: 80px;
 	border: 3px solid pink;
 	margin-left: auto;
 	margin-right: auto;

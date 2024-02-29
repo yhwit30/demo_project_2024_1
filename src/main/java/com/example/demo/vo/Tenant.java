@@ -14,7 +14,6 @@ public class Tenant {
 	private String tenantName;
 	private int tenantPhone;
 	private String tenantCarNum;
-	private String tenantMemo;
 	
 	private int deposit;
 	private int rent;
