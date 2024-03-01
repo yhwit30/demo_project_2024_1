@@ -6,9 +6,9 @@
 
 
 <section class="mt-8 mb-5 text-lg px-4">
-	<div class="mx-auto">
+	<div class="px-4  mt-36">
 		<form action="../bg12343/doBuildingAdd" method="POST">
-			<table class="write-box table-box-1" border="1">
+			<table class="write-box table-box-1 mx-auto" border="1">
 				<tbody>
 					<tr>
 						<th>건물명</th>

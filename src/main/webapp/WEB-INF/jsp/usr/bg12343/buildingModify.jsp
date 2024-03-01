@@ -11,7 +11,7 @@
 				<thead>
 					<tr>
 						<th>번호</th>
-						<th>날짜</th>
+						<th>등록날짜</th>
 						<th>건물명</th>
 						<th>건물주소</th>
 						<th>전체호실수</th>
@@ -33,13 +33,10 @@
 							<input size="5" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="bldgAdd"
 								value="${buildingRd.bldgAdd }" />
 						</td>
+						<td>${buildingRd.roomTotal }</td>
 						<td>
-							<input size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="roomTotal"
-								value="${buildingRd.roomTotal }" />
-						</td>
-						<td>
-							<input size="30" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="bldgMemo"
-								value="#" />
+							<!-- 							<input size="30" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="bldgMemo" value="#" /> -->
+							#
 						</td>
 					</tr>
 				</tbody>
@@ -64,7 +61,7 @@
 				<tbody>
 
 					<c:forEach var="room" items="${rooms }">
-					<input type="hidden" name="roomId" value="${room.id }" />
+						<input type="hidden" name="roomId" value="${room.id }" />
 						<tr class="hover">
 							<td>
 								<input size="1" autocomplete="off" type="text" name="roomNum" value="${room.roomNum }" />

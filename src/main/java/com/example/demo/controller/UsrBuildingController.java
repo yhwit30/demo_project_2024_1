@@ -125,7 +125,7 @@ public class UsrBuildingController {
 	public String doRoomAdd(int[] bldgId, int[] roomNum, String[] roomType, double[] roomArea,  int[] standardDeposit, int[] standardRent,
 			int[] standardJeonse) {
 		
-		// null 체크가 이곳에서 안되서 앞서서 ajax로 체크
+		// 표에 있는 데이터라 null 체크가 이곳에서 안되서 앞서서 ajax로 체크
 		
 		// 게시글 작성 작업
 		ResultData RoomAddRd = null;
