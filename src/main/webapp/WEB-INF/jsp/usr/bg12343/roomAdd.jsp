@@ -6,7 +6,6 @@
 
 
 
-<!-- 댓글 -->
 <script>
 	var roomAdd__submitDone = false;
 

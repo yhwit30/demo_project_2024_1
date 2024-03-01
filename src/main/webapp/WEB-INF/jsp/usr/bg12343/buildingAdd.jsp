@@ -4,10 +4,51 @@
 <%@ include file="../common/head.jspf"%>
 <%@ include file="../common/sidebar.jspf"%>
 
+<script>
+	var buildingAdd__submitDone = false;
+
+	function buildingAdd__submit(form) {
+
+		if (buildingAdd__submitDone) {
+			alert('이미 처리중입니다');
+			return;
+		}
+
+		// 숫자가 아닌 데이터 체크
+		if (isNaN(form.roomTotal.value)) {
+			alert('세대수에는 숫자만 입력 가능합니다');
+			form.roomTotal.focus();
+			return;
+		}
+
+		// 빈칸에 대한 유효성 검사 추가
+		if (form.bldgName.value.length < 1) {
+			alert('건물명을 입력해주세요');
+			form.bldgName.focus();
+			return;
+		}
+
+		if (form.bldgAdd.value.length < 1) {
+			alert('건물주소를 입력해주세요');
+			form.bldgAdd.focus();
+			return;
+		}
+		if (form.roomTotal.value.length < 1) {
+			alert('세대수를 입력해주세요');
+			form.roomTotal.focus();
+			return;
+		}
+
+		ReplyWrite__submitDone = true;
+		form.submit();
+
+	}
+</script>
+
 
 <section class="mt-8 mb-5 text-lg px-4">
 	<div class="px-4  mt-36">
-		<form action="../bg12343/doBuildingAdd" method="POST">
+		<form action="../bg12343/doBuildingAdd" method="POST" onsubmit="buildingAdd__submit(this); return false;">
 			<table class="write-box table-box-1 mx-auto" border="1">
 				<tbody>
 					<tr>
