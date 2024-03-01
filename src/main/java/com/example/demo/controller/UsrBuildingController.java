@@ -48,19 +48,7 @@ public class UsrBuildingController {
 	@RequestMapping("/usr/bg12343/doBuildingAdd")
 	@ResponseBody
 	public String doBuildingAdd(String bldgName, String bldgAdd, int roomTotal) {
-		// 로그인 상태 체크 - 인터셉터에서
-
-		// 제목 내용 빈 칸 확인
-		if (Ut.isNullOrEmpty(bldgName)) {
-			return Ut.jsHistoryBack("F-1", "건물명을 입력해주세요");
-		}
-		if (Ut.isNullOrEmpty(bldgAdd)) {
-			return Ut.jsHistoryBack("F-2", "건물주소를 입력해주세요");
-		}
-		if (Ut.isEmpty(roomTotal)) {
-			return Ut.jsHistoryBack("F-2", "세대수를 입력해주세요");
-		}
-
+		
 		// 게시글 작성 작업
 		ResultData BuildingAddRd = buildingService.addBuilding(bldgName, bldgAdd, roomTotal);
 

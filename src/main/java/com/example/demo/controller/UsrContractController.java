@@ -43,6 +43,17 @@ public class UsrContractController {
 		model.addAttribute("contracts", contracts);
 		return "usr/bg12343/contractAdd";
 	}
+	
+	@RequestMapping("/usr/bg12343/doContractAdd")
+	@ResponseBody
+	public String doContractAdd() {
+		
+		// 계약 작성 작업
+//		ResultData BuildingAddRd = buildingService.addBuilding(bldgName, bldgAdd, roomTotal);
+//
+//		return Ut.jsReplace(BuildingAddRd.getResultCode(), BuildingAddRd.getMsg(), "../bg12343/roomAdd");
+		return null;
+	}
 
 	@RequestMapping("/usr/bg12343/contractModify")
 	public String modifyContract(Model model) {
