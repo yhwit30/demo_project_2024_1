@@ -67,7 +67,12 @@
 								<input size="1" autocomplete="off" type="text" name="roomNum" value="${room.roomNum }" />
 							</td>
 							<td>
-								<input size="2" autocomplete="off" type="text" name="roomType" value="${room.roomType }" />
+								<select class="select select-bordered select-sm w-20 max-w-xs" name="roomType">
+									<option value="상가">상가</option>
+									<option value="원룸" selected>원룸</option>
+									<option value="1.5룸">1.5룸</option>
+									<option value="투룸">투룸</option>
+								</select>
 							</td>
 							<td>
 								<input size="3" autocomplete="off" type="text" name="roomArea" value="${room.roomArea }" />

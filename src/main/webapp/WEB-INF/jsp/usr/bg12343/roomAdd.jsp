@@ -24,13 +24,44 @@
 			var standardRentField = form.standardRent[i];
 			var standardJeonseField = form.standardJeonse[i];
 
+			 // 숫자가 아닌 데이터 체크
+            if (isNaN(roomNumField.value)) {
+                alert('호실에는 숫자만 입력 가능합니다');
+                roomAreaField.focus();
+                return;
+            }
+
+			 if (isNaN(roomAreaField.value)) {
+                alert('방 면적에는 숫자(소수점가능)만 입력 가능합니다');
+                roomAreaField.focus();
+                return;
+            }
+
+            if (isNaN(standardDepositField.value)) {
+                alert('기준 보증금에는 숫자만 입력 가능합니다');
+                standardDepositField.focus();
+                return;
+            }
+
+            if (isNaN(standardRentField.value)) {
+                alert('기준 월세에는 숫자만 입력 가능합니다');
+                standardRentField.focus();
+                return;
+            }
+
+            if (isNaN(standardJeonseField.value)) {
+                alert('기준 전세에는 숫자만 입력 가능합니다');
+                standardJeonseField.focus();
+                return;
+            }
+			
+			// 빈칸에 대한 유효성 검사 추가
 			if (roomNumField.value.length < 1) {
 				alert('호실을 입력해주세요');
 				roomNumField.focus();
 				return;
 			}
 
-			// 다른 필드에 대한 유효성 검사 추가
 			if (roomTypeField.value === "") {
 				alert('방 형태를 선택해주세요');
 				roomTypeField.focus();
@@ -122,7 +153,7 @@
 								<input size="1" autocomplete="off" type="text" placeholder="호실을 입력해주세요" name="roomNum" />
 							</td>
 							<td>
-								<select class="select select-bordered select-sm w-24 max-w-xs" name="roomType">
+								<select class="select select-bordered select-sm w-20 max-w-xs" name="roomType">
 									<option value="상가">상가</option>
 									<option value="원룸" selected>원룸</option>
 									<option value="1.5룸">1.5룸</option>

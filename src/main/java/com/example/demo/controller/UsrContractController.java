@@ -31,6 +31,18 @@ public class UsrContractController {
 		model.addAttribute("contracts", contracts);
 		return "usr/bg12343/contract";
 	}
+	
+	@RequestMapping("/usr/bg12343/contractAdd")
+	public String addContract(Model model) {
+
+		List<Contract> contracts = contractService.getForPrintContracts();
+
+		int contractsCnt = contracts.size();
+
+		model.addAttribute("contractsCnt", contractsCnt);
+		model.addAttribute("contracts", contracts);
+		return "usr/bg12343/contractAdd";
+	}
 
 	@RequestMapping("/usr/bg12343/contractModify")
 	public String modifyContract(Model model) {

@@ -35,14 +35,14 @@ public class BuildingService {
 	public ResultData addBuilding(String bldgName, String bldgAdd, int roomTotal) {
 		buildingRepository.addBuilding(bldgName, bldgAdd, roomTotal);
 		int id = getLastInsertId();
-		return ResultData.from("S-1", Ut.f("%d번 글이 생성되었습니다", id), "id", id);
+		return ResultData.from("S-1", Ut.f("%d번 건물정보가 생성되었습니다", id), "id", id);
 	}
 
 	public ResultData addRoom(int bldgId, int roomNum, String roomType, double roomArea, int standardDeposit, int standardRent,
 			int standardJeonse) {
 		buildingRepository.addRoom(bldgId, roomNum, roomType,roomArea, standardDeposit, standardRent, standardJeonse);
 		int id = getLastInsertId();
-		return ResultData.from("S-1", Ut.f("%d번 글이 생성되었습니다", id), "id", id);
+		return ResultData.from("S-1", "호실정보가 생성되었습니다", "id", id);
 	}
 
 	public ResultData modifyBuilding(int bldgId, String bldgName, String bldgAdd, int roomTotal) {
