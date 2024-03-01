@@ -1972,28 +1972,10 @@ T.tenantName = '수정김'
 WHERE C.id = 6;
 
 
-
 SELECT *
 FROM contract_Status 
 WHERE rentDate LIKE '2024-%1%' AND tenantId = 2;
 
-
-# building의 roomTotal 데이터가 room의 해당 bldgId가 가지는 총 행의 개수 만들기
-# room insert를 하나 만들고 자바에서 반복문으로 걸어주면 되서 실은 어렵지 않을 듯
-INSERT INTO room
-SET bldgId = #building의 새로운 id
-roomNum = #일단 만들어지고 직접 입력하도록 해야함- 기본값을 줘야할까
-roomType = #직접 입력하도록 해야함,
-standardDeposit = #직접 입력하도록 해야함,
-standardRent = #직접 입력하도록 해야함,
-standardJeonse = #직접 입력하도록 해야함
-roomArea = #직접 입력하도록 해야함
-;
-
-INSERT INTO room
-SET bldgId = 3;
-
-SELECT * FROM room;
 
 SELECT *
 FROM building
