@@ -28,16 +28,20 @@ public class BuildingService {
 		return buildingRepository.getForPrintRooms(bldgId);
 	}
 
+	public int getLastInsertId() {
+		return buildingRepository.getLastInsertId();
+	}
+	
 	public ResultData addBuilding(String bldgName, String bldgAdd, int roomTotal) {
 		buildingRepository.addBuilding(bldgName, bldgAdd, roomTotal);
-		int id = buildingRepository.getLastInsertId();
+		int id = getLastInsertId();
 		return ResultData.from("S-1", Ut.f("%d번 글이 생성되었습니다", id), "id", id);
 	}
 
-	public ResultData addRoom(int bldgId, int roomNum, String roomType, int standardDeposit, int standardRent,
+	public ResultData addRoom(int bldgId, int roomNum, String roomType, double roomArea, int standardDeposit, int standardRent,
 			int standardJeonse) {
-		buildingRepository.addRoom(bldgId, roomNum, roomType, standardDeposit, standardRent, standardJeonse);
-		int id = buildingRepository.getLastInsertId();
+		buildingRepository.addRoom(bldgId, roomNum, roomType,roomArea, standardDeposit, standardRent, standardJeonse);
+		int id = getLastInsertId();
 		return ResultData.from("S-1", Ut.f("%d번 글이 생성되었습니다", id), "id", id);
 	}
 
@@ -50,6 +54,10 @@ public class BuildingService {
 		buildingRepository.modifyRoom(roomId, roomNum, roomType, roomArea, standardDeposit, standardRent,  standardJeonse);
 		return ResultData.from("S-1", "호실정보가 수정되었습니다");
 	}
+	public int getLastBldgId() {
+		return buildingRepository.getLastBldgId();
+	}
+	
 
 	
 

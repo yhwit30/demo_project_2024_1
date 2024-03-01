@@ -11,7 +11,7 @@
 			<thead>
 				<tr>
 					<th>번호</th>
-					<th>날짜</th>
+					<th>등록날짜</th>
 					<th>건물명</th>
 					<th>건물주소</th>
 					<th>전체호실수</th>
@@ -82,10 +82,10 @@
 
 
 
+	<a class="btn btn-outline" href="/usr/bg12343/buildingAdd"> 건물 추가</a>
 	<div class="btns mt-5">
 		<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="#">삭제(todo)</a>
 	</div>
-	<a class="btn btn-outline" href="/usr/bg12343/buildingAdd"> 건물 추가</a>
 
 
 

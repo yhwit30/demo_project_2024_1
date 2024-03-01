@@ -67,7 +67,7 @@ public class UsrBuildingController {
 		// 작성된 게시글 번호 가져오기
 		int id = (int) BuildingAddRd.getData1();
 
-		return Ut.jsReplace(BuildingAddRd.getResultCode(), BuildingAddRd.getMsg(), "../bg12343/building");
+		return Ut.jsReplace(BuildingAddRd.getResultCode(), BuildingAddRd.getMsg(), "../bg12343/roomAdd");
 	}
 
 	@RequestMapping("/usr/bg12343/buildingModify")
@@ -113,40 +113,28 @@ public class UsrBuildingController {
 	@RequestMapping("/usr/bg12343/roomAdd")
 	public String showRoomAdd(Model model) {
 
+		int getLastInsertId = buildingService.getLastBldgId();
+		Building addedBuilding = buildingService.getForPrintBuilding(getLastInsertId);
+		
+		model.addAttribute("addedBuilding", addedBuilding);
 		return "usr/bg12343/roomAdd";
 	}
 
 	@RequestMapping("/usr/bg12343/doRoomAdd")
 	@ResponseBody
-	public String doRoomAdd(int bldgId, int roomNum, String roomType, int standardDeposit, int standardRent,
-			int standardJeonse) {
-		// 로그인 상태 체크 - 인터셉터에서
-
-		// 제목 내용 빈 칸 확인
-		if (Ut.isEmpty(roomNum)) {
-			return Ut.jsHistoryBack("F-1", "호실을 입력해주세요");
-		}
-		if (Ut.isNullOrEmpty(roomType)) {
-			return Ut.jsHistoryBack("F-2", "호실형태를 입력해주세요");
-		}
-		if (Ut.isEmpty(standardDeposit)) {
-			return Ut.jsHistoryBack("F-2", "기준 보증금을 입력해주세요");
-		}
-		if (Ut.isEmpty(standardRent)) {
-			return Ut.jsHistoryBack("F-2", "기준 월세를 입력해주세요");
-		}
-		if (Ut.isEmpty(standardJeonse)) {
-			return Ut.jsHistoryBack("F-2", "기준 전세를 입력해주세요");
-		}
-
+	public String doRoomAdd(int[] bldgId, int[] roomNum, String[] roomType, double[] roomArea,  int[] standardDeposit, int[] standardRent,
+			int[] standardJeonse) {
+		
+		// null 체크가 이곳에서 안되서 앞서서 ajax로 체크
+		
 		// 게시글 작성 작업
-		ResultData RoomAddRd = buildingService.addRoom(bldgId, roomNum, roomType, standardDeposit, standardRent,
-				standardJeonse);
+		ResultData RoomAddRd = null;
+		for(int i = 0; i < bldgId.length; i++) {
+		RoomAddRd = buildingService.addRoom(bldgId[i], roomNum[i], roomType[i], roomArea[i], standardDeposit[i], standardRent[i],
+				standardJeonse[i]);
+		}
 
-		// 작성된 게시글 번호 가져오기
-		int id = (int) RoomAddRd.getData1();
-
-		return Ut.jsReplace(RoomAddRd.getResultCode(), RoomAddRd.getMsg(), "../bg12343/room");
+		return Ut.jsReplace(RoomAddRd.getResultCode(), RoomAddRd.getMsg(), "../bg12343/contractAdd");
 	}
 	
 

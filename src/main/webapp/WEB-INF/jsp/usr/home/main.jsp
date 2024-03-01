@@ -24,12 +24,12 @@
 
 <div class="page mt-20 main-page mx-auto">
 	<div>
-		<a class="btn btn-outline" href="/usr/bg12343/dashboard"> 임대현황DAHBOARD</a>
+		<a class="btn btn-outline" href="/usr/bg12343/dashboard?bldgId=1"> 임대현황DAHBOARD</a>
 		<div class="menu">
-			<a class="btn btn-outline" href="/usr/bg12343/building"> 건물 현황</a>
+			<a class="btn btn-outline" href="/usr/bg12343/building?bldgId=1"> 건물 현황</a>
 		</div>
 		<div class="menu">
-			<a class="btn btn-outline" href="/usr/bg12343/room">호실 현황</a>
+			<a class="btn btn-outline" href="/usr/bg12343/rentStatus?bldgId=1">수납관리</a>
 		</div>
 		<div class="menu">
 			<a class="btn btn-outline" href="/usr/bg12343/tenant">세입자 현황</a>

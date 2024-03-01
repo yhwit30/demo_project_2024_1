@@ -15,9 +15,8 @@ import com.example.demo.service.DashboardService;
 import com.example.demo.util.Ut;
 import com.example.demo.vo.Building;
 import com.example.demo.vo.Dashboard;
-import com.example.demo.vo.Reply;
-import com.example.demo.vo.ResultData;
 import com.example.demo.vo.Room;
+import com.example.demo.vo.Rq;
 
 @Controller
 public class UsrDashboardController {
@@ -25,6 +24,9 @@ public class UsrDashboardController {
 	LocalDate now = LocalDate.now();
 	int nowYear = now.getYear();
 	
+	@Autowired
+	private Rq rq;
+
 	@Autowired
 	private DashboardService dashboardService;
 
@@ -74,8 +76,9 @@ public class UsrDashboardController {
 		
 		Dashboard rentStatusRd = dashboardService.getRentStatusRd(tenantId, year, month); 
 
+		// 데이터가 표 안에 있어서 jshistoryback이 안 먹혀서 null로 둠
 		if (rentStatusRd == null) {
-			return Ut.jsHistoryBack("F-1", Ut.f("%d번 세입자는 존재하지 않습니다", tenantId));
+			return null;
 		}
 
 		dashboardService.modifyRentStatus(tenantId, body, year, month);
