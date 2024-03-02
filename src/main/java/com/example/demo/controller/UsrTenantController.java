@@ -32,7 +32,6 @@ public class UsrTenantController {
 		return "usr/bg12343/tenant";
 	}
 
-	
 	@RequestMapping("/usr/bg12343/tenantAdd")
 	public String showTenantAdd(Model model) {
 
@@ -41,7 +40,7 @@ public class UsrTenantController {
 
 	@RequestMapping("/usr/bg12343/doTenantAdd")
 	@ResponseBody
-	public String doTenantAdd(String tenantName,  int tenantPhone, String tenantCarNum) {
+	public String doTenantAdd(String tenantName, int tenantPhone, String tenantCarNum) {
 		// 로그인 상태 체크 - 인터셉터에서
 
 		// 제목 내용 빈 칸 확인
@@ -63,7 +62,7 @@ public class UsrTenantController {
 
 		return Ut.jsReplace(TenantAddRd.getResultCode(), TenantAddRd.getMsg(), "../bg12343/tenant");
 	}
-	
+
 	@RequestMapping("/usr/bg12343/tenantModify")
 	public String showTenantModify(Model model) {
 
@@ -87,5 +86,5 @@ public class UsrTenantController {
 
 		return Ut.jsReplace(roomModifyRd.getResultCode(), roomModifyRd.getMsg(), "../bg12343/tenant");
 	}
-	
+
 }

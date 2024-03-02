@@ -5,7 +5,7 @@
 <%@ include file="../common/sidebar.jspf"%>
 
 
-
+<!-- 입력값 유효성 검사 -->
 <script>
 	var roomAdd__submitDone = false;
 
@@ -101,6 +101,8 @@
 
 
 
+
+
 <section class="mt-8 mb-5 text-lg px-4">
 	<div class="mx-auto">
 		<form action="../bg12343/doRoomAdd" method="POST" onsubmit="roomAdd__submit(this); return false;">
@@ -175,7 +177,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
-			<input class="btn btn-outline btn-info" type="submit" value="완료" />
+		<button class="btn btn-outline btn-info" onclick="submitForms()">완료</button>
 		</form>
 		<div class="btns">
 			<button class="btn btn-outline" type="button" onclick="history.back();">뒤로가기</button>
@@ -184,6 +186,12 @@
 </section>
 
 
+<!-- 세입자 id도 만들어놓아야 계약서 join insert 가능 -->
+<form  action="../bg12343/doTenantFirstAdd" method="POST">
+	<c:forEach var="i" begin="1" end="${addedBuilding.roomTotal }">
+		<input type="hidden" name="bldgId" value="${addedBuilding.id }" />
+	</c:forEach>
+</form>
 
 
 

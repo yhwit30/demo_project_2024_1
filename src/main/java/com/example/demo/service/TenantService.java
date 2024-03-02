@@ -31,5 +31,8 @@ public class TenantService {
 		return ResultData.from("S-1", "세입자정보가 수정되었습니다");
 	}
 
+//	public void addFirstTenant() {
+//		tenantRepository.addFirstTenant();
+//	}
 
 }

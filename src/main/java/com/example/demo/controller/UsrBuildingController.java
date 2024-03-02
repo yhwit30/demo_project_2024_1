@@ -86,18 +86,6 @@ public class UsrBuildingController {
 		return Ut.jsReplace(buildingModifyRd.getResultCode(), buildingModifyRd.getMsg(), "../bg12343/building?bldgId="+ bldgId);
 	}
 
-//	@RequestMapping("/usr/bg12343/room")
-//	public String getRoom(Model model, @RequestParam(defaultValue = "1") int bldgId) {
-//
-//		List<Room> rooms = buildingService.getForPrintRooms(bldgId);
-//
-//		int roomsCnt = rooms.size();
-//
-//		model.addAttribute("roomsCnt", roomsCnt);
-//		model.addAttribute("rooms", rooms);
-//		return "usr/bg12343/room";
-//	}
-
 	@RequestMapping("/usr/bg12343/roomAdd")
 	public String showRoomAdd(Model model) {
 

@@ -10,7 +10,7 @@
 		<table class="table-box-1 table" border="1">
 			<thead>
 				<tr>
-					<th>건물</th>
+					<th>건물명</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -47,6 +47,7 @@
 
 				<tbody>
 				<c:forEach var="room" items="${rooms }">
+				<input type="hidden" name="roomId" value="${room.id }" />
 						<tr>
 							<td>${room.roomNum }</td>
 							<td>

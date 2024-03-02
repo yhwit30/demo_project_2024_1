@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -43,5 +44,14 @@ public interface ContractRepository {
 			""")
 	void modifyContract(int id, String tenantName, String leaseType, int deposit, int rent, int maintenanceFee,
 			String contractStartDate, String contractEndDate, String depositDate, String rentDate);
+
+	@Insert("""
+			INSERT INTO contract (tenantId, updateDate, leaseType, deposit, rent, maintenanceFee, contractStartDate, contractEndDate, depositDate, rentDate)
+			SELECT T.id, NOW(), #{leaseType}, #{deposit}, #{rent}, #{maintenanceFee}, #{contractStartDate}, #{contractEndDate}, #{depositDate}, #{rentDate}
+			FROM Tenant AS T
+			WHERE T.tenantName = #{tenantName};
+			""")
+	void addContract(int tenantId, String tenantName, int tenantPhone, String leaseType, int deposit, int rent,
+			int maintenanceFee, String contractStartDate, String contractEndDate, String depositDate, String rentDate);
 
 }

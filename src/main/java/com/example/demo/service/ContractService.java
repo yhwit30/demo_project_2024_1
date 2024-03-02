@@ -26,4 +26,11 @@ public class ContractService {
 		return ResultData.from("S-1", "계약정보가 수정되었습니다");
 	}
 
+	public ResultData addContract(int tenantId, String tenantName, int tenantPhone, String leaseType, int deposit, int rent, int maintenanceFee,
+			String contractStartDate, String contractEndDate, String depositDate, String rentDate) {
+		contractRepository.addContract(tenantId, tenantName, tenantPhone, leaseType, deposit, rent, maintenanceFee, contractStartDate,
+				contractEndDate, depositDate, rentDate);
+		return ResultData.from("S-1", "계약정보가 생성되었습니다");
+	}
+
 }

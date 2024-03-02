@@ -54,10 +54,17 @@ public class UsrContractController {
 
 	@RequestMapping("/usr/bg12343/doContractAdd")
 	@ResponseBody
-	public String doContractAdd() {
+	public String doContractAdd(int roomId[], String[] tenantName, int[] tenantPhone, String[] leaseType, int[] deposit, int[] rent,
+			int[] maintenanceFee, String[] contractStartDate, String[] contractEndDate, String[] depositDate,
+			String[] rentDate) {
 
+		ResultData contractAddRd = null;
+		for (int i = 0; i < roomId.length; i++) {
+			contractAddRd = contractService.addContract(roomId[i], tenantName[i], tenantPhone[i], leaseType[i], deposit[i], rent[i],
+					maintenanceFee[i], contractStartDate[i], contractEndDate[i], depositDate[i], rentDate[i]);
+		}
 		
-		return null;
+		return Ut.jsReplace(contractAddRd.getResultCode(), contractAddRd.getMsg(), "../bg12343/contract");
 	}
 
 	@RequestMapping("/usr/bg12343/contractModify")

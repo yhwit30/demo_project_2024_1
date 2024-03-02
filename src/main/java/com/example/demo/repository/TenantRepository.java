@@ -49,4 +49,10 @@ public interface TenantRepository {
 			""")
 	public void modifyBuilding(int id, String tenantName, int tenantPhone, String tenantCarNum);
 
+//	@Insert("""
+//			INSERT INTO tenant
+//			SET regDate = NOW()
+//			""")
+//	public void addFirstTenant();
+
 }
