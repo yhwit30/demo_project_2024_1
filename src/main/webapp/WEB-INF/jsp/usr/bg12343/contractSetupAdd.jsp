@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="CONTRACT FIRST ADD"></c:set>
+<c:set var="pageTitle" value="CONTRACT SETUP ADD"></c:set>
 <%@ include file="../common/head.jspf"%>
 <%@ include file="../common/sidebar.jspf"%>
+
 
 
 <section class="mt-8 mb-5 text-lg px-4">
@@ -32,7 +33,8 @@
 					<tr>
 						<th>호실</th>
 						<th>세입자명</th>
-						<th>세입자번호</th>
+						<th>세입자휴대폰</th>
+						<th>세입자차량번호</th>
 						<th>임대형태</th>
 						<th>보증금</th>
 						<th>월세</th>
@@ -55,6 +57,9 @@
 							</td>
 							<td>
 								<input size="1" autocomplete="off" type="text" placeholder="세입자번호를 입력해주세요" name="tenantPhone" />
+							</td>
+							<td>
+								<input size="1" autocomplete="off" type="text" placeholder="세입자번호를 입력해주세요" name="tenantCarNum" />
 							</td>
 							<td>
 								<select class="select select-bordered select-sm w-20 max-w-xs" name="leaseType">

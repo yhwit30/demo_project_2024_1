@@ -55,7 +55,7 @@ public class UsrBuildingController {
 		// 작성된 게시글 번호 가져오기
 		int id = (int) BuildingAddRd.getData1();
 
-		return Ut.jsReplace(BuildingAddRd.getResultCode(), BuildingAddRd.getMsg(), "../bg12343/roomAdd");
+		return Ut.jsReplace(BuildingAddRd.getResultCode(), BuildingAddRd.getMsg(), "../bg12343/roomSetupAdd");
 	}
 
 	@RequestMapping("/usr/bg12343/buildingModify")
@@ -86,14 +86,14 @@ public class UsrBuildingController {
 		return Ut.jsReplace(buildingModifyRd.getResultCode(), buildingModifyRd.getMsg(), "../bg12343/building?bldgId="+ bldgId);
 	}
 
-	@RequestMapping("/usr/bg12343/roomAdd")
+	@RequestMapping("/usr/bg12343/roomSetupAdd")
 	public String showRoomAdd(Model model) {
 
 		int getLastBldgId = buildingService.getLastBldgId();
 		Building addedBuilding = buildingService.getForPrintBuilding(getLastBldgId);
 		
 		model.addAttribute("addedBuilding", addedBuilding);
-		return "usr/bg12343/roomAdd";
+		return "usr/bg12343/roomSetupAdd";
 	}
 
 	@RequestMapping("/usr/bg12343/doRoomAdd")
@@ -110,7 +110,7 @@ public class UsrBuildingController {
 				standardJeonse[i]);
 		}
 
-		return Ut.jsReplace(RoomAddRd.getResultCode(), RoomAddRd.getMsg(), "../bg12343/contractFirstAdd");
+		return Ut.jsReplace(RoomAddRd.getResultCode(), RoomAddRd.getMsg(), "../bg12343/contractSetupAdd");
 	}
 	
 

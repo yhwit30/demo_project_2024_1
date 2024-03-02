@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="ROOM ADD"></c:set>
+<c:set var="pageTitle" value="ROOM SETUP ADD"></c:set>
 <%@ include file="../common/head.jspf"%>
 <%@ include file="../common/sidebar.jspf"%>
 
@@ -186,12 +186,7 @@
 </section>
 
 
-<!-- 세입자 id도 만들어놓아야 계약서 join insert 가능 -->
-<form  action="../bg12343/doTenantFirstAdd" method="POST">
-	<c:forEach var="i" begin="1" end="${addedBuilding.roomTotal }">
-		<input type="hidden" name="bldgId" value="${addedBuilding.id }" />
-	</c:forEach>
-</form>
+
 
 
 

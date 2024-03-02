@@ -63,6 +63,7 @@ public class UsrTenantController {
 		return Ut.jsReplace(TenantAddRd.getResultCode(), TenantAddRd.getMsg(), "../bg12343/tenant");
 	}
 
+
 	@RequestMapping("/usr/bg12343/tenantModify")
 	public String showTenantModify(Model model) {
 

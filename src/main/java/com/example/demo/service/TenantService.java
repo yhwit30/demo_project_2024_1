@@ -31,8 +31,15 @@ public class TenantService {
 		return ResultData.from("S-1", "세입자정보가 수정되었습니다");
 	}
 
-//	public void addFirstTenant() {
-//		tenantRepository.addFirstTenant();
-//	}
+	// contractController에서 사용
+	public void addTenantSetup(int roomId, String tenantName, int tenantPhone, String tenantCarNum) {
+		tenantRepository.addTenantSetup(roomId, tenantName, tenantPhone, tenantCarNum);
+	}
+
+	// contractController에서 사용
+	public int getTenantIds(int roomId) {
+		return tenantRepository.getTenantIds(roomId);
+	}
+
 
 }

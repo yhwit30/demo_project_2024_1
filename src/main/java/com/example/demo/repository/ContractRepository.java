@@ -46,12 +46,21 @@ public interface ContractRepository {
 			String contractStartDate, String contractEndDate, String depositDate, String rentDate);
 
 	@Insert("""
-			INSERT INTO contract (tenantId, updateDate, leaseType, deposit, rent, maintenanceFee, contractStartDate, contractEndDate, depositDate, rentDate)
-			SELECT T.id, NOW(), #{leaseType}, #{deposit}, #{rent}, #{maintenanceFee}, #{contractStartDate}, #{contractEndDate}, #{depositDate}, #{rentDate}
-			FROM Tenant AS T
-			WHERE T.tenantName = #{tenantName};
+			INSERT INTO contract
+			SET regDate = NOW(),
+			updateDate = NOW(),
+			tenantId = #{tenantIds},
+			roomId = #{roomId},
+			leaseType = #{leaseType},
+			deposit = #{deposit},
+			rent = #{rent},
+			maintenanceFee = #{maintenanceFee},
+			contractStartDate = #{contractStartDate},
+			contractEndDate = #{contractEndDate},
+			depositDate =  #{depositDate},
+			rentDate =  #{rentDate}
 			""")
-	void addContract(int tenantId, String tenantName, int tenantPhone, String leaseType, int deposit, int rent,
-			int maintenanceFee, String contractStartDate, String contractEndDate, String depositDate, String rentDate);
+	void addContract(int roomId, String leaseType, int deposit, int rent, int maintenanceFee, String contractStartDate,
+			String contractEndDate, String depositDate, String rentDate, int tenantIds);
 
 }

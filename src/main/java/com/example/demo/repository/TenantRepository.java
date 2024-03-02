@@ -49,10 +49,22 @@ public interface TenantRepository {
 			""")
 	public void modifyBuilding(int id, String tenantName, int tenantPhone, String tenantCarNum);
 
-//	@Insert("""
-//			INSERT INTO tenant
-//			SET regDate = NOW()
-//			""")
-//	public void addFirstTenant();
+	@Insert("""
+			INSERT INTO tenant
+			SET regDate = NOW(),
+			updateDate = NOW(),
+			roomId = #{roomId},
+			tenantName = #{tenantName},
+			tenantPhone = #{tenantPhone},
+			tenantCarNum = #{tenantCarNum}
+			""")
+	public void addTenantSetup(int roomId, String tenantName, int tenantPhone, String tenantCarNum); // contractController에서 사용
+
+	@Select("""
+			SELECT id
+			FROM tenant
+			WHERE roomId = #{roomId}
+			""")
+	public int getTenantIds(int roomId);// contractController에서 사용
 
 }
