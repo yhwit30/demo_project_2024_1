@@ -67,4 +67,11 @@ public interface TenantRepository {
 			""")
 	public int getTenantIds(int roomId);// contractController에서 사용
 
+	@Select("""
+			SELECT COUNT(*)
+			FROM tenant
+			WHERE roomId = #{roomId}
+			""")
+	public int getTenantIdCnt(int roomId);
+
 }

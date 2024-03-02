@@ -5,6 +5,100 @@
 <%@ include file="../common/sidebar.jspf"%>
 
 
+<!-- 입력값 유효성 검사 아직 : 이게 공실을 해줘야 하는 문제가 있다.-->
+<script>
+
+// 	var contractAdd__submitDone = false;
+
+// 	function contractAdd__submit(form) {
+// 		if (contractAdd__submitDone) {
+// 			alert('이미 처리중입니다');
+// 			return;
+// 		}
+
+// 		for (var i = 0; i < form.roomNum.length; i++) {
+// 			var roomNumField = form.roomNum[i];
+// 			var roomTypeField = form.roomType[i];
+// 			var roomAreaField = form.roomArea[i];
+// 			var standardDepositField = form.standardDeposit[i];
+// 			var standardRentField = form.standardRent[i];
+// 			var standardJeonseField = form.standardJeonse[i];
+
+// 			 // 숫자가 아닌 데이터 체크
+//             if (isNaN(roomNumField.value)) {
+//                 alert('호실에는 숫자만 입력 가능합니다');
+//                 roomAreaField.focus();
+//                 return;
+//             }
+
+// 			 if (isNaN(roomAreaField.value)) {
+//                 alert('방 면적에는 숫자(소수점가능)만 입력 가능합니다');
+//                 roomAreaField.focus();
+//                 return;
+//             }
+
+//             if (isNaN(standardDepositField.value)) {
+//                 alert('기준 보증금에는 숫자만 입력 가능합니다');
+//                 standardDepositField.focus();
+//                 return;
+//             }
+
+//             if (isNaN(standardRentField.value)) {
+//                 alert('기준 월세에는 숫자만 입력 가능합니다');
+//                 standardRentField.focus();
+//                 return;
+//             }
+
+//             if (isNaN(standardJeonseField.value)) {
+//                 alert('기준 전세에는 숫자만 입력 가능합니다');
+//                 standardJeonseField.focus();
+//                 return;
+//             }
+			
+// 			// 빈칸에 대한 유효성 검사 추가
+// 			if (roomNumField.value.length < 1) {
+// 				alert('호실을 입력해주세요');
+// 				roomNumField.focus();
+// 				return;
+// 			}
+
+// 			if (roomTypeField.value === "") {
+// 				alert('방 형태를 선택해주세요');
+// 				roomTypeField.focus();
+// 				return;
+// 			}
+
+// 			if (roomAreaField.value.length < 1) {
+// 				alert('면적을 입력해주세요');
+// 				roomAreaField.focus();
+// 				return;
+// 			}
+
+// 			if (standardDepositField.value.length < 1) {
+// 				alert('기준 보증금을 입력해주세요');
+// 				standardDepositField.focus();
+// 				return;
+// 			}
+
+// 			if (standardRentField.value.length < 1) {
+// 				alert('기준 월세를 입력해주세요');
+// 				standardRentField.focus();
+// 				return;
+// 			}
+
+// 			if (standardJeonseField.value.length < 1) {
+// 				alert('기준 전세를 입력해주세요');
+// 				standardJeonseField.focus();
+// 				return;
+// 			}
+// 		}
+
+// 		contractAdd__submitDone = true;
+// 		form.submit();
+
+// 	}
+
+</script>
 
 <section class="mt-8 mb-5 text-lg px-4">
 	<div class="mx-auto">
@@ -27,7 +121,7 @@
 		<br />
 
 		<div class="badge badge-outline">${addedBuilding.roomTotal }개</div>
-		<form action="../bg12343/doContractAdd" method="POST">
+		<form action="../bg12343/doContractAdd" method="POST" onsubmit="contractAdd__submit(this); return false;">
 			<table class="table-box-1 table" border="1">
 				<thead>
 					<tr>
@@ -48,8 +142,8 @@
 
 
 				<tbody>
-				<c:forEach var="room" items="${rooms }">
-				<input type="hidden" name="roomId" value="${room.id }" />
+					<c:forEach var="room" items="${rooms }">
+						<input type="hidden" name="roomId" value="${room.id }" />
 						<tr>
 							<td>${room.roomNum }</td>
 							<td>

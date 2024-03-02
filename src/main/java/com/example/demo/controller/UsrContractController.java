@@ -60,8 +60,15 @@ public class UsrContractController {
 			int[] rent, int[] maintenanceFee, String[] contractStartDate, String[] contractEndDate,
 			String[] depositDate, String[] rentDate) {
 
+		boolean tenantDataCheck = false;
+		
 		// tenantId가 먼저 있어야 계약정보 insert가 가능하다
 		for (int i = 0; i < roomId.length; i++) {
+			tenantDataCheck = tenantService.isTenantData(roomId[i]);
+			if(!tenantDataCheck) {
+				return Ut.jsReplace("F-1", "이미 roomId가 있습니다", "../bg12343/contract");
+			}
+			
 			tenantService.addTenantSetup(roomId[i], tenantName[i], tenantPhone[i], tenantCarNum[i]);
 		}
 
@@ -71,8 +78,6 @@ public class UsrContractController {
 			tenantIds[i] = tenantService.getTenantIds(roomId[i]);
 		}
 		
-		System.err.println(tenantIds[0]);
-
 		ResultData contractAddRd = null;
 		for (int i = 0; i < roomId.length; i++) {
 			contractAddRd = contractService.addContract(roomId[i], leaseType[i], deposit[i], rent[i], maintenanceFee[i],

@@ -177,7 +177,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
-		<button class="btn btn-outline btn-info" onclick="submitForms()">완료</button>
+		<input class="btn btn-outline btn-info" type="submit" value="완료" />
 		</form>
 		<div class="btns">
 			<button class="btn btn-outline" type="button" onclick="history.back();">뒤로가기</button>

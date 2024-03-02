@@ -41,5 +41,13 @@ public class TenantService {
 		return tenantRepository.getTenantIds(roomId);
 	}
 
+	public boolean isTenantData(int roomId) {
+		int tenantData = tenantRepository.getTenantIdCnt(roomId);
+		if(tenantData > 0) {
+			return false;
+		}
+			return true;
+	}
+
 
 }
