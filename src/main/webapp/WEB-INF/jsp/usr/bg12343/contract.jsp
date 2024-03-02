@@ -15,7 +15,7 @@
 				<tr>
 					<th>계약번호</th>
 					<th>등록일</th>
-<!-- 					<th>갱신일</th> -->
+					<th>갱신일</th>
 					<th>건물명</th>
 					<th>호실번호</th>
 					<th>세입자명</th>
@@ -25,8 +25,8 @@
 					<th>관리비</th>
 					<th>계약시작일</th>
 					<th>계약만료일</th>
-					<th>보증금 납기일</th>
-					<th>월세 납기일</th>
+					<th>보증금 납부일</th>
+					<th>월세 납부일</th>
 					<th>계약메모</th>
 				</tr>
 			</thead>
@@ -36,7 +36,7 @@
 					<tr class="hover">
 						<td>${contract.id }</td>
 						<td>${contract.regDate.substring(0,10) }</td>
-<%-- 						<td>${contract.updateDate.substring(0,10) }</td> --%>
+						<td>${contract.updateDate.substring(0,10) }</td>
 						<td>${contract.bldgName }</td>
 						<td>${contract.roomNum }</td>
 						<td>${contract.tenantName }</td>
@@ -57,7 +57,7 @@
 
 
 <div class="btns mt-5">
-		<a class="btn btn-outline" href="#">추가(todo)</a>
+		<a class="btn btn-outline" href="../bg12343/contractFirstAdd">추가(나중에 주소 수정해야함)</a>
 		<a class="btn btn-outline" href="../bg12343/contractModify">수정</a>
 		<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="#">삭제</a>
 	</div>

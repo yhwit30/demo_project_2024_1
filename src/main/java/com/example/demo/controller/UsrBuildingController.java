@@ -101,8 +101,8 @@ public class UsrBuildingController {
 	@RequestMapping("/usr/bg12343/roomAdd")
 	public String showRoomAdd(Model model) {
 
-		int getLastInsertId = buildingService.getLastBldgId();
-		Building addedBuilding = buildingService.getForPrintBuilding(getLastInsertId);
+		int getLastBldgId = buildingService.getLastBldgId();
+		Building addedBuilding = buildingService.getForPrintBuilding(getLastBldgId);
 		
 		model.addAttribute("addedBuilding", addedBuilding);
 		return "usr/bg12343/roomAdd";
@@ -122,7 +122,7 @@ public class UsrBuildingController {
 				standardJeonse[i]);
 		}
 
-		return Ut.jsReplace(RoomAddRd.getResultCode(), RoomAddRd.getMsg(), "../bg12343/contractAdd");
+		return Ut.jsReplace(RoomAddRd.getResultCode(), RoomAddRd.getMsg(), "../bg12343/contractFirstAdd");
 	}
 	
 

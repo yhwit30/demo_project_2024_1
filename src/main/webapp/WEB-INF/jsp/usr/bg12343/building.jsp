@@ -4,7 +4,7 @@
 <%@ include file="../common/head.jspf"%>
 <%@ include file="../common/sidebar.jspf"%>
 
-
+<h1 style="text-align:center">전체 건물 목록</h1>
 <section class="mt-2 text-xl px-4">
 	<div class="mx-auto overflow-x-auto">
 		<table class="table-box-1 table" border="1">
@@ -46,6 +46,7 @@
 				href="../bg12343/building?bldgId=${building.id }"
 			>${building.bldgName }</a>
 		</c:forEach>
+		호실 목록
 	</div>
 
 	<div class="badge badge-outline">${roomsCnt }개</div>

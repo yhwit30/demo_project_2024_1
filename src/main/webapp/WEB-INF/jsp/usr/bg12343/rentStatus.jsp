@@ -4,9 +4,9 @@
 <%@ include file="../common/head.jspf"%>
 <%@ include file="../common/sidebar.jspf"%>
 
-스크립트 개행오류 있음 nowYear 데이터에. 나중에 납부현황 hover로 수정삭제 넣기
+스크립트 개행오류 있음 nowYear 데이터에. 나중에 납부현황 hover로수정삭제 넣기
 
-<!-- 월별 수납 수정기능 및 버튼토글 -->
+<!-- 월별 수납수정기능 및 버튼토글 -->
 <script>
 	// 1월 버튼 토글 함수
 	function toggleModifybtn(rentStatusTenantId, month) {
@@ -17,7 +17,7 @@
 		$('#modify-form-' + rentStatusTenantId).show();
 	}
 
-	// 1월 수정 함수
+	// 1월수정 함수
 	function doModifyRentStatus(rentStatusTenantId, month) {
 		var form = $('#modify-form-' + rentStatusTenantId);
 		var text = form.find(
@@ -46,7 +46,7 @@
 				$('#modify-btn-' + rentStatusTenantId).show();
 			},
 			error : function(xhr, status, error) {
-				alert('댓글 수정에 실패했습니다: ' + error);
+				alert('수정에 실패했습니다: ' + error);
 			}
 		})
 	}
@@ -60,7 +60,7 @@
 		$('#2modify-form-' + rentStatusTenantId).show();
 	}
 
-	// 2월 수정 함수
+	// 2월수정 함수
 	function doModifyRentStatus2(rentStatusTenantId, month) {
 		var form = $('#2modify-form-' + rentStatusTenantId);
 		var text = form.find(
@@ -84,7 +84,7 @@
 				$('#2modify-btn-' + rentStatusTenantId).show();
 			},
 			error : function(xhr, status, error) {
-				alert('댓글 수정에 실패했습니다: ' + error);
+				alert('수정에 실패했습니다: ' + error);
 			}
 		})
 	}
@@ -98,7 +98,7 @@
 		$('#3modify-form-' + rentStatusTenantId).show();
 	}
 
-	// 3월 수정 함수
+	// 3월수정 함수
 	function doModifyRentStatus3(rentStatusTenantId, month) {
 		var form = $('#3modify-form-' + rentStatusTenantId);
 		var text = form.find(
@@ -122,7 +122,7 @@
 				$('#3modify-btn-' + rentStatusTenantId).show();
 			},
 			error : function(xhr, status, error) {
-				alert('댓글 수정에 실패했습니다: ' + error);
+				alert('수정에 실패했습니다: ' + error);
 			}
 		})
 	}
@@ -136,7 +136,7 @@
 		$('#4modify-form-' + rentStatusTenantId).show();
 	}
 
-	// 4월 수정 함수
+	// 4월수정 함수
 	function doModifyRentStatus4(rentStatusTenantId, month) {
 		var form = $('#4modify-form-' + rentStatusTenantId);
 		var text = form.find(
@@ -160,7 +160,7 @@
 				$('#4modify-btn-' + rentStatusTenantId).show();
 			},
 			error : function(xhr, status, error) {
-				alert('댓글 수정에 실패했습니다: ' + error);
+				alert('수정에 실패했습니다: ' + error);
 			}
 		})
 	}
@@ -174,7 +174,7 @@
 		$('#5modify-form-' + rentStatusTenantId).show();
 	}
 
-	// 5월 수정 함수
+	// 5월수정 함수
 	function doModifyRentStatus5(rentStatusTenantId, month) {
 		var form = $('#5modify-form-' + rentStatusTenantId);
 		var text = form.find(
@@ -198,7 +198,7 @@
 				$('#5modify-btn-' + rentStatusTenantId).show();
 			},
 			error : function(xhr, status, error) {
-				alert('댓글 수정에 실패했습니다: ' + error);
+				alert('수정에 실패했습니다: ' + error);
 			}
 		})
 	}
@@ -235,7 +235,7 @@
 				$('#6modify-btn-' + rentStatusTenantId).show();
 			},
 			error : function(xhr, status, error) {
-				alert('댓글 수정에 실패했습니다: ' + error);
+				alert('수정에 실패했습니다: ' + error);
 			}
 		})
 	}
@@ -249,7 +249,7 @@
 		$('#7modify-form-' + rentStatusTenantId).show();
 	}
 
-	// 7월 수정 함수
+	// 7월수정 함수
 	function doModifyRentStatus7(rentStatusTenantId, month) {
 		var form = $('#7modify-form-' + rentStatusTenantId);
 		var text = form.find(
@@ -273,7 +273,7 @@
 				$('#7modify-btn-' + rentStatusTenantId).show();
 			},
 			error : function(xhr, status, error) {
-				alert('댓글 수정에 실패했습니다: ' + error);
+				alert('수정에 실패했습니다: ' + error);
 			}
 		})
 	}
@@ -287,7 +287,7 @@
 		$('#8modify-form-' + rentStatusTenantId).show();
 	}
 
-	// 8월 수정 함수
+	// 8월수정 함수
 	function doModifyRentStatus8(rentStatusTenantId, month) {
 		var form = $('#8modify-form-' + rentStatusTenantId);
 		var text = form.find(
@@ -311,7 +311,7 @@
 				$('#8modify-btn-' + rentStatusTenantId).show();
 			},
 			error : function(xhr, status, error) {
-				alert('댓글 수정에 실패했습니다: ' + error);
+				alert('수정에 실패했습니다: ' + error);
 			}
 		})
 	}
@@ -325,7 +325,7 @@
 		$('#9modify-form-' + rentStatusTenantId).show();
 	}
 
-	// 9월 수정 함수
+	// 9월수정 함수
 	function doModifyRentStatus9(rentStatusTenantId, month) {
 		var form = $('#9modify-form-' + rentStatusTenantId);
 		var text = form.find(
@@ -349,7 +349,7 @@
 				$('#9modify-btn-' + rentStatusTenantId).show();
 			},
 			error : function(xhr, status, error) {
-				alert('댓글 수정에 실패했습니다: ' + error);
+				alert('수정에 실패했습니다: ' + error);
 			}
 		})
 	}
@@ -363,7 +363,7 @@
 		$('#10modify-form-' + rentStatusTenantId).show();
 	}
 
-	// 10월 수정 함수
+	// 10월수정 함수
 	function doModifyRentStatus10(rentStatusTenantId, month) {
 		var form = $('#10modify-form-' + rentStatusTenantId);
 		var text = form.find(
@@ -387,7 +387,7 @@
 				$('#10modify-btn-' + rentStatusTenantId).show();
 			},
 			error : function(xhr, status, error) {
-				alert('댓글 수정에 실패했습니다: ' + error);
+				alert('수정에 실패했습니다: ' + error);
 			}
 		})
 	}
@@ -401,7 +401,7 @@
 		$('#11modify-form-' + rentStatusTenantId).show();
 	}
 
-	// 11월 수정 함수
+	// 11월수정 함수
 	function doModifyRentStatus11(rentStatusTenantId, month) {
 		var form = $('#11modify-form-' + rentStatusTenantId);
 		var text = form.find(
@@ -425,7 +425,7 @@
 				$('#11modify-btn-' + rentStatusTenantId).show();
 			},
 			error : function(xhr, status, error) {
-				alert('댓글 수정에 실패했습니다: ' + error);
+				alert('수정에 실패했습니다: ' + error);
 			}
 		})
 	}
@@ -439,7 +439,7 @@
 		$('#12modify-form-' + rentStatusTenantId).show();
 	}
 
-	// 12월 수정 함수
+	// 12월수정 함수
 	function doModifyRentStatus12(rentStatusTenantId, month) {
 		var form = $('#12modify-form-' + rentStatusTenantId);
 		var text = form.find(
@@ -463,7 +463,7 @@
 				$('#12modify-btn-' + rentStatusTenantId).show();
 			},
 			error : function(xhr, status, error) {
-				alert('댓글 수정에 실패했습니다: ' + error);
+				alert('수정에 실패했습니다: ' + error);
 			}
 		})
 	}
@@ -533,8 +533,6 @@
 						<td>${rentStatus.contractStartDate }</td>
 						<td>${rentStatus.contractEndDate }</td>
 						<td>${rentStatus.rentDate }</td>
-
-
 
 						<!-- January -->
 						<td>
@@ -701,6 +699,7 @@
 								style="white-space: nowrap; display: none" id="12save-btn-${rentStatus.tenantId }"
 								class="btn btn-xs btn-outline">저장</button>
 						</td>
+						<td>#</td>
 					</tr>
 				</c:forEach>
 			</tbody>

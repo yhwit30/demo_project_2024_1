@@ -6,18 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.service.BuildingService;
 import com.example.demo.service.ContractService;
 import com.example.demo.util.Ut;
+import com.example.demo.vo.Building;
 import com.example.demo.vo.Contract;
 import com.example.demo.vo.ResultData;
+import com.example.demo.vo.Room;
 
 @Controller
 public class UsrContractController {
 
 	@Autowired
 	private ContractService contractService;
+
+	@Autowired
+	private BuildingService buildingService;
 
 	// 액션 메소드
 	@RequestMapping("/usr/bg12343/contract")
@@ -31,27 +38,25 @@ public class UsrContractController {
 		model.addAttribute("contracts", contracts);
 		return "usr/bg12343/contract";
 	}
-	
-	@RequestMapping("/usr/bg12343/contractAdd")
+
+	@RequestMapping("/usr/bg12343/contractFirstAdd")
 	public String addContract(Model model) {
 
-		List<Contract> contracts = contractService.getForPrintContracts();
-
-		int contractsCnt = contracts.size();
-
-		model.addAttribute("contractsCnt", contractsCnt);
-		model.addAttribute("contracts", contracts);
-		return "usr/bg12343/contractAdd";
+		int getLastBldgId = buildingService.getLastBldgId();
+		Building addedBuilding = buildingService.getForPrintBuilding(getLastBldgId);
+		List<Room> rooms = buildingService.getForPrintRooms(getLastBldgId);
+		
+		model.addAttribute("addedBuilding", addedBuilding);
+		model.addAttribute("rooms", rooms);
+		return "usr/bg12343/contractFirstAdd";
 	}
-	
+
+
 	@RequestMapping("/usr/bg12343/doContractAdd")
 	@ResponseBody
 	public String doContractAdd() {
+
 		
-		// 계약 작성 작업
-//		ResultData BuildingAddRd = buildingService.addBuilding(bldgName, bldgAdd, roomTotal);
-//
-//		return Ut.jsReplace(BuildingAddRd.getResultCode(), BuildingAddRd.getMsg(), "../bg12343/roomAdd");
 		return null;
 	}
 
@@ -79,8 +84,7 @@ public class UsrContractController {
 					maintenanceFee[i], contractStartDate[i], contractEndDate[i], depositDate[i], rentDate[i]);
 		}
 
-		return Ut.jsReplace(contractModifyRd.getResultCode(), contractModifyRd.getMsg(),
-				"../bg12343/contract");
+		return Ut.jsReplace(contractModifyRd.getResultCode(), contractModifyRd.getMsg(), "../bg12343/contract");
 	}
 
 }

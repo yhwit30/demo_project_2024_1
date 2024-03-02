@@ -25,7 +25,7 @@ public interface BuildingRepository {
 			FROM building 
 			""")
 	List<Building> getForPrintBuildings();
-
+	
 	@Select("""
 			SELECT *
 			FROM room AS R
@@ -97,5 +97,7 @@ public interface BuildingRepository {
 			LIMIT 1
 			""")
 	int getLastBldgId();
+
+	
 
 }

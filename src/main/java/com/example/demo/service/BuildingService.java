@@ -23,6 +23,7 @@ public class BuildingService {
 	public List<Building> getForPrintBuildings() {
 		return buildingRepository.getForPrintBuildings();
 	}
+	
 
 	public List<Room> getForPrintRooms(int bldgId) {
 		return buildingRepository.getForPrintRooms(bldgId);
@@ -57,6 +58,7 @@ public class BuildingService {
 	public int getLastBldgId() {
 		return buildingRepository.getLastBldgId();
 	}
+	
 	
 
 	
