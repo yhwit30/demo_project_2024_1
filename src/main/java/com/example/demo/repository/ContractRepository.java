@@ -60,7 +60,7 @@ public interface ContractRepository {
 			depositDate =  #{depositDate},
 			rentDate =  #{rentDate}
 			""")
-	void addContract(int roomId, String leaseType, int deposit, int rent, int maintenanceFee, String contractStartDate,
+	void addContractSetup(int roomId, String leaseType, int deposit, int rent, int maintenanceFee, String contractStartDate,
 			String contractEndDate, String depositDate, String rentDate, int tenantIds);
 
 }

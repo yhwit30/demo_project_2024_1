@@ -5,99 +5,60 @@
 <%@ include file="../common/sidebar.jspf"%>
 
 
+<style>
+.hidden-placeholder {
+	color: transparent;
+}
+</style>
+
+
 <!-- 입력값 유효성 검사 아직 : 이게 공실을 해줘야 하는 문제가 있다.-->
 <script>
+	function contractAdd__submit(form) {
+		// 각 필드에 대한 값을 가져옵니다.
+		var fields = [ 'tenantName', 'tenantPhone', 'tenantCarNum', 'deposit',
+				'rent', 'maintenanceFee', 'contractStartDate',
+				'contractEndDate', 'depositDate', 'rentDate' ];
 
-// 	var contractAdd__submitDone = false;
+		// 빈 값인 경우 0으로 설정합니다.
+		for (var i = 0; i < fields.length; i++) {
+			var fieldName = fields[i];
+			var fieldValue = form[fieldName].value.trim();
 
-// 	function contractAdd__submit(form) {
-// 		if (contractAdd__submitDone) {
-// 			alert('이미 처리중입니다');
-// 			return;
-// 		}
+			if (fieldValue === '') {
+				form[fieldName].value = '0';
+			}
+		}
 
-// 		for (var i = 0; i < form.roomNum.length; i++) {
-// 			var roomNumField = form.roomNum[i];
-// 			var roomTypeField = form.roomType[i];
-// 			var roomAreaField = form.roomArea[i];
-// 			var standardDepositField = form.standardDeposit[i];
-// 			var standardRentField = form.standardRent[i];
-// 			var standardJeonseField = form.standardJeonse[i];
+		// 폼을 서버로 제출합니다.
+		form.submit();
 
-// 			 // 숫자가 아닌 데이터 체크
-//             if (isNaN(roomNumField.value)) {
-//                 alert('호실에는 숫자만 입력 가능합니다');
-//                 roomAreaField.focus();
-//                 return;
-//             }
+		// 폼 제출 후에 브라우저가 다른 동작을 수행하지 못하도록 기본 이벤트를 중지합니다.
+		return false;
+	}
 
-// 			 if (isNaN(roomAreaField.value)) {
-//                 alert('방 면적에는 숫자(소수점가능)만 입력 가능합니다');
-//                 roomAreaField.focus();
-//                 return;
-//             }
-
-//             if (isNaN(standardDepositField.value)) {
-//                 alert('기준 보증금에는 숫자만 입력 가능합니다');
-//                 standardDepositField.focus();
-//                 return;
-//             }
-
-//             if (isNaN(standardRentField.value)) {
-//                 alert('기준 월세에는 숫자만 입력 가능합니다');
-//                 standardRentField.focus();
-//                 return;
-//             }
-
-//             if (isNaN(standardJeonseField.value)) {
-//                 alert('기준 전세에는 숫자만 입력 가능합니다');
-//                 standardJeonseField.focus();
-//                 return;
-//             }
-			
-// 			// 빈칸에 대한 유효성 검사 추가
-// 			if (roomNumField.value.length < 1) {
-// 				alert('호실을 입력해주세요');
-// 				roomNumField.focus();
-// 				return;
-// 			}
-
-// 			if (roomTypeField.value === "") {
-// 				alert('방 형태를 선택해주세요');
-// 				roomTypeField.focus();
-// 				return;
-// 			}
-
-// 			if (roomAreaField.value.length < 1) {
-// 				alert('면적을 입력해주세요');
-// 				roomAreaField.focus();
-// 				return;
-// 			}
-
-// 			if (standardDepositField.value.length < 1) {
-// 				alert('기준 보증금을 입력해주세요');
-// 				standardDepositField.focus();
-// 				return;
-// 			}
-
-// 			if (standardRentField.value.length < 1) {
-// 				alert('기준 월세를 입력해주세요');
-// 				standardRentField.focus();
-// 				return;
-// 			}
-
-// 			if (standardJeonseField.value.length < 1) {
-// 				alert('기준 전세를 입력해주세요');
-// 				standardJeonseField.focus();
-// 				return;
-// 			}
-// 		}
-
-// 		contractAdd__submitDone = true;
-// 		form.submit();
-
-// 	}
-
+	// 사용자가 입력한 값이 존재하는 경우에만 값을 유지합니다.
+	window.onload = function() {
+		var inputs = document.querySelectorAll('input[type="text"]');
+		inputs.forEach(function(input) {
+			if (input.value.trim() === '') {
+				input.value = '0';
+				input.classList.add('hidden-placeholder');
+			}
+			input.addEventListener('focus', function() {
+				if (input.value === '0') {
+					input.value = '';
+					input.classList.remove('hidden-placeholder');
+				}
+			});
+			input.addEventListener('blur', function() {
+				if (input.value.trim() === '') {
+					input.value = '0';
+					input.classList.add('hidden-placeholder');
+				}
+			});
+		});
+	}
 </script>
 
 <section class="mt-8 mb-5 text-lg px-4">
@@ -112,7 +73,6 @@
 				<tr>
 					<td>${addedBuilding.bldgName }</td>
 
-					</td>
 				</tr>
 			</tbody>
 		</table>
@@ -121,7 +81,7 @@
 		<br />
 
 		<div class="badge badge-outline">${addedBuilding.roomTotal }개</div>
-		<form action="../bg12343/doContractAdd" method="POST" onsubmit="contractAdd__submit(this); return false;">
+		<form action="../bg12343/doContractSetupAdd" method="POST" onsubmit="contractAdd__submit(this); return false;">
 			<table class="table-box-1 table" border="1">
 				<thead>
 					<tr>

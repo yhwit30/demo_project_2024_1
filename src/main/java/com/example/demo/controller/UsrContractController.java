@@ -54,21 +54,36 @@ public class UsrContractController {
 		return "usr/bg12343/contractSetupAdd";
 	}
 
-	@RequestMapping("/usr/bg12343/doContractAdd")
+	@RequestMapping("/usr/bg12343/doContractSetupAdd")
 	@ResponseBody
-	public String doContractAdd(int roomId[], String[] tenantName, int[] tenantPhone, String[] tenantCarNum, String[] leaseType, int[] deposit,
-			int[] rent, int[] maintenanceFee, String[] contractStartDate, String[] contractEndDate,
-			String[] depositDate, String[] rentDate) {
+	public String doContractSetupAdd(int roomId[], String[] tenantName, int[] tenantPhone, String[] tenantCarNum,
+			String[] leaseType, int[] deposit, int[] rent, int[] maintenanceFee, String[] contractStartDate,
+			String[] contractEndDate, String[] depositDate, String[] rentDate) {
 
-		boolean tenantDataCheck = false;
+		for (int i = 0; i < roomId.length; i++) {
+			System.out.println(contractStartDate[i]);
+			
+			if ((tenantName[i] == null || tenantName[i].isEmpty() || tenantName[i].equals("0")) && tenantPhone[i] == 0
+					&& (tenantCarNum[i] == null || tenantCarNum[i].isEmpty() || tenantCarNum[i].equals("0"))
+					&& deposit[i] == 0 && rent[i] == 0 && maintenanceFee[i] == 0
+					&& (contractStartDate[i] == null || contractStartDate[i].isEmpty()
+							|| contractStartDate[i].equals("0"))
+					&& (contractEndDate[i] == null || contractEndDate[i].isEmpty() || contractEndDate[i].equals("0"))
+					&& (depositDate[i] == null || depositDate[i].isEmpty() || depositDate[i].equals("0"))
+					&& (rentDate[i] == null || rentDate[i].isEmpty() || rentDate[i].equals("0"))) {
 		
+				return Ut.jsReplace("F-2", "입력된 데이터가 없습니다", "../bg12343/contract");
+			}
+		}
+
 		// tenantId가 먼저 있어야 계약정보 insert가 가능하다
+		boolean tenantDataCheck = false;
 		for (int i = 0; i < roomId.length; i++) {
 			tenantDataCheck = tenantService.isTenantData(roomId[i]);
-			if(!tenantDataCheck) {
+			if (!tenantDataCheck) {
 				return Ut.jsReplace("F-1", "이미 roomId가 있습니다", "../bg12343/contract");
 			}
-			
+
 			tenantService.addTenantSetup(roomId[i], tenantName[i], tenantPhone[i], tenantCarNum[i]);
 		}
 
@@ -77,11 +92,12 @@ public class UsrContractController {
 		for (int i = 0; i < roomId.length; i++) {
 			tenantIds[i] = tenantService.getTenantIds(roomId[i]);
 		}
-		
+
 		ResultData contractAddRd = null;
 		for (int i = 0; i < roomId.length; i++) {
-			contractAddRd = contractService.addContract(roomId[i], leaseType[i], deposit[i], rent[i], maintenanceFee[i],
-					contractStartDate[i], contractEndDate[i], depositDate[i], rentDate[i], tenantIds[i]);
+			contractAddRd = contractService.addContractSetup(roomId[i], leaseType[i], deposit[i], rent[i],
+					maintenanceFee[i], contractStartDate[i], contractEndDate[i], depositDate[i], rentDate[i],
+					tenantIds[i]);
 		}
 
 		return Ut.jsReplace(contractAddRd.getResultCode(), contractAddRd.getMsg(), "../bg12343/contract");
