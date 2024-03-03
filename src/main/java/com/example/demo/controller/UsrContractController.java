@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,44 +62,58 @@ public class UsrContractController {
 			String[] leaseType, int[] deposit, int[] rent, int[] maintenanceFee, String[] contractStartDate,
 			String[] contractEndDate, String[] depositDate, String[] rentDate) {
 
+		// Contract 객체를 생성하고 컨트롤러에서 넘어온 값들을 저장한다.
+		List<Contract> contractSet = new ArrayList<>();
 		for (int i = 0; i < roomId.length; i++) {
-			System.out.println(contractStartDate[i]);
-			
-			if ((tenantName[i] == null || tenantName[i].isEmpty() || tenantName[i].equals("0")) && tenantPhone[i] == 0
-					&& (tenantCarNum[i] == null || tenantCarNum[i].isEmpty() || tenantCarNum[i].equals("0"))
-					&& deposit[i] == 0 && rent[i] == 0 && maintenanceFee[i] == 0
-					&& (contractStartDate[i] == null || contractStartDate[i].isEmpty()
-							|| contractStartDate[i].equals("0"))
-					&& (contractEndDate[i] == null || contractEndDate[i].isEmpty() || contractEndDate[i].equals("0"))
-					&& (depositDate[i] == null || depositDate[i].isEmpty() || depositDate[i].equals("0"))
-					&& (rentDate[i] == null || rentDate[i].isEmpty() || rentDate[i].equals("0"))) {
-		
-				return Ut.jsReplace("F-2", "입력된 데이터가 없습니다", "../bg12343/contract");
-			}
+		    Contract contract = new Contract(); 
+		    contract.setRoomId(roomId[i]); 
+		    contract.setTenantName(tenantName[i]); 
+		    contract.setTenantPhone(tenantPhone[i]); 
+		    contract.setTenantCarNum(tenantCarNum[i]); 
+		    contract.setLeaseType(leaseType[i]); 
+		    contract.setDeposit(deposit[i]); 
+		    contract.setRent(rent[i]); 
+		    contract.setMaintenanceFee(maintenanceFee[i]); 
+		    contract.setContractStartDate(contractStartDate[i]); 
+		    contract.setContractEndDate(contractEndDate[i]); 
+		    contract.setDepositDate(depositDate[i]); 
+		    contract.setRentDate(rentDate[i]);
+		    
+		    // leaseType이 0이 아닌 경우에만 contractSet에 추가한다.
+		    if (!"0".equals(contract.getLeaseType())) {
+		        contractSet.add(contract);
+		    }
 		}
 
+		System.out.println(contractSet.toString());
+		
 		// tenantId가 먼저 있어야 계약정보 insert가 가능하다
 		boolean tenantDataCheck = false;
-		for (int i = 0; i < roomId.length; i++) {
-			tenantDataCheck = tenantService.isTenantData(roomId[i]);
+		for (int i = 0; i < contractSet.size(); i++) {
+			Contract contract = contractSet.get(i);
+			tenantDataCheck = tenantService.isTenantData(contract.getRoomId());
 			if (!tenantDataCheck) {
 				return Ut.jsReplace("F-1", "이미 roomId가 있습니다", "../bg12343/contract");
 			}
 
-			tenantService.addTenantSetup(roomId[i], tenantName[i], tenantPhone[i], tenantCarNum[i]);
+			tenantService.addTenantSetup(contract.getRoomId(), contract.getTenantName(), contract.getTenantPhone(),contract.getTenantCarNum());
 		}
 
-		int[] tenantIds = new int[roomId.length];
-
-		for (int i = 0; i < roomId.length; i++) {
-			tenantIds[i] = tenantService.getTenantIds(roomId[i]);
+		// tenantId 가져오기
+		int[] tenantIds = new int[contractSet.size()];
+		for (int i = 0; i < contractSet.size(); i++) {
+			Contract contract = contractSet.get(i);
+		    tenantIds[i] = tenantService.getTenantIds(contract.getRoomId());
 		}
 
+		
+		// 공실을 제외한 데이터 데이터베이스에 넣기
 		ResultData contractAddRd = null;
-		for (int i = 0; i < roomId.length; i++) {
-			contractAddRd = contractService.addContractSetup(roomId[i], leaseType[i], deposit[i], rent[i],
-					maintenanceFee[i], contractStartDate[i], contractEndDate[i], depositDate[i], rentDate[i],
-					tenantIds[i]);
+		for (int i = 0; i < contractSet.size(); i++) {
+		    Contract contract = contractSet.get(i);
+		    contractAddRd = contractService.addContractSetup(contract.getRoomId(), contract.getLeaseType(), contract.getDeposit(),
+		            contract.getRent(), contract.getMaintenanceFee(), contract.getContractStartDate(), contract.getContractEndDate(),
+		            contract.getDepositDate(), contract.getRentDate(), tenantIds[i]);
 		}
 
 		return Ut.jsReplace(contractAddRd.getResultCode(), contractAddRd.getMsg(), "../bg12343/contract");

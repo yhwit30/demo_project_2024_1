@@ -12,32 +12,14 @@
 </style>
 
 
-<!-- 입력값 유효성 검사 아직 : 이게 공실을 해줘야 하는 문제가 있다.-->
 <script>
 	function contractAdd__submit(form) {
-		// 각 필드에 대한 값을 가져옵니다.
-		var fields = [ 'tenantName', 'tenantPhone', 'tenantCarNum', 'deposit',
-				'rent', 'maintenanceFee', 'contractStartDate',
-				'contractEndDate', 'depositDate', 'rentDate' ];
-
-		// 빈 값인 경우 0으로 설정합니다.
-		for (var i = 0; i < fields.length; i++) {
-			var fieldName = fields[i];
-			var fieldValue = form[fieldName].value.trim();
-
-			if (fieldValue === '') {
-				form[fieldName].value = '0';
-			}
-		}
-
-		// 폼을 서버로 제출합니다.
+		// 	입력값 유효성 검사 해야함
 		form.submit();
-
-		// 폼 제출 후에 브라우저가 다른 동작을 수행하지 못하도록 기본 이벤트를 중지합니다.
-		return false;
 	}
 
-	// 사용자가 입력한 값이 존재하는 경우에만 값을 유지합니다.
+	// 미리 0 값을 준비해두고 빈칸인 채로 submit 경우 사용한다.
+	// 사용자가 입력한 값이 존재하는 경우에만 값을 유지
 	window.onload = function() {
 		var inputs = document.querySelectorAll('input[type="text"]');
 		inputs.forEach(function(input) {
@@ -86,10 +68,10 @@
 				<thead>
 					<tr>
 						<th>호실</th>
+						<th>임대형태</th>
 						<th>세입자명</th>
 						<th>세입자휴대폰</th>
 						<th>세입자차량번호</th>
-						<th>임대형태</th>
 						<th>보증금</th>
 						<th>월세</th>
 						<th>관리비</th>
@@ -107,6 +89,14 @@
 						<tr>
 							<td>${room.roomNum }</td>
 							<td>
+								<select class="select select-bordered select-sm w-20 max-w-xs" name="leaseType">
+									<option value="월세">월세</option>
+									<option value="전세">전세</option>
+									<option value="반전세">반전세</option>
+									<option value="0" selected>공실</option>
+								</select>
+							</td>
+							<td>
 								<input size="1" autocomplete="off" type="text" placeholder="세입자명을 입력해주세요" name="tenantName" />
 							</td>
 							<td>
@@ -114,13 +104,6 @@
 							</td>
 							<td>
 								<input size="1" autocomplete="off" type="text" placeholder="세입자번호를 입력해주세요" name="tenantCarNum" />
-							</td>
-							<td>
-								<select class="select select-bordered select-sm w-20 max-w-xs" name="leaseType">
-									<option value="월세">월세</option>
-									<option value="전세">전세</option>
-									<option value="반전세">반전세</option>
-								</select>
 							</td>
 							<td>
 								<input size="1" autocomplete="off" type="text" placeholder="보증금을 입력해주세요" name="deposit" />

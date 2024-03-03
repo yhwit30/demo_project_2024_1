@@ -19,11 +19,13 @@ public class Contract {
 	private String contractEndDate;
 	private String depositDate;
 	private String rentDate;
+	private int roomId;
 	
 	private String bldgName;
 	private String roomNum;
 	private String tenantName;
-	
+	private int tenantPhone;
+	private String tenantCarNum;
 	
 	
 
