@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,6 +86,8 @@ public class UsrContractController {
 
 		System.out.println(contractSet.toString());
 		
+		
+		
 		// tenantId가 먼저 있어야 계약정보 insert가 가능하다
 		boolean tenantDataCheck = false;
 		for (int i = 0; i < contractSet.size(); i++) {
@@ -105,18 +106,23 @@ public class UsrContractController {
 			Contract contract = contractSet.get(i);
 		    tenantIds[i] = tenantService.getTenantIds(contract.getRoomId());
 		}
-
 		
-		// 공실을 제외한 데이터 데이터베이스에 넣기
-		ResultData contractAddRd = null;
-		for (int i = 0; i < contractSet.size(); i++) {
-		    Contract contract = contractSet.get(i);
-		    contractAddRd = contractService.addContractSetup(contract.getRoomId(), contract.getLeaseType(), contract.getDeposit(),
-		            contract.getRent(), contract.getMaintenanceFee(), contract.getContractStartDate(), contract.getContractEndDate(),
-		            contract.getDepositDate(), contract.getRentDate(), tenantIds[i]);
+		
+		if(contractSet.isEmpty()) {
+			return Ut.jsReplace("S-2", "모두 공실처리되었습니다", "../bg12343/contract");
 		}
 
-		return Ut.jsReplace(contractAddRd.getResultCode(), contractAddRd.getMsg(), "../bg12343/contract");
+		
+		 // 공실을 제외한 데이터 contract 데이터베이스에 넣기
+	    for (int i = 0; i < contractSet.size(); i++) {
+	        Contract contract = contractSet.get(i);
+	        ResultData contractAddRd = contractService.addContractSetup(contract.getRoomId(), contract.getLeaseType(), contract.getDeposit(),
+	                contract.getRent(), contract.getMaintenanceFee(), contract.getContractStartDate(), contract.getContractEndDate(),
+	                contract.getDepositDate(), contract.getRentDate(), tenantIds[i]);
+	       
+	    }
+
+	    return Ut.jsReplace("S-1", "계약 정보가 추가되었습니다", "../bg12343/contract");
 	}
 
 	@RequestMapping("/usr/bg12343/contractModify")
