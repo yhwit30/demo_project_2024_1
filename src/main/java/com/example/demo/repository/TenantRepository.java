@@ -13,6 +13,7 @@ import com.example.demo.vo.Tenant;
 public interface TenantRepository {
 
 	@Select("""
+			<script>
 			SELECT *
 			FROM tenant AS T
 			LEFT JOIN contract AS C
@@ -20,9 +21,14 @@ public interface TenantRepository {
 			LEFT JOIN room AS R
 			ON T.roomId = R.id
 			LEFT JOIN building AS B
-			ON R.bldgId = B.id;
+			ON R.bldgId = B.id
+			WHERE 1=1
+			<if test="bldgId != 0">
+				AND B.id = #{bldgId}
+			</if>
+			</script>
 			""")
-	public List<Tenant> getForPrintTenants();
+	public List<Tenant> getForPrintTenants(int bldgId);
 
 	@Insert("""
 			INSERT INTO

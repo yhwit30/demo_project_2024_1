@@ -4,6 +4,18 @@
 <%@ include file="../common/head.jspf"%>
 <%@ include file="../common/sidebar.jspf"%>
 
+
+<a href="../bg12343/tenant?bldgId=0" class="btn btn-sm btn-outline">전체보기</a>
+<!-- 건물 카테고리 버튼 -->
+<div>
+	<c:forEach var="building" items="${buildings }">
+		<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
+			href="../bg12343/tenant?bldgId=${building.id }"
+		>${building.bldgName }</a>
+	</c:forEach>
+</div>
+
+
 <section class="mt-2 text-xl px-4">
 	<div class="mx-auto overflow-x-auto">
 		<div class="badge badge-outline">${tenantsCnt }명</div>

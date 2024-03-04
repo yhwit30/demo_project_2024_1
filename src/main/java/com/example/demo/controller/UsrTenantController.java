@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.service.BuildingService;
 import com.example.demo.service.TenantService;
 import com.example.demo.util.Ut;
+import com.example.demo.vo.Building;
 import com.example.demo.vo.ResultData;
 import com.example.demo.vo.Tenant;
 
@@ -19,14 +22,33 @@ public class UsrTenantController {
 	@Autowired
 	private TenantService tenantService;
 
+	@Autowired
+	private BuildingService buildingService;
+
 	// 액션 메소드
 	@RequestMapping("/usr/bg12343/tenant")
-	public String getTenant(Model model) {
+	public String getTenant(Model model, @RequestParam(defaultValue = "0") int bldgId) {
 
-		List<Tenant> tenants = tenantService.getForPrintTenants();
+		if (bldgId == 0) {
+			List<Tenant> tenants = tenantService.getForPrintTenants(bldgId);
+			int tenantsCnt = tenants.size();
 
+//			건물 변환 버튼용
+			List<Building> buildings = buildingService.getForPrintBuildings();
+
+			model.addAttribute("buildings", buildings);
+			model.addAttribute("tenantsCnt", tenantsCnt);
+			model.addAttribute("tenants", tenants);
+			return "usr/bg12343/tenant";
+		}
+
+		List<Tenant> tenants = tenantService.getForPrintTenants(bldgId);
 		int tenantsCnt = tenants.size();
 
+//		건물 변환 버튼용
+		List<Building> buildings = buildingService.getForPrintBuildings();
+
+		model.addAttribute("buildings", buildings);
 		model.addAttribute("tenantsCnt", tenantsCnt);
 		model.addAttribute("tenants", tenants);
 		return "usr/bg12343/tenant";
@@ -65,15 +87,31 @@ public class UsrTenantController {
 
 
 	@RequestMapping("/usr/bg12343/tenantModify")
-	public String showTenantModify(Model model) {
+	public String showTenantModify(Model model, @RequestParam(defaultValue = "0") int bldgId) {
 
-		List<Tenant> tenants = tenantService.getForPrintTenants();
+		if (bldgId == 0) {
+			List<Tenant> tenants = tenantService.getForPrintTenants(bldgId);
+			int tenantsCnt = tenants.size();
 
+//			건물 변환 버튼용
+			List<Building> buildings = buildingService.getForPrintBuildings();
+
+			model.addAttribute("buildings", buildings);
+			model.addAttribute("tenantsCnt", tenantsCnt);
+			model.addAttribute("tenants", tenants);
+			return "usr/bg12343/tenant";
+		}
+
+		List<Tenant> tenants = tenantService.getForPrintTenants(bldgId);
 		int tenantsCnt = tenants.size();
 
+//		건물 변환 버튼용
+		List<Building> buildings = buildingService.getForPrintBuildings();
+
+		model.addAttribute("buildings", buildings);
 		model.addAttribute("tenantsCnt", tenantsCnt);
 		model.addAttribute("tenants", tenants);
-		return "usr/bg12343/tenantModify";
+		return "usr/bg12343/tenant";
 	}
 
 	@RequestMapping("/usr/bg12343/doTenantModify")

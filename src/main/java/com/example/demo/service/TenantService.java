@@ -16,8 +16,8 @@ public class TenantService {
 	@Autowired
 	private TenantRepository tenantRepository;
 
-	public List<Tenant> getForPrintTenants() {
-		return tenantRepository.getForPrintTenants();
+	public List<Tenant> getForPrintTenants(int bldgId) {
+		return tenantRepository.getForPrintTenants(bldgId);
 	}
 
 	public ResultData addTenant(String tenantName, int tenantPhone, String tenantCarNum) {
