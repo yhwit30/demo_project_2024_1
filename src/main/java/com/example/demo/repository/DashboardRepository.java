@@ -25,18 +25,18 @@ public interface DashboardRepository {
 
 	@Select("""
 			SELECT *,
-				MAX(CASE WHEN CS.rentDate LIKE '${year}-01%' THEN CS.paymentStatus ELSE NULL END) AS januaryPaymentStatus,
-			    MAX(CASE WHEN CS.rentDate LIKE '${year}-02%' THEN CS.paymentStatus ELSE NULL END) AS februaryPaymentStatus,
-			    MAX(CASE WHEN CS.rentDate LIKE '${year}-03%' THEN CS.paymentStatus ELSE NULL END) AS marchPaymentStatus,
-			    MAX(CASE WHEN CS.rentDate LIKE '${year}-04%' THEN CS.paymentStatus ELSE NULL END) AS aprilPaymentStatus,
-			    MAX(CASE WHEN CS.rentDate LIKE '${year}-05%' THEN CS.paymentStatus ELSE NULL END) AS mayPaymentStatus,
-			    MAX(CASE WHEN CS.rentDate LIKE '${year}-06%' THEN CS.paymentStatus ELSE NULL END) AS junePaymentStatus,
-			    MAX(CASE WHEN CS.rentDate LIKE '${year}-07%' THEN CS.paymentStatus ELSE NULL END) AS julyPaymentStatus,
-			    MAX(CASE WHEN CS.rentDate LIKE '${year}-08%' THEN CS.paymentStatus ELSE NULL END) AS augustPaymentStatus,
-			    MAX(CASE WHEN CS.rentDate LIKE '${year}-09%' THEN CS.paymentStatus ELSE NULL END) AS septemberPaymentStatus,
-			    MAX(CASE WHEN CS.rentDate LIKE '${year}-10%' THEN CS.paymentStatus ELSE NULL END) AS octoberPaymentStatus,
-			    MAX(CASE WHEN CS.rentDate LIKE '${year}-11%' THEN CS.paymentStatus ELSE NULL END) AS novemberPaymentStatus,
-			    MAX(CASE WHEN CS.rentDate LIKE '${year}-12%' THEN CS.paymentStatus ELSE NULL END) AS decemberPaymentStatus
+				MAX(CASE WHEN CS.rentDate LIKE '${year}-01%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus1,
+			    MAX(CASE WHEN CS.rentDate LIKE '${year}-02%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus2,
+			    MAX(CASE WHEN CS.rentDate LIKE '${year}-03%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus3,
+			    MAX(CASE WHEN CS.rentDate LIKE '${year}-04%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus4,
+			    MAX(CASE WHEN CS.rentDate LIKE '${year}-05%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus5,
+			    MAX(CASE WHEN CS.rentDate LIKE '${year}-06%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus6,
+			    MAX(CASE WHEN CS.rentDate LIKE '${year}-07%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus7,
+			    MAX(CASE WHEN CS.rentDate LIKE '${year}-08%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus8,
+			    MAX(CASE WHEN CS.rentDate LIKE '${year}-09%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus9,
+			    MAX(CASE WHEN CS.rentDate LIKE '${year}-10%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus10,
+			    MAX(CASE WHEN CS.rentDate LIKE '${year}-11%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus11,
+			    MAX(CASE WHEN CS.rentDate LIKE '${year}-12%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus12
 			FROM room AS R
 			LEFT JOIN contract AS C
 			ON R.id = C.roomId
