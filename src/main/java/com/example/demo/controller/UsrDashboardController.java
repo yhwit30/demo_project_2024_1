@@ -72,7 +72,7 @@ public class UsrDashboardController {
 
 	@RequestMapping("/usr/bg12343/doRentStatusAdd")
 	@ResponseBody
-	public String doRentStatusAdd(int tenantId, String body, int year, String month) {
+	public String doRentStatusAdd(Model model, int tenantId, String body, int year, String month) {
 		
 		Dashboard rentStatusRd = dashboardService.getRentStatusRd(tenantId, year, month); 
 
@@ -91,7 +91,7 @@ public class UsrDashboardController {
 	
 		rentStatusRd = dashboardService.getRentStatusRd(tenantId, year, month); 
 		
-		System.out.println(rentStatusRd.getRentDate());
+		System.out.println(rentStatusRd.getPaymentStatus());
 
 		return rentStatusRd.getPaymentStatus();
 	}

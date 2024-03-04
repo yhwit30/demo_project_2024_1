@@ -76,7 +76,7 @@ public interface DashboardRepository {
 			updateDate = NOW(),
 			rentDate = '${year}-${month}',
 			tenantId = #{tenantId},
-			paymentStatus = ${body},
+			paymentStatus = '${body}',
 			extraIncome = '없음',
 			extraExpense = '없음'
 			""")
