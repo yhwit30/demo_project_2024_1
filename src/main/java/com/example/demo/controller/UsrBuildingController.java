@@ -86,6 +86,20 @@ public class UsrBuildingController {
 		return Ut.jsReplace(buildingModifyRd.getResultCode(), buildingModifyRd.getMsg(), "../bg12343/building?bldgId="+ bldgId);
 	}
 
+	@RequestMapping("/usr/bg12343/doBuildingDelete")
+	@ResponseBody
+	public String doBuildingDelete(int bldgId) {
+
+		// 건물정보 삭제
+		ResultData buildingDeleteRd = buildingService.deleteBuilding(bldgId);
+		
+		// 해당 건물 호실정보 삭제
+		buildingService.deleteRooms(bldgId);
+
+		return Ut.jsReplace(buildingDeleteRd.getResultCode(), buildingDeleteRd.getMsg(), "../bg12343/building");
+	}
+
+	
 	@RequestMapping("/usr/bg12343/roomSetupAdd")
 	public String showRoomAdd(Model model) {
 
@@ -113,6 +127,7 @@ public class UsrBuildingController {
 		return Ut.jsReplace(RoomAddRd.getResultCode(), RoomAddRd.getMsg(), "../bg12343/contractSetupAdd");
 	}
 	
+
 
 
 	

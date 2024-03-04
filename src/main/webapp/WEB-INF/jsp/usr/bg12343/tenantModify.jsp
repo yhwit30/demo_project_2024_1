@@ -42,16 +42,16 @@
 							<td>${tenant.roomNum }
 								<input type="hidden" name="roomNum" value="${tenant.roomNum }" />
 							<td>
-								<input autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="tenantName" value="${tenant.tenantName }" />
+								<input size="2" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="tenantName" value="${tenant.tenantName }" />
 							<td>
-								<input autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="tenantPhone" value="${tenant.tenantPhone }" />
+								<input size="9" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="tenantPhone" value="${tenant.tenantPhone }" />
 							</td>
 							<td>
-								<input autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="tenantCarNum"
+								<input size="4" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="tenantCarNum"
 									value="${tenant.tenantCarNum }"
 								/>
 							</td>
-							<!-- 							이 아래로 hidden으로 값은 넘겨줬지만 사용은 안했다. 나중에 쓸지도? -->
+							<!-- 이 아래로 hidden으로 값은 넘겨줬지만 사용은 안했다. 나중에 쓸지도? -->
 							</td>
 							<td>${tenant.deposit }
 								<input type="hidden" name="deposit" value="${tenant.deposit }" />

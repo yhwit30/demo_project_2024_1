@@ -30,6 +30,7 @@
 						<td>#</td>
 						<td>
 							<a class="btn btn-sm btn-outline" href="../bg12343/buildingModify?bldgId=${building.id }">수정</a>
+							<a class="btn btn-sm btn-outline" onclick="if(confirm('건물과 호실정보가 모두 삭제됩니다.\n정말 삭제하시겠습니까?') == false) return false;" href="../bg12343/doBuildingDelete?bldgId=${building.id}">삭제</a>
 						</td>
 					</tr>
 				</c:forEach>
@@ -61,6 +62,7 @@
 					<th>기준 보증금</th>
 					<th>기준 월세</th>
 					<th>기준 전세</th>
+					<th>비품</th>
 					<th>메모</th>
 				</tr>
 			</thead>
@@ -74,6 +76,17 @@
 						<td>${room.standardDeposit }</td>
 						<td>${room.standardRent }</td>
 						<td>${room.standardJeonse }</td>
+						<td>
+						<input class="input input-bordered input-sm max-w-xs w-10" value="1" />
+						2
+						<input type="checkbox" class="toggle toggle-sm" checked />
+						3
+						<input type="checkbox" checked="checked" class="checkbox checkbox-sm checkbox-primary" />
+						4
+						<div class="rating rating-xs">
+							<input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400" checked />
+						</div>
+					</td>
 						<td>#</td>
 					</tr>
 				</c:forEach>
@@ -85,7 +98,6 @@
 
 	<div class="btns mt-5">
 		<a class="btn btn-outline" href="/usr/bg12343/buildingAdd"> 건물 추가</a>
-		<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="#">삭제(todo)</a>
 	</div>
 
 

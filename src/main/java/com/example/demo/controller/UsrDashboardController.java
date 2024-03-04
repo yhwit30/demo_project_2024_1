@@ -86,12 +86,11 @@ public class UsrDashboardController {
 			return Ut.jsHistoryBack("F-1", "add 이미 있음");
 		}
 
+		// 수납현황 추가
 		dashboardService.addRentStatus(tenantId, body, year, month);
 
+		// ajax 위한 데이터 가져오기
 		rentStatusRd = dashboardService.getRentStatusRd(tenantId, year, month);
-
-		System.out.println(rentStatusRd.getPaymentStatus());
-
 		return rentStatusRd.getPaymentStatus();
 	}
 
@@ -106,10 +105,11 @@ public class UsrDashboardController {
 			return null;
 		}
 
+		// 수납현황 수정
 		dashboardService.modifyRentStatus(tenantId, body, year, month);
 
+		// ajax 위한 데이터 가져오기
 		rentStatusRd = dashboardService.getRentStatusRd(tenantId, year, month);
-
 		return rentStatusRd.getPaymentStatus();
 	}
 

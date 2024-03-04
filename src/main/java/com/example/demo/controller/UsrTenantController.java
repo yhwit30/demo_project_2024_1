@@ -99,7 +99,7 @@ public class UsrTenantController {
 			model.addAttribute("buildings", buildings);
 			model.addAttribute("tenantsCnt", tenantsCnt);
 			model.addAttribute("tenants", tenants);
-			return "usr/bg12343/tenant";
+			return "usr/bg12343/tenantModify";
 		}
 
 		List<Tenant> tenants = tenantService.getForPrintTenants(bldgId);
@@ -111,7 +111,7 @@ public class UsrTenantController {
 		model.addAttribute("buildings", buildings);
 		model.addAttribute("tenantsCnt", tenantsCnt);
 		model.addAttribute("tenants", tenants);
-		return "usr/bg12343/tenant";
+		return "usr/bg12343/tenantModify";
 	}
 
 	@RequestMapping("/usr/bg12343/doTenantModify")

@@ -8,7 +8,7 @@
 
 
 
-<!-- 월별 수납수정기능 및 버튼토글 -->
+<!-- 수납현황 수정 ajax -->
 <script>
 	// 1월 버튼 토글 함수
 	function toggleModifybtn(rentStatusTenantId, month) {
@@ -553,7 +553,7 @@
 	}
 </script>
 
-
+<!-- 수납현황 추가 ajax -->
 <script>
 	// 1월 add 토글 함수
 	function toggleAddbtn(rentStatusTenantId, month) {
@@ -1138,6 +1138,7 @@ ${paymentStatusRd }
 						<td>
 							<c:if test="${rentStatus.tenantId != 0 }">
 
+								<!-- 납부일자 그려주는 태그 -->
 								<span id="rent-${rentStatus.tenantId }">${rentStatus.januaryPaymentStatus }</span>
 								<!-- 수정기능 -->
 								<c:if test="${not empty rentStatus.januaryPaymentStatus}">
@@ -1185,6 +1186,7 @@ ${paymentStatusRd }
 						<!-- February -->
 						<td>
 							<c:if test="${rentStatus.tenantId != 0 }">
+							<!-- 납부일자 그려주는 태그 -->
 								<span id="2rent-${rentStatus.tenantId }">${rentStatus.februaryPaymentStatus }</span>
 
 								<!-- 수정 -->
@@ -1233,6 +1235,7 @@ ${paymentStatusRd }
 						<!-- March -->
 						<td>
 							<c:if test="${rentStatus.tenantId != 0 }">
+							<!-- 납부일자 그려주는 태그 -->
 								<span id="3rent-${rentStatus.tenantId }">${rentStatus.marchPaymentStatus }</span>
 
 								<!-- 수정  -->
@@ -1278,6 +1281,7 @@ ${paymentStatusRd }
 						<!-- April -->
 						<td>
 							<c:if test="${rentStatus.tenantId != 0 }">
+							<!-- 납부일자 그려주는 태그 -->
 								<span id="4rent-${rentStatus.tenantId }">${rentStatus.aprilPaymentStatus }</span>
 
 								<!-- 수정  -->
@@ -1324,6 +1328,7 @@ ${paymentStatusRd }
 						<!-- May -->
 						<td>
 							<c:if test="${rentStatus.tenantId != 0 }">
+							<!-- 납부일자 그려주는 태그 -->
 								<span id="5rent-${rentStatus.tenantId }">${rentStatus.mayPaymentStatus }</span>
 
 								<!-- 수정  -->
@@ -1368,6 +1373,7 @@ ${paymentStatusRd }
 						<!-- June -->
 						<td>
 							<c:if test="${rentStatus.tenantId != 0 }">
+							<!-- 납부일자 그려주는 태그 -->
 								<span id="6rent-${rentStatus.tenantId }">${rentStatus.junePaymentStatus }</span>
 
 								<!-- 수정 -->
@@ -1412,6 +1418,7 @@ ${paymentStatusRd }
 						<!-- July -->
 						<td>
 							<c:if test="${rentStatus.tenantId != 0 }">
+							<!-- 납부일자 그려주는 태그 -->
 								<span id="7rent-${rentStatus.tenantId }">${rentStatus.julyPaymentStatus }</span>
 
 								<!-- 수정  -->
@@ -1456,6 +1463,7 @@ ${paymentStatusRd }
 						<!-- August -->
 						<td>
 							<c:if test="${rentStatus.tenantId != 0 }">
+							<!-- 납부일자 그려주는 태그 -->
 								<span id="8rent-${rentStatus.tenantId }">${rentStatus.augustPaymentStatus }</span>
 
 								<!-- 수정  -->
@@ -1502,6 +1510,7 @@ ${paymentStatusRd }
 						<!-- September -->
 						<td>
 							<c:if test="${rentStatus.tenantId != 0 }">
+							<!-- 납부일자 그려주는 태그 -->
 								<span id="9rent-${rentStatus.tenantId }">${rentStatus.septemberPaymentStatus }</span>
 
 								<!-- 수정  -->
@@ -1548,6 +1557,7 @@ ${paymentStatusRd }
 						<!-- October -->
 						<td>
 							<c:if test="${rentStatus.tenantId != 0 }">
+							<!-- 납부일자 그려주는 태그 -->
 								<span id="10rent-${rentStatus.tenantId }">${rentStatus.octoberPaymentStatus }</span>
 
 								<!-- 수정 -->
@@ -1594,6 +1604,7 @@ ${paymentStatusRd }
 						<!-- November -->
 						<td>
 							<c:if test="${rentStatus.tenantId != 0 }">
+							<!-- 납부일자 그려주는 태그 -->
 								<span id="11rent-${rentStatus.tenantId }">${rentStatus.novemberPaymentStatus }</span>
 
 								<!-- 수정 -->
@@ -1640,6 +1651,7 @@ ${paymentStatusRd }
 						<!-- December -->
 						<td>
 							<c:if test="${rentStatus.tenantId != 0 }">
+							<!-- 납부일자 그려주는 태그 -->
 								<span id="12rent-${rentStatus.tenantId }">${rentStatus.decemberPaymentStatus }</span>
 
 								<!-- 수정 -->

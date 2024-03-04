@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -22,10 +23,10 @@ public interface BuildingRepository {
 
 	@Select("""
 			SELECT *
-			FROM building 
+			FROM building
 			""")
 	List<Building> getForPrintBuildings();
-	
+
 	@Select("""
 			SELECT *
 			FROM room AS R
@@ -65,10 +66,11 @@ public interface BuildingRepository {
 			standardRent = #{standardRent},
 			standardJeonse = #{standardJeonse}
 			""")
-	void addRoom(int bldgId, int roomNum, String roomType, double roomArea, int standardDeposit, int standardRent, int standardJeonse);
+	void addRoom(int bldgId, int roomNum, String roomType, double roomArea, int standardDeposit, int standardRent,
+			int standardJeonse);
 
 	@Update("""
-			UPDATE building 
+			UPDATE building
 			SET updateDate = NOW(),
 			bldgName = #{bldgName},
 			bldgAdd = #{bldgAdd},
@@ -98,6 +100,10 @@ public interface BuildingRepository {
 			""")
 	int getLastBldgId();
 
-	
+	@Delete("DELETE FROM building WHERE id = #{bldgId}")
+	void deleteBuilding(int bldgId);
+
+	@Delete("DELETE FROM room WHERE bldgId = #{bldgId}")
+	void deleteRooms(int bldgId);
 
 }
