@@ -4,8 +4,10 @@
 <%@ include file="../common/head.jspf"%>
 <%@ include file="../common/sidebar.jspf"%>
 
-사업장 현황신고 dashboard controller 위치 23년도 사업장 현황신고
+사업장 현황신고 dashboard controller 위치 23년도 사업장 현황신고// pdf 출력기능 추가
 
+
+<section class="mt-2 text-xl px-4">
 <!-- 건물 카테고리 버튼 -->
 <div>
 	<c:forEach var="building" items="${buildings }">
@@ -20,9 +22,7 @@
 <a class="btn btn-sm btn-outline ${param.year == nowYear ? 'btn-active' : '' }"
 	href="reportBusiness?bldgId=${param.bldgId }&year=${nowYear}">올해(${nowYear}) 보기</a>
 
-
-
-<section class="mt-2 text-xl px-4">
+	<!-- 사업장 현황신고표 -->
 	<div class="mx-auto overflow-x-auto">
 		<table class="table-box-1 table" border="1">
 			<c:forEach var="rentStatus" items="${rentStatus }">

@@ -37,8 +37,10 @@ public class UsrDashboardController {
 	@RequestMapping("/usr/bg12343/dashboard")
 	public String getDashboard(Model model, @RequestParam(defaultValue = "1") int bldgId) {
 
+		// 건물별 보증금 등 합계 가져오기
 		List<Dashboard> dashboard = dashboardService.getDashboard();
 
+		// 호실정보 가져오기
 		List<Room> rooms = buildingService.getForPrintRooms(bldgId);
 		int roomsCnt = rooms.size();
 

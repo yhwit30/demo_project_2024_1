@@ -183,5 +183,13 @@ public class UsrContractController {
 
 		return Ut.jsReplace(contractModifyRd.getResultCode(), contractModifyRd.getMsg(), "../bg12343/contract?bldgId=" + bldgId);
 	}
+	
+	@RequestMapping("/usr/bg12343/doContractDelete")
+	@ResponseBody
+	public String doContractDelete(int id) {
+
+		return null;
+	}
+
 
 }

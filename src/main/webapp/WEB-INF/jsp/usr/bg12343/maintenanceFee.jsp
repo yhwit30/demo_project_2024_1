@@ -4,6 +4,17 @@
 <%@ include file="../common/head.jspf"%>
 <%@ include file="../common/sidebar.jspf"%>
 
+
+
+
+<style type="text/css">
+.underlineClick>td>a:hover {
+	background-color: skyblue;
+	text-decoration: underline;
+}
+</style>
+
+<section class="mt-2 text-xl px-4">
 <!-- 건물 카테고리 버튼 -->
 <div>
 	<c:forEach var="building" items="${buildings }">
@@ -21,15 +32,6 @@
 	href="maintenanceFee?bldgId=${param.bldgId }&year=${nowYear}"
 >올해(todo) 보기</a>
 
-
-<style type="text/css">
-.underlineClick>td>a:hover {
-	background-color: skyblue;
-	text-decoration: underline;
-}
-</style>
-
-<section class="mt-2 text-xl px-4">
 	<div class="mx-auto overflow-x-auto">
 		<table class="table-box-1 table" border="1">
 			<colgroup>

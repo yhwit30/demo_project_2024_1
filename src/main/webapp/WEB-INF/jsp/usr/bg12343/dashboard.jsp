@@ -46,6 +46,8 @@
 
 <br />
 
+
+<section class="mt-2 text-xl px-4">
 <!-- 건물 카테고리 버튼 -->
 <div>
 	<c:forEach var="building" items="${buildings }">
@@ -56,7 +58,8 @@
 	1: 전자렌지 2: 냉장고 3: 침대 4: 전기렌지
 
 </div>
-<section class="mt-2 text-xl px-4">
+
+	<!-- 대쉬보드 표 -->
 	<div class="badge badge-outline">${roomsCnt }개</div>
 	<table class="table-box-1 table" border="1">
 		<thead>

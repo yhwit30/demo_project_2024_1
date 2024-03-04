@@ -37,7 +37,10 @@
 			</tbody>
 		</table>
 	</div>
-
+	<div class="mt-2" style="text-align:right">
+		<a class="btn btn-m btn-outline" href="/usr/bg12343/buildingAdd"> 건물 추가</a>
+	</div>
+	
 	<br />
 
 	<!-- 건물 카테고리 버튼 -->
@@ -96,22 +99,7 @@
 
 
 
-	<div class="btns mt-5">
-		<a class="btn btn-outline" href="/usr/bg12343/buildingAdd"> 건물 추가</a>
-	</div>
-
-
-
-
-
-
 </section>
-
-
-
-
-
-
 
 
 

@@ -5,6 +5,8 @@
 <%@ include file="../common/sidebar.jspf"%>
 
 
+
+<section class="mt-2 text-xl px-4">
 <a class="btn btn-sm btn-outline ${0 == param.bldgId ? 'btn-active' : '' }" href="../bg12343/tenant?bldgId=0"> 전체보기</a>
 <!-- 건물 카테고리 버튼 -->
 <div>
@@ -15,8 +17,7 @@
 	</c:forEach>
 </div>
 
-
-<section class="mt-2 text-xl px-4">
+	<!-- 세입자표 -->
 	<div class="mx-auto overflow-x-auto">
 		<div class="badge badge-outline">${tenantsCnt }명</div>
 		<table class="table-box-1 table" border="1">

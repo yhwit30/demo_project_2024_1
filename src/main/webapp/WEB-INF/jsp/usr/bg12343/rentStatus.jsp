@@ -1069,23 +1069,22 @@
 </script>
 
 
-<!-- 건물 카테고리 버튼 -->
-<div>
-	<c:forEach var="building" items="${buildings }">
-		<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
-			href="../bg12343/rentStatus?bldgId=${building.id }">${building.bldgName }</a>
-	</c:forEach>
-</div>
-
-<a class="btn btn-sm btn-outline ${param.year == nowYear -1 ? 'btn-active' : '' }"
-	href="rentStatus?bldgId=${param.bldgId }&year=${nowYear -1}">전년도 보기</a>
-<a class="btn btn-sm btn-outline ${param.year == nowYear ? 'btn-active' : '' }"
-	href="rentStatus?bldgId=${param.bldgId }&year=${nowYear}">올해(${nowYear}) 보기</a>
-
-
-${paymentStatusRd }
 
 <section class="mt-2 text-xl px-4">
+	<!-- 건물 카테고리 버튼 -->
+	<div>
+		<c:forEach var="building" items="${buildings }">
+			<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
+				href="../bg12343/rentStatus?bldgId=${building.id }">${building.bldgName }</a>
+		</c:forEach>
+	</div>
+
+	<a class="btn btn-sm btn-outline ${param.year == nowYear -1 ? 'btn-active' : '' }"
+		href="rentStatus?bldgId=${param.bldgId }&year=${nowYear -1}">전년도 보기</a>
+	<a class="btn btn-sm btn-outline ${param.year == nowYear ? 'btn-active' : '' }"
+		href="rentStatus?bldgId=${param.bldgId }&year=${nowYear}">올해(${nowYear}) 보기</a>
+
+	<!--수납현황표 -->
 	<div class="mx-auto overflow-x-auto">
 		<table class="table-box-1 table" border="1">
 			<thead>
@@ -1186,7 +1185,7 @@ ${paymentStatusRd }
 						<!-- February -->
 						<td>
 							<c:if test="${rentStatus.tenantId != 0 }">
-							<!-- 납부일자 그려주는 태그 -->
+								<!-- 납부일자 그려주는 태그 -->
 								<span id="2rent-${rentStatus.tenantId }">${rentStatus.februaryPaymentStatus }</span>
 
 								<!-- 수정 -->
@@ -1235,7 +1234,7 @@ ${paymentStatusRd }
 						<!-- March -->
 						<td>
 							<c:if test="${rentStatus.tenantId != 0 }">
-							<!-- 납부일자 그려주는 태그 -->
+								<!-- 납부일자 그려주는 태그 -->
 								<span id="3rent-${rentStatus.tenantId }">${rentStatus.marchPaymentStatus }</span>
 
 								<!-- 수정  -->
@@ -1281,7 +1280,7 @@ ${paymentStatusRd }
 						<!-- April -->
 						<td>
 							<c:if test="${rentStatus.tenantId != 0 }">
-							<!-- 납부일자 그려주는 태그 -->
+								<!-- 납부일자 그려주는 태그 -->
 								<span id="4rent-${rentStatus.tenantId }">${rentStatus.aprilPaymentStatus }</span>
 
 								<!-- 수정  -->
@@ -1328,7 +1327,7 @@ ${paymentStatusRd }
 						<!-- May -->
 						<td>
 							<c:if test="${rentStatus.tenantId != 0 }">
-							<!-- 납부일자 그려주는 태그 -->
+								<!-- 납부일자 그려주는 태그 -->
 								<span id="5rent-${rentStatus.tenantId }">${rentStatus.mayPaymentStatus }</span>
 
 								<!-- 수정  -->
@@ -1373,7 +1372,7 @@ ${paymentStatusRd }
 						<!-- June -->
 						<td>
 							<c:if test="${rentStatus.tenantId != 0 }">
-							<!-- 납부일자 그려주는 태그 -->
+								<!-- 납부일자 그려주는 태그 -->
 								<span id="6rent-${rentStatus.tenantId }">${rentStatus.junePaymentStatus }</span>
 
 								<!-- 수정 -->
@@ -1418,7 +1417,7 @@ ${paymentStatusRd }
 						<!-- July -->
 						<td>
 							<c:if test="${rentStatus.tenantId != 0 }">
-							<!-- 납부일자 그려주는 태그 -->
+								<!-- 납부일자 그려주는 태그 -->
 								<span id="7rent-${rentStatus.tenantId }">${rentStatus.julyPaymentStatus }</span>
 
 								<!-- 수정  -->
@@ -1463,7 +1462,7 @@ ${paymentStatusRd }
 						<!-- August -->
 						<td>
 							<c:if test="${rentStatus.tenantId != 0 }">
-							<!-- 납부일자 그려주는 태그 -->
+								<!-- 납부일자 그려주는 태그 -->
 								<span id="8rent-${rentStatus.tenantId }">${rentStatus.augustPaymentStatus }</span>
 
 								<!-- 수정  -->
@@ -1510,7 +1509,7 @@ ${paymentStatusRd }
 						<!-- September -->
 						<td>
 							<c:if test="${rentStatus.tenantId != 0 }">
-							<!-- 납부일자 그려주는 태그 -->
+								<!-- 납부일자 그려주는 태그 -->
 								<span id="9rent-${rentStatus.tenantId }">${rentStatus.septemberPaymentStatus }</span>
 
 								<!-- 수정  -->
@@ -1557,7 +1556,7 @@ ${paymentStatusRd }
 						<!-- October -->
 						<td>
 							<c:if test="${rentStatus.tenantId != 0 }">
-							<!-- 납부일자 그려주는 태그 -->
+								<!-- 납부일자 그려주는 태그 -->
 								<span id="10rent-${rentStatus.tenantId }">${rentStatus.octoberPaymentStatus }</span>
 
 								<!-- 수정 -->
@@ -1604,7 +1603,7 @@ ${paymentStatusRd }
 						<!-- November -->
 						<td>
 							<c:if test="${rentStatus.tenantId != 0 }">
-							<!-- 납부일자 그려주는 태그 -->
+								<!-- 납부일자 그려주는 태그 -->
 								<span id="11rent-${rentStatus.tenantId }">${rentStatus.novemberPaymentStatus }</span>
 
 								<!-- 수정 -->
@@ -1651,7 +1650,7 @@ ${paymentStatusRd }
 						<!-- December -->
 						<td>
 							<c:if test="${rentStatus.tenantId != 0 }">
-							<!-- 납부일자 그려주는 태그 -->
+								<!-- 납부일자 그려주는 태그 -->
 								<span id="12rent-${rentStatus.tenantId }">${rentStatus.decemberPaymentStatus }</span>
 
 								<!-- 수정 -->
