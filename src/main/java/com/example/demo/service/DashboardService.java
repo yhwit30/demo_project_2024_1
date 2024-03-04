@@ -10,7 +10,7 @@ import com.example.demo.vo.Dashboard;
 
 @Service
 public class DashboardService {
-	
+
 	@Autowired
 	private DashboardRepository dashboardRepository;
 
@@ -28,10 +28,12 @@ public class DashboardService {
 
 	public void modifyRentStatus(int tenantId, String body, int year, String month) {
 		dashboardRepository.modifyRentStatus(tenantId, body, year, month);
-		
+
 	}
 
+	public void addRentStatus(int tenantId, String body, int year, String month) {
+		dashboardRepository.addRentStatus(tenantId, body, year, month);
 
-
+	}
 
 }

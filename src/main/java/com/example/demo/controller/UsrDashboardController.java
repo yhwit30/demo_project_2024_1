@@ -70,6 +70,32 @@ public class UsrDashboardController {
 		return "usr/bg12343/rentStatus";
 	}
 
+	@RequestMapping("/usr/bg12343/doRentStatusAdd")
+	@ResponseBody
+	public String doRentStatusAdd(int tenantId, String body, int year, String month) {
+		
+		Dashboard rentStatusRd = dashboardService.getRentStatusRd(tenantId, year, month); 
+
+		System.out.println(tenantId);
+		System.out.println(body);
+		System.out.println(year);
+		System.out.println(month);
+
+		// 이미 데이터가 있다면 추가하면 안됨
+		if (rentStatusRd != null) {
+			return Ut.jsHistoryBack("F-1", "add 이미 있음" );
+		}
+
+		
+		dashboardService.addRentStatus(tenantId, body, year, month);
+	
+		rentStatusRd = dashboardService.getRentStatusRd(tenantId, year, month); 
+		
+		System.out.println(rentStatusRd.getRentDate());
+
+		return rentStatusRd.getPaymentStatus();
+	}
+	
 	@RequestMapping("/usr/bg12343/doRentStatusModify")
 	@ResponseBody
 	public String doRentStatusModify(int tenantId, String body, int year, String month) {

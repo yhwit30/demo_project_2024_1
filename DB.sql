@@ -978,7 +978,7 @@ CREATE TABLE contract_status(
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL,
-    rentDate DATE NOT  NULL,
+    rentDate CHAR(20) NOT  NULL,
     #roomId INT(10) NOT NULL,
     tenantId INT(10) NOT NULL,
     paymentStatus CHAR(20) NOT NULL,
@@ -986,11 +986,13 @@ CREATE TABLE contract_status(
     extraExpense CHAR(20)
 );
 
+SELECT * FROM contract_status;
+
 # contract_status testdata
 INSERT INTO contract_status
 SET regDate = NOW(),
 updateDate = NOW(),
-rentDate = '2024.1.10',
+rentDate = '2024-01',
 #roomId = 1,
 tenantId = 1,
 paymentStatus = '1/11',
@@ -1001,7 +1003,7 @@ extraExpense = '없음';
 INSERT INTO contract_status
 SET regDate = NOW(),
 updateDate = NOW(),
-rentDate = '2024.2.10',
+rentDate = '2024-02',
 #roomId = 1,
 tenantId = 1,
 paymentStatus = '2/10',
@@ -1012,7 +1014,7 @@ extraExpense = '없음';
 INSERT INTO contract_status
 SET regDate = NOW(),
 updateDate = NOW(),
-rentDate = '2024.3.10',
+rentDate = '2024-03',
 #roomId = 1,
 tenantId = 1,
 paymentStatus = '미납',
@@ -1023,7 +1025,7 @@ extraExpense = '없음';
 INSERT INTO contract_status
 SET regDate = NOW(),
 updateDate = NOW(),
-rentDate = '2024.1.10',
+rentDate = '2024-01',
 #roomId = 2,
 tenantId = 2,
 paymentStatus = '완납',
@@ -1034,7 +1036,7 @@ extraExpense = '없음';
 INSERT INTO contract_status
 SET regDate = NOW(),
 updateDate = NOW(),
-rentDate = '2024.2.10',
+rentDate = '2024-02',
 #roomId = 2,
 tenantId = 2,
 paymentStatus = '완납',
@@ -1045,7 +1047,7 @@ extraExpense = '없음';
 INSERT INTO contract_status
 SET regDate = NOW(),
 updateDate = NOW(),
-rentDate = '2024.2.10',
+rentDate = '2024-02',
 #roomId = 2,
 tenantId = 3,
 paymentStatus = '완납',
@@ -1056,7 +1058,7 @@ extraExpense = '없음';
 INSERT INTO contract_status
 SET regDate = NOW(),
 updateDate = NOW(),
-rentDate = '2024.1.10',
+rentDate = '2024-01',
 #roomId = 2,
 tenantId = 4,
 paymentStatus = '완납',
@@ -1067,7 +1069,7 @@ extraExpense = '없음';
 INSERT INTO contract_status
 SET regDate = NOW(),
 updateDate = NOW(),
-rentDate = '2024.2.10',
+rentDate = '2024-02',
 #roomId = 2,
 tenantId = 4,
 paymentStatus = '완납',
@@ -1079,7 +1081,7 @@ extraExpense = '없음';
 INSERT INTO contract_status
 SET regDate = NOW(),
 updateDate = NOW(),
-rentDate = '2024.3.10',
+rentDate = '2024-03',
 #roomId = 2,
 tenantId = 4,
 paymentStatus = '완납',
@@ -1090,7 +1092,7 @@ extraExpense = '없음';
 INSERT INTO contract_status
 SET regDate = NOW(),
 updateDate = NOW(),
-rentDate = '2024.4.10',
+rentDate = '2024-04',
 #roomId = 2,
 tenantId = 4,
 paymentStatus = '완납',
@@ -1101,7 +1103,7 @@ extraExpense = '없음';
 INSERT INTO contract_status
 SET regDate = NOW(),
 updateDate = NOW(),
-rentDate = '2024.5.10',
+rentDate = '2024-05',
 #roomId = 2,
 tenantId = 4,
 paymentStatus = '미납',
@@ -1112,7 +1114,7 @@ extraExpense = '없음';
 INSERT INTO contract_status
 SET regDate = NOW(),
 updateDate = NOW(),
-rentDate = '2024.1.10',
+rentDate = '2024-01',
 #roomId = 2,
 tenantId = 5,
 paymentStatus = '완납',
@@ -1123,7 +1125,7 @@ extraExpense = '없음';
 INSERT INTO contract_status
 SET regDate = NOW(),
 updateDate = NOW(),
-rentDate = '2024.2.10',
+rentDate = '2024-02',
 #roomId = 2,
 tenantId = 5,
 paymentStatus = '완납',
@@ -1134,7 +1136,7 @@ extraExpense = '없음';
 INSERT INTO contract_status
 SET regDate = NOW(),
 updateDate = NOW(),
-rentDate = '2024.3.10',
+rentDate = '2024-03',
 #roomId = 2,
 tenantId = 5,
 paymentStatus = '완납',
@@ -1145,7 +1147,7 @@ extraExpense = '없음';
 INSERT INTO contract_status
 SET regDate = NOW(),
 updateDate = NOW(),
-rentDate = '2024.4.10',
+rentDate = '2024-04',
 #roomId = 2,
 tenantId = 5,
 paymentStatus = '미납',
@@ -1156,7 +1158,7 @@ extraExpense = '없음';
 INSERT INTO contract_status
 SET regDate = NOW(),
 updateDate = NOW(),
-rentDate = '2024.5.10',
+rentDate = '2024-05',
 #roomId = 2,
 tenantId = 5,
 paymentStatus = '미납',
@@ -1167,7 +1169,7 @@ extraExpense = '없음';
 INSERT INTO contract_status
 SET regDate = NOW(),
 updateDate = NOW(),
-rentDate = '2024.1.10',
+rentDate = '2024-01',
 #roomId = 2,
 tenantId = 6,
 paymentStatus = '완납',
@@ -1178,7 +1180,7 @@ extraExpense = '없음';
 INSERT INTO contract_status
 SET regDate = NOW(),
 updateDate = NOW(),
-rentDate = '2024.1.10',
+rentDate = '2024-01',
 #roomId = 2,
 tenantId = 7,
 paymentStatus = '미납',
@@ -1189,7 +1191,7 @@ extraExpense = '없음';
 INSERT INTO contract_status
 SET regDate = NOW(),
 updateDate = NOW(),
-rentDate = '2023.12.10',
+rentDate = '2023-12',
 #roomId = 2,
 tenantId = 7,
 paymentStatus = '완납',
@@ -1200,7 +1202,7 @@ extraExpense = '없음';
 INSERT INTO contract_status
 SET regDate = NOW(),
 updateDate = NOW(),
-rentDate = '2023.11.10',
+rentDate = '2023-11',
 #roomId = 2,
 tenantId = 7,
 paymentStatus = '완납',
@@ -1413,7 +1415,7 @@ CREATE TABLE maintenance_fee(
 );
 
 # 관리비 월별 상세보기
-SELECT * 
+SELECT *
 FROM room AS R
 LEFT JOIN contract AS C
 ON R.id = C.roomId
@@ -1422,9 +1424,11 @@ ON R.bldgId = B.id
 LEFT JOIN tenant AS T
 ON C.tenantId = T.id
 LEFT JOIN maintenance_fee AS MF 
-ON MF.tenantId = T.id AND MF.updateDate LIKE '2024-%2%'
+ON MF.tenantId = T.id AND MF.updateDate LIKE '2024-12%'
 GROUP BY R.id
 HAVING B.id = 1;
+
+SELECT * FROM maintenance_fee;
 
 
 
@@ -1967,17 +1971,14 @@ UPDATE contract AS C INNER JOIN Tenant AS T
 ON C.tenantId = T.id
 SET C.updateDate = NOW(),
 C.leaseType = '반전세',
-C.deposit = 40,
+C.deposit = 40000,
+C.rent = 30,
 T.tenantName = '수정김'
 WHERE C.id = 6;
+
 
 
 SELECT *
 FROM contract_Status 
 WHERE rentDate LIKE '2024-%1%' AND tenantId = 2;
 
-
-SELECT *
-FROM building
-ORDER BY id DESC
-LIMIT 1;  

@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -56,7 +57,7 @@ public interface DashboardRepository {
 
 	@Select("""
 			SELECT *
-			FROM contract_Status
+			FROM contract_status
 			WHERE rentDate LIKE '${year}-${month}%' AND tenantId = #{tenantId};
 			""")
 	Dashboard getRentStatusRd(int tenantId, int year, String month);
@@ -67,5 +68,18 @@ public interface DashboardRepository {
 			WHERE rentDate LIKE '${year}-${month}%' AND tenantId = #{tenantId};
 			""")
 	void modifyRentStatus(int tenantId, String body, int year, String month);
+
+	@Insert("""
+			INSERT INTO
+			contract_status SET
+			regDate = NOW(),
+			updateDate = NOW(),
+			rentDate = '${year}-${month}',
+			tenantId = #{tenantId},
+			paymentStatus = ${body},
+			extraIncome = '없음',
+			extraExpense = '없음'
+			""")
+	void addRentStatus(int tenantId, String body, int year, String month);
 
 }

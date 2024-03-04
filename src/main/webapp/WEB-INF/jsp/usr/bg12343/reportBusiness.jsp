@@ -16,10 +16,10 @@
 </div>
 
 <a class="btn btn-sm btn-outline ${param.year == nowYear -1 ? 'btn-active' : '' }"
-	href="rentStatus?bldgId=${param.bldgId }&year=${nowYear -1}"
+	href="reportBusiness?bldgId=${param.bldgId }&year=${nowYear -1}"
 >전년도 보기</a>
 <a class="btn btn-sm btn-outline ${param.year == nowYear ? 'btn-active' : '' }"
-	href="rentStatus?bldgId=${param.bldgId }&year=${nowYear}"
+	href="reportBusiness?bldgId=${param.bldgId }&year=${nowYear}"
 >올해(${nowYear}) 보기</a>
 
 
@@ -53,7 +53,20 @@
 					<tr>
 						<td rowspan="2">${rentStatus.roomNum }</td>
 						<td rowspan="2">${rentStatus.roomType }</td>
-						<td>납부 보증금</td>
+						<c:choose>
+							<c:when test="${rentStatus.leaseType eq '전세'}">
+								<td>전세 보증금</td>
+							</c:when>
+							<c:when test="${rentStatus.leaseType eq '반전세'}">
+								<td>반전세 보증금</td>
+							</c:when>
+							<c:when test="${rentStatus.leaseType eq null}">
+								<td rowspan="2">공실</td>
+							</c:when>
+							<c:otherwise>
+								<td>월세 보증금</td>
+							</c:otherwise>
+						</c:choose>
 
 						<!-- January -->
 						<td>
@@ -149,9 +162,12 @@
 							<c:when test="${rentStatus.leaseType eq '전세'}">
 								<td>전세</td>
 							</c:when>
+							<c:when test="${rentStatus.leaseType eq null}">
+							</c:when>
 							<c:otherwise>
 								<td>납부 월세</td>
 							</c:otherwise>
+
 						</c:choose>
 
 						<!-- January -->
