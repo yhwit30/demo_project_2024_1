@@ -20,10 +20,10 @@ import com.example.demo.vo.Rq;
 
 @Controller
 public class UsrDashboardController {
-	
+
 	LocalDate now = LocalDate.now();
 	int nowYear = now.getYear();
-	
+
 	@Autowired
 	private Rq rq;
 
@@ -56,11 +56,11 @@ public class UsrDashboardController {
 	public String getStatus(Model model, @RequestParam(defaultValue = "1") int bldgId, Integer year) {
 
 		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
-		if(year == null) {
+		if (year == null) {
 			year = nowYear;
 		}
 		List<Dashboard> rentStatus = dashboardService.getRentStatus(bldgId, year);
-		
+
 //		건물 변환 버튼용
 		List<Building> buildings = buildingService.getForPrintBuildings();
 
@@ -73,8 +73,8 @@ public class UsrDashboardController {
 	@RequestMapping("/usr/bg12343/doRentStatusAdd")
 	@ResponseBody
 	public String doRentStatusAdd(Model model, int tenantId, String body, int year, String month) {
-		
-		Dashboard rentStatusRd = dashboardService.getRentStatusRd(tenantId, year, month); 
+
+		Dashboard rentStatusRd = dashboardService.getRentStatusRd(tenantId, year, month);
 
 		System.out.println(tenantId);
 		System.out.println(body);
@@ -83,24 +83,23 @@ public class UsrDashboardController {
 
 		// 이미 데이터가 있다면 추가하면 안됨
 		if (rentStatusRd != null) {
-			return Ut.jsHistoryBack("F-1", "add 이미 있음" );
+			return Ut.jsHistoryBack("F-1", "add 이미 있음");
 		}
 
-		
 		dashboardService.addRentStatus(tenantId, body, year, month);
-	
-		rentStatusRd = dashboardService.getRentStatusRd(tenantId, year, month); 
-		
+
+		rentStatusRd = dashboardService.getRentStatusRd(tenantId, year, month);
+
 		System.out.println(rentStatusRd.getPaymentStatus());
 
 		return rentStatusRd.getPaymentStatus();
 	}
-	
+
 	@RequestMapping("/usr/bg12343/doRentStatusModify")
 	@ResponseBody
 	public String doRentStatusModify(int tenantId, String body, int year, String month) {
-		
-		Dashboard rentStatusRd = dashboardService.getRentStatusRd(tenantId, year, month); 
+
+		Dashboard rentStatusRd = dashboardService.getRentStatusRd(tenantId, year, month);
 
 		// 데이터가 표 안에 있어서 jshistoryback이 안 먹혀서 null로 둠
 		if (rentStatusRd == null) {
@@ -108,28 +107,28 @@ public class UsrDashboardController {
 		}
 
 		dashboardService.modifyRentStatus(tenantId, body, year, month);
-	
-		rentStatusRd = dashboardService.getRentStatusRd(tenantId, year, month); 
+
+		rentStatusRd = dashboardService.getRentStatusRd(tenantId, year, month);
 
 		return rentStatusRd.getPaymentStatus();
 	}
-	
+
 	@RequestMapping("/usr/bg12343/reportBusiness")
 	public String showNotice(Model model, @RequestParam(defaultValue = "1") int bldgId, Integer year) {
 
 		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
-				if(year == null) {
-					year = nowYear;
-				}
-				List<Dashboard> rentStatus = dashboardService.getRentStatus(bldgId, year);
-				
+		if (year == null) {
+			year = nowYear;
+		}
+		List<Dashboard> rentStatus = dashboardService.getRentStatus(bldgId, year);
+
 //				건물 변환 버튼용
-				List<Building> buildings = buildingService.getForPrintBuildings();
-				model.addAttribute("buildings", buildings);
-				
-				model.addAttribute("rentStatus", rentStatus);
-				model.addAttribute("nowYear", nowYear);
+		List<Building> buildings = buildingService.getForPrintBuildings();
+		model.addAttribute("buildings", buildings);
+
+		model.addAttribute("rentStatus", rentStatus);
+		model.addAttribute("nowYear", nowYear);
 		return "usr/bg12343/reportBusiness";
 	}
-	
+
 }
