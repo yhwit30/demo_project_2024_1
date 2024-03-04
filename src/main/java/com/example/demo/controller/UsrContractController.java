@@ -95,7 +95,7 @@ public class UsrContractController {
 			contract.setDepositDate(depositDate[i]);
 			contract.setRentDate(rentDate[i]);
 
-			// leaseType이 0이 아닌 경우에만 contractSet에 추가한다.
+			// leaseType이 0(공실)이 아닌 경우에만 contractSet에 추가한다.
 			if (!"0".equals(contract.getLeaseType())) {
 				contractSet.add(contract);
 			}
@@ -127,7 +127,7 @@ public class UsrContractController {
 			return Ut.jsReplace("S-2", "모두 공실처리되었습니다", "../bg12343/contract");
 		}
 
-		// 공실을 제외한 데이터 contract 데이터베이스에 넣기
+		// tenantId 포함해서 contract 데이터베이스에 넣기
 		for (int i = 0; i < contractSet.size(); i++) {
 			Contract contract = contractSet.get(i);
 			ResultData contractAddRd = contractService.addContractSetup(contract.getRoomId(), contract.getLeaseType(),
@@ -172,15 +172,16 @@ public class UsrContractController {
 	@ResponseBody
 	public String doContractModify(int id[], String[] tenantName, String[] leaseType, int[] deposit, int[] rent,
 			int[] maintenanceFee, String[] contractStartDate, String[] contractEndDate, String[] depositDate,
-			String[] rentDate) {
+			String[] rentDate, int bldgId) {
 
+		// 계약정보를 한번에 수정하기 위한 배열 사용
 		ResultData contractModifyRd = null;
 		for (int i = 0; i < id.length; i++) {
 			contractModifyRd = contractService.modifyContract(id[i], tenantName[i], leaseType[i], deposit[i], rent[i],
 					maintenanceFee[i], contractStartDate[i], contractEndDate[i], depositDate[i], rentDate[i]);
 		}
 
-		return Ut.jsReplace(contractModifyRd.getResultCode(), contractModifyRd.getMsg(), "../bg12343/contract");
+		return Ut.jsReplace(contractModifyRd.getResultCode(), contractModifyRd.getMsg(), "../bg12343/contract?bldgId=" + bldgId);
 	}
 
 }

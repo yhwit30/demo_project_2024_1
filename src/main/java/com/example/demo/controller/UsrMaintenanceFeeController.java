@@ -87,6 +87,7 @@ public class UsrMaintenanceFeeController {
 			year = nowYear;
 		}
 
+		// 관리비 계산을 위한 배열생성
 		int[] waterBill = new int[tenantId.length];
 		int[] elecBill = new int[tenantId.length];
 		int[] gasBill = new int[tenantId.length];
@@ -94,6 +95,7 @@ public class UsrMaintenanceFeeController {
 		int[] lateFee = new int[tenantId.length];
 		int[] lateMaintenanceFee = new int[tenantId.length];
 
+		// 관리비 정보 수정
 		ResultData maintenanceFeeModifyRd = null;
 		for (int i = 0; i < tenantId.length; i++) {
 

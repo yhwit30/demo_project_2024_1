@@ -6,6 +6,7 @@
 
 <section class="mt-2 text-xl px-4">
 	<form action="../bg12343/doContractModify" method="POST">
+	<input type="hidden" name="bldgId" value="${param.bldgId }" />
 		<div class="mx-auto overflow-x-auto">
 			<div class="badge badge-outline">${contractsCnt }개</div>
 
@@ -41,46 +42,41 @@
 							<td>${contract.roomNum }</td>
 							<td>
 								<input size="5" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="tenantName"
-									value="${contract.tenantName }"
-								/>
+									value="${contract.tenantName }" />
 							</td>
 							<td>
-								<input size="5" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="leaseType"
-									value="${contract.leaseType }"
-								/>
+								<select class="select select-bordered select-sm w-20 max-w-xs" name="leaseType"	data-value="${contract.leaseType }">
+									<option value="월세">월세</option>
+									<option value="전세">전세</option>
+									<option value="반전세">반전세</option>
+								</select>
 							</td>
 							<td>
 								<input size="5" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="deposit"
-									value="${contract.deposit }"
-								/>
+									value="${contract.deposit }" />
 							</td>
 							<td>
 								<input size="5" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="rent" value="${contract.rent }" />
 							</td>
 							<td>
 								<input size="5" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="maintenanceFee"
-									value="${contract.maintenanceFee }"
-								/>
+									value="${contract.maintenanceFee }" />
 							</td>
 							<td>
 								<input size="5" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="contractStartDate"
-									value="${contract.contractStartDate }"
-								/>
+									value="${contract.contractStartDate }" />
 							</td>
 							<td>
 								<input size="5" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="contractEndDate"
-									value="${contract.contractEndDate }"
-								/>
+									value="${contract.contractEndDate }" />
 							</td>
 							<td>
 								<input size="5" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="depositDate"
-									value="${contract.depositDate }"
-								/>
+									value="${contract.depositDate }" />
 							</td>
 							<td>
 								<input size="5" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="rentDate"
-									value="${contract.rentDate }"
-								/>
+									value="${contract.rentDate }" />
 							</td>
 							<td>#</td>
 						</tr>

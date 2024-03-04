@@ -190,7 +190,7 @@
 							</td>
 							<td>
 								<%-- 							<input size="1" autocomplete="off" type="text" name="roomType" value="${room.roomType }" /> --%>
-								<select class="select select-bordered select-sm w-20 max-w-xs" name="roomType" data-value2="${room.roomType }">
+								<select class="select select-bordered select-sm w-20 max-w-xs" name="roomType" data-value="${room.roomType }">
 									<option value="상가">상가</option>
 									<option value="원룸">원룸</option>
 									<option value="1.5룸">1.5룸</option>

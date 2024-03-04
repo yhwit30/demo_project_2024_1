@@ -10,17 +10,15 @@
 <div>
 	<c:forEach var="building" items="${buildings }">
 		<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
-			href="../bg12343/reportBusiness?bldgId=${building.id }"
-		>${building.bldgName }</a>
+			href="../bg12343/reportBusiness?bldgId=${building.id }">${building.bldgName }</a>
 	</c:forEach>
 </div>
 
+<!-- 연도 버튼 -->
 <a class="btn btn-sm btn-outline ${param.year == nowYear -1 ? 'btn-active' : '' }"
-	href="reportBusiness?bldgId=${param.bldgId }&year=${nowYear -1}"
->전년도 보기</a>
+	href="reportBusiness?bldgId=${param.bldgId }&year=${nowYear -1}">전년도 보기</a>
 <a class="btn btn-sm btn-outline ${param.year == nowYear ? 'btn-active' : '' }"
-	href="reportBusiness?bldgId=${param.bldgId }&year=${nowYear}"
->올해(${nowYear}) 보기</a>
+	href="reportBusiness?bldgId=${param.bldgId }&year=${nowYear}">올해(${nowYear}) 보기</a>
 
 
 
@@ -68,6 +66,7 @@
 							</c:otherwise>
 						</c:choose>
 
+						<!-- 월별 납부보증금 -->
 						<!-- January -->
 						<td>
 							<c:if test="${not empty rentStatus.januaryPaymentStatus}">
@@ -151,10 +150,6 @@
 								<span>${rentStatus.deposit}</span>
 							</c:if>
 						</td>
-
-
-
-
 
 					</tr>
 					<tr>
@@ -170,6 +165,7 @@
 
 						</c:choose>
 
+						<!-- 월별 납부월세 -->
 						<!-- January -->
 						<td>
 							<c:if test="${not empty rentStatus.januaryPaymentStatus}">
@@ -255,11 +251,12 @@
 						</td>
 
 					</tr>
+
+					<!-- 세입자 정보 -->
 					<tr>
 						<td>세입자 정보</td>
 						<td>${rentStatus.tenantName }</td>
 						<td>${rentStatus.tenantPhone }</td>
-
 
 					</tr>
 				</tbody>

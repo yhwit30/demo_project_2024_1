@@ -120,6 +120,8 @@ public class UsrDashboardController {
 		if (year == null) {
 			year = nowYear;
 		}
+		
+		// 현황 데이터 가져오기
 		List<Dashboard> rentStatus = dashboardService.getRentStatus(bldgId, year);
 
 //				건물 변환 버튼용
