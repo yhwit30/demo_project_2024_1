@@ -99,8 +99,8 @@ public class UsrDashboardController {
 				
 //				건물 변환 버튼용
 				List<Building> buildings = buildingService.getForPrintBuildings();
-
 				model.addAttribute("buildings", buildings);
+				
 				model.addAttribute("rentStatus", rentStatus);
 				model.addAttribute("nowYear", nowYear);
 		return "usr/bg12343/reportBusiness";

@@ -10,14 +10,17 @@
 <div>
 	<c:forEach var="building" items="${buildings }">
 		<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
-			href="../bg12343/reportBusiness?bldgId=${building.id }">${building.bldgName }</a>
+			href="../bg12343/reportBusiness?bldgId=${building.id }"
+		>${building.bldgName }</a>
 	</c:forEach>
 </div>
 
 <a class="btn btn-sm btn-outline ${param.year == nowYear -1 ? 'btn-active' : '' }"
-	href="rentStatus?bldgId=${param.bldgId }&year=${nowYear -1}">전년도 보기</a>
+	href="rentStatus?bldgId=${param.bldgId }&year=${nowYear -1}"
+>전년도 보기</a>
 <a class="btn btn-sm btn-outline ${param.year == nowYear ? 'btn-active' : '' }"
-	href="rentStatus?bldgId=${param.bldgId }&year=${nowYear}">올해(${nowYear}) 보기</a>
+	href="rentStatus?bldgId=${param.bldgId }&year=${nowYear}"
+>올해(${nowYear}) 보기</a>
 
 
 
@@ -51,16 +54,197 @@
 						<td rowspan="2">${rentStatus.roomNum }</td>
 						<td rowspan="2">${rentStatus.roomType }</td>
 						<td>납부 보증금</td>
-						<td>${rentStatus.deposit }</td>
+
+						<!-- January -->
+						<td>
+							<c:if test="${not empty rentStatus.januaryPaymentStatus}">
+								<span>${rentStatus.deposit}</span>
+							</c:if>
+						</td>
+
+						<!-- February -->
+						<td>
+							<c:if test="${not empty rentStatus.februaryPaymentStatus}">
+								<span>${rentStatus.deposit}</span>
+							</c:if>
+						</td>
+
+						<!-- March -->
+						<td>
+							<c:if test="${not empty rentStatus.marchPaymentStatus}">
+								<span>${rentStatus.deposit}</span>
+							</c:if>
+						</td>
+
+						<!-- April -->
+						<td>
+							<c:if test="${not empty rentStatus.aprilPaymentStatus}">
+								<span>${rentStatus.deposit}</span>
+							</c:if>
+						</td>
+
+						<!-- May -->
+						<td>
+							<c:if test="${not empty rentStatus.mayPaymentStatus}">
+								<span>${rentStatus.deposit}</span>
+							</c:if>
+						</td>
+
+						<!-- June -->
+						<td>
+							<c:if test="${not empty rentStatus.junePaymentStatus}">
+								<span>${rentStatus.deposit}</span>
+							</c:if>
+						</td>
+
+						<!-- July -->
+						<td>
+							<c:if test="${not empty rentStatus.julyPaymentStatus}">
+								<span>${rentStatus.deposit}</span>
+							</c:if>
+						</td>
+
+						<!-- August -->
+						<td>
+							<c:if test="${not empty rentStatus.augustPaymentStatus}">
+								<span>${rentStatus.deposit}</span>
+							</c:if>
+						</td>
+
+						<!-- September -->
+						<td>
+							<c:if test="${not empty rentStatus.septemberPaymentStatus}">
+								<span>${rentStatus.deposit}</span>
+							</c:if>
+						</td>
+
+						<!-- October -->
+						<td>
+							<c:if test="${not empty rentStatus.octoberPaymentStatus}">
+								<span>${rentStatus.deposit}</span>
+							</c:if>
+						</td>
+
+						<!-- November -->
+						<td>
+							<c:if test="${not empty rentStatus.novemberPaymentStatus}">
+								<span>${rentStatus.deposit}</span>
+							</c:if>
+						</td>
+
+						<!-- December -->
+						<td>
+							<c:if test="${not empty rentStatus.decemberPaymentStatus}">
+								<span>${rentStatus.deposit}</span>
+							</c:if>
+						</td>
+
+
+
+
+
 					</tr>
 					<tr>
-						<td>납부 월세</td>
-						<td>${rentStatus.rent }</td>
+						<c:choose>
+							<c:when test="${rentStatus.leaseType eq '전세'}">
+								<td>전세</td>
+							</c:when>
+							<c:otherwise>
+								<td>납부 월세</td>
+							</c:otherwise>
+						</c:choose>
+
+						<!-- January -->
+						<td>
+							<c:if test="${not empty rentStatus.januaryPaymentStatus}">
+								<span>${rentStatus.rent}</span>
+							</c:if>
+						</td>
+
+						<!-- February -->
+						<td>
+							<c:if test="${not empty rentStatus.februaryPaymentStatus}">
+								<span>${rentStatus.rent}</span>
+							</c:if>
+						</td>
+
+						<!-- March -->
+						<td>
+							<c:if test="${not empty rentStatus.marchPaymentStatus}">
+								<span>${rentStatus.rent}</span>
+							</c:if>
+						</td>
+
+						<!-- April -->
+						<td>
+							<c:if test="${not empty rentStatus.aprilPaymentStatus}">
+								<span>${rentStatus.rent}</span>
+							</c:if>
+						</td>
+
+						<!-- May -->
+						<td>
+							<c:if test="${not empty rentStatus.mayPaymentStatus}">
+								<span>${rentStatus.rent}</span>
+							</c:if>
+						</td>
+
+						<!-- June -->
+						<td>
+							<c:if test="${not empty rentStatus.junePaymentStatus}">
+								<span>${rentStatus.rent}</span>
+							</c:if>
+						</td>
+
+						<!-- July -->
+						<td>
+							<c:if test="${not empty rentStatus.julyPaymentStatus}">
+								<span>${rentStatus.rent}</span>
+							</c:if>
+						</td>
+
+						<!-- August -->
+						<td>
+							<c:if test="${not empty rentStatus.augustPaymentStatus}">
+								<span>${rentStatus.rent}</span>
+							</c:if>
+						</td>
+
+						<!-- September -->
+						<td>
+							<c:if test="${not empty rentStatus.septemberPaymentStatus}">
+								<span>${rentStatus.rent}</span>
+							</c:if>
+						</td>
+
+						<!-- October -->
+						<td>
+							<c:if test="${not empty rentStatus.octoberPaymentStatus}">
+								<span>${rentStatus.rent}</span>
+							</c:if>
+						</td>
+
+						<!-- November -->
+						<td>
+							<c:if test="${not empty rentStatus.novemberPaymentStatus}">
+								<span>${rentStatus.rent}</span>
+							</c:if>
+						</td>
+
+						<!-- December -->
+						<td>
+							<c:if test="${not empty rentStatus.decemberPaymentStatus}">
+								<span>${rentStatus.rent}</span>
+							</c:if>
+						</td>
+
 					</tr>
 					<tr>
 						<td>세입자 정보</td>
 						<td>${rentStatus.tenantName }</td>
 						<td>${rentStatus.tenantPhone }</td>
+
+
 					</tr>
 				</tbody>
 				<tr>

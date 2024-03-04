@@ -22,10 +22,10 @@
 <!-- 				<a href="/usr/bg12343/room?bldgId=1">호실정보</a> -->
 <!-- 			</li> -->
 			<li>
-				<a href="/usr/bg12343/contract">계약정보</a>
+				<a href="/usr/bg12343/contract?bldgId=0">계약정보</a>
 			</li>
 			<li>
-				<a href="/usr/bg12343/tenant">세입자정보</a>
+				<a href="/usr/bg12343/tenant?bldgId=0">세입자정보</a>
 			</li>
 			<li>
 				<a href="/usr/bg12343/repair">작업일지</a>
@@ -37,7 +37,7 @@
 				<a href="/usr/bg12343/expenses">지출내역</a>
 			</li>
 			<li>
-				<a href="/usr/bg12343/reportBusiness">사업장<br> 현황신고</a>
+				<a href="/usr/bg12343/reportBusiness?bldgId=1">사업장<br> 현황신고</a>
 			</li>
 
 

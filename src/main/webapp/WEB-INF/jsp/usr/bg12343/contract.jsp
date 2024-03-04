@@ -5,7 +5,7 @@
 <%@ include file="../common/sidebar.jspf"%>
 
 
-<a href="../bg12343/contract?bldgId=0" class="btn btn-sm btn-outline">전체보기</a>
+<a class="btn btn-sm btn-outline ${0 == param.bldgId ? 'btn-active' : '' }" href="../bg12343/contract?bldgId=0"> 전체보기</a>
 <!-- 건물 카테고리 버튼 -->
 <div>
 	<c:forEach var="building" items="${buildings }">
