@@ -13,6 +13,7 @@ import com.example.demo.vo.Contract;
 public interface ContractRepository {
 
 	@Select("""
+			<script>
 			SELECT *
 			FROM contract AS C
 			LEFT JOIN room AS R
@@ -21,9 +22,14 @@ public interface ContractRepository {
 			ON R.bldgId = B.id
 			LEFT JOIN tenant AS T
 			ON C.tenantId = T.id
-			GROUP BY C.id;
+			WHERE 1=1
+			<if test="bldgId != 0">
+				AND B.id = #{bldgId}
+			</if>
+			GROUP BY C.id
+			</script>
 			""")
-	List<Contract> getForPrintContracts();
+	List<Contract> getForPrintContracts(int bldgId);
 
 	@Update("""
 			<script>
@@ -60,7 +66,7 @@ public interface ContractRepository {
 			depositDate =  #{depositDate},
 			rentDate =  #{rentDate}
 			""")
-	void addContractSetup(int roomId, String leaseType, int deposit, int rent, int maintenanceFee, String contractStartDate,
-			String contractEndDate, String depositDate, String rentDate, int tenantIds);
+	void addContractSetup(int roomId, String leaseType, int deposit, int rent, int maintenanceFee,
+			String contractStartDate, String contractEndDate, String depositDate, String rentDate, int tenantIds);
 
 }

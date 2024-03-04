@@ -15,8 +15,8 @@ public class ContractService {
 	@Autowired
 	private ContractRepository contractRepository;
 
-	public List<Contract> getForPrintContracts() {
-		return contractRepository.getForPrintContracts();
+	public List<Contract> getForPrintContracts(int bldgId) {
+		return contractRepository.getForPrintContracts(bldgId);
 	}
 
 	public ResultData modifyContract(int id, String tenantName, String leaseType, int deposit, int rent, int maintenanceFee,

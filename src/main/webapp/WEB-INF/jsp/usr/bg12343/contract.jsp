@@ -4,6 +4,18 @@
 <%@ include file="../common/head.jspf"%>
 <%@ include file="../common/sidebar.jspf"%>
 
+
+<a href="../bg12343/contract?bldgId=0" class="btn btn-sm btn-outline">전체보기</a>
+<!-- 건물 카테고리 버튼 -->
+<div>
+	<c:forEach var="building" items="${buildings }">
+		<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
+			href="../bg12343/contract?bldgId=${building.id }"
+		>${building.bldgName }</a>
+	</c:forEach>
+</div>
+
+
 <section class="mt-2 text-xl px-4">
 	<div class="mx-auto overflow-x-auto">
 		<div class="badge badge-outline">${contractsCnt }개</div>
@@ -56,8 +68,8 @@
 	</div>
 
 
-<div class="btns mt-5">
-		<a class="btn btn-outline" href="../bg12343/contractSetupAdd">추가(나중에 링크 그냥 Add로 또 만들어야함)</a>
+	<div class="btns mt-5">
+		<a class="btn btn-outline" href="../bg12343/contractSetupAdd">추가(지금은 setup, 나중에 링크 그냥 Add로 또 만들어야함)</a>
 		<a class="btn btn-outline" href="../bg12343/contractModify">수정</a>
 		<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="#">삭제</a>
 	</div>
