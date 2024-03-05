@@ -52,11 +52,7 @@ public class UsrBuildingController {
 		// 게시글 작성 작업
 		ResultData BuildingAddRd = buildingService.addBuilding(bldgName, bldgAdd, roomTotal);
 
-		// 작성된 게시글 번호 가져오기
-		int id = (int) BuildingAddRd.getData1();
-
-		 // 절대 경로 사용하여 리다이렉트
-	    return Ut.jsReplace(BuildingAddRd.getResultCode(), BuildingAddRd.getMsg(), "../building/roomSetupAdd");
+		return Ut.jsReplace(BuildingAddRd.getResultCode(), BuildingAddRd.getMsg(), "../building/roomSetupAdd");
 	}
 
 	@RequestMapping("/usr/bg12343/building/buildingModify")
