@@ -105,7 +105,7 @@
 
 <section class="mt-8 mb-5 text-lg px-4">
 	<div class="mx-auto">
-		<form action="../bg12343/building/doRoomAdd" method="POST" onsubmit="roomAdd__submit(this); return false;">
+		<form action="/usr/bg12343/building/doRoomAdd" method="POST" onsubmit="roomAdd__submit(this); return false;">
 			<table class="table-box-1 table " border="1">
 				<thead>
 					<tr>

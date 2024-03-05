@@ -9,7 +9,7 @@
 		<div class="badge badge-outline">${tenantsCnt }개</div>
 
 
-		<form action="../bg12343/tenant/doTenantModify" method="POST">
+		<form action="../tenant/doTenantModify" method="POST">
 
 			<table class="modify-box table-box-1 table" border="1">
 				<thead>

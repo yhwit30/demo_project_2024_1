@@ -55,7 +55,8 @@ public class UsrBuildingController {
 		// 작성된 게시글 번호 가져오기
 		int id = (int) BuildingAddRd.getData1();
 
-		return Ut.jsReplace(BuildingAddRd.getResultCode(), BuildingAddRd.getMsg(), "../bg12343/building/roomSetupAdd");
+		 // 절대 경로 사용하여 리다이렉트
+	    return Ut.jsReplace(BuildingAddRd.getResultCode(), BuildingAddRd.getMsg(), "../building/roomSetupAdd");
 	}
 
 	@RequestMapping("/usr/bg12343/building/buildingModify")
@@ -83,7 +84,7 @@ public class UsrBuildingController {
 		
 		buildingModifyRd = buildingService.modifyBuilding(bldgId, bldgName, bldgAdd, roomTotal);
 
-		return Ut.jsReplace(buildingModifyRd.getResultCode(), buildingModifyRd.getMsg(), "../bg12343/building/building?bldgId="+ bldgId);
+		return Ut.jsReplace(buildingModifyRd.getResultCode(), buildingModifyRd.getMsg(), "../building/building?bldgId="+ bldgId);
 	}
 
 	@RequestMapping("/usr/bg12343/building/doBuildingDelete")
@@ -96,7 +97,7 @@ public class UsrBuildingController {
 		// 해당 건물 호실정보 삭제
 		buildingService.deleteRooms(bldgId);
 
-		return Ut.jsReplace(buildingDeleteRd.getResultCode(), buildingDeleteRd.getMsg(), "../bg12343/building/building");
+		return Ut.jsReplace(buildingDeleteRd.getResultCode(), buildingDeleteRd.getMsg(), "../building/building");
 	}
 
 	
@@ -107,7 +108,7 @@ public class UsrBuildingController {
 		Building addedBuilding = buildingService.getForPrintBuilding(getLastBldgId);
 		
 		model.addAttribute("addedBuilding", addedBuilding);
-		return "usr/bg12343/building/roomSetupAdd";
+		return "usr/building/roomSetupAdd";
 	}
 
 	@RequestMapping("/usr/bg12343/building/doRoomAdd")
@@ -124,7 +125,7 @@ public class UsrBuildingController {
 				standardJeonse[i]);
 		}
 
-		return Ut.jsReplace(RoomAddRd.getResultCode(), RoomAddRd.getMsg(), "../bg12343/contract/contractSetupAdd");
+		return Ut.jsReplace(RoomAddRd.getResultCode(), RoomAddRd.getMsg(), "../contract/contractSetupAdd");
 	}
 	
 

@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.repository.DashboardRepository;
+import com.example.demo.util.Ut;
+import com.example.demo.vo.Article;
 import com.example.demo.vo.Dashboard;
+import com.example.demo.vo.ResultData;
 
 @Service
 public class DashboardService {
@@ -35,5 +38,12 @@ public class DashboardService {
 		dashboardRepository.addRentStatus(tenantId, body, year, month);
 
 	}
+
+	public void deleteRentStatus(int tenantId, String body, int year, String month) {
+		dashboardRepository.deleteRentStatus(tenantId, body, year, month);
+		
+	}
+	
+
 
 }

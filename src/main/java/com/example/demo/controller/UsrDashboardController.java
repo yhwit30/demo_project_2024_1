@@ -119,8 +119,13 @@ public class UsrDashboardController {
 	@ResponseBody
 	public void doRentStatusDelete(int tenantId, String body, int year, String month) {
 
-		Dashboard rentStatusRd = dashboardService.getRentStatusRd(tenantId, year, month);
+		// 나중에 회원체크 userCanDelete 메소드 가져다 써야함(articleService)
 
+		// 삭제할 데이터 있는지 체크
+		Dashboard rentStatusRd = dashboardService.getRentStatusRd(tenantId, year, month);
+		if(rentStatusRd == null) {
+			return;
+		}
 		
 		// 수납현황 삭제
 		dashboardService.deleteRentStatus(tenantId, body, year, month);

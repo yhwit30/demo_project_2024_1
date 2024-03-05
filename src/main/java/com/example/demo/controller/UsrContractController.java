@@ -109,7 +109,7 @@ public class UsrContractController {
 			Contract contract = contractSet.get(i);
 			tenantDataCheck = tenantService.isTenantData(contract.getRoomId());
 			if (!tenantDataCheck) {
-				return Ut.jsReplace("F-1", "이미 roomId가 있습니다", "../bg12343/contract");
+				return Ut.jsReplace("F-1", "이미 roomId가 있습니다", "../contract/contract");
 			}
 
 			tenantService.addTenantSetup(contract.getRoomId(), contract.getTenantName(), contract.getTenantPhone(),
@@ -124,7 +124,7 @@ public class UsrContractController {
 		}
 
 		if (contractSet.isEmpty()) {
-			return Ut.jsReplace("S-2", "모두 공실처리되었습니다", "../bg12343/contract/contract");
+			return Ut.jsReplace("S-2", "모두 공실처리되었습니다", "../contract/contract");
 		}
 
 		// tenantId 포함해서 contract 데이터베이스에 넣기
@@ -137,7 +137,7 @@ public class UsrContractController {
 
 		}
 
-		return Ut.jsReplace("S-1", "계약 정보가 추가되었습니다", "../bg12343/contract/contract");
+		return Ut.jsReplace("S-1", "계약 정보가 추가되었습니다", "../contract/contract");
 	}
 
 	@RequestMapping("/usr/bg12343/contract/contractModify")
@@ -181,7 +181,7 @@ public class UsrContractController {
 					maintenanceFee[i], contractStartDate[i], contractEndDate[i], depositDate[i], rentDate[i]);
 		}
 
-		return Ut.jsReplace(contractModifyRd.getResultCode(), contractModifyRd.getMsg(), "../bg12343/contract?bldgId=" + bldgId);
+		return Ut.jsReplace(contractModifyRd.getResultCode(), contractModifyRd.getMsg(), "../contract/contract?bldgId=" + bldgId);
 	}
 	
 	@RequestMapping("/usr/bg12343/contract/doContractDelete")

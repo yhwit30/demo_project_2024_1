@@ -48,7 +48,7 @@
 
 <section class="mt-8 mb-5 text-lg px-4">
 	<div class="px-4  mt-36">
-		<form action="../bg12343/building/building/doBuildingAdd" method="POST" onsubmit="buildingAdd__submit(this); return false;">
+		<form action="/usr/bg12343/building/doBuildingAdd" method="POST" onsubmit="buildingAdd__submit(this); return false;">
 			<table class="write-box table-box-1 mx-auto" border="1">
 				<tbody>
 					<tr>

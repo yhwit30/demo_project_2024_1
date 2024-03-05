@@ -82,7 +82,7 @@ public class UsrTenantController {
 		// 작성된 게시글 번호 가져오기
 		int id = (int) TenantAddRd.getData1();
 
-		return Ut.jsReplace(TenantAddRd.getResultCode(), TenantAddRd.getMsg(), "../bg12343/tenant/tenant");
+		return Ut.jsReplace(TenantAddRd.getResultCode(), TenantAddRd.getMsg(), "../tenant/tenant");
 	}
 
 
@@ -123,7 +123,7 @@ public class UsrTenantController {
 			roomModifyRd = tenantService.modifyTenant(id[i], tenantName[i], tenantPhone[i], tenantCarNum[i]);
 		}
 
-		return Ut.jsReplace(roomModifyRd.getResultCode(), roomModifyRd.getMsg(), "../bg12343/tenant/tenant");
+		return Ut.jsReplace(roomModifyRd.getResultCode(), roomModifyRd.getMsg(), "../tenant/tenant");
 	}
 
 }

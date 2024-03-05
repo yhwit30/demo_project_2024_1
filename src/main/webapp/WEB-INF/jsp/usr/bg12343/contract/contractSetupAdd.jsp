@@ -63,7 +63,7 @@
 		<br />
 
 		<div class="badge badge-outline">${addedBuilding.roomTotal }개</div>
-		<form action="../bg12343/contract/doContractSetupAdd" method="POST" onsubmit="contractAdd__submit(this); return false;">
+		<form action="../contract/doContractSetupAdd" method="POST" onsubmit="contractAdd__submit(this); return false;">
 			<table class="table-box-1 table" border="1">
 				<thead>
 					<tr>

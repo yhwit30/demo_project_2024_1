@@ -5,7 +5,7 @@
 <%@ include file="../../common/sidebar.jspf"%>
 
 <section class="mt-2 text-xl px-4">
-	<form action="../bg12343/contract/doContractModify" method="POST">
+	<form action="../contract/doContractModify" method="POST">
 	<input type="hidden" name="bldgId" value="${param.bldgId }" />
 		<div class="mx-auto overflow-x-auto">
 			<div class="badge badge-outline">${contractsCnt }개</div>

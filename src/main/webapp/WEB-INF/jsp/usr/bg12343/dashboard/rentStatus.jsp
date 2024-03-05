@@ -102,6 +102,14 @@
 		if (rentStatusTenantId == 0) {
 			alert('세입자가 없습니다')
 		}
+		
+		// 추가에 빈칸으로 넘어왔을 때 체크
+		if (text === null || text.trim() === '') {
+			$('#' + methodNum + 'add-form-' + rentStatusTenantId).hide();
+			$('#' + methodNum + 'add-btn-' + rentStatusTenantId).show();
+			$('#' + methodNum + 'add-save-btn-' + rentStatusTenantId).hide();
+			return;
+		}
 
 		$.post({
 			url : '/usr/bg12343/dashboard/doRentStatusAdd',
@@ -134,7 +142,7 @@
 	<div>
 		<c:forEach var="building" items="${buildings }">
 			<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
-				href="../bg12343/dashboard/rentStatus?bldgId=${building.id }">${building.bldgName }</a>
+				href="rentStatus?bldgId=${building.id }">${building.bldgName }</a>
 		</c:forEach>
 	</div>
 
@@ -210,6 +218,8 @@
 										<button onclick="doModifyRentStatus('${rentStatus.tenantId}', '0${month}', '${month}');"
 											style="white-space: nowrap; display: none" id="${month}save-btn-${rentStatus.tenantId}"
 											class="btn btn-xs btn-outline">저장</button>
+											
+											<button calss="btn btn-xs">삭제</button>
 									</c:if>
 
 									<!-- 추가기능 -->

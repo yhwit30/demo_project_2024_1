@@ -67,7 +67,7 @@
 	</div>
 
 	<div class="btns mt-5">
-		<a class="btn btn-outline" href="../bg12343/tenant/tenantModify?bldgId=${param.bldgId }">수정</a>
+		<a class="btn btn-outline" href="../tenant/tenantModify?bldgId=${param.bldgId }">수정</a>
 		<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="#">삭제</a>
 	</div>
 	<a class="btn btn-outline" href="/usr/bg12343/tenant/tenantAdd"> 세입자 추가(todo)</a>

@@ -113,7 +113,7 @@ public class UsrMaintenanceFeeController {
 		}
 
 		return Ut.jsReplace(maintenanceFeeModifyRd.getResultCode(), maintenanceFeeModifyRd.getMsg(),
-				"../bg12343/maintenanceFee/maintenanceFeeDetail?bldgId="+bldgId+"&month="+month);
+				"../maintenanceFee/maintenanceFeeDetail?bldgId="+bldgId+"&month="+month);
 	}
 
 }

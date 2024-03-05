@@ -29,8 +29,8 @@
 						<td>${building.roomTotal }</td>
 						<td>#</td>
 						<td>
-							<a class="btn btn-sm btn-outline" href="../bg12343/building/buildingModify?bldgId=${building.id }">수정</a>
-							<a class="btn btn-sm btn-outline" onclick="if(confirm('건물과 호실정보가 모두 삭제됩니다.\n정말 삭제하시겠습니까?') == false) return false;" href="../bg12343/doBuildingDelete?bldgId=${building.id}">삭제</a>
+							<a class="btn btn-sm btn-outline" href="../building/buildingModify?bldgId=${building.id }">수정</a>
+							<a class="btn btn-sm btn-outline" onclick="if(confirm('건물과 호실정보가 모두 삭제됩니다.\n정말 삭제하시겠습니까?') == false) return false;" href="../building/doBuildingDelete?bldgId=${building.id}">삭제</a>
 						</td>
 					</tr>
 				</c:forEach>
@@ -47,7 +47,7 @@
 	<div>
 		<c:forEach var="building" items="${buildings }">
 			<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
-				href="../bg12343/building/building?bldgId=${building.id }"
+				href="building?bldgId=${building.id }"
 			>${building.bldgName }</a>
 		</c:forEach>
 		호실 목록
