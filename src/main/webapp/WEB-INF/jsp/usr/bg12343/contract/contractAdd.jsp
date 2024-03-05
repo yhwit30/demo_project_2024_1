@@ -31,7 +31,7 @@
 				// 가져온 호실데이터를 option 태그로 그려주기
 				data.forEach(function(room) {
 					var option = document.createElement("option");
-					option.value = room.roomNum;
+					option.value = room.id;
 					option.text = room.roomNum;
 					roomSelect.appendChild(option);
 				});
@@ -94,7 +94,7 @@
 					<tr>
 						<td>
 							<!-- 호실 선택 -->
-							<select class="select select-bordered select-sm w-20 max-w-xs" name="roomNum" id="roomNum">
+							<select class="select select-bordered select-sm w-20 max-w-xs" name="roomId" id="roomNum">
 								<!--ajax에서 option 태그를 그려준다 -->
 							</select>
 						<td>

@@ -50,9 +50,9 @@ public class UsrBuildingController {
 	public String doBuildingAdd(String bldgName, String bldgAdd, int roomTotal) {
 		
 		// 게시글 작성 작업
-		ResultData BuildingAddRd = buildingService.addBuilding(bldgName, bldgAdd, roomTotal);
+		ResultData buildingAddRd = buildingService.addBuilding(bldgName, bldgAdd, roomTotal);
 
-		return Ut.jsReplace(BuildingAddRd.getResultCode(), BuildingAddRd.getMsg(), "../building/roomSetupAdd"); // 이상하게 경로 오류남
+		return Ut.jsReplace(buildingAddRd.getResultCode(), buildingAddRd.getMsg(), "../building/roomSetupAdd"); 
 	}
 	
 	@RequestMapping("/usr/bg12343/building/buildingModify")

@@ -77,6 +77,7 @@ public class UsrContractController {
 		return "usr/bg12343/contract/contractAdd";
 	}
 
+	// ajax
 	@RequestMapping("/usr/bg12343/contract/getRoomsForContract")
 	@ResponseBody
 	public List<Room> getRoomsForContract(int bldgId) {
@@ -90,9 +91,20 @@ public class UsrContractController {
 
 	@RequestMapping("/usr/bg12343/contract/doContractAdd")
 	@ResponseBody
-	public String doContractAdd() {
+	public String doContractAdd(int roomId, String leaseType, int deposit, int rent, int maintenanceFee,
+			String contractStartDate, String contractEndDate, String depositDate, String rentDate, String tenantName,
+			int tenantPhone, String tenantCarNum) {
 
-		return null;
+		// 세입자 먼저 생성해서 tenantId 얻기
+		tenantService.addTenantSetup(roomId, tenantName, tenantPhone, tenantCarNum);
+		int tenantId = tenantService.getTenantIds(roomId); // 호실roomId 중복 시 오류나는데 이건 한 호실에 여러번 계약의 경우 체크할 때 하자
+
+		// 계약 작성 작업
+		ResultData contractAddRd = contractService.addContract(roomId, leaseType, deposit, rent, maintenanceFee, contractStartDate,
+				contractEndDate, depositDate, rentDate, tenantId);
+
+		return Ut.jsReplace(contractAddRd.getResultCode(), contractAddRd.getMsg(), "../contract/contract");
+
 	}
 
 	@RequestMapping("/usr/bg12343/contract/contractSetupAdd")
@@ -165,7 +177,7 @@ public class UsrContractController {
 		// tenantId 포함해서 contract 데이터베이스에 넣기
 		for (int i = 0; i < contractSet.size(); i++) {
 			Contract contract = contractSet.get(i);
-			ResultData contractAddRd = contractService.addContractSetup(contract.getRoomId(), contract.getLeaseType(),
+			ResultData contractAddRd = contractService.addContract(contract.getRoomId(), contract.getLeaseType(),
 					contract.getDeposit(), contract.getRent(), contract.getMaintenanceFee(),
 					contract.getContractStartDate(), contract.getContractEndDate(), contract.getDepositDate(),
 					contract.getRentDate(), tenantIds[i]);

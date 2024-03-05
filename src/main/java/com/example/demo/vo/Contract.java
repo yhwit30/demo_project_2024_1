@@ -20,6 +20,7 @@ public class Contract {
 	private String depositDate;
 	private String rentDate;
 	private int roomId;
+	private int tenantId;
 	
 	private String bldgName;
 	private String roomNum;

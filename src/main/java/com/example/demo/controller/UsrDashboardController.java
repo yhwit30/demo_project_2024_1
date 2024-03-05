@@ -72,6 +72,7 @@ public class UsrDashboardController {
 		return "usr/bg12343/dashboard/rentStatus";
 	}
 
+	//ajax
 	@RequestMapping("/usr/bg12343/dashboard/doRentStatusAdd")
 	@ResponseBody
 	public String doRentStatusAdd(Model model, int tenantId, String body, int year, String month) {
@@ -96,6 +97,7 @@ public class UsrDashboardController {
 		return rentStatusRd.getPaymentStatus();
 	}
 
+	//ajax
 	@RequestMapping("/usr/bg12343/dashboard/doRentStatusModify")
 	@ResponseBody
 	public String doRentStatusModify(int tenantId, String body, int year, String month) {
@@ -115,6 +117,7 @@ public class UsrDashboardController {
 		return rentStatusRd.getPaymentStatus();
 	}
 	
+	//ajax
 	@RequestMapping("/usr/bg12343/dashboard/doRentStatusDelete")
 	@ResponseBody
 	public void doRentStatusDelete(int tenantId, String body, int year, String month) {
