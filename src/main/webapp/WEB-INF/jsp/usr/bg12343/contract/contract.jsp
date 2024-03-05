@@ -1,18 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="CONTRACT DETAIL"></c:set>
-<%@ include file="../common/head.jspf"%>
-<%@ include file="../common/sidebar.jspf"%>
+<%@ include file="../../common/head.jspf"%>
+<%@ include file="../../common/sidebar.jspf"%>
 
 
 
 <section class="mt-2 text-xl px-4">
-<a class="btn btn-sm btn-outline ${0 == param.bldgId ? 'btn-active' : '' }" href="../bg12343/contract?bldgId=0"> 전체보기</a>
+<a class="btn btn-sm btn-outline ${0 == param.bldgId ? 'btn-active' : '' }" href="../bg12343/contract/contract?bldgId=0"> 전체보기</a>
 <!-- 건물 카테고리 버튼 -->
 <div>
 	<c:forEach var="building" items="${buildings }">
 		<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
-			href="../bg12343/contract?bldgId=${building.id }"
+			href="../bg12343/contract/contract?bldgId=${building.id }"
 		>${building.bldgName }</a>
 	</c:forEach>
 </div>
@@ -70,8 +70,8 @@
 
 
 	<div class="btns mt-5">
-		<a class="btn btn-outline" href="../bg12343/contractSetupAdd">추가(지금은 setup, 나중에 링크 그냥 Add로 또 만들어야함)</a>
-		<a class="btn btn-outline" href="../bg12343/contractModify?bldgId=${param.bldgId }">수정</a>
+		<a class="btn btn-outline" href="../bg12343/contract/contractSetupAdd">추가(지금은 setup, 나중에 링크 그냥 Add로 또 만들어야함)</a>
+		<a class="btn btn-outline" href="../bg12343/contract/contractModify?bldgId=${param.bldgId }">수정</a>
 		<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="#">삭제</a>
 	</div>
 
@@ -90,4 +90,4 @@
 
 
 
-<%@ include file="../common/foot.jspf"%>
+<%@ include file="../../common/foot.jspf"%>

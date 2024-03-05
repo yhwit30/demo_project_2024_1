@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="RENT SATUS"></c:set>
-<%@ include file="../common/head.jspf"%>
-<%@ include file="../common/sidebar.jspf"%>
+<%@ include file="../../common/head.jspf"%>
+<%@ include file="../../common/sidebar.jspf"%>
 
 스크립트 개행오류 있음 nowYear 데이터에. 나중에 납부현황 hover로수정삭제 넣기
 
@@ -14,7 +14,7 @@
 	function toggleModifybtn(rentStatusTenantId, methodNum) {
 		console.log('TogglerentStatusTenantId:' + rentStatusTenantId);
 		console.log('TogglemethodNum:' + methodNum);
-
+		
 		$('#' + methodNum + 'modify-btn-' + rentStatusTenantId).hide();
 		$('#' + methodNum + 'save-btn-' + rentStatusTenantId).show();
 		$('#' + methodNum + 'rent-' + rentStatusTenantId).hide();
@@ -43,7 +43,7 @@
 
 		$
 				.post({
-					url : '/usr/bg12343/doRentStatusModify',
+					url : '/usr/bg12343/dashboard/doRentStatusModify',
 					type : 'POST',
 					data : {
 						tenantId : rentStatusTenantId,
@@ -104,7 +104,7 @@
 		}
 
 		$.post({
-			url : '/usr/bg12343/doRentStatusAdd',
+			url : '/usr/bg12343/dashboard/doRentStatusAdd',
 			type : 'POST',
 			data : {
 				tenantId : rentStatusTenantId,
@@ -134,7 +134,7 @@
 	<div>
 		<c:forEach var="building" items="${buildings }">
 			<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
-				href="../bg12343/rentStatus?bldgId=${building.id }">${building.bldgName }</a>
+				href="../bg12343/dashboard/rentStatus?bldgId=${building.id }">${building.bldgName }</a>
 		</c:forEach>
 	</div>
 
@@ -201,7 +201,7 @@
 									<!-- 수정기능 -->
 									<c:if test="${not empty rentStatus[paymentStatusVar]}">
 										<form onsubmit="return false;" method="POST" id="${month}modify-form-${rentStatus.tenantId}"
-											style="display: none" action="/usr/bg12343/doRentStatusModify">
+											style="display: none" action="/usr/bg12343/dashboard/doRentStatusModify">
 											<input size="1" type="text" value="${rentStatus[paymentStatusVar]}"
 												name="${month}rent-text-${rentStatus.tenantId}" />
 										</form>
@@ -215,7 +215,7 @@
 									<!-- 추가기능 -->
 									<c:if test="${empty rentStatus[paymentStatusVar]}">
 										<form onsubmit="return false;" method="POST" id="${month}add-form-${rentStatus.tenantId}"
-											style="display: none" action="/usr/bg12343/doRentStatusAdd">
+											style="display: none" action="/usr/bg12343/dashboard/doRentStatusAdd">
 											<input size="1" type="text" name="${month}add-rent-text-${rentStatus.tenantId}" />
 										</form>
 										<button onclick="toggleAddbtn('${rentStatus.tenantId}', '${month}');"
@@ -226,7 +226,7 @@
 
 										<!-- 추가 후 즉각 수정기능 -->
 										<form onsubmit="return false;" method="POST" id="${month}modify-form-${rentStatus.tenantId}"
-											style="display: none" action="/usr/bg12343/doRentStatusModify">
+											style="display: none" action="/usr/bg12343/dashboard/doRentStatusModify">
 											<input size="1" type="text" name="${month}rent-text-${rentStatus.tenantId}" />
 										</form>
 										<button onclick="toggleModifybtn('${rentStatus.tenantId}', '${month}');"
@@ -254,4 +254,4 @@
 
 
 
-<%@ include file="../common/foot.jspf"%>
+<%@ include file="../../common/foot.jspf"%>

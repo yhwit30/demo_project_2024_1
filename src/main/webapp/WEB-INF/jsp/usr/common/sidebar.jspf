@@ -7,37 +7,37 @@
 	<nav class="side_menu">
 		<ul>
 			<li>
-				<a href="/usr/bg12343/dashboard?bldgId=1">대쉬보드</a>
+				<a href="/usr/bg12343/dashboard/dashboard?bldgId=1">대쉬보드</a>
 			</li>
 			<li>
-				<a href="/usr/bg12343/rentStatus?bldgId=1">수납관리</a>
+				<a href="/usr/bg12343/dashboard/rentStatus?bldgId=1">수납관리</a>
 			</li>
 			<li>
-				<a href="/usr/bg12343/maintenanceFee?bldgId=1">관리비</a>
+				<a href="/usr/bg12343/maintenanceFee/maintenanceFee?bldgId=1">관리비</a>
 			</li>
 			<li>
-				<a href="/usr/bg12343/building?bldgId=1">건물정보</a>
+				<a href="/usr/bg12343/building/building?bldgId=1">건물정보</a>
 			</li>
 <!-- 			<li> -->
 <!-- 				<a href="/usr/bg12343/room?bldgId=1">호실정보</a> -->
 <!-- 			</li> -->
 			<li>
-				<a href="/usr/bg12343/contract?bldgId=0">계약정보</a>
+				<a href="/usr/bg12343/contract/contract?bldgId=0">계약정보</a>
 			</li>
 			<li>
-				<a href="/usr/bg12343/tenant?bldgId=0">세입자정보</a>
+				<a href="/usr/bg12343/tenant/tenant?bldgId=0">세입자정보</a>
 			</li>
 			<li>
-				<a href="/usr/bg12343/repair">작업일지</a>
+				<a href="/usr/bg12343/memo/repair">작업일지</a>
 			</li>
 			<li>
-				<a href="/usr/bg12343/notice">공지사항</a>
+				<a href="/usr/bg12343/memo/notice">공지사항</a>
 			</li>
 			<li>
-				<a href="/usr/bg12343/expenses">지출내역</a>
+				<a href="/usr/bg12343/memo/expenses">지출내역</a>
 			</li>
 			<li>
-				<a href="/usr/bg12343/reportBusiness?bldgId=1">사업장<br> 현황신고</a>
+				<a href="/usr/bg12343/dashboard/reportBusiness?bldgId=1">사업장<br> 현황신고</a>
 			</li>
 
 

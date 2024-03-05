@@ -34,7 +34,7 @@ public class UsrDashboardController {
 	private BuildingService buildingService;
 
 	// 액션 메소드
-	@RequestMapping("/usr/bg12343/dashboard")
+	@RequestMapping("/usr/bg12343/dashboard/dashboard")
 	public String getDashboard(Model model, @RequestParam(defaultValue = "1") int bldgId) {
 
 		// 건물별 보증금 등 합계 가져오기
@@ -51,10 +51,10 @@ public class UsrDashboardController {
 		model.addAttribute("dashboard", dashboard);
 		model.addAttribute("rooms", rooms);
 		model.addAttribute("roomsCnt", roomsCnt);
-		return "usr/bg12343/dashboard";
+		return "usr/bg12343/dashboard/dashboard";
 	}
 
-	@RequestMapping("/usr/bg12343/rentStatus")
+	@RequestMapping("/usr/bg12343/dashboard/rentStatus")
 	public String getStatus(Model model, @RequestParam(defaultValue = "1") int bldgId, Integer year) {
 
 		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
@@ -69,10 +69,10 @@ public class UsrDashboardController {
 		model.addAttribute("buildings", buildings);
 		model.addAttribute("rentStatus", rentStatus);
 		model.addAttribute("nowYear", nowYear);
-		return "usr/bg12343/rentStatus";
+		return "usr/bg12343/dashboard/rentStatus";
 	}
 
-	@RequestMapping("/usr/bg12343/doRentStatusAdd")
+	@RequestMapping("/usr/bg12343/dashboard/doRentStatusAdd")
 	@ResponseBody
 	public String doRentStatusAdd(Model model, int tenantId, String body, int year, String month) {
 
@@ -96,7 +96,7 @@ public class UsrDashboardController {
 		return rentStatusRd.getPaymentStatus();
 	}
 
-	@RequestMapping("/usr/bg12343/doRentStatusModify")
+	@RequestMapping("/usr/bg12343/dashboard/doRentStatusModify")
 	@ResponseBody
 	public String doRentStatusModify(int tenantId, String body, int year, String month) {
 
@@ -114,8 +114,21 @@ public class UsrDashboardController {
 		rentStatusRd = dashboardService.getRentStatusRd(tenantId, year, month);
 		return rentStatusRd.getPaymentStatus();
 	}
+	
+	@RequestMapping("/usr/bg12343/dashboard/doRentStatusDelete")
+	@ResponseBody
+	public void doRentStatusDelete(int tenantId, String body, int year, String month) {
 
-	@RequestMapping("/usr/bg12343/reportBusiness")
+		Dashboard rentStatusRd = dashboardService.getRentStatusRd(tenantId, year, month);
+
+		
+		// 수납현황 삭제
+		dashboardService.deleteRentStatus(tenantId, body, year, month);
+
+		
+	}
+
+	@RequestMapping("/usr/bg12343/dashboard/reportBusiness")
 	public String showNotice(Model model, @RequestParam(defaultValue = "1") int bldgId, Integer year) {
 
 		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
@@ -132,7 +145,7 @@ public class UsrDashboardController {
 
 		model.addAttribute("rentStatus", rentStatus);
 		model.addAttribute("nowYear", nowYear);
-		return "usr/bg12343/reportBusiness";
+		return "usr/bg12343/dashboard/reportBusiness";
 	}
 
 }

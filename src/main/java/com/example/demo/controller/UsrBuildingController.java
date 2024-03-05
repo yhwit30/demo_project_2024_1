@@ -22,7 +22,7 @@ public class UsrBuildingController {
 	private BuildingService buildingService;
 
 	// 액션 메소드
-	@RequestMapping("/usr/bg12343/building")
+	@RequestMapping("/usr/bg12343/building/building")
 	public String getBuilding(Model model, @RequestParam(defaultValue = "1") int bldgId) {
 
 		Building buildingRd = buildingService.getForPrintBuilding(bldgId);
@@ -36,16 +36,16 @@ public class UsrBuildingController {
 		model.addAttribute("buildings", buildings);
 		model.addAttribute("rooms", rooms);
 		model.addAttribute("roomsCnt", roomsCnt);
-		return "usr/bg12343/building";
+		return "usr/bg12343/building/building";
 	}
 
-	@RequestMapping("/usr/bg12343/buildingAdd")
+	@RequestMapping("/usr/bg12343/building/buildingAdd")
 	public String showBuildingAdd(Model model) {
 
-		return "usr/bg12343/buildingAdd";
+		return "usr/bg12343/building/buildingAdd";
 	}
 
-	@RequestMapping("/usr/bg12343/doBuildingAdd")
+	@RequestMapping("/usr/bg12343/building/doBuildingAdd")
 	@ResponseBody
 	public String doBuildingAdd(String bldgName, String bldgAdd, int roomTotal) {
 		
@@ -55,10 +55,10 @@ public class UsrBuildingController {
 		// 작성된 게시글 번호 가져오기
 		int id = (int) BuildingAddRd.getData1();
 
-		return Ut.jsReplace(BuildingAddRd.getResultCode(), BuildingAddRd.getMsg(), "../bg12343/roomSetupAdd");
+		return Ut.jsReplace(BuildingAddRd.getResultCode(), BuildingAddRd.getMsg(), "../bg12343/building/roomSetupAdd");
 	}
 
-	@RequestMapping("/usr/bg12343/buildingModify")
+	@RequestMapping("/usr/bg12343/building/buildingModify")
 	public String showBuildingModify(Model model, @RequestParam(defaultValue = "1") int bldgId) {
 
 		Building buildingRd = buildingService.getForPrintBuilding(bldgId);
@@ -68,10 +68,10 @@ public class UsrBuildingController {
 		model.addAttribute("buildingRd", buildingRd);
 		model.addAttribute("rooms", rooms);
 
-		return "usr/bg12343/buildingModify";
+		return "usr/bg12343/building/buildingModify";
 	}
 
-	@RequestMapping("/usr/bg12343/doBuildingModify")
+	@RequestMapping("/usr/bg12343/building/doBuildingModify")
 	@ResponseBody
 	public String doBuildingModify(int[] roomId, String bldgName, String bldgAdd, int roomTotal, int[] roomNum, String[] roomType, double[] roomArea, int[] standardDeposit, int[] standardRent, int[] standardJeonse, int bldgId) {
 
@@ -83,10 +83,10 @@ public class UsrBuildingController {
 		
 		buildingModifyRd = buildingService.modifyBuilding(bldgId, bldgName, bldgAdd, roomTotal);
 
-		return Ut.jsReplace(buildingModifyRd.getResultCode(), buildingModifyRd.getMsg(), "../bg12343/building?bldgId="+ bldgId);
+		return Ut.jsReplace(buildingModifyRd.getResultCode(), buildingModifyRd.getMsg(), "../bg12343/building/building?bldgId="+ bldgId);
 	}
 
-	@RequestMapping("/usr/bg12343/doBuildingDelete")
+	@RequestMapping("/usr/bg12343/building/doBuildingDelete")
 	@ResponseBody
 	public String doBuildingDelete(int bldgId) {
 
@@ -96,21 +96,21 @@ public class UsrBuildingController {
 		// 해당 건물 호실정보 삭제
 		buildingService.deleteRooms(bldgId);
 
-		return Ut.jsReplace(buildingDeleteRd.getResultCode(), buildingDeleteRd.getMsg(), "../bg12343/building");
+		return Ut.jsReplace(buildingDeleteRd.getResultCode(), buildingDeleteRd.getMsg(), "../bg12343/building/building");
 	}
 
 	
-	@RequestMapping("/usr/bg12343/roomSetupAdd")
+	@RequestMapping("/usr/bg12343/building/roomSetupAdd")
 	public String showRoomAdd(Model model) {
 
 		int getLastBldgId = buildingService.getLastBldgId();
 		Building addedBuilding = buildingService.getForPrintBuilding(getLastBldgId);
 		
 		model.addAttribute("addedBuilding", addedBuilding);
-		return "usr/bg12343/roomSetupAdd";
+		return "usr/bg12343/building/roomSetupAdd";
 	}
 
-	@RequestMapping("/usr/bg12343/doRoomAdd")
+	@RequestMapping("/usr/bg12343/building/doRoomAdd")
 	@ResponseBody
 	public String doRoomAdd(int[] bldgId, int[] roomNum, String[] roomType, double[] roomArea,  int[] standardDeposit, int[] standardRent,
 			int[] standardJeonse) {
@@ -124,7 +124,7 @@ public class UsrBuildingController {
 				standardJeonse[i]);
 		}
 
-		return Ut.jsReplace(RoomAddRd.getResultCode(), RoomAddRd.getMsg(), "../bg12343/contractSetupAdd");
+		return Ut.jsReplace(RoomAddRd.getResultCode(), RoomAddRd.getMsg(), "../bg12343/contract/contractSetupAdd");
 	}
 	
 

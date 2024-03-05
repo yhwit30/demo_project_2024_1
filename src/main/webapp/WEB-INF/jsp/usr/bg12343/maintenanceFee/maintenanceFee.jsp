@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="MAINTENANCE FEE"></c:set>
-<%@ include file="../common/head.jspf"%>
-<%@ include file="../common/sidebar.jspf"%>
+<%@ include file="../../common/head.jspf"%>
+<%@ include file="../../common/sidebar.jspf"%>
 
 
 
@@ -19,7 +19,7 @@
 <div>
 	<c:forEach var="building" items="${buildings }">
 		<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
-			href="../bg12343/maintenanceFee?bldgId=${building.id }"
+			href="../bg12343/maintenanceFee/maintenanceFee?bldgId=${building.id }"
 		>${building.bldgName }</a>
 	</c:forEach>
 </div>
@@ -65,40 +65,40 @@
 						<td>${maintenanceFeeMonthly.tenantName }</td>
 						<td>${maintenanceFeeMonthly.leaseType }</td>
 						<td>
-							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=01">${maintenanceFeeMonthly.monthlyMaintenanceFee1 }</a>
+							<a href="../bg12343/maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=01">${maintenanceFeeMonthly.monthlyMaintenanceFee1 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=02">${maintenanceFeeMonthly.monthlyMaintenanceFee2 }</a>
+							<a href="../bg12343/maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=02">${maintenanceFeeMonthly.monthlyMaintenanceFee2 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=03">${maintenanceFeeMonthly.monthlyMaintenanceFee3 }</a>
+							<a href="../bg12343/maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=03">${maintenanceFeeMonthly.monthlyMaintenanceFee3 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=04">${maintenanceFeeMonthly.monthlyMaintenanceFee4 }</a>
+							<a href="../bg12343/maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=04">${maintenanceFeeMonthly.monthlyMaintenanceFee4 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=05">${maintenanceFeeMonthly.monthlyMaintenanceFee5 }</a>
+							<a href="../bg12343/maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=05">${maintenanceFeeMonthly.monthlyMaintenanceFee5 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=06">${maintenanceFeeMonthly.monthlyMaintenanceFee6 }</a>
+							<a href="../bg12343/maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=06">${maintenanceFeeMonthly.monthlyMaintenanceFee6 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=07">${maintenanceFeeMonthly.monthlyMaintenanceFee7 }</a>
+							<a href="../bg12343/maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=07">${maintenanceFeeMonthly.monthlyMaintenanceFee7 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=08">${maintenanceFeeMonthly.monthlyMaintenanceFee8 }</a>
+							<a href="../bg12343/maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=08">${maintenanceFeeMonthly.monthlyMaintenanceFee8 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=09">${maintenanceFeeMonthly.monthlyMaintenanceFee9 }</a>
+							<a href="../bg12343/maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=09">${maintenanceFeeMonthly.monthlyMaintenanceFee9 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=10">${maintenanceFeeMonthly.monthlyMaintenanceFee10 }</a>
+							<a href="../bg12343/maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=10">${maintenanceFeeMonthly.monthlyMaintenanceFee10 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=11">${maintenanceFeeMonthly.monthlyMaintenanceFee11 }</a>
+							<a href="../bg12343/maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=11">${maintenanceFeeMonthly.monthlyMaintenanceFee11 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFeeDetail?bldgId=${param.bldgId }&month=12">${maintenanceFeeMonthly.monthlyMaintenanceFee12 }</a>
+							<a href="../bg12343/maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=12">${maintenanceFeeMonthly.monthlyMaintenanceFee12 }</a>
 						</td>
 						<td>#</td>
 					</tr>
@@ -111,4 +111,4 @@
 
 
 
-<%@ include file="../common/foot.jspf"%>
+<%@ include file="../../common/foot.jspf"%>

@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="MEMO ADD"></c:set>
-<%@ include file="../common/head.jspf"%>
-<%@ include file="../common/sidebar.jspf"%>
+<%@ include file="../../common/head.jspf"%>
+<%@ include file="../../common/sidebar.jspf"%>
 
 
 <section class="mt-8 mb-5 text-lg px-4">
 	<div class="mx-auto">
-		<form action="../bg12343/doMemoAdd" method="POST">
+		<form action="../bg12343/memo/doMemoAdd" method="POST">
 			<table class="write-box table-box-1" border="1">
 				<tbody>
 					<tr>
@@ -73,4 +73,4 @@
 
 
 
-<%@ include file="../common/foot.jspf"%>
+<%@ include file="../../common/foot.jspf"%>

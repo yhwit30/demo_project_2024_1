@@ -26,7 +26,7 @@ public class UsrTenantController {
 	private BuildingService buildingService;
 
 	// 액션 메소드
-	@RequestMapping("/usr/bg12343/tenant")
+	@RequestMapping("/usr/bg12343/tenant/tenant")
 	public String getTenant(Model model, @RequestParam(defaultValue = "0") int bldgId) {
 
 		if (bldgId == 0) {
@@ -39,7 +39,7 @@ public class UsrTenantController {
 			model.addAttribute("buildings", buildings);
 			model.addAttribute("tenantsCnt", tenantsCnt);
 			model.addAttribute("tenants", tenants);
-			return "usr/bg12343/tenant";
+			return "usr/bg12343/tenant/tenant";
 		}
 
 		List<Tenant> tenants = tenantService.getForPrintTenants(bldgId);
@@ -51,16 +51,16 @@ public class UsrTenantController {
 		model.addAttribute("buildings", buildings);
 		model.addAttribute("tenantsCnt", tenantsCnt);
 		model.addAttribute("tenants", tenants);
-		return "usr/bg12343/tenant";
+		return "usr/bg12343/tenant/tenant";
 	}
 
-	@RequestMapping("/usr/bg12343/tenantAdd")
+	@RequestMapping("/usr/bg12343/tenant/tenantAdd")
 	public String showTenantAdd(Model model) {
 
-		return "usr/bg12343/tenantAdd";
+		return "usr/bg12343/tenant/tenantAdd";
 	}
 
-	@RequestMapping("/usr/bg12343/doTenantAdd")
+	@RequestMapping("/usr/bg12343/tenant/doTenantAdd")
 	@ResponseBody
 	public String doTenantAdd(String tenantName, int tenantPhone, String tenantCarNum) {
 		// 로그인 상태 체크 - 인터셉터에서
@@ -82,11 +82,11 @@ public class UsrTenantController {
 		// 작성된 게시글 번호 가져오기
 		int id = (int) TenantAddRd.getData1();
 
-		return Ut.jsReplace(TenantAddRd.getResultCode(), TenantAddRd.getMsg(), "../bg12343/tenant");
+		return Ut.jsReplace(TenantAddRd.getResultCode(), TenantAddRd.getMsg(), "../bg12343/tenant/tenant");
 	}
 
 
-	@RequestMapping("/usr/bg12343/tenantModify")
+	@RequestMapping("/usr/bg12343/tenant/tenantModify")
 	public String showTenantModify(Model model, @RequestParam(defaultValue = "0") int bldgId) {
 
 		if (bldgId == 0) {
@@ -99,7 +99,7 @@ public class UsrTenantController {
 			model.addAttribute("buildings", buildings);
 			model.addAttribute("tenantsCnt", tenantsCnt);
 			model.addAttribute("tenants", tenants);
-			return "usr/bg12343/tenantModify";
+			return "usr/bg12343/tenant/tenantModify";
 		}
 
 		List<Tenant> tenants = tenantService.getForPrintTenants(bldgId);
@@ -111,10 +111,10 @@ public class UsrTenantController {
 		model.addAttribute("buildings", buildings);
 		model.addAttribute("tenantsCnt", tenantsCnt);
 		model.addAttribute("tenants", tenants);
-		return "usr/bg12343/tenantModify";
+		return "usr/bg12343/tenant/tenantModify";
 	}
 
-	@RequestMapping("/usr/bg12343/doTenantModify")
+	@RequestMapping("/usr/bg12343/tenant/doTenantModify")
 	@ResponseBody
 	public String doTenantModify(int[] id, String[] tenantName, int[] tenantPhone, String[] tenantCarNum) {
 
@@ -123,7 +123,7 @@ public class UsrTenantController {
 			roomModifyRd = tenantService.modifyTenant(id[i], tenantName[i], tenantPhone[i], tenantCarNum[i]);
 		}
 
-		return Ut.jsReplace(roomModifyRd.getResultCode(), roomModifyRd.getMsg(), "../bg12343/tenant");
+		return Ut.jsReplace(roomModifyRd.getResultCode(), roomModifyRd.getMsg(), "../bg12343/tenant/tenant");
 	}
 
 }

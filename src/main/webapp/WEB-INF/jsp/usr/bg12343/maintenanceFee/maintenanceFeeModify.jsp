@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="MAINTENANCE_FEE MODIFY"></c:set>
-<%@ include file="../common/head.jspf"%>
-<%@ include file="../common/sidebar.jspf"%>
+<%@ include file="../../common/head.jspf"%>
+<%@ include file="../../common/sidebar.jspf"%>
 
 ${param.month }월
 <section class="mt-2 text-xl px-4">
 	<div class="mx-auto overflow-x-auto">
 
-		<form action="../bg12343/doMaintenanceFeeModify" method="POST">
+		<form action="../bg12343/maintenanceFee/doMaintenanceFeeModify" method="POST">
 			<input type="hidden" name="bldgId" value="${param.bldgId }" />
 			<input type="hidden" name="month" value="${param.month }" />
 			<table class="table-box-1 table" border="1">
@@ -138,4 +138,4 @@ ${param.month }월
 
 
 
-<%@ include file="../common/foot.jspf"%>
+<%@ include file="../../common/foot.jspf"%>

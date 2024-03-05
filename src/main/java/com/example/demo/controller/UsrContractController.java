@@ -32,7 +32,7 @@ public class UsrContractController {
 	private TenantService tenantService;
 
 	// 액션 메소드
-	@RequestMapping("/usr/bg12343/contract")
+	@RequestMapping("/usr/bg12343/contract/contract")
 	public String getContract(Model model, @RequestParam(defaultValue = "0") int bldgId) {
 
 		if (bldgId == 0) {
@@ -45,7 +45,7 @@ public class UsrContractController {
 			model.addAttribute("buildings", buildings);
 			model.addAttribute("contractsCnt", contractsCnt);
 			model.addAttribute("contracts", contracts);
-			return "usr/bg12343/contract";
+			return "usr/bg12343/contract/contract";
 		}
 
 //		건물 변환 버튼용
@@ -57,10 +57,10 @@ public class UsrContractController {
 
 		model.addAttribute("contractsCnt", contractsCnt);
 		model.addAttribute("contracts", contracts);
-		return "usr/bg12343/contract";
+		return "usr/bg12343/contract/contract";
 	}
 
-	@RequestMapping("/usr/bg12343/contractSetupAdd")
+	@RequestMapping("/usr/bg12343/contract/contractSetupAdd")
 	public String addContract(Model model) {
 
 		int getLastBldgId = buildingService.getLastBldgId();
@@ -69,10 +69,10 @@ public class UsrContractController {
 
 		model.addAttribute("addedBuilding", addedBuilding);
 		model.addAttribute("rooms", rooms);
-		return "usr/bg12343/contractSetupAdd";
+		return "usr/bg12343/contract/contractSetupAdd";
 	}
 
-	@RequestMapping("/usr/bg12343/doContractSetupAdd")
+	@RequestMapping("/usr/bg12343/contract/doContractSetupAdd")
 	@ResponseBody
 	public String doContractSetupAdd(int roomId[], String[] tenantName, int[] tenantPhone, String[] tenantCarNum,
 			String[] leaseType, int[] deposit, int[] rent, int[] maintenanceFee, String[] contractStartDate,
@@ -124,7 +124,7 @@ public class UsrContractController {
 		}
 
 		if (contractSet.isEmpty()) {
-			return Ut.jsReplace("S-2", "모두 공실처리되었습니다", "../bg12343/contract");
+			return Ut.jsReplace("S-2", "모두 공실처리되었습니다", "../bg12343/contract/contract");
 		}
 
 		// tenantId 포함해서 contract 데이터베이스에 넣기
@@ -137,10 +137,10 @@ public class UsrContractController {
 
 		}
 
-		return Ut.jsReplace("S-1", "계약 정보가 추가되었습니다", "../bg12343/contract");
+		return Ut.jsReplace("S-1", "계약 정보가 추가되었습니다", "../bg12343/contract/contract");
 	}
 
-	@RequestMapping("/usr/bg12343/contractModify")
+	@RequestMapping("/usr/bg12343/contract/contractModify")
 	public String modifyContract(Model model, @RequestParam(defaultValue = "0") int bldgId) {
 
 		if (bldgId == 0) {
@@ -153,7 +153,7 @@ public class UsrContractController {
 			model.addAttribute("buildings", buildings);
 			model.addAttribute("contractsCnt", contractsCnt);
 			model.addAttribute("contracts", contracts);
-			return "usr/bg12343/contractModify";
+			return "usr/bg12343/contract/contractModify";
 		}
 
 //		건물 변환 버튼용
@@ -165,10 +165,10 @@ public class UsrContractController {
 
 		model.addAttribute("contractsCnt", contractsCnt);
 		model.addAttribute("contracts", contracts);
-		return "usr/bg12343/contractModify";
+		return "usr/bg12343/contract/contractModify";
 	}
 
-	@RequestMapping("/usr/bg12343/doContractModify")
+	@RequestMapping("/usr/bg12343/contract/doContractModify")
 	@ResponseBody
 	public String doContractModify(int id[], String[] tenantName, String[] leaseType, int[] deposit, int[] rent,
 			int[] maintenanceFee, String[] contractStartDate, String[] contractEndDate, String[] depositDate,
@@ -184,7 +184,7 @@ public class UsrContractController {
 		return Ut.jsReplace(contractModifyRd.getResultCode(), contractModifyRd.getMsg(), "../bg12343/contract?bldgId=" + bldgId);
 	}
 	
-	@RequestMapping("/usr/bg12343/doContractDelete")
+	@RequestMapping("/usr/bg12343/contract/doContractDelete")
 	@ResponseBody
 	public String doContractDelete(int id) {
 

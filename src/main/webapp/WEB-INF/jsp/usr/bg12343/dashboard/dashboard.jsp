@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="DASHBOARD"></c:set>
-<%@ include file="../common/head.jspf"%>
-<%@ include file="../common/sidebar.jspf"%>
+<%@ include file="../../common/head.jspf"%>
+<%@ include file="../../common/sidebar.jspf"%>
 
 <section class="mt-2 text-xl px-4 flex justify-around">
 	<div class="overflow-x-auto">
@@ -52,7 +52,7 @@
 <div>
 	<c:forEach var="building" items="${buildings }">
 		<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
-			href="../bg12343/dashboard?bldgId=${building.id }">${building.bldgName }</a>
+			href="../bg12343/dashboard/dashboard?bldgId=${building.id }">${building.bldgName }</a>
 	</c:forEach>
 
 	1: 전자렌지 2: 냉장고 3: 침대 4: 전기렌지
@@ -107,4 +107,4 @@
 </section>
 
 
-<%@ include file="../common/foot.jspf"%>
+<%@ include file="../../common/foot.jspf"%>

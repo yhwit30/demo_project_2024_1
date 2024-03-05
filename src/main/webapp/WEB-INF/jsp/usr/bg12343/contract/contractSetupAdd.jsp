@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="CONTRACT SETUP ADD"></c:set>
-<%@ include file="../common/head.jspf"%>
-<%@ include file="../common/sidebar.jspf"%>
+<%@ include file="../../common/head.jspf"%>
+<%@ include file="../../common/sidebar.jspf"%>
 
 
 <style>
@@ -63,7 +63,7 @@
 		<br />
 
 		<div class="badge badge-outline">${addedBuilding.roomTotal }개</div>
-		<form action="../bg12343/doContractSetupAdd" method="POST" onsubmit="contractAdd__submit(this); return false;">
+		<form action="../bg12343/contract/doContractSetupAdd" method="POST" onsubmit="contractAdd__submit(this); return false;">
 			<table class="table-box-1 table" border="1">
 				<thead>
 					<tr>
@@ -140,4 +140,4 @@
 
 
 
-<%@ include file="../common/foot.jspf"%>
+<%@ include file="../../common/foot.jspf"%>

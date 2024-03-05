@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="CONTRACT MODIFY"></c:set>
-<%@ include file="../common/head.jspf"%>
-<%@ include file="../common/sidebar.jspf"%>
+<%@ include file="../../common/head.jspf"%>
+<%@ include file="../../common/sidebar.jspf"%>
 
 <section class="mt-2 text-xl px-4">
-	<form action="../bg12343/doContractModify" method="POST">
+	<form action="../bg12343/contract/doContractModify" method="POST">
 	<input type="hidden" name="bldgId" value="${param.bldgId }" />
 		<div class="mx-auto overflow-x-auto">
 			<div class="badge badge-outline">${contractsCnt }개</div>
@@ -96,4 +96,4 @@
 
 
 
-<%@ include file="../common/foot.jspf"%>
+<%@ include file="../../common/foot.jspf"%>

@@ -28,32 +28,32 @@ public class UsrMemoController {
 	private BuildingService buildingService;
 
 	// 액션 메소드
-	@RequestMapping("/usr/bg12343/notice")
+	@RequestMapping("/usr/bg12343/memo/notice")
 	public String showNotice(Model model) {
 
 //		건물 변환 버튼용
 		List<Building> buildings = buildingService.getForPrintBuildings();
 
 		model.addAttribute("buildings", buildings);
-		return "usr/bg12343/notice";
+		return "usr/bg12343/memo/notice";
 	}
 	
-	@RequestMapping("/usr/bg12343/expenses")
+	@RequestMapping("/usr/bg12343/memo/expenses")
 	public String showExpenses(Model model) {
 //		건물 변환 버튼용
 		List<Building> buildings = buildingService.getForPrintBuildings();
 
 		model.addAttribute("buildings", buildings);
-		return "usr/bg12343/expenses";
+		return "usr/bg12343/memo/expenses";
 	}
 	
-	@RequestMapping("/usr/bg12343/memoAdd")
+	@RequestMapping("/usr/bg12343/memo/memoAdd")
 	public String showMemoAdd(Model model) {
 
-		return "usr/bg12343/memoAdd";
+		return "usr/bg12343/memo/memoAdd";
 	}
 
-	@RequestMapping("/usr/bg12343/doMemoAdd")
+	@RequestMapping("/usr/bg12343/memo/doMemoAdd")
 	@ResponseBody
 	public String doMemoAdd(int boardId, String title, String body, String afterLoginUri) { // 매개변수 뭘 줄지
 		// 로그인 체크 인터셉터에서
@@ -81,13 +81,13 @@ public class UsrMemoController {
 		return null;
 	}
 
-	@RequestMapping("/usr/bg12343/memoModify")
+	@RequestMapping("/usr/bg12343/memo/memoModify")
 	public String showMemoModify(Model model) {
 
-		return "usr/bg12343/memoModify";
+		return "usr/bg12343/memo/memoModify";
 	}
 
-	@RequestMapping("/usr/bg12343/doMemoModify")
+	@RequestMapping("/usr/bg12343/memo/doMemoModify")
 	@ResponseBody
 	public String doMemoModify(int[] id, String[] tenantName, int[] tenantPhone, String[] tenantCarNum,
 			String[] tenantMemo) {
@@ -97,7 +97,7 @@ return null;
 	}
 
 	
-	@RequestMapping("/usr/bg12343/repair")
+	@RequestMapping("/usr/bg12343/memo/repair")
 	public String showRepair(Model model) {
 
 		List<Memo> memoRepair = memoService.getMemoRepair();
@@ -105,25 +105,25 @@ return null;
 		
 		model.addAttribute("memoRepair", memoRepair);
 		model.addAttribute("memoRepairCnt", memoRepairCnt);
-		return "usr/bg12343/repair";
+		return "usr/bg12343/memo/repair";
 	}
 
-	@RequestMapping("/usr/bg12343/repairDetail")
+	@RequestMapping("/usr/bg12343/memo/repairDetail")
 	public String showRepairDetail(Model model, int id) {
 		
 		Memo memoRepairRd = memoService.getMemoRepairRd(id);
 		
 		model.addAttribute("memoRepairRd", memoRepairRd);
-		return "usr/bg12343/repairDetail";
+		return "usr/bg12343/memo/repairDetail";
 	}
 	
-	@RequestMapping("/usr/bg12343/repairModify")
+	@RequestMapping("/usr/bg12343/memo/repairModify")
 	public String showRepairModify(Model model) {
 		
-		return "usr/bg12343/repairModify";
+		return "usr/bg12343/memo/repairModify";
 	}
 
-	@RequestMapping("/usr/bg12343/addRepair")
+	@RequestMapping("/usr/bg12343/memo/addRepair")
 	@ResponseBody
 	public String doRepairAdd(int boardId, String title, String body, String afterLoginUri) { // 매개변수 뭘 줄지
 		// 로그인 체크 인터셉터에서

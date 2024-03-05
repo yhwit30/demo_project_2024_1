@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="REPAIR DETAIL"></c:set>
-<%@ include file="../common/head.jspf"%>
-<%@ include file="../common/sidebar.jspf"%>
+<%@ include file="../../common/head.jspf"%>
+<%@ include file="../../common/sidebar.jspf"%>
 
 
 <section class="mt-8 text-xl px-4">
@@ -54,7 +54,7 @@
 
 	<div class="btns mt-5">
 		<button class="btn btn-outline" type="button" onclick="history.back();">뒤로가기</button>
-		<a class="btn btn-outline" href="../bg12343/repairModify">수정</a>
+		<a class="btn btn-outline" href="../bg12343/memo/repairModify">수정</a>
 		<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="#">삭제</a>
 	</div>
 </section>
@@ -63,4 +63,4 @@
 
 
 
-<%@ include file="../common/foot.jspf"%>
+<%@ include file="../../common/foot.jspf"%>

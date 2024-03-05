@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="MAINTENANCE FEE DETAIL"></c:set>
-<%@ include file="../common/head.jspf"%>
-<%@ include file="../common/sidebar.jspf"%>
+<%@ include file="../../common/head.jspf"%>
+<%@ include file="../../common/sidebar.jspf"%>
 
 
 ${param.month }월
@@ -74,8 +74,8 @@ ${param.month }월
 	</div>
 
 	<div class="btns mt-5">
-		<a class="btn btn-outline" href="../bg12343/maintenanceFee?bldgId=${param.bldgId }">월별 관리비</a>
-		<a class="btn btn-outline" href="../bg12343/maintenanceFeeModify?bldgId=${param.bldgId }&month=${param.month}">수정</a>
+		<a class="btn btn-outline" href="../bg12343/maintenanceFee/maintenanceFee?bldgId=${param.bldgId }">월별 관리비</a>
+		<a class="btn btn-outline" href="../bg12343/maintenanceFee/maintenanceFeeModify?bldgId=${param.bldgId }&month=${param.month}">수정</a>
 		<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="#">삭제</a>
 	</div>
 
@@ -83,4 +83,4 @@ ${param.month }월
 
 
 
-<%@ include file="../common/foot.jspf"%>
+<%@ include file="../../common/foot.jspf"%>

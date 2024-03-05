@@ -30,7 +30,7 @@ public class UsrMaintenanceFeeController {
 	private BuildingService buildingService;
 
 	// 액션 메소드
-	@RequestMapping("/usr/bg12343/maintenanceFee")
+	@RequestMapping("/usr/bg12343/maintenanceFee/maintenanceFee")
 	public String getMaintenanceFee(Model model, @RequestParam(defaultValue = "1") int bldgId, Integer year) {
 
 		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
@@ -45,10 +45,10 @@ public class UsrMaintenanceFeeController {
 
 		model.addAttribute("buildings", buildings);
 		model.addAttribute("maintenanceFeeMonthly", maintenanceFeeMonthly);
-		return "usr/bg12343/maintenanceFee";
+		return "usr/bg12343/maintenanceFee/maintenanceFee";
 	}
 
-	@RequestMapping("/usr/bg12343/maintenanceFeeDetail")
+	@RequestMapping("/usr/bg12343/maintenanceFee/maintenanceFeeDetail")
 	public String getMaintenanceFeeDetail(Model model, @RequestParam(defaultValue = "1") int bldgId, Integer year, String month) {
 
 		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
@@ -59,10 +59,10 @@ public class UsrMaintenanceFeeController {
 		List<MaintenanceFee> maintenanceFee = maintenanceFeeService.getMaintenanceFee(bldgId, year, month);
 
 		model.addAttribute("maintenanceFee", maintenanceFee);
-		return "usr/bg12343/maintenanceFeeDetail";
+		return "usr/bg12343/maintenanceFee/maintenanceFeeDetail";
 	}
 
-	@RequestMapping("/usr/bg12343/maintenanceFeeModify")
+	@RequestMapping("/usr/bg12343/maintenanceFee/maintenanceFeeModify")
 	public String showMaintenanceFeeModify(Model model, @RequestParam(defaultValue = "1") int bldgId, Integer year, String month) {
 
 		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
@@ -73,10 +73,10 @@ public class UsrMaintenanceFeeController {
 		List<MaintenanceFee> maintenanceFee = maintenanceFeeService.getMaintenanceFee(bldgId, year, month);
 
 		model.addAttribute("maintenanceFee", maintenanceFee);
-		return "usr/bg12343/maintenanceFeeModify";
+		return "usr/bg12343/maintenanceFee/maintenanceFeeModify";
 	}
 
-	@RequestMapping("/usr/bg12343/doMaintenanceFeeModify")
+	@RequestMapping("/usr/bg12343/maintenanceFee/doMaintenanceFeeModify")
 	@ResponseBody
 	public String doMaintenanceFeeModify(int[] tenantId, int[] commonElec, int[] commonWater, int[] elevater,
 			int[] internetTV, int[] fireSafety, int[] waterUse, int[] waterCost, int[] elecUse, int[] elecCost,
@@ -113,7 +113,7 @@ public class UsrMaintenanceFeeController {
 		}
 
 		return Ut.jsReplace(maintenanceFeeModifyRd.getResultCode(), maintenanceFeeModifyRd.getMsg(),
-				"../bg12343/maintenanceFeeDetail?bldgId="+bldgId+"&month="+month);
+				"../bg12343/maintenanceFee/maintenanceFeeDetail?bldgId="+bldgId+"&month="+month);
 	}
 
 }

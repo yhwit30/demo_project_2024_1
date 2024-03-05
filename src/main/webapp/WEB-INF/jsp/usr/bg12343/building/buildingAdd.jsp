@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="BUILDING DETAIL"></c:set>
-<%@ include file="../common/head.jspf"%>
-<%@ include file="../common/sidebar.jspf"%>
+<%@ include file="../../common/head.jspf"%>
+<%@ include file="../../common/sidebar.jspf"%>
 
 <script>
 	var buildingAdd__submitDone = false;
@@ -48,7 +48,7 @@
 
 <section class="mt-8 mb-5 text-lg px-4">
 	<div class="px-4  mt-36">
-		<form action="../bg12343/doBuildingAdd" method="POST" onsubmit="buildingAdd__submit(this); return false;">
+		<form action="../bg12343/building/building/doBuildingAdd" method="POST" onsubmit="buildingAdd__submit(this); return false;">
 			<table class="write-box table-box-1 mx-auto" border="1">
 				<tbody>
 					<tr>
@@ -91,4 +91,4 @@
 
 
 
-<%@ include file="../common/foot.jspf"%>
+<%@ include file="../../common/foot.jspf"%>

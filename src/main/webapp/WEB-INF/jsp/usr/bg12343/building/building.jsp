@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="BUILDING DETAIL"></c:set>
-<%@ include file="../common/head.jspf"%>
-<%@ include file="../common/sidebar.jspf"%>
+<%@ include file="../../common/head.jspf"%>
+<%@ include file="../../common/sidebar.jspf"%>
 
 <h1 style="text-align:center">전체 건물 목록</h1>
 <section class="mt-2 text-xl px-4">
@@ -29,7 +29,7 @@
 						<td>${building.roomTotal }</td>
 						<td>#</td>
 						<td>
-							<a class="btn btn-sm btn-outline" href="../bg12343/buildingModify?bldgId=${building.id }">수정</a>
+							<a class="btn btn-sm btn-outline" href="../bg12343/building/buildingModify?bldgId=${building.id }">수정</a>
 							<a class="btn btn-sm btn-outline" onclick="if(confirm('건물과 호실정보가 모두 삭제됩니다.\n정말 삭제하시겠습니까?') == false) return false;" href="../bg12343/doBuildingDelete?bldgId=${building.id}">삭제</a>
 						</td>
 					</tr>
@@ -38,7 +38,7 @@
 		</table>
 	</div>
 	<div class="mt-2" style="text-align:right">
-		<a class="btn btn-m btn-outline" href="/usr/bg12343/buildingAdd"> 건물 추가</a>
+		<a class="btn btn-m btn-outline" href="/usr/bg12343/building/buildingAdd"> 건물 추가</a>
 	</div>
 	
 	<br />
@@ -47,7 +47,7 @@
 	<div>
 		<c:forEach var="building" items="${buildings }">
 			<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
-				href="../bg12343/building?bldgId=${building.id }"
+				href="../bg12343/building/building?bldgId=${building.id }"
 			>${building.bldgName }</a>
 		</c:forEach>
 		호실 목록
@@ -104,4 +104,4 @@
 
 
 
-<%@ include file="../common/foot.jspf"%>
+<%@ include file="../../common/foot.jspf"%>
