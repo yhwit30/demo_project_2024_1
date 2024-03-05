@@ -19,7 +19,7 @@
 <div>
 	<c:forEach var="building" items="${buildings }">
 		<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
-			href="../bg12343/maintenanceFee/maintenanceFee?bldgId=${building.id }"
+			href="../maintenanceFee/maintenanceFee?bldgId=${building.id }"
 		>${building.bldgName }</a>
 	</c:forEach>
 </div>
@@ -65,40 +65,40 @@
 						<td>${maintenanceFeeMonthly.tenantName }</td>
 						<td>${maintenanceFeeMonthly.leaseType }</td>
 						<td>
-							<a href="../bg12343/maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=01">${maintenanceFeeMonthly.monthlyMaintenanceFee1 }</a>
+							<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=01">${maintenanceFeeMonthly.monthlyMaintenanceFee1 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=02">${maintenanceFeeMonthly.monthlyMaintenanceFee2 }</a>
+							<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=02">${maintenanceFeeMonthly.monthlyMaintenanceFee2 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=03">${maintenanceFeeMonthly.monthlyMaintenanceFee3 }</a>
+							<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=03">${maintenanceFeeMonthly.monthlyMaintenanceFee3 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=04">${maintenanceFeeMonthly.monthlyMaintenanceFee4 }</a>
+							<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=04">${maintenanceFeeMonthly.monthlyMaintenanceFee4 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=05">${maintenanceFeeMonthly.monthlyMaintenanceFee5 }</a>
+							<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=05">${maintenanceFeeMonthly.monthlyMaintenanceFee5 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=06">${maintenanceFeeMonthly.monthlyMaintenanceFee6 }</a>
+							<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=06">${maintenanceFeeMonthly.monthlyMaintenanceFee6 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=07">${maintenanceFeeMonthly.monthlyMaintenanceFee7 }</a>
+							<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=07">${maintenanceFeeMonthly.monthlyMaintenanceFee7 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=08">${maintenanceFeeMonthly.monthlyMaintenanceFee8 }</a>
+							<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=08">${maintenanceFeeMonthly.monthlyMaintenanceFee8 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=09">${maintenanceFeeMonthly.monthlyMaintenanceFee9 }</a>
+							<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=09">${maintenanceFeeMonthly.monthlyMaintenanceFee9 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=10">${maintenanceFeeMonthly.monthlyMaintenanceFee10 }</a>
+							<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=10">${maintenanceFeeMonthly.monthlyMaintenanceFee10 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=11">${maintenanceFeeMonthly.monthlyMaintenanceFee11 }</a>
+							<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=11">${maintenanceFeeMonthly.monthlyMaintenanceFee11 }</a>
 						</td>
 						<td>
-							<a href="../bg12343/maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=12">${maintenanceFeeMonthly.monthlyMaintenanceFee12 }</a>
+							<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=12">${maintenanceFeeMonthly.monthlyMaintenanceFee12 }</a>
 						</td>
 						<td>#</td>
 					</tr>

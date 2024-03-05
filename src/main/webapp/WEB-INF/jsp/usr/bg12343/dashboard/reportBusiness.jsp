@@ -4,7 +4,7 @@
 <%@ include file="../../common/head.jspf"%>
 <%@ include file="../../common/sidebar.jspf"%>
 
-사업장 현황신고 dashboard controller 위치 23년도 사업장 현황신고// pdf 출력기능 추가
+ pdf 출력기능 추가
 
 
 <section class="mt-2 text-xl px-4">
@@ -12,7 +12,7 @@
 	<div>
 		<c:forEach var="building" items="${buildings }">
 			<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
-				href="../bg12343/dashboard/reportBusiness?bldgId=${building.id }"
+				href="../dashboard/reportBusiness?bldgId=${building.id }"
 			>${building.bldgName }</a>
 		</c:forEach>
 	</div>

@@ -8,7 +8,7 @@ ${param.month }월
 <section class="mt-2 text-xl px-4">
 	<div class="mx-auto overflow-x-auto">
 
-		<form action="../bg12343/maintenanceFee/doMaintenanceFeeModify" method="POST">
+		<form action="../maintenanceFee/doMaintenanceFeeModify" method="POST">
 			<input type="hidden" name="bldgId" value="${param.bldgId }" />
 			<input type="hidden" name="month" value="${param.month }" />
 			<table class="table-box-1 table" border="1">

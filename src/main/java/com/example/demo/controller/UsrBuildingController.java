@@ -104,7 +104,7 @@ public class UsrBuildingController {
 		Building addedBuilding = buildingService.getForPrintBuilding(getLastBldgId);
 		
 		model.addAttribute("addedBuilding", addedBuilding);
-		return "usr/building/roomSetupAdd";
+		return "usr/bg12343/building/roomSetupAdd";
 	}
 	
 	@RequestMapping("/usr/bg12343/building/doRoomAdd")
