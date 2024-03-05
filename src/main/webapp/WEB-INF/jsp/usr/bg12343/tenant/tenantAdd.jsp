@@ -7,7 +7,7 @@
 
 <section class="mt-8 mb-5 text-lg px-4">
 	<div class="mx-auto">
-		<form action="../bg12343/tenant/doTenantAdd" method="POST">
+		<form action="../tenant/doTenantAdd" method="POST">
 			<table class="write-box table-box-1" border="1">
 				<tbody>
 					<tr>

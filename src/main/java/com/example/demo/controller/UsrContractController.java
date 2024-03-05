@@ -100,8 +100,8 @@ public class UsrContractController {
 		int tenantId = tenantService.getTenantIds(roomId); // 호실roomId 중복 시 오류나는데 이건 한 호실에 여러번 계약의 경우 체크할 때 하자
 
 		// 계약 작성 작업
-		ResultData contractAddRd = contractService.addContract(roomId, leaseType, deposit, rent, maintenanceFee, contractStartDate,
-				contractEndDate, depositDate, rentDate, tenantId);
+		ResultData contractAddRd = contractService.addContract(roomId, leaseType, deposit, rent, maintenanceFee,
+				contractStartDate, contractEndDate, depositDate, rentDate, tenantId);
 
 		return Ut.jsReplace(contractAddRd.getResultCode(), contractAddRd.getMsg(), "../contract/contract");
 
@@ -213,6 +213,23 @@ public class UsrContractController {
 		model.addAttribute("contractsCnt", contractsCnt);
 		model.addAttribute("contracts", contracts);
 		return "usr/bg12343/contract/contractModify";
+	}
+
+	// ajax
+	@RequestMapping("/usr/bg12343/contract/doContractModifyAjax")
+	@ResponseBody
+	public String doContractModifyAjax(int contractId, String tenantName, String leaseType, int deposit, int rent,
+			int maintenanceFee, String contractStartDate, String contractEndDate, String depositDate, String rentDate) {
+
+		System.out.println(contractId);
+		System.out.println(tenantName);
+		System.out.println(rentDate);
+
+
+		// 계약정보 수정
+
+		// ajax 위한 데이터 가져오기
+		return null;
 	}
 
 	@RequestMapping("/usr/bg12343/contract/doContractModify")

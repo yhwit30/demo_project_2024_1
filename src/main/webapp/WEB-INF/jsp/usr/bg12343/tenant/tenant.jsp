@@ -7,12 +7,12 @@
 
 
 <section class="mt-2 text-xl px-4">
-<a class="btn btn-sm btn-outline ${0 == param.bldgId ? 'btn-active' : '' }" href="../bg12343/tenant/tenant?bldgId=0"> 전체보기</a>
+<a class="btn btn-sm btn-outline ${0 == param.bldgId ? 'btn-active' : '' }" href="../tenant/tenant?bldgId=0"> 전체보기</a>
 <!-- 건물 카테고리 버튼 -->
 <div>
 	<c:forEach var="building" items="${buildings }">
 		<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
-			href="../bg12343/tenant/tenant?bldgId=${building.id }"
+			href="../tenant/tenant?bldgId=${building.id }"
 		>${building.bldgName }</a>
 	</c:forEach>
 </div>
