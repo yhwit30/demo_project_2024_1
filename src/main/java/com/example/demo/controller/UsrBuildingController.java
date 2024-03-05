@@ -41,7 +41,7 @@ public class UsrBuildingController {
 
 	@RequestMapping("/usr/bg12343/building/buildingAdd")
 	public String showBuildingAdd(Model model) {
-
+		
 		return "usr/bg12343/building/buildingAdd";
 	}
 
@@ -106,7 +106,7 @@ public class UsrBuildingController {
 		model.addAttribute("addedBuilding", addedBuilding);
 		return "usr/building/roomSetupAdd";
 	}
-
+	
 	@RequestMapping("/usr/bg12343/building/doRoomAdd")
 	@ResponseBody
 	public String doRoomAdd(int[] bldgId, int[] roomNum, String[] roomType, double[] roomArea,  int[] standardDeposit, int[] standardRent,

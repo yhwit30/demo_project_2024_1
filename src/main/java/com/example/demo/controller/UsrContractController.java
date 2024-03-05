@@ -16,6 +16,7 @@ import com.example.demo.service.TenantService;
 import com.example.demo.util.Ut;
 import com.example.demo.vo.Building;
 import com.example.demo.vo.Contract;
+import com.example.demo.vo.Dashboard;
 import com.example.demo.vo.ResultData;
 import com.example.demo.vo.Room;
 
@@ -35,6 +36,7 @@ public class UsrContractController {
 	@RequestMapping("/usr/bg12343/contract/contract")
 	public String getContract(Model model, @RequestParam(defaultValue = "0") int bldgId) {
 
+		// 건물 전체보기 위한 조건문
 		if (bldgId == 0) {
 			List<Contract> contracts = contractService.getForPrintContracts(bldgId);
 			int contractsCnt = contracts.size();
@@ -50,8 +52,9 @@ public class UsrContractController {
 
 //		건물 변환 버튼용
 		List<Building> buildings = buildingService.getForPrintBuildings();
-
 		model.addAttribute("buildings", buildings);
+
+		// 건물별 계약정보 가져오기
 		List<Contract> contracts = contractService.getForPrintContracts(bldgId);
 		int contractsCnt = contracts.size();
 
@@ -61,9 +64,35 @@ public class UsrContractController {
 	}
 
 	@RequestMapping("/usr/bg12343/contract/contractAdd")
-	public String addContract(Model model) {
+	public String addContract(Model model, @RequestParam(defaultValue = "1") int bldgId) {
 
+		// 건물목록 가져오기
+		List<Building> buildings = buildingService.getForPrintBuildings();
+
+		// 건물별 호실 가져오기
+//		List<Room> rooms = buildingService.getForPrintRooms(bldgId);
+
+		model.addAttribute("buildings", buildings);
+//		model.addAttribute("rooms", rooms);
 		return "usr/bg12343/contract/contractAdd";
+	}
+
+	@RequestMapping("/usr/bg12343/contract/getRoomsForContract")
+	@ResponseBody
+	public List<Room> getRoomsForContract(int bldgId) {
+
+		// 건물별 호실 가져오기
+		List<Room> rooms = buildingService.getForPrintRooms(bldgId);
+
+		// ajax 반환
+		return rooms;
+	}
+
+	@RequestMapping("/usr/bg12343/contract/doContractAdd")
+	@ResponseBody
+	public String doContractAdd() {
+
+		return null;
 	}
 
 	@RequestMapping("/usr/bg12343/contract/contractSetupAdd")
