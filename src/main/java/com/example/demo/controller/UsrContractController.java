@@ -60,8 +60,14 @@ public class UsrContractController {
 		return "usr/bg12343/contract/contract";
 	}
 
-	@RequestMapping("/usr/bg12343/contract/contractSetupAdd")
+	@RequestMapping("/usr/bg12343/contract/contractAdd")
 	public String addContract(Model model) {
+
+		return "usr/bg12343/contract/contractAdd";
+	}
+
+	@RequestMapping("/usr/bg12343/contract/contractSetupAdd")
+	public String addContracts(Model model) {
 
 		int getLastBldgId = buildingService.getLastBldgId();
 		Building addedBuilding = buildingService.getForPrintBuilding(getLastBldgId);
@@ -181,15 +187,15 @@ public class UsrContractController {
 					maintenanceFee[i], contractStartDate[i], contractEndDate[i], depositDate[i], rentDate[i]);
 		}
 
-		return Ut.jsReplace(contractModifyRd.getResultCode(), contractModifyRd.getMsg(), "../contract/contract?bldgId=" + bldgId);
+		return Ut.jsReplace(contractModifyRd.getResultCode(), contractModifyRd.getMsg(),
+				"../contract/contract?bldgId=" + bldgId);
 	}
-	
+
 	@RequestMapping("/usr/bg12343/contract/doContractDelete")
 	@ResponseBody
 	public String doContractDelete(int id) {
 
 		return null;
 	}
-
 
 }

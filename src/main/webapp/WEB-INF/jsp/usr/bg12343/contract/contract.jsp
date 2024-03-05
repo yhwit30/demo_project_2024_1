@@ -70,7 +70,7 @@
 
 
 	<div class="btns mt-5">
-		<a class="btn btn-outline" href="../contract/contractSetupAdd">추가(지금은 setup, 나중에 링크 그냥 Add로 또 만들어야함)</a>
+		<a class="btn btn-outline" href="../contract/contractAdd">추가</a>
 		<a class="btn btn-outline" href="../contract/contractModify?bldgId=${param.bldgId }">수정</a>
 		<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="#">삭제</a>
 	</div>

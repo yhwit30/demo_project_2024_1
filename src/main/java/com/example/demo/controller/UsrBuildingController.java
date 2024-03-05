@@ -45,16 +45,16 @@ public class UsrBuildingController {
 		return "usr/bg12343/building/buildingAdd";
 	}
 
-	@RequestMapping("/usr/bg12343/building/doBuildingAdd")
+	@RequestMapping("/usr/bg12343/building/doBuildingSetupAdd")
 	@ResponseBody
 	public String doBuildingAdd(String bldgName, String bldgAdd, int roomTotal) {
 		
 		// 게시글 작성 작업
 		ResultData BuildingAddRd = buildingService.addBuilding(bldgName, bldgAdd, roomTotal);
 
-		return Ut.jsReplace(BuildingAddRd.getResultCode(), BuildingAddRd.getMsg(), "../building/roomSetupAdd");
+		return Ut.jsReplace(BuildingAddRd.getResultCode(), BuildingAddRd.getMsg(), "../building/roomSetupAdd"); // 이상하게 경로 오류남
 	}
-
+	
 	@RequestMapping("/usr/bg12343/building/buildingModify")
 	public String showBuildingModify(Model model, @RequestParam(defaultValue = "1") int bldgId) {
 
