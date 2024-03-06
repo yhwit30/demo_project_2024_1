@@ -231,6 +231,8 @@ public class UsrContractController {
 
 		// ajax 위한 데이터 가져오기
 		Contract modifiedContract = contractService.getForPrintContract(contractId);
+		
+		System.out.println(modifiedContract.getTenantName());
 		return modifiedContract;
 	}
 

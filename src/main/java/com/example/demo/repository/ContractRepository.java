@@ -41,10 +41,6 @@ public interface ContractRepository {
 			ON R.bldgId = B.id
 			LEFT JOIN tenant AS T
 			ON C.tenantId = T.id
-			WHERE 1=1
-			<if test="bldgId != 0">
-				AND B.id = #{bldgId}
-			</if>
 			GROUP BY C.id
 			HAVING C.id = #{contractId}
 			</script>
