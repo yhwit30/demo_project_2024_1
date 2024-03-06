@@ -15,13 +15,12 @@
 		$('#modify-btn-' + contractId).hide();
 		$('#save-btn-' + contractId).show();
 
-		// 해당 contractId를 가진 요소들 선택
+		// 해당 row에 있는 모든 태그를 input으로 변경(class 사용)
 		var existingCells = document.querySelectorAll('.existing-cell-'
 				+ contractId);
 		var inputFields = document.querySelectorAll('.input-field-'
 				+ contractId);
 
-		// 필요한 변경 수행
 		existingCells.forEach(function(cell) {
 			$(cell).hide(); // jQuery의 hide() 메서드 사용
 		});
@@ -87,7 +86,7 @@
 				$('#modify-btn-' + contractId).show();
 				$('#save-btn-' + contractId).hide();
 
-				// 데이터를 성공적으로 가져왔다면 각 요소에 데이터를 그려줍니다.
+				// 데이터를 성공적으로 가져왔다면 각 요소에 데이터를 그려줍니다.(id 사용)
 				$('#existing-cell-' + contractId + '-tenantName').text(
 						data.tenantName);
 				$('#existing-cell-' + contractId + '-leaseType').text(
@@ -106,13 +105,13 @@
 				$('#existing-cell-' + contractId + '-rentDate').text(
 						data.rentDate);
 
-				// 입력값 박스 숨김
+				// 입력값 박스 숨김(class 사용)
 				var inputFields = document.querySelectorAll('.input-field-'
 						+ contractId);
 				inputFields.forEach(function(field) {
 					$(field).hide();
 
-					// 수정된 데이터 보여주기
+					// 수정된 데이터 보여주기(id 사용)
 					$('#existing-cell-' + contractId + '-tenantName').show();
 					$('#existing-cell-' + contractId + '-leaseType').show();
 					$('#existing-cell-' + contractId + '-deposit').show();
@@ -167,7 +166,7 @@
 					<tr>
 						<th>계약번호</th>
 						<th>등록일</th>
-						<!-- 					<th>갱신일</th> -->
+						<th>갱신일</th>
 						<th>건물명</th>
 						<th>호실번호</th>
 						<th>세입자명</th>
@@ -190,7 +189,7 @@
 						<tr class="hover">
 							<td>${contract.id }</td>
 							<td>${contract.regDate.substring(0,10) }</td>
-							<%-- 						<td>${contract.updateDate.substring(0,10) }</td> --%>
+							<td>${contract.updateDate.substring(0,10) }</td>
 							<td>${contract.bldgName }</td>
 							<td>${contract.roomNum }</td>
 

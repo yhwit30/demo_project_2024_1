@@ -30,7 +30,7 @@ public interface ContractRepository {
 			</script>
 			""")
 	List<Contract> getForPrintContracts(int bldgId);
-	
+
 	@Select("""
 			<script>
 			SELECT *
@@ -84,7 +84,5 @@ public interface ContractRepository {
 			""")
 	void addContract(int roomId, String leaseType, int deposit, int rent, int maintenanceFee, String contractStartDate,
 			String contractEndDate, String depositDate, String rentDate, int tenantIds);
-
-
 
 }

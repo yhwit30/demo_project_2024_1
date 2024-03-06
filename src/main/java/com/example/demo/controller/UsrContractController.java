@@ -220,19 +220,13 @@ public class UsrContractController {
 	public Contract doContractModifyAjax(int contractId, String tenantName, String leaseType, int deposit, int rent,
 			int maintenanceFee, String contractStartDate, String contractEndDate, String depositDate, String rentDate) {
 
-		System.out.println("contractId:" + contractId);
-		System.out.println("tenantName:" + tenantName);
-		System.out.println("rentDate:" + rentDate);
-		System.out.println("deposit:" + deposit);
-
-
 		// 계약정보 수정
-		contractService.modifyContract(contractId, tenantName, leaseType, deposit, rent, maintenanceFee, contractStartDate, contractEndDate, depositDate, rentDate);
+		contractService.modifyContract(contractId, tenantName, leaseType, deposit, rent, maintenanceFee,
+				contractStartDate, contractEndDate, depositDate, rentDate);
 
 		// ajax 위한 데이터 가져오기
 		Contract modifiedContract = contractService.getForPrintContract(contractId);
-		
-		System.out.println(modifiedContract.getTenantName());
+
 		return modifiedContract;
 	}
 

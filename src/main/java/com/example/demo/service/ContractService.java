@@ -22,11 +22,11 @@ public class ContractService {
 	public Contract getForPrintContract(int contractId) {
 		return contractRepository.getForPrintContract(contractId);
 	}
-	
+
 	public ResultData modifyContract(int contractId, String tenantName, String leaseType, int deposit, int rent,
 			int maintenanceFee, String contractStartDate, String contractEndDate, String depositDate, String rentDate) {
-		contractRepository.modifyContract(contractId, tenantName, leaseType, deposit, rent, maintenanceFee, contractStartDate,
-				contractEndDate, depositDate, rentDate);
+		contractRepository.modifyContract(contractId, tenantName, leaseType, deposit, rent, maintenanceFee,
+				contractStartDate, contractEndDate, depositDate, rentDate);
 		return ResultData.from("S-1", "계약정보가 수정되었습니다");
 	}
 
@@ -36,9 +36,5 @@ public class ContractService {
 				contractEndDate, depositDate, rentDate, tenantIds);
 		return ResultData.from("S-1", "계약정보가 생성되었습니다");
 	}
-
-	
-
-
 
 }
