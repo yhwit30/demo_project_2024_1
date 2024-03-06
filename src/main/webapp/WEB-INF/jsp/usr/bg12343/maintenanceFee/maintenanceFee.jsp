@@ -15,22 +15,19 @@
 </style>
 
 <section class="mt-2 text-xl px-4">
-<!-- 건물 카테고리 버튼 -->
-<div>
-	<c:forEach var="building" items="${buildings }">
-		<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
-			href="../maintenanceFee/maintenanceFee?bldgId=${building.id }"
-		>${building.bldgName }</a>
-	</c:forEach>
-</div>
+	<!-- 건물 카테고리 버튼 -->
+	<div>
+		<c:forEach var="building" items="${buildings }">
+			<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
+				href="../maintenanceFee/maintenanceFee?bldgId=${building.id }">${building.bldgName }</a>
+		</c:forEach>
+	</div>
 
-<!-- 연도 변경 버튼todo -->
-<a class="btn btn-sm btn-outline ${param.year == nowYear -1 ? 'btn-active' : '' }"
-	href="maintenanceFee?bldgId=${param.bldgId }&year=${nowYear -1}"
->전년도 보기(todo)</a>
-<a class="btn btn-sm btn-outline ${param.year == nowYear ? 'btn-active' : '' }"
-	href="maintenanceFee?bldgId=${param.bldgId }&year=${nowYear}"
->올해(todo) 보기</a>
+	<!-- 연도 변경 버튼todo -->
+	<a class="btn btn-sm btn-outline ${param.year == nowYear -1 ? 'btn-active' : '' }"
+		href="maintenanceFee?bldgId=${param.bldgId }&year=${nowYear -1}">전년도 보기(todo)</a>
+	<a class="btn btn-sm btn-outline ${param.year == nowYear ? 'btn-active' : '' }"
+		href="maintenanceFee?bldgId=${param.bldgId }&year=${nowYear}">올해(todo) 보기</a>
 
 	<div class="mx-auto overflow-x-auto">
 		<table class="table-box-1 table" border="1">
@@ -64,42 +61,17 @@
 						<td>${maintenanceFeeMonthly.roomNum }</td>
 						<td>${maintenanceFeeMonthly.tenantName }</td>
 						<td>${maintenanceFeeMonthly.leaseType }</td>
-						<td>
-							<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=01">${maintenanceFeeMonthly.monthlyMaintenanceFee1 }</a>
-						</td>
-						<td>
-							<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=02">${maintenanceFeeMonthly.monthlyMaintenanceFee2 }</a>
-						</td>
-						<td>
-							<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=03">${maintenanceFeeMonthly.monthlyMaintenanceFee3 }</a>
-						</td>
-						<td>
-							<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=04">${maintenanceFeeMonthly.monthlyMaintenanceFee4 }</a>
-						</td>
-						<td>
-							<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=05">${maintenanceFeeMonthly.monthlyMaintenanceFee5 }</a>
-						</td>
-						<td>
-							<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=06">${maintenanceFeeMonthly.monthlyMaintenanceFee6 }</a>
-						</td>
-						<td>
-							<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=07">${maintenanceFeeMonthly.monthlyMaintenanceFee7 }</a>
-						</td>
-						<td>
-							<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=08">${maintenanceFeeMonthly.monthlyMaintenanceFee8 }</a>
-						</td>
-						<td>
-							<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=09">${maintenanceFeeMonthly.monthlyMaintenanceFee9 }</a>
-						</td>
-						<td>
-							<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=10">${maintenanceFeeMonthly.monthlyMaintenanceFee10 }</a>
-						</td>
-						<td>
-							<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=11">${maintenanceFeeMonthly.monthlyMaintenanceFee11 }</a>
-						</td>
-						<td>
-							<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId }&month=12">${maintenanceFeeMonthly.monthlyMaintenanceFee12 }</a>
-						</td>
+
+
+						<c:forEach var="i" begin="1" end="12">
+							<c:set var="monthFee" value="monthlyMaintenanceFee${i }" />
+							<td>
+								<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId}&month=${i}">
+									${maintenanceFeeMonthly[monthFee]} </a>
+							</td>
+						</c:forEach>
+
+
 						<td>#</td>
 					</tr>
 				</c:forEach>

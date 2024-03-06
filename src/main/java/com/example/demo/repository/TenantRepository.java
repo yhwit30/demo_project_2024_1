@@ -37,9 +37,7 @@ public interface TenantRepository {
 			updateDate = NOW(),
 			tenantName = #{tenantName},
 			tenantPhone = #{tenantPhone},
-			tenantCarNum = #{tenantCarNum},
-			tenantMemo = '세입자메모 테스트',
-			roomId = 7
+			tenantCarNum = #{tenantCarNum}
 			""")
 	public void addTenant(String tenantName, int tenantPhone, String tenantCarNum);
 

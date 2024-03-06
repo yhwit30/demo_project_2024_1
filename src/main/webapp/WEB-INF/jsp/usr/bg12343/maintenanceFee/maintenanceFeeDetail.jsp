@@ -75,8 +75,8 @@ ${param.month }월
 
 	<div class="btns mt-5">
 		<a class="btn btn-outline" href="../maintenanceFee/maintenanceFee?bldgId=${param.bldgId }">월별 관리비</a>
-		<a class="btn btn-outline" href="../maintenanceFee/maintenanceFeeModify?bldgId=${param.bldgId }&month=${param.month}">수정</a>
-		<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="#">삭제</a>
+		<a class="btn btn-outline" href="../maintenanceFee/maintenanceFeeModify?bldgId=${param.bldgId }&month=${param.month}">전체 수정</a>
+		<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="#">삭제(todo)</a>
 	</div>
 
 </section>

@@ -274,7 +274,7 @@
 	<div class="btns mt-5">
 		<a class="btn btn-outline" href="../contract/contractAdd">추가</a>
 		<a class="btn btn-outline" href="../contract/contractModify?bldgId=${param.bldgId }">전체 수정</a>
-		<!-- 		<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="#">삭제</a> -->
+				<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="#">삭제(todo)</a>
 	</div>
 
 
