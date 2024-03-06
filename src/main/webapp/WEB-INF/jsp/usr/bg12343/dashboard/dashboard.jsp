@@ -52,7 +52,7 @@
 <div>
 	<c:forEach var="building" items="${buildings }">
 		<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
-			href="../bg12343/dashboard/dashboard?bldgId=${building.id }">${building.bldgName }</a>
+			href="../dashboard/dashboard?bldgId=${building.id }">${building.bldgName }</a>
 	</c:forEach>
 
 	1: 전자렌지 2: 냉장고 3: 침대 4: 전기렌지

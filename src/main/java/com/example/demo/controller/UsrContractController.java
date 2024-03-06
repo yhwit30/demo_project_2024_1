@@ -16,7 +16,6 @@ import com.example.demo.service.TenantService;
 import com.example.demo.util.Ut;
 import com.example.demo.vo.Building;
 import com.example.demo.vo.Contract;
-import com.example.demo.vo.Dashboard;
 import com.example.demo.vo.ResultData;
 import com.example.demo.vo.Room;
 
@@ -218,18 +217,20 @@ public class UsrContractController {
 	// ajax
 	@RequestMapping("/usr/bg12343/contract/doContractModifyAjax")
 	@ResponseBody
-	public String doContractModifyAjax(int contractId, String tenantName, String leaseType, int deposit, int rent,
+	public Contract doContractModifyAjax(int contractId, String tenantName, String leaseType, int deposit, int rent,
 			int maintenanceFee, String contractStartDate, String contractEndDate, String depositDate, String rentDate) {
 
-		System.out.println(contractId);
-		System.out.println(tenantName);
-		System.out.println(rentDate);
+		System.out.println("contractId:" + contractId);
+		System.out.println("tenantName:" + tenantName);
+		System.out.println("rentDate:" + rentDate);
+		System.out.println("deposit:" + deposit);
 
 
 		// 계약정보 수정
+		Contract modifiedContract = contractService.modifyContractAjax(contractId, tenantName, leaseType, deposit, rent, maintenanceFee, contractStartDate, contractEndDate, depositDate, rentDate);
 
 		// ajax 위한 데이터 가져오기
-		return null;
+		return modifiedContract;
 	}
 
 	@RequestMapping("/usr/bg12343/contract/doContractModify")

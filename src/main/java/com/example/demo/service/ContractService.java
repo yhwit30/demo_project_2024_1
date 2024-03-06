@@ -33,5 +33,10 @@ public class ContractService {
 		return ResultData.from("S-1", "계약정보가 생성되었습니다");
 	}
 
+	public Contract modifyContractAjax(int contractId, String tenantName, String leaseType, int deposit, int rent,
+			int maintenanceFee, String contractStartDate, String contractEndDate, String depositDate, String rentDate) {
+		return contractRepository.modifyContractAjax(contractId, tenantName, leaseType, deposit, rent, maintenanceFee, contractStartDate, contractEndDate, depositDate, rentDate);
+	}
+
 
 }

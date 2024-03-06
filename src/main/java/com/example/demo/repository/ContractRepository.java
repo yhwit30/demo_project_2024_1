@@ -66,7 +66,27 @@ public interface ContractRepository {
 			depositDate =  #{depositDate},
 			rentDate =  #{rentDate}
 			""")
-	void addContract(int roomId, String leaseType, int deposit, int rent, int maintenanceFee,
-			String contractStartDate, String contractEndDate, String depositDate, String rentDate, int tenantIds);
+	void addContract(int roomId, String leaseType, int deposit, int rent, int maintenanceFee, String contractStartDate,
+			String contractEndDate, String depositDate, String rentDate, int tenantIds);
+
+	@Update("""
+			<script>
+			UPDATE contract AS C INNER JOIN Tenant AS T
+			ON C.tenantId = T.id
+			SET C.updateDate = NOW(),
+			T.tenantName = #{tenantName},
+			C.leaseType = #{leaseType},
+			C.deposit = #{deposit},
+			C.rent = #{rent},
+			C.maintenanceFee = #{maintenanceFee},
+			C.contractStartDate = #{contractStartDate},
+			C.contractEndDate = #{contractEndDate},
+			C.depositDate = #{depositDate},
+			C.rentDate = #{rentDate}
+			WHERE C.id = #{contractId}
+			</script>
+			""")
+	Contract modifyContractAjax(int contractId, String tenantName, String leaseType, int deposit, int rent,
+			int maintenanceFee, String contractStartDate, String contractEndDate, String depositDate, String rentDate);
 
 }
