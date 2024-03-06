@@ -38,65 +38,79 @@
 		var form = $('#modify-form');
 
 		// 수정할 데이터를 가져옵니다.
-		var tenantName = form.find('input[name="tenantName"]').val();
-		var leaseType = form.find('select[name="leaseType"]').val();
-		var deposit = form.find('input[name="deposit"]').val();
-		var rent = form.find('input[name="rent"]').val();
-		var maintenanceFee = form.find('input[name="maintenanceFee"]').val();
-		var contractStartDate = form.find('input[name="contractStartDate"]')
-				.val();
-		var contractEndDate = form.find('input[name="contractEndDate"]').val();
-		var depositDate = form.find('input[name="depositDate"]').val();
-		var rentDate = form.find('input[name="rentDate"]').val();
+		var tenantName = form.find('input[name="tenantName-' + contractId + '"]').val();
+		var leaseType = form.find('select[name="leaseType-' + contractId + '"]').val();
+		var deposit = form.find('input[name="deposit-' + contractId + '"]').val();
+		var rent = form.find('input[name="rent-' + contractId + '"]').val();
+		var maintenanceFee = form.find('input[name="maintenanceFee-' + contractId + '"]').val();
+		var contractStartDate = form.find('input[name="contractStartDate-' + contractId + '"]').val();
+		var contractEndDate = form.find('input[name="contractEndDate-' + contractId + '"]').val();
+		var depositDate = form.find('input[name="depositDate-' + contractId + '"]').val();
+		var rentDate = form.find('input[name="rentDate-' + contractId + '"]').val();
+
 
 		// 공백 체크
-		if (tenantName.trim() === '' || leaseType.trim() === ''
-				|| deposit.trim() === '' || rent.trim() === ''
-				|| maintenanceFee.trim() === ''
-				|| contractStartDate.trim() === ''
-				|| contractEndDate.trim() === '' || depositDate.trim() === ''
-				|| rentDate.trim() === '') {
-			alert('공백을 채워주세요');
-			return;
+		if (String(tenantName).trim() === '' || String(leaseType).trim() === ''
+		        || String(deposit).trim() === '' || String(rent).trim() === ''
+		        || String(maintenanceFee).trim() === ''
+		        || String(contractStartDate).trim() === ''
+		        || String(contractEndDate).trim() === '' || String(depositDate).trim() === ''
+		        || String(rentDate).trim() === '') {
+		    alert('공백을 채워주세요');
+		    return;
 		}
 
-		$.post({
-			url : '/usr/bg12343/contract/doContractModifyAjax',
-			type : 'POST',
-			data : {
-				contractId : contractId,
-				tenantName : tenantName,
-				leaseType : leaseType,
-				deposit : deposit,
-				rent : rent,
-				maintenanceFee : maintenanceFee,
-				contractStartDate : contractStartDate,
-				contractEndDate : contractEndDate,
-				depositDate : depositDate,
-				rentDate : rentDate
-			},
-			success : function(data) {
-				$('#modify-btn-' + contractId).show();
-				$('#save-btn-' + contractId).hide();
 
-				 // 해당 contractId를 가진 tr 요소를 선택합니다.
-			    var tr = $('#modify-form-' + contractId).closest('tr');
+		$
+				.post({
+					url : '/usr/bg12343/contract/doContractModifyAjax',
+					type : 'POST',
+					data : {
+						contractId : contractId,
+						tenantName : tenantName,
+						leaseType : leaseType,
+						deposit : deposit,
+						rent : rent,
+						maintenanceFee : maintenanceFee,
+						contractStartDate : contractStartDate,
+						contractEndDate : contractEndDate,
+						depositDate : depositDate,
+						rentDate : rentDate
+					},
+					success : function(data) {
+						$('#modify-btn-' + contractId).show();
+						$('#save-btn-' + contractId).hide();
 
-			    // 데이터를 성공적으로 가져왔다면 각 요소에 데이터를 그려줍니다.
-			    tr.find('.existing-cell-${contract.id}').text(data.tenantName);
-			    tr.find('.existing-cell-${contract.id}').text(data.leaseType);
-			    tr.find('.existing-cell-${contract.id}').text(data.deposit);
-			    tr.find('.existing-cell-${contract.id}').text(data.rent);
-			    tr.find('.existing-cell-${contract.id}').text(data.maintenanceFee);
-			    tr.find('.existing-cell-${contract.id}').text(data.contractStartDate);
-			    tr.find('.existing-cell-${contract.id}').text(data.contractEndDate);
-			    tr.find('.existing-cell-${contract.id}').text(data.depositDate);
-			    tr.find('.existing-cell-${contract.id}').text(data.rentDate);
-			},
-			error : function(xhr, status, error) {
-				alert('수정에 실패했습니다: ' + error);
-			}
-		});
+						// 해당 contractId를 가진 tr 요소를 선택합니다.
+						var tr = $('#modify-form-' + contractId).closest('tr');
+
+						// 데이터를 성공적으로 가져왔다면 각 요소에 데이터를 그려줍니다.
+						tr.find('.existing-cell-${contract.id}').text(
+								data.tenantName);
+						tr.find('.existing-cell-${contract.id}').text(
+								data.leaseType);
+						tr.find('.existing-cell-${contract.id}').text(
+								data.deposit);
+						tr.find('.existing-cell-${contract.id}')
+								.text(data.rent);
+						tr.find('.existing-cell-${contract.id}').text(
+								data.maintenanceFee);
+						tr.find('.existing-cell-${contract.id}').text(
+								data.contractStartDate);
+						tr.find('.existing-cell-${contract.id}').text(
+								data.contractEndDate);
+						tr.find('.existing-cell-${contract.id}').text(
+								data.depositDate);
+						tr.find('.existing-cell-${contract.id}').text(
+								data.rentDate);
+
+					
+
+					},
+					error : function(xhr, status, error) {
+						alert('수정에 실패했습니다: ' + error);
+					}
+				});
 	}
 </script>
 
@@ -161,13 +175,13 @@
 							<!-- 여기부터 수정기능 들어감 -->
 							<td class="existing-cell-${contract.id}">${contract.tenantName}</td>
 							<td class="input-field-${contract.id}" style="display: none;">
-								<input size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="tenantName"
+								<input size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="tenantName-${contract.id}"
 									value="${contract.tenantName}"
 								/>
 							</td>
 							<td class="existing-cell-${contract.id}">${contract.leaseType}</td>
 							<td class="input-field-${contract.id}" style="display: none;">
-								<select class="select select-bordered select-sm w-15 max-w-xs" name="leaseType"
+								<select class="select select-bordered select-sm w-15 max-w-xs" name="leaseType-${contract.id}"
 									data-value="${contract.leaseType}"
 								>
 									<option value="월세">월세</option>
@@ -177,41 +191,41 @@
 							</td>
 							<td class="existing-cell-${contract.id}">${contract.deposit }</td>
 							<td class="input-field-${contract.id}" style="display: none;">
-								<input size="3" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="deposit"
+								<input size="3" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="deposit-${contract.id}"
 									value="${contract.deposit }"
 								/>
 							</td>
 							<td class="existing-cell-${contract.id}">${contract.rent }</td>
 							<td class="input-field-${contract.id}" style="display: none;">
-								<input size="3" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="rent" value="${contract.rent }" />
+								<input size="3" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="rent-${contract.id }" value="${contract.rent }" />
 							</td>
 							<td class="existing-cell-${contract.id}">${contract.maintenanceFee }</td>
 							<td class="input-field-${contract.id}" style="display: none;">
-								<input size="3" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="maintenanceFee"
+								<input size="3" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="maintenanceFee-${contract.id}"
 									value="${contract.maintenanceFee }"
 								/>
 							</td>
 							<td class="existing-cell-${contract.id}">${contract.contractStartDate }</td>
 							<td class="input-field-${contract.id}" style="display: none;">
-								<input size="3" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="contractStartDate"
+								<input size="3" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="contractStartDate-${contract.id}"
 									value="${contract.contractStartDate }"
 								/>
 							</td>
 							<td class="existing-cell-${contract.id}">${contract.contractEndDate }</td>
 							<td class="input-field-${contract.id}" style="display: none;">
-								<input size="3" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="contractEndDate"
+								<input size="3" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="contractEndDate-${contract.id}"
 									value="${contract.contractEndDate }"
 								/>
 							</td>
 							<td class="existing-cell-${contract.id}">${contract.depositDate }</td>
 							<td class="input-field-${contract.id}" style="display: none;">
-								<input size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="depositDate"
+								<input size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="depositDate-${contract.id}"
 									value="${contract.depositDate }"
 								/>
 							</td>
 							<td class="existing-cell-${contract.id}">${contract.rentDate }</td>
 							<td class="input-field-${contract.id}" style="display: none;">
-								<input size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="rentDate"
+								<input size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="rentDate-${contract.id}"
 									value="${contract.rentDate }"
 								/>
 							</td>

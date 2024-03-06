@@ -30,6 +30,26 @@ public interface ContractRepository {
 			</script>
 			""")
 	List<Contract> getForPrintContracts(int bldgId);
+	
+	@Select("""
+			<script>
+			SELECT *
+			FROM contract AS C
+			LEFT JOIN room AS R
+			ON C.roomId = R.id
+			LEFT JOIN building AS B
+			ON R.bldgId = B.id
+			LEFT JOIN tenant AS T
+			ON C.tenantId = T.id
+			WHERE 1=1
+			<if test="bldgId != 0">
+				AND B.id = #{bldgId}
+			</if>
+			GROUP BY C.id
+			HAVING C.id = #{contractId}
+			</script>
+			""")
+	Contract getForPrintContract(int contractId);
 
 	@Update("""
 			<script>
@@ -45,10 +65,10 @@ public interface ContractRepository {
 			C.contractEndDate = #{contractEndDate},
 			C.depositDate = #{depositDate},
 			C.rentDate = #{rentDate}
-			WHERE C.id = #{id}
+			WHERE C.id = #{contractId}
 			</script>
 			""")
-	void modifyContract(int id, String tenantName, String leaseType, int deposit, int rent, int maintenanceFee,
+	void modifyContract(int contractId, String tenantName, String leaseType, int deposit, int rent, int maintenanceFee,
 			String contractStartDate, String contractEndDate, String depositDate, String rentDate);
 
 	@Insert("""
@@ -69,24 +89,6 @@ public interface ContractRepository {
 	void addContract(int roomId, String leaseType, int deposit, int rent, int maintenanceFee, String contractStartDate,
 			String contractEndDate, String depositDate, String rentDate, int tenantIds);
 
-	@Update("""
-			<script>
-			UPDATE contract AS C INNER JOIN Tenant AS T
-			ON C.tenantId = T.id
-			SET C.updateDate = NOW(),
-			T.tenantName = #{tenantName},
-			C.leaseType = #{leaseType},
-			C.deposit = #{deposit},
-			C.rent = #{rent},
-			C.maintenanceFee = #{maintenanceFee},
-			C.contractStartDate = #{contractStartDate},
-			C.contractEndDate = #{contractEndDate},
-			C.depositDate = #{depositDate},
-			C.rentDate = #{rentDate}
-			WHERE C.id = #{contractId}
-			</script>
-			""")
-	Contract modifyContractAjax(int contractId, String tenantName, String leaseType, int deposit, int rent,
-			int maintenanceFee, String contractStartDate, String contractEndDate, String depositDate, String rentDate);
+
 
 }

@@ -227,9 +227,10 @@ public class UsrContractController {
 
 
 		// 계약정보 수정
-		Contract modifiedContract = contractService.modifyContractAjax(contractId, tenantName, leaseType, deposit, rent, maintenanceFee, contractStartDate, contractEndDate, depositDate, rentDate);
+		contractService.modifyContract(contractId, tenantName, leaseType, deposit, rent, maintenanceFee, contractStartDate, contractEndDate, depositDate, rentDate);
 
 		// ajax 위한 데이터 가져오기
+		Contract modifiedContract = contractService.getForPrintContract(contractId);
 		return modifiedContract;
 	}
 

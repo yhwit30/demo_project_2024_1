@@ -19,9 +19,13 @@ public class ContractService {
 		return contractRepository.getForPrintContracts(bldgId);
 	}
 
-	public ResultData modifyContract(int id, String tenantName, String leaseType, int deposit, int rent,
+	public Contract getForPrintContract(int contractId) {
+		return contractRepository.getForPrintContract(contractId);
+	}
+	
+	public ResultData modifyContract(int contractId, String tenantName, String leaseType, int deposit, int rent,
 			int maintenanceFee, String contractStartDate, String contractEndDate, String depositDate, String rentDate) {
-		contractRepository.modifyContract(id, tenantName, leaseType, deposit, rent, maintenanceFee, contractStartDate,
+		contractRepository.modifyContract(contractId, tenantName, leaseType, deposit, rent, maintenanceFee, contractStartDate,
 				contractEndDate, depositDate, rentDate);
 		return ResultData.from("S-1", "계약정보가 수정되었습니다");
 	}
@@ -33,10 +37,8 @@ public class ContractService {
 		return ResultData.from("S-1", "계약정보가 생성되었습니다");
 	}
 
-	public Contract modifyContractAjax(int contractId, String tenantName, String leaseType, int deposit, int rent,
-			int maintenanceFee, String contractStartDate, String contractEndDate, String depositDate, String rentDate) {
-		return contractRepository.modifyContractAjax(contractId, tenantName, leaseType, deposit, rent, maintenanceFee, contractStartDate, contractEndDate, depositDate, rentDate);
-	}
+	
+
 
 
 }
