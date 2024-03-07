@@ -97,30 +97,30 @@ public class UsrMaintenanceFeeController {
 		int[] lateFees = new int[tenantId.length];
 		int[] lateMaintenanceFees = new int[tenantId.length];
 
-		System.out.println(tenantId[0]);
-		System.out.println(tenantId[1]);
-		
-		// 기존에 데이터 없으면 insert 실행
+		// insert 실행- UX 생각해서 수정버튼으로 추가로 처리함
 		List<MaintenanceFee> maintenanceFee = null;
 		for (int i = 0; i < tenantId.length; i++) {
+
+			// 기존에 데이터가 없거나, tenantId가 0이 아닌 경우 insert 한다.
 			int tenantCheck = tenantId[i];
 			maintenanceFee = maintenanceFeeService.getMaintenanceFee(tenantId[i], bldgId, year, month);
-			if(maintenanceFee.isEmpty() && tenantCheck != 0) {
-				
-					int waterBill = maintenanceFeeService.calculateBill(waterUse[i], waterCost[i]);
-					int elecBill = maintenanceFeeService.calculateBill(elecUse[i], elecCost[i]);
-					int gasBill = maintenanceFeeService.calculateBill(gasUse[i], gasCost[i]);
-					int monthlyMaintenanceFee = maintenanceFeeService.sumMaintenanceFee(waterBill, elecBill, gasBill);
-					int lateFee = maintenanceFeeService.caculateLateFee(monthlyMaintenanceFee);
-					int lateMaintenanceFee = maintenanceFeeService.sumMaintenanceFee(monthlyMaintenanceFee, lateFee);
+			if (maintenanceFee.isEmpty() && tenantCheck != 0) {
 
-					maintenanceFeeService.addMaintenanceFee(tenantId[i], commonElec[i], commonWater[i], elevater[i],
-							internetTV[i], fireSafety[i], waterUse[i], waterCost[i], waterBill, elecUse[i], elecCost[i],
-							elecBill, gasUse[i], gasCost[i], gasBill, monthlyMaintenanceFee, lateFee,
-							lateMaintenanceFee, maintenanceFeeDate[i], year, month);
-				}
+				int waterBill = maintenanceFeeService.calculateBill(waterUse[i], waterCost[i]);
+				int elecBill = maintenanceFeeService.calculateBill(elecUse[i], elecCost[i]);
+				int gasBill = maintenanceFeeService.calculateBill(gasUse[i], gasCost[i]);
+				int monthlyMaintenanceFee = maintenanceFeeService.sumMaintenanceFee(commonElec[i], commonWater[i],
+						elevater[i], internetTV[i], fireSafety[i], waterBill, elecBill, gasBill);
+				int lateFee = maintenanceFeeService.caculateLateFee(monthlyMaintenanceFee);
+				int lateMaintenanceFee = maintenanceFeeService.sumMaintenanceFee(monthlyMaintenanceFee, lateFee);
+
+				maintenanceFeeService.addMaintenanceFee(tenantId[i], commonElec[i], commonWater[i], elevater[i],
+						internetTV[i], fireSafety[i], waterUse[i], waterCost[i], waterBill, elecUse[i], elecCost[i],
+						elecBill, gasUse[i], gasCost[i], gasBill, monthlyMaintenanceFee, lateFee, lateMaintenanceFee,
+						maintenanceFeeDate[i], year, month);
+			}
 		}
-		
+
 		// 관리비 정보 수정
 		ResultData maintenanceFeeModifyRd = null;
 
@@ -129,14 +129,15 @@ public class UsrMaintenanceFeeController {
 			waterBills[i] = maintenanceFeeService.calculateBill(waterUse[i], waterCost[i]);
 			elecBills[i] = maintenanceFeeService.calculateBill(elecUse[i], elecCost[i]);
 			gasBills[i] = maintenanceFeeService.calculateBill(gasUse[i], gasCost[i]);
-			monthlyMaintenanceFees[i] = maintenanceFeeService.sumMaintenanceFee(waterBills[i], elecBills[i], gasBills[i]);
+			monthlyMaintenanceFees[i] = maintenanceFeeService.sumMaintenanceFee(commonElec[i], commonWater[i],
+					elevater[i], internetTV[i], fireSafety[i], waterBills[i], elecBills[i], gasBills[i]);
 			lateFees[i] = maintenanceFeeService.caculateLateFee(monthlyMaintenanceFees[i]);
 			lateMaintenanceFees[i] = maintenanceFeeService.sumMaintenanceFee(monthlyMaintenanceFees[i], lateFees[i]);
 
 			maintenanceFeeModifyRd = maintenanceFeeService.modifyMaintenanceFee(tenantId[i], commonElec[i],
 					commonWater[i], elevater[i], internetTV[i], fireSafety[i], waterUse[i], waterCost[i], waterBills[i],
-					elecUse[i], elecCost[i], elecBills[i], gasUse[i], gasCost[i], gasBills[i], monthlyMaintenanceFees[i],
-					lateFees[i], lateMaintenanceFees[i], maintenanceFeeDate[i], year, month);
+					elecUse[i], elecCost[i], elecBills[i], gasUse[i], gasCost[i], gasBills[i],
+					monthlyMaintenanceFees[i], lateFees[i], lateMaintenanceFees[i], maintenanceFeeDate[i], year, month);
 		}
 
 		return Ut.jsReplace(maintenanceFeeModifyRd.getResultCode(), maintenanceFeeModifyRd.getMsg(),

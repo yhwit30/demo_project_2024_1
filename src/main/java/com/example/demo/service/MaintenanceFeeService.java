@@ -18,7 +18,6 @@ public class MaintenanceFeeService {
 	public List<MaintenanceFee> getMaintenanceFeeMonthly(int bldgId, Integer year) {
 		return maintenanceFeeRepository.getMaintenanceFeeMonthly(bldgId, year);
 	}
-	
 
 	public List<MaintenanceFee> getMaintenanceFees(int bldgId, Integer year, String month) {
 		return maintenanceFeeRepository.getMaintenanceFees(bldgId, year, month);
@@ -38,8 +37,9 @@ public class MaintenanceFeeService {
 		return use * cost;
 	}
 
-	public int sumMaintenanceFee(int waterBill, int elecBill, int gasBill) {
-		return waterBill + elecBill + gasBill;
+	public int sumMaintenanceFee(int commonElec, int commonWater, int elevater, int internetTV, int fireSafety,
+			int waterBill, int elecBill, int gasBill) {
+		return commonElec + commonWater + elevater + internetTV + fireSafety + waterBill + elecBill + gasBill;
 	}
 
 	public int sumMaintenanceFee(int monthlyMaintenanceFee, int lateFee) {
@@ -50,21 +50,18 @@ public class MaintenanceFeeService {
 		return Math.round(monthlyMaintenanceFee / 20);
 	}
 
-
 	public void addMaintenanceFee(int tenantId, int commonElec, int commonWater, int elevater, int internetTV,
 			int fireSafety, int waterUse, int waterCost, int waterBill, int elecUse, int elecCost, int elecBill,
 			int gasUse, int gasCost, int gasBill, int monthlyMaintenanceFee, int lateFee, int lateMaintenanceFee,
 			int maintenanceFeeDate, int year, String month) {
-		maintenanceFeeRepository.addMaintenanceFee(tenantId, commonElec, commonWater, elevater, internetTV,
-				fireSafety, waterUse, waterCost, waterBill, elecUse, elecCost, elecBill, gasUse, gasCost, gasBill,
+		maintenanceFeeRepository.addMaintenanceFee(tenantId, commonElec, commonWater, elevater, internetTV, fireSafety,
+				waterUse, waterCost, waterBill, elecUse, elecCost, elecBill, gasUse, gasCost, gasBill,
 				monthlyMaintenanceFee, lateFee, lateMaintenanceFee, maintenanceFeeDate, year, month);
-		
-	}
 
+	}
 
 	public List<MaintenanceFee> getMaintenanceFee(int tenantId, int bldgId, Integer year, String month) {
 		return maintenanceFeeRepository.getMaintenanceFee(tenantId, bldgId, year, month);
 	}
-
 
 }
