@@ -84,7 +84,7 @@
 				</tbody>
 			</table>
 		</div>
-		<div>
+		<div class="btns mt-5">
 			<button class="btn btn-outline" type="button" onclick="history.back();">뒤로가기</button>
 			<input class="btn btn-info" type="submit" value="수정" />
 		</div>

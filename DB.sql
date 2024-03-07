@@ -890,6 +890,7 @@ roomId = 6,
 tenantId = 3,
 leaseType = '전세',
 deposit = 55000000,
+rent= 0,
 maintenanceFee = 100000,
 contractStartDate = '2023.12.2',
 contractEndDate= '2025.12.1',
@@ -905,6 +906,7 @@ roomId = 10,
 tenantId = 4,
 leaseType = '전세',
 deposit = 55000000,
+rent= 0,
 maintenanceFee = 100000,
 contractStartDate = '2023.12.2',
 contractEndDate= '2025.12.1',
@@ -937,6 +939,7 @@ roomId = 16,
 tenantId = 6,
 leaseType = '전세',
 deposit = 55000000,
+rent= 0,
 maintenanceFee = 100000,
 contractStartDate = '2023.12.2',
 contractEndDate= '2025.12.1',
@@ -1996,6 +1999,6 @@ WHERE C.id = 9;
 
 SELECT *
 FROM contract_Status 
-WHERE rentDate LIKE '2024-02%' AND tenantId = 2;
+WHERE rentDate LIKE '2024-01' AND tenantId = 2;
 
 

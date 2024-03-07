@@ -7,23 +7,19 @@
 
 
 <section class="mt-2 text-xl px-4">
-<a class="btn btn-sm btn-outline ${0 == param.bldgId ? 'btn-active' : '' }" href="../tenant/tenant?bldgId=0"> 전체보기</a>
-<!-- 건물 카테고리 버튼 -->
-<div>
-	<c:forEach var="building" items="${buildings }">
-		<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
-			href="../tenant/tenant?bldgId=${building.id }"
-		>${building.bldgName }</a>
-	</c:forEach>
-</div>
+	<a class="btn btn-sm btn-outline ${0 == param.bldgId ? 'btn-active' : '' }" href="../tenant/tenant?bldgId=0"> 전체보기</a>
+	<!-- 건물 카테고리 버튼 -->
+	<div>
+		<c:forEach var="building" items="${buildings }">
+			<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
+				href="../tenant/tenant?bldgId=${building.id }">${building.bldgName }</a>
+		</c:forEach>
+	</div>
 
 	<!-- 세입자표 -->
 	<div class="mx-auto overflow-x-auto">
 		<div class="badge badge-outline">${tenantsCnt }명</div>
 		<table class="table-box-1 table" border="1">
-			<colgroup>
-				<col style="width: 5%" />
-			</colgroup>
 			<thead>
 				<tr>
 					<th>건물명</th>

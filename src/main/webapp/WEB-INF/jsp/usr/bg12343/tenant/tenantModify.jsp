@@ -14,7 +14,7 @@
 			<table class="modify-box table-box-1 table" border="1">
 				<thead>
 					<tr>
-<!-- 						<th>세입자관리번호</th> -->
+						<!-- 						<th>세입자관리번호</th> -->
 						<th>건물명</th>
 						<th>호실</th>
 						<th>세입자명</th>
@@ -35,21 +35,22 @@
 					<c:forEach var="tenant" items="${tenants }">
 						<input type="hidden" name="id" value="${tenant.id }" />
 						<tr>
-<%-- 							<td>${tenant.id }</td> --%>
+							<%-- 							<td>${tenant.id }</td> --%>
 							<td>${tenant.bldgName }
 								<input type="hidden" name="bldgName" value="${tenant.bldgName }" />
 							</td>
 							<td>${tenant.roomNum }
 								<input type="hidden" name="roomNum" value="${tenant.roomNum }" />
 							<td>
-								<input size="2" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="tenantName" value="${tenant.tenantName }" />
+								<input size="2" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="tenantName"
+									value="${tenant.tenantName }" />
 							<td>
-								<input size="9" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="tenantPhone" value="${tenant.tenantPhone }" />
+								<input size="9" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="tenantPhone"
+									value="${tenant.tenantPhone }" />
 							</td>
 							<td>
 								<input size="4" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="tenantCarNum"
-									value="${tenant.tenantCarNum }"
-								/>
+									value="${tenant.tenantCarNum }" />
 							</td>
 							<!-- 이 아래로 hidden으로 값은 넘겨줬지만 사용은 안했다. 나중에 쓸지도? -->
 							</td>
@@ -78,7 +79,8 @@
 					</c:forEach>
 				</tbody>
 			</table>
-			<div>
+			<div class="btns mt-5">
+				<button class="btn btn-outline" type="button" onclick="history.back();">뒤로가기</button>
 				<input class="btn btn-info" type="submit" value="수정" />
 			</div>
 		</form>
