@@ -45,12 +45,21 @@ public class UsrMaintenanceFeeController {
 
 		model.addAttribute("buildings", buildings);
 		model.addAttribute("maintenanceFeeMonthly", maintenanceFeeMonthly);
+		model.addAttribute("nowYear", nowYear);
 		return "usr/bg12343/maintenanceFee/maintenanceFee";
 	}
 
 	@RequestMapping("/usr/bg12343/maintenanceFee/maintenanceFeeDetail")
 	public String getMaintenanceFeeDetail(Model model, @RequestParam(defaultValue = "1") int bldgId, Integer year,
 			String month) {
+		// 레포지터리 월표현 정리
+		if (month.equals("010")) {
+			month = "10";
+		} else if (month.equals("011")) {
+			month = "11";
+		} else if (month.equals("012")) {
+			month = "12";
+		}
 
 		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
 		if (year == null) {
@@ -66,6 +75,14 @@ public class UsrMaintenanceFeeController {
 	@RequestMapping("/usr/bg12343/maintenanceFee/maintenanceFeeModify")
 	public String showMaintenanceFeeModify(Model model, @RequestParam(defaultValue = "1") int bldgId, Integer year,
 			String month) {
+		// 레포지터리 월표현 정리
+		if (month.equals("010")) {
+			month = "10";
+		} else if (month.equals("011")) {
+			month = "11";
+		} else if (month.equals("012")) {
+			month = "12";
+		}
 
 		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
 		if (year == null) {
@@ -84,6 +101,15 @@ public class UsrMaintenanceFeeController {
 			int[] internetTV, int[] fireSafety, int[] waterUse, int[] waterCost, int[] elecUse, int[] elecCost,
 			int[] gasUse, int[] gasCost, int[] maintenanceFeeDate, int bldgId, Integer year, String month) {
 
+		// 레포지터리 월표현 정리
+		if (month.equals("010")) {
+			month = "10";
+		} else if (month.equals("011")) {
+			month = "11";
+		} else if (month.equals("012")) {
+			month = "12";
+		}
+
 		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
 		if (year == null) {
 			year = nowYear;
@@ -101,7 +127,8 @@ public class UsrMaintenanceFeeController {
 		List<MaintenanceFee> maintenanceFee = null;
 		for (int i = 0; i < tenantId.length; i++) {
 
-			// 기존에 데이터가 없거나, tenantId가 0이 아닌 경우 insert 한다. 0을 거를 수 있는 이유는 sql을 not null로 했기 때문일 것. 
+			// 기존에 데이터가 없거나, tenantId가 0이 아닌 경우 insert 한다. 0을 거를 수 있는 이유는 sql을 not null로 했기
+			// 때문일 것.
 			int tenantCheck = tenantId[i];
 			maintenanceFee = maintenanceFeeService.getMaintenanceFee(tenantId[i], bldgId, year, month);
 			if (maintenanceFee.isEmpty() && tenantCheck != 0) {

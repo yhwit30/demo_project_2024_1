@@ -23,11 +23,10 @@
 		</c:forEach>
 	</div>
 
-	<!-- 연도 변경 버튼todo -->
 	<a class="btn btn-sm btn-outline ${param.year == nowYear -1 ? 'btn-active' : '' }"
-		href="maintenanceFee?bldgId=${param.bldgId }&year=${nowYear -1}">전년도 보기(todo)</a>
+		href="maintenanceFee?bldgId=${param.bldgId }&year=${nowYear -1}">전년도 보기</a>
 	<a class="btn btn-sm btn-outline ${param.year == nowYear ? 'btn-active' : '' }"
-		href="maintenanceFee?bldgId=${param.bldgId }&year=${nowYear}">올해(todo) 보기</a>
+		href="maintenanceFee?bldgId=${param.bldgId }&year=${nowYear}">올해(${nowYear}) 보기</a>
 
 	<div class="mx-auto overflow-x-auto">
 		<table class="table-box-1 table" border="1">

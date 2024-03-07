@@ -155,9 +155,9 @@ public class UsrContractController {
 			Contract contract = contractSet.get(i);
 			tenantDataCheck = tenantService.isTenantData(contract.getRoomId());
 			if (!tenantDataCheck) {
+				// todo 아직 계약날짜로 체크하는 코드 미완성이라 일단 1호실 1계약으로
 				return Ut.jsReplace("F-1", "이미 roomId가 있습니다", "../contract/contract");
 			}
-
 			tenantService.addTenantSetup(contract.getRoomId(), contract.getTenantName(), contract.getTenantPhone(),
 					contract.getTenantCarNum());
 		}
@@ -169,6 +169,7 @@ public class UsrContractController {
 			tenantIds[i] = tenantService.getTenantIds(contract.getRoomId());
 		}
 
+		// 모든 호실 공실일 경우
 		if (contractSet.isEmpty()) {
 			return Ut.jsReplace("S-2", "모두 공실처리되었습니다", "../contract/contract");
 		}
@@ -180,20 +181,19 @@ public class UsrContractController {
 					contract.getDeposit(), contract.getRent(), contract.getMaintenanceFee(),
 					contract.getContractStartDate(), contract.getContractEndDate(), contract.getDepositDate(),
 					contract.getRentDate(), tenantIds[i]);
-
 		}
-
 		return Ut.jsReplace("S-1", "계약 정보가 추가되었습니다", "../contract/contract");
 	}
 
 	@RequestMapping("/usr/bg12343/contract/contractModify")
 	public String modifyContract(Model model, @RequestParam(defaultValue = "0") int bldgId) {
 
+		// 전체보기에서 수정
 		if (bldgId == 0) {
 			List<Contract> contracts = contractService.getForPrintContracts(bldgId);
 			int contractsCnt = contracts.size();
 
-//			건물 변환 버튼용
+			// 건물 변환 버튼용
 			List<Building> buildings = buildingService.getForPrintBuildings();
 
 			model.addAttribute("buildings", buildings);
@@ -202,7 +202,8 @@ public class UsrContractController {
 			return "usr/bg12343/contract/contractModify";
 		}
 
-//		건물 변환 버튼용
+		// 건물별로 수정
+		// 건물 변환 버튼용
 		List<Building> buildings = buildingService.getForPrintBuildings();
 
 		model.addAttribute("buildings", buildings);

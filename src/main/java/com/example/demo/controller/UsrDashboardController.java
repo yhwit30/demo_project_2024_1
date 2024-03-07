@@ -72,10 +72,19 @@ public class UsrDashboardController {
 		return "usr/bg12343/dashboard/rentStatus";
 	}
 
-	//ajax
+	// ajax
 	@RequestMapping("/usr/bg12343/dashboard/doRentStatusAdd")
 	@ResponseBody
 	public String doRentStatusAdd(Model model, int tenantId, String body, int year, String month) {
+
+		// 레포지터리 월표현 정리
+		if (month.equals("010")) {
+			month = "10";
+		} else if (month.equals("011")) {
+			month = "11";
+		} else if (month.equals("012")) {
+			month = "12";
+		}
 
 		Dashboard rentStatusRd = dashboardService.getRentStatusRd(tenantId, year, month);
 
@@ -97,10 +106,19 @@ public class UsrDashboardController {
 		return rentStatusRd.getPaymentStatus();
 	}
 
-	//ajax
+	// ajax
 	@RequestMapping("/usr/bg12343/dashboard/doRentStatusModify")
 	@ResponseBody
 	public String doRentStatusModify(int tenantId, String body, int year, String month) {
+
+		// 레포지터리 월표현 정리
+		if (month.equals("010")) {
+			month = "10";
+		} else if (month.equals("011")) {
+			month = "11";
+		} else if (month.equals("012")) {
+			month = "12";
+		}
 
 		Dashboard rentStatusRd = dashboardService.getRentStatusRd(tenantId, year, month);
 
@@ -116,24 +134,32 @@ public class UsrDashboardController {
 		rentStatusRd = dashboardService.getRentStatusRd(tenantId, year, month);
 		return rentStatusRd.getPaymentStatus();
 	}
-	
-	//ajax
+
+	// ajax
 	@RequestMapping("/usr/bg12343/dashboard/doRentStatusDelete")
 	@ResponseBody
 	public void doRentStatusDelete(int tenantId, String body, int year, String month) {
+
+		// 레포지터리 월표현 정리
+		if (month.equals("010")) {
+			month = "10";
+		} else if (month.equals("011")) {
+			month = "11";
+		} else if (month.equals("012")) {
+			month = "12";
+		}
 
 		// 나중에 회원체크 userCanDelete 메소드 가져다 써야함(articleService)
 
 		// 삭제할 데이터 있는지 체크
 		Dashboard rentStatusRd = dashboardService.getRentStatusRd(tenantId, year, month);
-		if(rentStatusRd == null) {
+		if (rentStatusRd == null) {
 			return;
 		}
-		
+
 		// 수납현황 삭제
 		dashboardService.deleteRentStatus(tenantId, body, year, month);
 
-		
 	}
 
 	@RequestMapping("/usr/bg12343/dashboard/reportBusiness")
@@ -143,7 +169,7 @@ public class UsrDashboardController {
 		if (year == null) {
 			year = nowYear;
 		}
-		
+
 		// 현황 데이터 가져오기
 		List<Dashboard> rentStatus = dashboardService.getRentStatus(bldgId, year);
 

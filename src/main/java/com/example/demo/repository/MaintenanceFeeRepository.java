@@ -54,11 +54,11 @@ public interface MaintenanceFeeRepository {
 			LEFT JOIN
 			    maintenance_fee AS MF9 ON MF9.tenantId = T.id AND MF9.updateDate LIKE '${year}-09%'
 			LEFT JOIN
-			    maintenance_fee AS MF10 ON MF10.tenantId = T.id AND MF10.updateDate LIKE '${year}-%10%'
+			    maintenance_fee AS MF10 ON MF10.tenantId = T.id AND MF10.updateDate LIKE '${year}-10%'
 			LEFT JOIN
-			    maintenance_fee AS MF11 ON MF11.tenantId = T.id AND MF11.updateDate LIKE '${year}-%11%'
+			    maintenance_fee AS MF11 ON MF11.tenantId = T.id AND MF11.updateDate LIKE '${year}-11%'
 			LEFT JOIN
-			    maintenance_fee AS MF12 ON MF12.tenantId = T.id AND MF12.updateDate LIKE '${year}-%12%'
+			    maintenance_fee AS MF12 ON MF12.tenantId = T.id AND MF12.updateDate LIKE '${year}-12%'
 			GROUP BY
 			    R.id
 			HAVING B.id = #{bldgId}

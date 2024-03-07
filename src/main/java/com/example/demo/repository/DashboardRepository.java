@@ -35,9 +35,9 @@ public interface DashboardRepository {
 			    MAX(CASE WHEN CS.rentDate LIKE '${year}-07%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus7,
 			    MAX(CASE WHEN CS.rentDate LIKE '${year}-08%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus8,
 			    MAX(CASE WHEN CS.rentDate LIKE '${year}-09%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus9,
-			    MAX(CASE WHEN CS.rentDate LIKE '${year}-%10%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus10,
-			    MAX(CASE WHEN CS.rentDate LIKE '${year}-%11%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus11,
-			    MAX(CASE WHEN CS.rentDate LIKE '${year}-%12%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus12
+			    MAX(CASE WHEN CS.rentDate LIKE '${year}-10%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus10,
+			    MAX(CASE WHEN CS.rentDate LIKE '${year}-11%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus11,
+			    MAX(CASE WHEN CS.rentDate LIKE '${year}-12%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus12
 			FROM room AS R
 			LEFT JOIN contract AS C
 			ON R.id = C.roomId
@@ -50,7 +50,7 @@ public interface DashboardRepository {
 			AND (CS.rentDate LIKE '${year}-01%' OR CS.rentDate LIKE '${year}-02%' OR CS.rentDate LIKE '${year}-03%' OR
 			     CS.rentDate LIKE '${year}-04%' OR CS.rentDate LIKE '${year}-05%' OR CS.rentDate LIKE '${year}-06%' OR
 			     CS.rentDate LIKE '${year}-07%' OR CS.rentDate LIKE '${year}-08%' OR CS.rentDate LIKE '${year}-09%' OR
-			     CS.rentDate LIKE '${year}-%10%' OR CS.rentDate LIKE '${year}-%11%' OR CS.rentDate LIKE '${year}-%12%')
+			     CS.rentDate LIKE '${year}-10%' OR CS.rentDate LIKE '${year}-11%' OR CS.rentDate LIKE '${year}-12%')
 			GROUP BY R.id
 			HAVING B.id = #{bldgId}
 			""")
