@@ -55,8 +55,6 @@
 			href="../dashboard/dashboard?bldgId=${building.id }">${building.bldgName }</a>
 	</c:forEach>
 
-	1: 전자렌지 2: 냉장고 3: 침대 4: 전기렌지
-
 </div>
 
 	<!-- 대쉬보드 표 -->
@@ -71,7 +69,7 @@
 				<th>현 보증금</th>
 				<th>현 월세</th>
 				<th>현 관리비</th>
-				<th>비품(여기에도 나타낼지 고민)</th>
+<!-- 				<th>비품(여기에도 나타낼지 고민)</th> -->
 				<th>호실메모</th>
 
 			</tr>
@@ -87,17 +85,17 @@
 					<td>${room.deposit }</td>
 					<td>${room.rent }</td>
 					<td>${room.maintenanceFee }</td>
-					<td>
-						<input class="input input-bordered input-sm max-w-xs w-10" value="1" />
-						2
-						<input type="checkbox" class="toggle toggle-sm" checked />
-						3
-						<input type="checkbox" checked="checked" class="checkbox checkbox-sm checkbox-primary" />
-						4
-						<div class="rating rating-xs">
-							<input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400" checked />
-						</div>
-					</td>
+<!-- 					<td> -->
+<!-- 						<input class="input input-bordered input-sm max-w-xs w-10" value="1" /> -->
+<!-- 						2 -->
+<!-- 						<input type="checkbox" class="toggle toggle-sm" checked /> -->
+<!-- 						3 -->
+<!-- 						<input type="checkbox" checked="checked" class="checkbox checkbox-sm checkbox-primary" /> -->
+<!-- 						4 -->
+<!-- 						<div class="rating rating-xs"> -->
+<!-- 							<input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400" checked /> -->
+<!-- 						</div> -->
+<!-- 					</td> -->
 					<td>#</td>
 
 				</tr>

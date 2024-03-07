@@ -101,7 +101,7 @@ public class UsrMaintenanceFeeController {
 		List<MaintenanceFee> maintenanceFee = null;
 		for (int i = 0; i < tenantId.length; i++) {
 
-			// 기존에 데이터가 없거나, tenantId가 0이 아닌 경우 insert 한다.
+			// 기존에 데이터가 없거나, tenantId가 0이 아닌 경우 insert 한다. 0을 거를 수 있는 이유는 sql을 not null로 했기 때문일 것. 
 			int tenantCheck = tenantId[i];
 			maintenanceFee = maintenanceFeeService.getMaintenanceFee(tenantId[i], bldgId, year, month);
 			if (maintenanceFee.isEmpty() && tenantCheck != 0) {

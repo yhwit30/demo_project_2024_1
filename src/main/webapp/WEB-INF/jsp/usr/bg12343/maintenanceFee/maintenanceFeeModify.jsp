@@ -4,8 +4,15 @@
 <%@ include file="../../common/head.jspf"%>
 <%@ include file="../../common/sidebar.jspf"%>
 
-${param.month }월
+
+
+
 <section class="mt-2 text-xl px-4">
+	<div class="btns">
+		<a class="btn btn-outline" href="../maintenanceFee/maintenanceFee?bldgId=${param.bldgId }">월별 관리비 돌아가기</a>
+	</div>
+	${param.month }월
+
 	<div class="mx-auto overflow-x-auto">
 
 		<form action="../maintenanceFee/doMaintenanceFeeModify" method="POST">
@@ -13,6 +20,15 @@ ${param.month }월
 			<input type="hidden" name="month" value="${param.month }" />
 			<table class="table-box-1 table" border="1">
 				<thead>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>한번에 쓰기</td>
+						<td>
+							<input id="bulkWriteInput" size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요"/>
+						</td>
+					</tr>
 					<tr>
 						<th>건물명</th>
 						<th>호실</th>
@@ -50,13 +66,13 @@ ${param.month }월
 							<td>${maintenanceFee.tenantName }</td>
 							<td>${maintenanceFee.leaseType }</td>
 							<td>
-								<input size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="commonElec"
-									value="${maintenanceFee.commonElec }"
+								<input class="commonElecInput" size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요"
+									name="commonElec" value="${maintenanceFee.commonElec }"
 								/>
 							</td>
 							<td>
-								<input size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="commonWater"
-									value="${maintenanceFee.commonWater }"
+								<input class="commonWaterInput" size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요"
+									name="commonWater" value="${maintenanceFee.commonWater }"
 								/>
 							</td>
 							<td>
@@ -131,6 +147,26 @@ ${param.month }월
 
 
 
+<script>
+
+const bulkWriteInput = document.getElementById('bulkWriteInput');
+const commonElecInputs = document.querySelectorAll('.commonElecInput');
+
+bulkWriteInput.addEventListener('input', function() {
+    const value = this.value;
+    // 모든 commonElecInput 입력 필드에 같은 값을 설정
+    commonElecInputs.forEach(input => {
+        input.value = value; // 모든 입력 필드에 값을 설정
+
+        // 이미 값이 채워져 있는 경우에는 값을 지우고 새로운 값을 설정
+        if (input.value !== '') {
+            input.value = '';
+            input.value = value;
+        }
+    });
+});
+  
+</script>
 
 
 

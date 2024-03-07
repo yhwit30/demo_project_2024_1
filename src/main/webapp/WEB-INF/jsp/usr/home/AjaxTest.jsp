@@ -103,7 +103,7 @@
 			num1 : num1,
 			num2 : num2
 		}, function(data) {
-	
+
 			$('.rs').text(data.rs);
 			$('.rs-msg').text(data.msg);
 			$('.rs-code').text(data.code);
@@ -136,5 +136,36 @@
 	<div class="rs-msg"></div>
 	<h2>더한 결과 코드</h2>
 	<div class="rs-code"></div>
+
+
+	<div>
+		한번에 쓰기
+		<input type="text" id="bulkWriteInput" />
+	</div>
+
+	<c:forEach var="i" begin="1" end="10">
+		<div>
+			<input type="text" class="forEachInput" />
+		</div>
+	</c:forEach>
+
+	<script>
+    // 한번에 쓰기 입력 필드
+    const bulkWriteInput = document.getElementById('bulkWriteInput');
+    // forEach로 감싸여진 input들
+    const forEachInputs = document.querySelectorAll('.forEachInput');
+
+    // 한번에 쓰기 입력 필드 값 변경 시
+    bulkWriteInput.addEventListener('input', function() {
+        const value = this.value;
+        // 모든 forEach로 감싸여진 input에 같은 값을 설정
+        forEachInputs.forEach(input => input.value = value);
+    });
+</script>
+
+
+
+
+
 </body>
 </html>

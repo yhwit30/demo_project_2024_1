@@ -50,7 +50,7 @@
 				href="building?bldgId=${building.id }"
 			>${building.bldgName }</a>
 		</c:forEach>
-		호실 목록
+		호실 목록 1: 전자렌지 2: 냉장고 3: 침대 4: 전기렌지
 	</div>
 
 	<div class="badge badge-outline">${roomsCnt }개</div>

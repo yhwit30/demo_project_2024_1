@@ -750,6 +750,7 @@ CREATE TABLE tenant(
     tenantName CHAR(20) NOT NULL,
     tenantPhone INT(10) NOT NULL,
     tenantCarNum CHAR(20) NOT NULL,
+    tenantRegNum INT(10),
     roomId INT(10) NOT NULL
 );
 
@@ -1033,7 +1034,7 @@ extraIncome = '없음',
 extraExpense = '없음';
 
 # contract_status testdata
-INSERT INTO contract_status
+/*INSERT INTO contract_status
 SET regDate = NOW(),
 updateDate = NOW(),
 rentDate = '2024-02',
@@ -1041,7 +1042,7 @@ rentDate = '2024-02',
 tenantId = 2,
 paymentStatus = '완납',
 extraIncome = '없음',
-extraExpense = '없음';
+extraExpense = '없음';*/
 
 # contract_status testdata
 INSERT INTO contract_status
@@ -1055,7 +1056,7 @@ extraIncome = '없음',
 extraExpense = '없음';
 
 # contract_status testdata
-INSERT INTO contract_status
+/*INSERT INTO contract_status
 SET regDate = NOW(),
 updateDate = NOW(),
 rentDate = '2024-01',
@@ -1063,10 +1064,10 @@ rentDate = '2024-01',
 tenantId = 4,
 paymentStatus = '완납',
 extraIncome = '없음',
-extraExpense = '없음';
+extraExpense = '없음';*/
 
 # contract_status testdata
-INSERT INTO contract_status
+/*INSERT INTO contract_status
 SET regDate = NOW(),
 updateDate = NOW(),
 rentDate = '2024-02',
@@ -1074,7 +1075,7 @@ rentDate = '2024-02',
 tenantId = 4,
 paymentStatus = '완납',
 extraIncome = '없음',
-extraExpense = '없음';
+extraExpense = '없음';*/
 
 
 # contract_status testdata
@@ -1424,12 +1425,27 @@ ON R.bldgId = B.id
 LEFT JOIN tenant AS T
 ON C.tenantId = T.id
 LEFT JOIN maintenance_fee AS MF 
-ON MF.tenantId = T.id AND MF.updateDate LIKE '2024-12%'
+ON MF.tenantId = T.id AND MF.updateDate LIKE '2024-03%'
 GROUP BY R.id
 HAVING B.id = 1;
 
 SELECT * FROM maintenance_fee;
 
+# 관리비 월별 없는 경우 찾기
+SELECT *
+FROM room AS R
+LEFT JOIN contract AS C
+ON R.id = C.roomId
+LEFT JOIN building AS B
+ON R.bldgId = B.id
+LEFT JOIN tenant AS T
+ON C.tenantId = T.id
+LEFT JOIN maintenance_fee AS MF 
+ON MF.tenantId = T.id
+WHERE MF.updateDate LIKE '2024-02%'
+AND MF.tenantId = 1
+GROUP BY R.id
+HAVING B.id = 1;
 
 
 # 관리비 월별 전체보기 (관리비도 호실기준 정렬)
@@ -1490,18 +1506,18 @@ LEFT JOIN
 LEFT JOIN 
     maintenance_fee AS MF9 ON MF9.tenantId = T.id AND MF9.updateDate LIKE '2024-09%'
 LEFT JOIN 
-    maintenance_fee AS MF10 ON MF10.tenantId = T.id AND MF10.updateDate LIKE '2024-10%'
+    maintenance_fee AS MF10 ON MF10.tenantId = T.id AND MF10.updateDate LIKE '2024-%10%'
 LEFT JOIN 
-    maintenance_fee AS MF11 ON MF11.tenantId = T.id AND MF11.updateDate LIKE '2024-11%'
+    maintenance_fee AS MF11 ON MF11.tenantId = T.id AND MF11.updateDate LIKE '2024-%11%'
 LEFT JOIN 
-    maintenance_fee AS MF12 ON MF12.tenantId = T.id AND MF12.updateDate LIKE '2024-12%'
+    maintenance_fee AS MF12 ON MF12.tenantId = T.id AND MF12.updateDate LIKE '2024-%12%'
 GROUP BY 
     R.id;
   
 # maintenance_fee testdata
 INSERT INTO maintenance_fee
 SET regDate = NOW(),
-updateDate = '2024-12',
+updateDate = '2024-012',
 commonElec = 1212,
 commonWater =1212,
 elevater =11212,
@@ -1895,18 +1911,18 @@ GROUP BY R.id;
 
 #GPT한테 서브쿼리 풀어달라고 한 쿼리 약간 변경
 SELECT *,
-MAX(CASE WHEN CS.rentDate LIKE '2024-01%' THEN CS.paymentStatus ELSE NULL END) AS JanuaryPaymentStatus,
-MAX(CASE WHEN CS.rentDate LIKE '2024-02%' THEN CS.paymentStatus ELSE NULL END) AS FebruaryPaymentStatus,
-MAX(CASE WHEN CS.rentDate LIKE '2024-03%' THEN CS.paymentStatus ELSE NULL END) AS MarchPaymentStatus,
-MAX(CASE WHEN CS.rentDate LIKE '2024-04%' THEN CS.paymentStatus ELSE NULL END) AS AprilPaymentStatus,
-MAX(CASE WHEN CS.rentDate LIKE '2024-05%' THEN CS.paymentStatus ELSE NULL END) AS MayPaymentStatus,
-MAX(CASE WHEN CS.rentDate LIKE '2024-06%' THEN CS.paymentStatus ELSE NULL END) AS JunePaymentStatus,
-MAX(CASE WHEN CS.rentDate LIKE '2024-07%' THEN CS.paymentStatus ELSE NULL END) AS JulyPaymentStatus,
-MAX(CASE WHEN CS.rentDate LIKE '2024-08%' THEN CS.paymentStatus ELSE NULL END) AS AugustPaymentStatus,
-MAX(CASE WHEN CS.rentDate LIKE '2024-09%' THEN CS.paymentStatus ELSE NULL END) AS SeptemberPaymentStatus,
-MAX(CASE WHEN CS.rentDate LIKE '2024-10%' THEN CS.paymentStatus ELSE NULL END) AS OctoberPaymentStatus,
-MAX(CASE WHEN CS.rentDate LIKE '2024-11%' THEN CS.paymentStatus ELSE NULL END) AS NovemberPaymentStatus,
-MAX(CASE WHEN CS.rentDate LIKE '2024-12%' THEN CS.paymentStatus ELSE NULL END) AS DecemberPaymentStatus
+MAX(CASE WHEN CS.rentDate LIKE '2024-01%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus1,
+MAX(CASE WHEN CS.rentDate LIKE '2024-02%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus2,
+MAX(CASE WHEN CS.rentDate LIKE '2024-03%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus3,
+MAX(CASE WHEN CS.rentDate LIKE '2024-04%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus4,
+MAX(CASE WHEN CS.rentDate LIKE '2024-05%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus5,
+MAX(CASE WHEN CS.rentDate LIKE '2024-06%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus6,
+MAX(CASE WHEN CS.rentDate LIKE '2024-07%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus7,
+MAX(CASE WHEN CS.rentDate LIKE '2024-08%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus8,
+MAX(CASE WHEN CS.rentDate LIKE '2024-09%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus9,
+MAX(CASE WHEN CS.rentDate LIKE '2024-10%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus10,
+MAX(CASE WHEN CS.rentDate LIKE '2024-11%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus11,
+MAX(CASE WHEN CS.rentDate LIKE '2024-12%' THEN CS.paymentStatus ELSE NULL END) AS paymentStatus12
 FROM room AS R
 LEFT JOIN contract AS C
 ON R.id = C.roomId
@@ -1974,11 +1990,12 @@ C.leaseType = '반전세',
 C.deposit = 40000,
 C.rent = 30,
 T.tenantName = '수정김'
-WHERE C.id = 6;
+WHERE C.id = 9;
 
 
 
 SELECT *
 FROM contract_Status 
-WHERE rentDate LIKE '2024-%1%' AND tenantId = 2;
+WHERE rentDate LIKE '2024-02%' AND tenantId = 2;
+
 

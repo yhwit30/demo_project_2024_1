@@ -35,4 +35,9 @@ public class UsrAjaxTestController {
 
 		return rs;
 	}
+	
+	@RequestMapping("/usr/home/input")
+	public String showInputPage() {
+		return "/usr/home/AjaxTest";
+	}
 }
