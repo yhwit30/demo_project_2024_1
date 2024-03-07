@@ -5,14 +5,14 @@
 <%@ include file="../../common/sidebar.jspf"%>
 
 
-
-
+<!-- 월별현황 링크에 hover -->
 <style type="text/css">
 .underlineClick>td>a:hover {
 	background-color: skyblue;
 	text-decoration: underline;
 }
 </style>
+
 
 <section class="mt-2 text-xl px-4">
 	<!-- 건물 카테고리 버튼 -->
@@ -31,9 +31,6 @@
 
 	<div class="mx-auto overflow-x-auto">
 		<table class="table-box-1 table" border="1">
-			<colgroup>
-				<col style="width: 10%" />
-			</colgroup>
 			<thead>
 				<tr>
 					<th>호실</th>
@@ -62,15 +59,13 @@
 						<td>${maintenanceFeeMonthly.tenantName }</td>
 						<td>${maintenanceFeeMonthly.leaseType }</td>
 
-
 						<c:forEach var="i" begin="1" end="12">
 							<c:set var="monthFee" value="monthlyMaintenanceFee${i }" />
 							<td>
-								<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId}&month=${i}">
+								<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId}&month=0${i}">
 									${maintenanceFeeMonthly[monthFee]} </a>
 							</td>
 						</c:forEach>
-
 
 						<td>#</td>
 					</tr>

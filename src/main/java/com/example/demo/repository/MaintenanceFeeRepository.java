@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -53,11 +54,11 @@ public interface MaintenanceFeeRepository {
 			LEFT JOIN
 			    maintenance_fee AS MF9 ON MF9.tenantId = T.id AND MF9.updateDate LIKE '${year}-09%'
 			LEFT JOIN
-			    maintenance_fee AS MF10 ON MF10.tenantId = T.id AND MF10.updateDate LIKE '${year}-10%'
+			    maintenance_fee AS MF10 ON MF10.tenantId = T.id AND MF10.updateDate LIKE '${year}-%10%'
 			LEFT JOIN
-			    maintenance_fee AS MF11 ON MF11.tenantId = T.id AND MF11.updateDate LIKE '${year}-11%'
+			    maintenance_fee AS MF11 ON MF11.tenantId = T.id AND MF11.updateDate LIKE '${year}-%11%'
 			LEFT JOIN
-			    maintenance_fee AS MF12 ON MF12.tenantId = T.id AND MF12.updateDate LIKE '${year}-12%'
+			    maintenance_fee AS MF12 ON MF12.tenantId = T.id AND MF12.updateDate LIKE '${year}-%12%'
 			GROUP BY
 			    R.id
 			HAVING B.id = #{bldgId}
@@ -78,7 +79,25 @@ public interface MaintenanceFeeRepository {
 			GROUP BY R.id
 			HAVING B.id = #{bldgId};
 			""")
-	List<MaintenanceFee> getMaintenanceFee(int bldgId, Integer year, String month);
+	List<MaintenanceFee> getMaintenanceFees(int bldgId, Integer year, String month);
+
+	@Select("""
+			SELECT *
+			FROM room AS R
+			LEFT JOIN contract AS C
+			ON R.id = C.roomId
+			LEFT JOIN building AS B
+			ON R.bldgId = B.id
+			LEFT JOIN tenant AS T
+			ON C.tenantId = T.id
+			LEFT JOIN maintenance_fee AS MF
+			ON MF.tenantId = T.id
+			WHERE MF.updateDate LIKE '${year}-${month}%'
+			AND MF.tenantId = #{tenantId}
+			GROUP BY R.id
+			HAVING B.id = #{bldgId};
+			""")
+	List<MaintenanceFee> getMaintenanceFee(int tenantId, int bldgId, Integer year, String month);
 
 	@Update("""
 			UPDATE maintenance_fee
@@ -100,12 +119,41 @@ public interface MaintenanceFeeRepository {
 			lateFee = #{lateFee},
 			lateMaintenanceFee = #{lateMaintenanceFee},
 			maintenanceFeeDate = #{maintenanceFeeDate}
-			WHERE tenantId = #{tenantId} 
+			WHERE tenantId = #{tenantId}
 			AND updateDate LIKE '${year}-${month}%'
 			""")
 	void modifyMaintenanceFee(int tenantId, int commonElec, int commonWater, int elevater, int internetTV,
 			int fireSafety, int waterUse, int waterCost, int waterBill, int elecUse, int elecCost, int elecBill,
 			int gasUse, int gasCost, int gasBill, int monthlyMaintenanceFee, int lateFee, int lateMaintenanceFee,
+			int maintenanceFeeDate, int year, String month);
+
+	@Insert("""
+			INSERT INTO maintenance_fee
+			SET regDate = NOW(),
+			commonElec = #{commonElec},
+			commonWater = #{commonWater},
+			elevater = #{elevater},
+			internetTV = #{internetTV},
+			fireSafety = #{fireSafety},
+			waterUse = #{waterUse},
+			waterCost = #{waterCost},
+			waterBill = #{waterBill},
+			elecUse = #{elecUse},
+			elecCost = #{elecCost},
+			elecBill = #{elecBill},
+			gasUse = #{gasUse},
+			gasCost = #{gasCost},
+			gasBill = #{gasBill},
+			monthlyMaintenanceFee = #{monthlyMaintenanceFee},
+			lateFee = #{lateFee},
+			lateMaintenanceFee = #{lateMaintenanceFee},
+			maintenanceFeeDate = #{maintenanceFeeDate},
+			tenantId = #{tenantId},
+			updateDate = '${year}-${month}'
+			""")
+	void addMaintenanceFee(int tenantId, int commonElec, int commonWater, int elevater, int internetTV, int fireSafety,
+			int waterUse, int waterCost, int waterBill, int elecUse, int elecCost, int elecBill, int gasUse,
+			int gasCost, int gasBill, int monthlyMaintenanceFee, int lateFee, int lateMaintenanceFee,
 			int maintenanceFeeDate, int year, String month);
 
 }

@@ -49,28 +49,30 @@ public class UsrMaintenanceFeeController {
 	}
 
 	@RequestMapping("/usr/bg12343/maintenanceFee/maintenanceFeeDetail")
-	public String getMaintenanceFeeDetail(Model model, @RequestParam(defaultValue = "1") int bldgId, Integer year, String month) {
+	public String getMaintenanceFeeDetail(Model model, @RequestParam(defaultValue = "1") int bldgId, Integer year,
+			String month) {
 
 		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
 		if (year == null) {
 			year = nowYear;
 		}
 
-		List<MaintenanceFee> maintenanceFee = maintenanceFeeService.getMaintenanceFee(bldgId, year, month);
+		List<MaintenanceFee> maintenanceFee = maintenanceFeeService.getMaintenanceFees(bldgId, year, month);
 
 		model.addAttribute("maintenanceFee", maintenanceFee);
 		return "usr/bg12343/maintenanceFee/maintenanceFeeDetail";
 	}
 
 	@RequestMapping("/usr/bg12343/maintenanceFee/maintenanceFeeModify")
-	public String showMaintenanceFeeModify(Model model, @RequestParam(defaultValue = "1") int bldgId, Integer year, String month) {
+	public String showMaintenanceFeeModify(Model model, @RequestParam(defaultValue = "1") int bldgId, Integer year,
+			String month) {
 
 		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
 		if (year == null) {
 			year = nowYear;
 		}
 
-		List<MaintenanceFee> maintenanceFee = maintenanceFeeService.getMaintenanceFee(bldgId, year, month);
+		List<MaintenanceFee> maintenanceFee = maintenanceFeeService.getMaintenanceFees(bldgId, year, month);
 
 		model.addAttribute("maintenanceFee", maintenanceFee);
 		return "usr/bg12343/maintenanceFee/maintenanceFeeModify";
@@ -80,7 +82,7 @@ public class UsrMaintenanceFeeController {
 	@ResponseBody
 	public String doMaintenanceFeeModify(int[] tenantId, int[] commonElec, int[] commonWater, int[] elevater,
 			int[] internetTV, int[] fireSafety, int[] waterUse, int[] waterCost, int[] elecUse, int[] elecCost,
-			int[] gasUse, int[] gasCost, int[] maintenanceFeeDate, @RequestParam(defaultValue = "1") int bldgId, Integer year, String month) {
+			int[] gasUse, int[] gasCost, int[] maintenanceFeeDate, int bldgId, Integer year, String month) {
 
 		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
 		if (year == null) {
@@ -88,32 +90,57 @@ public class UsrMaintenanceFeeController {
 		}
 
 		// 관리비 계산을 위한 배열생성
-		int[] waterBill = new int[tenantId.length];
-		int[] elecBill = new int[tenantId.length];
-		int[] gasBill = new int[tenantId.length];
-		int[] monthlyMaintenanceFee = new int[tenantId.length];
-		int[] lateFee = new int[tenantId.length];
-		int[] lateMaintenanceFee = new int[tenantId.length];
+		int[] waterBills = new int[tenantId.length];
+		int[] elecBills = new int[tenantId.length];
+		int[] gasBills = new int[tenantId.length];
+		int[] monthlyMaintenanceFees = new int[tenantId.length];
+		int[] lateFees = new int[tenantId.length];
+		int[] lateMaintenanceFees = new int[tenantId.length];
 
+		System.out.println(tenantId[0]);
+		System.out.println(tenantId[1]);
+		
+		// 기존에 데이터 없으면 insert 실행
+		List<MaintenanceFee> maintenanceFee = null;
+		for (int i = 0; i < tenantId.length; i++) {
+			int tenantCheck = tenantId[i];
+			maintenanceFee = maintenanceFeeService.getMaintenanceFee(tenantId[i], bldgId, year, month);
+			if(maintenanceFee.isEmpty() && tenantCheck != 0) {
+				
+					int waterBill = maintenanceFeeService.calculateBill(waterUse[i], waterCost[i]);
+					int elecBill = maintenanceFeeService.calculateBill(elecUse[i], elecCost[i]);
+					int gasBill = maintenanceFeeService.calculateBill(gasUse[i], gasCost[i]);
+					int monthlyMaintenanceFee = maintenanceFeeService.sumMaintenanceFee(waterBill, elecBill, gasBill);
+					int lateFee = maintenanceFeeService.caculateLateFee(monthlyMaintenanceFee);
+					int lateMaintenanceFee = maintenanceFeeService.sumMaintenanceFee(monthlyMaintenanceFee, lateFee);
+
+					maintenanceFeeService.addMaintenanceFee(tenantId[i], commonElec[i], commonWater[i], elevater[i],
+							internetTV[i], fireSafety[i], waterUse[i], waterCost[i], waterBill, elecUse[i], elecCost[i],
+							elecBill, gasUse[i], gasCost[i], gasBill, monthlyMaintenanceFee, lateFee,
+							lateMaintenanceFee, maintenanceFeeDate[i], year, month);
+				}
+		}
+		
 		// 관리비 정보 수정
 		ResultData maintenanceFeeModifyRd = null;
+
 		for (int i = 0; i < tenantId.length; i++) {
 
-			waterBill[i] = maintenanceFeeService.calculateBill(waterUse[i], waterCost[i]);
-			elecBill[i] = maintenanceFeeService.calculateBill(elecUse[i], elecCost[i]);
-			gasBill[i] = maintenanceFeeService.calculateBill(gasUse[i], gasCost[i]);
-			monthlyMaintenanceFee[i] = maintenanceFeeService.sumMaintenanceFee(waterBill[i], elecBill[i], gasBill[i]);
-			lateFee[i] = maintenanceFeeService.caculateLateFee(monthlyMaintenanceFee[i]);
-			lateMaintenanceFee[i] = maintenanceFeeService.sumMaintenanceFee(monthlyMaintenanceFee[i], lateFee[i]);
+			waterBills[i] = maintenanceFeeService.calculateBill(waterUse[i], waterCost[i]);
+			elecBills[i] = maintenanceFeeService.calculateBill(elecUse[i], elecCost[i]);
+			gasBills[i] = maintenanceFeeService.calculateBill(gasUse[i], gasCost[i]);
+			monthlyMaintenanceFees[i] = maintenanceFeeService.sumMaintenanceFee(waterBills[i], elecBills[i], gasBills[i]);
+			lateFees[i] = maintenanceFeeService.caculateLateFee(monthlyMaintenanceFees[i]);
+			lateMaintenanceFees[i] = maintenanceFeeService.sumMaintenanceFee(monthlyMaintenanceFees[i], lateFees[i]);
 
 			maintenanceFeeModifyRd = maintenanceFeeService.modifyMaintenanceFee(tenantId[i], commonElec[i],
-					commonWater[i], elevater[i], internetTV[i], fireSafety[i], waterUse[i], waterCost[i], waterBill[i],
-					elecUse[i], elecCost[i], elecBill[i], gasUse[i], gasCost[i], gasBill[i], monthlyMaintenanceFee[i],
-					lateFee[i], lateMaintenanceFee[i], maintenanceFeeDate[i], year, month);
+					commonWater[i], elevater[i], internetTV[i], fireSafety[i], waterUse[i], waterCost[i], waterBills[i],
+					elecUse[i], elecCost[i], elecBills[i], gasUse[i], gasCost[i], gasBills[i], monthlyMaintenanceFees[i],
+					lateFees[i], lateMaintenanceFees[i], maintenanceFeeDate[i], year, month);
 		}
 
 		return Ut.jsReplace(maintenanceFeeModifyRd.getResultCode(), maintenanceFeeModifyRd.getMsg(),
-				"../maintenanceFee/maintenanceFeeDetail?bldgId="+bldgId+"&month="+month);
+				"../maintenanceFee/maintenanceFeeDetail?bldgId=" + bldgId + "&month=" + month);
 	}
 
 }

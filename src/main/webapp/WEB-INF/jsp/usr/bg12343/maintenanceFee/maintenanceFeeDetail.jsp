@@ -9,9 +9,6 @@ ${param.month }월
 <section class="mt-2 text-xl px-4">
 	<div class="mx-auto overflow-x-auto">
 		<table class="table-box-1 table" border="1">
-			<colgroup>
-				<col style="width: 10%" />
-			</colgroup>
 			<thead>
 				<tr>
 					<th>건물명</th>
@@ -75,7 +72,7 @@ ${param.month }월
 
 	<div class="btns mt-5">
 		<a class="btn btn-outline" href="../maintenanceFee/maintenanceFee?bldgId=${param.bldgId }">월별 관리비</a>
-		<a class="btn btn-outline" href="../maintenanceFee/maintenanceFeeModify?bldgId=${param.bldgId }&month=${param.month}">전체 수정</a>
+		<a class="btn btn-outline" href="../maintenanceFee/maintenanceFeeModify?bldgId=${param.bldgId }&month=${param.month}">수정</a>
 		<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="#">삭제(todo)</a>
 	</div>
 

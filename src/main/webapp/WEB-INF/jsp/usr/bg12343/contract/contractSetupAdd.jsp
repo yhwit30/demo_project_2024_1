@@ -86,47 +86,47 @@
 				<tbody>
 					<c:forEach var="room" items="${rooms }">
 						<input type="hidden" name="roomId" value="${room.id }" />
-						<tr>
-							<td>${room.roomNum }</td>
-							<td>
-								<select class="select select-bordered select-sm w-20 max-w-xs" name="leaseType">
-									<option value="월세">월세</option>
-									<option value="전세">전세</option>
-									<option value="반전세">반전세</option>
-									<option value="0" selected>공실</option>
-								</select>
-							</td>
-							<td>
-								<input size="1" autocomplete="off" type="text" placeholder="세입자명을 입력해주세요" name="tenantName" />
-							</td>
-							<td>
-								<input size="1" autocomplete="off" type="text" placeholder="세입자번호를 입력해주세요" name="tenantPhone" />
-							</td>
-							<td>
-								<input size="1" autocomplete="off" type="text" placeholder="세입자번호를 입력해주세요" name="tenantCarNum" />
-							</td>
-							<td>
-								<input size="1" autocomplete="off" type="text" placeholder="보증금을 입력해주세요" name="deposit" />
-							</td>
-							<td>
-								<input size="3" autocomplete="off" type="text" placeholder="월세를 입력해주세요" name="rent" />
-							</td>
-							<td>
-								<input size="3" autocomplete="off" type="text" placeholder="관리비를 입력해주세요" name="maintenanceFee" />
-							</td>
-							<td>
-								<input size="3" autocomplete="off" type="text" placeholder="계약시작일을 입력해주세요" name="contractStartDate" />
-							</td>
-							<td>
-								<input size="3" autocomplete="off" type="text" placeholder="계약만료일을 입력해주세요" name="contractEndDate" />
-							</td>
-							<td>
-								<input size="3" autocomplete="off" type="text" placeholder="보증금납부일을 입력해주세요" name="depositDate" />
-							</td>
-							<td>
-								<input size="3" autocomplete="off" type="text" placeholder="월세 납부일을 입력해주세요" name="rentDate" />
-							</td>
-						</tr>
+							<tr>
+								<td>${room.roomNum }</td>
+								<td>
+									<select class="select select-bordered select-sm w-20 max-w-xs" name="leaseType">
+										<option value="월세">월세</option>
+										<option value="전세">전세</option>
+										<option value="반전세">반전세</option>
+										<option value="0" selected>공실</option>
+									</select>
+								</td>
+								<td>
+									<input size="1" autocomplete="off" type="text" placeholder="세입자명을 입력해주세요" name="tenantName" />
+								</td>
+								<td>
+									<input size="1" autocomplete="off" type="text" placeholder="세입자번호를 입력해주세요" name="tenantPhone" />
+								</td>
+								<td>
+									<input size="1" autocomplete="off" type="text" placeholder="세입자번호를 입력해주세요" name="tenantCarNum" />
+								</td>
+								<td>
+									<input size="1" autocomplete="off" type="text" placeholder="보증금을 입력해주세요" name="deposit" />
+								</td>
+								<td>
+									<input size="3" autocomplete="off" type="text" placeholder="월세를 입력해주세요" name="rent" />
+								</td>
+								<td>
+									<input size="3" autocomplete="off" type="text" placeholder="관리비를 입력해주세요" name="maintenanceFee" />
+								</td>
+								<td>
+									<input size="3" autocomplete="off" type="text" placeholder="계약시작일을 입력해주세요" name="contractStartDate" />
+								</td>
+								<td>
+									<input size="3" autocomplete="off" type="text" placeholder="계약만료일을 입력해주세요" name="contractEndDate" />
+								</td>
+								<td>
+									<input size="3" autocomplete="off" type="text" placeholder="보증금납부일을 입력해주세요" name="depositDate" />
+								</td>
+								<td>
+									<input size="3" autocomplete="off" type="text" placeholder="월세 납부일을 입력해주세요" name="rentDate" />
+								</td>
+							</tr>
 					</c:forEach>
 				</tbody>
 			</table>
