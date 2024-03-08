@@ -76,7 +76,7 @@
 
 				<c:if test="${rq.isLogined()}">
 					<li>
-						<a class="hover:underline" href="usr/article/write">
+						<a class="hover:underline" href="../article/write">
 							<i class="fa-solid fa-pen-nib"></i>
 						</a>
 					</li>
@@ -84,7 +84,7 @@
 
 				<c:if test="${rq.isLogined()}">
 					<li>
-						<a class="hover:underline" href="usr/article/list?boardId=0">
+						<a class="hover:underline" href="../article/list?boardId=0">
 							<i class="fa-solid fa-table-list"></i>
 						</a>
 						<ul>
