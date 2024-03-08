@@ -1,6 +1,8 @@
 package com.example.demo.util;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
+import java.net.URLEncoder;
 import java.util.Map;
 
 public class Ut {
@@ -81,4 +83,14 @@ public class Ut {
 				""", resultMsg, replaceUri);
 	}
 
+	public static String getEncodedCurrentUri(String currentUri) {
+
+		try {
+			return URLEncoder.encode(currentUri, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return currentUri;
+		}
+
+	}
 }

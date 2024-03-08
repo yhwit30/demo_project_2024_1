@@ -1,6 +1,8 @@
 package com.example.demo.vo;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -108,6 +110,35 @@ public class Rq {
 
 		return currentUri;
 
+	}
+
+	public void jsprintReplace(String resultCode, String msg, String replaceUri) {
+		resp.setContentType("text/html; charset=UTF-8");
+		print(Ut.jsReplace(resultCode, msg, replaceUri));
+
+	}
+	
+	public String getLoginUri() {
+		return "../member/login?afterLoginUri=" + getAfterLoginUri();
+	}
+
+	private String getAfterLoginUri() {
+		return getEncodedCurrentUri();
+	}
+
+	public String getEncodedCurrentUri() {
+		return Ut.getEncodedCurrentUri(getCurrentUri());
+	}
+	
+	public String getLogoutUri() {
+		return "../member/doLogout?afterLogoutUri=" + getAfterLogoutUri();
+	}
+
+	private String getAfterLogoutUri() {
+
+		String requestUri = req.getRequestURI();
+
+		return getEncodedCurrentUri();
 	}
 
 }
