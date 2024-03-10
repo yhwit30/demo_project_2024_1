@@ -67,7 +67,9 @@
 						<td>${maintenanceFee.lateFee }</td>
 						<td>${maintenanceFee.lateMaintenanceFee }</td>
 						<td>${maintenanceFee.maintenanceFeeDate }</td>
-						<td>PDF 저장</td>
+						<td>
+						<a class="btn btn-sm" href="../maintenanceFee/pdfExport" target="_blank">PDF</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

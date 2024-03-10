@@ -1,29 +1,37 @@
 package com.example.demo.controller;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.itextpdf.kernel.geom.PageSize;
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Paragraph;
+import com.example.demo.service.PdfTestService;
+import com.lowagie.text.DocumentException;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 public class UsrPdfTestController {
 
-	public static void main(String[] args) throws FileNotFoundException {
+	@Autowired
+	private PdfTestService pdfTestService;
+
+	@RequestMapping("usr/pdf/generate")
+	public void generatePDF(HttpServletResponse response) throws DocumentException, IOException {
+		response.setContentType("application/pdf");
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:mm:ss");
+		String currentDateTime = dateFormatter.format(new Date());
 		
+		String headerKey = "Content-Disposition";
+		String headerValue = "inline; filename=pdf_" + currentDateTime + ".pdf";
+		response.setHeader(headerKey, headerValue);
 		
-		String path = "c:\\work\\sample2.pdf";
-		PdfWriter pdfWriter = new PdfWriter(path);
-		PdfDocument pdfDocument = new PdfDocument(pdfWriter);
-		pdfDocument.setDefaultPageSize(PageSize.A4);
-		Document document = new Document(pdfDocument);
-		
-		document.add(new Paragraph("Hello coding"));
-		document.close();
-		
-		}
+		pdfTestService.export(response);
+
+	}
+	
 }

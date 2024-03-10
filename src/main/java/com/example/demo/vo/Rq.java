@@ -99,14 +99,14 @@ public class Rq {
 		String currentUri = req.getRequestURI();
 		String queryString = req.getQueryString();
 
-		System.err.println(currentUri);
-		System.err.println(queryString);
+//		System.err.println(currentUri);
+//		System.err.println(queryString);
 
 		if (currentUri != null && queryString != null) {
 			currentUri += "?" + queryString;
 		}
 
-		System.out.println(currentUri);
+//		System.out.println(currentUri);
 
 		return currentUri;
 

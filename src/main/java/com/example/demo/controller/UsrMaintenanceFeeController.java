@@ -1,6 +1,10 @@
 package com.example.demo.controller;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +16,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.service.BuildingService;
 import com.example.demo.service.MaintenanceFeeService;
+import com.example.demo.service.PdfService;
 import com.example.demo.util.Ut;
 import com.example.demo.vo.Building;
 import com.example.demo.vo.MaintenanceFee;
 import com.example.demo.vo.ResultData;
+import com.lowagie.text.DocumentException;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 public class UsrMaintenanceFeeController {
@@ -29,6 +37,9 @@ public class UsrMaintenanceFeeController {
 	@Autowired
 	private BuildingService buildingService;
 
+	@Autowired
+	private PdfService pdfService;
+	
 	// 액션 메소드
 	@RequestMapping("/usr/bg12343/maintenanceFee/maintenanceFee")
 	public String getMaintenanceFee(Model model, @RequestParam(defaultValue = "1") int bldgId, Integer year) {
@@ -170,5 +181,20 @@ public class UsrMaintenanceFeeController {
 		return Ut.jsReplace(maintenanceFeeModifyRd.getResultCode(), maintenanceFeeModifyRd.getMsg(),
 				"../maintenanceFee/maintenanceFeeDetail?bldgId=" + bldgId + "&month=" + month);
 	}
+	
+	@RequestMapping("usr/bg12343/maintenanceFee/pdfExport")
+	public void generatePDF(HttpServletResponse response) throws DocumentException, IOException {
+		response.setContentType("application/pdf");
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:mm:ss");
+		String currentDateTime = dateFormatter.format(new Date());
+		
+		String headerKey = "Content-Disposition";
+		String headerValue = "inline; filename=pdf_" + currentDateTime + ".pdf";
+		response.setHeader(headerKey, headerValue);
+		
+		pdfService.export(response);
+
+	}
+	
 
 }
