@@ -97,7 +97,7 @@ public interface MaintenanceFeeRepository {
 			GROUP BY R.id
 			HAVING B.id = #{bldgId};
 			""")
-	List<MaintenanceFee> getMaintenanceFee(int tenantId, int bldgId, Integer year, String month);
+	MaintenanceFee getMaintenanceFee(int tenantId, int bldgId, Integer year, String month);
 
 	@Update("""
 			UPDATE maintenance_fee

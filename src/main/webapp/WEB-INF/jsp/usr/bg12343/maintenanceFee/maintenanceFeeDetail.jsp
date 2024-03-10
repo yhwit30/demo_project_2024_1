@@ -9,13 +9,14 @@
 	<div class="btns">
 		<a class="btn btn-outline" href="../maintenanceFee/maintenanceFee?bldgId=${param.bldgId }">월별 관리비 돌아가기</a>
 	</div>
+	
+	건물: ${building.bldgName }
 	${param.month }월
 
 	<div class="mx-auto overflow-x-auto">
 		<table class="table-box-1 table" border="1">
 			<thead>
 				<tr>
-					<th>건물명</th>
 					<th>호실</th>
 					<th>세입자</th>
 					<th>임대형태</th>
@@ -43,9 +44,8 @@
 			</thead>
 			<tbody>
 
-				<c:forEach var="maintenanceFee" items="${maintenanceFee }">
+				<c:forEach var="maintenanceFee" items="${maintenanceFees }">
 					<tr class="hover">
-						<td>${maintenanceFee.bldgName }</td>
 						<td>${maintenanceFee.roomNum }</td>
 						<td>${maintenanceFee.tenantName }</td>
 						<td>${maintenanceFee.leaseType }</td>
@@ -68,7 +68,7 @@
 						<td>${maintenanceFee.lateMaintenanceFee }</td>
 						<td>${maintenanceFee.maintenanceFeeDate }</td>
 						<td>
-						<a class="btn btn-sm" href="../maintenanceFee/pdfExport" target="_blank">PDF</a>
+						<a class="btn btn-sm" href="../maintenanceFee/pdfExport?tenantId=${maintenanceFee.tenantId }&bldgId=${param.bldgId }&month=${param.month}" target="_blank">PDF</a>
 						</td>
 					</tr>
 				</c:forEach>

@@ -39,7 +39,7 @@ public class UsrMaintenanceFeeController {
 
 	@Autowired
 	private PdfService pdfService;
-	
+
 	// 액션 메소드
 	@RequestMapping("/usr/bg12343/maintenanceFee/maintenanceFee")
 	public String getMaintenanceFee(Model model, @RequestParam(defaultValue = "1") int bldgId, Integer year) {
@@ -77,9 +77,12 @@ public class UsrMaintenanceFeeController {
 			year = nowYear;
 		}
 
-		List<MaintenanceFee> maintenanceFee = maintenanceFeeService.getMaintenanceFees(bldgId, year, month);
+		List<MaintenanceFee> maintenanceFees = maintenanceFeeService.getMaintenanceFees(bldgId, year, month);
 
-		model.addAttribute("maintenanceFee", maintenanceFee);
+		Building building = buildingService.getForPrintBuilding(bldgId);
+
+		model.addAttribute("maintenanceFees", maintenanceFees);
+		model.addAttribute("building", building);
 		return "usr/bg12343/maintenanceFee/maintenanceFeeDetail";
 	}
 
@@ -135,14 +138,14 @@ public class UsrMaintenanceFeeController {
 		int[] lateMaintenanceFees = new int[tenantId.length];
 
 		// insert 실행- UX 생각해서 수정버튼으로 추가로 처리함
-		List<MaintenanceFee> maintenanceFee = null;
+		MaintenanceFee maintenanceFee = null;
 		for (int i = 0; i < tenantId.length; i++) {
 
 			// 기존에 데이터가 없거나, tenantId가 0이 아닌 경우 insert 한다. 0을 거를 수 있는 이유는 sql을 not null로 했기
 			// 때문일 것.
 			int tenantCheck = tenantId[i];
 			maintenanceFee = maintenanceFeeService.getMaintenanceFee(tenantId[i], bldgId, year, month);
-			if (maintenanceFee.isEmpty() && tenantCheck != 0) {
+			if (maintenanceFee == null && tenantCheck != 0) {
 
 				int waterBill = maintenanceFeeService.calculateBill(waterUse[i], waterCost[i]);
 				int elecBill = maintenanceFeeService.calculateBill(elecUse[i], elecCost[i]);
@@ -181,20 +184,30 @@ public class UsrMaintenanceFeeController {
 		return Ut.jsReplace(maintenanceFeeModifyRd.getResultCode(), maintenanceFeeModifyRd.getMsg(),
 				"../maintenanceFee/maintenanceFeeDetail?bldgId=" + bldgId + "&month=" + month);
 	}
-	
+
 	@RequestMapping("usr/bg12343/maintenanceFee/pdfExport")
-	public void generatePDF(HttpServletResponse response) throws DocumentException, IOException {
+	public void generatePDF(HttpServletResponse response, int tenantId, int bldgId, Integer year, String month)
+			throws DocumentException, IOException {
+
+		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
+		if (year == null) {
+			year = nowYear;
+		}
+
+		// 파일 형식설정(없어도 되기는 한다?)
 		response.setContentType("application/pdf");
+
+		// pdf 파일에 시간정보 추가
 		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:mm:ss");
 		String currentDateTime = dateFormatter.format(new Date());
-		
+
+		// pdf 저장방식 설정
 		String headerKey = "Content-Disposition";
 		String headerValue = "inline; filename=pdf_" + currentDateTime + ".pdf";
 		response.setHeader(headerKey, headerValue);
-		
-		pdfService.export(response);
+
+		pdfService.export(response, tenantId, bldgId, year, month);
 
 	}
-	
 
 }

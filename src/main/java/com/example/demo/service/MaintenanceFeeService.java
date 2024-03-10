@@ -60,7 +60,7 @@ public class MaintenanceFeeService {
 
 	}
 
-	public List<MaintenanceFee> getMaintenanceFee(int tenantId, int bldgId, Integer year, String month) {
+	public MaintenanceFee getMaintenanceFee(int tenantId, int bldgId, Integer year, String month) {
 		return maintenanceFeeRepository.getMaintenanceFee(tenantId, bldgId, year, month);
 	}
 
