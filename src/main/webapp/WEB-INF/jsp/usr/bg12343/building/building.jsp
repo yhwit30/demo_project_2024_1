@@ -65,7 +65,7 @@
 					<th>기준 보증금</th>
 					<th>기준 월세</th>
 					<th>기준 전세</th>
-					<th>비품</th>
+					<th>비품(todo)</th>
 					<th>메모</th>
 				</tr>
 			</thead>
