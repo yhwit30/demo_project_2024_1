@@ -47,10 +47,12 @@ header>div>ul>li {
 header>div>ul>li>ul {
     display: none;
     position: absolute;
+    background-color: white;
+	z-index: 1;
 }
 
 /* 밝은 테마에서의 네비게이션 2차 메뉴 배경색 */
-html[data-theme='light'] header>div>ul>li>ul {
+html[data-theme='autumn'] header>div>ul>li>ul {
     background-color: white; /* 또는 밝은 테마에 적합한 다른 색상 */
 }
 
