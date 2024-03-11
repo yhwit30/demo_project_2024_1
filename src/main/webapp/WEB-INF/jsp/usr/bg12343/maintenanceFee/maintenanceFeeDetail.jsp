@@ -9,9 +9,8 @@
 	<div class="btns">
 		<a class="btn btn-outline" href="../maintenanceFee/maintenanceFee?bldgId=${param.bldgId }">월별 관리비 돌아가기</a>
 	</div>
-	
-	건물: ${building.bldgName }
-	${param.month }월
+
+	건물: ${building.bldgName } ${param.month }월
 
 	<div class="mx-auto overflow-x-auto">
 		<table class="table-box-1 table" border="1">
@@ -68,7 +67,12 @@
 						<td>${maintenanceFee.lateMaintenanceFee }</td>
 						<td>${maintenanceFee.maintenanceFeeDate }</td>
 						<td>
-						<a class="btn btn-sm" href="../maintenanceFee/pdfExport?tenantId=${maintenanceFee.tenantId }&bldgId=${param.bldgId }&month=${param.month}" target="_blank">PDF</a>
+							<c:if test="${maintenanceFee.tenantName != null }">
+								<a class="btn btn-sm"
+									href="../maintenanceFee/pdfExport?tenantId=${maintenanceFee.tenantId }&bldgId=${param.bldgId }&month=${param.month}"
+									target="_blank"
+								>PDF</a>
+							</c:if>
 						</td>
 					</tr>
 				</c:forEach>
