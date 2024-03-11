@@ -117,10 +117,10 @@ public class PdfService {
 		Font fontTitle = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
 		fontTitle.setSize(18);
 		Font fontParagraph = FontFactory.getFont(FontFactory.HELVETICA);
-		fontParagraph.setSize(12);
+		fontParagraph.setSize(10);
 		// 한글은 추가로 폰트 넣어줘야함
 		BaseFont baseFont = BaseFont.createFont("c:/windows/fonts/malgun.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-		Font font = new Font(baseFont, 12);
+		Font font = new Font(baseFont, 10);
 		Font titleFont = new Font(baseFont, 18);
 
 		// 내용설정
