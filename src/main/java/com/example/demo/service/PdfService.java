@@ -63,7 +63,7 @@ public class PdfService {
 		cell.setPhrase(new Phrase("세부금액", font));
 		table.addCell(cell);
 		
-		table.addCell(new Phrase("엘레베이터", font));
+		table.addCell(new Phrase("엘리베이터", font));
 		table.addCell(new Phrase("" + maintenanceFee.getElevater()));
 		table.addCell(new Phrase("소방안전", font));
 		table.addCell(new Phrase("" + maintenanceFee.getFireSafety()));
