@@ -11,6 +11,7 @@ import com.example.demo.vo.MaintenanceFee;
 import com.lowagie.text.Cell;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
+import com.lowagie.text.Element;
 import com.lowagie.text.Font;
 import com.lowagie.text.FontFactory;
 import com.lowagie.text.PageSize;
@@ -32,8 +33,9 @@ public class PdfService {
 	private void writeTableData(PdfPTable table, Font font, MaintenanceFee maintenanceFee) {
 		// header용 셀
 		PdfPCell cell = new PdfPCell();
-		cell.setBackgroundColor(Color.blue);
+		cell.setBackgroundColor(Color.LIGHT_GRAY);
 		cell.setPadding(5);
+		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 		// 표 단락 나누기용 셀
 		PdfPCell cellFloat = new PdfPCell();

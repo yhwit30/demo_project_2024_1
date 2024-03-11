@@ -30,4 +30,9 @@ public class UsrAPITestController {
 		return "/usr/home/APITest4";
 	}
 
+	@RequestMapping("/usr/home/AddFindTest")
+	public String AddFindTest() {
+
+		return "/usr/home/AddFindTest";
+	}
 }
