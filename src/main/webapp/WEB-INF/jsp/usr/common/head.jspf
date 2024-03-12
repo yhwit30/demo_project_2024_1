@@ -83,7 +83,7 @@
 
 				<c:if test="${rq.isLogined()}">
 					<li>
-						<a class="hover:underline" href="/">${rq.loginedMemberNickname }님<i class="fa-solid fa-handshake"></i>
+						<a class="hover:underline" href="/usr/member/myPage">${rq.loginedMemberNickname }님<i class="fa-solid fa-handshake"></i>
 						</a>
 					</li>
 				</c:if>
@@ -96,24 +96,25 @@
 					</li>
 				</c:if>
 
-				<c:if test="${rq.isLogined()}">
-					<li>
-						<a class="hover:underline" href="../article/list?boardId=0">
-							<i class="fa-solid fa-table-list"></i>
-						</a>
-						<ul>
-							<li>
-								<a class="hover:underline" href="../article/list?boardId=1&page=1">NOTICE</a>
-							</li>
-							<li>
-								<a class="hover:underline" href="../article/list?boardId=2&page=1">FREE</a>
-							</li>
-							<li>
-								<a class="hover:underline" href="../article/list?boardId=3&page=1">QnA</a>
-							</li>
-						</ul>
-					</li>
-				</c:if>
+				<!-- 목록 메뉴 -->
+				<%-- 				<c:if test="${rq.isLogined()}"> --%>
+<!-- 					<li> -->
+<!-- 						<a class="hover:underline" href="../article/list?boardId=0"> -->
+<!-- 							<i class="fa-solid fa-table-list"></i> -->
+<!-- 						</a> -->
+<!-- 						<ul> -->
+<!-- 							<li> -->
+<!-- 								<a class="hover:underline" href="../article/list?boardId=1&page=1">NOTICE</a> -->
+<!-- 							</li> -->
+<!-- 							<li> -->
+<!-- 								<a class="hover:underline" href="../article/list?boardId=2&page=1">FREE</a> -->
+<!-- 							</li> -->
+<!-- 							<li> -->
+<!-- 								<a class="hover:underline" href="../article/list?boardId=3&page=1">QnA</a> -->
+<!-- 							</li> -->
+<!-- 						</ul> -->
+<!-- 					</li> -->
+<%-- 				</c:if> --%>
 
 				<c:if test="${!rq.isLogined()}">
 					<li>
@@ -127,9 +128,6 @@
 				</c:if>
 
 				<c:if test="${rq.isLogined()}">
-					<li>
-						<a class="hover:underline" href="/usr/member/myPage">MYPAGE</a>
-					</li>
 					<li>
 						<a onclick="if(confirm('로그아웃하시겠습니까?') == false) return false;" class="hover:underline" href="/usr/member/doLogout?${rq.logoutUri }">LOGOUT</a>
 					</li>

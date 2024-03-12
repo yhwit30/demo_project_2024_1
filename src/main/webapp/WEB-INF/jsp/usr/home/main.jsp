@@ -22,7 +22,7 @@
 
 
 
-<div class="page mt-20 main-page mx-auto">
+<div class="page mt-10 main-page mx-auto">
 	<div>
 		<a class="btn btn-outline" href="/usr/bg12343/dashboard/dashboard?bldgId=1"> 임대현황DAHBOARD</a>
 		<div class="menu">

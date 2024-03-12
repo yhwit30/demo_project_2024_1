@@ -37,11 +37,31 @@ header>div>ul>li {
 	margin-right: 30px;
 }
 
-.table-box-1 th, .table-box-1 td {
+/* 표 디자인 */
+.table-box-1 th{
 	border: 1px solid black;
 	padding: 9px;
 	text-align: center;
+	color: #fff;
+	box-shadow: 0 0 20px rgba(0,0,0,0.1);
 }
+
+.table-box-1 td {
+	border: 1px solid black;
+	padding: 9px;
+	text-align: center;
+	color: black;
+	}
+
+.table-box-1 th{
+	background-color: #55608f;
+}
+
+.table-box-1 tr{
+	background-color: linear-gradient(45deg, #49a09d, #5f2c82);
+	}
+
+
 
 /* 기본 네비게이션 2차 메뉴 스타일 */
 header>div>ul>li>ul {

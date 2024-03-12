@@ -7,7 +7,7 @@
 <h1 style="text-align:center">전체 건물 목록</h1>
 <section class="mt-2 text-xl px-4">
 	<div class="mx-auto overflow-x-auto">
-		<table class="table-box-1 table" border="1">
+		<table class="table-box-1 table-sm" border="1">
 			<thead>
 				<tr>
 					<th>번호</th>
@@ -56,7 +56,7 @@
 	<div class="badge badge-outline">${roomsCnt }개</div>
 	<!-- 호실정보 가져오기 -->
 	<div class="mx-auto overflow-x-auto">
-		<table class="table-box-1 table" border="1">
+		<table class="table-box-1 table-sm" border="1">
 			<thead>
 				<tr>
 					<th>호실</th>
