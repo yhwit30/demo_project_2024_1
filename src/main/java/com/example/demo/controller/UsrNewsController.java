@@ -15,8 +15,12 @@ public class UsrNewsController {
 		UsrCrawlingNews news = new UsrCrawlingNews();
 		
 		List<String> daumNews = news.daum();
+		List<String> naverNews = news.naver();
+		List<String> googleNews = news.google();
 		
 		model.addAttribute("daumNews", daumNews);
+		model.addAttribute("naverNews", naverNews);
+		model.addAttribute("googleNews", googleNews);
 		return "usr/news/news";
 
 	}
