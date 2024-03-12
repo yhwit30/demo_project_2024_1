@@ -43,7 +43,7 @@
 		<div class="menu">자유글</div>
 	</div>
 	<div>
-		뉴스
+		<a class="btn btn-outline" href="/usr/news/news">뉴스</a>
 		<div class="menu">다음</div>
 		<div class="menu">네이버</div>
 		<div class="menu">구글</div>
