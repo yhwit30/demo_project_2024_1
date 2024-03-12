@@ -51,12 +51,26 @@
   });
 </script>
 
+<style>
+#logo{
+	background-image: url("/resource/logo.png");
+	height: 100px;
+	width: 100px;
+	background-size: cover;
+	margin-top: 10px;
+}
+
+</style>
+
+
+
+
 </head>
 <body>
 	<header>
 		<div class="h-16 flex items-center text-3xl">
-			<a class="pl-3" href="/">
-				<button class="button">BG12343</button>
+			<a class="ml-1" href="/">
+				<img id="logo" src="/resource/logo.png"/>
 			</a>
 
 			<!-- 게시판 헤드 -->

@@ -79,14 +79,16 @@ header>div>ul>li:hover>ul {
 .side_menu > ul > li > a{
 	display: block;
 	padding: 10px;
-	background-color: skyblue;
-	margin-bottom: 15px;
+/* 	background-color: skyblue; */
+	border-bottom: 1px solid black;
+	margin-bottom: 10px;
 	color: black;
 }
 
 .side_bar_push{
 	margin-left: 100px;
 }
+
 
 
 
