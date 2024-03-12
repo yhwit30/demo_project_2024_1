@@ -1,19 +1,21 @@
 /* 폰트 */
-
 @font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'LINESeedKR-Bd';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
-    font-weight: 700;
-    font-style: normal;
+	font-family: 'Pretendard-Regular';
+	src:
+		url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
+		format('woff');
+	font-weight: 400;
+	font-style: normal;
 }
 
-
+@font-face {
+	font-family: 'LINESeedKR-Bd';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2')
+		format('woff2');
+	font-weight: 700;
+	font-style: normal;
+}
 
 html>body {
 	font-family: 'Pretendard-Regular';
@@ -38,83 +40,67 @@ header>div>ul>li {
 }
 
 /* 표 디자인 */
-.table-box-1 th{
-	border: 1px solid black;
-	padding: 9px;
-	text-align: center;
-	color: #fff;
-	box-shadow: 0 0 20px rgba(0,0,0,0.1);
+.table-box-1 {
+	width: 100%;
+	margin-bottom: 1.5em;
 }
 
-.table-box-1 td {
-	border: 1px solid black;
-	padding: 9px;
-	text-align: center;
-	color: black;
-	}
-
-.table-box-1 th{
-	background-color: #55608f;
+.table-box-1 thead th {
+	background-color: #1d96b2;
+	border: 1px solid #1d96b2;
+	font-weight: normal;
+	text-align: left;
+	color: white;
 }
-
-.table-box-1 tr{
-	background-color: linear-gradient(45deg, #49a09d, #5f2c82);
-	}
-
-
 
 /* 기본 네비게이션 2차 메뉴 스타일 */
 header>div>ul>li>ul {
-    display: none;
-    position: absolute;
-    background-color: white;
+	display: none;
+	position: absolute;
+	background-color: white;
 	z-index: 1;
 }
 
 /* 밝은 테마에서의 네비게이션 2차 메뉴 배경색 */
 html[data-theme='autumn'] header>div>ul>li>ul {
-    background-color: white; /* 또는 밝은 테마에 적합한 다른 색상 */
+	background-color: white; /* 또는 밝은 테마에 적합한 다른 색상 */
 }
 
 /* 어두운 테마에서의 네비게이션 2차 메뉴 배경색 */
 html[data-theme='dark'] header>div>ul>li>ul {
-    background-color: #333333; /* 또는 어두운 테마에 적합한 다른 색상 */
+	background-color: #333333; /* 또는 어두운 테마에 적합한 다른 색상 */
 }
 
 /* 네비게이션 2차 메뉴 호버 스타일 */
 header>div>ul>li:hover>ul {
-    display: block;
+	display: block;
 }
 
 /* 대쉬보드 메뉴바 */
 .side_bar {
 	width: 100px;
 	height: 100%;
-	overflow:auto;
+	overflow: auto;
 	position: fixed;
 	border-right: thin solid gold; /* 	색깔 임시로 */
-
 }
 
-.side_menu > ul > li > a{
+.side_menu>ul>li>a {
 	display: block;
 	padding-right: 10px;
 	padding-left: 5px;
 	padding-top: 10px;
-/* 	background-color: skyblue; */
+	/* 	background-color: skyblue; */
 	border-bottom: 1px solid black;
 	margin-bottom: 10px;
 	color: black;
 }
 
-.side_bar_push{
+.side_bar_push {
 	margin-left: 100px;
 }
 
 /* 페이지 제목 위치 */
-#pageTitle{
+#pageTitle {
 	margin-left: 105px;
 }
-
-
-
