@@ -11,10 +11,10 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 public class UsrCrawlingNews {
 
-	public ArrayList<String> naver() {
+	public List<String> naver() {
 
 		// 결과 담을 변수
-		ArrayList<String> naverNews = new ArrayList<>();
+		List<String> naverNews = new ArrayList<>();
 
 		// 크롬 드라이버 경로 설정 (크롬 드라이버 설치 필요)
 		System.setProperty("webdriver.chrome.driver", "C:/work/chromedriver.exe");
@@ -68,10 +68,10 @@ public class UsrCrawlingNews {
 //		System.out.println("데이터를 파일에 저장했습니다.");
 //	}
 
-	public ArrayList<String> daum() {
+	public List<String> daum() {
 
 		// 결과 담을 변수
-		ArrayList<String> daumNews = new ArrayList<>();
+		List<String> daumNews = new ArrayList<>();
 
 		// 크롬 드라이버 경로 설정 (크롬 드라이버 설치 필요)
 		System.setProperty("webdriver.chrome.driver", "C:/work/chromedriver.exe");
@@ -114,10 +114,10 @@ public class UsrCrawlingNews {
 		return daumNews;
 	}
 
-	public ArrayList<String> google() {
+	public List<String> google() {
 
 		// 결과 담을 변수
-		ArrayList<String> googleNews = new ArrayList<>();
+		List<String> googleNews = new ArrayList<>();
 
 		// 크롬 드라이버 경로 설정 (크롬 드라이버 설치 필요)
 		System.setProperty("webdriver.chrome.driver", "C:/work/chromedriver.exe");

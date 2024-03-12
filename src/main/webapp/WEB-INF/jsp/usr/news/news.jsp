@@ -8,7 +8,14 @@
 <h1>news page</h1>
 
 
-<div></div>
+<div>
+	<c:forEach var="daumNews" items="${daumNews }">
+
+${daumNews }
+
+</c:forEach>
+</div>
+
 
 <div></div>
 
