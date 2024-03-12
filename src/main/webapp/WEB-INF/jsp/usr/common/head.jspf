@@ -69,7 +69,7 @@
 <body>
 	<header>
 		<div class="h-16 flex items-center text-3xl">
-			<a class="ml-1" href="/">
+			<a href="/">
 				<img id="logo" src="/resource/logo.png"/>
 			</a>
 
@@ -137,5 +137,5 @@
 			</ul>
 		</div>
 	</header>
-	<h2>${pageTitle }</h2>
+	<h2 id="pageTitle">${pageTitle }</h2>
 	<hr />
