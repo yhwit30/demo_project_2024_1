@@ -33,7 +33,7 @@ header>div>ul>li {
 }
 
 .table-box-1>thead tr {
-	background: linear-gradient(to right, #536976, #292e49);
+	background: linear-gradient(to right, #536976, #292e49); /* 로얄블루 색상 */
 }
 
 .table-box-1 th {

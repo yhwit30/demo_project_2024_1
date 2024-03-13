@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class UsrAPITestController {
+public class UsrAPITest {
 
 	@RequestMapping("/usr/home/APITest")
 	public String APITest() {

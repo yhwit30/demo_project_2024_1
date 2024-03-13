@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class UsrAjaxTestController {
+public class UsrAjaxTest {
 
 	@RequestMapping("/usr/home/plus")
 	public String showTestPage() {

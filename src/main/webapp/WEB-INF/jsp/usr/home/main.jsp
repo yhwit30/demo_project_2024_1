@@ -32,7 +32,7 @@
 			<a class="btn btn-outline" href="/usr/bg12343/dashboard/rentStatus?bldgId=1">수납관리</a>
 		</div>
 		<div class="menu">
-			<a class="btn btn-outline" href="/usr/bg12343/tenant/tenant">세입자 현황</a>
+			<a class="btn btn-outline" href="/usr/bg12343/maintenanceFee/maintenanceFee">관리비</a>
 		</div>
 
 	</div>
@@ -54,6 +54,7 @@
 
 
 <style type="text/css">
+
 .mainSearch {
 	text-align: center;
 }
@@ -69,7 +70,7 @@
 .menu {
 	width: 180px;
 	height: 80px;
-	border: 3px solid pink;
+/* 	border: 3px solid pink; */
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 20px;
@@ -84,15 +85,15 @@
 }
 
 .main-page>div:nth-child(1) {
-	border: 3px solid blue;
+/* 	border: 3px solid blue; */
 }
 
 .main-page>div:nth-child(2) {
-	border: 3px solid gold;
+/* 	border: 3px solid gold; */
 }
 
 .main-page>div:nth-child(3) {
-	border: 3px solid green;
+/* 	border: 3px solid green; */
 }
 </style>
 
