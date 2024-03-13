@@ -491,15 +491,7 @@ FROM building AS B
 INNER JOIN room AS R
 ON B.id = R.bldgId;
 
-UPDATE building
-SET latitude = 36.3460337761986,
-longitude = 127.380830444995
-WHERE id = 1;
 
-UPDATE building
-SET latitude = 36.3473091394007,
-longitude = 127.382179238289
-WHERE id = 2;
 
 # building testdata
 INSERT INTO building
@@ -517,9 +509,19 @@ SET regDate = NOW(),
 updateDate = NOW(),
 bldgName = '다라',
 bldgAdd = '대전시 정림',
-roomTotal = 10
+roomTotal = 10,
 latitude = 36.3473091394007,
 longitude = 127.382179238289;
+
+UPDATE building
+SET latitude = 36.3460337761986,
+longitude = 127.380830444995
+WHERE id = 1;
+
+UPDATE building
+SET latitude = 36.3473091394007,
+longitude = 127.382179238289
+WHERE id = 2;
 
 #------------------------------------------------------
 # room 테이블 생성
