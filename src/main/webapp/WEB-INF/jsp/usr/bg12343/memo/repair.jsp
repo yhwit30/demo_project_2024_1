@@ -13,7 +13,7 @@
 <section class="mt-2 text-xl px-4">
 	<div class="mx-auto overflow-x-auto">
 		<div class="badge badge-outline">${memoRepairCnt }개</div>
-		<table class="table-box-1 table" border="1">
+		<table class="table-box-1" border="1">
 			<colgroup>
 				<col style="width: 10%" />
 			</colgroup>

@@ -21,7 +21,7 @@ public class UsrCrawlingNews {
 
 		// 크롬 옵션 설정
 		ChromeOptions options = new ChromeOptions();
-		options.addArguments("--headless"); // 브라우저를 표시하지 않고 실행할 경우
+//		options.addArguments("--headless"); // 브라우저를 표시하지 않고 실행할 경우
 
 		// 웹 드라이버 초기화
 		WebDriver driver = new ChromeDriver(options);
@@ -47,7 +47,6 @@ public class UsrCrawlingNews {
 				naverNews.add(news);
 			}
 
-	
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -78,7 +77,7 @@ public class UsrCrawlingNews {
 
 		// 크롬 옵션 설정
 		ChromeOptions options = new ChromeOptions();
-		options.addArguments("--headless"); // 브라우저를 표시하지 않고 실행할 경우
+//		options.addArguments("--headless"); // 브라우저를 표시하지 않고 실행할 경우
 
 		// 웹 드라이버 초기화
 		WebDriver driver = new ChromeDriver(options);
@@ -124,7 +123,7 @@ public class UsrCrawlingNews {
 
 		// 크롬 옵션 설정
 		ChromeOptions options = new ChromeOptions();
-		options.addArguments("--headless"); // 브라우저를 표시하지 않고 실행할 경우
+//		options.addArguments("--headless"); // 브라우저를 표시하지 않고 실행할 경우
 
 		// 웹 드라이버 초기화
 		WebDriver driver = new ChromeDriver(options);

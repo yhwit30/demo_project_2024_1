@@ -23,7 +23,7 @@
 
 <section class="mt-2 text-xl px-4">
 	<div class="mx-auto overflow-x-auto">
-		<table class="table-box-1 table" border="1">
+		<table class="table-box-1" border="1">
 			<tr>
 				<th>공지사항</th>
 				<th></th>

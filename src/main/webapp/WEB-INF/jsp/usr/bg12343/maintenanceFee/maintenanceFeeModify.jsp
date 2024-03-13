@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		<form id="maintenanceFeeModifyForm" action="../maintenanceFee/doMaintenanceFeeModify" method="POST">
 			<input type="hidden" name="bldgId" value="${param.bldgId }" />
 			<input type="hidden" name="month" value="${param.month }" />
-			<table class="table-box-1 table" border="1">
+			<table class="table-box-1" border="1">
 				<thead>
 					<tr>
 

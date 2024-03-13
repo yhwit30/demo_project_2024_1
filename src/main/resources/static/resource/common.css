@@ -41,16 +41,29 @@ header>div>ul>li {
 
 /* 표 디자인 */
 .table-box-1 {
-	width: 100%;
-	margin-bottom: 1.5em;
+	width: 90%;
+	white-space: nowrap;
 }
 
-.table-box-1 thead th {
-	background-color: #1d96b2;
-	border: 1px solid #1d96b2;
+.table-box-1>thead tr {
+	background: linear-gradient(to right, #536976, #292e49);
+}
+
+.table-box-1 th {
+	/* 	background-color: #1d96b2; */
+	/* 	background: linear-gradient(to right, #c0c0aa, #1cefff); */
+	border: 1px solid rgba(255, 0, 0, 0.1);
 	font-weight: normal;
+	font-size: 13px;
 	text-align: left;
 	color: white;
+	box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.table-box-1 td {
+	font-weight: normal;
+	font-size: 14px;
+	border: 1px solid rgba(255, 0, 0, 0.1);
 }
 
 /* 기본 네비게이션 2차 메뉴 스타일 */

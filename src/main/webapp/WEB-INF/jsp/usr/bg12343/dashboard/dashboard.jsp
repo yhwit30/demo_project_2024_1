@@ -6,7 +6,7 @@
 
 <section class="mt-2 text-xl px-4 flex justify-around">
 	<div class="overflow-x-auto">
-		<table class="table-box-1 table " border="1">
+		<table class="table-box-1" border="1">
 			<thead>
 				<tr>
 					<th>건물명</th>
@@ -59,7 +59,7 @@
 
 	<!-- 대쉬보드 표 -->
 	<div class="badge badge-outline">${roomsCnt }개</div>
-	<table class="table-box-1 table" border="1">
+	<table class="table-box-1" border="1">
 		<thead>
 			<tr>
 				<th>호실</th>

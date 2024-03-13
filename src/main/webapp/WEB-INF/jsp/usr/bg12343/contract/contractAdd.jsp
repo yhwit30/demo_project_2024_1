@@ -48,7 +48,7 @@
 
 <section class="mt-8 mb-5 text-lg px-4">
 	<div class="mx-auto">
-		<table class="table-box-1 table" border="1">
+		<table class="table-box-1" border="1">
 			<thead>
 				<tr>
 					<th>건물명</th>

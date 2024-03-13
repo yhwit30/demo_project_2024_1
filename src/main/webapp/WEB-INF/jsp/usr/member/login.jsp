@@ -5,10 +5,10 @@
 
 
 <section class="login-back text-xl">
-	<div class="px-4  mt-36">
+	<div class="mt-36">
 		<form action="../member/doLogin" method="POST">
 			<input type="hidden" name="afterLoginUri" value="${param.afterLoginUri }" />
-			<table class=" table-box-1 mx-auto" border="1">
+			<table class="table-box-1" border="1">
 				<tbody>
 					<tr>
 						<th>아이디</th>

@@ -27,7 +27,7 @@
 
 	<!-- 사업장 현황신고표 -->
 	<div class="mx-auto overflow-x-auto">
-		<table class="table-box-1 table" border="1">
+		<table class="table-box-1" border="1">
 			<c:forEach var="rentStatus" items="${rentStatus }">
 				<thead>
 

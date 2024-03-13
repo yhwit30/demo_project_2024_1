@@ -10,7 +10,7 @@
 		<div class="mx-auto overflow-x-auto">
 			<div class="badge badge-outline">${contractsCnt }개</div>
 
-			<table class="table-box-1 table" border="1">
+			<table class="table-box-1" border="1">
 				<thead>
 					<tr>
 						<th>계약번호</th>

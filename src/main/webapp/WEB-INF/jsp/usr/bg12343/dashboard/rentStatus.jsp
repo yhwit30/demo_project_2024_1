@@ -185,7 +185,7 @@
 
 	<!--수납현황표 -->
 	<div class="mx-auto overflow-x-auto">
-		<table class="table-box-1 table" border="1">
+		<table class="table-box-1" border="1">
 			<thead>
 				<tr>
 					<th>호실</th>

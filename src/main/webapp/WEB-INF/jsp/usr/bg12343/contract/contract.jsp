@@ -157,7 +157,7 @@
 		<div class="badge badge-outline">${contractsCnt }개</div>
 		<!-- 수정기능 -->
 		<form onsubmit="return false;" method="POST" id="modify-form" action="/usr/bg12343/contract/doContractModifyAjax">
-			<table class="table-box-1 table" border="1">
+			<table class="table-box-1" border="1">
 				<thead>
 					<tr>
 						<th>계약번호</th>

@@ -127,7 +127,7 @@
 <section class="mt-2 text-xl px-4">
 	<form action="../building/doBuildingModify" method="POST" onsubmit="buildingModify__submit(this); return false;">
 		<div class="mx-auto overflow-x-auto">
-			<table class="table-box-1 table" border="1">
+			<table class="table-box-1" border="1">
 				<thead>
 					<tr>
 						<th>번호</th>

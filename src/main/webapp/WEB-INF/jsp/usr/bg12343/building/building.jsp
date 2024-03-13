@@ -7,9 +7,9 @@
 <h1 style="text-align: center">전체 건물 목록</h1>
 <section class="mt-2 text-xl px-4">
 	<div class="mx-auto overflow-x-auto">
-		<table class="table-box-1 table">
+		<table class="table-box-1">
 			<thead>
-				<tr>
+				<tr class="bgc">
 					<th>번호</th>
 					<th>등록날짜</th>
 					<th>건물명</th>
@@ -39,7 +39,7 @@
 			</tbody>
 		</table>
 	</div>
-	<div class="mt-2" style="text-align: right">
+	<div class="mt-2" style="text-align: left">
 		<a class="btn btn-m btn-outline" href="/usr/bg12343/building/buildingAdd"> 건물 추가</a>
 	</div>
 
@@ -57,7 +57,7 @@
 	<div class="badge badge-outline">${roomsCnt }개</div>
 	<!-- 호실정보 가져오기 -->
 	<div class="mx-auto overflow-x-auto">
-		<table class="table-box-1 table" border="1">
+		<table class="table-box-1" border="1">
 			<thead>
 				<tr>
 					<th>호실</th>
