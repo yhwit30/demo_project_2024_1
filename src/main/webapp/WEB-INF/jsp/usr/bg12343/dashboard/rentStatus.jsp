@@ -4,7 +4,6 @@
 <%@ include file="../../common/head.jspf"%>
 <%@ include file="../../common/sidebar.jspf"%>
 
-나중에 납부현황 hover로수정삭제 넣기
 
 <script>
 	var currentDate = new Date();
@@ -169,6 +168,16 @@
 </script>
 
 
+
+<!-- 수정버튼 hover -->
+<style type="text/css">
+
+
+
+</style>
+
+
+
 <section class="mt-2 text-xl px-4">
 	<!-- 건물 카테고리 버튼 -->
 	<div>
@@ -184,8 +193,7 @@
 		href="rentStatus?bldgId=${param.bldgId }&year=${nowYear}">올해(${nowYear}) 보기</a>
 
 	<!--수납현황표 -->
-	<div class="mx-auto overflow-x-auto">
-		<table class="table-box-1" border="1">
+		<table class="table-box-1">
 			<thead>
 				<tr>
 					<th>호실</th>
@@ -298,7 +306,6 @@
 				</c:forEach>
 			</tbody>
 		</table>
-	</div>
 
 
 </section>

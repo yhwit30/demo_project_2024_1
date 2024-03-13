@@ -6,7 +6,7 @@
 
 
 
-<!-- 수납현황 수정 ajax -->
+<!-- 계약 수정 ajax -->
 <script>
 	// 버튼 토글 함수
 	function toggleModifybtn(contractId) {

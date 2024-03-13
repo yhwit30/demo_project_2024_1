@@ -27,7 +27,7 @@ public class TenantService {
 	}
 
 	public ResultData modifyTenant(int id, String tenantName, int tenantPhone, String tenantCarNum) {
-		tenantRepository.modifyBuilding(id, tenantName, tenantPhone, tenantCarNum);
+		tenantRepository.modifyTenant(id, tenantName, tenantPhone, tenantCarNum);
 		return ResultData.from("S-1", "세입자정보가 수정되었습니다");
 	}
 
@@ -47,6 +47,10 @@ public class TenantService {
 			return false;
 		}
 			return true;
+	}
+
+	public Tenant getForPrintTenant(int tenantId) {
+		return tenantRepository.getForPrintTenant(tenantId);
 	}
 
 

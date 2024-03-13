@@ -30,6 +30,21 @@ public interface TenantRepository {
 			""")
 	public List<Tenant> getForPrintTenants(int bldgId);
 
+	@Select("""
+			<script>
+			SELECT *
+			FROM tenant AS T
+			LEFT JOIN contract AS C
+			ON T.roomId = C.roomId
+			LEFT JOIN room AS R
+			ON T.roomId = R.id
+			LEFT JOIN building AS B
+			ON R.bldgId = B.id
+			WHERE T.id = #{tenantId}
+			</script>
+			""")
+	public Tenant getForPrintTenant(int tenantId);
+
 	@Insert("""
 			INSERT INTO
 			tenant SET
@@ -51,7 +66,7 @@ public interface TenantRepository {
 			tenantCarNum = #{tenantCarNum}
 			WHERE id = #{id}
 			""")
-	public void modifyBuilding(int id, String tenantName, int tenantPhone, String tenantCarNum);
+	public void modifyTenant(int id, String tenantName, int tenantPhone, String tenantCarNum);
 
 	@Insert("""
 			INSERT INTO tenant
@@ -62,7 +77,8 @@ public interface TenantRepository {
 			tenantPhone = #{tenantPhone},
 			tenantCarNum = #{tenantCarNum}
 			""")
-	public void addTenantSetup(int roomId, String tenantName, int tenantPhone, String tenantCarNum); // contractController에서 사용
+	public void addTenantSetup(int roomId, String tenantName, int tenantPhone, String tenantCarNum); // contractController에서
+																										// 사용
 
 	@Select("""
 			SELECT id

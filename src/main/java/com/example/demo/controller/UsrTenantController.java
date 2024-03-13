@@ -13,6 +13,7 @@ import com.example.demo.service.BuildingService;
 import com.example.demo.service.TenantService;
 import com.example.demo.util.Ut;
 import com.example.demo.vo.Building;
+import com.example.demo.vo.Contract;
 import com.example.demo.vo.ResultData;
 import com.example.demo.vo.Tenant;
 
@@ -85,7 +86,6 @@ public class UsrTenantController {
 		return Ut.jsReplace(TenantAddRd.getResultCode(), TenantAddRd.getMsg(), "../tenant/tenant");
 	}
 
-
 	@RequestMapping("/usr/bg12343/tenant/tenantModify")
 	public String showTenantModify(Model model, @RequestParam(defaultValue = "0") int bldgId) {
 
@@ -118,12 +118,26 @@ public class UsrTenantController {
 	@ResponseBody
 	public String doTenantModify(int[] id, String[] tenantName, int[] tenantPhone, String[] tenantCarNum) {
 
-		ResultData roomModifyRd = null;
+		ResultData tenantModifyRd = null;
 		for (int i = 0; i < id.length; i++) {
-			roomModifyRd = tenantService.modifyTenant(id[i], tenantName[i], tenantPhone[i], tenantCarNum[i]);
+			tenantModifyRd = tenantService.modifyTenant(id[i], tenantName[i], tenantPhone[i], tenantCarNum[i]);
 		}
 
-		return Ut.jsReplace(roomModifyRd.getResultCode(), roomModifyRd.getMsg(), "../tenant/tenant");
+		return Ut.jsReplace(tenantModifyRd.getResultCode(), tenantModifyRd.getMsg(), "../tenant/tenant");
+	}
+
+	// ajax
+	@RequestMapping("/usr/bg12343/tenant/doTenantModifyAjax")
+	@ResponseBody
+	public Tenant doTenantModifyAjax(int tenantId, String tenantName, int tenantPhone, String tenantCarNum) {
+
+		// 세입자정보 수정
+		ResultData tenantModifyRd = tenantService.modifyTenant(tenantId, tenantName, tenantPhone, tenantCarNum);
+
+		// ajax 위한 데이터 가져오기
+		Tenant modifiedTenant = tenantService.getForPrintTenant(tenantId);
+
+		return modifiedTenant;
 	}
 
 }

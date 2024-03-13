@@ -5,7 +5,7 @@
 <%@ include file="../../common/sidebar.jspf"%>
 
 <section class="mt-2 text-xl px-4 flex justify-around">
-	<div class="overflow-x-auto">
+	<div class="overflow-x-auto flex-grow">
 		<table class="table-box-1" border="1">
 			<thead>
 				<tr>
@@ -35,9 +35,9 @@
 
 	</div>
 
-	<div class="bg-yellow-400">입주율 부분</div>
-	<div class="bg-yellow-400">수익률 부분</div>
-	<div class="bg-yellow-400">
+	<div class="bg-yellow-400 mr-5">입주율 부분</div>
+	<div class="bg-yellow-400 mr-5">수익률 부분</div>
+	<div class="bg-yellow-400 mr-20">
 		날씨 부분
 		<i class="fa-solid fa-sun"></i>
 	</div>
