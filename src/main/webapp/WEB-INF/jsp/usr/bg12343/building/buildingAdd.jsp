@@ -175,8 +175,6 @@ section input {
 	};
 
 	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-	var lat; // 위도
-	var lon; // 경도
 </script>
 
 <!-- 주소찾기 및 지도 실행함수 -->

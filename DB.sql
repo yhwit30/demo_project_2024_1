@@ -477,9 +477,12 @@ CREATE TABLE building(
     regDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL,
     bldgName CHAR(20) NOT NULL,
-    bldgAdd CHAR(20) NOT NULL,
+    bldgAdd VARCHAR(50) NOT NULL,
     roomTotal INT(10) NOT NULL
     );
+
+ALTER TABLE building ADD latitude CHAR(20);
+ALTER TABLE building ADD longitude CHAR(20);
 
 SELECT * FROM building;
 
@@ -488,13 +491,25 @@ FROM building AS B
 INNER JOIN room AS R
 ON B.id = R.bldgId;
 
+UPDATE building
+SET latitude = 36.3460337761986,
+longitude = 127.380830444995
+WHERE id = 1;
+
+UPDATE building
+SET latitude = 36.3473091394007,
+longitude = 127.382179238289
+WHERE id = 2;
+
 # building testdata
 INSERT INTO building
 SET regDate = NOW(),
 updateDate = NOW(),
 bldgName = '가나',
 bldgAdd = '대전시 송림',
-roomTotal = 10;
+roomTotal = 10,
+latitude = 36.3460337761986,
+longitude = 127.380830444995;
 
 # building testdata
 INSERT INTO building
@@ -502,7 +517,9 @@ SET regDate = NOW(),
 updateDate = NOW(),
 bldgName = '다라',
 bldgAdd = '대전시 정림',
-roomTotal = 10;
+roomTotal = 10
+latitude = 36.3473091394007,
+longitude = 127.382179238289;
 
 #------------------------------------------------------
 # room 테이블 생성
@@ -517,6 +534,7 @@ CREATE TABLE room(
     roomArea DOUBLE NOT NULL
 );
 
+ALTER TABLE room ADD furnish CHAR(20);
 
 SELECT * FROM room;
 
@@ -890,7 +908,6 @@ roomId = 6,
 tenantId = 3,
 leaseType = '전세',
 deposit = 55000000,
-rent= 0,
 maintenanceFee = 100000,
 contractStartDate = '2023.12.2',
 contractEndDate= '2025.12.1',
@@ -906,7 +923,6 @@ roomId = 10,
 tenantId = 4,
 leaseType = '전세',
 deposit = 55000000,
-rent= 0,
 maintenanceFee = 100000,
 contractStartDate = '2023.12.2',
 contractEndDate= '2025.12.1',
@@ -939,7 +955,6 @@ roomId = 16,
 tenantId = 6,
 leaseType = '전세',
 deposit = 55000000,
-rent= 0,
 maintenanceFee = 100000,
 contractStartDate = '2023.12.2',
 contractEndDate= '2025.12.1',
@@ -1999,6 +2014,6 @@ WHERE C.id = 9;
 
 SELECT *
 FROM contract_Status 
-WHERE rentDate LIKE '2024-01' AND tenantId = 2;
+WHERE rentDate LIKE '2024-02%' AND tenantId = 2;
 
 

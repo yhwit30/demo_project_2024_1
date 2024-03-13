@@ -4,10 +4,12 @@
 <%@ include file="../../common/head.jspf"%>
 <%@ include file="../../common/sidebar.jspf"%>
 
-<h1 style="text-align: center">전체 건물 목록</h1>
+
+
+<h1 style="text-align: center; background-color: pink;">전체 건물 목록</h1>
 <section class="mt-2 text-xl px-4">
-	<div class="mx-auto overflow-x-auto">
-		<table class="table-box-1">
+	<div class="mx-auto overflow-x-auto flex justify-around">
+		<table class="table-box-1 mr-5">
 			<thead>
 				<tr class="bgc">
 					<th>번호</th>
@@ -21,7 +23,7 @@
 			</thead>
 			<tbody>
 				<c:forEach var="building" items="${buildings }">
-					<tr class="hover">
+					<tr style="${building.id == param.bldgId ? 'background-color: #ff8c00' : '' }">
 						<td>${building.id }</td>
 						<td>${building.regDate.substring(0,10) }</td>
 						<td>${building.bldgName }</td>
@@ -32,13 +34,62 @@
 							<a class="btn btn-sm btn-outline" href="../building/buildingModify?bldgId=${building.id }">수정</a>
 							<a class="btn btn-sm btn-outline"
 								onclick="if(confirm('건물과 호실정보가 모두 삭제됩니다.\n정말 삭제하시겠습니까?') == false) return false;"
-								href="../building/doBuildingDelete?bldgId=${building.id}">삭제</a>
+								href="../building/doBuildingDelete?bldgId=${building.id}"
+							>삭제</a>
 						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
+
+<!-- 지도 보이기 -->
+<div id="map" style="width: 300px; height: 200px;"></div>
 	</div>
+
+<!-- 지도api -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=426dd75f75d2eb88e4ae8811cf3bce62&libraries=services"></script>
+
+<!-- 지도 및 위도경도 변수 선언 -->
+<script>
+    var map;
+    var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
+
+    function initMap() {
+        var mapOption = {
+            center : new kakao.maps.LatLng(${buildingRd.latitude}, ${buildingRd.longitude}), // 지도의 중심좌표
+            level : 3 // 지도의 확대 레벨
+        };
+
+        map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+        // 지도에 표시
+        setCenter(${buildingRd.latitude}, ${buildingRd.longitude});
+    }
+
+    // 주소에서 얻은 위도,경도로 지도 이동 및 마커 추가
+    function setCenter(lat, lon) {
+        // 마커가 표시될 위치를 생성합니다
+        var markerPosition = new kakao.maps.LatLng(lat, lon);
+
+        // 중심 좌표를 변경하여 지도의 중심을 설정합니다
+        map.setCenter(markerPosition);
+
+        // 마커를 생성합니다
+        var marker = new kakao.maps.Marker({
+            position : markerPosition,
+            map: map // 마커가 지도 위에 표시되도록 설정합니다
+        });
+    }
+
+    // 페이지 로드 시 initMap 함수를 호출하여 지도를 초기화합니다
+    document.addEventListener("DOMContentLoaded", function() {
+        initMap();
+    });
+</script>
+
+
+
+
 	<div class="mt-2" style="text-align: left">
 		<a class="btn btn-m btn-outline" href="/usr/bg12343/building/buildingAdd"> 건물 추가</a>
 	</div>
@@ -49,7 +100,8 @@
 	<div>
 		<c:forEach var="building" items="${buildings }">
 			<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
-				href="building?bldgId=${building.id }">${building.bldgName }</a>
+				href="building?bldgId=${building.id }"
+			>${building.bldgName }</a>
 		</c:forEach>
 		호실 목록 1: 전자렌지 2: 냉장고 3: 침대 4: 전기렌지
 	</div>
