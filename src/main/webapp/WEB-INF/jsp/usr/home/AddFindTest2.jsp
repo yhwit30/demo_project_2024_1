@@ -14,7 +14,7 @@
 
 
 <!-- 지도 보이기 -->
-<div id="map" style="width: 100%; height: 350px;"></div>
+<div id="map" style="width: 800px; height: 350px;"></div>
 <p>
 	<button onclick="setCenter()">지도 중심좌표 이동시키기</button>
 </p>
