@@ -27,6 +27,7 @@ public class Dashboard {
 	private int tenantId;
 
 	private int bldgId;
+	private int roomTotal;
 	private String bldgName;
 	private String roomNum;
 	private String roomType;

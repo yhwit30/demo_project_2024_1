@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.service.BuildingService;
 import com.example.demo.service.DashboardService;
+import com.example.demo.service.TenantService;
 import com.example.demo.util.Ut;
 import com.example.demo.vo.Building;
 import com.example.demo.vo.Dashboard;
 import com.example.demo.vo.Room;
 import com.example.demo.vo.Rq;
+import com.example.demo.vo.Tenant;
 
 @Controller
 public class UsrDashboardController {
@@ -33,6 +35,9 @@ public class UsrDashboardController {
 	@Autowired
 	private BuildingService buildingService;
 
+	@Autowired
+	private TenantService tenantService;
+
 	// 액션 메소드
 	@RequestMapping("/usr/bg12343/dashboard/dashboard")
 	public String getDashboard(Model model, @RequestParam(defaultValue = "1") int bldgId) {
@@ -44,13 +49,19 @@ public class UsrDashboardController {
 		List<Room> rooms = buildingService.getForPrintRooms(bldgId);
 		int roomsCnt = rooms.size();
 
+		// 입주율 가져오기(세입자수 / 호실수)
+		List<Tenant> tenants = tenantService.getForPrintTenants(bldgId);
+		int tenantCnt = tenants.size();
+		double occupancyRate = dashboardService.getOccupancyRate(roomsCnt, tenantCnt);
+
 //		건물 변환 버튼용
 		List<Building> buildings = buildingService.getForPrintBuildings();
-
 		model.addAttribute("buildings", buildings);
+
 		model.addAttribute("dashboard", dashboard);
 		model.addAttribute("rooms", rooms);
 		model.addAttribute("roomsCnt", roomsCnt);
+		model.addAttribute("occupancyRate", (int) occupancyRate);
 		return "usr/bg12343/dashboard/dashboard";
 	}
 

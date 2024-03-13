@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.repository.DashboardRepository;
-import com.example.demo.util.Ut;
-import com.example.demo.vo.Article;
 import com.example.demo.vo.Dashboard;
-import com.example.demo.vo.ResultData;
 
 @Service
 public class DashboardService {
@@ -41,9 +38,11 @@ public class DashboardService {
 
 	public void deleteRentStatus(int tenantId, String body, int year, String month) {
 		dashboardRepository.deleteRentStatus(tenantId, body, year, month);
-		
-	}
-	
 
+	}
+
+	public double getOccupancyRate(int roomsCnt, int tenantCnt) {
+		return ((double) tenantCnt / (double) roomsCnt) * 100;
+	}
 
 }
