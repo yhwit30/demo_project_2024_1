@@ -10,7 +10,7 @@
 	margin-left: auto;
 	margin-right: auto;
 	white-space: nowrap;
-	border: 1px solid black;
+	border: 1px solid rgba(255, 0, 0, 0.1);
 	text-align: center;
 	white-space: nowrap;
 }

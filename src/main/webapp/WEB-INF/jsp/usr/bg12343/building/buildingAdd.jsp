@@ -45,36 +45,76 @@
 	}
 </script>
 
+<style>
+/* 로그인 디자인 */
+.write-box {
+	width: 450px;
+	margin-left: auto;
+	margin-right: auto;
+	white-space: nowrap;
+	border: 1px solid rgba(255, 0, 0, 0.1);
+	text-align: center;
+	white-space: nowrap;
+}
+
+.write-box>thead tr {
+	background: linear-gradient(to right, #536976, #292e49);
+}
+
+.write-box>thead th {
+	color: white;
+}
+
+.write-box>tbody th {
+	font-size: 14px;
+}
+
+.write-boxx th, td {
+	border: 1px solid rgba(255, 0, 0, 0.1);
+}
+</style>
+
 
 <section class="mt-8 mb-5 text-lg px-4">
 	<div class="px-4  mt-36">
-		<form action="/usr/bg12343/building/doBuildingSetupAdd" method="POST" onsubmit="buildingAdd__submit(this); return false;">
-			<table class="write-box table-box-1 mx-auto" border="1">
+		<form action="/usr/bg12343/building/doBuildingSetupAdd" method="POST"
+			onsubmit="buildingAdd__submit(this); return false;"
+		>
+			<table class="write-box" border="1">
+				<thead>
+					<tr>
+						<th colspan="2">BUILDING ADD</th>
+					</tr>
+				</thead>
 				<tbody>
 					<tr>
 						<th>건물명</th>
 						<td>
 							<input class="input input-bordered input-secondary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="건물이름을 입력해주세요" name="bldgName" />
-						</td>
-					</tr>
-					<tr>
-						<th>건물주소</th>
-						<td>
-							<input class="input input-bordered input-secondary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="건물주소를 입력해주세요" name="bldgAdd" />
+								placeholder="건물이름을 입력해주세요" name="bldgName"
+							/>
 						</td>
 					</tr>
 					<tr>
 						<th>세대수</th>
 						<td>
 							<input class="input input-bordered input-secondary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="세대수를 입력해주세요" name="roomTotal" />
+								placeholder="세대수를 입력해주세요" name="roomTotal"
+							/>
 						</td>
 					</tr>
 					<tr>
-						<th></th>
+						<th>건물주소</th>
 						<td>
+						<div>주소찾기</div>
+						
+							<input class="input input-bordered input-secondary w-full max-w-xs" autocomplete="off" type="text"
+								placeholder="건물주소를 입력해주세요" name="bldgAdd"
+							/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
 							<input class="btn btn-outline btn-info" type="submit" value="완료" />
 						</td>
 					</tr>

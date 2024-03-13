@@ -35,6 +35,12 @@ public class UsrAPITest {
 
 		return "/usr/home/AddFindTest";
 	}
+
+	@RequestMapping("/usr/home/AddFindTest2")
+	public String AddFindTest2() {
+		
+		return "/usr/home/AddFindTest2";
+	}
 	
 	@RequestMapping("/usr/home/weatherApiTest")
 	public String weatherApiTest() {

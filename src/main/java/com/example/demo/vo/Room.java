@@ -18,6 +18,7 @@ public class Room {
 	private int standardJeonse;
 	private int bldgId;
 	private double roomArea;
+	private String furnish;
 	
 	private String bldgName;
 	private int deposit;

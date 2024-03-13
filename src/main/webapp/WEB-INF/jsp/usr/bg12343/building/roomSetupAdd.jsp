@@ -133,7 +133,7 @@
 			<br />
 
 			<div class="badge badge-outline">${addedBuilding.roomTotal }개</div>
-			<table class="table-box-1 table" border="1">
+			<table class="table-box-1" border="1">
 				<thead>
 					<tr>
 						<th>번호</th>
@@ -162,16 +162,16 @@
 								</select>
 							</td>
 							<td>
-								<input size="1" autocomplete="off" type="text" placeholder="면적을 입력해주세요" name="roomArea" />
+								<input size="2" autocomplete="off" type="text" placeholder="면적을 입력해주세요" name="roomArea" />
 							</td>
 							<td>
-								<input size="3" autocomplete="off" type="text" placeholder="기준 보증금을 입력해주세요" name="standardDeposit" />
+								<input size="6" autocomplete="off" type="text" placeholder="기준 보증금을 입력해주세요" name="standardDeposit" />
 							</td>
 							<td>
-								<input size="3" autocomplete="off" type="text" placeholder="기준 월세를 입력해주세요" name="standardRent" />
+								<input size="6" autocomplete="off" type="text" placeholder="기준 월세를 입력해주세요" name="standardRent" />
 							</td>
 							<td>
-								<input size="3" autocomplete="off" type="text" placeholder="기준 전세을 입력해주세요" name="standardJeonse" />
+								<input size="6" autocomplete="off" type="text" placeholder="기준 전세을 입력해주세요" name="standardJeonse" />
 							</td>
 						</tr>
 					</c:forEach>

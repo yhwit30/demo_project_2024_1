@@ -5,12 +5,18 @@
 <%@ include file="../common/head.jspf"%>
 
 
-<div id="wrap" style="border: 1px solid; width: 500px; height: 400px; margin: 5px 0; position: relative"></div>
+<!-- <div id="wrap" style="border: 1px solid; width: 500px; height: 400px; margin: 5px 0; position: relative"></div> -->
 
+<input type="text" id="sample6_postcode" placeholder="우편번호">
+<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+<input type="text" id="sample6_address" placeholder="주소"><br>
+<input type="text" id="sample6_detailAddress" placeholder="상세주소">
+<input type="text" id="sample6_extraAddress" placeholder="참고항목">
+
+<!-- 지도 보이기 -->
 <div id="map" style="width: 100%; height: 350px;"></div>
 <p>
 	<button onclick="setCenter()">지도 중심좌표 이동시키기</button>
-	<button onclick="panTo()">지도 중심좌표 부드럽게 이동시키기</button>
 </p>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript"
@@ -30,7 +36,6 @@ var lon; // 경도
 
 
   // 우편번호 찾기 화면을 넣을 element
-  const element_wrap = document.getElementById('wrap');
 
   const daumPostcode = () => {
     new daum.Postcode({
@@ -53,7 +58,7 @@ var lon; // 경도
           }
         });
       },
-      }).embed(element_wrap, {autoClose: false});
+      })
   }
 
   daumPostcode();
@@ -77,6 +82,9 @@ var lon; // 경도
   }
 
 
+  
+  
+  
   
 
 </script>

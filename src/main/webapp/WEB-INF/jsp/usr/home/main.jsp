@@ -9,13 +9,15 @@
 		<input type="hidden" name="boardId" value="${param.boardId }" />
 
 		<select data-value="${param.searchKeywordTypeCode }" class="select select-bordered select-sm max-w-xs"
-			name="searchKeywordTypeCode">
+			name="searchKeywordTypeCode"
+		>
 			<option value="title">제목</option>
 			<option value="extra__writer">작성자</option>
 			<option value="body">내용</option>
 		</select>
 		<input value="${param.searchKeyword }" name="searchKeyword" type="text" placeholder="What is your searchKeyword?"
-			class="input-sm input input-bordered w-60 max-w-xs mt-3" />
+			class="input-sm input input-bordered w-60 max-w-xs mt-3"
+		/>
 		<button class="btn btn-primary btn-sm" type="submit">검색</button>
 	</form>
 </div>
@@ -54,7 +56,6 @@
 
 
 <style type="text/css">
-
 .mainSearch {
 	text-align: center;
 }
@@ -70,7 +71,7 @@
 .menu {
 	width: 180px;
 	height: 80px;
-/* 	border: 3px solid pink; */
+	/* 	border: 3px solid pink; */
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 20px;
@@ -85,15 +86,15 @@
 }
 
 .main-page>div:nth-child(1) {
-/* 	border: 3px solid blue; */
+	border: 3px solid blue;
 }
 
 .main-page>div:nth-child(2) {
-/* 	border: 3px solid gold; */
+	border: 3px solid gold;
 }
 
 .main-page>div:nth-child(3) {
-/* 	border: 3px solid green; */
+	border: 3px solid green;
 }
 </style>
 
