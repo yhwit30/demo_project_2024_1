@@ -33,6 +33,52 @@
 </script>
 
 
+
+<!-- 날씨 api -->
+<script>
+
+const API_KEY = '2d1119c77c14a77fee290dd58e72b536';
+
+const callbackOk= (position) =>{
+    console.log(position)
+    const lat = position.coords.latitude //위도
+    const lon = position.coords.longitude //경도
+		console.log("현재 위치는 위도:" + lat + ", 경도:" + lon);
+		const url = 'https://api.openweathermap.org/data/2.5/weather?lat=' +lat+ '&lon='+lon+ '&appid='+API_KEY + '&units=metric&lang=kr';
+		console.log(url);
+		fetch(url)
+		.then(response => response.json())
+		.then(data=>{
+			console.log(data);
+			
+			const temperature = data.main.temp;
+		    const place = data.name;
+		    const description = data.weather[0].description;
+		      
+		    console.log('temperature: ' + temperature);
+		    console.log('place: ' + place);
+		    console.log('description: ' + description);
+		    
+		    // html 그리기
+		    document.querySelector('.temp').innerText = '온도: ' + temperature + '°C';
+		    document.querySelector('.place').innerText = '장소: ' + place;
+		    document.querySelector('.desc').innerText = '날씨: ' + description;
+		})
+		
+}
+	
+const callbackError= () =>{
+    alert("위치정보를 찾을 수 없습니다.")
+}
+
+	navigator.geolocation.getCurrentPosition(callbackOk, callbackError);
+
+
+	
+</script>
+
+
+
 <style>
 .pie-chart {
 	position: relative;
@@ -88,7 +134,7 @@ span.center {
 						<td>#</td>
 					</tr>
 				</c:forEach>
-			
+
 			</tbody>
 		</table>
 
@@ -98,11 +144,13 @@ span.center {
 		<span class="center">입주율${occupancyRate}%</span>
 	</div>
 	<div class="pie-chart pie-chart2 mr-10">
-		<span class="center">수익율</span>
+		<span class="center">수익율(todo)</span>
 	</div>
 	<div class="bg-yellow-400 mr-20">
-		날씨 부분
-		<i class="fa-solid fa-sun"></i>
+		<div>현재 날씨</div>
+		<div class="temp"></div>
+		<div class="place"></div>
+		<div class="desc"></div>
 	</div>
 
 </section>
@@ -115,8 +163,7 @@ span.center {
 	<div>
 		<c:forEach var="building" items="${buildings }">
 			<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
-				href="../dashboard/dashboard?bldgId=${building.id }"
-			>${building.bldgName }</a>
+				href="../dashboard/dashboard?bldgId=${building.id }">${building.bldgName }</a>
 		</c:forEach>
 
 	</div>
