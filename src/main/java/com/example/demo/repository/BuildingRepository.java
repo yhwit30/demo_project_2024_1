@@ -48,9 +48,11 @@ public interface BuildingRepository {
 			updateDate = NOW(),
 			bldgName = #{bldgName},
 			bldgAdd = #{bldgAdd},
-			roomTotal = #{roomTotal}
+			roomTotal = #{roomTotal},
+			latitude = #{latitude},
+			longitude = #{longitude}
 			""")
-	void addBuilding(String bldgName, String bldgAdd, int roomTotal);
+	void addBuilding(String bldgName, String bldgAdd, int roomTotal, String latitude, String longitude);
 
 	@Select("SELECT LAST_INSERT_ID()")
 	int getLastInsertId();

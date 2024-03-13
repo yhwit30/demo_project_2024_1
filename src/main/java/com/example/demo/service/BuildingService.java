@@ -33,8 +33,8 @@ public class BuildingService {
 		return buildingRepository.getLastInsertId();
 	}
 
-	public ResultData addBuilding(String bldgName, String bldgAdd, int roomTotal) {
-		buildingRepository.addBuilding(bldgName, bldgAdd, roomTotal);
+	public ResultData addBuilding(String bldgName, String bldgAdd, int roomTotal, String latitude, String longitude) {
+		buildingRepository.addBuilding(bldgName, bldgAdd, roomTotal, latitude, longitude);
 		int id = getLastInsertId();
 		return ResultData.from("S-1", Ut.f("%d번 건물정보가 생성되었습니다", id), "id", id);
 	}

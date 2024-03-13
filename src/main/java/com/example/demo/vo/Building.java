@@ -14,4 +14,6 @@ public class Building {
 	private String bldgName;
 	private String bldgAdd;
 	private int roomTotal;
+	private double latitude;
+	private double longitude;
 }

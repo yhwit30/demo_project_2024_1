@@ -14,13 +14,6 @@
 			return;
 		}
 
-		// 숫자가 아닌 데이터 체크
-		if (isNaN(form.roomTotal.value)) {
-			alert('세대수에는 숫자만 입력 가능합니다');
-			form.roomTotal.focus();
-			return;
-		}
-
 		// 빈칸에 대한 유효성 검사 추가
 		if (form.bldgName.value.length < 1) {
 			alert('건물명을 입력해주세요');
@@ -28,13 +21,20 @@
 			return;
 		}
 
+		if (form.roomTotal.value.length < 1) {
+			alert('세대수를 입력해주세요');
+			form.roomTotal.focus();
+			return;
+		}
 		if (form.bldgAdd.value.length < 1) {
 			alert('건물주소를 입력해주세요');
 			form.bldgAdd.focus();
 			return;
 		}
-		if (form.roomTotal.value.length < 1) {
-			alert('세대수를 입력해주세요');
+
+		// 숫자가 아닌 데이터 체크
+		if (isNaN(form.roomTotal.value)) {
+			alert('세대수에는 숫자만 입력 가능합니다');
 			form.roomTotal.focus();
 			return;
 		}
@@ -133,9 +133,11 @@ section input {
 							<input type="text" id="sample6_detailAddress" placeholder="상세주소">
 							<input type="text" id="sample6_extraAddress" placeholder="참고항목">
 
-							<!-- 							<input class="input input-bordered input-secondary w-full max-w-xs" autocomplete="off" type="text" -->
-							<!-- 								placeholder="건물주소를 입력해주세요" name="bldgAdd" -->
-							<!-- 							/> -->
+							<!-- 건물주소값 hidden으로 넘기기 -->
+							<input type="hidden" name="bldgAdd" value="" />
+							<!-- 주소 위도경고값 hidden으로 넘기기 -->
+							<input type="hidden" name="latitude" value="" />
+							<input type="hidden" name="longitude" value="" />
 						</td>
 					</tr>
 					<tr>
@@ -232,17 +234,34 @@ function sample6_execDaumPostcode() {
                     console.log('경도 : ' + result[0].x);
 
                     // 위도, 경도 변수에 저장
-                    lat = result[0].y;
-                    lon = result[0].x;
+                    var latitude = result[0].y;
+                    var longitude = result[0].x;
 
                     // 지도에 표시
                     setCenter();
+                    
+//                     위도/경도 값을 hidden input 태그의 value에 설정하기
+                    document.querySelector('input[name="bldgAdd"]').value = addr;
+                    document.querySelector('input[name="latitude"]').value = latitude;
+                    document.querySelector('input[name="longitude"]').value = longitude;
+                    console.log('addr'+addr);
+                    console.log('latitude'+latitude);
+                    console.log('longitude'+longitude);
                 }
             });
+            
         }
     }).open();
 }
 
+//상세주소 입력이 완료될 때마다 hidden input 태그의 value를 설정합니다.
+document.getElementById("sample6_detailAddress").addEventListener("input", function() {
+    var detailAddress = this.value;
+    document.querySelector('input[name="bldgAdd"]').value = document.getElementById("sample6_address").value + ' ' + detailAddress;
+    
+    console.log(detailAddress);
+});
+    
 // 주소에서 얻은 위도,경도로 지도 이동 및 마커 추가
 function setCenter() {
     // 마커가 표시될 위치를 생성합니다
@@ -284,6 +303,7 @@ function setCenter() {
 
 }
 </script>
+
 
 
 
