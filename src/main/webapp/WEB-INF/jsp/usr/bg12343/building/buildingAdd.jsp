@@ -265,7 +265,7 @@ function setCenter() {
  // 마커가 지도 위에 표시되도록 설정합니다
     marker.setMap(map);
 
-    var iwContent = '여기 맞나요!', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+    var iwContent = '<div class="info" style="padding:5px; text-align: center;">여기 맞나요!</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
         iwPosition = new kakao.maps.LatLng(lat, lon); //인포윈도우 표시 위치입니다
 
     // 인포윈도우를 생성합니다
@@ -276,10 +276,14 @@ function setCenter() {
       
     // 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
     infowindow.open(map, marker); 
-    
+   
+    // 인포윈도우가 표시된 후에 스타일 변경을 위한 코드를 추가합니다.
+    var infoElement = document.querySelector(".info");
+    var grandParentElement = infoElement.parentNode.parentNode;
+    grandParentElement.style.width = "110px";
+
 }
 </script>
-
 
 
 
