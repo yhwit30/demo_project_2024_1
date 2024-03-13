@@ -47,16 +47,26 @@
 	<div class="mx-auto">
 		<table class="table-box-1 table" border="1">
 			<thead>
-				<tr>
-					<th>건물명</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>${addedBuilding.bldgName }</td>
+					<tr>
+						<th>번호</th>
+						<th>등록날짜</th>
+						<th>건물명</th>
+						<th>건물주소</th>
+						<th>전체호실수</th>
+						<th>건물메모</th>
+					</tr>
+				</thead>
+				<tbody>
 
-				</tr>
-			</tbody>
+					<tr class="hover">
+						<td>${addedBuilding.id }</td>
+						<td>${addedBuilding.regDate.substring(0,10) }</td>
+						<td>${addedBuilding.bldgName }</td>
+						<td>${addedBuilding.bldgAdd }</td>
+						<td>${addedBuilding.roomTotal }</td>
+						<td>#</td>
+					</tr>
+				</tbody>
 		</table>
 
 

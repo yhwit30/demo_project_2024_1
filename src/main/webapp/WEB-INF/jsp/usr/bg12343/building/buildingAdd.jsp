@@ -230,15 +230,13 @@ function sample6_execDaumPostcode() {
             var geocoder = new kakao.maps.services.Geocoder();
             geocoder.addressSearch(data.roadAddress, (result, status) => {
                 if (status === kakao.maps.services.Status.OK) {
-                    console.log('위도 : ' + result[0].y);
-                    console.log('경도 : ' + result[0].x);
 
                     // 위도, 경도 변수에 저장
                     var latitude = result[0].y;
                     var longitude = result[0].x;
 
                     // 지도에 표시
-                    setCenter();
+                    setCenter(latitude, longitude);
                     
 //                     위도/경도 값을 hidden input 태그의 value에 설정하기
                     document.querySelector('input[name="bldgAdd"]').value = addr;
@@ -259,11 +257,10 @@ document.getElementById("sample6_detailAddress").addEventListener("input", funct
     var detailAddress = this.value;
     document.querySelector('input[name="bldgAdd"]').value = document.getElementById("sample6_address").value + ' ' + detailAddress;
     
-    console.log(detailAddress);
 });
     
 // 주소에서 얻은 위도,경도로 지도 이동 및 마커 추가
-function setCenter() {
+function setCenter(lat, lon) {
     // 마커가 표시될 위치를 생성합니다
     var markerPosition   = new kakao.maps.LatLng(lat, lon);
 
