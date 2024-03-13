@@ -193,12 +193,14 @@
 							<td id="existing-cell-${contract.id}-tenantName" class="existing-cell-${contract.id}">${contract.tenantName}</td>
 							<td class="input-field-${contract.id}" style="display: none;">
 								<input size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="tenantName-${contract.id}"
-									value="${contract.tenantName}" />
+									value="${contract.tenantName}"
+								/>
 							</td>
 							<td id="existing-cell-${contract.id}-leaseType" class="existing-cell-${contract.id}">${contract.leaseType}</td>
 							<td class="input-field-${contract.id}" style="display: none;">
 								<select class="select select-bordered select-sm w-15 max-w-xs" name="leaseType-${contract.id}"
-									data-value="${contract.leaseType}">
+									data-value="${contract.leaseType}"
+								>
 									<option value="월세">월세</option>
 									<option value="전세">전세</option>
 									<option value="반전세">반전세</option>
@@ -207,45 +209,54 @@
 							<td id="existing-cell-${contract.id}-deposit" class="existing-cell-${contract.id}">${contract.deposit }</td>
 							<td class="input-field-${contract.id}" style="display: none;">
 								<input size="3" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="deposit-${contract.id}"
-									value="${contract.deposit }" />
+									value="${contract.deposit }"
+								/>
 							</td>
 							<td id="existing-cell-${contract.id}-rent" class="existing-cell-${contract.id}">${contract.rent }</td>
 							<td class="input-field-${contract.id}" style="display: none;">
 								<input size="3" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="rent-${contract.id }"
-									value="${contract.rent }" />
+									value="${contract.rent }"
+								/>
 							</td>
 							<td id="existing-cell-${contract.id}-maintenanceFee" class="existing-cell-${contract.id}">${contract.maintenanceFee }</td>
 							<td class="input-field-${contract.id}" style="display: none;">
 								<input size="3" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="maintenanceFee-${contract.id}"
-									value="${contract.maintenanceFee }" />
+									value="${contract.maintenanceFee }"
+								/>
 							</td>
 							<td id="existing-cell-${contract.id}-contractStartDate" class="existing-cell-${contract.id}">${contract.contractStartDate }</td>
 							<td class="input-field-${contract.id}" style="display: none;">
 								<input size="3" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="contractStartDate-${contract.id}"
-									value="${contract.contractStartDate }" />
+									value="${contract.contractStartDate }"
+								/>
 							</td>
 							<td id="existing-cell-${contract.id}-contractEndDate" class="existing-cell-${contract.id}">${contract.contractEndDate }</td>
 							<td class="input-field-${contract.id}" style="display: none;">
 								<input size="3" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="contractEndDate-${contract.id}"
-									value="${contract.contractEndDate }" />
+									value="${contract.contractEndDate }"
+								/>
 							</td>
 							<td id="existing-cell-${contract.id}-depositDate" class="existing-cell-${contract.id}">${contract.depositDate }</td>
 							<td class="input-field-${contract.id}" style="display: none;">
 								<input size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="depositDate-${contract.id}"
-									value="${contract.depositDate }" />
+									value="${contract.depositDate }"
+								/>
 							</td>
 							<td id="existing-cell-${contract.id}-rentDate" class="existing-cell-${contract.id}">${contract.rentDate }</td>
 							<td class="input-field-${contract.id}" style="display: none;">
 								<input size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="rentDate-${contract.id}"
-									value="${contract.rentDate }" />
+									value="${contract.rentDate }"
+								/>
 							</td>
 							<td>#</td>
 
 							<td>
 								<button onclick="toggleModifybtn('${contract.id}');" id="modify-btn-${contract.id}" style="white-space: nowrap"
-									class="btn btn-xs btn-outline">수정</button>
+									class="btn btn-xs btn-outline"
+								>수정</button>
 								<button onclick="doModifyContract('${contract.id}');" style="white-space: nowrap; display: none"
-									id="save-btn-${contract.id}" class="btn btn-xs btn-outline">저장</button>
+									id="save-btn-${contract.id}" class="btn btn-xs btn-outline"
+								>저장</button>
 							</td>
 						</tr>
 					</c:forEach>

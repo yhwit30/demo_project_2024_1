@@ -85,10 +85,45 @@
 	const checkLoginIdDupDebounced = _.debounce(checkLoginIdDup, 600);
 </script>
 
+
+<style>
+/* 회원가입 디자인 */
+.join-box {
+	width: 450px;
+	margin-left: auto;
+	margin-right: auto;
+	white-space: nowrap;
+	border: 1px solid black;
+	text-align: center;
+	white-space: nowrap;
+}
+
+.join-box>thead tr {
+	background: linear-gradient(to right, #536976, #292e49);
+}
+
+.join-box>thead th {
+	color: white;
+}
+
+.join-box>tbody th {
+	font-size: 14px;
+}
+
+.join-box th, td {
+	border: 1px solid rgba(255, 0, 0, 0.1);
+}
+</style>
+
 <section class="mt-8 text-xl px-4">
 	<div class="mx-auto">
 		<form class="table-box-type-1" method="POST" action="../member/doJoin" onsubmit="submitJoinForm(this); return false;">
-			<table class="join-box table-box-1" border="1">
+			<table class="join-box" border="1">
+			<thead>
+					<tr>
+						<th colspan="2">JOIN</th>
+					</tr>
+				</thead>
 				<tbody>
 					<tr>
 						<th>아이디</th>

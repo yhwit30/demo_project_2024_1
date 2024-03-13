@@ -8,8 +8,7 @@
 <link rel="stylesheet" href="/resource/common.css" />
 <script src="/resource/common.js" defer="defer"></script>
 <!-- 테일윈드 불러오기 -->
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" /> -->
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
 
 <!-- daisy ui 불러오기 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/daisyui/4.6.1/full.css" />
@@ -20,49 +19,16 @@
 <!-- 제이쿼리 불러오기 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-<script>
-  // 테마를 전환하는 함수
-  function Theme__toggle() {
-    const theme = localStorage.getItem('theme') ?? 'autumn';
-
-    if (theme == 'autumn') {
-      localStorage.setItem('theme', 'dark');
-      Theme__applyTo('dark'); // 테마를 어두운 테마로 설정
-    } else {
-      localStorage.setItem('theme', 'autumn');
-      Theme__applyTo('autumn'); // 테마를 밝은 테마로 설정
-    }
-  }
-
-  // 특정 테마를 적용하는 함수
-  function Theme__applyTo(themeName) {
-    $('html').attr('data-theme', themeName);
-  }
-
-  // 초기 테마 설정 함수
-  function Theme__init() {
-    const theme = localStorage.getItem('theme') ?? 'autumn';
-    Theme__applyTo(theme);
-  }
-
-  // 문서 로드 완료 시 초기 테마 설정
-  $(document).ready(function () {
-    Theme__init();
-  });
-</script>
 
 <style>
-#logo{
+#logo {
 	background-image: url("/resource/logo.png");
 	height: 100px;
 	width: 100px;
 	background-size: cover;
 	margin-top: 10px;
 }
-
 </style>
-
-
 
 
 </head>
@@ -70,20 +36,19 @@
 	<header>
 		<div class="h-16 flex items-center text-3xl">
 			<a href="/">
-				<img id="logo" src="/resource/logo.png"/>
+				<img id="logo" src="/resource/logo.png" />
 			</a>
 
 			<!-- 게시판 헤드 -->
 			<div class="flex-grow "></div>
 			<ul class="flex ">
-			<li class=""><a class="h-full px-3 flex items-center btn-theme-toggle" href="javascript:Theme__toggle();">
-						<span>🌞</span>
-						<span>🌚</span>
-					</a></li>
+
 
 				<c:if test="${rq.isLogined()}">
 					<li>
-						<a class="hover:underline" href="/usr/member/myPage">${rq.loginedMemberNickname }님<i class="fa-solid fa-handshake"></i>
+						<a class="hover:underline" href="/usr/member/myPage">${rq.loginedMemberNickname }님<i
+								class="fa-solid fa-handshake"
+							></i>
 						</a>
 					</li>
 				</c:if>
@@ -98,23 +63,23 @@
 
 				<!-- 목록 메뉴 -->
 				<%-- 				<c:if test="${rq.isLogined()}"> --%>
-<!-- 					<li> -->
-<!-- 						<a class="hover:underline" href="../article/list?boardId=0"> -->
-<!-- 							<i class="fa-solid fa-table-list"></i> -->
-<!-- 						</a> -->
-<!-- 						<ul> -->
-<!-- 							<li> -->
-<!-- 								<a class="hover:underline" href="../article/list?boardId=1&page=1">NOTICE</a> -->
-<!-- 							</li> -->
-<!-- 							<li> -->
-<!-- 								<a class="hover:underline" href="../article/list?boardId=2&page=1">FREE</a> -->
-<!-- 							</li> -->
-<!-- 							<li> -->
-<!-- 								<a class="hover:underline" href="../article/list?boardId=3&page=1">QnA</a> -->
-<!-- 							</li> -->
-<!-- 						</ul> -->
-<!-- 					</li> -->
-<%-- 				</c:if> --%>
+				<!-- 					<li> -->
+				<!-- 						<a class="hover:underline" href="../article/list?boardId=0"> -->
+				<!-- 							<i class="fa-solid fa-table-list"></i> -->
+				<!-- 						</a> -->
+				<!-- 						<ul> -->
+				<!-- 							<li> -->
+				<!-- 								<a class="hover:underline" href="../article/list?boardId=1&page=1">NOTICE</a> -->
+				<!-- 							</li> -->
+				<!-- 							<li> -->
+				<!-- 								<a class="hover:underline" href="../article/list?boardId=2&page=1">FREE</a> -->
+				<!-- 							</li> -->
+				<!-- 							<li> -->
+				<!-- 								<a class="hover:underline" href="../article/list?boardId=3&page=1">QnA</a> -->
+				<!-- 							</li> -->
+				<!-- 						</ul> -->
+				<!-- 					</li> -->
+				<%-- 				</c:if> --%>
 
 				<c:if test="${!rq.isLogined()}">
 					<li>
@@ -129,7 +94,9 @@
 
 				<c:if test="${rq.isLogined()}">
 					<li>
-						<a onclick="if(confirm('로그아웃하시겠습니까?') == false) return false;" class="hover:underline" href="/usr/member/doLogout?${rq.logoutUri }">LOGOUT</a>
+						<a onclick="if(confirm('로그아웃하시겠습니까?') == false) return false;" class="hover:underline"
+							href="/usr/member/doLogout?${rq.logoutUri }"
+						>LOGOUT</a>
 					</li>
 				</c:if>
 			</ul>
