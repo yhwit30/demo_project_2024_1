@@ -5,80 +5,6 @@
 <%@ include file="../../common/sidebar.jspf"%>
 
 
-<script>
-	$(window).ready(function() {
-		draw(${occupancyRate}, '.pie-chart1', '#ff8c00');
-		draw(50, '.pie-chart2', '#8b22ff');
-		draw(30, '.pie-chart3', '#ff0');
-	});
-
-	function draw(max, classname, colorname) {
-		var i = 1;
-		var func1 = setInterval(function() {
-			if (i <= max) {
-				color1(i, classname, colorname);
-				i++;
-			} else {
-				clearInterval(func1);
-			}
-		}, 10);
-	}
-	function color1(i, classname, colorname) {
-		$(classname).css(
-				{
-					"background" : "conic-gradient(" + colorname + " 0% " + i
-							+ "%, #ffffff " + i + "% 100%)"
-				});
-	}
-</script>
-
-
-
-<!-- 날씨 api -->
-<script>
-
-const API_KEY = '2d1119c77c14a77fee290dd58e72b536';
-
-const callbackOk= (position) =>{
-    console.log(position)
-    const lat = position.coords.latitude //위도
-    const lon = position.coords.longitude //경도
-		console.log("현재 위치는 위도:" + lat + ", 경도:" + lon);
-		const url = 'https://api.openweathermap.org/data/2.5/weather?lat=' +lat+ '&lon='+lon+ '&appid='+API_KEY + '&units=metric&lang=kr';
-		console.log(url);
-		fetch(url)
-		.then(response => response.json())
-		.then(data=>{
-			console.log(data);
-			
-			const temperature = data.main.temp;
-		    const place = data.name;
-		    const description = data.weather[0].description;
-		      
-		    console.log('temperature: ' + temperature);
-		    console.log('place: ' + place);
-		    console.log('description: ' + description);
-		    
-		    // html 그리기
-		    document.querySelector('.temp').innerText = '온도: ' + temperature + '°C';
-		    document.querySelector('.place').innerText = '장소: ' + place;
-		    document.querySelector('.desc').innerText = '날씨: ' + description;
-		})
-		
-}
-	
-const callbackError= () =>{
-    alert("위치정보를 찾을 수 없습니다.")
-}
-
-	navigator.geolocation.getCurrentPosition(callbackOk, callbackError);
-
-
-	
-</script>
-
-
-
 <style>
 .pie-chart {
 	position: relative;
@@ -106,9 +32,9 @@ span.center {
 </style>
 
 
-<section class="mt-2 text-xl px-4 flex justify-around">
-	<div class="overflow-x-auto flex-grow">
-		<table class="table-box-1" border="1">
+<section class="mt-2 text-xl px-4 flex justify-between">
+	<div class="overflow-x-auto">
+		<table class="table-box-1" border="1" style="width: 600px;">
 			<thead>
 				<tr>
 					<th>건물명</th>
@@ -140,17 +66,17 @@ span.center {
 
 	</div>
 
-	<div class="pie-chart pie-chart1 mr-10">
+	<div class="pie-chart pie-chart1 mr-5">
 		<span class="center">입주율${occupancyRate}%</span>
 	</div>
-	<div class="pie-chart pie-chart2 mr-10">
-		<span class="center">수익율(todo)</span>
-	</div>
-	<div class="bg-yellow-400 mr-20">
-		<div>현재 날씨</div>
+	<!-- 지도 보이기 -->
+	<div class="mr-5" id="map" style="width: 200px; height: 200px;"></div>
+	<div style="width: 200px; border-radius: 10px; text-align: left;  background: linear-gradient(to right, #4fc3f7, #0093c4 );">
+		<div>건물: '${buildingRd.bldgName }'의 날씨</div>
 		<div class="temp"></div>
 		<div class="place"></div>
 		<div class="desc"></div>
+		<img class="weatherIcon" />
 	</div>
 
 </section>
@@ -163,7 +89,8 @@ span.center {
 	<div>
 		<c:forEach var="building" items="${buildings }">
 			<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
-				href="../dashboard/dashboard?bldgId=${building.id }">${building.bldgName }</a>
+				href="../dashboard/dashboard?bldgId=${building.id }"
+			>${building.bldgName }</a>
 		</c:forEach>
 
 	</div>
@@ -214,6 +141,133 @@ span.center {
 		</tbody>
 	</table>
 </section>
+
+
+<script>
+	$(window).ready(function() {
+		draw(${occupancyRate}, '.pie-chart1', '#ff8c00');
+// 		draw(50, '.pie-chart2', '#8b22ff');
+// 		draw(30, '.pie-chart3', '#ff0');
+	});
+
+	function draw(max, classname, colorname) {
+		var i = 1;
+		var func1 = setInterval(function() {
+			if (i <= max) {
+				color1(i, classname, colorname);
+				i++;
+			} else {
+				clearInterval(func1);
+			}
+		}, 10);
+	}
+	function color1(i, classname, colorname) {
+		$(classname).css(
+				{
+					"background" : "conic-gradient(" + colorname + " 0% " + i
+							+ "%, #ffffff " + i + "% 100%)"
+				});
+	}
+</script>
+
+
+
+<!-- 날씨 api -->
+<script>
+
+const API_KEY = '2d1119c77c14a77fee290dd58e72b536';
+
+const getWeatherByCoordinates = (latitude, longitude) =>{
+		console.log("현재 위치는 위도:" + latitude + ", 경도:" + longitude);
+		const url = 'https://api.openweathermap.org/data/2.5/weather?lat=' +latitude+ '&lon='+longitude+ '&appid='+API_KEY + '&units=metric&lang=kr';
+		console.log(url);
+		fetch(url)
+		.then(response => response.json())
+		.then(data=>{
+			console.log(data);
+			
+			const temperature = data.main.temp;
+		    const place = data.name;
+		    const description = data.weather[0].description;
+		    const weatherIcon = data.weather[0].icon;
+		    const weatherIconAdrs = 'http://openweathermap.org/img/wn/' + weatherIcon + '@2x.png';
+		      
+		    console.log('temperature: ' + temperature);
+		    console.log('place: ' + place);
+		    console.log('description: ' + description);
+		    
+		    
+		    // html 그리기
+		    document.querySelector('.temp').innerText = '온도: ' + temperature + '°C';
+		    document.querySelector('.place').innerText = '장소: ' + place;
+		    document.querySelector('.desc').innerText = '날씨: ' + description;
+		    document.querySelector('.weatherIcon').setAttribute('src', weatherIconAdrs);
+		})
+		
+}
+
+getWeatherByCoordinates(${buildingRd.latitude}, ${buildingRd.longitude});
+
+// const callbackOk = (position) => {
+//     console.log(position);
+//     const lat = position.coords.latitude; //위도
+//     const lon = position.coords.longitude; //경도
+//     console.log("현재 위치는 위도:" + lat + ", 경도:" + lon);
+// }
+
+// const callbackError= () =>{
+//     alert("위치정보를 찾을 수 없습니다.")
+// }
+
+// navigator.geolocation.getCurrentPosition(callbackOk, callbackError);
+
+</script>
+
+
+
+
+<!-- 지도api -->
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=426dd75f75d2eb88e4ae8811cf3bce62&libraries=services"
+></script>
+
+<!-- 지도 및 위도경도 변수 선언 -->
+<script>
+    var map;
+    var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
+
+    function initMap() {
+        var mapOption = {
+            center : new kakao.maps.LatLng(${buildingRd.latitude}, ${buildingRd.longitude}), // 지도의 중심좌표
+            level : 3 // 지도의 확대 레벨
+        };
+
+        map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+        // 지도에 표시
+        setCenter(${buildingRd.latitude}, ${buildingRd.longitude});
+    }
+
+    // 주소에서 얻은 위도,경도로 지도 이동 및 마커 추가
+    function setCenter(lat, lon) {
+        // 마커가 표시될 위치를 생성합니다
+        var markerPosition = new kakao.maps.LatLng(lat, lon);
+
+        // 중심 좌표를 변경하여 지도의 중심을 설정합니다
+        map.setCenter(markerPosition);
+
+        // 마커를 생성합니다
+        var marker = new kakao.maps.Marker({
+            position : markerPosition,
+            map: map // 마커가 지도 위에 표시되도록 설정합니다
+        });
+    }
+
+    // 페이지 로드 시 initMap 함수를 호출하여 지도를 초기화합니다
+    document.addEventListener("DOMContentLoaded", function() {
+        initMap();
+    });
+</script>
 
 
 <%@ include file="../../common/foot.jspf"%>

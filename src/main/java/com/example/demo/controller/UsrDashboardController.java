@@ -44,6 +44,9 @@ public class UsrDashboardController {
 
 		// 건물별 보증금 등 합계 가져오기
 		List<Dashboard> dashboard = dashboardService.getDashboard();
+		
+		// 건물 지도에 찍을 용도
+		Building buildingRd = buildingService.getForPrintBuilding(bldgId);
 
 		// 호실정보 가져오기
 		List<Room> rooms = buildingService.getForPrintRooms(bldgId);
@@ -58,6 +61,7 @@ public class UsrDashboardController {
 		List<Building> buildings = buildingService.getForPrintBuildings();
 		model.addAttribute("buildings", buildings);
 
+		model.addAttribute("buildingRd", buildingRd);
 		model.addAttribute("dashboard", dashboard);
 		model.addAttribute("rooms", rooms);
 		model.addAttribute("roomsCnt", roomsCnt);
