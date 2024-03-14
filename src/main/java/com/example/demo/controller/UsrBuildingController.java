@@ -14,10 +14,14 @@ import com.example.demo.util.Ut;
 import com.example.demo.vo.Building;
 import com.example.demo.vo.ResultData;
 import com.example.demo.vo.Room;
+import com.example.demo.vo.Rq;
 
 @Controller
 public class UsrBuildingController {
 
+	@Autowired
+	private Rq rq;
+	
 	@Autowired
 	private BuildingService buildingService;
 

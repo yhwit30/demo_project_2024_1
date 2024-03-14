@@ -16,4 +16,5 @@ public class Building {
 	private int roomTotal;
 	private double latitude;
 	private double longitude;
+	private int memberId;
 }
