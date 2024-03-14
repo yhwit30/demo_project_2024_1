@@ -240,6 +240,13 @@
 		<tbody>
 
 			<c:forEach var="rentStatus" items="${rentStatus }">
+				<!-- rentEndDate를 이용하여 연도와 월 추출 -->
+				<c:set var="rentEndDate" value="${rentStatus.contractEndDate}" />
+				<c:set var="parts" value="${fn:split(rentEndDate, '.')}" />
+				<c:set var="endDateYear" value="${parts[0]}" />
+				<c:set var="endDateMonth" value="${parts[1]}" />
+
+				<!-- 표 그리기 -->
 				<tr class="hover">
 					<td>${rentStatus.roomNum }</td>
 					<td>${rentStatus.tenantName }</td>
@@ -254,9 +261,11 @@
 					<td>${rentStatus.rentDate }</td>
 
 
+
+
 					<c:forEach var="month" begin="1" end="12">
 						<c:set var="paymentStatusVar" value="paymentStatus${month}" />
-						<td class="ctrlBtnHover">
+						<td class="ctrlBtnHover" style="${endDateYear == nowYear && endDateMonth == month ? 'background:pink;' : '' }">
 							<c:if test="${rentStatus.tenantId != 0}">
 								<!-- 납부일자 그려주는 태그 -->
 								<span id="${month}rent-${rentStatus.tenantId}">${rentStatus[paymentStatusVar]}</span>

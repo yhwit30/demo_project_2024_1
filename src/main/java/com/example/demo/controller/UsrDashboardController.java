@@ -77,6 +77,7 @@ public class UsrDashboardController {
 			year = nowYear;
 		}
 		List<Dashboard> rentStatus = dashboardService.getRentStatus(bldgId, year);
+		
 
 //		건물 변환 버튼용
 		List<Building> buildings = buildingService.getForPrintBuildings();
