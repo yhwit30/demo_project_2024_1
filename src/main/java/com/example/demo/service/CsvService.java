@@ -34,57 +34,57 @@ public class CsvService {
 		bw.write("항목, 세부금액");
 		bw.write(newline);
 
-		bw.write("엘리베이터");
+		bw.write("엘리베이터,");
 		bw.write("" + maintenanceFee.getElevater());
-		bw.write(newline);
-		bw.write("소방안전");
+		bw.newLine();
+		bw.write("소방안전,");
 		bw.write("" + maintenanceFee.getFireSafety());
 		bw.write(newline);
 
-		bw.write("인터넷,TV");
+		bw.write("인터넷TV,");
 		bw.write("" + maintenanceFee.getInternetTV());
 		bw.write(newline);
 
-		bw.write("공용전기");
+		bw.write("공용전기,");
 		bw.write("" + maintenanceFee.getCommonElec());
 		bw.write(newline);
 
-		bw.write("사용전기");
+		bw.write("사용전기,");
 		bw.write("" + maintenanceFee.getElecUse());
 		bw.write(newline);
 
-		bw.write("전기비용");
+		bw.write("전기비용,");
 		bw.write("" + maintenanceFee.getElecBill());
 		bw.write(newline);
 
-		bw.write("공용수도");
+		bw.write("공용수도,");
 		bw.write("" + maintenanceFee.getCommonWater());
 		bw.write(newline);
 
-		bw.write("사용수도");
+		bw.write("사용수도,");
 		bw.write("" + maintenanceFee.getWaterUse());
 		bw.write(newline);
 
-		bw.write("수도비용");
+		bw.write("수도비용,");
 		bw.write("" + maintenanceFee.getWaterBill());
 		bw.write(newline);
 
-		bw.write("가스사용");
+		bw.write("가스사용,");
 		bw.write("" + maintenanceFee.getGasUse());
 		bw.write(newline);
 
-		bw.write("가스비용");
+		bw.write("가스비용,");
 		bw.write("" + maintenanceFee.getGasBill());
 		bw.write(newline);
 
 		bw.write(newline);
-		bw.write("당월계");
+		bw.write("당월계,");
 		bw.write("" + maintenanceFee.getMonthlyMaintenanceFee());
 		bw.write(newline);
-		bw.write("연체료");
+		bw.write("연체료,");
 		bw.write("" + maintenanceFee.getLateFee());
 		bw.write(newline);
-		bw.write("납기 후 금액");
+		bw.write("납기 후 금액,");
 		bw.write("" + maintenanceFee.getLateMaintenanceFee());
 
 	}

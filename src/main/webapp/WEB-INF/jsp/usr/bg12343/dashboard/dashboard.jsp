@@ -71,7 +71,9 @@ span.center {
 	</div>
 	<!-- 지도 보이기 -->
 	<div class="mr-5" id="map" style="width: 200px; height: 200px;"></div>
-	<div style="width: 200px; border-radius: 10px; text-align: left;  background: linear-gradient(to right, #4fc3f7, #0093c4 );">
+	<div
+		style="width: 200px; border-radius: 10px; text-align: left; background: linear-gradient(to right, rgba(79, 195, 247, 0.6), rgba(0, 147, 196, 0.6));"
+	>
 		<div>건물: '${buildingRd.bldgName }'의 날씨</div>
 		<div class="temp"></div>
 		<div class="place"></div>
