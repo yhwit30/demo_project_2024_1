@@ -1,8 +1,5 @@
 package com.example.demo.controller;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -18,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.service.BuildingService;
+import com.example.demo.service.CsvService;
 import com.example.demo.service.MaintenanceFeeService;
 import com.example.demo.service.PdfService;
 import com.example.demo.util.Ut;
@@ -42,6 +40,9 @@ public class UsrMaintenanceFeeController {
 
 	@Autowired
 	private PdfService pdfService;
+
+	@Autowired
+	private CsvService csvService;
 
 	// 액션 메소드
 	@RequestMapping("/usr/bg12343/maintenanceFee/maintenanceFee")
@@ -206,10 +207,30 @@ public class UsrMaintenanceFeeController {
 
 		// pdf 저장방식 설정
 		String headerKey = "Content-Disposition";
+		// 브라우저 새로 열어서 보여주기
 		String headerValue = "inline; filename=pdf_" + currentDateTime + ".pdf";
 		response.setHeader(headerKey, headerValue);
 
 		pdfService.export(response, tenantId, bldgId, year, month);
+
+	}
+
+	@RequestMapping("usr/bg12343/maintenanceFee/csvExport")
+	public void generateCSV(HttpServletResponse response, int tenantId, int bldgId, Integer year, String month) throws DocumentException, IOException {
+
+		// csv 파일에 시간정보 추가
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:mm:ss");
+		String currentDateTime = dateFormatter.format(new Date());
+
+		// csv 저장방식 설정
+		response.setContentType("text/csv");
+
+		// 브라우저 새로 열어서 보여주기
+		String headerKey = "Content-Disposition";
+		String headerValue = "attachment; filename=csv_" + currentDateTime + ".csv";
+		response.setHeader(headerKey, headerValue);
+
+		csvService.export(response, tenantId, bldgId, year, month);
 
 	}
 
