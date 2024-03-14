@@ -224,8 +224,6 @@ public class UsrMaintenanceFeeController {
 
 		// csv 저장방식 설정
 		response.setContentType("text/csv");
-
-		// 브라우저 새로 열어서 보여주기
 		String headerKey = "Content-Disposition";
 		String headerValue = "attachment; filename=csv_" + currentDateTime + ".csv";
 		response.setHeader(headerKey, headerValue);
