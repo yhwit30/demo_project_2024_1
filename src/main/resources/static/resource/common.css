@@ -58,6 +58,36 @@ header>div>ul>li {
 }
 
 
+/* 상세보기 테이블 */
+.table-box-detail {
+	width: 40%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.table-box-detail tbody th {
+	background: linear-gradient(to right, #536976, #292e49); /* 로얄블루 색상 */
+	white-space: nowrap;
+	width: 80px;
+}
+
+.table-box-detail th {
+	border: 1px solid rgba(255, 0, 0, 0.1);
+	font-weight: normal;
+	font-size: 13px;
+	text-align: center;
+	color: white;
+	box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.table-box-detail td {
+	font-weight: normal;
+	font-size: 14px;
+	border: 1px solid rgba(255, 0, 0, 0.1);
+}
+
+
+
 
 /* 기본 네비게이션 2차 메뉴 스타일 */
 header>div>ul>li>ul {
@@ -103,3 +133,4 @@ header>div>ul>li:hover>ul {
 	position: absolute;
 	top: 35px;
 }
+

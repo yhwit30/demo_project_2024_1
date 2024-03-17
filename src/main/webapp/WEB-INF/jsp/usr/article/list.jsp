@@ -68,31 +68,31 @@
 
 
 	<!-- 버전2 동적 페이징-->
-	<div class="pagination flex justify-center mt-3">
-		<c:set var="paginationLen" value="3" />
-		<c:set var="startPage" value="${page -  paginationLen  >= 1 ? page - paginationLen : 1}" />
-		<c:set var="endPage"
-			value="${page +  paginationLen  <= pagination.totalPage ? page + paginationLen : pagination.totalPage}" />
+<!-- 	<div class="pagination flex justify-center mt-3"> -->
+<%-- 		<c:set var="paginationLen" value="3" /> --%>
+<%-- 		<c:set var="startPage" value="${page -  paginationLen  >= 1 ? page - paginationLen : 1}" /> --%>
+<%-- 		<c:set var="endPage" --%>
+<%-- 			value="${page +  paginationLen  <= pagination.totalPage ? page + paginationLen : pagination.totalPage}" /> --%>
 
-		<c:set var="baseUri" value="?boardId=${boardId}" />
-		<c:set var="baseUri" value="${baseUri}&searchKeywordTypeCode=${param.searchKeywordTypeCode}" />
-		<c:set var="baseUri" value="${baseUri}&searchKeyword=${param.searchKeyword}" />
+<%-- 		<c:set var="baseUri" value="?boardId=${boardId}" /> --%>
+<%-- 		<c:set var="baseUri" value="${baseUri}&searchKeywordTypeCode=${param.searchKeywordTypeCode}" /> --%>
+<%-- 		<c:set var="baseUri" value="${baseUri}&searchKeyword=${param.searchKeyword}" /> --%>
 
-		<c:if test="${startPage > 1 }">
-			<a class="btn btn-sm" href="?page=1&${baseUri}">1</a>
-			<button class="btn btn-sm btn-disabled">...</button>
-		</c:if>
+<%-- 		<c:if test="${startPage > 1 }"> --%>
+<%-- 			<a class="btn btn-sm" href="?page=1&${baseUri}">1</a> --%>
+<!-- 			<button class="btn btn-sm btn-disabled">...</button> -->
+<%-- 		</c:if> --%>
 
-		<c:forEach begin="${startPage }" end="${endPage }" var="i">
-			<a class="btn btn-sm ${page == i ? 'btn-active' : '' }" href="?page=${i }&${baseUri}">${i }</a>
-		</c:forEach>
+<%-- 		<c:forEach begin="${startPage }" end="${endPage }" var="i"> --%>
+<%-- 			<a class="btn btn-sm ${page == i ? 'btn-active' : '' }" href="?page=${i }&${baseUri}">${i }</a> --%>
+<%-- 		</c:forEach> --%>
 
-		<c:if test="${endPage < pagination.totalPage }">
-			<button class="btn btn-sm btn-disabled">...</button>
-			<a class="btn btn-sm" href="?page=${pagination.totalPage }&${baseUri}">${pagination.totalPage }</a>
-		</c:if>
+<%-- 		<c:if test="${endPage < pagination.totalPage }"> --%>
+<!-- 			<button class="btn btn-sm btn-disabled">...</button> -->
+<%-- 			<a class="btn btn-sm" href="?page=${pagination.totalPage }&${baseUri}">${pagination.totalPage }</a> --%>
+<%-- 		</c:if> --%>
 
-	</div>
+<!-- 	</div> -->
 
 	<!-- 버전1  -->
 	<div class="pagination flex justify-center mt-3">

@@ -239,12 +239,13 @@ function doModifyReply(replyId) {
 	})
 }
 
+
 </script>
 
 
 <section class="mt-8 text-xl px-4 ">
 	<div class="">
-		<table class="table-box-1 " border="1">
+		<table class="table-box-detail" border="1">
 			<tbody>
 				<tr>
 					<th>번호</th>
@@ -292,7 +293,7 @@ function doModifyReply(replyId) {
 				<tr>
 					<th>첨부 이미지</th>
 					<td>
-						<img class="w-full rounded-xl" src="${rq.getImgUri(article.id)}" onerror="${rq.profileFallbackImgOnErrorHtml}"
+						<img class="rounded-xl" src="${rq.getImgUri(article.id)}" onerror="${rq.profileFallbackImgOnErrorHtml}"
 							alt="" />
 						<div>${rq.getImgUri(article.id)}</div>
 					</td>
@@ -320,7 +321,9 @@ function doModifyReply(replyId) {
 	</div>
 </section>
 
-<section class="mt-5 px-3">
+
+<!-- 댓글 -->
+<section class="mt-5 px-3 table-box-detail ml-0">
 	<c:if test="${rq.isLogined() }">
 		<form action="../reply/doWrite" method="POST" onsubmit="ReplyWrite__submit(this); return false;">
 			<input type="hidden" name="relTypeCode" value="article" />
@@ -335,9 +338,8 @@ function doModifyReply(replyId) {
 						</td>
 					</tr>
 					<tr>
-						<th></th>
-						<td>
-							<input class="btn btn-outline btn-info" type="submit" value="댓글 작성" />
+						<td colspan="2">
+							<input  class="btn btn-outline btn-info" type="submit" value="댓글 작성" />
 						</td>
 					</tr>
 				</tbody>
@@ -347,9 +349,9 @@ function doModifyReply(replyId) {
 	<c:if test="${!rq.isLogined() }">
 		<a class="btn btn-outline btn-ghost" href="${rq.loginUri }">LOGIN</a> 하고 댓글 써
 	</c:if>
-	<div class="mx-auto">
+	<div>
 		<h2>댓글 리스트(${repliesCount })</h2>
-		<table class="table-box-1 table" border="1">
+		<table class="table-box-1" border="1">
 			<colgroup>
 				<col style="width: 10%" />
 				<col style="width: 20%" />
@@ -387,14 +389,14 @@ function doModifyReply(replyId) {
 							<c:if test="${reply.userCanModify }">
 								<%-- 							href="../reply/modify?id=${reply.id }" --%>
 								<button onclick="toggleModifybtn('${reply.id}');" id="modify-btn-${reply.id }" style="white-space: nowrap;"
-									class="btn btn-outline">수정</button>
+									class="btn btn-outline btn-sm">수정</button>
 								<button onclick="doModifyReply('${reply.id}');" style="white-space: nowrap; display: none;"
-									id="save-btn-${reply.id }" class="btn btn-outline">저장</button>
+									id="save-btn-${reply.id }" class="btn btn-outline btn-sm">저장</button>
 							</c:if>
 						</td>
 						<td>
 							<c:if test="${reply.userCanDelete }">
-								<a style="white-space: nowrap;" class="btn btn-outline"
+								<a style="white-space: nowrap;" class="btn btn-outline btn-sm"
 									onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="../reply/doDelete?id=${reply.id }">삭제</a>
 							</c:if>
 						</td>

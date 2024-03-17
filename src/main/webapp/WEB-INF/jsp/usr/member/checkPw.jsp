@@ -7,7 +7,7 @@
 <section class="mt-8 text-xl px-4">
 	<div class="mx-auto">
 		<form action="../member/doCheckPw" method="POST">
-			<table class="login-box table-box-1" border="1">
+			<table class="table-box-detail" border="1">
 				<tbody>
 					<tr>
 						<th>아이디</th>

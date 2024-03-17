@@ -6,7 +6,7 @@
 <style>
 /* 로그인 디자인 */
 .login-box {
-	width: 450px;
+	width: 420px;
 	margin-left: auto;
 	margin-right: auto;
 	white-space: nowrap;
@@ -68,7 +68,7 @@
 					</tr>
 				</tbody>
 			</table>
-			<div style="text-align:center; font-size:13px; padding-left:390px">
+			<div style="text-align:center; font-size:13px; padding-left:370px">
 			<a href="join">회원가입</a>
 			</div>
 		</form>

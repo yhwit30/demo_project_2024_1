@@ -267,7 +267,7 @@
 
 					<c:forEach var="month" begin="1" end="12">
 						<c:set var="paymentStatusVar" value="paymentStatus${month}" />
-						<td class="ctrlBtnHover" style="${endDateYear == nowYear && endDateMonth == month ? 'background:pink;' : '' }">
+						<td class="ctrlBtnHover" style="${endDateYear == nowYear && endDateMonth == month ? 'background:pink;' : '' }"> <!-- todo nowYear는 param값으로 수정예정 -->
 							<c:if test="${rentStatus.tenantId != 0}">
 								<!-- 납부일자 그려주는 태그 -->
 								<span id="${month}rent-${rentStatus.tenantId}">${rentStatus[paymentStatusVar]}</span>

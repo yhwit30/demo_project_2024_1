@@ -3,17 +3,13 @@
 <c:set var="pageTitle" value="MYPAGE"></c:set>
 <%@ include file="../common/head.jspf"%>
 
-<div>1${loginedMember }</div>
-<div>2${rq.loginedMember }</div>
-<div>${loginedMember.loginId }</div>
-<div>${rq.loginedMember.loginId }</div>
-<div>${rq.loginedMember.getLoginId() }</div>
+<div>1${rq.loginedMember }</div>
+<div>2${loginedMember.loginId }</div>
+<div>로그인 중인 아이디(loginId) : ${rq.loginedMember.loginId }</div>
+<div>로그인 중인 아이디(getLoginId()) : ${rq.loginedMember.getLoginId() }</div>
 <section class="mt-8 text-xl px-4 ">
 	<div class="">
-		<table class="table-box-1 " border="1">
-			<colgroup>
-				<col width="200" />
-			</colgroup>
+		<table class="table-box-detail" border="1">
 
 			<tbody>
 				<tr>
@@ -41,8 +37,7 @@
 					<td>${rq.loginedMember.email }</td>
 				</tr>
 				<tr>
-					<th></th>
-					<td>
+					<td colspan="2">
 						<a href="../member/checkPw" class="btn btn-active btn-ghost">회원정보 수정</a>
 					</td>
 				</tr>

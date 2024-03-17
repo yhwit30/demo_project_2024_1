@@ -5,31 +5,7 @@
 <%@ include file="../../common/sidebar.jspf"%>
 
 
-<style>
-.pie-chart {
-	position: relative;
-	display: inline-block;
-	width: 150px;
-	height: 150px;
-	border-radius: 50%;
-	transition: 0.3s;
-}
 
-span.center {
-	background: #fff;
-	display: block;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 70px;
-	height: 70px;
-	border-radius: 50%;
-	text-align: center;
-	line-height: 100px;
-	font-size: 15px;
-	transform: translate(-50%, -50%);
-}
-</style>
 
 
 <section class="mt-2 text-xl px-4 flex justify-between">
@@ -50,7 +26,7 @@ span.center {
 			<tbody>
 
 				<c:forEach var="dashboard" items="${dashboard }">
-					<tr style="${dashboard.bldgId == param.bldgId ? 'background-color: #ff8c00' : '' }">
+					<tr style="${dashboard.bldgId == param.bldgId ? 'background-color: #4caf50' : '' }">
 						<td>${dashboard.bldgName }</td>
 						<td>${dashboard.roomTotal }</td>
 						<td>${dashboard.depositSum }</td>
@@ -144,10 +120,35 @@ span.center {
 	</table>
 </section>
 
+<!-- 도넛차트 그리기 -->
+<style>
+.pie-chart {
+	position: relative;
+	display: inline-block;
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	transition: 0.3s;
+}
 
+span.center {
+	background: #fff;
+	display: block;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 70px;
+	height: 70px;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 100px;
+	font-size: 15px;
+	transform: translate(-50%, -50%);
+}
+</style>
 <script>
 	$(window).ready(function() {
-		draw(${occupancyRate}, '.pie-chart1', '#ff8c00');
+		draw(${occupancyRate}, '.pie-chart1', '#4caf50');
 // 		draw(50, '.pie-chart2', '#8b22ff');
 // 		draw(30, '.pie-chart3', '#ff0');
 	});

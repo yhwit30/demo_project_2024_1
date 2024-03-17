@@ -23,7 +23,7 @@
 			</thead>
 			<tbody>
 				<c:forEach var="building" items="${buildings }">
-					<tr style="${building.id == param.bldgId ? 'background-color: #ff8c00' : '' }">
+					<tr style="${building.id == param.bldgId ? 'background-color: #4caf50' : '' }">
 						<td>${building.id }</td>
 						<td>${building.regDate.substring(0,10) }</td>
 						<td>${building.bldgName }</td>
