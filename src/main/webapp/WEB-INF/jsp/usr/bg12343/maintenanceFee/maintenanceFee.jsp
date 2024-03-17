@@ -63,7 +63,7 @@
 						<c:forEach var="i" begin="1" end="12">
 							<c:set var="monthFee" value="monthlyMaintenanceFee${i }" />
 							<td>
-								<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId}&month=0${i}">
+								<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId}&month=${i}">
 									${maintenanceFeeMonthly[monthFee]} </a>
 							</td>
 						</c:forEach>

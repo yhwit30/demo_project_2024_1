@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -84,5 +85,8 @@ public interface ContractRepository {
 			""")
 	void addContract(int roomId, String leaseType, int deposit, int rent, int maintenanceFee, String contractStartDate,
 			String contractEndDate, String depositDate, String rentDate, int tenantIds);
+
+	@Delete("DELETE FROM contract WHERE id=#{contractId}")
+	void deleteContract(int contractId);
 
 }

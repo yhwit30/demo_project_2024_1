@@ -53,5 +53,10 @@ public class TenantService {
 		return tenantRepository.getForPrintTenant(tenantId);
 	}
 
+	public void deleteTenant(int tenantId) {
+		tenantRepository.deleteTenant(tenantId);
+		
+	}
+
 
 }

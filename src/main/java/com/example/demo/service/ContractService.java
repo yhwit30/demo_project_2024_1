@@ -37,4 +37,9 @@ public class ContractService {
 		return ResultData.from("S-1", "계약정보가 생성되었습니다");
 	}
 
+	public void deleteContract(int contractId) {
+		contractRepository.deleteContract(contractId);
+		
+	}
+
 }

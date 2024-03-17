@@ -99,8 +99,7 @@
 	<div>
 		<c:forEach var="building" items="${buildings }">
 			<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
-				href="../tenant/tenant?bldgId=${building.id }"
-			>${building.bldgName }</a>
+				href="../tenant/tenant?bldgId=${building.id }">${building.bldgName }</a>
 		</c:forEach>
 	</div>
 
@@ -114,6 +113,7 @@
 						<th>건물명</th>
 						<th>호실</th>
 						<th>세입자명</th>
+						<th>주민번호</th>
 						<th>세입자휴대폰</th>
 						<th>세입자차량</th>
 						<th>임대형태</th>
@@ -126,6 +126,7 @@
 						<th>납부일</th>
 						<th>메모</th>
 						<th>수정</th>
+						<th class="resetBtn" style="display: none;">삭제</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -138,39 +139,45 @@
 							<td id="existing-cell-${tenant.id}-tenantName" class="existing-cell-${tenant.id}">${tenant.tenantName}</td>
 							<td class="input-field-${tenant.id}" style="display: none;">
 								<input size="3" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="tenantName-${tenant.id}"
-									value="${tenant.tenantName}"
-								/>
+									value="${tenant.tenantName}" />
 							</td>
+							<td>주민번호(todo)</td>
 							<td id="existing-cell-${tenant.id}-tenantPhone" class="existing-cell-${tenant.id}">${tenant.tenantPhone}</td>
 							<td class="input-field-${tenant.id}" style="display: none;">
 								<input size="6" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="tenantPhone-${tenant.id}"
-									value="${tenant.tenantPhone}"
-								/>
+									value="${tenant.tenantPhone}" />
 							</td>
 							<td id="existing-cell-${tenant.id}-tenantCarNum" class="existing-cell-${tenant.id}">${tenant.tenantCarNum}</td>
 							<td class="input-field-${tenant.id}" style="display: none;">
 								<input size="4" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="tenantCarNum-${tenant.id}"
-									value="${tenant.tenantCarNum}"
-								/>
+									value="${tenant.tenantCarNum}" />
 							</td>
 
-
-							<td>${tenant.leaseType }</td>
-							<td>${tenant.deposit }</td>
-							<td>${tenant.rent }</td>
-							<td>${tenant.maintenanceFee }</td>
-							<td>${tenant.contractStartDate }</td>
-							<td>${tenant.contractEndDate }</td>
-							<td>${tenant.depositDate }</td>
-							<td>${tenant.rentDate }</td>
+							<c:choose>
+								<c:when test="${tenant.leaseType != null }">
+									<td>${tenant.leaseType }</td>
+									<td>${tenant.deposit }</td>
+									<td>${tenant.rent }</td>
+									<td>${tenant.maintenanceFee }</td>
+									<td>${tenant.contractStartDate }</td>
+									<td>${tenant.contractEndDate }</td>
+									<td>${tenant.depositDate }</td>
+									<td>${tenant.rentDate }</td>
+								</c:when>
+								<c:otherwise>
+									<td colspan="8" style="text-align:center;">계약이 없습니다</td>
+								</c:otherwise>
+							</c:choose>
 							<td>#</td>
 							<td>
 								<button onclick="toggleModifybtn('${tenant.id}');" id="modify-btn-${tenant.id}" style="white-space: nowrap"
-									class="btn btn-xs btn-outline"
-								>수정</button>
+									class="btn btn-xs btn-outline">수정</button>
 								<button onclick="doModifyTenant('${tenant.id}');" style="white-space: nowrap; display: none"
-									id="save-btn-${tenant.id}" class="btn btn-xs btn-outline"
-								>저장</button>
+									id="save-btn-${tenant.id}" class="btn btn-xs btn-outline">저장</button>
+							</td>
+							<td class="resetBtn" style="display: none;">
+								<a href="/usr/bg12343/tenant/doTenantDelete?tenantId=${tenant.id }" class="btn btn-sm"
+									onclick="if(confirm('${tenant.bldgName} 건물의 ${tenant.roomNum }호 ${tenant.tenantName }의 정보와 계약이 모두 삭제됩니다.\n진행하시겠습니까?') == false) return false;">삭제</a>
 							</td>
 						</tr>
 					</c:forEach>
@@ -181,14 +188,31 @@
 
 	<div class="btns mt-5">
 		<a class="btn btn-outline" href="../tenant/tenantModify?bldgId=${param.bldgId }">전체 수정</a>
-		<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="#">삭제</a>
+		<button class="btn btn-outline resetBtnShow" onclick="toggleResetBtn();">세입자 삭제</button>
+		<button class="btn btn-outline resetBtn" onclick="toggleReset();" style="display: none;">세입자 삭제 취소</button>
 	</div>
-	<a class="btn btn-outline" href="/usr/bg12343/tenant/tenantAdd"> 세입자 추가(todo)</a>
 
 </section>
 
 
 
+<script>
+	// 버튼 토글 함수
+	function toggleResetBtn() {
+		// 버튼 바꾸기
+		$('.resetBtnShow').hide();
+		$('.resetBtn').show();
+
+	}
+
+	// 버튼 토글 함수
+	function toggleReset() {
+		// 버튼 바꾸기
+		$('.resetBtnShow').show();
+		$('.resetBtn').hide();
+
+	}
+</script>
 
 
 

@@ -139,5 +139,14 @@ public class UsrTenantController {
 
 		return modifiedTenant;
 	}
+	
+	@RequestMapping("/usr/bg12343/tenant/doTenantDelete")
+	@ResponseBody
+	public String doTenantDelete(int tenantId) {
+
+		tenantService.deleteTenant(tenantId);
+
+		return Ut.jsReplace("S-2", "삭제되었습니다", "/usr/bg12343/tenant/tenant");
+	}
 
 }

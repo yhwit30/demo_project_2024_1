@@ -54,7 +54,7 @@
 								<c:when test="${not empty maintenanceFee.tenantName}">
 									<a
 										href="/usr/bg12343/maintenanceFee/doMaintenanceFeeDelete?tenantId=${maintenanceFee.tenantId }&bldgId=${maintenanceFee.bldgId }&month=${param.month}&year=${param.year}"
-										class="btn btn-sm" onclick="if(confirm('해당 임차인의 관리비가 0으로 재설정됩니다.\n진행하시겠습니까?') == false) return false;">재설정</a>
+										class="btn btn-sm" onclick="if(confirm('임차인 ${maintenanceFee.tenantName}의 ${param.month }월 관리비가 0으로 재설정됩니다.\n진행하시겠습니까?') == false) return false;">재설정</a>
 								</c:when>
 								<c:otherwise>
 									<!-- 기본값으로 공백을 출력합니다 -->

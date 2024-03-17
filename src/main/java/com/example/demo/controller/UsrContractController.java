@@ -250,9 +250,11 @@ public class UsrContractController {
 
 	@RequestMapping("/usr/bg12343/contract/doContractDelete")
 	@ResponseBody
-	public String doContractDelete(int id) {
+	public String doContractDelete(int contractId) {
+		
+		contractService.deleteContract(contractId);
 
-		return null;
+		return Ut.jsReplace("S-2", "삭제되었습니다", "/usr/bg12343/contract/contract");
 	}
 
 }
