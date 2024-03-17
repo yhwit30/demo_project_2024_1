@@ -23,7 +23,12 @@
 			editor.focus();
 			return;
 		}
+		
+// 		alert(${currentId});
+		$('#fileInput').attr('name', 'file__article__' + ${currentId} + '__extra__Img__1');
+		
 		form.body.value = markdown;
+		
 		ArticleWrite__submitFormDone = true;
 		form.submit();
 	}
@@ -31,7 +36,10 @@
 
 <section class="mt-8 text-xl px-4">
 	<div class="mx-auto">
-		<form action="../article/doWrite" method="POST" onsubmit="ArticleWrite__submit(this); return false;">
+		<div>${currentId }</div>
+		<form action="../article/doWrite" method="POST" onsubmit="ArticleWrite__submit(this); return false;"
+			enctype="multipart/form-data">
+			<input type="hidden" name=">${currentId }">
 			<input type="hidden" name="body">
 			<table class="write-box table-box-1" border="1">
 				<tbody>
@@ -57,6 +65,12 @@
 						<td>
 							<input class="input input-bordered input-primary w-full max-w-xs" autocomplete="off" type="text"
 								placeholder="제목을 입력해주세요" name="title" />
+						</td>
+					</tr>
+					<tr>
+						<th>첨부 이미지</th>
+						<td>
+							<input id="fileInput" placeholder="이미지를 선택해주세요" type="file" />
 						</td>
 					</tr>
 					<tr>

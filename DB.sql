@@ -470,6 +470,56 @@ FROM reactionPoint AS RP
 GROUP BY RP.relTypeCode,RP.relId;
 
 
+
+# 파일 테이블 추가
+CREATE TABLE genFile (
+  id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, # 번호
+  regDate DATETIME DEFAULT NULL, # 작성날짜
+  updateDate DATETIME DEFAULT NULL, # 갱신날짜
+  delDate DATETIME DEFAULT NULL, # 삭제날짜
+  delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0, # 삭제상태(0:미삭제,1:삭제)
+  relTypeCode CHAR(50) NOT NULL, # 관련 데이터 타입(article, member)
+  relId INT(10) UNSIGNED NOT NULL, # 관련 데이터 번호
+  originFileName VARCHAR(100) NOT NULL, # 업로드 당시의 파일이름
+  fileExt CHAR(10) NOT NULL, # 확장자
+  typeCode CHAR(20) NOT NULL, # 종류코드 (common)
+  type2Code CHAR(20) NOT NULL, # 종류2코드 (attatchment)
+  fileSize INT(10) UNSIGNED NOT NULL, # 파일의 사이즈
+  fileExtTypeCode CHAR(10) NOT NULL, # 파일규격코드(img, video)
+  fileExtType2Code CHAR(10) NOT NULL, # 파일규격2코드(jpg, mp4)
+  fileNo SMALLINT(2) UNSIGNED NOT NULL, # 파일번호 (1)
+  fileDir CHAR(20) NOT NULL, # 파일이 저장되는 폴더명
+  PRIMARY KEY (id),
+  KEY relId (relTypeCode,relId,typeCode,type2Code,fileNo)
+);
+
+SELECT MAX(id) FROM article;
+
+SELECT * FROM `genFile`;
+
+SELECT *
+FROM reply
+WHERE relTypeCode = 'article'
+AND relId = 1
+
+SELECT A.*, M.nickname AS extra__writer, IFNULL(R.cnt,0) AS cnt
+FROM article AS A
+INNER JOIN `member` AS M
+ON A.memberId = M.id
+LEFT JOIN (SELECT relId, COUNT(*) AS cnt FROM reply GROUP BY relId) AS R
+ON A.id = R.relId
+GROUP BY A.id
+ORDER BY A.id DESC
+
+
+SELECT A.*, M.nickname AS extra__writer, COUNT(R.id) AS cnt
+FROM article AS A
+INNER JOIN `member` AS M ON A.memberId = M.id
+LEFT JOIN `reply` AS R ON A.id = R.relId
+GROUP BY A.id
+ORDER BY A.id DESC
+
+
 ###############################################################
 # building 테이블 생성
 CREATE TABLE building(
@@ -1986,8 +2036,6 @@ SELECT * FROM contract_status;
 SELECT * FROM memo;
 
 SELECT * FROM memo_board;
-
-SELECT * FROM `repair`;
 
 SELECT * FROM maintenance_fee;
 

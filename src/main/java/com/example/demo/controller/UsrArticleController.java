@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,9 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 
 import com.example.demo.service.ArticleService;
 import com.example.demo.service.BoardService;
+import com.example.demo.service.GenFileService;
 import com.example.demo.service.ReactionPointService;
 import com.example.demo.service.ReplyService;
 import com.example.demo.util.Ut;
@@ -20,6 +24,8 @@ import com.example.demo.vo.Page;
 import com.example.demo.vo.Reply;
 import com.example.demo.vo.ResultData;
 import com.example.demo.vo.Rq;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class UsrArticleController {
@@ -38,6 +44,9 @@ public class UsrArticleController {
 
 	@Autowired
 	private ReplyService replyService;
+
+	@Autowired
+	private GenFileService genFileService;
 
 	// 액션 메소드
 	@RequestMapping("/usr/article/detail")
@@ -69,8 +78,10 @@ public class UsrArticleController {
 		model.addAttribute("replies", replies);
 		model.addAttribute("repliesCount", repliesCount);
 		// 좋아요 싫어요 기능 위한 데이터
-		model.addAttribute("isAlreadyAddGoodRp", reactionPointService.isAlreadyAddGoodRp(rq.getLoginedMemberId(), id, "article"));
-		model.addAttribute("isAlreadyAddBadRp",	reactionPointService.isAlreadyAddBadRp(rq.getLoginedMemberId(), id, "article"));
+		model.addAttribute("isAlreadyAddGoodRp",
+				reactionPointService.isAlreadyAddGoodRp(rq.getLoginedMemberId(), id, "article"));
+		model.addAttribute("isAlreadyAddBadRp",
+				reactionPointService.isAlreadyAddBadRp(rq.getLoginedMemberId(), id, "article"));
 
 		return "usr/article/detail";
 	}
@@ -211,14 +222,18 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/write")
-	public String showWrite() {
+	public String showJoin(Model model) {
 
+		int currentId = articleService.getCurrentArticleId();
+
+		model.addAttribute("currentId", currentId);
 		return "usr/article/write";
 	}
 
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public String doWrite(String title, String body, int boardId) {
+	public String doWrite(HttpServletRequest req, int boardId, String title, String body, String replaceUri,
+			MultipartRequest multipartRequest) {
 		// 로그인 상태 체크 - 인터셉터에서
 
 		// 제목 내용 빈 칸 확인
@@ -237,6 +252,17 @@ public class UsrArticleController {
 
 		// 작성된 게시글 번호 가져오기
 		int id = (int) writeArticleRd.getData1();
+
+		// 이미지 업로드
+		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+
+		for (String fileInputName : fileMap.keySet()) {
+			MultipartFile multipartFile = fileMap.get(fileInputName);
+
+			if (multipartFile.isEmpty() == false) {
+				genFileService.save(multipartFile, id);
+			}
+		}
 
 		return Ut.jsReplace(writeArticleRd.getResultCode(), writeArticleRd.getMsg(), "../article/detail?id=" + id);
 	}
