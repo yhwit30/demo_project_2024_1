@@ -189,6 +189,30 @@ public class UsrMaintenanceFeeController {
 				"../maintenanceFee/maintenanceFeeDetail?bldgId=" + bldgId + "&month=" + month);
 	}
 
+	@RequestMapping("/usr/bg12343/maintenanceFee/doMaintenanceFeeDelete")
+	@ResponseBody
+	public String doMaintenanceFeeDelete(int tenantId, int bldgId, Integer year, String month) {
+
+		// 레포지터리 월표현 정리
+		if (month.equals("010")) {
+			month = "10";
+		} else if (month.equals("011")) {
+			month = "11";
+		} else if (month.equals("012")) {
+			month = "12";
+		}
+
+		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
+		if (year == null) {
+			year = nowYear;
+		}
+
+		maintenanceFeeService.deleteMaintenanceFee(tenantId, year, month);
+
+		return Ut.jsReplace("S-2", "재설정되었습니다", "/usr/bg12343/maintenanceFee/maintenanceFeeDetail?bldgId=" + bldgId
+				+ "&month=" + month + "&year=" + year);
+	}
+
 	@RequestMapping("usr/bg12343/maintenanceFee/pdfExport")
 	public void generatePDF(HttpServletResponse response, int tenantId, int bldgId, Integer year, String month)
 			throws DocumentException, IOException {
@@ -216,7 +240,8 @@ public class UsrMaintenanceFeeController {
 	}
 
 	@RequestMapping("usr/bg12343/maintenanceFee/csvExport")
-	public void generateCSV(HttpServletResponse response, int tenantId, int bldgId, Integer year, String month) throws DocumentException, IOException {
+	public void generateCSV(HttpServletResponse response, int tenantId, int bldgId, Integer year, String month)
+			throws DocumentException, IOException {
 
 		// csv 파일에 시간정보 추가
 		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:mm:ss");

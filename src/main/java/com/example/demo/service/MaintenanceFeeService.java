@@ -64,4 +64,9 @@ public class MaintenanceFeeService {
 		return maintenanceFeeRepository.getMaintenanceFee(tenantId, bldgId, year, month);
 	}
 
+	public void deleteMaintenanceFee(int tenantId, Integer year, String month) {
+		maintenanceFeeRepository.deleteMaintenanceFee(tenantId, year, month);
+		
+	}
+
 }

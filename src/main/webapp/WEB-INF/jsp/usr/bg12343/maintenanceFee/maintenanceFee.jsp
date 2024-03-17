@@ -28,6 +28,8 @@
 	<a class="btn btn-sm btn-outline ${param.year == nowYear ? 'btn-active' : '' }"
 		href="maintenanceFee?bldgId=${param.bldgId }&year=${nowYear}">올해(${nowYear}) 보기</a>
 
+해당 월의 관리비를 누르면 상세보기로 이동합니다
+	<!-- 관리비 표 -->
 	<div class="mx-auto overflow-x-auto">
 		<table class="table-box-1" border="1">
 			<thead>

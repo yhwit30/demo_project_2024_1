@@ -11,7 +11,7 @@
 	<div class="mx-auto overflow-x-auto flex justify-around">
 		<table class="table-box-1 mr-5">
 			<thead>
-				<tr class="bgc">
+				<tr>
 					<th>번호</th>
 					<th>등록날짜</th>
 					<th>건물명</th>
@@ -23,7 +23,7 @@
 			</thead>
 			<tbody>
 				<c:forEach var="building" items="${buildings }">
-					<tr style="${building.id == param.bldgId ? 'background-color: #4caf50' : '' }">
+					<tr style="${building.id == param.bldgId ? 'background-color: rgba(255, 235, 59, 0.5)' : '' }">
 						<td>${building.id }</td>
 						<td>${building.regDate.substring(0,10) }</td>
 						<td>${building.bldgName }</td>

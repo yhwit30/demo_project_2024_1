@@ -5,58 +5,57 @@
 <%@ include file="../../common/sidebar.jspf"%>
 
 
+<section class="mt-2 text-xl px-4">
+	<div class="overflow-x-auto flex justify-around">
+	<!-- 건물 현황표 -->
+			<table class="table-box-1 mr-5" style="width:600px;">
+				<thead>
+					<tr>
+						<th>건물명</th>
+						<th>세대수</th>
+						<th>보증금 합계</th>
+						<th>월세 합계</th>
+						<th>관리비 합계</th>
+						<th>수익률(연)</th>
+						<th>입주율</th>
 
-
-
-<section class="mt-2 text-xl px-4 flex justify-between">
-	<div class="overflow-x-auto">
-		<table class="table-box-1" border="1" style="width: 600px;">
-			<thead>
-				<tr>
-					<th>건물명</th>
-					<th>세대수</th>
-					<th>보증금 합계</th>
-					<th>월세 합계</th>
-					<th>관리비 합계</th>
-					<th>수익률(연)</th>
-					<th>입주율</th>
-
-				</tr>
-			</thead>
-			<tbody>
-
-				<c:forEach var="dashboard" items="${dashboard }">
-					<tr style="${dashboard.bldgId == param.bldgId ? 'background-color: #4caf50' : '' }">
-						<td>${dashboard.bldgName }</td>
-						<td>${dashboard.roomTotal }</td>
-						<td>${dashboard.depositSum }</td>
-						<td>${dashboard.rentSum }</td>
-						<td>${dashboard.maintenanceFeeSum }</td>
-						<td>#</td>
-						<td>#</td>
 					</tr>
-				</c:forEach>
+				</thead>
+				<tbody>
 
-			</tbody>
-		</table>
+					<c:forEach var="dashboard" items="${dashboard }">
+						<tr style="${dashboard.bldgId == param.bldgId ? 'background-color: rgba(255, 235, 59, 0.5)' : '' }">
+							<td>${dashboard.bldgName }</td>
+							<td>${dashboard.roomTotal }</td>
+							<td>${dashboard.depositSum }</td>
+							<td>${dashboard.rentSum }</td>
+							<td>${dashboard.maintenanceFeeSum }</td>
+							<td>#</td>
+							<td>#</td>
+						</tr>
+					</c:forEach>
 
+				</tbody>
+			</table>
+
+
+		<!-- 입주율 그래프 -->
+		<div class="pie-chart pie-chart1 mr-5 place-self-center">
+			<span class="center">입주율${occupancyRate}%</span>
+		</div>
+		<!-- 지도 보이기 -->
+		<div class="mr-5" id="map" style="width: 200px;"></div>
+
+		<!-- 	날씨 -->
+		<div
+			style="width: 200px; border-radius: 10px; text-align: left; background: linear-gradient(to right, rgba(79, 195, 247, 0.6), rgba(0, 147, 196, 0.6));">
+			<div>건물: '${buildingRd.bldgName }'의 날씨</div>
+			<div class="temp"></div>
+			<div class="place"></div>
+			<div class="desc"></div>
+			<img class="weatherIcon" />
+		</div>
 	</div>
-
-	<div class="pie-chart pie-chart1 mr-5">
-		<span class="center">입주율${occupancyRate}%</span>
-	</div>
-	<!-- 지도 보이기 -->
-	<div class="mr-5" id="map" style="width: 200px; height: 200px;"></div>
-	<div
-		style="width: 200px; border-radius: 10px; text-align: left; background: linear-gradient(to right, rgba(79, 195, 247, 0.6), rgba(0, 147, 196, 0.6));"
-	>
-		<div>건물: '${buildingRd.bldgName }'의 날씨</div>
-		<div class="temp"></div>
-		<div class="place"></div>
-		<div class="desc"></div>
-		<img class="weatherIcon" />
-	</div>
-
 </section>
 
 <br />
@@ -67,8 +66,7 @@
 	<div>
 		<c:forEach var="building" items="${buildings }">
 			<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
-				href="../dashboard/dashboard?bldgId=${building.id }"
-			>${building.bldgName }</a>
+				href="../dashboard/dashboard?bldgId=${building.id }">${building.bldgName }</a>
 		</c:forEach>
 
 	</div>
@@ -148,7 +146,7 @@ span.center {
 </style>
 <script>
 	$(window).ready(function() {
-		draw(${occupancyRate}, '.pie-chart1', '#4caf50');
+		draw(${occupancyRate}, '.pie-chart1', 'rgba(255, 235, 59, 0.5)');
 // 		draw(50, '.pie-chart2', '#8b22ff');
 // 		draw(30, '.pie-chart3', '#ff0');
 	});
@@ -231,8 +229,7 @@ getWeatherByCoordinates(${buildingRd.latitude}, ${buildingRd.longitude});
 
 <!-- 지도api -->
 <script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=426dd75f75d2eb88e4ae8811cf3bce62&libraries=services"
-></script>
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=426dd75f75d2eb88e4ae8811cf3bce62&libraries=services"></script>
 
 <!-- 지도 및 위도경도 변수 선언 -->
 <script>

@@ -19,6 +19,7 @@
 					<th>호실</th>
 					<th>세입자</th>
 					<th>임대형태</th>
+					<th class="resetBtn" style="display: none;">재설정</th>
 					<th>공동전기</th>
 					<th>공동수도</th>
 					<th>엘레베이터</th>
@@ -44,10 +45,23 @@
 			<tbody>
 
 				<c:forEach var="maintenanceFee" items="${maintenanceFees }">
-					<tr class="hover">
+					<tr>
 						<td>${maintenanceFee.roomNum }</td>
 						<td>${maintenanceFee.tenantName }</td>
 						<td>${maintenanceFee.leaseType }</td>
+						<td class="resetBtn" style="display: none;">
+							<c:choose>
+								<c:when test="${not empty maintenanceFee.tenantName}">
+									<a
+										href="/usr/bg12343/maintenanceFee/doMaintenanceFeeDelete?tenantId=${maintenanceFee.tenantId }&bldgId=${maintenanceFee.bldgId }&month=${param.month}&year=${param.year}"
+										class="btn btn-sm" onclick="if(confirm('해당 임차인의 관리비가 0으로 재설정됩니다.\n진행하시겠습니까?') == false) return false;">재설정</a>
+								</c:when>
+								<c:otherwise>
+									<!-- 기본값으로 공백을 출력합니다 -->
+           						 &nbsp;
+     						   </c:otherwise>
+							</c:choose>
+						</td>
 						<td>${maintenanceFee.commonElec }</td>
 						<td>${maintenanceFee.commonWater }</td>
 						<td>${maintenanceFee.elevater }</td>
@@ -70,11 +84,12 @@
 							<c:if test="${maintenanceFee.tenantName != null }">
 								<a class="btn btn-sm"
 									href="../maintenanceFee/pdfExport?tenantId=${maintenanceFee.tenantId }&bldgId=${param.bldgId }&month=${param.month}"
-									target="_blank"
-								>PDF</a>
+									target="_blank">PDF</a>
 							</c:if>
 							<c:if test="${maintenanceFee.tenantName != null }">
-								<a class="btn btn-sm" href="../maintenanceFee/csvExport?tenantId=${maintenanceFee.tenantId }&bldgId=${param.bldgId }&month=${param.month}">CSV</a>  <!-- csv는 브라우저가 못 읽어서 새창열기 알됨 -->
+								<a class="btn btn-sm"
+									href="../maintenanceFee/csvExport?tenantId=${maintenanceFee.tenantId }&bldgId=${param.bldgId }&month=${param.month}">CSV</a>
+								<!-- csv는 브라우저가 못 읽어서 새창열기 알됨 -->
 							</c:if>
 						</td>
 					</tr>
@@ -85,12 +100,28 @@
 
 	<div class="btns mt-5">
 		<a class="btn btn-outline" href="../maintenanceFee/maintenanceFeeModify?bldgId=${param.bldgId }&month=${param.month}">수정</a>
-		<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="#">삭제(todo)</a>
+		<button class="btn btn-outline resetBtnShow" onclick="toggleResetBtn();">관리비 재설정</button>
+		<button class="btn btn-outline resetBtn" onclick="toggleReset();" style="display: none;">재설정 취소</button>
 	</div>
 
 </section>
 
+<script>
+	// 버튼 토글 함수
+	function toggleResetBtn() {
+		// 버튼 바꾸기
+		$('.resetBtnShow').hide();
+		$('.resetBtn').show();
 
+	}
 
+	// 버튼 토글 함수
+	function toggleReset() {
+		// 버튼 바꾸기
+		$('.resetBtnShow').show();
+		$('.resetBtn').hide();
+
+	}
+</script>
 
 <%@ include file="../../common/foot.jspf"%>

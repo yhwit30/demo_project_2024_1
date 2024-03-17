@@ -59,8 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			<table class="table-box-1" border="1">
 				<thead>
 					<tr>
-
-						<td colspan="4">한번에 입력</td>
+						<th colspan="4" style="text-align:center;">한번에 입력</th>
 						<td>
 							<input id="bulkWriteCommonElec" size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요" />
 						</td>
@@ -90,6 +89,10 @@ document.addEventListener('DOMContentLoaded', function() {
 						<td>
 							<input id="bulkWriteGasCost" size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요" />
 						</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
 						<td></td>
 					</tr>
 					<tr>

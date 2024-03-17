@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -155,5 +156,8 @@ public interface MaintenanceFeeRepository {
 			int waterUse, int waterCost, int waterBill, int elecUse, int elecCost, int elecBill, int gasUse,
 			int gasCost, int gasBill, int monthlyMaintenanceFee, int lateFee, int lateMaintenanceFee,
 			int maintenanceFeeDate, int year, String month);
+
+	@Delete("DELETE FROM maintenance_fee WHERE tenantId = #{tenantId} AND updateDate = '${year}-${month}'")
+	void deleteMaintenanceFee(int tenantId, Integer year, String month);
 
 }
