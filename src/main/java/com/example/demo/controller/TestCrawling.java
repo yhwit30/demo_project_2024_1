@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-public class UsrCrawlingTest {
+public class TestCrawling {
 
 	public void naver() {
 		// 크롬 드라이버 경로 설정 (크롬 드라이버 설치 필요)
@@ -133,10 +133,10 @@ public class UsrCrawlingTest {
 	}
 	
 
-	public static void main(String[] args) {
-		UsrCrawlingTest webCrawler = new UsrCrawlingTest();
-		webCrawler.naver();
-		webCrawler.daum();
-		webCrawler.google();
-	}
+//	public static void main(String[] args) {
+//		UsrCrawlingTest webCrawler = new UsrCrawlingTest();
+//		webCrawler.naver();
+//		webCrawler.daum();
+//		webCrawler.google();
+//	}
 }

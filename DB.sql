@@ -500,7 +500,7 @@ SELECT * FROM `genFile`;
 SELECT *
 FROM reply
 WHERE relTypeCode = 'article'
-AND relId = 1
+AND relId = 1;
 
 SELECT A.*, M.nickname AS extra__writer, IFNULL(R.cnt,0) AS cnt
 FROM article AS A
@@ -509,7 +509,7 @@ ON A.memberId = M.id
 LEFT JOIN (SELECT relId, COUNT(*) AS cnt FROM reply GROUP BY relId) AS R
 ON A.id = R.relId
 GROUP BY A.id
-ORDER BY A.id DESC
+ORDER BY A.id DESC;
 
 
 SELECT A.*, M.nickname AS extra__writer, COUNT(R.id) AS cnt
@@ -517,7 +517,7 @@ FROM article AS A
 INNER JOIN `member` AS M ON A.memberId = M.id
 LEFT JOIN `reply` AS R ON A.id = R.relId
 GROUP BY A.id
-ORDER BY A.id DESC
+ORDER BY A.id DESC;
 
 
 ###############################################################

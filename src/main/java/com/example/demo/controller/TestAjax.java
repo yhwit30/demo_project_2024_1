@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class UsrAjaxTest {
+public class TestAjax {
 
-	@RequestMapping("/usr/home/plus")
+	@RequestMapping("/usr/test/plus")
 	public String showTestPage() {
-		return "/usr/home/AjaxTest";
+		return "/usr/test/AjaxTest";
 	}
 
-	@RequestMapping("/usr/home/doPlus")
+	@RequestMapping("/usr/test/doPlus")
 	@ResponseBody
 	public String doPlus(int num1, int num2) {
 		String msg = "더하기 성공!";
@@ -24,7 +24,7 @@ public class UsrAjaxTest {
 		return rs + "/" + msg + "/S-1";
 	}
 
-	@RequestMapping("/usr/home/doPlusJson")
+	@RequestMapping("/usr/test/doPlusJson")
 	@ResponseBody
 	public Map doPlusJson(int num1, int num2) {
 		Map rs = new HashMap<String, Object>();
@@ -35,9 +35,9 @@ public class UsrAjaxTest {
 
 		return rs;
 	}
-	
-	@RequestMapping("/usr/home/input")
+
+	@RequestMapping("/usr/test/input")
 	public String showInputPage() {
-		return "/usr/home/AjaxTest";
+		return "/usr/test/AjaxTest";
 	}
 }
