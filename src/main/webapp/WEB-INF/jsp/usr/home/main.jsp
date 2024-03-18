@@ -3,43 +3,43 @@
 <c:set var="pageTitle" value="MAIN"></c:set>
 <%@ include file="../common/head.jspf"%>
 
+<!-- 검색창 -->
+<!-- <div class="mainSearch"> -->
+<!-- 	<form action=""> -->
+<%-- 		<input type="hidden" name="boardId" value="${param.boardId }" /> --%>
 
-<div class="mainSearch">
-	<form action="">
-		<input type="hidden" name="boardId" value="${param.boardId }" />
-
-		<select data-value="${param.searchKeywordTypeCode }" class="select select-bordered select-sm max-w-xs"
-			name="searchKeywordTypeCode"
-		>
-			<option value="title">제목</option>
-			<option value="extra__writer">작성자</option>
-			<option value="body">내용</option>
-		</select>
-		<input value="${param.searchKeyword }" name="searchKeyword" type="text" placeholder="What is your searchKeyword?"
-			class="input-sm input input-bordered w-60 max-w-xs mt-3"
-		/>
-		<button class="btn btn-primary btn-sm" type="submit">검색</button>
-	</form>
-</div>
+<%-- 		<select data-value="${param.searchKeywordTypeCode }" class="select select-bordered select-sm max-w-xs" --%>
+<!-- 			name="searchKeywordTypeCode" -->
+<!-- 		> -->
+<!-- 			<option value="title">제목</option> -->
+<!-- 			<option value="extra__writer">작성자</option> -->
+<!-- 			<option value="body">내용</option> -->
+<!-- 		</select> -->
+<%-- 		<input value="${param.searchKeyword }" name="searchKeyword" type="text" placeholder="What is your searchKeyword?" --%>
+<!-- 			class="input-sm input input-bordered w-60 max-w-xs mt-3" -->
+<!-- 		/> -->
+<!-- 		<button class="btn btn-primary btn-sm" type="submit">검색</button> -->
+<!-- 	</form> -->
+<!-- </div> -->
 
 
 
 <div class="page mt-10 mx-auto">
 	<div>
-		<a class="btn btn-outline w-full" href="/usr/bg12343/dashboard/dashboard?bldgId=1"> 임대현황DAHBOARD</a>
+		<a class="btn btn-outline w-full" href="/usr/bg12343/dashboard/dashboard?bldgId=1"> 임대현황 보기</a>
 		<img src="/resource/building.jpg" alt="" />
 	</div>
 	<div>
-		<a class="btn btn-outline w-full" href="/usr/article/list">커뮤니티</a>
+		<a class="btn btn-outline w-full" href="/usr/article/list">커뮤니티 보기</a>
 		<img src="/resource/community.png" alt="" />
 	</div>
 	<div>
-		<a class="btn btn-outline w-full" href="/usr/news/news">부동산 관련 뉴스</a>
-		<div class="menu">다음</div>
+		<a class="btn btn-outline w-full" href="/usr/news/news">부동산 관련 뉴스 보기</a>
+		<div>다음</div>
 		<img src="/resource/daum.png" alt="" />
-		<div class="menu">네이버</div>
+		<div>네이버</div>
 		<img src="/resource/naver.png" alt="" />
-		<div class="menu">구글</div>
+		<div>구글</div>
 		<img src="/resource/google.png" alt="" />
 	</div>
 
@@ -61,14 +61,10 @@
 	align-items: center;
 }
 
-.menu {
-	width: 180px;
-	border-radius: 5px;
-}
-
 .page>div>a {
 	background: linear-gradient(to right, #536976, #292e49); /* 로얄블루 색상 */
 	color: white;
+	margin-bottom: 10px;
 }
 
 .page>div {
