@@ -19,7 +19,7 @@ public class CsvService {
 	@Autowired
 	private MaintenanceFeeRepository maintenanceFeeRepository;
 
-	private void writeTableData(BufferedWriter bw, MaintenanceFee maintenanceFee) throws IOException {
+	private void writeMaintenanceFeeTable(BufferedWriter bw, MaintenanceFee maintenanceFee) throws IOException {
 
 		String newline = System.lineSeparator();
 
@@ -89,7 +89,7 @@ public class CsvService {
 
 	}
 
-	public void export(HttpServletResponse response, int tenantId, int bldgId, Integer year, String month)
+	public void exportMaintenanceFee(HttpServletResponse response, int tenantId, int bldgId, Integer year, String month)
 			throws DocumentException, IOException {
 
 		// 관리비 데이터 가져오기
@@ -103,7 +103,7 @@ public class CsvService {
 			// 한글깨짐 해결하는 한 줄 코드
 			bw.write("\uFEFF");
 
-			writeTableData(bw, maintenanceFee);
+			writeMaintenanceFeeTable(bw, maintenanceFee);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -113,6 +113,84 @@ public class CsvService {
 				bw.close();
 			}
 
+		}
+	}
+	
+	private void writeReportBusinessTable(BufferedWriter bw) throws IOException {
+		
+		String newline = System.lineSeparator();
+		
+		// 헤더용 셀
+		bw.write("건물, 호실, 이름");
+		bw.write(newline);
+		
+		bw.write(newline);
+		bw.write(newline);
+		bw.write("항목, 세부금액");
+		bw.write(newline);
+		
+		bw.write("엘리베이터,");
+		bw.newLine();
+		bw.write("소방안전,");
+		bw.write(newline);
+		
+		bw.write("인터넷TV,");
+		bw.write(newline);
+		
+		bw.write("공용전기,");
+		bw.write(newline);
+		
+		bw.write("사용전기,");
+		bw.write(newline);
+		
+		bw.write("전기비용,");
+		bw.write(newline);
+		
+		bw.write("공용수도,");
+		bw.write(newline);
+		
+		bw.write("사용수도,");
+		bw.write(newline);
+		
+		bw.write("수도비용,");
+		bw.write(newline);
+		
+		bw.write(newline);
+		
+		bw.write("가스비용,");
+		bw.write(newline);
+		
+		bw.write(newline);
+		bw.write("당월계,");
+		bw.write(newline);
+		bw.write("연체료,");
+		bw.write(newline);
+		bw.write("납기 후 금액,");
+		
+	}
+	
+	public void exportReportBusiness(HttpServletResponse response)
+			throws DocumentException, IOException {
+		
+			BufferedWriter bw = null;
+		
+		try {
+			
+			// csv 만들기
+			bw = new BufferedWriter(new OutputStreamWriter(response.getOutputStream()));
+			// 한글깨짐 해결하는 한 줄 코드
+			bw.write("\uFEFF");
+			
+			writeReportBusinessTable(bw);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// BufferedWriter 닫기
+			if (bw != null) {
+				bw.close();
+			}
+			
 		}
 	}
 }

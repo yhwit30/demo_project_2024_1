@@ -4,7 +4,7 @@
 <%@ include file="../../common/head.jspf"%>
 <%@ include file="../../common/sidebar.jspf"%>
 
- pdf 출력기능 추가
+pdf 출력기능 추가
 
 
 <section class="mt-2 text-xl px-4">
@@ -24,6 +24,12 @@
 	<a class="btn btn-sm btn-outline ${param.year == nowYear ? 'btn-active' : '' }"
 		href="reportBusiness?bldgId=${param.bldgId }&year=${nowYear}"
 	>올해(${nowYear}) 보기</a>
+
+	<!-- pdf 출력버튼 -->
+	<a class="btn btn-sm" href="/usr/bg12343/dashboard/pdfExport" target="_blank">PDF</a>
+	<!-- csv는 브라우저가 못 읽어서 새창열기 알됨 -->
+	<a class="btn btn-sm" href="/usr/bg12343/dashboard/csvExport">CSV</a>
+
 
 	<!-- 사업장 현황신고표 -->
 	<div class="mx-auto overflow-x-auto">

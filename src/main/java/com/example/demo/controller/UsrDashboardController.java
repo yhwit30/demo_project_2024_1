@@ -1,6 +1,10 @@
 package com.example.demo.controller;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.service.BuildingService;
+import com.example.demo.service.CsvService;
 import com.example.demo.service.DashboardService;
+import com.example.demo.service.PdfService;
 import com.example.demo.service.TenantService;
 import com.example.demo.util.Ut;
 import com.example.demo.vo.Building;
@@ -19,6 +25,9 @@ import com.example.demo.vo.Dashboard;
 import com.example.demo.vo.Room;
 import com.example.demo.vo.Rq;
 import com.example.demo.vo.Tenant;
+import com.lowagie.text.DocumentException;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 public class UsrDashboardController {
@@ -37,6 +46,12 @@ public class UsrDashboardController {
 
 	@Autowired
 	private TenantService tenantService;
+	
+	@Autowired
+	private PdfService pdfService;
+	
+	@Autowired
+	private CsvService csvService;
 
 	// 액션 메소드
 	@RequestMapping("/usr/bg12343/dashboard/dashboard")
@@ -196,6 +211,45 @@ public class UsrDashboardController {
 		model.addAttribute("rentStatus", rentStatus);
 		model.addAttribute("nowYear", nowYear);
 		return "usr/bg12343/dashboard/reportBusiness";
+	}
+	
+	@RequestMapping("usr/bg12343/dashboard/pdfExport")
+	public void generatePDF(HttpServletResponse response)
+			throws DocumentException, IOException {
+
+		// 파일 형식설정(없어도 되기는 한다?)
+		response.setContentType("application/pdf");
+
+		// pdf 파일에 시간정보 추가
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:mm:ss");
+		String currentDateTime = dateFormatter.format(new Date());
+
+		// pdf 저장방식 설정
+		String headerKey = "Content-Disposition";
+		// 브라우저 새로 열어서 보여주기
+		String headerValue = "inline; filename=pdf_" + currentDateTime + ".pdf";
+		response.setHeader(headerKey, headerValue);
+
+		pdfService.exportReportBusiness(response);
+
+	}
+
+	@RequestMapping("usr/bg12343/dashboard/csvExport")
+	public void generateCSV(HttpServletResponse response)
+			throws DocumentException, IOException {
+
+		// csv 파일에 시간정보 추가
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:mm:ss");
+		String currentDateTime = dateFormatter.format(new Date());
+
+		// csv 저장방식 설정
+		response.setContentType("text/csv");
+		String headerKey = "Content-Disposition";
+		String headerValue = "attachment; filename=csv_" + currentDateTime + ".csv";
+		response.setHeader(headerKey, headerValue);
+
+		csvService.exportReportBusiness(response);
+
 	}
 
 }

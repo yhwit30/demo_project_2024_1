@@ -89,7 +89,7 @@
 							<c:if test="${maintenanceFee.tenantName != null }">
 								<a class="btn btn-sm"
 									href="../maintenanceFee/csvExport?tenantId=${maintenanceFee.tenantId }&bldgId=${param.bldgId }&month=${param.month}">CSV</a>
-								<!-- csv는 브라우저가 못 읽어서 새창열기 알됨 -->
+								<!-- csv는 브라우저가 못 읽어서 새창열기 안됨 -->
 							</c:if>
 						</td>
 					</tr>

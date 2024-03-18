@@ -30,7 +30,7 @@ public class PdfService {
 	@Autowired
 	private MaintenanceFeeRepository maintenanceFeeRepository;
 
-	private void writeTableData(PdfPTable table, Font font, MaintenanceFee maintenanceFee) {
+	private void writeMaintenanceFeeTable(PdfPTable table, Font font, MaintenanceFee maintenanceFee) {
 		// header용 셀
 		PdfPCell cell = new PdfPCell();
 		cell.setBackgroundColor(Color.LIGHT_GRAY);
@@ -62,7 +62,7 @@ public class PdfService {
 
 		cell.setPhrase(new Phrase("세부금액", font));
 		table.addCell(cell);
-		
+
 		table.addCell(new Phrase("엘리베이터", font));
 		table.addCell(new Phrase("" + maintenanceFee.getElevater()));
 		table.addCell(new Phrase("소방안전", font));
@@ -95,17 +95,16 @@ public class PdfService {
 		cell.setPhrase(new Phrase("연체료", font));
 		table.addCell(cell);
 		table.addCell(new Phrase("" + maintenanceFee.getLateFee()));
-		
+
 		cell.setPhrase(new Phrase("납기 후 금액", font));
 		table.addCell(cell);
 		table.addCell(new Phrase("" + maintenanceFee.getLateMaintenanceFee()));
 	}
 
-	public void export(HttpServletResponse response, int tenantId, int bldgId, Integer year, String month)
+	public void exportMaintenanceFee(HttpServletResponse response, MaintenanceFee maintenanceFee)
 			throws DocumentException, IOException {
 
-		// 관리비 데이터 가져오기
-		MaintenanceFee maintenanceFee = maintenanceFeeRepository.getMaintenanceFee(tenantId, bldgId, 2024, month);
+		
 
 		// pdf 파일 만들기
 		Document document = new Document(PageSize.A4);
@@ -124,7 +123,7 @@ public class PdfService {
 		Font titleFont = new Font(baseFont, 18);
 
 		// 내용설정
-		Paragraph title = new Paragraph(month + "월 관리비 고지서", titleFont);
+		Paragraph title = new Paragraph("월 관리비 고지서", titleFont);
 		title.setAlignment(Paragraph.ALIGN_CENTER);
 
 //		Paragraph paragraph2 = new Paragraph("This is a paragraph", fontParagraph);
@@ -144,7 +143,7 @@ public class PdfService {
 		col2table.setSpacingBefore(15);
 //		table.setWidths(new float[] {1.5f, 3.5f});
 
-		writeTableData(col2table, font, maintenanceFee);
+		writeMaintenanceFeeTable(col2table, font, maintenanceFee);
 
 		// pdf파일 그리기
 		document.add(title);
@@ -152,6 +151,120 @@ public class PdfService {
 //		document.add(paragraph3);
 //		document.add(paragraph4);
 //		document.add(paragraph5);
+
+		document.add(col2table);
+
+		document.close();
+
+	}
+
+	private void writeReportBusinessTable(PdfPTable table, Font font) {
+		// header용 셀
+		PdfPCell cell = new PdfPCell();
+		cell.setBackgroundColor(Color.LIGHT_GRAY);
+		cell.setPadding(5);
+		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+		// 표 단락 나누기용 셀
+		PdfPCell cellFloat = new PdfPCell();
+		cellFloat.setColspan(16);
+		cellFloat.setFixedHeight(20);
+		cellFloat.setBorder(0);
+
+		// 헤더
+		cell.setPhrase(new Phrase("호실", font));
+		table.addCell(cell);
+
+		cell.setPhrase(new Phrase("호실형태", font));
+		table.addCell(cell);
+
+		cell.setPhrase(new Phrase("1월", font));
+		table.addCell(cell);
+		cell.setPhrase(new Phrase("2월", font));
+		table.addCell(cell);
+		cell.setPhrase(new Phrase("3월", font));
+		table.addCell(cell);
+		cell.setPhrase(new Phrase("4월", font));
+		table.addCell(cell);
+		cell.setPhrase(new Phrase("5월", font));
+		table.addCell(cell);
+		cell.setPhrase(new Phrase("6월", font));
+		table.addCell(cell);
+		cell.setPhrase(new Phrase("7월", font));
+		table.addCell(cell);
+		cell.setPhrase(new Phrase("8월", font));
+		table.addCell(cell);
+		cell.setPhrase(new Phrase("9월", font));
+		table.addCell(cell);
+		cell.setPhrase(new Phrase("10월", font));
+		table.addCell(cell);
+		cell.setPhrase(new Phrase("11월", font));
+		table.addCell(cell);
+		cell.setPhrase(new Phrase("12월", font));
+		table.addCell(cell);
+		cell.setPhrase(new Phrase("비고", font));
+		table.addCell(cell);
+
+		
+		// 단락나누기
+		table.addCell(cellFloat);
+
+		// 1열
+		cell.setPhrase(new Phrase("항목", font));
+		table.addCell(cell);
+
+		cell.setPhrase(new Phrase("세부금액", font));
+		table.addCell(cell);
+
+		table.addCell(new Phrase("엘리베이터", font));
+		table.addCell(new Phrase("소방안전", font));
+		table.addCell(new Phrase("인터넷,TV", font));
+		table.addCell(new Phrase("사용전기", font));
+		table.addCell(new Phrase("가스비용", font));
+
+		table.addCell(cellFloat);
+
+		cell.setPhrase(new Phrase("당월계", font));
+		table.addCell(cell);
+
+		cell.setPhrase(new Phrase("연체료", font));
+		table.addCell(cell);
+
+		cell.setPhrase(new Phrase("납기 후 금액", font));
+		table.addCell(cell);
+	}
+
+	public void exportReportBusiness(HttpServletResponse response) throws DocumentException, IOException {
+
+		// pdf 파일 만들기
+		Document document = new Document(PageSize.A4);
+		PdfWriter.getInstance(document, response.getOutputStream());
+
+		document.open();
+
+		// 폰트설정
+		Font fontTitle = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+		fontTitle.setSize(18);
+		Font fontParagraph = FontFactory.getFont(FontFactory.HELVETICA);
+		fontParagraph.setSize(10);
+		// 한글은 추가로 폰트 넣어줘야함
+		BaseFont baseFont = BaseFont.createFont("c:/windows/fonts/malgun.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+		Font font = new Font(baseFont, 10);
+		Font titleFont = new Font(baseFont, 18);
+
+		// 내용설정
+		Paragraph title = new Paragraph("사업장 현황신고서", titleFont);
+		title.setAlignment(Paragraph.ALIGN_CENTER);
+
+		PdfPTable col2table = new PdfPTable(2);
+		col2table.setWidthPercentage(100);
+		col2table.setSpacingBefore(15);
+//		table.setWidths(new float[] {1.5f, 3.5f});
+
+		writeReportBusinessTable(col2table, font);
+
+		// pdf파일 그리기
+		document.add(title);
 
 		document.add(col2table);
 

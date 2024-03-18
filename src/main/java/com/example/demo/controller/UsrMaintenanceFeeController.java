@@ -222,6 +222,9 @@ public class UsrMaintenanceFeeController {
 			year = nowYear;
 		}
 
+		// 관리비 데이터 가져오기
+		MaintenanceFee maintenanceFee = maintenanceFeeService.getMaintenanceFee(tenantId, bldgId, year, month);
+
 		// 파일 형식설정(없어도 되기는 한다?)
 		response.setContentType("application/pdf");
 
@@ -235,13 +238,16 @@ public class UsrMaintenanceFeeController {
 		String headerValue = "inline; filename=pdf_" + currentDateTime + ".pdf";
 		response.setHeader(headerKey, headerValue);
 
-		pdfService.export(response, tenantId, bldgId, year, month);
+		pdfService.exportMaintenanceFee(response, maintenanceFee);
 
 	}
 
 	@RequestMapping("usr/bg12343/maintenanceFee/csvExport")
 	public void generateCSV(HttpServletResponse response, int tenantId, int bldgId, Integer year, String month)
 			throws DocumentException, IOException {
+
+		// 관리비 데이터 가져오기
+		MaintenanceFee maintenanceFee = maintenanceFeeService.getMaintenanceFee(tenantId, bldgId, year, month);
 
 		// csv 파일에 시간정보 추가
 		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:mm:ss");
@@ -253,7 +259,7 @@ public class UsrMaintenanceFeeController {
 		String headerValue = "attachment; filename=csv_" + currentDateTime + ".csv";
 		response.setHeader(headerKey, headerValue);
 
-		csvService.export(response, tenantId, bldgId, year, month);
+		csvService.exportMaintenanceFee(response, tenantId, bldgId, year, month);
 
 	}
 

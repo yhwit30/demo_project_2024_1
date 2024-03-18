@@ -7,36 +7,36 @@
 
 <section class="mt-2 text-xl px-4">
 	<div class="overflow-x-auto flex justify-around">
-	<!-- 건물 현황표 -->
-			<table class="table-box-1 mr-5" style="width:600px;">
-				<thead>
-					<tr>
-						<th>건물명</th>
-						<th>세대수</th>
-						<th>보증금 합계</th>
-						<th>월세 합계</th>
-						<th>관리비 합계</th>
-						<th>수익률(연)</th>
-						<th>입주율</th>
+		<!-- 건물 현황표 -->
+		<table class="table-box-1 mr-5" style="width: 600px;">
+			<thead>
+				<tr>
+					<th>건물명</th>
+					<th>세대수</th>
+					<th>보증금 합계</th>
+					<th>월세 합계</th>
+					<th>관리비 합계</th>
+					<th>수익률(연)</th>
+					<th>입주율</th>
 
+				</tr>
+			</thead>
+			<tbody>
+
+				<c:forEach var="dashboard" items="${dashboard }">
+					<tr style="${dashboard.bldgId == param.bldgId ? 'background-color: rgba(255, 235, 59, 0.5)' : '' }">
+						<td>${dashboard.bldgName }</td>
+						<td>${dashboard.roomTotal }</td>
+						<td>${dashboard.depositSum }</td>
+						<td>${dashboard.rentSum }</td>
+						<td>${dashboard.maintenanceFeeSum }</td>
+						<td>#</td>
+						<td>#</td>
 					</tr>
-				</thead>
-				<tbody>
+				</c:forEach>
 
-					<c:forEach var="dashboard" items="${dashboard }">
-						<tr style="${dashboard.bldgId == param.bldgId ? 'background-color: rgba(255, 235, 59, 0.5)' : '' }">
-							<td>${dashboard.bldgName }</td>
-							<td>${dashboard.roomTotal }</td>
-							<td>${dashboard.depositSum }</td>
-							<td>${dashboard.rentSum }</td>
-							<td>${dashboard.maintenanceFeeSum }</td>
-							<td>#</td>
-							<td>#</td>
-						</tr>
-					</c:forEach>
-
-				</tbody>
-			</table>
+			</tbody>
+		</table>
 
 
 		<!-- 입주율 그래프 -->
@@ -48,7 +48,8 @@
 
 		<!-- 	날씨 -->
 		<div
-			style="width: 200px; border-radius: 10px; text-align: left; background: linear-gradient(to right, rgba(79, 195, 247, 0.6), rgba(0, 147, 196, 0.6));">
+			style="width: 200px; border-radius: 10px; text-align: left; background: linear-gradient(to right, rgba(79, 195, 247, 0.6), rgba(0, 147, 196, 0.6));"
+		>
 			<div>건물: '${buildingRd.bldgName }'의 날씨</div>
 			<div class="temp"></div>
 			<div class="place"></div>
@@ -66,7 +67,8 @@
 	<div>
 		<c:forEach var="building" items="${buildings }">
 			<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
-				href="../dashboard/dashboard?bldgId=${building.id }">${building.bldgName }</a>
+				href="../dashboard/dashboard?bldgId=${building.id }"
+			>${building.bldgName }</a>
 		</c:forEach>
 
 	</div>
@@ -229,7 +231,8 @@ getWeatherByCoordinates(${buildingRd.latitude}, ${buildingRd.longitude});
 
 <!-- 지도api -->
 <script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=426dd75f75d2eb88e4ae8811cf3bce62&libraries=services"></script>
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=426dd75f75d2eb88e4ae8811cf3bce62&libraries=services"
+></script>
 
 <!-- 지도 및 위도경도 변수 선언 -->
 <script>
