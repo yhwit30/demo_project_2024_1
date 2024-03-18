@@ -46,10 +46,10 @@ public class UsrDashboardController {
 
 	@Autowired
 	private TenantService tenantService;
-	
+
 	@Autowired
 	private PdfService pdfService;
-	
+
 	@Autowired
 	private CsvService csvService;
 
@@ -59,7 +59,7 @@ public class UsrDashboardController {
 
 		// 건물별 보증금 등 합계 가져오기
 		List<Dashboard> dashboard = dashboardService.getDashboard();
-		
+
 		// 건물 지도에 찍을 용도
 		Building buildingRd = buildingService.getForPrintBuilding(bldgId);
 
@@ -92,7 +92,6 @@ public class UsrDashboardController {
 			year = nowYear;
 		}
 		List<Dashboard> rentStatus = dashboardService.getRentStatus(bldgId, year);
-		
 
 //		건물 변환 버튼용
 		List<Building> buildings = buildingService.getForPrintBuildings();
@@ -212,10 +211,18 @@ public class UsrDashboardController {
 		model.addAttribute("nowYear", nowYear);
 		return "usr/bg12343/dashboard/reportBusiness";
 	}
-	
+
 	@RequestMapping("usr/bg12343/dashboard/pdfExport")
-	public void generatePDF(HttpServletResponse response)
+	public void generatePDF(HttpServletResponse response, int bldgId, Integer year)
 			throws DocumentException, IOException {
+
+		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
+		if (year == null) {
+			year = nowYear;
+		}
+
+		// 현황 데이터 가져오기
+		List<Dashboard> rentStatus = dashboardService.getRentStatus(bldgId, year);
 
 		// 파일 형식설정(없어도 되기는 한다?)
 		response.setContentType("application/pdf");
@@ -230,13 +237,21 @@ public class UsrDashboardController {
 		String headerValue = "inline; filename=pdf_" + currentDateTime + ".pdf";
 		response.setHeader(headerKey, headerValue);
 
-		pdfService.exportReportBusiness(response);
+		pdfService.exportReportBusiness(response, rentStatus);
 
 	}
 
 	@RequestMapping("usr/bg12343/dashboard/csvExport")
-	public void generateCSV(HttpServletResponse response)
+	public void generateCSV(HttpServletResponse response, int bldgId, Integer year)
 			throws DocumentException, IOException {
+
+		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
+		if (year == null) {
+			year = nowYear;
+		}
+
+		// 현황 데이터 가져오기
+		List<Dashboard> rentStatus = dashboardService.getRentStatus(bldgId, year);
 
 		// csv 파일에 시간정보 추가
 		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:mm:ss");
@@ -248,7 +263,7 @@ public class UsrDashboardController {
 		String headerValue = "attachment; filename=csv_" + currentDateTime + ".csv";
 		response.setHeader(headerKey, headerValue);
 
-		csvService.exportReportBusiness(response);
+		csvService.exportReportBusiness(response, rentStatus);
 
 	}
 

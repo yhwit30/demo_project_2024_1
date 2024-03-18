@@ -24,31 +24,23 @@
 
 
 
-<div class="page mt-10 main-page mx-auto">
+<div class="page mt-10 mx-auto">
 	<div>
-		<a class="btn btn-outline" href="/usr/bg12343/dashboard/dashboard?bldgId=1"> 임대현황DAHBOARD</a>
-		<div class="menu">
-			<a class="btn btn-outline" href="/usr/bg12343/building/building?bldgId=1"> 건물 현황</a>
-		</div>
-		<div class="menu">
-			<a class="btn btn-outline" href="/usr/bg12343/dashboard/rentStatus?bldgId=1">수납관리</a>
-		</div>
-		<div class="menu">
-			<a class="btn btn-outline" href="/usr/bg12343/maintenanceFee/maintenanceFee">관리비</a>
-		</div>
-
+		<a class="btn btn-outline w-full" href="/usr/bg12343/dashboard/dashboard?bldgId=1"> 임대현황DAHBOARD</a>
+		<img src="/resource/building.jpg" alt="" />
 	</div>
 	<div>
-		<a class="btn btn-outline" href="/usr/article/list">커뮤니티</a>
-		<div class="menu">인기글</div>
-		<div class="menu">최신글</div>
-		<div class="menu">자유글</div>
+		<a class="btn btn-outline w-full" href="/usr/article/list">커뮤니티</a>
+		<img src="/resource/community.png" alt="" />
 	</div>
 	<div>
-		<a class="btn btn-outline" href="/usr/news/news">뉴스</a>
+		<a class="btn btn-outline w-full" href="/usr/news/news">부동산 관련 뉴스</a>
 		<div class="menu">다음</div>
+		<img src="/resource/daum.png" alt="" />
 		<div class="menu">네이버</div>
+		<img src="/resource/naver.png" alt="" />
 		<div class="menu">구글</div>
+		<img src="/resource/google.png" alt="" />
 	</div>
 
 
@@ -62,39 +54,42 @@
 
 .page {
 	display: flex;
-	border: 5px solid red;
+	/* 	border: 5px solid red; */
 	height: 500px;
 	width: 1000px;
 	justify-content: space-around;
+	align-items: center;
 }
 
 .menu {
 	width: 180px;
-	height: 80px;
-	/* 	border: 3px solid pink; */
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 20px;
-	margin-top: 10px;
 	border-radius: 5px;
 }
 
-.main-page>div {
+.page>div>a {
+	background: linear-gradient(to right, #536976, #292e49); /* 로얄블루 색상 */
+	color: white;
+}
+
+.page>div {
 	text-align: center;
 	width: 250px;
 	height: 400px;
 }
 
-.main-page>div:nth-child(1) {
-	border: 3px solid blue;
+.page>div:nth-child(1) {
+	/* 	border: 3px solid blue; */
+	
 }
 
-.main-page>div:nth-child(2) {
-	border: 3px solid gold;
+.page>div:nth-child(2) {
+	/* 	border: 3px solid gold; */
+	
 }
 
-.main-page>div:nth-child(3) {
-	border: 3px solid green;
+.page>div:nth-child(3) {
+	/* 	border: 3px solid green; */
+	
 }
 </style>
 

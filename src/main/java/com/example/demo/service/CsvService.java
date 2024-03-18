@@ -3,9 +3,11 @@ package com.example.demo.service;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.vo.Dashboard;
 import com.example.demo.vo.MaintenanceFee;
 import com.lowagie.text.DocumentException;
 
@@ -111,7 +113,7 @@ public class CsvService {
 	}
 
 	// 사업장 현황보고
-	public void exportReportBusiness(HttpServletResponse response) throws DocumentException, IOException {
+	public void exportReportBusiness(HttpServletResponse response, List<Dashboard> rentStatus) throws DocumentException, IOException {
 
 		BufferedWriter bw = null;
 

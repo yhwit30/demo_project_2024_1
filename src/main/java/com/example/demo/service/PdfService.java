@@ -2,9 +2,11 @@ package com.example.demo.service;
 
 import java.awt.Color;
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.vo.Dashboard;
 import com.example.demo.vo.MaintenanceFee;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
@@ -80,6 +82,7 @@ public class PdfService {
 
 	}
 
+	// 관리비 고지서 표 그리기
 	private void writeMaintenanceFeeTable(PdfPTable table, Font font, MaintenanceFee maintenanceFee) {
 		// header용 셀
 		PdfPCell cell = new PdfPCell();
@@ -104,6 +107,10 @@ public class PdfService {
 		cell.setPhrase(new Phrase("이름", font));
 		table.addCell(cell);
 		table.addCell(new Phrase("" + maintenanceFee.getTenantName(), font));
+
+		cell.setPhrase(new Phrase("임대형태", font));
+		table.addCell(cell);
+		table.addCell(new Phrase("" + maintenanceFee.getLeaseType(), font));
 
 		table.addCell(cellFloat);
 
@@ -152,7 +159,8 @@ public class PdfService {
 	}
 
 	// 사업장 현황보고
-	public void exportReportBusiness(HttpServletResponse response) throws DocumentException, IOException {
+	public void exportReportBusiness(HttpServletResponse response, List<Dashboard> rentStatus)
+			throws DocumentException, IOException {
 
 		// pdf 파일 만들기
 		Document document = new Document(PageSize.A4);
@@ -174,23 +182,24 @@ public class PdfService {
 		Paragraph title = new Paragraph("사업장 현황신고서", titleFont);
 		title.setAlignment(Paragraph.ALIGN_CENTER);
 
-		PdfPTable col2table = new PdfPTable(2);
-		col2table.setWidthPercentage(100);
-		col2table.setSpacingBefore(15);
+		PdfPTable col16table = new PdfPTable(16);
+		col16table.setWidthPercentage(100);
+		col16table.setSpacingBefore(15);
 //		table.setWidths(new float[] {1.5f, 3.5f});
 
-		writeReportBusinessTable(col2table, font);
+		writeReportBusinessTable(col16table, font, rentStatus);
 
 		// pdf파일 그리기
 		document.add(title);
 
-		document.add(col2table);
+		document.add(col16table);
 
 		document.close();
 
 	}
 
-	private void writeReportBusinessTable(PdfPTable table, Font font) {
+	// 사업장 현황보고 표 그리기
+	private void writeReportBusinessTable(PdfPTable table, Font font, List<Dashboard> rentStatus) {
 		// header용 셀
 		PdfPCell cell = new PdfPCell();
 		cell.setBackgroundColor(Color.LIGHT_GRAY);
@@ -206,10 +215,10 @@ public class PdfService {
 		// 헤더
 		cell.setPhrase(new Phrase("호실", font));
 		table.addCell(cell);
-
-		cell.setPhrase(new Phrase("호실형태", font));
+		cell.setPhrase(new Phrase("형태", font));
 		table.addCell(cell);
-
+		cell.setPhrase(new Phrase("임대료", font));
+		table.addCell(cell);
 		cell.setPhrase(new Phrase("1월", font));
 		table.addCell(cell);
 		cell.setPhrase(new Phrase("2월", font));
@@ -236,33 +245,45 @@ public class PdfService {
 		table.addCell(cell);
 		cell.setPhrase(new Phrase("비고", font));
 		table.addCell(cell);
+		
+		// 내용
+		for (Dashboard rent : rentStatus) {
+			
+			cell.setPhrase(new Phrase(""+ rent.getRoomNum(), font));
+			table.addCell(cell);
+			cell.setPhrase(new Phrase(""+ rent.getLeaseType(), font));
+			table.addCell(cell);
+			cell.setPhrase(new Phrase(""+ rent.getRent(), font));
+			table.addCell(cell);
+			cell.setPhrase(new Phrase(""+ rent.getPaymentStatus1(), font));
+			table.addCell(cell);
+			cell.setPhrase(new Phrase(""+ rent.getPaymentStatus2(), font));
+			table.addCell(cell);
+			cell.setPhrase(new Phrase(""+ rent.getPaymentStatus3(), font));
+			table.addCell(cell);
+			cell.setPhrase(new Phrase(""+ rent.getPaymentStatus4(), font));
+			table.addCell(cell);
+			cell.setPhrase(new Phrase(""+ rent.getPaymentStatus5(), font));
+			table.addCell(cell);
+			cell.setPhrase(new Phrase(""+ rent.getPaymentStatus6(), font));
+			table.addCell(cell);
+			cell.setPhrase(new Phrase(""+ rent.getPaymentStatus7(), font));
+			table.addCell(cell);
+			cell.setPhrase(new Phrase(""+ rent.getPaymentStatus8(), font));
+			table.addCell(cell);
+			cell.setPhrase(new Phrase(""+ rent.getPaymentStatus9(), font));
+			table.addCell(cell);
+			cell.setPhrase(new Phrase(""+ rent.getPaymentStatus10(), font));
+			table.addCell(cell);
+			cell.setPhrase(new Phrase(""+ rent.getPaymentStatus11(), font));
+			table.addCell(cell);
+			cell.setPhrase(new Phrase(""+ rent.getPaymentStatus12(), font));
+			table.addCell(cell);
+			cell.setPhrase(new Phrase("#", font));
+			table.addCell(cell);
 
-		// 단락나누기
-		table.addCell(cellFloat);
+		}
 
-		// 1열
-		cell.setPhrase(new Phrase("항목", font));
-		table.addCell(cell);
-
-		cell.setPhrase(new Phrase("세부금액", font));
-		table.addCell(cell);
-
-		table.addCell(new Phrase("엘리베이터", font));
-		table.addCell(new Phrase("소방안전", font));
-		table.addCell(new Phrase("인터넷,TV", font));
-		table.addCell(new Phrase("사용전기", font));
-		table.addCell(new Phrase("가스비용", font));
-
-		table.addCell(cellFloat);
-
-		cell.setPhrase(new Phrase("당월계", font));
-		table.addCell(cell);
-
-		cell.setPhrase(new Phrase("연체료", font));
-		table.addCell(cell);
-
-		cell.setPhrase(new Phrase("납기 후 금액", font));
-		table.addCell(cell);
 	}
 
 }

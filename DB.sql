@@ -1587,7 +1587,7 @@ GROUP BY
 # maintenance_fee testdata
 INSERT INTO maintenance_fee
 SET regDate = NOW(),
-updateDate = '2024-012',
+updateDate = '2024-12',
 commonElec = 1212,
 commonWater =1212,
 elevater =11212,
@@ -1612,7 +1612,7 @@ tenantId =1;
 # maintenance_fee testdata
 INSERT INTO maintenance_fee
 SET regDate = NOW(),
-updateDate = '2024-01',
+updateDate = '2024-1',
 commonElec = 23000,
 commonWater =10000,
 elevater =165000,
@@ -1636,7 +1636,7 @@ tenantId =1;
 # maintenance_fee testdata
 INSERT INTO maintenance_fee
 SET regDate = NOW(),
-updateDate = '2024-01',
+updateDate = '2024-1',
 commonElec = 23000,
 commonWater =10000,
 elevater =165000,
@@ -1660,7 +1660,7 @@ tenantId =2;
 # maintenance_fee testdata
 INSERT INTO maintenance_fee
 SET regDate = NOW(),
-updateDate = '2024-01',
+updateDate = '2024-1',
 commonElec = 23000,
 commonWater =10000,
 elevater =165000,
@@ -1684,7 +1684,7 @@ tenantId =3;
 # maintenance_fee testdata
 INSERT INTO maintenance_fee
 SET regDate = NOW(),
-updateDate = '2024-01',
+updateDate = '2024-1',
 commonElec = 23000,
 commonWater =10000,
 elevater =165000,
@@ -1708,7 +1708,7 @@ tenantId =4;
 # maintenance_fee testdata
 INSERT INTO maintenance_fee
 SET regDate = NOW(),
-updateDate = '2024-01',
+updateDate = '2024-1',
 commonElec = 23000,
 commonWater =10000,
 elevater =165000,
@@ -1733,7 +1733,7 @@ tenantId =5;
 # maintenance_fee testdata
 INSERT INTO maintenance_fee
 SET regDate = NOW(),
-updateDate = '2024-01',
+updateDate = '2024-1',
 commonElec = 23000,
 commonWater =10000,
 elevater =165000,
@@ -1757,7 +1757,7 @@ tenantId =6;
 # maintenance_fee testdata
 INSERT INTO maintenance_fee
 SET regDate = NOW(),
-updateDate = '2024-01',
+updateDate = '2024-1',
 commonElec = 23000,
 commonWater =10000,
 elevater =165000,
@@ -1782,7 +1782,7 @@ tenantId =7;
 # maintenance_fee testdata
 INSERT INTO maintenance_fee
 SET regDate = NOW(),
-updateDate = '2024-02',
+updateDate = '2024-2',
 commonElec = 50000,
 commonWater =10000,
 elevater =165000,
@@ -1806,7 +1806,7 @@ tenantId =1;
 # maintenance_fee testdata
 INSERT INTO maintenance_fee
 SET regDate = NOW(),
-updateDate = '2024-02',
+updateDate = '2024-2',
 commonElec = 50000,
 commonWater =10000,
 elevater =165000,
@@ -1830,7 +1830,7 @@ tenantId =2;
 # maintenance_fee testdata
 INSERT INTO maintenance_fee
 SET regDate = NOW(),
-updateDate = '2024-02',
+updateDate = '2024-2',
 commonElec = 50000,
 commonWater =10000,
 elevater =165000,
@@ -1854,7 +1854,7 @@ tenantId =3;
 # maintenance_fee testdata
 INSERT INTO maintenance_fee
 SET regDate = NOW(),
-updateDate = '2024-02',
+updateDate = '2024-2',
 commonElec = 50000,
 commonWater =10000,
 elevater =165000,
@@ -1878,7 +1878,7 @@ tenantId =4;
 # maintenance_fee testdata
 INSERT INTO maintenance_fee
 SET regDate = NOW(),
-updateDate = '2024-02',
+updateDate = '2024-2',
 commonElec = 50000,
 commonWater =10000,
 elevater =165000,
@@ -1903,7 +1903,7 @@ tenantId =5;
 # maintenance_fee testdata
 INSERT INTO maintenance_fee
 SET regDate = NOW(),
-updateDate = '2024-02',
+updateDate = '2024-2',
 commonElec = 50000,
 commonWater =10000,
 elevater =165000,
@@ -1927,7 +1927,7 @@ tenantId =6;
 # maintenance_fee testdata
 INSERT INTO maintenance_fee
 SET regDate = NOW(),
-updateDate = '2024-02',
+updateDate = '2024-2',
 commonElec = 50000,
 commonWater =10000,
 elevater =165000,
