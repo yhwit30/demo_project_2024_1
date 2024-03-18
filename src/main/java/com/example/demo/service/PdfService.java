@@ -3,12 +3,9 @@ package com.example.demo.service;
 import java.awt.Color;
 import java.io.IOException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.repository.MaintenanceFeeRepository;
 import com.example.demo.vo.MaintenanceFee;
-import com.lowagie.text.Cell;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Element;
@@ -27,8 +24,61 @@ import jakarta.servlet.http.HttpServletResponse;
 @Service
 public class PdfService {
 
-	@Autowired
-	private MaintenanceFeeRepository maintenanceFeeRepository;
+	// 관리비 고지서
+	public void exportMaintenanceFee(HttpServletResponse response, MaintenanceFee maintenanceFee, String month)
+			throws DocumentException, IOException {
+
+		// pdf 파일 만들기
+		Document document = new Document(PageSize.A4);
+		PdfWriter.getInstance(document, response.getOutputStream());
+
+		document.open();
+
+		// 폰트설정
+		Font fontTitle = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+		fontTitle.setSize(18);
+		Font fontParagraph = FontFactory.getFont(FontFactory.HELVETICA);
+		fontParagraph.setSize(10);
+		// 한글은 추가로 폰트 넣어줘야함
+		BaseFont baseFont = BaseFont.createFont("c:/windows/fonts/malgun.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+		Font font = new Font(baseFont, 10);
+		Font titleFont = new Font(baseFont, 18);
+
+		// 내용설정
+		Paragraph title = new Paragraph(month + "월 관리비 고지서", titleFont);
+		title.setAlignment(Paragraph.ALIGN_CENTER);
+
+//		Paragraph paragraph2 = new Paragraph("This is a paragraph", fontParagraph);
+//		paragraph2.setAlignment(Paragraph.ALIGN_LEFT);
+//
+//		Paragraph paragraph3 = new Paragraph("한글은 나오려나", font);
+//		paragraph2.setAlignment(Paragraph.ALIGN_LEFT);
+//
+//		Paragraph paragraph4 = new Paragraph(maintenanceFee.getTenantName(), font);
+//		paragraph2.setAlignment(Paragraph.ALIGN_LEFT);
+//
+//		Paragraph paragraph5 = new Paragraph(maintenanceFee.getLeaseType(), font);
+//		paragraph2.setAlignment(Paragraph.ALIGN_LEFT);
+
+		PdfPTable col2table = new PdfPTable(2);
+		col2table.setWidthPercentage(100);
+		col2table.setSpacingBefore(15);
+//		table.setWidths(new float[] {1.5f, 3.5f});
+
+		writeMaintenanceFeeTable(col2table, font, maintenanceFee);
+
+		// pdf파일 그리기
+		document.add(title);
+//		document.add(paragraph2);
+//		document.add(paragraph3);
+//		document.add(paragraph4);
+//		document.add(paragraph5);
+
+		document.add(col2table);
+
+		document.close();
+
+	}
 
 	private void writeMaintenanceFeeTable(PdfPTable table, Font font, MaintenanceFee maintenanceFee) {
 		// header용 셀
@@ -101,10 +151,8 @@ public class PdfService {
 		table.addCell(new Phrase("" + maintenanceFee.getLateMaintenanceFee()));
 	}
 
-	public void exportMaintenanceFee(HttpServletResponse response, MaintenanceFee maintenanceFee)
-			throws DocumentException, IOException {
-
-		
+	// 사업장 현황보고
+	public void exportReportBusiness(HttpServletResponse response) throws DocumentException, IOException {
 
 		// pdf 파일 만들기
 		Document document = new Document(PageSize.A4);
@@ -123,34 +171,18 @@ public class PdfService {
 		Font titleFont = new Font(baseFont, 18);
 
 		// 내용설정
-		Paragraph title = new Paragraph("월 관리비 고지서", titleFont);
+		Paragraph title = new Paragraph("사업장 현황신고서", titleFont);
 		title.setAlignment(Paragraph.ALIGN_CENTER);
-
-//		Paragraph paragraph2 = new Paragraph("This is a paragraph", fontParagraph);
-//		paragraph2.setAlignment(Paragraph.ALIGN_LEFT);
-//
-//		Paragraph paragraph3 = new Paragraph("한글은 나오려나", font);
-//		paragraph2.setAlignment(Paragraph.ALIGN_LEFT);
-//
-//		Paragraph paragraph4 = new Paragraph(maintenanceFee.getTenantName(), font);
-//		paragraph2.setAlignment(Paragraph.ALIGN_LEFT);
-//
-//		Paragraph paragraph5 = new Paragraph(maintenanceFee.getLeaseType(), font);
-//		paragraph2.setAlignment(Paragraph.ALIGN_LEFT);
 
 		PdfPTable col2table = new PdfPTable(2);
 		col2table.setWidthPercentage(100);
 		col2table.setSpacingBefore(15);
 //		table.setWidths(new float[] {1.5f, 3.5f});
 
-		writeMaintenanceFeeTable(col2table, font, maintenanceFee);
+		writeReportBusinessTable(col2table, font);
 
 		// pdf파일 그리기
 		document.add(title);
-//		document.add(paragraph2);
-//		document.add(paragraph3);
-//		document.add(paragraph4);
-//		document.add(paragraph5);
 
 		document.add(col2table);
 
@@ -205,7 +237,6 @@ public class PdfService {
 		cell.setPhrase(new Phrase("비고", font));
 		table.addCell(cell);
 
-		
 		// 단락나누기
 		table.addCell(cellFloat);
 
@@ -232,44 +263,6 @@ public class PdfService {
 
 		cell.setPhrase(new Phrase("납기 후 금액", font));
 		table.addCell(cell);
-	}
-
-	public void exportReportBusiness(HttpServletResponse response) throws DocumentException, IOException {
-
-		// pdf 파일 만들기
-		Document document = new Document(PageSize.A4);
-		PdfWriter.getInstance(document, response.getOutputStream());
-
-		document.open();
-
-		// 폰트설정
-		Font fontTitle = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
-		fontTitle.setSize(18);
-		Font fontParagraph = FontFactory.getFont(FontFactory.HELVETICA);
-		fontParagraph.setSize(10);
-		// 한글은 추가로 폰트 넣어줘야함
-		BaseFont baseFont = BaseFont.createFont("c:/windows/fonts/malgun.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-		Font font = new Font(baseFont, 10);
-		Font titleFont = new Font(baseFont, 18);
-
-		// 내용설정
-		Paragraph title = new Paragraph("사업장 현황신고서", titleFont);
-		title.setAlignment(Paragraph.ALIGN_CENTER);
-
-		PdfPTable col2table = new PdfPTable(2);
-		col2table.setWidthPercentage(100);
-		col2table.setSpacingBefore(15);
-//		table.setWidths(new float[] {1.5f, 3.5f});
-
-		writeReportBusinessTable(col2table, font);
-
-		// pdf파일 그리기
-		document.add(title);
-
-		document.add(col2table);
-
-		document.close();
-
 	}
 
 }
