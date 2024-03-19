@@ -26,72 +26,76 @@
 		<table class="table-box-1" border="1">
 			<tr>
 				<th>공지사항</th>
-				<th></th>
 				<th>지출내용</th>
+				<th>작성자</th>
 				<th>비고</th>
 			</tr>
 			<tr>
 				<td></td>
 				<td></td>
 				<td></td>
-				<td></td>
+				<td>#</td>
 			</tr>
 			<tr>
 				<td></td>
 				<td></td>
 				<td></td>
-				<td></td>
+				<td>#</td>
 			</tr>
 			<tr>
 				<td></td>
 				<td></td>
 				<td></td>
-				<td></td>
+				<td>#</td>
 			</tr>
 			<tr>
 				<td></td>
 				<td></td>
 				<td></td>
-				<td></td>
+				<td>#</td>
 			</tr>
 			<tr>
 				<td></td>
 				<td></td>
 				<td></td>
-				<td></td>
+				<td>#</td>
 			</tr>
 			<tr>
 				<td></td>
 				<td></td>
 				<td></td>
-				<td></td>
+				<td>#</td>
 			</tr>
 			<tr>
 				<td></td>
 				<td></td>
 				<td></td>
-				<td></td>
+				<td>#</td>
 			</tr>
 			<tr>
 				<td></td>
 				<td></td>
 				<td></td>
-				<td></td>
+				<td>#</td>
 			</tr>
 			<tr>
 				<td></td>
 				<td></td>
 				<td></td>
-				<td></td>
+				<td>#</td>
 			</tr>
 			<tr>
 				<td></td>
 				<td></td>
 				<td></td>
-				<td></td>
+				<td>#</td>
 			</tr>
 		</table>
 
+
+		<div class="mt-2">
+			<a class="btn btn-m btn-outline" href="">추가</a>
+		</div>
 
 	</div>
 </section>

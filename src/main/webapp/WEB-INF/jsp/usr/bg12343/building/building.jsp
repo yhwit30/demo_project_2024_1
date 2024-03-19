@@ -8,7 +8,7 @@
 
 <h1 style="text-align: center; background-color: pink;">전체 건물 목록</h1>
 <section class="mt-2 text-xl px-4">
-	<div class="mx-auto overflow-x-auto flex justify-around">
+	<div class="mx-auto overflow-x-auto flex justify-around h-60">
 		<table class="table-box-1 mr-5">
 			<thead>
 				<tr>
@@ -43,7 +43,7 @@
 		</table>
 
 <!-- 지도 보이기 -->
-<div id="map" style="width: 300px; height: 200px;"></div>
+<div id="map" style="width: 300px;"></div>
 	</div>
 
 <!-- 지도api -->
@@ -90,7 +90,7 @@
 
 
 
-	<div class="mt-2" style="text-align: left">
+	<div class="mt-2">
 		<a class="btn btn-m btn-outline" href="/usr/bg12343/building/buildingAdd"> 건물 추가</a>
 	</div>
 

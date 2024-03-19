@@ -6,7 +6,7 @@
 
 
 <section class="mt-2 text-xl px-4">
-	<div class="overflow-x-auto flex justify-around">
+	<div class="overflow-x-auto flex justify-around h-60">
 		<!-- 건물 현황표 -->
 		<table class="table-box-1 mr-5" style="width: 600px;">
 			<thead>

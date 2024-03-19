@@ -62,26 +62,72 @@
 
 
 <!-- 달력 태그 -->
-<div class="calendar-container">
-	<div class="calendar-header">
-		<button id="prevBtn">이전</button>
-		<h2 id="currentMonth"></h2>
-		<button id="nextBtn">다음</button>
+	<div class="calendar-container h-80">
+		<div class="calendar-header">
+			<button id="prevBtn">이전</button>
+			<h2 id="currentMonth"></h2>
+			<button id="nextBtn">다음</button>
+		</div>
+		<div class="calendar-days">
+			<div class="day">일</div>
+			<div class="day">월</div>
+			<div class="day">화</div>
+			<div class="day">수</div>
+			<div class="day">목</div>
+			<div class="day">금</div>
+			<div class="day">토</div>
+		</div>
+		<div class="calendar-dates" id="calendarDates"></div>
+		<!-- 	동적으로 달력을 그려준다 -->
 	</div>
-	<div class="calendar-days">
-		<div class="day">일</div>
-		<div class="day">월</div>
-		<div class="day">화</div>
-		<div class="day">수</div>
-		<div class="day">목</div>
-		<div class="day">금</div>
-		<div class="day">토</div>
-	</div>
-	<div class="calendar-dates" id="calendarDates"></div>
-<!-- 	동적으로 달력을 그려준다 -->
-</div>
 
-<br />
+<!-- 작업일지 목록 -->
+<section class="mt-2 text-xl px-4">
+	<div class="mx-auto overflow-x-auto">
+		<div class="badge badge-outline">${memoRepairCnt }개</div>
+		<table class="table-box-1" border="1">
+			<colgroup>
+				<col style="width: 10%" />
+			</colgroup>
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>날짜</th>
+					<th>제목</th>
+					<th>건물</th>
+					<th>호실</th>
+					<th>세입자</th>
+					<th>보수 일자</th>
+
+				</tr>
+			</thead>
+			<tbody>
+
+				<c:forEach var="memoRepair" items="${memoRepair }">
+					<tr class="hover">
+						<td>${memoRepair.id }</td>
+						<td>${memoRepair.regDate.substring(0,10) }</td>
+						<td>
+							<a href="repairDetail?id=${memoRepair.id }">${memoRepair.title }</a>
+						</td>
+						<td>${memoRepair.bldgName }</td>
+						<td>${memoRepair.roomNum }</td>
+						<td>${memoRepair.tenantName }</td>
+						<td>${memoRepair.repairDate }</td>
+
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+
+		<div class="mt-2">
+			<a class="btn btn-m btn-outline" href="">추가</a>
+		</div>
+
+	</div>
+
+</section>
+
 
 <!-- 달력 스크립트 -->
 <script>
@@ -163,52 +209,6 @@ nextBtn.addEventListener("click", () => {
 2. 변경된 월과 연도를 바탕으로 renderCalendar 함수를 호출하여 다음 월의 캘린더를 표시한다.
 */
 </script>
-
-
-<section class="mt-2 text-xl px-4">
-	<div class="mx-auto overflow-x-auto">
-		<div class="badge badge-outline">${memoRepairCnt }개</div>
-		<table class="table-box-1" border="1">
-			<colgroup>
-				<col style="width: 10%" />
-			</colgroup>
-			<thead>
-				<tr>
-					<th>번호</th>
-					<th>날짜</th>
-					<th>제목</th>
-					<th>건물</th>
-					<th>호실</th>
-					<th>세입자</th>
-					<th>보수 일자</th>
-
-				</tr>
-			</thead>
-			<tbody>
-
-				<c:forEach var="memoRepair" items="${memoRepair }">
-					<tr class="hover">
-						<td>${memoRepair.id }</td>
-						<td>${memoRepair.regDate.substring(0,10) }</td>
-						<td>
-							<a href="repairDetail?id=${memoRepair.id }">${memoRepair.title }</a>
-						</td>
-						<td>${memoRepair.bldgName }</td>
-						<td>${memoRepair.roomNum }</td>
-						<td>${memoRepair.tenantName }</td>
-						<td>${memoRepair.repairDate }</td>
-
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</div>
-
-
-
-
-</section>
-
 
 
 
