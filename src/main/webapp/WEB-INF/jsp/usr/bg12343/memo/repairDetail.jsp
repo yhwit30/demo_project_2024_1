@@ -6,8 +6,8 @@
 
 
 <section class="mt-8 text-xl px-4">
-	<div class="mx-auto overflow-x-auto inline-block">
-		<table class="table-box-1" border="1">
+	<div class="mx-auto overflow-x-auto">
+		<table class="table-box-detail" border="1">
 			<tbody>
 				<tr>
 					<th>게시판</th>
@@ -49,12 +49,13 @@
 		</table>
 	</div>
 
+	<br />
 	사진파일 첨부하는 공간->
 	<input type="file" class="file-input file-input-bordered file-input-primary w-full max-w-xs" />
 
 	<div class="btns mt-5">
 		<button class="btn btn-outline" type="button" onclick="history.back();">뒤로가기</button>
-		<a class="btn btn-outline" href="../bg12343/memo/repairModify">수정</a>
+		<a class="btn btn-outline" href="../memo/repairModify">수정</a>
 		<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="#">삭제</a>
 	</div>
 </section>
