@@ -78,6 +78,7 @@
 		<div class="day">토</div>
 	</div>
 	<div class="calendar-dates" id="calendarDates"></div>
+<!-- 	동적으로 달력을 그려준다 -->
 </div>
 
 <br />
@@ -90,34 +91,31 @@ const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
 
 const today = new Date(); // 현재 날짜를 나타내는 Date 객체를 저장한다.
+// 현재 월을 나타내는 값을 저장한다. getMonth() 메서드는 0부터 시작하는 월을 반환하므로 1월이면 0, 2월이면 1을 반환한다.
 let currentMonth = today.getMonth();
-/* 현재 월을 나타내는 값을 저장한다. getMonth() 메서드는 0부터 시작하는 월을 반환하므로
-1월이면 0, 2월이면 1을 반환한다. */
-let currentYear = today.getFullYear(); // 변수에 현재 연도를 나타내는 값을 저장한다.
+//변수에 현재 연도를 나타내는 값을 저장한다.
+let currentYear = today.getFullYear(); 
 
 function renderCalendar() {
-  /* firstDayOfMonth 변수에 현재 월의 첫 번째 날짜를 나타내는 Date 객체를 저장한다.
-해당 월의 첫 번째 날짜에 대한 정보를 얻는다. */
+  // firstDayOfMonth 변수에 현재 월의 첫 번째 날짜를 나타내는 Date 객체를 저장한다. 해당 월의 첫 번째 날짜에 대한 정보를 얻는다.
   const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
-  /* daysInMonth 변수에 현재 월의 총 일 수를 나타내는 값을 저장한다. 
-  해당 월이 몇 일까지 있는지 알 수 있다. */
+  // daysInMonth 변수에 현재 월의 총 일 수를 나타내는 값을 저장한다. 해당 월이 몇 일까지 있는지 알 수 있다.
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-  /* 변수에 현재 월의 첫 번째 날짜의 요일을 나타내는 값을 저장한다.
-  해당 월의 첫 번째 날짜가 무슨 요일인지 알 수 있다. */
+  // 변수에 현재 월의 첫 번째 날짜의 요일을 나타내는 값을 저장한다. 해당 월의 첫 번째 날짜가 무슨 요일인지 알 수 있다.
   const startDayOfWeek = firstDayOfMonth.getDay();
   // 월을 나타내는 요소에 현재 월과 연도를 설정하여 표시한다.
   currentMonthElement.textContent = currentYear + "년 " + (currentMonth + 1) + "월";
 
-  calendarDates.innerHTML = ""; // 일자를 표시하는 그리드 컨테이너를 비운다.
+  calendarDates.innerHTML = ""; // 월 변경 시 이전 월의 일자를 초기화한다.
 
   // 빈 날짜(이전 달)
   for (let i = 0; i < startDayOfWeek; i++) {
-    const emptyDate = document.createElement("div");
     //  빈 날짜를 나타내는 div 요소를 생성한다.
+    const emptyDate = document.createElement("div");
+    // 생성한 div 요소에 "date"와 "empty" 클래스를 추가한다. empty에 속성을 안줘도 기본 공백으로 나온다. 그냥 태그명으로만 사용.
     emptyDate.classList.add("date", "empty");
-    // 생성한 div 요소에 "date"와 "empty" 클래스를 추가한다.
-    calendarDates.appendChild(emptyDate);
     // 생성한 빈 날짜 요소를 캘린더 그리드에 추가한다.
+    calendarDates.appendChild(emptyDate);
   }
 
   // 현재 달의 날짜
