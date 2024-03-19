@@ -172,10 +172,10 @@ public class PdfService {
 		Font fontTitle = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
 		fontTitle.setSize(18);
 		Font fontParagraph = FontFactory.getFont(FontFactory.HELVETICA);
-		fontParagraph.setSize(10);
+		fontParagraph.setSize(9);
 		// 한글은 추가로 폰트 넣어줘야함
 		BaseFont baseFont = BaseFont.createFont("c:/windows/fonts/malgun.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-		Font font = new Font(baseFont, 10);
+		Font font = new Font(baseFont, 9);
 		Font titleFont = new Font(baseFont, 18);
 
 		// 내용설정
@@ -209,7 +209,7 @@ public class PdfService {
 		// 표 단락 나누기용 셀
 		PdfPCell cellFloat = new PdfPCell();
 		cellFloat.setColspan(16);
-		cellFloat.setFixedHeight(20);
+		cellFloat.setFixedHeight(10);
 		cellFloat.setBorder(0);
 
 		// 헤더
@@ -245,42 +245,142 @@ public class PdfService {
 		table.addCell(cell);
 		cell.setPhrase(new Phrase("비고", font));
 		table.addCell(cell);
-		
+
 		// 내용
 		for (Dashboard rent : rentStatus) {
-			
-			cell.setPhrase(new Phrase(""+ rent.getRoomNum(), font));
+
+			cell.setPhrase(new Phrase("" + rent.getRoomNum(), font));
 			table.addCell(cell);
-			cell.setPhrase(new Phrase(""+ rent.getLeaseType(), font));
-			table.addCell(cell);
-			cell.setPhrase(new Phrase(""+ rent.getRent(), font));
-			table.addCell(cell);
-			cell.setPhrase(new Phrase(""+ rent.getPaymentStatus1(), font));
-			table.addCell(cell);
-			cell.setPhrase(new Phrase(""+ rent.getPaymentStatus2(), font));
-			table.addCell(cell);
-			cell.setPhrase(new Phrase(""+ rent.getPaymentStatus3(), font));
-			table.addCell(cell);
-			cell.setPhrase(new Phrase(""+ rent.getPaymentStatus4(), font));
-			table.addCell(cell);
-			cell.setPhrase(new Phrase(""+ rent.getPaymentStatus5(), font));
-			table.addCell(cell);
-			cell.setPhrase(new Phrase(""+ rent.getPaymentStatus6(), font));
-			table.addCell(cell);
-			cell.setPhrase(new Phrase(""+ rent.getPaymentStatus7(), font));
-			table.addCell(cell);
-			cell.setPhrase(new Phrase(""+ rent.getPaymentStatus8(), font));
-			table.addCell(cell);
-			cell.setPhrase(new Phrase(""+ rent.getPaymentStatus9(), font));
-			table.addCell(cell);
-			cell.setPhrase(new Phrase(""+ rent.getPaymentStatus10(), font));
-			table.addCell(cell);
-			cell.setPhrase(new Phrase(""+ rent.getPaymentStatus11(), font));
-			table.addCell(cell);
-			cell.setPhrase(new Phrase(""+ rent.getPaymentStatus12(), font));
-			table.addCell(cell);
+
+			if (rent.getLeaseType() != null) {
+				cell.setPhrase(new Phrase("" + rent.getLeaseType(), font));
+				table.addCell(cell);
+			} else {
+				cell.setPhrase(new Phrase(""));
+				table.addCell(cell);
+			}
+			if (rent.getLeaseType() != null) {
+				cell.setPhrase(new Phrase("" + rent.getRent(), font));
+				table.addCell(cell);
+			} else {
+				cell.setPhrase(new Phrase(""));
+				table.addCell(cell);
+			}
+
+			// 월별 납부현황에 따른 보증금, 월세 출력
+			if (rent.getPaymentStatus1() != null) {
+				cell.setPhrase(new Phrase("" + rent.getDeposit(), font));
+				table.addCell(cell);
+			} else {
+				cell.setPhrase(new Phrase(""));
+				table.addCell(cell);
+			}
+			if (rent.getPaymentStatus2() != null) {
+				cell.setPhrase(new Phrase("" + rent.getDeposit(), font));
+				table.addCell(cell);
+			} else {
+				cell.setPhrase(new Phrase(""));
+				table.addCell(cell);
+			}
+			if (rent.getPaymentStatus3() != null) {
+				cell.setPhrase(new Phrase("" + rent.getDeposit(), font));
+				table.addCell(cell);
+			} else {
+				cell.setPhrase(new Phrase(""));
+				table.addCell(cell);
+			}
+			if (rent.getPaymentStatus4() != null) {
+				cell.setPhrase(new Phrase("" + rent.getDeposit(), font));
+				table.addCell(cell);
+			} else {
+				cell.setPhrase(new Phrase(""));
+				table.addCell(cell);
+			}
+			if (rent.getPaymentStatus5() != null) {
+				cell.setPhrase(new Phrase("" + rent.getDeposit(), font));
+				table.addCell(cell);
+			} else {
+				cell.setPhrase(new Phrase(""));
+				table.addCell(cell);
+			}
+			if (rent.getPaymentStatus6() != null) {
+				cell.setPhrase(new Phrase("" + rent.getDeposit(), font));
+				table.addCell(cell);
+			} else {
+				cell.setPhrase(new Phrase(""));
+				table.addCell(cell);
+			}
+			if (rent.getPaymentStatus7() != null) {
+				cell.setPhrase(new Phrase("" + rent.getDeposit(), font));
+				table.addCell(cell);
+			} else {
+				cell.setPhrase(new Phrase(""));
+				table.addCell(cell);
+			}
+			if (rent.getPaymentStatus8() != null) {
+				cell.setPhrase(new Phrase("" + rent.getDeposit(), font));
+				table.addCell(cell);
+			} else {
+				cell.setPhrase(new Phrase(""));
+				table.addCell(cell);
+			}
+			if (rent.getPaymentStatus9() != null) {
+				cell.setPhrase(new Phrase("" + rent.getDeposit(), font));
+				table.addCell(cell);
+			} else {
+				cell.setPhrase(new Phrase(""));
+				table.addCell(cell);
+			}
+			if (rent.getPaymentStatus10() != null) {
+				cell.setPhrase(new Phrase("" + rent.getDeposit(), font));
+				table.addCell(cell);
+			} else {
+				cell.setPhrase(new Phrase(""));
+				table.addCell(cell);
+			}
+			if (rent.getPaymentStatus11() != null) {
+				cell.setPhrase(new Phrase("" + rent.getDeposit(), font));
+				table.addCell(cell);
+			} else {
+				cell.setPhrase(new Phrase(""));
+				table.addCell(cell);
+			}
+			if (rent.getPaymentStatus12() != null) {
+				cell.setPhrase(new Phrase("" + rent.getDeposit(), font));
+				table.addCell(cell);
+			} else {
+				cell.setPhrase(new Phrase(""));
+				table.addCell(cell);
+			}
+
+			// 메모
 			cell.setPhrase(new Phrase("#", font));
 			table.addCell(cell);
+
+			// 세입자 정보
+			cell.setPhrase(new Phrase("세입자 정보", font));
+			table.addCell(cell);
+			if (rent.getTenantName() != null) {
+				cell.setPhrase(new Phrase("" + rent.getTenantName(), font));
+				table.addCell(cell);
+			} else {
+				cell.setPhrase(new Phrase(""));
+				table.addCell(cell);
+			}
+			if (rent.getTenantPhone() != null) {
+				cell.setPhrase(new Phrase("" + rent.getTenantPhone(), font));
+				table.addCell(cell);
+			} else {
+				cell.setPhrase(new Phrase(""));
+				table.addCell(cell);
+			}
+			// 세입자정보 단락 나누기용 셀
+			PdfPCell cellFloat13 = new PdfPCell();
+			cellFloat13.setColspan(13);
+			table.addCell(cellFloat13);
+
+			// 표 단락 나누기용 셀
+			table.addCell(cellFloat);
 
 		}
 
