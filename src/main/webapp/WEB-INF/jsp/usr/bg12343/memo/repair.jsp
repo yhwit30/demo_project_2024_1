@@ -108,7 +108,7 @@
 						<td>${memoRepair.id }</td>
 						<td>${memoRepair.regDate.substring(0,10) }</td>
 						<td>
-							<a href="repairDetail?id=${memoRepair.id }">${memoRepair.title }</a>
+							<a href="repairDetail?memoId=${memoRepair.id }">${memoRepair.title }</a>
 						</td>
 						<td>${memoRepair.bldgName }</td>
 						<td>${memoRepair.roomNum }</td>

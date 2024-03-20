@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.service.BuildingService;
 import com.example.demo.service.MemoService;
 import com.example.demo.util.Ut;
+import com.example.demo.vo.Article;
 import com.example.demo.vo.Building;
 import com.example.demo.vo.Memo;
 import com.example.demo.vo.Rq;
@@ -23,21 +25,50 @@ public class UsrMemoController {
 
 	@Autowired
 	private MemoService memoService;
-	
+
 	@Autowired
 	private BuildingService buildingService;
 
 	// 액션 메소드
 	@RequestMapping("/usr/bg12343/memo/notice")
-	public String showNotice(Model model) {
+	public String showNotice(Model model, @RequestParam(defaultValue = "0") int bldgId) {
+
+		// 전체 공지사항 가져오기
+		if (bldgId == 0) {
+			// 건물 번호로 게시글 가져오기 및 페이지네이션
+			List<Memo> notices = memoService.getMemoNotices(bldgId);
+
+//	건물 변환 버튼용
+			List<Building> buildings = buildingService.getForPrintBuildings();
+			model.addAttribute("buildings", buildings);
+
+			model.addAttribute("notices", notices);
+			return "usr/bg12343/memo/notice";
+		}
+
+		List<Memo> notices = memoService.getMemoNotices(bldgId);
 
 //		건물 변환 버튼용
 		List<Building> buildings = buildingService.getForPrintBuildings();
-
 		model.addAttribute("buildings", buildings);
+
+		model.addAttribute("notices", notices);
 		return "usr/bg12343/memo/notice";
 	}
-	
+
+	@RequestMapping("/usr/bg12343/memo/noticeDetail")
+	public String showNoticeDetail(Model model, int memoId) {
+
+		Memo notice = memoService.getMemo(memoId);
+
+//		건물 변환 버튼용
+		List<Building> buildings = buildingService.getForPrintBuildings();
+		model.addAttribute("buildings", buildings);
+
+		model.addAttribute("notice", notice);
+		return "usr/bg12343/memo/noticeDetail";
+	}
+
 	@RequestMapping("/usr/bg12343/memo/expenses")
 	public String showExpenses(Model model) {
 //		건물 변환 버튼용
@@ -46,7 +77,7 @@ public class UsrMemoController {
 		model.addAttribute("buildings", buildings);
 		return "usr/bg12343/memo/expenses";
 	}
-	
+
 	@RequestMapping("/usr/bg12343/memo/memoAdd")
 	public String showMemoAdd(Model model) {
 
@@ -92,34 +123,33 @@ public class UsrMemoController {
 	public String doMemoModify(int[] id, String[] tenantName, int[] tenantPhone, String[] tenantCarNum,
 			String[] tenantMemo) {
 
-return null;
+		return null;
 //		return Ut.jsReplace(roomModifyRd.getResultCode(), roomModifyRd.getMsg(), "../bg12343/tenant");
 	}
 
-	
 	@RequestMapping("/usr/bg12343/memo/repair")
 	public String showRepair(Model model) {
 
-		List<Memo> memoRepair = memoService.getMemoRepair();
+		List<Memo> memoRepair = memoService.getMemoRepairs();
 		int memoRepairCnt = memoRepair.size();
-		
+
 		model.addAttribute("memoRepair", memoRepair);
 		model.addAttribute("memoRepairCnt", memoRepairCnt);
 		return "usr/bg12343/memo/repair";
 	}
 
 	@RequestMapping("/usr/bg12343/memo/repairDetail")
-	public String showRepairDetail(Model model, int id) {
-		
-		Memo memoRepairRd = memoService.getMemoRepairRd(id);
-		
+	public String showRepairDetail(Model model, int memoId) {
+
+		Memo memoRepairRd = memoService.getMemo(memoId);
+
 		model.addAttribute("memoRepairRd", memoRepairRd);
 		return "usr/bg12343/memo/repairDetail";
 	}
-	
+
 	@RequestMapping("/usr/bg12343/memo/repairModify")
 	public String showRepairModify(Model model) {
-		
+
 		return "usr/bg12343/memo/repairModify";
 	}
 
@@ -150,5 +180,5 @@ return null;
 //		return Ut.jsReplace(memoAddRd.getResultCode(), memoAddRd.getMsg(), "../bg12343/dashboard");
 		return null;
 	}
-	
+
 }

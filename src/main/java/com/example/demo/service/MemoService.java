@@ -10,16 +10,20 @@ import com.example.demo.vo.Memo;
 
 @Service
 public class MemoService {
-	
+
 	@Autowired
 	private MemoRepository memoRepository;
 
-	public List<Memo> getMemoRepair() {
-		return memoRepository.getMemoRepair();
+	public Memo getMemo(int memoId) {
+		return memoRepository.getMemo(memoId);
 	}
 
-	public Memo getMemoRepairRd(int id) {
-		return memoRepository.getMemoRepairRd(id);
+	public List<Memo> getMemoRepairs() {
+		return memoRepository.getMemoRepairs();
+	}
+
+	public List<Memo> getMemoNotices(int bldgId) {
+		return memoRepository.getMemoNotices(bldgId);
 	}
 
 }

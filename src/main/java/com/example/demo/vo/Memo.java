@@ -16,6 +16,7 @@ public class Memo {
 	private int bldgId;
 	private int roomId;
 	private int tenantId;
+	private int contractId;
 	private String title;
 	private String body;
 	private String repairDate;
@@ -24,4 +25,6 @@ public class Memo {
 	private String bldgName;
 	private int roomNum;
 	private String tenantName;
+	private String memoCode;
+	private String memberName;
 }
