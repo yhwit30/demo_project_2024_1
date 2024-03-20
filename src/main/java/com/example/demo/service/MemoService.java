@@ -22,8 +22,5 @@ public class MemoService {
 		return memoRepository.getMemoRepairs();
 	}
 
-	public List<Memo> getMemoNotices(int bldgId) {
-		return memoRepository.getMemoNotices(bldgId);
-	}
 
 }

@@ -1406,11 +1406,6 @@ SET regDate = NOW(),
 updateDate = NOW(),
 memoCode = '지출내역';
 
-# memo_board 7
-INSERT INTO memo_board
-SET regDate = NOW(),
-updateDate = NOW(),
-memoCode = '공지사항';
 
 #------------------------
 # memo testdata
@@ -1418,7 +1413,7 @@ INSERT INTO memo
 SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 1,
-boardId = 5,
+boardId = 4,
 contractId = 3,
 title = '계약에 메모 테스트',
 `body`= '3번 계약에 메모임';
@@ -1502,27 +1497,6 @@ boardId = 3,
 tenantId = 3,
 title = '2번 회원이 3번 세입자 게시판에 글',
 `body`= '2번 회원 3번 세입자 게시판 내용';
-
-# memo testdata
-INSERT INTO memo
-SET regDate = NOW(),
-updateDate = NOW(),
-boardId = 7,
-memberId = 1,
-bldgId = 1,
-title = '공지사항1',
-`body`= '공지사항 전파합니다. 따뜻하게 생활할 수 있도록';
-
-# memo testdata
-INSERT INTO memo
-SET regDate = NOW(),
-updateDate = NOW(),
-boardId = 7,
-memberId = 1,
-bldgId = 2,
-title = '공지사항2',
-`body`= '쓰레기 수거는 매주 목요일';
-
 
 
 
@@ -2147,11 +2121,17 @@ T.tenantName = '수정김'
 WHERE C.id = 9;
 
 
-SELECT SUM(deposit) AS depositSum, SUM(rent) AS rentSum, SUM(maintenanceFee) AS maintenanceFeeSum, B.*
-FROM contract AS C
-INNER JOIN room AS R
-ON C.roomId = R.id
-RIGHT JOIN building AS B
+SELECT *
+FROM memo AS M
+LEFT JOIN room AS R
+ON M.roomId = R.id
+LEFT JOIN building AS B
 ON R.bldgId = B.id
-GROUP BY B.id
+LEFT JOIN tenant AS T
+ON M.tenantId = T.id
+LEFT JOIN contract AS C
+ON M.contractId = C.id
+LEFT JOIN memo_board AS MB
+ON M.boardId = MB.id
+WHERE M.boardId = 5;
 

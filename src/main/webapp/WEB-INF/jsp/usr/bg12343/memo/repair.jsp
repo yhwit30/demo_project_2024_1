@@ -121,7 +121,7 @@
 		</table>
 
 		<div class="mt-2">
-			<a class="btn btn-m btn-outline" href="">추가</a>
+			<a class="btn btn-m btn-outline" href="memoAdd">추가</a>
 		</div>
 
 	</div>

@@ -30,17 +30,17 @@ public interface MemoRepository {
 	@Select("""
 			SELECT *
 			FROM memo AS M
-			LEFT JOIN building AS B
-			ON M.bldgId = B.id
 			LEFT JOIN room AS R
 			ON M.roomId = R.id
+			LEFT JOIN building AS B
+			ON R.bldgId = B.id
 			LEFT JOIN tenant AS T
 			ON M.tenantId = T.id
 			LEFT JOIN contract AS C
 			ON M.contractId = C.id
 			LEFT JOIN memo_board AS MB
 			ON M.boardId = MB.id
-			WHERE M.boardId = 6;
+			WHERE M.boardId = 5;
 			""")
 	List<Memo> getMemoRepairs();
 
@@ -64,6 +64,6 @@ public interface MemoRepository {
 			</if>
 			</script>
 			""")
-	List<Memo> getMemoNotices(int bldgId);
+	List<Memo> getMemoNotices(int bldgId); //혹시 나중에 유용할까봐. 지출내역할 때
 
 }
