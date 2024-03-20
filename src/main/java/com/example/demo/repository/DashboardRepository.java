@@ -14,11 +14,11 @@ import com.example.demo.vo.Dashboard;
 public interface DashboardRepository {
 
 	@Select("""
-			SELECT SUM(deposit) AS depositSum, SUM(rent) AS rentSum, SUM(maintenanceFee) AS maintenanceFeeSum, C.*, R.*, B.*
+			SELECT SUM(deposit) AS depositSum, SUM(rent) AS rentSum, SUM(maintenanceFee) AS maintenanceFeeSum, B.*
 			FROM contract AS C
 			INNER JOIN room AS R
 			ON C.roomId = R.id
-			INNER JOIN building AS B
+			RIGHT JOIN building AS B
 			ON R.bldgId = B.id
 			GROUP BY B.id
 			""")

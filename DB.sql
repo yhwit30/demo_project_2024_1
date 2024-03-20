@@ -2147,9 +2147,11 @@ T.tenantName = '수정김'
 WHERE C.id = 9;
 
 
-
-SELECT *
-FROM contract_Status 
-WHERE rentDate LIKE '2024-02%' AND tenantId = 2;
-
+SELECT SUM(deposit) AS depositSum, SUM(rent) AS rentSum, SUM(maintenanceFee) AS maintenanceFeeSum, B.*
+FROM contract AS C
+INNER JOIN room AS R
+ON C.roomId = R.id
+RIGHT JOIN building AS B
+ON R.bldgId = B.id
+GROUP BY B.id
 

@@ -17,20 +17,18 @@
 					<th>월세 합계</th>
 					<th>관리비 합계</th>
 					<th>수익률(연)</th>
-					<th>입주율</th>
 
 				</tr>
 			</thead>
 			<tbody>
 
 				<c:forEach var="dashboard" items="${dashboard }">
-					<tr style="${dashboard.bldgId == param.bldgId ? 'background-color: rgba(255, 235, 59, 0.5)' : '' }">
+					<tr style="${dashboard.id == param.bldgId ? 'background-color: rgba(255, 235, 59, 0.5)' : '' }">
 						<td>${dashboard.bldgName }</td>
 						<td>${dashboard.roomTotal }</td>
 						<td>${dashboard.depositSum }</td>
 						<td>${dashboard.rentSum }</td>
 						<td>${dashboard.maintenanceFeeSum }</td>
-						<td>#</td>
 						<td>#</td>
 					</tr>
 				</c:forEach>
