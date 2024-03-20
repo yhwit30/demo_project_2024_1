@@ -80,6 +80,10 @@ public class UsrMemoController {
 
 	@RequestMapping("/usr/bg12343/memo/memoAdd")
 	public String showMemoAdd(Model model) {
+		
+//		건물 변환 버튼용
+		List<Building> buildings = buildingService.getForPrintBuildings();
+		model.addAttribute("buildings", buildings);
 
 		return "usr/bg12343/memo/memoAdd";
 	}

@@ -4,6 +4,45 @@
 <%@ include file="../../common/head.jspf"%>
 <%@ include file="../../common/sidebar.jspf"%>
 
+<!-- 건물을 선택할 때 해당 호실을 불러오기 -->
+<script>
+	// 페이지 로드 시 기본값으로 bldgId를 1로 설정하고 호실 목록을 가져옴
+	window.onload = function() {
+		var defaultBldgId = 1;
+		buildingSelect(defaultBldgId);
+	};
+
+	function buildingSelect(bldgId) {
+		console.log('bldgId:' + bldgId);
+
+		$.post({
+			url : '/usr/bg12343/contract/getRoomsForContract',
+			type : 'POST',
+			data : {
+				bldgId : bldgId
+			},
+			success : function(data) {
+				console.log(data);
+
+				// 기존 option태그 초기화
+				var roomSelect = document.getElementById("roomNum");
+				roomSelect.innerHTML = "";
+
+				// 가져온 호실데이터를 option 태그로 그려주기
+				data.forEach(function(room) {
+					var option = document.createElement("option");
+					option.value = room.id;
+					option.text = room.roomNum;
+					roomSelect.appendChild(option);
+				});
+			},
+			error : function(xhr, status, error) {
+				alert('수정에 실패했습니다: ' + error);
+			}
+		});
+	}
+</script>
+
 
 <section class="mt-8 mb-5 text-lg px-4">
 	<div class="mx-auto">
@@ -13,18 +52,22 @@
 					<tr>
 						<th>건물명</th>
 						<td>
-							<select class="select select-bordered select-sm w-full max-w-xs" name="bldgId">
-								<option value=1>건물 가나</option>
-								<option value=2>건물 다라</option>
+							<select class="select select-bordered select-sm w-20 max-w-xs" name="bldgId"
+								onchange="buildingSelect(this.value)"
+							>
+								<c:forEach var="building" items="${buildings }">
+									<option value="${building.id }">${building.bldgName }</option>
+								</c:forEach>
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<th>호실</th>
 						<td>
-							<input class="input input-bordered input-secondary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="호실을 입력해주세요" name="roomNum"
-							/>
+							<!-- 호실 선택 -->
+							<select class="select select-bordered select-sm w-20 max-w-xs" name="roomId" id="roomNum">
+								<!--ajax에서 option 태그를 그려준다 -->
+							</select>
 						</td>
 					</tr>
 					<tr>

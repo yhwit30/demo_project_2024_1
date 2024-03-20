@@ -30,7 +30,6 @@
 .login-box th, td {
 	border: 1px solid rgba(255, 0, 0, 0.1);
 }
-
 </style>
 
 <section class=" text-xl">
@@ -63,13 +62,20 @@
 					<tr>
 						<td colspan="2">
 							<input class="btn btn-outline btn-info" type="submit" value="로그인" />
-							
+
+						</td>
+					</tr>
+					<tr>
+						<th></th>
+						<td>
+							<a class="btn btn-active btn-ghost" href="${rq.findLoginIdUri }">아이디 찾기</a>
+							<a class="btn btn-ghost btn-active" href="${rq.findLoginPwUri }">비밀번호찾기</a>
 						</td>
 					</tr>
 				</tbody>
 			</table>
-			<div style="text-align:center; font-size:13px; padding-left:370px">
-			<a href="join">회원가입</a>
+			<div style="text-align: center; font-size: 13px; padding-left: 370px">
+				<a href="join">회원가입</a>
 			</div>
 		</form>
 		<!-- 		<div class="btns"> -->
