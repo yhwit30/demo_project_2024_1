@@ -15,6 +15,7 @@ import com.example.demo.util.Ut;
 import com.example.demo.vo.Article;
 import com.example.demo.vo.Building;
 import com.example.demo.vo.Memo;
+import com.example.demo.vo.ResultData;
 import com.example.demo.vo.Rq;
 
 @Controller
@@ -51,30 +52,43 @@ public class UsrMemoController {
 
 	@RequestMapping("/usr/bg12343/memo/doMemoAdd")
 	@ResponseBody
-	public String doMemoAdd(int boardId, String title, String body, String afterLoginUri) { // 매개변수 뭘 줄지
+	public String doMemoAdd(int boardId, String title, String body) {
 		// 로그인 체크 인터셉터에서
 
-		// 제목 내용 빈 칸 확인
-		if (Ut.isEmpty(boardId)) {
-			return Ut.jsHistoryBack("F-1", "세입자이름을 입력해주세요");
-		}
-		if (Ut.isNullOrEmpty(title)) {
-			return Ut.jsHistoryBack("F-2", "세입자휴대폰번호를 입력해주세요");
-		}
-		if (Ut.isNullOrEmpty(body)) {
-			return Ut.jsHistoryBack("F-2", "세입자차량번호를 입력해주세요");
-		}
-
-//		ResultData memoAddRd = memoService.addMemo(rq.getLoginedMemberId(), boardId, title, body);
-//
-//		// 작성된 게시글 번호 가져오기
-//		int id = (int) memoAddRd.getData1();
-//
-//		if (afterLoginUri.length() > 0) {
-//			return Ut.jsReplace(memoAddRd.getResultCode(), memoAddRd.getMsg(), afterLoginUri);
-//		}
-//		return Ut.jsReplace(memoAddRd.getResultCode(), memoAddRd.getMsg(), "../bg12343/dashboard");
 		return null;
+	}
+
+	// ajax
+	@RequestMapping("/usr/bg12343/memo/doMemoAddAjax")
+	@ResponseBody
+	public Memo doMemoAddAjax(@RequestParam(defaultValue = "0") int bldgId, int roomId, int boardId,
+			@RequestParam(defaultValue = "0") int tenantId, @RequestParam(defaultValue = "0") int contractId,
+			String title, String body, @RequestParam(defaultValue = "0") String memoDate,
+			@RequestParam(defaultValue = "0") int cost) {
+		// 로그인 체크 인터셉터에서
+
+		System.out.println("roomId: " + roomId);
+		System.out.println("boardId: " + boardId);
+		System.out.println("title: " + title);
+		System.out.println("body: " + body);
+
+		// 현재는 회원은 시험모드로 관리자만
+		int memberId = 1;
+
+		// 메모 작성
+		ResultData<Integer> addedMemoRd = memoService.addMemo(memberId, bldgId, roomId, boardId, tenantId, contractId,
+				title, body, memoDate, cost);
+
+		// 작성된 메모 번호 가져오기
+		int id = (int) addedMemoRd.getData1();
+		
+		System.out.println("lastId: " + id);
+
+		Memo addedMemo = memoService.getMemo(id);
+		
+		System.out.println("addedMemo: " + addedMemo.toString());
+
+		return addedMemo;
 	}
 
 	@RequestMapping("/usr/bg12343/memo/memoModify")

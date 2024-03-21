@@ -27,7 +27,7 @@
 				</tr>
 				<tr>
 					<th>작업날짜</th>
-					<td>${memoRepairRd.repairDate }</td>
+					<td>${memoRepairRd.memoDate }</td>
 				</tr>
 				<tr>
 					<th>작성자</th>
@@ -43,7 +43,7 @@
 				</tr>
 				<tr>
 					<th>작업비용</th>
-					<td>${memoRepairRd.repairCost }</td>
+					<td>${memoRepairRd.cost }</td>
 				</tr>
 			</tbody>
 		</table>

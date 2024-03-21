@@ -24,6 +24,11 @@
 23년도 지출내역
 
 <section class="mt-2 text-xl px-4">
+
+	<div class="mt-2">
+		<button class="btn btn-m btn-outline" id="modalOpen">추가</button>
+	</div>
+
 	<div class="mx-auto overflow-x-auto">
 
 		1월
@@ -35,9 +40,9 @@
 				<th>비고</th>
 			</tr>
 			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td id="memoDate"></td>
+				<td id="cost"></td>
+				<td id="title"></td>
 				<td>#</td>
 			</tr>
 			<tr>
@@ -108,9 +113,7 @@
 
 		월별로 1년치 나오도록
 
-		<div class="mt-2">
-			<button class="btn btn-m btn-outline" id="modalOpen">추가</button>
-		</div>
+
 
 
 	</div>
@@ -122,18 +125,14 @@
 #modalExpenses {
 	position: absolute;
 	left: 50%;
-	top: 50%;
+	top: 40%;
 	transform: translateX(-50%) translateY(-50%);
 	display: none;
 	background-color: #ffffff;
 	width: 700px;
 	height: 400px;
 	z-index: 51;
-}
-
-#modalContent {
-	display: flex;
-	justify-content: center;
+	border-radius: 10px;
 }
 
 #modalBg {
@@ -145,6 +144,10 @@
 	left: 0;
 	top: 0;
 	z-index: 50;
+}
+
+.modalTable {
+	margin-top: 20px;
 }
 </style>
 
@@ -203,13 +206,74 @@
 	}
 </script>
 
+<!-- 지출내역 추가 함수 -->
+<script>
+	// 추가 함수
+	function doAddMemo() {
+
+		// 해당 contractId를 가진 form 요소를 선택합니다.
+		var form = $('#memoAddForm');
+
+		// 수정할 데이터를 가져옵니다.
+		var roomId = form.find('select[name="roomId"]').val();
+		var boardId = form.find('input[name="boardId"]').val();
+		var title = form.find('input[name="title"]').val();
+		var body = form.find('input[name="body"]').val();
+		var memoDate = form.find('input[name="memoDate"]').val();
+		var cost = form.find('input[name="cost"]').val();
+
+		// 공백 체크
+		if (String(roomId).trim() === '' || String(boardId).trim() === ''
+				|| String(title).trim() === '' || String(body).trim() === '') {
+			alert('공백을 채워주세요');
+			return;
+		}
+
+		$.post({
+			url : '/usr/bg12343/memo/doMemoAddAjax',
+			type : 'POST',
+			data : {
+				roomId : roomId,
+				boardId : boardId,
+				title : title,
+				body : body,
+				memoDate : memoDate,
+				cost : cost
+			},
+			success : function(data) {
+
+				console.log('title: ' + data.title);
+
+				// 데이터를 성공적으로 가져왔다면 각 요소에 데이터를 그려줍니다.(id 사용)
+				$('#memoDate').text(data.memoDate);
+				$('#cost').text(data.cost);
+				$('#title').text(data.title);
+
+				// 모달 숨김(class 사용)
+				$('#modalExpenses').hide();
+				$('#modalBg').hide();
+
+				// 수정된 데이터 보여주기(id 사용)
+				$('#memoDate').show();
+				$('#cost').show();
+				$('#title').show();
+
+			},
+			error : function(xhr, status, error) {
+				alert('수정에 실패했습니다: ' + error);
+			}
+		});
+	}
+</script>
+
+
 <!-- 모달 투명한 배경용 -->
 <div id="modalBg"></div>
 <!-- 지출내역 추가 입력란 -->
 <section class="text-lg" id="modalExpenses">
-	<div id="modalContent">
-		<form action="../bg12343/memo/doMemoAdd" method="POST">
-			<table class="table-box-detail" border="1">
+	<div>
+		<form id="memoAddForm" onsubmit="return false;" action="../bg12343/memo/doMemoAdd" method="POST">
+			<table class="table-box-detail modalTable" border="1">
 				<tbody>
 					<tr>
 						<th>건물명</th>
@@ -234,11 +298,21 @@
 					</tr>
 					<tr>
 						<th>게시판</th>
+						<input type="hidden" name="boardId" value="6" />
+						<td>지출내역</td>
+					</tr>
+					<tr>
+						<th>지출연월</th>
+						<!-- 						예시 -->
+						<input type="hidden" name="memoDate" value="2024-2-4" />
+						<td>달력(todo)</td>
+					</tr>
+					<tr>
+						<th>지출비용</th>
 						<td>
-							<select class="select select-bordered select-sm max-w-xs" name="boardId" onchange="boardSelect(this.value)">
-								<option value="5">작업일지</option>
-								<option value="6">지출내역</option>
-							</select>
+							<input class="input input-bordered input-secondary w-full max-w-xs" autocomplete="off" type="text"
+								placeholder="제목을 입력해주세요" name="cost"
+							/>
 						</td>
 					</tr>
 					<tr>
@@ -258,9 +332,8 @@
 						</td>
 					</tr>
 					<tr>
-						<th></th>
-						<td>
-							<input class="btn btn-outline btn-info" type="submit" value="완료" />
+						<td colspan="2">
+							<button onclick="doAddMemo();" class="btn btn-outline btn-info">완료</button>
 						</td>
 					</tr>
 				</tbody>
@@ -269,9 +342,9 @@
 
 
 	</div>
-		<div class="mt-2">
-			<button class="btn btn-outline" id="modalClose">닫기</button>
-		</div>
+	<div class="mt-2">
+		<button class="btn btn-outline" id="modalClose">닫기</button>
+	</div>
 </section>
 
 

@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -9,6 +10,9 @@ import com.example.demo.vo.Memo;
 
 @Mapper
 public interface MemoRepository {
+
+	@Select("SELECT LAST_INSERT_ID()")
+	int getLastInsertId();
 
 	@Select("""
 			SELECT *
@@ -64,6 +68,25 @@ public interface MemoRepository {
 			</if>
 			</script>
 			""")
-	List<Memo> getMemoNotices(int bldgId); //혹시 나중에 유용할까봐. 지출내역할 때
+	List<Memo> getMemoNotices(int bldgId); // 혹시 나중에 유용할까봐. 지출내역할 때
+
+	@Insert("""
+			INSERT INTO
+			memo SET
+			regDate = NOW(),
+			updateDate = NOW(),
+			memberId = #{memberId},
+			bldgId = #{bldgId},
+			roomId = #{roomId},
+			boardId = #{boardId},
+			tenantId = #{tenantId},
+			contractId = #{contractId},
+			title = #{title},
+			`body` = #{body},
+			memoDate = #{memoDate},
+			cost = #{cost}
+			""")
+	void addMemo(int memberId, int bldgId, int roomId, int boardId, int tenantId, int contractId, String title,
+			String body, String memoDate, int cost);
 
 }

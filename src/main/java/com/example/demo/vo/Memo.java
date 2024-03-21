@@ -19,8 +19,8 @@ public class Memo {
 	private int contractId;
 	private String title;
 	private String body;
-	private String repairDate;
-	private int repairCost;
+	private String memoDate;
+	private int cost;
 
 	private String bldgName;
 	private int roomNum;

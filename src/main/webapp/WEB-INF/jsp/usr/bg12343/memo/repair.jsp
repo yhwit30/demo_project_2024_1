@@ -113,7 +113,7 @@
 						<td>${memoRepair.bldgName }</td>
 						<td>${memoRepair.roomNum }</td>
 						<td>${memoRepair.tenantName }</td>
-						<td>${memoRepair.repairDate }</td>
+						<td>${memoRepair.memoDate }</td>
 
 					</tr>
 				</c:forEach>
