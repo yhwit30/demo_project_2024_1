@@ -1507,9 +1507,10 @@ title = '2번 회원이 3번 세입자 게시판에 글',
 INSERT INTO memo
 SET regDate = NOW(),
 updateDate = NOW(),
-boardId = 7,
+boardId = 6,
 memberId = 1,
 bldgId = 1,
+memoDate = '2024-4-3',
 title = '공지사항1',
 `body`= '공지사항 전파합니다. 따뜻하게 생활할 수 있도록';
 
@@ -1517,9 +1518,10 @@ title = '공지사항1',
 INSERT INTO memo
 SET regDate = NOW(),
 updateDate = NOW(),
-boardId = 7,
+boardId = 6,
 memberId = 1,
 bldgId = 2,
+memoDate = '2024-1-3',
 title = '공지사항2',
 `body`= '쓰레기 수거는 매주 목요일';
 

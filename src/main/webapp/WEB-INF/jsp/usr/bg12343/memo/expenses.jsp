@@ -23,73 +23,210 @@
 
 23년도 지출내역
 
+<style>
+.expenses-table {
+	width: 400px;
+}
+</style>
+
+
+
 <section class="mt-2 text-xl px-4">
 
 	<div class="mt-2">
 		<button class="btn btn-m btn-outline" id="modalOpen">추가</button>
 	</div>
 
-	<div class="mx-auto overflow-x-auto">
-
+	<div class="flex">
 		1월
-		<table class="table-box-1 modalAdd" border="1">
-			<tr>
-				<th>번호(데이터체크용)</th>
-				<th>지출일</th>
-				<th>비용</th>
-				<th>지출내용</th>
-				<th>비고</th>
-			</tr>
-
-			<c:forEach var="expenses" items="${expenses }">
+		<table class="table-box-1 expenses-table modalAdd" border="1">
+			<thead>
 				<tr>
-					<td>${expenses.id }</td>
-					<td>${expenses.memoDate }</td>
-					<td>${expenses.cost }</td>
-					<td>${expenses.title }</td>
-					<td>${expenses.body }</td>
+					<th>지출일</th>
+					<th>비용</th>
+					<th>지출내용</th>
+					<th>비고</th>
 				</tr>
+			</thead>
+			<tbody>
 
-			</c:forEach>
+				<c:forEach var="expenses" items="${expenses }">
+					<tr>
+						<td>${expenses.memoDate }</td>
+						<td>${expenses.cost }</td>
+						<td>${expenses.body }</td>
+						<td>#</td>
+					</tr>
 
-			<!-- 새로 추가한 지출내역 동적으로 그리는 부분 -->
+				</c:forEach>
 
+				<!-- 새로 추가한 지출내역 동적으로 그리는 부분 -->
+			</tbody>
 		</table>
 
 		2월
-		<table class="table-box-1" border="1">
-			<tr>
-				<th>지출일</th>
-				<th>비용</th>
-				<th>지출내용</th>
-				<th>비고</th>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td>#</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td>#</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td>#</td>
-			</tr>
+		<table class="table-box-1 expenses-table" border="1">
+			<thead>
+				<tr>
+					<th>지출일</th>
+					<th>비용</th>
+					<th>지출내용</th>
+					<th>비고</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>#</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>#</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>#</td>
+				</tr>
+			</tbody>
 		</table>
+		3월
+		<table class="table-box-1 expenses-table" border="1">
+			<thead>
+				<tr>
+					<th>지출일</th>
+					<th>비용</th>
+					<th>지출내용</th>
+					<th>비고</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>#</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>#</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>#</td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+		<div class="flex">
+		4월
+		<table class="table-box-1 expenses-table" border="1">
+			<thead>
+				<tr>
+					<th>지출일</th>
+					<th>비용</th>
+					<th>지출내용</th>
+					<th>비고</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>#</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>#</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>#</td>
+				</tr>
+			</tbody>
+		</table>
+		5월
+		<table class="table-box-1 expenses-table" border="1">
+			<thead>
+				<tr>
+					<th>지출일</th>
+					<th>비용</th>
+					<th>지출내용</th>
+					<th>비고</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>#</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>#</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>#</td>
+				</tr>
+			</tbody>
+		</table>
+		6월
+		<table class="table-box-1 expenses-table" border="1">
+			<thead>
+				<tr>
+					<th>지출일</th>
+					<th>비용</th>
+					<th>지출내용</th>
+					<th>비고</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>#</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>#</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>#</td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
 
 		월별로 1년치 나오도록
 
 
 
-
-	</div>
 </section>
 
 

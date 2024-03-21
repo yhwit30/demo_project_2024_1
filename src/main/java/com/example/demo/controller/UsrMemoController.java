@@ -32,12 +32,12 @@ public class UsrMemoController {
 
 	// 액션 메소드
 	@RequestMapping("/usr/bg12343/memo/expenses")
-	public String showExpenses(Model model) {
+	public String showExpenses(Model model, @RequestParam(defaultValue = "0") int bldgId) {
 //		건물 변환 버튼용
 		List<Building> buildings = buildingService.getForPrintBuildings();
 		model.addAttribute("buildings", buildings);
 
-		List<Memo> expenses = memoService.getMemoExpenses();
+		List<Memo> expenses = memoService.getMemoExpenses(bldgId);
 
 		model.addAttribute("expenses", expenses);
 		return "usr/bg12343/memo/expenses";
