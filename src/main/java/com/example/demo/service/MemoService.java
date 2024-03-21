@@ -24,8 +24,8 @@ public class MemoService {
 		return memoRepository.getMemoRepairs();
 	}
 	
-	public List<Memo> getMemoExpenses(int bldgId) {
-		return memoRepository.getMemoExpenses(bldgId);
+	public List<Memo> getMemoExpenses(int bldgId, Integer year) {
+		return memoRepository.getMemoExpenses(bldgId, year);
 	}
 
 	public ResultData<Integer> addMemo(int memberId, int bldgId, int roomId, int boardId, int tenantId, int contractId,

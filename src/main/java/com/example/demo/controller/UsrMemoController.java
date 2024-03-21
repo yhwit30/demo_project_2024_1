@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ import com.example.demo.vo.Rq;
 
 @Controller
 public class UsrMemoController {
+	
+	LocalDate now = LocalDate.now();
+	int nowYear = now.getYear();
 
 	@Autowired
 	private Rq rq;
@@ -32,12 +36,17 @@ public class UsrMemoController {
 
 	// 액션 메소드
 	@RequestMapping("/usr/bg12343/memo/expenses")
-	public String showExpenses(Model model, @RequestParam(defaultValue = "0") int bldgId) {
+	public String showExpenses(Model model, @RequestParam(defaultValue = "0") int bldgId, Integer year) {
+		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
+		if (year == null) {
+			year = nowYear;
+		}
+
 //		건물 변환 버튼용
 		List<Building> buildings = buildingService.getForPrintBuildings();
 		model.addAttribute("buildings", buildings);
 
-		List<Memo> expenses = memoService.getMemoExpenses(bldgId);
+		List<Memo> expenses = memoService.getMemoExpenses(bldgId, year);
 
 		model.addAttribute("expenses", expenses);
 		return "usr/bg12343/memo/expenses";

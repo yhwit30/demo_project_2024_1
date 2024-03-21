@@ -20,6 +20,18 @@ public class Memo {
 	private String title;
 	private String body;
 	private String memoDate;
+	private String memoDate1;
+	private String memoDate2;
+	private String memoDate3;
+	private String memoDate4;
+	private String memoDate5;
+	private String memoDate6;
+	private String memoDate7;
+	private String memoDate8;
+	private String memoDate9;
+	private String memoDate10;
+	private String memoDate11;
+	private String memoDate12;
 	private int cost;
 
 	private String bldgName;

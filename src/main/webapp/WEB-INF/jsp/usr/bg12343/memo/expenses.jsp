@@ -21,14 +21,14 @@
 >올해(${nowYear}) 보기</a>
 
 
-23년도 지출내역
+24년도 지출내역
 
+<!-- 지출내역 표 스타일 -->
 <style>
 .expenses-table {
 	width: 400px;
 }
 </style>
-
 
 
 <section class="mt-2 text-xl px-4">
@@ -37,9 +37,11 @@
 		<button class="btn btn-m btn-outline" id="modalOpen">추가</button>
 	</div>
 
-	<div class="flex">
+	<!-- 지출내역 월별 표 -->
+	<div class="flex justify-evenly">
+
 		1월
-		<table class="table-box-1 expenses-table modalAdd" border="1">
+		<table class="table-box-1 expenses-table modalAdd-01" border="1">
 			<thead>
 				<tr>
 					<th>지출일</th>
@@ -51,13 +53,14 @@
 			<tbody>
 
 				<c:forEach var="expenses" items="${expenses }">
-					<tr>
-						<td>${expenses.memoDate }</td>
-						<td>${expenses.cost }</td>
-						<td>${expenses.body }</td>
-						<td>#</td>
-					</tr>
-
+					<c:if test="${expenses.memoDate1 != null }">
+						<tr>
+							<td>${expenses.memoDate }</td>
+							<td>${expenses.cost }</td>
+							<td>${expenses.body }</td>
+							<td>#</td>
+						</tr>
+					</c:if>
 				</c:forEach>
 
 				<!-- 새로 추가한 지출내역 동적으로 그리는 부분 -->
@@ -65,7 +68,7 @@
 		</table>
 
 		2월
-		<table class="table-box-1 expenses-table" border="1">
+		<table class="table-box-1 expenses-table modalAdd-02" border="1">
 			<thead>
 				<tr>
 					<th>지출일</th>
@@ -75,28 +78,22 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td>#</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td>#</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td>#</td>
-				</tr>
+				<c:forEach var="expenses" items="${expenses }">
+					<c:if test="${expenses.memoDate2 != null }">
+						<tr>
+							<td>${expenses.memoDate }</td>
+							<td>${expenses.cost }</td>
+							<td>${expenses.body }</td>
+							<td>#</td>
+						</tr>
+					</c:if>
+				</c:forEach>
+
+				<!-- 새로 추가한 지출내역 동적으로 그리는 부분 -->
 			</tbody>
 		</table>
 		3월
-		<table class="table-box-1 expenses-table" border="1">
+		<table class="table-box-1 expenses-table modalAdd-03" border="1">
 			<thead>
 				<tr>
 					<th>지출일</th>
@@ -106,30 +103,24 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td>#</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td>#</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td>#</td>
-				</tr>
+				<c:forEach var="expenses" items="${expenses }">
+					<c:if test="${expenses.memoDate3 != null }">
+						<tr>
+							<td>${expenses.memoDate }</td>
+							<td>${expenses.cost }</td>
+							<td>${expenses.body }</td>
+							<td>#</td>
+						</tr>
+					</c:if>
+				</c:forEach>
+
+				<!-- 새로 추가한 지출내역 동적으로 그리는 부분 -->
 			</tbody>
 		</table>
-		</div>
-		<div class="flex">
+	</div>
+	<div class="flex justify-evenly">
 		4월
-		<table class="table-box-1 expenses-table" border="1">
+		<table class="table-box-1 expenses-table modalAdd-04" border="1">
 			<thead>
 				<tr>
 					<th>지출일</th>
@@ -139,28 +130,22 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td>#</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td>#</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td>#</td>
-				</tr>
+				<c:forEach var="expenses" items="${expenses }">
+					<c:if test="${expenses.memoDate4 != null }">
+						<tr>
+							<td>${expenses.memoDate }</td>
+							<td>${expenses.cost }</td>
+							<td>${expenses.body }</td>
+							<td>#</td>
+						</tr>
+					</c:if>
+				</c:forEach>
+
+				<!-- 새로 추가한 지출내역 동적으로 그리는 부분 -->
 			</tbody>
 		</table>
 		5월
-		<table class="table-box-1 expenses-table" border="1">
+		<table class="table-box-1 expenses-table modalAdd-05" border="1">
 			<thead>
 				<tr>
 					<th>지출일</th>
@@ -170,28 +155,22 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td>#</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td>#</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td>#</td>
-				</tr>
+				<c:forEach var="expenses" items="${expenses }">
+					<c:if test="${expenses.memoDate5 != null }">
+						<tr>
+							<td>${expenses.memoDate }</td>
+							<td>${expenses.cost }</td>
+							<td>${expenses.body }</td>
+							<td>#</td>
+						</tr>
+					</c:if>
+				</c:forEach>
+
+				<!-- 새로 추가한 지출내역 동적으로 그리는 부분 -->
 			</tbody>
 		</table>
 		6월
-		<table class="table-box-1 expenses-table" border="1">
+		<table class="table-box-1 expenses-table modalAdd-06" border="1">
 			<thead>
 				<tr>
 					<th>지출일</th>
@@ -201,31 +180,175 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td>#</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td>#</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td>#</td>
-				</tr>
+				<c:forEach var="expenses" items="${expenses }">
+					<c:if test="${expenses.memoDate6 != null }">
+						<tr>
+							<td>${expenses.memoDate }</td>
+							<td>${expenses.cost }</td>
+							<td>${expenses.body }</td>
+							<td>#</td>
+						</tr>
+					</c:if>
+				</c:forEach>
+
+				<!-- 새로 추가한 지출내역 동적으로 그리는 부분 -->
 			</tbody>
 		</table>
-		</div>
+	</div>
+	<div class="flex justify-evenly">
+		7월
+		<table class="table-box-1 expenses-table modalAdd-07" border="1">
+			<thead>
+				<tr>
+					<th>지출일</th>
+					<th>비용</th>
+					<th>지출내용</th>
+					<th>비고</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="expenses" items="${expenses }">
+					<c:if test="${expenses.memoDate7 != null }">
+						<tr>
+							<td>${expenses.memoDate }</td>
+							<td>${expenses.cost }</td>
+							<td>${expenses.body }</td>
+							<td>#</td>
+						</tr>
+					</c:if>
+				</c:forEach>
 
-		월별로 1년치 나오도록
+				<!-- 새로 추가한 지출내역 동적으로 그리는 부분 -->
+			</tbody>
+		</table>
+		8월
+		<table class="table-box-1 expenses-table modalAdd-08" border="1">
+			<thead>
+				<tr>
+					<th>지출일</th>
+					<th>비용</th>
+					<th>지출내용</th>
+					<th>비고</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="expenses" items="${expenses }">
+					<c:if test="${expenses.memoDate8 != null }">
+						<tr>
+							<td>${expenses.memoDate }</td>
+							<td>${expenses.cost }</td>
+							<td>${expenses.body }</td>
+							<td>#</td>
+						</tr>
+					</c:if>
+				</c:forEach>
 
+				<!-- 새로 추가한 지출내역 동적으로 그리는 부분 -->
+			</tbody>
+		</table>
+		9월
+		<table class="table-box-1 expenses-table modalAdd-09" border="1">
+			<thead>
+				<tr>
+					<th>지출일</th>
+					<th>비용</th>
+					<th>지출내용</th>
+					<th>비고</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="expenses" items="${expenses }">
+					<c:if test="${expenses.memoDate9 != null }">
+						<tr>
+							<td>${expenses.memoDate }</td>
+							<td>${expenses.cost }</td>
+							<td>${expenses.body }</td>
+							<td>#</td>
+						</tr>
+					</c:if>
+				</c:forEach>
 
+				<!-- 새로 추가한 지출내역 동적으로 그리는 부분 -->
+			</tbody>
+		</table>
+	</div>
+	<div class="flex justify-evenly">
+		10월
+		<table class="table-box-1 expenses-table modalAdd-10" border="1">
+			<thead>
+				<tr>
+					<th>지출일</th>
+					<th>비용</th>
+					<th>지출내용</th>
+					<th>비고</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="expenses" items="${expenses }">
+					<c:if test="${expenses.memoDate10 != null }">
+						<tr>
+							<td>${expenses.memoDate }</td>
+							<td>${expenses.cost }</td>
+							<td>${expenses.body }</td>
+							<td>#</td>
+						</tr>
+					</c:if>
+				</c:forEach>
+
+				<!-- 새로 추가한 지출내역 동적으로 그리는 부분 -->
+			</tbody>
+		</table>
+		11월
+		<table class="table-box-1 expenses-table modalAdd-11" border="1">
+			<thead>
+				<tr>
+					<th>지출일</th>
+					<th>비용</th>
+					<th>지출내용</th>
+					<th>비고</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="expenses" items="${expenses }">
+					<c:if test="${expenses.memoDate11 != null }">
+						<tr>
+							<td>${expenses.memoDate }</td>
+							<td>${expenses.cost }</td>
+							<td>${expenses.body }</td>
+							<td>#</td>
+						</tr>
+					</c:if>
+				</c:forEach>
+
+				<!-- 새로 추가한 지출내역 동적으로 그리는 부분 -->
+			</tbody>
+		</table>
+		12월
+		<table class="table-box-1 expenses-table modalAdd-12" border="1">
+			<thead>
+				<tr>
+					<th>지출일</th>
+					<th>비용</th>
+					<th>지출내용</th>
+					<th>비고</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="expenses" items="${expenses }">
+					<c:if test="${expenses.memoDate12 != null }">
+						<tr>
+							<td>${expenses.memoDate }</td>
+							<td>${expenses.cost }</td>
+							<td>${expenses.body }</td>
+							<td>#</td>
+						</tr>
+					</c:if>
+				</c:forEach>
+
+				<!-- 새로 추가한 지출내역 동적으로 그리는 부분 -->
+			</tbody>
+		</table>
+	</div>
 
 </section>
 
@@ -355,6 +478,9 @@
 			},
 			success : function(data) {
 
+				var split = data.memoDate.split('-');
+				var date = split[1];
+				
 				// 데이터를 성공적으로 가져왔다면 각 요소에 데이터를 그려줍니다.
 				// 빈 <tr> 태그 그리기
 				var newMemoTag = $('<tr>');
@@ -362,7 +488,7 @@
 				newMemoTag.append($('<td>').text(data.cost));
 				newMemoTag.append($('<td>').text(data.body));
 				newMemoTag.append($('<td>'));
-				$('.modalAdd').append(newMemoTag);
+				$('.modalAdd-' + date).append(newMemoTag);
 
 				// 모달 숨김(class 사용)
 				$('#modalExpenses').hide();
@@ -420,8 +546,9 @@
 					<tr>
 						<th>지출연월</th>
 						<!-- 						예시 -->
-						<input type="hidden" name="memoDate" value="2024-2-4" />
-						<td>달력(todo)</td>
+						<td>
+						<input class="input input-bordered input-secondary w-full max-w-xs" autocomplete="off" type="text" name="memoDate" />
+						달력(todo)</td>
 					</tr>
 					<tr>
 						<th>지출비용</th>
