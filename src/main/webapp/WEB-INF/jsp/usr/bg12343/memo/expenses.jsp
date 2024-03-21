@@ -8,7 +8,7 @@
 <div>
 	<c:forEach var="building" items="${buildings }">
 		<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
-			href="../bg12343/memo/expenses?bldgId=${building.id }"
+			href="expenses?bldgId=${building.id }"
 		>${building.bldgName }</a>
 	</c:forEach>
 </div>
@@ -32,8 +32,9 @@
 	<div class="mx-auto overflow-x-auto">
 
 		1월
-		<table class="table-box-1" border="1">
+		<table class="table-box-1 modalAdd" border="1">
 			<tr>
+				<th>번호(데이터체크용)</th>
 				<th>지출일</th>
 				<th>비용</th>
 				<th>지출내용</th>
@@ -42,6 +43,7 @@
 
 			<c:forEach var="expenses" items="${expenses }">
 				<tr>
+					<td>${expenses.id }</td>
 					<td>${expenses.memoDate }</td>
 					<td>${expenses.cost }</td>
 					<td>${expenses.title }</td>
@@ -50,33 +52,8 @@
 
 			</c:forEach>
 
-			<tr>
-				<td id="memoDate"></td>
-				<td id="cost"></td>
-				<td id="body"></td>
-				<td>#</td>
-			</tr>
+			<!-- 새로 추가한 지출내역 동적으로 그리는 부분 -->
 
-
-
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td>#</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td>#</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td>#</td>
-			</tr>
 		</table>
 
 		2월
@@ -86,18 +63,6 @@
 				<th>비용</th>
 				<th>지출내용</th>
 				<th>비고</th>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td>#</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td>#</td>
 			</tr>
 			<tr>
 				<td></td>
@@ -234,6 +199,12 @@
 			alert('공백을 채워주세요');
 			return;
 		}
+		// 숫자 체크
+		if (isNaN(cost)) {
+			alert('비용은 숫자만 입력 가능합니다');
+			$('input[name="cost"]').focus();
+			return;
+		}
 
 		$.post({
 			url : '/usr/bg12343/memo/doMemoAddAjax',
@@ -247,10 +218,14 @@
 			},
 			success : function(data) {
 
-				// 데이터를 성공적으로 가져왔다면 각 요소에 데이터를 그려줍니다.(id 사용)
-				$('#memoDate').text(data.memoDate);
-				$('#cost').text(data.cost);
-				$('#body').text(data.body);
+				// 데이터를 성공적으로 가져왔다면 각 요소에 데이터를 그려줍니다.
+				// 빈 <tr> 태그 그리기
+				var newMemoTag = $('<tr>');
+				newMemoTag.append($('<td>').text(data.memoDate));
+				newMemoTag.append($('<td>').text(data.cost));
+				newMemoTag.append($('<td>').text(data.body));
+				newMemoTag.append($('<td>'));
+				$('.modalAdd').append(newMemoTag);
 
 				// 모달 숨김(class 사용)
 				$('#modalExpenses').hide();
@@ -315,7 +290,7 @@
 						<th>지출비용</th>
 						<td>
 							<input class="input input-bordered input-secondary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="제목을 입력해주세요" name="cost"
+								placeholder="지출비용을 입력해주세요" name="cost"
 							/>
 						</td>
 					</tr>
@@ -323,7 +298,7 @@
 						<th>지출내용</th>
 						<td>
 							<input class="input input-bordered input-secondary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="메모내용을 입력해주세요" name="body"
+								placeholder="지출내용을 입력해주세요" name="body"
 							/>
 						</td>
 					</tr>
