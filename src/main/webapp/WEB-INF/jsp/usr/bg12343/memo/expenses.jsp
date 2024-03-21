@@ -39,18 +39,26 @@
 				<th>지출내용</th>
 				<th>비고</th>
 			</tr>
+
+			<c:forEach var="expenses" items="${expenses }">
+				<tr>
+					<td>${expenses.memoDate }</td>
+					<td>${expenses.cost }</td>
+					<td>${expenses.title }</td>
+					<td>${expenses.body }</td>
+				</tr>
+
+			</c:forEach>
+
 			<tr>
 				<td id="memoDate"></td>
 				<td id="cost"></td>
-				<td id="title"></td>
+				<td id="body"></td>
 				<td>#</td>
 			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td>#</td>
-			</tr>
+
+
+
 			<tr>
 				<td></td>
 				<td></td>
@@ -130,7 +138,7 @@
 	display: none;
 	background-color: #ffffff;
 	width: 700px;
-	height: 400px;
+	height: 450px;
 	z-index: 51;
 	border-radius: 10px;
 }
@@ -159,13 +167,11 @@
 		$('#modalOpen').click(function() {
 			$('#modalExpenses').show();
 			$('#modalBg').show();
-			$('#modalOpen').hide();
 		});
 		// 모달 닫기
 		$('#modalClose').click(function() {
 			$('#modalExpenses').hide();
 			$('#modalBg').hide();
-			$('#modalOpen').show();
 		});
 	});
 </script>
@@ -217,14 +223,14 @@
 		// 수정할 데이터를 가져옵니다.
 		var roomId = form.find('select[name="roomId"]').val();
 		var boardId = form.find('input[name="boardId"]').val();
-		var title = form.find('input[name="title"]').val();
 		var body = form.find('input[name="body"]').val();
 		var memoDate = form.find('input[name="memoDate"]').val();
 		var cost = form.find('input[name="cost"]').val();
 
 		// 공백 체크
 		if (String(roomId).trim() === '' || String(boardId).trim() === ''
-				|| String(title).trim() === '' || String(body).trim() === '') {
+				|| String(body).trim() === '' || String(memoDate).trim() === ''
+				|| String(cost).trim() === '') {
 			alert('공백을 채워주세요');
 			return;
 		}
@@ -235,28 +241,26 @@
 			data : {
 				roomId : roomId,
 				boardId : boardId,
-				title : title,
 				body : body,
 				memoDate : memoDate,
 				cost : cost
 			},
 			success : function(data) {
 
-				console.log('title: ' + data.title);
-
 				// 데이터를 성공적으로 가져왔다면 각 요소에 데이터를 그려줍니다.(id 사용)
 				$('#memoDate').text(data.memoDate);
 				$('#cost').text(data.cost);
-				$('#title').text(data.title);
+				$('#body').text(data.body);
 
 				// 모달 숨김(class 사용)
 				$('#modalExpenses').hide();
 				$('#modalBg').hide();
+				$('#modalOpen').show();
 
 				// 수정된 데이터 보여주기(id 사용)
-				$('#memoDate').show();
-				$('#cost').show();
-				$('#title').show();
+				// 				$('#memoDate').show();
+				// 				$('#cost').show();
+				// 				$('#body').show();
 
 			},
 			error : function(xhr, status, error) {
@@ -316,15 +320,7 @@
 						</td>
 					</tr>
 					<tr>
-						<th>제목</th>
-						<td>
-							<input class="input input-bordered input-secondary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="제목을 입력해주세요" name="title"
-							/>
-						</td>
-					</tr>
-					<tr>
-						<th>내용</th>
+						<th>지출내용</th>
 						<td>
 							<input class="input input-bordered input-secondary w-full max-w-xs" autocomplete="off" type="text"
 								placeholder="메모내용을 입력해주세요" name="body"

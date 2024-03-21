@@ -23,6 +23,10 @@ public class MemoService {
 	public List<Memo> getMemoRepairs() {
 		return memoRepository.getMemoRepairs();
 	}
+	
+	public List<Memo> getMemoExpenses() {
+		return memoRepository.getMemoExpenses();
+	}
 
 	public ResultData<Integer> addMemo(int memberId, int bldgId, int roomId, int boardId, int tenantId, int contractId,
 			String title, String body, String memoDate, int cost) {
@@ -33,5 +37,7 @@ public class MemoService {
 		return ResultData.from("S-1", Ut.f("%d번 글이 생성되었습니다", id), "id", id);
 
 	}
+
+	
 
 }

@@ -49,6 +49,24 @@ public interface MemoRepository {
 	List<Memo> getMemoRepairs();
 
 	@Select("""
+			SELECT *
+			FROM memo AS M
+			LEFT JOIN room AS R
+			ON M.roomId = R.id
+			LEFT JOIN building AS B
+			ON R.bldgId = B.id
+			LEFT JOIN tenant AS T
+			ON M.tenantId = T.id
+			LEFT JOIN contract AS C
+			ON M.contractId = C.id
+			LEFT JOIN memo_board AS MB
+			ON M.boardId = MB.id
+			WHERE M.boardId = 6;
+			""")
+	List<Memo> getMemoExpenses();
+
+
+	@Select("""
 			<script>
 			SELECT *
 			FROM memo AS M
@@ -89,4 +107,5 @@ public interface MemoRepository {
 	void addMemo(int memberId, int bldgId, int roomId, int boardId, int tenantId, int contractId, String title,
 			String body, String memoDate, int cost);
 
+	
 }

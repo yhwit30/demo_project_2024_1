@@ -35,8 +35,11 @@ public class UsrMemoController {
 	public String showExpenses(Model model) {
 //		건물 변환 버튼용
 		List<Building> buildings = buildingService.getForPrintBuildings();
-
 		model.addAttribute("buildings", buildings);
+
+		List<Memo> expenses = memoService.getMemoExpenses();
+
+		model.addAttribute("expenses", expenses);
 		return "usr/bg12343/memo/expenses";
 	}
 
@@ -63,8 +66,8 @@ public class UsrMemoController {
 	@ResponseBody
 	public Memo doMemoAddAjax(@RequestParam(defaultValue = "0") int bldgId, int roomId, int boardId,
 			@RequestParam(defaultValue = "0") int tenantId, @RequestParam(defaultValue = "0") int contractId,
-			String title, String body, @RequestParam(defaultValue = "0") String memoDate,
-			@RequestParam(defaultValue = "0") int cost) {
+			@RequestParam(defaultValue = "0") String title, String body,
+			@RequestParam(defaultValue = "0") String memoDate, @RequestParam(defaultValue = "0") int cost) {
 		// 로그인 체크 인터셉터에서
 
 		System.out.println("roomId: " + roomId);
@@ -81,11 +84,11 @@ public class UsrMemoController {
 
 		// 작성된 메모 번호 가져오기
 		int id = (int) addedMemoRd.getData1();
-		
+
 		System.out.println("lastId: " + id);
 
 		Memo addedMemo = memoService.getMemo(id);
-		
+
 		System.out.println("addedMemo: " + addedMemo.toString());
 
 		return addedMemo;
