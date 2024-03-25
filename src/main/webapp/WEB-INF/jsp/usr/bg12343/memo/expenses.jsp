@@ -583,79 +583,80 @@
 
 	<!-- 	달력용 스크립트 -->
 	<script>
-		var today = new Date();
+		var today = new Date(); // 현재 날짜를 가져옴
 		function buildCalendar() {
 			var row = null
-			var cnt = 0;
-			var calendarTable = document.getElementById("calendar");
-			var calendarTableTitle = document.getElementById("calendarTitle");
+			var cnt = 0; // 셀의 개수를 세는 변수
+			var calendarTable = document.getElementById("calendar"); // 달력 테이블 요소 가져오기
+			var calendarTableTitle = document.getElementById("calendarTitle"); // 달력 제목 요소 가져오기
 			calendarTableTitle.innerHTML = today.getFullYear() + "년"
-					+ (today.getMonth() + 1) + "월";
+					+ (today.getMonth() + 1) + "월"; // 달력 제목 설정
 
-			var firstDate = new Date(today.getFullYear(), today.getMonth(), 1);
+			var firstDate = new Date(today.getFullYear(), today.getMonth(), 1); // 현재 달의 첫째 날
 			var lastDate = new Date(today.getFullYear(), today.getMonth() + 1,
-					0);
+					0); // 현재 달의 마지막 날
 			while (calendarTable.rows.length > 2) {
-				calendarTable.deleteRow(calendarTable.rows.length - 1);
+				calendarTable.deleteRow(calendarTable.rows.length - 1); // 달력의 행 삭제 (날짜 표시 부분만 남김)
 			}
 
 			var isFirstRow = true;
-			for (var i = 1; i <= lastDate.getDate(); i++) {
-				if (isFirstRow) {
-					row = calendarTable.insertRow();
+			for (var i = 1; i <= lastDate.getDate(); i++) { // 현재 달의 날짜만큼 반복
+				if (isFirstRow) { // 첫 번째 행인지 확인
+					row = calendarTable.insertRow(); // 새로운 행 추가
 					isFirstRow = false;
 					for (var j = 0; j < firstDate.getDay(); j++) {
-						var cell = row.insertCell();
+						var cell = row.insertCell(); // 빈 셀 추가 (첫째 날 이전)
 						cnt += 1;
 					}
 				}
-				if (cnt % 7 == 0) {
+				if (cnt % 7 == 0) { // 일주일이 지나면 새로운 행 추가
 					row = calendarTable.insertRow();
 				}
-				var cell = row.insertCell();
+				var cell = row.insertCell(); // 날짜를 표시할 셀 추가
 				cnt += 1;
-				cell.setAttribute('id', i);
-				cell.innerHTML = i;
+				cell.setAttribute('id', i); // 셀의 ID 설정
+				cell.innerHTML = i; // 셀에 날짜 표시
 				cell.align = "center";
 
-				cell.onclick = function() {
+				cell.onclick = function() { // 셀 클릭 시
 					var clickedYear = today.getFullYear();
 					var clickedMonth = (1 + today.getMonth());
-					var clickedDate = this.getAttribute('id');
+					var clickedDate = this.getAttribute('id'); // 클릭한 셀의 날짜 가져오기
 
 					clickedDate = clickedDate >= 10 ? clickedDate : '0'
 							+ clickedDate;
 					clickedMonth = clickedMonth >= 10 ? clickedMonth : '0'
 							+ clickedMonth;
 					var clickedYMD = clickedYear + "-" + clickedMonth + "-"
-							+ clickedDate;
+							+ clickedDate; // 선택한 날짜를 YYYY-MM-DD 형식으로 변환
 
-					opener.document.getElementById("date").value = clickedYMD;
-					self.close();
+					opener.document.getElementById("date").value = clickedYMD; // 부모 창의 입력 필드에 선택한 날짜 설정
+					self.close(); // 현재 창 닫기
 				}
 
-				if (cnt % 7 == 1) {
-					cell.innerHTML = "<font color=#F79DC2>" + i + "</font>";
+				if (cnt % 7 == 1) { // 일요일인 경우
+					cell.innerHTML = "<font color=#F79DC2>" + i + "</font>"; // 일요일에는 빨간색으로 표시
 				}
 
-				if (cnt % 7 == 0) {
-					cell.innerHTML = "<font color=skyblue>" + i + "</font>";
+				if (cnt % 7 == 0) { // 토요일인 경우
+					cell.innerHTML = "<font color=skyblue>" + i + "</font>"; // 토요일에는 파란색으로 표시
 				}
 			}
 		}
 
 		function prevCalendar() {
 			today = new Date(today.getFullYear(), today.getMonth() - 1, today
-					.getDate());
-			buildCalendar();
+					.getDate()); // 이전 달로 이동
+			buildCalendar(); // 달력 다시 빌드
 		}
 
 		function nextCalendar() {
 			today = new Date(today.getFullYear(), today.getMonth() + 1, today
-					.getDate());
-			buildCalendar();
+					.getDate()); // 다음 달로 이동
+			buildCalendar(); // 달력 다시 빌드
 		}
 	</script>
+
 
 
 	<!-- 	달력 -->
