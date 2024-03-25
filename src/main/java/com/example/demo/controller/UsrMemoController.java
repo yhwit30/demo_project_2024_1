@@ -41,7 +41,7 @@ public class UsrMemoController {
 		if (year == null) {
 			year = nowYear;
 		}
-
+		
 //		건물 변환 버튼용
 		List<Building> buildings = buildingService.getForPrintBuildings();
 		model.addAttribute("buildings", buildings);
@@ -79,6 +79,7 @@ public class UsrMemoController {
 			@RequestParam(defaultValue = "0") String memoDate, @RequestParam(defaultValue = "0") int cost) {
 		// 로그인 체크 인터셉터에서
 
+		System.out.println("bldgId :" + bldgId);
 		System.out.println("roomId: " + roomId);
 		System.out.println("boardId: " + boardId);
 		System.out.println("title: " + title);

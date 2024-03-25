@@ -446,6 +446,7 @@
 		var form = $('#memoAddForm');
 
 		// 수정할 데이터를 가져옵니다.
+		var bldgId = form.find('select[name="bldgId"]').val();
 		var roomId = form.find('select[name="roomId"]').val();
 		var boardId = form.find('input[name="boardId"]').val();
 		var body = form.find('input[name="body"]').val();
@@ -470,6 +471,7 @@
 			url : '/usr/bg12343/memo/doMemoAddAjax',
 			type : 'POST',
 			data : {
+				bldgId : bldgId,
 				roomId : roomId,
 				boardId : boardId,
 				body : body,
@@ -478,9 +480,10 @@
 			},
 			success : function(data) {
 
+				// 태그이름찾기 위한 월 데이터 정제
 				var split = data.memoDate.split('-');
 				var date = split[1];
-				
+
 				// 데이터를 성공적으로 가져왔다면 각 요소에 데이터를 그려줍니다.
 				// 빈 <tr> 태그 그리기
 				var newMemoTag = $('<tr>');
@@ -495,11 +498,6 @@
 				$('#modalBg').hide();
 				$('#modalOpen').show();
 
-				// 수정된 데이터 보여주기(id 사용)
-				// 				$('#memoDate').show();
-				// 				$('#cost').show();
-				// 				$('#body').show();
-
 			},
 			error : function(xhr, status, error) {
 				alert('수정에 실패했습니다: ' + error);
@@ -509,7 +507,7 @@
 </script>
 
 
-<!-- 모달 투명한 배경용 -->
+<!-- 모달 투명한 배경용 태그 -->
 <div id="modalBg"></div>
 <!-- 지출내역 추가 입력란 -->
 <section class="text-lg" id="modalExpenses">
@@ -547,8 +545,11 @@
 						<th>지출연월</th>
 						<!-- 						예시 -->
 						<td>
-						<input class="input input-bordered input-secondary w-full max-w-xs" autocomplete="off" type="text" name="memoDate" />
-						달력(todo)</td>
+							<input class="input input-bordered input-secondary w-full max-w-xs" autocomplete="off" type="text"
+								name="memoDate"
+							/>
+							달력(todo)
+						</td>
 					</tr>
 					<tr>
 						<th>지출비용</th>
@@ -574,12 +575,122 @@
 				</tbody>
 			</table>
 		</form>
-
-
 	</div>
 	<div class="mt-2">
 		<button class="btn btn-outline" id="modalClose">닫기</button>
 	</div>
+
+
+	<!-- 	달력용 스크립트 -->
+	<script>
+		var today = new Date();
+		function buildCalendar() {
+			var row = null
+			var cnt = 0;
+			var calendarTable = document.getElementById("calendar");
+			var calendarTableTitle = document.getElementById("calendarTitle");
+			calendarTableTitle.innerHTML = today.getFullYear() + "년"
+					+ (today.getMonth() + 1) + "월";
+
+			var firstDate = new Date(today.getFullYear(), today.getMonth(), 1);
+			var lastDate = new Date(today.getFullYear(), today.getMonth() + 1,
+					0);
+			while (calendarTable.rows.length > 2) {
+				calendarTable.deleteRow(calendarTable.rows.length - 1);
+			}
+
+			var isFirstRow = true;
+			for (var i = 1; i <= lastDate.getDate(); i++) {
+				if (isFirstRow) {
+					row = calendarTable.insertRow();
+					isFirstRow = false;
+					for (var j = 0; j < firstDate.getDay(); j++) {
+						var cell = row.insertCell();
+						cnt += 1;
+					}
+				}
+				if (cnt % 7 == 0) {
+					row = calendarTable.insertRow();
+				}
+				var cell = row.insertCell();
+				cnt += 1;
+				cell.setAttribute('id', i);
+				cell.innerHTML = i;
+				cell.align = "center";
+
+				cell.onclick = function() {
+					var clickedYear = today.getFullYear();
+					var clickedMonth = (1 + today.getMonth());
+					var clickedDate = this.getAttribute('id');
+
+					clickedDate = clickedDate >= 10 ? clickedDate : '0'
+							+ clickedDate;
+					clickedMonth = clickedMonth >= 10 ? clickedMonth : '0'
+							+ clickedMonth;
+					var clickedYMD = clickedYear + "-" + clickedMonth + "-"
+							+ clickedDate;
+
+					opener.document.getElementById("date").value = clickedYMD;
+					self.close();
+				}
+
+				if (cnt % 7 == 1) {
+					cell.innerHTML = "<font color=#F79DC2>" + i + "</font>";
+				}
+
+				if (cnt % 7 == 0) {
+					cell.innerHTML = "<font color=skyblue>" + i + "</font>";
+				}
+			}
+		}
+
+		function prevCalendar() {
+			today = new Date(today.getFullYear(), today.getMonth() - 1, today
+					.getDate());
+			buildCalendar();
+		}
+
+		function nextCalendar() {
+			today = new Date(today.getFullYear(), today.getMonth() + 1, today
+					.getDate());
+			buildCalendar();
+		}
+	</script>
+
+
+	<!-- 	달력 -->
+	<table id="calendar" align="center">
+		<tr>
+			<td align="center">
+				<label onclick="prevCalendar()"> ◀ </label>
+			</td>
+			<td colspan="5" align="center" id="calendarTitle">yyyy년 m월</td>
+			<td align="center">
+				<label onclick="nextCalendar()"> ▶ </label>
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				<font color="#F79DC2">일 
+			</td>
+			<td align="center">월</td>
+			<td align="center">화</td>
+			<td align="center">수</td>
+			<td align="center">목</td>
+			<td align="center">금</td>
+			<td align="center">
+				<font color="skyblue">토 
+			</td>
+		</tr>
+		<script type="text/javascript">
+			buildCalendar();
+		</script>
+	</table>
+
+
+
+
+
 </section>
 
 
