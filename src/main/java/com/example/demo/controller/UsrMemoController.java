@@ -103,6 +103,40 @@ public class UsrMemoController {
 
 		return addedMemo;
 	}
+	
+	// ajax
+	@RequestMapping("/usr/bg12343/memo/doMemoModifyAjax")
+	@ResponseBody
+	public Memo doMemoModifyAjax(@RequestParam(defaultValue = "0") int bldgId, int roomId, int boardId,
+			@RequestParam(defaultValue = "0") int tenantId, @RequestParam(defaultValue = "0") int contractId,
+			@RequestParam(defaultValue = "0") String title, String body,
+			@RequestParam(defaultValue = "0") String memoDate, @RequestParam(defaultValue = "0") int cost) {
+		// 로그인 체크 인터셉터에서
+		
+		System.out.println("bldgId :" + bldgId);
+		System.out.println("roomId: " + roomId);
+		System.out.println("boardId: " + boardId);
+		System.out.println("title: " + title);
+		System.out.println("body: " + body);
+		
+		// 현재는 회원은 시험모드로 관리자만
+		int memberId = 1;
+		
+		// 메모 작성
+		ResultData<Integer> addedMemoRd = memoService.addMemo(memberId, bldgId, roomId, boardId, tenantId, contractId,
+				title, body, memoDate, cost);
+		
+		// 작성된 메모 번호 가져오기
+		int id = (int) addedMemoRd.getData1();
+		
+		System.out.println("lastId: " + id);
+		
+		Memo addedMemo = memoService.getMemo(id);
+		
+		System.out.println("addedMemo: " + addedMemo.toString());
+		
+		return addedMemo;
+	}
 
 	@RequestMapping("/usr/bg12343/memo/memoModify")
 	public String showMemoModify(Model model) {

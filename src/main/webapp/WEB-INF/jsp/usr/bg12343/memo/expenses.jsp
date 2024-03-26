@@ -348,7 +348,7 @@
 
 <!-- 지출내역 추가 모달 -->
 <!-- 모달 투명한 배경용 태그 -->
-<div id="modalBg" onclick='closeCalendar();'></div>
+<div id="modalBg"></div>
 <!-- 지출내역 추가 입력란 -->
 <section class="text-lg" id="modalExpenses">
 	<div>
@@ -400,46 +400,13 @@
         					});
 							</script>
 
-
-							<!-- 							<input id="pickedDate" class="input input-bordered input-secondary w-full max-w-xs" autocomplete="off" -->
-							<!-- 								type="text" name="memoDate" placeholder="yyyy-mm-dd" readonly -->
-							<!-- 							/> -->
-							<!-- 								달력 -->
-							<!-- 							<table id="calendar" align="center"> -->
-							<!-- 								<tbody> -->
-							<!-- 									<tr> -->
-							<!-- 										<td align="center"> -->
-							<!-- 											<label onclick="prevCalendar()"> ◀ </label> -->
-							<!-- 										</td> -->
-							<!-- 										<td colspan="5" align="center" id="calendarTitle">yyyy년 m월</td> -->
-							<!-- 										<td align="center"> -->
-							<!-- 											<label onclick="nextCalendar()"> ▶ </label> -->
-							<!-- 										</td> -->
-							<!-- 									</tr> -->
-							<!-- 									<tr> -->
-							<!-- 										<td align="center"> -->
-							<!-- 											<font color="#F79DC2">일  -->
-							<!-- 										</td> -->
-							<!-- 										<td align="center">월</td> -->
-							<!-- 										<td align="center">화</td> -->
-							<!-- 										<td align="center">수</td> -->
-							<!-- 										<td align="center">목</td> -->
-							<!-- 										<td align="center">금</td> -->
-							<!-- 										<td align="center"> -->
-							<!-- 											<font color="skyblue">토  -->
-							<!-- 										</td> -->
-							<!-- 									</tr> -->
-							<!-- 								</tbody> -->
-							<!-- 							</table> -->
-							<!-- 							<button id="calendarBtn" class="btn btn-outline" onclick="showCalendar();">달력</button> -->
-
 						</td>
 					</tr>
 					<tr>
 						<th>지출비용</th>
 						<td>
 							<input class="input input-bordered input-secondary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="지출비용 입력" name="cost"
+								placeholder="숫자만 입력" name="cost"
 							/>
 						</td>
 					</tr>
@@ -464,16 +431,19 @@
 		<button class="btn btn-outline" id="modalClose">닫기</button>
 	</div>
 
-	<!-- 지출내역 표 스타일 -->
-	<style>
+</section>
+
+
+<!-- 지출내역 표 스타일 -->
+<style>
 .expenses-table {
 	width: 400px;
 }
 </style>
 
 
-	<!-- 지출내역 추가 모달 스타일 -->
-	<style>
+<!-- 지출내역 추가 모달 스타일 -->
+<style>
 #modalExpenses {
 	position: absolute;
 	left: 50%;
@@ -482,7 +452,7 @@
 	display: none;
 	background-color: #ffffff;
 	width: 600px;
-	height: 450px;
+	height: 400px;
 	z-index: 51;
 	border-radius: 10px;
 }
@@ -504,8 +474,8 @@
 </style>
 
 
-	<!-- 모달 toggle 컨트롤 -->
-	<script>
+<!-- 모달 toggle 컨트롤 -->
+<script>
 		$(document).ready(function() {
 			// 모달 띄우기
 			$('#modalOpen').click(function() {
@@ -530,8 +500,8 @@
 	</script>
 
 
-	<!-- 건물을 선택할 때 해당 호실을 불러오기 -->
-	<script>
+<!-- 건물을 선택할 때 해당 호실을 불러오기 -->
+<script>
 		// 페이지 로드 시 기본값으로 bldgId를 1로 설정하고 호실 목록을 가져옴
 		window.onload = function() {
 			var defaultBldgId = 1;
@@ -566,8 +536,8 @@
 		}
 	</script>
 
-	<!-- 지출내역 추가 함수 -->
-	<script>
+<!-- 지출내역 추가 함수 -->
+<script>
 		// 추가 함수
 		function doAddMemo() {
 
@@ -641,124 +611,7 @@
 		}
 	</script>
 
-
-	<!-- 달력용 스타일 -->
-	<style>
-/* #calendar { */
-/* 	display: none; */
-/* 	position: absolute; */
-/* 	background-color: white; */
-/* 	width: 200px; */
-/* } */
-
-/* #calendar>tbody>tr:nth-child(n+3)>td { */
-/* 	cursor: pointer; */
-/* } */
-</style>
-
-
-	<script>
-// 		// 	달력버튼 시 달력 보이게
-// 		function showCalendar() {
-// 			$('#calendar').show();
-// 		}
-// 		//	배경 클릭시 달력 안보이게
-// 		function closeCalendar() {
-// 			$('#calendar').hide();
-// 		}
-	</script>
-
-
-	<!-- 	달력용 스크립트 -->
-	<script>
-// 		var today = new Date(); // 현재 날짜를 가져옴
-// 		function buildCalendar() {
-// 			var row = null
-// 			var cnt = 0; // 셀의 개수를 세는 변수
-// 			var calendarTable = document.getElementById("calendar"); // 달력 테이블 요소 가져오기
-// 			var calendarTableTitle = document.getElementById("calendarTitle"); // 달력 제목 요소 가져오기
-// 			calendarTableTitle.innerHTML = today.getFullYear() + "년"
-// 					+ (today.getMonth() + 1) + "월"; // 달력 제목 설정
-
-// 			var firstDate = new Date(today.getFullYear(), today.getMonth(), 1); // 현재 달의 첫째 날
-// 			var lastDate = new Date(today.getFullYear(), today.getMonth() + 1,
-// 					0); // 현재 달의 마지막 날
-// 			while (calendarTable.rows.length > 2) {
-// 				calendarTable.deleteRow(calendarTable.rows.length - 1); // 달력의 행 삭제 (날짜 표시 부분만 남김)
-// 			}
-
-// 			var isFirstRow = true;
-// 			for (var i = 1; i <= lastDate.getDate(); i++) { // 현재 달의 날짜만큼 반복
-// 				if (isFirstRow) { // 첫 번째 행인지 확인
-// 					row = calendarTable.insertRow(); // 새로운 행 추가
-// 					isFirstRow = false;
-// 					for (var j = 0; j < firstDate.getDay(); j++) {
-// 						var cell = row.insertCell(); // 빈 셀 추가 (첫째 날 이전)
-// 						cnt += 1;
-// 					}
-// 				}
-// 				if (cnt % 7 == 0) { // 일주일이 지나면 새로운 행 추가
-// 					row = calendarTable.insertRow();
-// 				}
-// 				var cell = row.insertCell(); // 날짜를 표시할 셀 추가
-// 				cnt += 1;
-// 				cell.setAttribute('id', i); // 셀의 ID 설정
-// 				cell.innerHTML = i; // 셀에 날짜 표시
-// 				cell.align = "center";
-
-// 				if (cnt % 7 == 1) { // 일요일인 경우
-// 					cell.innerHTML = "<font color=red>" + i + "</font>"; // 일요일에는 빨간색으로 표시
-// 				}
-
-// 				if (cnt % 7 == 0) { // 토요일인 경우
-// 					cell.innerHTML = "<font color=skyblue>" + i + "</font>"; // 토요일에는 파란색으로 표시
-// 				}
-
-// 				// 오늘 날짜를 하이라이트
-// 				if (i === today.getDate()
-// 						&& today.getMonth() === new Date().getMonth()
-// 						&& today.getFullYear() === new Date().getFullYear()) {
-// 					cell.style.backgroundColor = "yellow";
-// 				}
-
-// 				// 	날짜 클릭 시 데이터 넣기
-// 				cell.onclick = function() { // 셀 클릭 시
-// 					var clickedYear = today.getFullYear();
-// 					var clickedMonth = (1 + today.getMonth());
-// 					var clickedDate = this.getAttribute('id'); // 클릭한 셀의 날짜 가져오기
-
-// 					clickedDate = clickedDate >= 10 ? clickedDate : '0'
-// 							+ clickedDate;
-// 					clickedMonth = clickedMonth >= 10 ? clickedMonth : '0'
-// 							+ clickedMonth;
-// 					var clickedYMD = clickedYear + "-" + clickedMonth + "-"
-// 							+ clickedDate; // 선택한 날짜를 YYYY-MM-DD 형식으로 변환
-
-// 					console.log(clickedYMD);
-
-// 					$('#pickedDate').val(clickedYMD);
-// 					$('#calendar').hide();
-// 					buildCalendar(); // 날짜 고른 후 달력 초기화
-// 				}
-
-// 			}
-// 		}
-
-// 		function prevCalendar() {
-// 			today = new Date(today.getFullYear(), today.getMonth() - 1, today
-// 					.getDate()); // 이전 달로 이동
-// 			buildCalendar(); // 달력 다시 빌드
-// 		}
-
-// 		function nextCalendar() {
-// 			today = new Date(today.getFullYear(), today.getMonth() + 1, today
-// 					.getDate()); // 다음 달로 이동
-// 			buildCalendar(); // 달력 다시 빌드
-// 		}
-	</script>
-
-
-</section>
+<!-- 지출내역 수정 ajax -->
 
 
 
