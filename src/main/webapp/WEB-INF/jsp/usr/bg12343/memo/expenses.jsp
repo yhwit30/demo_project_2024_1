@@ -347,7 +347,7 @@
 
 <!-- 지출내역 추가 모달 -->
 <!-- 모달 투명한 배경용 태그 -->
-<div id="modalBg"></div>
+<div id="modalBg" onclick='closeCalendar();'></div>
 <!-- 지출내역 추가 입력란 -->
 <section class="text-lg" id="modalExpenses">
 	<div>
@@ -384,32 +384,34 @@
 						<th>지출연월</th>
 						<td>
 							<input id="pickedDate" class="input input-bordered input-secondary w-full max-w-xs" autocomplete="off"
-								type="text" name="memoDate" placeholder="yyyy-mm-dd 형식 입력" readonly
+								type="text" name="memoDate" placeholder="yyyy-mm-dd" readonly
 							/>
 							<!-- 	달력 -->
 							<table id="calendar" align="center">
-								<tr>
-									<td align="center">
-										<label onclick="prevCalendar()"> ◀ </label>
-									</td>
-									<td colspan="5" align="center" id="calendarTitle">yyyy년 m월</td>
-									<td align="center">
-										<label onclick="nextCalendar()"> ▶ </label>
-									</td>
-								</tr>
-								<tr>
-									<td align="center">
-										<font color="#F79DC2">일 
-									</td>
-									<td align="center">월</td>
-									<td align="center">화</td>
-									<td align="center">수</td>
-									<td align="center">목</td>
-									<td align="center">금</td>
-									<td align="center">
-										<font color="skyblue">토 
-									</td>
-								</tr>
+								<tbody>
+									<tr>
+										<td align="center">
+											<label onclick="prevCalendar()"> ◀ </label>
+										</td>
+										<td colspan="5" align="center" id="calendarTitle">yyyy년 m월</td>
+										<td align="center">
+											<label onclick="nextCalendar()"> ▶ </label>
+										</td>
+									</tr>
+									<tr>
+										<td align="center">
+											<font color="#F79DC2">일 
+										</td>
+										<td align="center">월</td>
+										<td align="center">화</td>
+										<td align="center">수</td>
+										<td align="center">목</td>
+										<td align="center">금</td>
+										<td align="center">
+											<font color="skyblue">토 
+										</td>
+									</tr>
+								</tbody>
 							</table>
 							<button id="calendarBtn" class="btn btn-outline" onclick="showCalendar();">달력</button>
 
@@ -419,7 +421,7 @@
 						<th>지출비용</th>
 						<td>
 							<input class="input input-bordered input-secondary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="지출비용을 입력해주세요" name="cost"
+								placeholder="지출비용 입력" name="cost"
 							/>
 						</td>
 					</tr>
@@ -427,7 +429,7 @@
 						<th>지출내용</th>
 						<td>
 							<input class="input input-bordered input-secondary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="지출내용을 입력해주세요" name="body"
+								placeholder="지출내용 입력" name="body"
 							/>
 						</td>
 					</tr>
@@ -463,7 +465,7 @@
 	transform: translateX(-50%) translateY(-50%);
 	display: none;
 	background-color: #ffffff;
-	width: 700px;
+	width: 600px;
 	height: 450px;
 	z-index: 51;
 	border-radius: 10px;
@@ -498,6 +500,15 @@
 			$('#modalClose').click(function() {
 				$('#modalExpenses').hide();
 				$('#modalBg').hide();
+
+				var form = $('#memoAddForm');
+
+				// 입력 값들 초기화
+				form.find('input[name="body"]').val('');
+				form.find('input[name="memoDate"]').val('');
+				form.find('input[name="cost"]').val('');
+				// 달력 초기화
+				buildCalendar();
 			});
 		});
 	</script>
@@ -509,6 +520,7 @@
 		window.onload = function() {
 			var defaultBldgId = 1;
 			buildingSelect(defaultBldgId);
+			buildCalendar(); // 로드 시 달력도 실행
 		};
 		function buildingSelect(bldgId) {
 			console.log('bldgId:' + bldgId);
@@ -613,18 +625,28 @@
 		}
 	</script>
 
+
 	<!-- 달력용 스타일 -->
 	<style>
 #calendar {
 	display: none;
 	position: absolute;
 	background-color: white;
+	width: 200px;
+}
+
+#calendar>tbody>tr:nth-child(n+3)>td {
+	cursor: pointer;
 }
 </style>
 	<script>
+		// 	달력버튼 시 달력 보이게
 		function showCalendar() {
 			$('#calendar').show();
-
+		}
+		//	배경 클릭시 달력 안보이게
+		function closeCalendar() {
+			$('#calendar').hide();
 		}
 	</script>
 
@@ -667,13 +689,21 @@
 				cell.align = "center";
 
 				if (cnt % 7 == 1) { // 일요일인 경우
-					cell.innerHTML = "<font color=#F79DC2>" + i + "</font>"; // 일요일에는 빨간색으로 표시
+					cell.innerHTML = "<font color=red>" + i + "</font>"; // 일요일에는 빨간색으로 표시
 				}
 
 				if (cnt % 7 == 0) { // 토요일인 경우
 					cell.innerHTML = "<font color=skyblue>" + i + "</font>"; // 토요일에는 파란색으로 표시
 				}
 
+				// 오늘 날짜를 하이라이트
+				if (i === today.getDate()
+						&& today.getMonth() === new Date().getMonth()
+						&& today.getFullYear() === new Date().getFullYear()) {
+					cell.style.backgroundColor = "yellow";
+				}
+
+				// 	날짜 클릭 시 데이터 넣기
 				cell.onclick = function() { // 셀 클릭 시
 					var clickedYear = today.getFullYear();
 					var clickedMonth = (1 + today.getMonth());
@@ -690,6 +720,7 @@
 
 					$('#pickedDate').val(clickedYMD);
 					$('#calendar').hide();
+					buildCalendar(); // 날짜 고른 후 달력 초기화
 				}
 
 			}
@@ -707,10 +738,6 @@
 			buildCalendar(); // 달력 다시 빌드
 		}
 	</script>
-	<script>
-		buildCalendar();
-	</script>
-
 
 
 </section>
