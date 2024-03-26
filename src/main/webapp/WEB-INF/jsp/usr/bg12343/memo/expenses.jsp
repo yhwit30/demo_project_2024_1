@@ -391,14 +391,14 @@
 								<input type="date" id="birth" name="memoDate" required max="">
 							</div>
 							<script>
-        $(function() {
-            $("#birthdate").datepicker({
-            	dateFormat: 'yy-mm-dd',
-                changeMonth: true,
-                changeYear: true,
-                yearRange: 'c-100:c+0'
-        });
-</script>
+   						     $(function() {
+ 					           $("#birthdate").datepicker({
+    				        	dateFormat: 'yy-mm-dd',
+         					    changeMonth: true,
+           					    changeYear: true,
+             					yearRange: 'c-100:c+0'
+        					});
+							</script>
 
 
 							<!-- 							<input id="pickedDate" class="input input-bordered input-secondary w-full max-w-xs" autocomplete="off" -->
@@ -616,7 +616,7 @@
 
 					// 데이터를 성공적으로 가져왔다면 각 요소에 데이터를 그려줍니다.
 					// 빈 <tr> 태그 그리기
-					var newMemoTag = $('<tr>');
+					var newMemoTag = $('<tr style="background-color:gold">');
 					newMemoTag.append($('<td>').text(data.memoDate));
 					newMemoTag.append($('<td>').text(data.cost));
 					newMemoTag.append($('<td>').text(data.body));

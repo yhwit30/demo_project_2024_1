@@ -79,6 +79,7 @@ public interface MemoRepository {
 				AND M.bldgId = #{bldgId}
 			</if>
 			GROUP BY M.id
+			ORDER BY M.memoDate ASC
 			</script>
 			""")
 	List<Memo> getMemoExpenses(int bldgId, Integer year);
