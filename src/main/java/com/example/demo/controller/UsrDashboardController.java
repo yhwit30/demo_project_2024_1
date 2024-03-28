@@ -103,6 +103,18 @@ public class UsrDashboardController {
 	}
 
 	// ajax
+	@RequestMapping("/usr/bg12343/dashboard/getRentStatus")
+	@ResponseBody
+	public List<Dashboard> getRentStatusAjax(int bldgId, int year) {
+
+		// 연도별 데이터 가져오기
+		List<Dashboard> rentStatus = dashboardService.getRentStatus(bldgId, year);
+
+		// ajax 반환
+		return rentStatus;
+	}
+
+	// ajax
 	@RequestMapping("/usr/bg12343/dashboard/doRentStatusAdd")
 	@ResponseBody
 	public String doRentStatusAdd(Model model, int tenantId, String body, int year, String month) {

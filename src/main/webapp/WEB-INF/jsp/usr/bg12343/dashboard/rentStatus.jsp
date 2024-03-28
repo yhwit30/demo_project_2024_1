@@ -5,11 +5,6 @@
 <%@ include file="../../common/sidebar.jspf"%>
 
 
-<script>
-	var currentDate = new Date();
-	var currentYear = currentDate.getFullYear();
-	console.log(currentYear); // 현재 연도 출력
-</script>
 
 <!-- 수납현황 수정 ajax -->
 <script>
@@ -168,6 +163,51 @@
 </script>
 
 
+<!-- 현재 연도 출력 -->
+<script>
+	var currentDate = new Date();
+	var currentYear = currentDate.getFullYear();
+	// 	console.log(currentYear);
+</script>
+
+<!-- 연도 선택할 때 해당하는 데이터 불러오기 -->
+<script>
+	// 페이지 로드 시 기본값으로 현재연도로 설정
+	window.onload = function() {
+		var defaultBldgId = 1;
+		var defaultYear = currentYear;
+		buildingSelect(defaultBldgId);
+	};
+
+	function buildingSelect(bldgId) {
+		console.log('bldgId:' + bldgId);
+		console.log('year:' + currentYear);
+
+		$.ajax({
+			url : '/usr/bg12343/dashboard/getRentStatus',
+			type : 'POST',
+			data : {
+				bldgId : bldgId,
+				year : currentYear
+			},
+			success : function(data) {
+				console.log('data : ' + data);
+
+				// 기존 option태그 초기화
+			  $('#year').empty();
+
+				// 가져온 호실데이터를 option 태그로 그려주기
+			  data.forEach(function(rentStatus) {
+			        $('#year').append('<option value="' + rentStatus.id + '">' + rentStatus.rentDate + '</option>');
+			    });
+			},
+			error : function(xhr, status, error) {
+				alert('수정에 실패했습니다: ' + error);
+			}
+		});
+	}
+</script>
+
 
 <!-- 수정버튼 hover -->
 <style type="text/css">
@@ -196,12 +236,17 @@
 		</c:forEach>
 	</div>
 
-	<a class="btn btn-sm btn-outline ${param.year == nowYear -1 ? 'btn-active' : '' }"
-		href="rentStatus?bldgId=${param.bldgId }&year=${nowYear -1}"
-	>전년도 보기</a>
-	<a class="btn btn-sm btn-outline ${param.year == nowYear ? 'btn-active' : '' }"
-		href="rentStatus?bldgId=${param.bldgId }&year=${nowYear}"
-	>올해(${nowYear}) 보기</a>
+	<!-- 건물 선택 -->
+	<select class="select select-bordered select-sm w-20 max-w-xs" name="bldgId" onchange="buildingSelect(this.value)">
+		<c:forEach var="building" items="${buildings }">
+			<option value="${building.id }">${building.bldgName }</option>
+		</c:forEach>
+	</select>
+	<!-- 건물에 해당하는 데이터 있는 연도만큼 그리기-->
+	<select class="select select-bordered select-sm w-20 max-w-xs" name="year" id="year">
+		<!--ajax에서 option 태그를 그려준다 -->
+	</select>
+
 
 
 	* 수납현황을 수정하려면 해당 월에 마우스를 올리세요
@@ -238,7 +283,7 @@
 			</tr>
 		</thead>
 		<tbody>
-		
+
 
 			<c:forEach var="rentStatus" items="${rentStatus }">
 				<!-- rentEndDate를 이용하여 연도와 월 추출 -->
@@ -267,7 +312,8 @@
 
 					<c:forEach var="month" begin="1" end="12">
 						<c:set var="paymentStatusVar" value="paymentStatus${month}" />
-						<td class="ctrlBtnHover" style="${endDateYear == nowYear && endDateMonth == month ? 'background:pink;' : '' }"> <!-- todo nowYear는 param값으로 수정예정 -->
+						<td class="ctrlBtnHover" style="${endDateYear == nowYear && endDateMonth == month ? 'background:pink;' : '' }">
+							<!-- todo nowYear는 param값으로 수정예정 -->
 							<c:if test="${rentStatus.tenantId != 0}">
 								<!-- 납부일자 그려주는 태그 -->
 								<span id="${month}rent-${rentStatus.tenantId}">${rentStatus[paymentStatusVar]}</span>
