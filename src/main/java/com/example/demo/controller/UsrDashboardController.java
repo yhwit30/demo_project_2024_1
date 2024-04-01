@@ -96,22 +96,24 @@ public class UsrDashboardController {
 
 //		건물 변환 버튼용
 		List<Building> buildings = buildingService.getForPrintBuildings();
-		
-		// 연도별 데이터 가져오기
-				List<Dashboard> rentStatusYear = dashboardService.getRentStatusYear(bldgId);
 
-				// rentDate에서 연도만 정제
-				List<String> rentYears = new ArrayList<>();
-				for (Dashboard dashboard : rentStatusYear) {
-					 // rentDate 추출
-		            String rentDate = dashboard.getRentDate();
-		            // 연도 부분 추출 (yyyy-mm 형식이므로 앞 4자리만 추출)
-		            String rentYear = rentDate.substring(0, 4);
-		            // 중복 제거를 위해 연도가 리스트에 없는 경우에만 추가
-					if (!rentYears.contains(rentYear)) {
-						rentYears.add(rentYear);
-					}
-				}
+		// 연도별 데이터 가져오기
+		List<Dashboard> rentStatusYear = dashboardService.getRentStatusYear(bldgId);
+
+		// rentDate에서 연도만 정제
+		List<String> rentYears = new ArrayList<>();
+		for (Dashboard dashboard : rentStatusYear) {
+			// rentDate 추출
+			String rentDate = dashboard.getRentDate();
+			// 연도 부분 추출 (yyyy-mm 형식이므로 앞 4자리만 추출)
+			String rentYear = rentDate.substring(0, 4);
+			// 중복 제거를 위해 연도가 리스트에 없는 경우에만 추가
+			if (!rentYears.contains(rentYear)) {
+				rentYears.add(rentYear);
+			}
+		}
+		
+		System.out.println("rentYears" + rentYears);
 
 		model.addAttribute("buildings", buildings);
 		model.addAttribute("rentStatus", rentStatus);
@@ -121,29 +123,15 @@ public class UsrDashboardController {
 	}
 
 	// ajax
-//	@RequestMapping("/usr/bg12343/dashboard/getRentStatusYear")
+//	@RequestMapping("/usr/bg12343/dashboard/getRentStatusByYear")
 //	@ResponseBody
-//	public List<String> getRentStatusAjax(int bldgId) {
+//	public List<Dashboard> getRentStatusAjax( @RequestParam(defaultValue = "1") int bldgId, int year) {
 //
 //		// 연도별 데이터 가져오기
-//		List<Dashboard> rentStatusYear = dashboardService.getRentStatusYear(bldgId);
+//		List<Dashboard> rentStatus = dashboardService.getRentStatus(bldgId, year);
 //
-//		// rentDate에서 연도만 정제
-//		List<String> rentYears = new ArrayList<>();
-//		for (Dashboard dashboard : rentStatusYear) {
-//			 // rentDate 추출
-//            String rentDate = dashboard.getRentDate();
-//            // 연도 부분 추출 (yyyy-mm 형식이므로 앞 4자리만 추출)
-//            String year = rentDate.substring(0, 4);
-//            // 중복 제거를 위해 연도가 리스트에 없는 경우에만 추가
-//			if (!rentYears.contains(year)) {
-//				rentYears.add(year);
-//			}
-//		}
-//		
-//		System.out.println(rentYears);
 //		// ajax 반환
-//		return rentYears;
+//		return rentStatus;
 //	}
 
 	// ajax
