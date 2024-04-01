@@ -45,4 +45,8 @@ public class DashboardService {
 		return ((double) tenantCnt / (double) roomsCnt) * 100;
 	}
 
+	public List<Dashboard> getRentStatusYear(int bldgId) {
+		return dashboardRepository.getRentStatusYear(bldgId);
+	}
+
 }

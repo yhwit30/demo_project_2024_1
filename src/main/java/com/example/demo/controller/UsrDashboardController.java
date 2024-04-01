@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -103,15 +104,29 @@ public class UsrDashboardController {
 	}
 
 	// ajax
-	@RequestMapping("/usr/bg12343/dashboard/getRentStatus")
+	@RequestMapping("/usr/bg12343/dashboard/getRentStatusYear")
 	@ResponseBody
-	public List<Dashboard> getRentStatusAjax(int bldgId, int year) {
+	public List<String> getRentStatusAjax(int bldgId) {
 
 		// 연도별 데이터 가져오기
-		List<Dashboard> rentStatus = dashboardService.getRentStatus(bldgId, year);
+		List<Dashboard> rentStatusYear = dashboardService.getRentStatusYear(bldgId);
 
+		// rentDate에서 연도만 정제
+		List<String> rentYears = new ArrayList<>();
+		for (Dashboard dashboard : rentStatusYear) {
+			 // rentDate 추출
+            String rentDate = dashboard.getRentDate();
+            // 연도 부분 추출 (yyyy-mm 형식이므로 앞 4자리만 추출)
+            String year = rentDate.substring(0, 4);
+            // 중복 제거를 위해 연도가 리스트에 없는 경우에만 추가
+			if (!rentYears.contains(year)) {
+				rentYears.add(year);
+			}
+		}
+		
+		System.out.println(rentYears);
 		// ajax 반환
-		return rentStatus;
+		return rentYears;
 	}
 
 	// ajax

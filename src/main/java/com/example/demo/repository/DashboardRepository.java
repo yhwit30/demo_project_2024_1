@@ -63,6 +63,18 @@ public interface DashboardRepository {
 			""")
 	Dashboard getRentStatusRd(int tenantId, int year, String month);
 
+	@Select("""
+			SELECT CS.rentDate AS rentDate
+			FROM room AS R
+			INNER JOIN contract AS C ON R.id = C.roomId
+			INNER JOIN building AS B ON R.bldgId = B.id
+			INNER JOIN tenant AS T ON C.tenantId = T.id
+			INNER JOIN contract_Status AS CS ON C.tenantId = CS.tenantId
+			WHERE B.id = #{bldgId}
+			GROUP BY CS.rentDate;
+			""")
+	List<Dashboard> getRentStatusYear(int bldgId);
+
 	@Update("""
 			UPDATE contract_status
 			SET paymentStatus = #{body}

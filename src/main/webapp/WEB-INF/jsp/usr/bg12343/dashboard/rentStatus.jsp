@@ -173,22 +173,20 @@
 <!-- 연도 선택할 때 해당하는 데이터 불러오기 -->
 <script>
 	// 페이지 로드 시 기본값으로 현재연도로 설정
-	window.onload = function() {
-		var defaultBldgId = 1;
-		var defaultYear = currentYear;
-		buildingSelect(defaultBldgId);
-	};
+// 	window.onload = function() {
+// 		var defaultBldgId = 1;
+// 		var defaultYear = currentYear;
+// 		buildingSelect(defaultBldgId);
+// 	};
 
 	function buildingSelect(bldgId) {
 		console.log('bldgId:' + bldgId);
-		console.log('year:' + currentYear);
 
 		$.ajax({
-			url : '/usr/bg12343/dashboard/getRentStatus',
+			url : '/usr/bg12343/dashboard/getRentStatusYear',
 			type : 'POST',
 			data : {
-				bldgId : bldgId,
-				year : currentYear
+				bldgId : bldgId
 			},
 			success : function(data) {
 				console.log('data : ' + data);
@@ -198,7 +196,7 @@
 
 				// 가져온 호실데이터를 option 태그로 그려주기
 			  data.forEach(function(rentStatus) {
-			        $('#year').append('<option value="' + rentStatus.id + '">' + rentStatus.rentDate + '</option>');
+			        $('#year').append('<option value="' + rentStatus + '">' + rentStatus + '</option>');
 			    });
 			},
 			error : function(xhr, status, error) {
@@ -243,7 +241,7 @@
 		</c:forEach>
 	</select>
 	<!-- 건물에 해당하는 데이터 있는 연도만큼 그리기-->
-	<select class="select select-bordered select-sm w-20 max-w-xs" name="year" id="year">
+	<select class="select select-bordered select-sm w-20 max-w-xs" name="year" id="year" onchange="yearSelect(this.value)">
 		<!--ajax에서 option 태그를 그려준다 -->
 	</select>
 
