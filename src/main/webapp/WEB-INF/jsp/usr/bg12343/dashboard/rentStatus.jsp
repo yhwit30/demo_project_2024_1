@@ -5,6 +5,13 @@
 <%@ include file="../../common/sidebar.jspf"%>
 
 
+<!-- 현재 연도 선언 -->
+<script>
+	var currentDate = new Date();
+	var currentYear = currentDate.getFullYear();
+	// 	console.log(currentYear);
+</script>
+
 
 <!-- 수납현황 수정 ajax -->
 <script>
@@ -98,9 +105,6 @@
 </script>
 
 
-
-
-
 <!-- 수납현황 추가 ajax -->
 <script>
 	//add 토글 함수
@@ -163,13 +167,6 @@
 </script>
 
 
-<!-- 현재 연도 출력 -->
-<script>
-	var currentDate = new Date();
-	var currentYear = currentDate.getFullYear();
-	// 	console.log(currentYear);
-</script>
-
 <!-- 연도 선택할 때 해당하는 데이터 불러오기 -->
 <script>
 	$(document).ready(function() {
@@ -224,7 +221,7 @@
 			<p>* 수납현황을 수정하려면 해당 월에 마우스를 올리세요</p>
 		</c:when>
 		<c:otherwise>
-			<p>계약을 추가하십시오.</p>
+			<p>수납현황을 추가하십시오.</p>
 		</c:otherwise>
 	</c:choose>
 
@@ -290,8 +287,8 @@
 
 					<c:forEach var="month" begin="1" end="12">
 						<c:set var="paymentStatusVar" value="paymentStatus${month}" />
-						<td class="ctrlBtnHover" style="${endDateYear == nowYear && endDateMonth == month ? 'background:pink;' : '' }">
 							<!-- todo nowYear는 param값으로 수정예정 -->
+						<td class="ctrlBtnHover" style="${endDateYear == nowYear && endDateMonth == month ? 'background:pink;' : '' }">
 							<c:if test="${rentStatus.tenantId != 0}">
 								<!-- 납부일자 그려주는 태그 -->
 								<span id="${month}rent-${rentStatus.tenantId}">${rentStatus[paymentStatusVar]}</span>
