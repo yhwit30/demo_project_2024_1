@@ -175,35 +175,34 @@
 	// 페이지 로드 시 기본값으로 현재연도로 설정
 // 	window.onload = function() {
 // 		var defaultBldgId = 1;
-// 		var defaultYear = currentYear;
 // 		buildingSelect(defaultBldgId);
 // 	};
 
-	function buildingSelect(bldgId) {
-		console.log('bldgId:' + bldgId);
+// 	function buildingSelect(bldgId) {
+// 		console.log('bldgId:' + bldgId);
 
-		$.ajax({
-			url : '/usr/bg12343/dashboard/getRentStatusYear',
-			type : 'POST',
-			data : {
-				bldgId : bldgId
-			},
-			success : function(data) {
-				console.log('data : ' + data);
+// 		$.ajax({
+// 			url : '/usr/bg12343/dashboard/getRentStatusYear',
+// 			type : 'POST',
+// 			data : {
+// 				bldgId : bldgId
+// 			},
+// 			success : function(data) {
+// 				console.log('data : ' + data);
 
-				// 기존 option태그 초기화
-			  $('#year').empty();
+// 				// 기존 option태그 초기화
+// 			  $('#year').empty();
 
-				// 가져온 호실데이터를 option 태그로 그려주기
-			  data.forEach(function(rentStatus) {
-			        $('#year').append('<option value="' + rentStatus + '">' + rentStatus + '</option>');
-			    });
-			},
-			error : function(xhr, status, error) {
-				alert('수정에 실패했습니다: ' + error);
-			}
-		});
-	}
+// 				// 가져온 호실데이터를 option 태그로 그려주기
+// 			  data.forEach(function(rentStatus) {
+// 			        $('#year').append('<option value="' + rentStatus + '">' + rentStatus + '</option>');
+// 			    });
+// 			},
+// 			error : function(xhr, status, error) {
+// 				alert('수정에 실패했습니다: ' + error);
+// 			}
+// 		});
+// 	}
 </script>
 
 
@@ -235,14 +234,16 @@
 	</div>
 
 	<!-- 건물 선택 -->
-	<select class="select select-bordered select-sm w-20 max-w-xs" name="bldgId" onchange="buildingSelect(this.value)">
-		<c:forEach var="building" items="${buildings }">
-			<option value="${building.id }">${building.bldgName }</option>
-		</c:forEach>
-	</select>
+<!-- 	<select class="select select-bordered select-sm w-20 max-w-xs" name="bldgId" onchange="buildingSelect(this.value)"> -->
+<%-- 		<c:forEach var="building" items="${buildings }"> --%>
+<%-- 			<option value="${building.id }">${building.bldgName }</option> --%>
+<%-- 		</c:forEach> --%>
+<!-- 	</select> -->
 	<!-- 건물에 해당하는 데이터 있는 연도만큼 그리기-->
 	<select class="select select-bordered select-sm w-20 max-w-xs" name="year" id="year" onchange="yearSelect(this.value)">
-		<!--ajax에서 option 태그를 그려준다 -->
+		<c:forEach var="rentYear" items="${rentYears }">
+			<option value="${rentYear }">${rentYear }</option>
+		</c:forEach>
 	</select>
 
 

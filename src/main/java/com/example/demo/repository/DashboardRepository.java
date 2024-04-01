@@ -71,7 +71,8 @@ public interface DashboardRepository {
 			INNER JOIN tenant AS T ON C.tenantId = T.id
 			INNER JOIN contract_Status AS CS ON C.tenantId = CS.tenantId
 			WHERE B.id = #{bldgId}
-			GROUP BY CS.rentDate;
+			GROUP BY CS.rentDate
+			ORDER BY CS.rentDate DESC
 			""")
 	List<Dashboard> getRentStatusYear(int bldgId);
 
