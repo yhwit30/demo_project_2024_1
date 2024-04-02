@@ -94,6 +94,7 @@ public class UsrDashboardController {
 		}
 		List<Dashboard> rentStatus = dashboardService.getRentStatus(bldgId, year);
 
+
 //		건물 변환 버튼용
 		List<Building> buildings = buildingService.getForPrintBuildings();
 
@@ -112,16 +113,14 @@ public class UsrDashboardController {
 				rentYears.add(rentYear);
 			}
 		}
-		
-		System.out.println("rentYears" + rentYears);
 
+		System.out.println("rentYears" + rentYears);
 		model.addAttribute("buildings", buildings);
 		model.addAttribute("rentStatus", rentStatus);
 		model.addAttribute("nowYear", nowYear);
 		model.addAttribute("rentYears", rentYears);
 		return "usr/bg12343/dashboard/rentStatus";
 	}
-
 
 	// ajax
 	@RequestMapping("/usr/bg12343/dashboard/doRentStatusAdd")

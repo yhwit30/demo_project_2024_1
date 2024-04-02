@@ -9,7 +9,11 @@
 <script>
 	var currentDate = new Date();
 	var currentYear = currentDate.getFullYear();
-	// 	console.log(currentYear);
+	var setYear = ${param.year};
+	console.log('setYear' + setYear);
+	if (setYear == null || setYear === "") {
+		setYear = currentYear;
+	}
 </script>
 
 
@@ -39,7 +43,7 @@
 		var text = form.find(
 				'input[name="' + methodNum + 'rent-text-' + rentStatusTenantId
 						+ '"]').val();
-		var year = currentYear;
+		var year = setYear;
 
 		console.log('rentStatusTenantId:' + rentStatusTenantId);
 		console.log('text:' + text);
@@ -121,7 +125,7 @@
 		var text = form.find(
 				'input[name="' + methodNum + 'add-rent-text-'
 						+ rentStatusTenantId + '"]').val();
-		var year = currentYear;
+		var year = setYear;
 
 		console.log('rentStatusTenantId:' + rentStatusTenantId);
 		console.log('form:' + form);
@@ -206,13 +210,16 @@
 	<div>
 		<c:forEach var="building" items="${buildings }">
 			<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
-				href="rentStatus?bldgId=${building.id }">${building.bldgName }</a>
+				href="rentStatus?bldgId=${building.id }&year=${param.year}"
+			>${building.bldgName }</a>
 		</c:forEach>
 	</div>
 
-	<!-- 건물에 해당하는 데이터 있는 연도만큼 그리기-->
+	<div>현재 설정 연도 : ${param.year}</div>
+
+	<!-- 건물에 해당하는 데이터 있는 연도만큼 그리기 <script>에 함수-->
 	<c:choose>
-		 <c:when test="${not empty rentYears}">
+		<c:when test="${not empty rentYears}">
 			<select data-value="${param.year }" class=" select select-bordered select-sm w-20 max-w-xs" name="year" id="year">
 				<c:forEach var="rentYear" items="${rentYears }">
 					<option value="${rentYear }">${rentYear }</option>
@@ -221,7 +228,7 @@
 			<p>* 수납현황을 수정하려면 해당 월에 마우스를 올리세요</p>
 		</c:when>
 		<c:otherwise>
-			<p>수납현황을 추가하십시오.</p>
+			<p>계약 및 수납현황을 추가하십시오.</p>
 		</c:otherwise>
 	</c:choose>
 
@@ -287,8 +294,7 @@
 
 					<c:forEach var="month" begin="1" end="12">
 						<c:set var="paymentStatusVar" value="paymentStatus${month}" />
-							<!-- todo nowYear는 param값으로 수정예정 -->
-						<td class="ctrlBtnHover" style="${endDateYear == nowYear && endDateMonth == month ? 'background:pink;' : '' }">
+						<td class="ctrlBtnHover" style="${endDateYear == param.year && endDateMonth == month ? 'background:pink;' : '' }">
 							<c:if test="${rentStatus.tenantId != 0}">
 								<!-- 납부일자 그려주는 태그 -->
 								<span id="${month}rent-${rentStatus.tenantId}">${rentStatus[paymentStatusVar]}</span>
@@ -296,60 +302,73 @@
 								<!-- 수정기능 -->
 								<c:if test="${not empty rentStatus[paymentStatusVar]}">
 									<form onsubmit="return false;" method="POST" id="${month}modify-form-${rentStatus.tenantId}"
-										style="display: none" action="/usr/bg12343/dashboard/doRentStatusModify">
+										style="display: none" action="/usr/bg12343/dashboard/doRentStatusModify"
+									>
 										<input size="1" type="text" value="${rentStatus[paymentStatusVar]}"
-											name="${month}rent-text-${rentStatus.tenantId}" autocomplete="off" />
+											name="${month}rent-text-${rentStatus.tenantId}" autocomplete="off"
+										/>
 									</form>
 									<div class="ctrlBtn">
 										<button onclick="toggleModifybtn('${rentStatus.tenantId}', '${month}');"
-											id="${month}modify-btn-${rentStatus.tenantId}" style="white-space: nowrap" class="btn btn-xs btn-outline">수정</button>
+											id="${month}modify-btn-${rentStatus.tenantId}" style="white-space: nowrap" class="btn btn-xs btn-outline"
+										>수정</button>
 									</div>
 									<button onclick="doModifyRentStatus('${rentStatus.tenantId}', '0${month}', '${month}');"
 										style="white-space: nowrap; display: none" id="${month}save-btn-${rentStatus.tenantId}"
-										class="btn btn-xs btn-outline">저장</button>
+										class="btn btn-xs btn-outline"
+									>저장</button>
 
 									<!--수정 공백 저장 후 즉각 추가기능 -->
 									<form onsubmit="return false;" method="POST" id="${month}add-form-${rentStatus.tenantId}" style="display: none"
-										action="/usr/bg12343/dashboard/doRentStatusAdd">
+										action="/usr/bg12343/dashboard/doRentStatusAdd"
+									>
 										<input size="1" type="text" name="${month}add-rent-text-${rentStatus.tenantId}" autocomplete="off" />
 									</form>
 									<div class="ctrlBtn">
 										<button onclick="toggleAddbtn('${rentStatus.tenantId}', '${month}');"
 											id="${month}add-btn-${rentStatus.tenantId}" style="white-space: nowrap; display: none"
-											class="btn btn-xs btn-outline">추가</button>
+											class="btn btn-xs btn-outline"
+										>추가</button>
 									</div>
 									<button onclick="doAddRentStatus('${rentStatus.tenantId}', '0${month}', '${month}');"
 										style="white-space: nowrap; display: none" id="${month}add-save-btn-${rentStatus.tenantId}"
-										class="btn btn-xs btn-outline">저장</button>
+										class="btn btn-xs btn-outline"
+									>저장</button>
 								</c:if>
 
 								<!-- 추가기능 -->
 								<c:if test="${empty rentStatus[paymentStatusVar]}">
 									<form onsubmit="return false;" method="POST" id="${month}add-form-${rentStatus.tenantId}" style="display: none"
-										action="/usr/bg12343/dashboard/doRentStatusAdd">
+										action="/usr/bg12343/dashboard/doRentStatusAdd"
+									>
 										<input size="1" type="text" name="${month}add-rent-text-${rentStatus.tenantId}" autocomplete="off" />
 									</form>
 									<div class="ctrlBtn">
 										<button onclick="toggleAddbtn('${rentStatus.tenantId}', '${month}');"
-											id="${month}add-btn-${rentStatus.tenantId}" style="white-space: nowrap" class="btn btn-xs btn-outline">추가</button>
+											id="${month}add-btn-${rentStatus.tenantId}" style="white-space: nowrap" class="btn btn-xs btn-outline"
+										>추가</button>
 									</div>
 									<button onclick="doAddRentStatus('${rentStatus.tenantId}', '0${month}', '${month}');"
 										style="white-space: nowrap; display: none" id="${month}add-save-btn-${rentStatus.tenantId}"
-										class="btn btn-xs btn-outline">저장</button>
+										class="btn btn-xs btn-outline"
+									>저장</button>
 
 									<!-- 추가 후 즉각 수정기능 -->
 									<form onsubmit="return false;" method="POST" id="${month}modify-form-${rentStatus.tenantId}"
-										style="display: none" action="/usr/bg12343/dashboard/doRentStatusModify">
+										style="display: none" action="/usr/bg12343/dashboard/doRentStatusModify"
+									>
 										<input size="1" type="text" name="${month}rent-text-${rentStatus.tenantId}" autocomplete="off" />
 									</form>
 									<div class="ctrlBtn">
 										<button onclick="toggleModifybtn('${rentStatus.tenantId}', '${month}');"
 											id="${month}modify-btn-${rentStatus.tenantId}" style="white-space: nowrap; display: none"
-											class="btn btn-xs btn-outline">수정</button>
+											class="btn btn-xs btn-outline"
+										>수정</button>
 									</div>
 									<button onclick="doModifyRentStatus('${rentStatus.tenantId}', '0${month}', '${month}');"
 										style="white-space: nowrap; display: none" id="${month}save-btn-${rentStatus.tenantId}"
-										class="btn btn-xs btn-outline">저장</button>
+										class="btn btn-xs btn-outline"
+									>저장</button>
 								</c:if>
 							</c:if>
 						</td>
