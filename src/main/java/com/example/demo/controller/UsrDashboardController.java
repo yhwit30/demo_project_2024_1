@@ -95,7 +95,7 @@ public class UsrDashboardController {
 		}
 		List<Dashboard> rentStatus = dashboardService.getRentStatus(bldgId, year);
 
-//		건물 변환 버튼용
+		// 건물 변환 버튼용
 		List<Building> buildings = buildingService.getForPrintBuildings();
 
 		// 연도별 데이터 가져오기
@@ -120,7 +120,7 @@ public class UsrDashboardController {
 			int start = Integer.parseInt(startYear);
 			int end = Integer.parseInt(endYear);
 
-			// 중복 제거를 위해 연도가 리스트에 없는 경우에만 추가
+			// 중복 제거를 위해 연도가 리스트에 없는 경우에만 추가 + 사이 연도 추가
 			for (int iYear = start; iYear <= end; iYear++) {
 				String yearString = String.valueOf(iYear);
 				if (!rentYears.contains(yearString)) {
@@ -129,7 +129,6 @@ public class UsrDashboardController {
 			}
 		}
 		System.out.println("rentYears: " + rentYears);
-
 
 		model.addAttribute("buildings", buildings);
 		model.addAttribute("rentStatus", rentStatus);

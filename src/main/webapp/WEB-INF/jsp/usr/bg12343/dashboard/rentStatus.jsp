@@ -9,7 +9,8 @@
 <script>
 	var currentDate = new Date();
 	var currentYear = currentDate.getFullYear();
-	var setYear = ${param.year};
+// 	var setYear = ${param.year}; 자동완성 때문에 자꾸 오류나서
+	var setYear = 2024;
 	console.log('setYear' + setYear);
 	if (setYear == null || setYear === "") {
 		setYear = currentYear;
@@ -268,11 +269,60 @@
 
 
 			<c:forEach var="rentStatus" items="${rentStatus }">
+				<!-- rentStartDate를 이용하여 연도와 월 추출 -->
+				<c:set var="rentStartDate" value="${rentStatus.contractStartDate}" />
+				<c:set var="parts" value="${fn:split(rentStartDate, '-')}" />
+				<c:set var="startDateYear" value="${parts[0]}" />
+				<c:set var="startDateMonth" value="${parts[1]}" />
 				<!-- rentEndDate를 이용하여 연도와 월 추출 -->
 				<c:set var="rentEndDate" value="${rentStatus.contractEndDate}" />
-				<c:set var="parts" value="${fn:split(rentEndDate, '.')}" />
+				<c:set var="parts" value="${fn:split(rentEndDate, '-')}" />
 				<c:set var="endDateYear" value="${parts[0]}" />
 				<c:set var="endDateMonth" value="${parts[1]}" />
+
+				<c:if test="${not empty startDateYear && not empty endDateYear }">
+					<c:set var="startDateYearInt" value="${Integer.parseInt(startDateYear)}" />
+					<c:set var="endDateYearInt" value="${Integer.parseInt(endDateYear)}" />
+					<c:set var="startDateMonthInt" value="${Integer.parseInt(startDateMonth)}" />
+					<c:set var="endDateMonthInt" value="${Integer.parseInt(endDateMonth)}" />
+				</c:if>
+
+
+				<c:set var="endDateMinus3MonthsYear" value="${endDateYearInt}" />
+				<c:set var="endDateMinus3MonthsMonth" value="${endDateMonthInt - 3}" />
+
+				<c:if test="${endDateMinus3MonthsMonth < 1}">
+					<c:set var="endDateMinus3MonthsYear" value="${endDateMinus3MonthsYear - 1}" />
+					<c:set var="endDateMinus3MonthsMonth" value="${12 + endDateMinus3MonthsMonth}" />
+				</c:if>
+
+				<c:out value='${rentStartDate}' />
+
+				<script>
+var startDate = new Date("${rentStartDate}");
+var endDate = new Date("${rentEndDate}");
+
+var startYear = startDate.getFullYear();
+var startMonth = startDate.getMonth() + 1;
+var endYear = endDate.getFullYear();
+var endMonth = endDate.getMonth() + 1;
+
+console.log("startYear: " + startYear);
+console.log("startMonth: " + startMonth);
+console.log("endYear: " + endYear);
+console.log("endMonth: " + endMonth);
+
+console.log("startDate: "+startDate);
+console.log("endDate: "+endDate);
+
+
+if( ${param.year} >= startYear && ${param.year} <= endYear ){
+$('.highlightContract').css("background-color", "skyblue");
+}
+
+
+</script>
+
 
 
 				<!-- 표 그리기 -->
@@ -293,8 +343,9 @@
 
 
 					<c:forEach var="month" begin="1" end="12">
+
 						<c:set var="paymentStatusVar" value="paymentStatus${month}" />
-						<td class="ctrlBtnHover" style="${endDateYear == param.year && endDateMonth == month ? 'background:pink;' : '' }">
+						<td class="ctrlBtnHover highlightContract">
 							<c:if test="${rentStatus.tenantId != 0}">
 								<!-- 납부일자 그려주는 태그 -->
 								<span id="${month}rent-${rentStatus.tenantId}">${rentStatus[paymentStatusVar]}</span>

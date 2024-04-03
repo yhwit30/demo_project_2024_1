@@ -222,12 +222,12 @@
 							</td>
 							<td id="existing-cell-${contract.id}-contractStartDate" class="existing-cell-${contract.id}">${contract.contractStartDate }</td>
 							<td class="input-field-${contract.id}" style="display: none;">
-								<input size="3" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="contractStartDate-${contract.id}"
+								<input size="6" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="contractStartDate-${contract.id}"
 									value="${contract.contractStartDate }" />
 							</td>
 							<td id="existing-cell-${contract.id}-contractEndDate" class="existing-cell-${contract.id}">${contract.contractEndDate }</td>
 							<td class="input-field-${contract.id}" style="display: none;">
-								<input size="3" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="contractEndDate-${contract.id}"
+								<input size="6" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="contractEndDate-${contract.id}"
 									value="${contract.contractEndDate }" />
 							</td>
 							<td id="existing-cell-${contract.id}-depositDate" class="existing-cell-${contract.id}">${contract.depositDate }</td>
