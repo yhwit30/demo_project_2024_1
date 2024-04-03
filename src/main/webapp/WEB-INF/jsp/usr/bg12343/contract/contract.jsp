@@ -52,7 +52,7 @@
 				'input[name="contractEndDate-' + contractId + '"]').val();
 		var depositDate = form.find(
 				'input[name="depositDate-' + contractId + '"]').val();
-		var rentDate = form.find('input[name="rentDate-' + contractId + '"]')
+		var rentDay = form.find('input[name="rentDay-' + contractId + '"]')
 				.val();
 
 		// 공백 체크
@@ -62,7 +62,7 @@
 				|| String(contractStartDate).trim() === ''
 				|| String(contractEndDate).trim() === ''
 				|| String(depositDate).trim() === ''
-				|| String(rentDate).trim() === '') {
+				|| String(rentDay).trim() === '') {
 			alert('공백을 채워주세요');
 			return;
 		}
@@ -80,7 +80,7 @@
 				contractStartDate : contractStartDate,
 				contractEndDate : contractEndDate,
 				depositDate : depositDate,
-				rentDate : rentDate
+				rentDay : rentDay
 			},
 			success : function(data) {
 				$('#modify-btn-' + contractId).show();
@@ -102,8 +102,8 @@
 						data.contractEndDate);
 				$('#existing-cell-' + contractId + '-depositDate').text(
 						data.depositDate);
-				$('#existing-cell-' + contractId + '-rentDate').text(
-						data.rentDate);
+				$('#existing-cell-' + contractId + '-rentDay').text(
+						data.rentDay);
 
 				// 입력값 박스 숨김(class 사용)
 				var inputFields = document.querySelectorAll('.input-field-'
@@ -123,7 +123,7 @@
 					$('#existing-cell-' + contractId + '-contractEndDate')
 							.show();
 					$('#existing-cell-' + contractId + '-depositDate').show();
-					$('#existing-cell-' + contractId + '-rentDate').show();
+					$('#existing-cell-' + contractId + '-rentDay').show();
 
 				});
 
@@ -235,10 +235,10 @@
 								<input size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="depositDate-${contract.id}"
 									value="${contract.depositDate }" />
 							</td>
-							<td id="existing-cell-${contract.id}-rentDate" class="existing-cell-${contract.id}">${contract.rentDate }</td>
+							<td id="existing-cell-${contract.id}-rentDay" class="existing-cell-${contract.id}">${contract.rentDay }</td>
 							<td class="input-field-${contract.id}" style="display: none;">
-								<input size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="rentDate-${contract.id}"
-									value="${contract.rentDate }" />
+								<input size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="rentDay-${contract.id}"
+									value="${contract.rentDay }" />
 							</td>
 							<td>#</td>
 

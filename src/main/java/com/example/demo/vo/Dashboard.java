@@ -23,6 +23,7 @@ public class Dashboard {
 	private String contractEndDate;
 	private String depositDate;
 	private String rentDate;
+	private String rentDay;
 	private String paymentStatus;
 	private int tenantId;
 

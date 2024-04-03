@@ -61,12 +61,12 @@ public interface ContractRepository {
 			C.contractStartDate = #{contractStartDate},
 			C.contractEndDate = #{contractEndDate},
 			C.depositDate = #{depositDate},
-			C.rentDate = #{rentDate}
+			C.rentDay = #{rentDay}
 			WHERE C.id = #{contractId}
 			</script>
 			""")
 	void modifyContract(int contractId, String tenantName, String leaseType, int deposit, int rent, int maintenanceFee,
-			String contractStartDate, String contractEndDate, String depositDate, String rentDate);
+			String contractStartDate, String contractEndDate, String depositDate, String rentDay);
 
 	@Insert("""
 			INSERT INTO contract
@@ -81,10 +81,10 @@ public interface ContractRepository {
 			contractStartDate = #{contractStartDate},
 			contractEndDate = #{contractEndDate},
 			depositDate =  #{depositDate},
-			rentDate =  #{rentDate}
+			rentDay =  #{rentDay}
 			""")
 	void addContract(int roomId, String leaseType, int deposit, int rent, int maintenanceFee, String contractStartDate,
-			String contractEndDate, String depositDate, String rentDate, int tenantIds);
+			String contractEndDate, String depositDate, String rentDay, int tenantIds);
 
 	@Delete("DELETE FROM contract WHERE id=#{contractId}")
 	void deleteContract(int contractId);

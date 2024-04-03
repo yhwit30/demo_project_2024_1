@@ -91,7 +91,7 @@ public class UsrContractController {
 	@RequestMapping("/usr/bg12343/contract/doContractAdd")
 	@ResponseBody
 	public String doContractAdd(int roomId, String leaseType, int deposit, int rent, int maintenanceFee,
-			String contractStartDate, String contractEndDate, String depositDate, String rentDate, String tenantName,
+			String contractStartDate, String contractEndDate, String depositDate, String rentDay, String tenantName,
 			int tenantPhone, String tenantCarNum) {
 
 		// 세입자 먼저 생성해서 tenantId 얻기
@@ -100,7 +100,7 @@ public class UsrContractController {
 
 		// 계약 작성 작업
 		ResultData contractAddRd = contractService.addContract(roomId, leaseType, deposit, rent, maintenanceFee,
-				contractStartDate, contractEndDate, depositDate, rentDate, tenantId);
+				contractStartDate, contractEndDate, depositDate, rentDay, tenantId);
 
 		return Ut.jsReplace(contractAddRd.getResultCode(), contractAddRd.getMsg(), "../contract/contract");
 
@@ -122,7 +122,7 @@ public class UsrContractController {
 	@ResponseBody
 	public String doContractSetupAdd(int roomId[], String[] tenantName, int[] tenantPhone, String[] tenantCarNum,
 			String[] leaseType, int[] deposit, int[] rent, int[] maintenanceFee, String[] contractStartDate,
-			String[] contractEndDate, String[] depositDate, String[] rentDate) {
+			String[] contractEndDate, String[] depositDate, String[] rentDay) {
 
 		// Contract 객체를 생성하고 컨트롤러에서 넘어온 값들을 저장한다.
 		List<Contract> contractSet = new ArrayList<>();
@@ -139,7 +139,7 @@ public class UsrContractController {
 			contract.setContractStartDate(contractStartDate[i]);
 			contract.setContractEndDate(contractEndDate[i]);
 			contract.setDepositDate(depositDate[i]);
-			contract.setRentDate(rentDate[i]);
+			contract.setRentDay(rentDay[i]);
 
 			// leaseType이 0(공실)이 아닌 경우에만 contractSet에 추가한다.
 			if (!"0".equals(contract.getLeaseType())) {
@@ -180,7 +180,7 @@ public class UsrContractController {
 			ResultData contractAddRd = contractService.addContract(contract.getRoomId(), contract.getLeaseType(),
 					contract.getDeposit(), contract.getRent(), contract.getMaintenanceFee(),
 					contract.getContractStartDate(), contract.getContractEndDate(), contract.getDepositDate(),
-					contract.getRentDate(), tenantIds[i]);
+					contract.getRentDay(), tenantIds[i]);
 		}
 		return Ut.jsReplace("S-1", "계약 정보가 추가되었습니다", "../contract/contract");
 	}
@@ -219,11 +219,11 @@ public class UsrContractController {
 	@RequestMapping("/usr/bg12343/contract/doContractModifyAjax")
 	@ResponseBody
 	public Contract doContractModifyAjax(int contractId, String tenantName, String leaseType, int deposit, int rent,
-			int maintenanceFee, String contractStartDate, String contractEndDate, String depositDate, String rentDate) {
+			int maintenanceFee, String contractStartDate, String contractEndDate, String depositDate, String rentDay) {
 
 		// 계약정보 수정
 		contractService.modifyContract(contractId, tenantName, leaseType, deposit, rent, maintenanceFee,
-				contractStartDate, contractEndDate, depositDate, rentDate);
+				contractStartDate, contractEndDate, depositDate, rentDay);
 
 		// ajax 위한 데이터 가져오기
 		Contract modifiedContract = contractService.getForPrintContract(contractId);
@@ -235,13 +235,13 @@ public class UsrContractController {
 	@ResponseBody
 	public String doContractModify(int id[], String[] tenantName, String[] leaseType, int[] deposit, int[] rent,
 			int[] maintenanceFee, String[] contractStartDate, String[] contractEndDate, String[] depositDate,
-			String[] rentDate, int bldgId) {
+			String[] rentDay, int bldgId) {
 
 		// 계약정보를 한번에 수정하기 위한 배열 사용
 		ResultData contractModifyRd = null;
 		for (int i = 0; i < id.length; i++) {
 			contractModifyRd = contractService.modifyContract(id[i], tenantName[i], leaseType[i], deposit[i], rent[i],
-					maintenanceFee[i], contractStartDate[i], contractEndDate[i], depositDate[i], rentDate[i]);
+					maintenanceFee[i], contractStartDate[i], contractEndDate[i], depositDate[i], rentDay[i]);
 		}
 
 		return Ut.jsReplace(contractModifyRd.getResultCode(), contractModifyRd.getMsg(),

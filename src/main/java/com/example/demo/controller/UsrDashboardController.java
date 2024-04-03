@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -94,27 +95,42 @@ public class UsrDashboardController {
 		}
 		List<Dashboard> rentStatus = dashboardService.getRentStatus(bldgId, year);
 
-
 //		건물 변환 버튼용
 		List<Building> buildings = buildingService.getForPrintBuildings();
 
 		// 연도별 데이터 가져오기
 		List<Dashboard> rentStatusYear = dashboardService.getRentStatusYear(bldgId);
 
-		// rentDate에서 연도만 정제
+		// rentStatusYear에서 연도만 정제
 		List<String> rentYears = new ArrayList<>();
 		for (Dashboard dashboard : rentStatusYear) {
-			// rentDate 추출
-			String rentDate = dashboard.getRentDate();
-			// 연도 부분 추출 (yyyy-mm 형식이므로 앞 4자리만 추출)
-			String rentYear = rentDate.substring(0, 4);
+			// contractStartDate와 contractEndDate 추출
+			String contractStartDate = dashboard.getContractStartDate();
+			String contractEndDate = dashboard.getContractEndDate();
+
+			// contractStartDate를 '.'으로 분할하여 연도 부분 추출
+			String[] startDateParts = contractStartDate.split("\\-");
+			String startYear = startDateParts[0]; // 연도는 첫 번째 요소
+
+			// contractEndDate를 '.'으로 분할하여 연도 부분 추출
+			String[] endDateParts = contractEndDate.split("\\-");
+			String endYear = endDateParts[0]; // 연도는 첫 번째 요소
+
+			// 연도 범위 설정
+			int start = Integer.parseInt(startYear);
+			int end = Integer.parseInt(endYear);
+
 			// 중복 제거를 위해 연도가 리스트에 없는 경우에만 추가
-			if (!rentYears.contains(rentYear)) {
-				rentYears.add(rentYear);
+			for (int iYear = start; iYear <= end; iYear++) {
+				String yearString = String.valueOf(iYear);
+				if (!rentYears.contains(yearString)) {
+					rentYears.add(yearString);
+				}
 			}
 		}
+		System.out.println("rentYears: " + rentYears);
 
-		System.out.println("rentYears" + rentYears);
+
 		model.addAttribute("buildings", buildings);
 		model.addAttribute("rentStatus", rentStatus);
 		model.addAttribute("nowYear", nowYear);

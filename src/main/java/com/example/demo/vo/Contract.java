@@ -18,7 +18,7 @@ public class Contract {
 	private String contractStartDate;
 	private String contractEndDate;
 	private String depositDate;
-	private String rentDate;
+	private String rentDay;
 	private int roomId;
 	private int tenantId;
 	

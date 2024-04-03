@@ -75,8 +75,8 @@
 									value="${contract.depositDate }" />
 							</td>
 							<td>
-								<input size="5" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="rentDate"
-									value="${contract.rentDate }" />
+								<input size="5" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="rentDay"
+									value="${contract.rentDay }" />
 							</td>
 							<td>#</td>
 						</tr>

@@ -132,7 +132,7 @@
 							<input size="3" autocomplete="off" type="text" placeholder="보증금납부일을 입력해주세요" name="depositDate" />
 						</td>
 						<td>
-							<input size="3" autocomplete="off" type="text" placeholder="월세 납부일을 입력해주세요" name="rentDate" />
+							<input size="3" autocomplete="off" type="text" placeholder="월세 납부일을 입력해주세요" name="rentDay" />
 						</td>
 					</tr>
 				</tbody>

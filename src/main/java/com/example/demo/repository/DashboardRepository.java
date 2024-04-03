@@ -64,7 +64,7 @@ public interface DashboardRepository {
 	Dashboard getRentStatusRd(int tenantId, int year, String month);
 
 	@Select("""
-			SELECT CS.rentDate AS rentDate
+			SELECT C.contractStartDate, C.contractEndDate
 			FROM room AS R
 			INNER JOIN contract AS C ON R.id = C.roomId
 			INNER JOIN building AS B ON R.bldgId = B.id

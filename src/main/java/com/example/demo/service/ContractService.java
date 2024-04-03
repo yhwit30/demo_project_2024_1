@@ -24,16 +24,16 @@ public class ContractService {
 	}
 
 	public ResultData modifyContract(int contractId, String tenantName, String leaseType, int deposit, int rent,
-			int maintenanceFee, String contractStartDate, String contractEndDate, String depositDate, String rentDate) {
+			int maintenanceFee, String contractStartDate, String contractEndDate, String depositDate, String rentDay) {
 		contractRepository.modifyContract(contractId, tenantName, leaseType, deposit, rent, maintenanceFee,
-				contractStartDate, contractEndDate, depositDate, rentDate);
+				contractStartDate, contractEndDate, depositDate, rentDay);
 		return ResultData.from("S-1", "계약정보가 수정되었습니다");
 	}
 
 	public ResultData addContract(int roomId, String leaseType, int deposit, int rent, int maintenanceFee,
-			String contractStartDate, String contractEndDate, String depositDate, String rentDate, int tenantIds) {
+			String contractStartDate, String contractEndDate, String depositDate, String rentDay, int tenantIds) {
 		contractRepository.addContract(roomId, leaseType, deposit, rent, maintenanceFee, contractStartDate,
-				contractEndDate, depositDate, rentDate, tenantIds);
+				contractEndDate, depositDate, rentDay, tenantIds);
 		return ResultData.from("S-1", "계약정보가 생성되었습니다");
 	}
 

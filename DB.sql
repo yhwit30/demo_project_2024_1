@@ -964,7 +964,7 @@ CREATE TABLE contract(
     contractStartDate CHAR(20) NOT NULL,
     contractEndDate CHAR(20) NOT NULL,
     depositDate CHAR(20) NOT NULL,
-    rentDate CHAR(20) NOT NULL
+    rentDay CHAR(20) NOT NULL
 );
 
 
@@ -979,10 +979,10 @@ leaseType = '월세',
 deposit = 5000000,
 rent= 500000,
 maintenanceFee = 60000,
-contractStartDate = '2023.2.2',
-contractEndDate= '2025.2.1',
+contractStartDate = '2023-2-2',
+contractEndDate= '2025-2-1',
 depositDate = 10,
-rentDate = 10;
+rentDay = 10;
 
 # contract testdata
 INSERT INTO contract
@@ -995,10 +995,10 @@ leaseType = '월세',
 deposit = 5000000,
 rent= 500000,
 maintenanceFee = 60000,
-contractStartDate = '2022.2.2',
-contractEndDate= '2024.6.1',
+contractStartDate = '2022-2-2',
+contractEndDate= '2024-6-1',
 depositDate = 15,
-rentDate = 10;
+rentDay = 10;
 
 # contract testdata
 INSERT INTO contract
@@ -1010,10 +1010,10 @@ tenantId = 3,
 leaseType = '전세',
 deposit = 55000000,
 maintenanceFee = 100000,
-contractStartDate = '2023.12.2',
-contractEndDate= '2025.12.1',
+contractStartDate = '2023-12-2',
+contractEndDate= '2025-12-1',
 depositDate = 15,
-rentDate = 10;
+rentDay = 10;
 
 # contract testdata
 INSERT INTO contract
@@ -1025,10 +1025,10 @@ tenantId = 4,
 leaseType = '전세',
 deposit = 55000000,
 maintenanceFee = 100000,
-contractStartDate = '2023.12.2',
-contractEndDate= '2025.12.1',
+contractStartDate = '2023-12-2',
+contractEndDate= '2025-12-1',
 depositDate = 15,
-rentDate = 15;
+rentDay = 15;
 
 # contract testdata
 INSERT INTO contract
@@ -1041,10 +1041,10 @@ leaseType = '월세',
 deposit = 5500000,
 rent= 400000,
 maintenanceFee = 100000,
-contractStartDate = '2023.12.2',
-contractEndDate= '2025.12.1',
+contractStartDate = '2023-12-2',
+contractEndDate= '2025-12-1',
 depositDate = 15,
-rentDate = 10;
+rentDay = 10;
 
 
 # contract testdata
@@ -1057,10 +1057,10 @@ tenantId = 6,
 leaseType = '전세',
 deposit = 55000000,
 maintenanceFee = 100000,
-contractStartDate = '2023.12.2',
-contractEndDate= '2025.12.1',
+contractStartDate = '2023-12-2',
+contractEndDate= '2025-12-1',
 depositDate = 15,
-rentDate = 20;
+rentDay = 20;
 
 
 # contract testdata
@@ -1074,10 +1074,10 @@ leaseType = '월세',
 deposit = 5500000,
 rent= 500000,
 maintenanceFee = 100000,
-contractStartDate = '2023.12.2',
-contractEndDate= '2025.12.1',
+contractStartDate = '2023-12-2',
+contractEndDate= '2025-12-1',
 depositDate = 15,
-rentDate = 20;
+rentDay = 20;
 
 SELECT * FROM contract;
 
@@ -1432,7 +1432,7 @@ boardId = 5,
 roomId = 1,
 title = '타일공사작업',
 `body`= '101호 타일작업',
-memoDate = '2024-1-3',
+memoDate = '2024-01-3',
 cost = 30000;
 
 # memo-repair testdata
@@ -1444,7 +1444,7 @@ boardId = 5,
 roomId = 2,
 title = '바닥장판공사작업',
 `body`= '102호 타일작업',
-memoDate = '2024-1-5',
+memoDate = '2024-01-5',
 cost = 50000;
 
 # memo-repair testdata
@@ -1456,7 +1456,7 @@ boardId = 5,
 roomId = 7,
 title = '장판공사작업',
 `body`= '302호 타일작업',
-memoDate = '2024-1-10',
+memoDate = '2024-01-10',
 cost = 65000;
 
 
@@ -1510,9 +1510,9 @@ updateDate = NOW(),
 boardId = 6,
 memberId = 1,
 bldgId = 1,
-memoDate = '2024-4-3',
-title = '공지사항1',
-`body`= '공지사항 전파합니다. 따뜻하게 생활할 수 있도록';
+memoDate = '2024-04-3',
+title = '11',
+`body`= '타일작업';
 
 # memo testdata
 INSERT INTO memo
@@ -1521,9 +1521,9 @@ updateDate = NOW(),
 boardId = 6,
 memberId = 1,
 bldgId = 2,
-memoDate = '2024-1-3',
-title = '공지사항2',
-`body`= '쓰레기 수거는 매주 목요일';
+memoDate = '2024-01-3',
+title = '22',
+`body`= '바닥작업';
 
 
 
@@ -2110,6 +2110,15 @@ GROUP BY R.id
 HAVING T.id = 1;
 
 
+SELECT C.contractStartDate, C.contractEndDate
+FROM room AS R
+INNER JOIN contract AS C ON R.id = C.roomId
+INNER JOIN building AS B ON R.bldgId = B.id
+INNER JOIN tenant AS T ON C.tenantId = T.id
+INNER JOIN contract_Status AS CS ON C.tenantId = CS.tenantId
+WHERE B.id = 2
+GROUP BY CS.rentDate;
+
 
 SELECT * FROM building;
 
@@ -2156,4 +2165,33 @@ ON C.roomId = R.id
 RIGHT JOIN building AS B
 ON R.bldgId = B.id
 GROUP BY B.id
+
+
+SELECT *,
+MAX(CASE WHEN M.memoDate LIKE '2024-01%' THEN M.memoDate ELSE NULL END) AS memoDate1,
+MAX(CASE WHEN M.memoDate LIKE '2024-02%' THEN M.memoDate ELSE NULL END) AS memoDate2,
+MAX(CASE WHEN M.memoDate LIKE '2024-03%' THEN M.memoDate ELSE NULL END) AS memoDate3,
+MAX(CASE WHEN M.memoDate LIKE '2024-04%' THEN M.memoDate ELSE NULL END) AS memoDate4,
+MAX(CASE WHEN M.memoDate LIKE '2024-05%' THEN M.memoDate ELSE NULL END) AS memoDate5,
+MAX(CASE WHEN M.memoDate LIKE '2024-06%' THEN M.memoDate ELSE NULL END) AS memoDate6,
+MAX(CASE WHEN M.memoDate LIKE '2024-07%' THEN M.memoDate ELSE NULL END) AS memoDate7,
+MAX(CASE WHEN M.memoDate LIKE '2024-08%' THEN M.memoDate ELSE NULL END) AS memoDate8,
+MAX(CASE WHEN M.memoDate LIKE '2024-09%' THEN M.memoDate ELSE NULL END) AS memoDate9,
+MAX(CASE WHEN M.memoDate LIKE '2024-10%' THEN M.memoDate ELSE NULL END) AS memoDate10,
+MAX(CASE WHEN M.memoDate LIKE '2024-11%' THEN M.memoDate ELSE NULL END) AS memoDate11,
+MAX(CASE WHEN M.memoDate LIKE '2024-12%' THEN M.memoDate ELSE NULL END) AS memoDate12
+FROM memo AS M
+LEFT JOIN room AS R
+ON M.roomId = R.id
+LEFT JOIN building AS B
+ON R.bldgId = B.id
+LEFT JOIN tenant AS T
+ON M.tenantId = T.id
+LEFT JOIN contract AS C
+ON M.contractId = C.id
+LEFT JOIN memo_board AS MB
+ON M.boardId = MB.id
+WHERE M.boardId = 6
+GROUP BY M.id
+ORDER BY M.memoDate DESC;
 

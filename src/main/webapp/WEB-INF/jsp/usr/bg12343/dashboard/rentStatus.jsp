@@ -287,7 +287,7 @@
 					<td>${rentStatus.maintenanceFee }</td>
 					<td>${rentStatus.contractStartDate }</td>
 					<td>${rentStatus.contractEndDate }</td>
-					<td>${rentStatus.rentDate }</td>
+					<td>${rentStatus.rentDay }</td>
 
 
 
