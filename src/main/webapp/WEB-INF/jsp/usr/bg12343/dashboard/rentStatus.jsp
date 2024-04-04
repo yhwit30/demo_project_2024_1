@@ -407,11 +407,20 @@
 		// 년, 월, 일을 가지고 Date 객체 생성
 		var thisDate = new Date(tagYear, tagMonth - 1, 15); // 월은 0부터 시작하므로 tagMonth에서 1을 빼줍니다.
 	    var contractStartDate = new Date(parseInt(startDateParts[0]), parseInt(startDateParts[1]) - 1, 1); 
-	    var contractEndDate = new Date(parseInt(endDateParts[0]), parseInt(endDateParts[1]) - 1, 30);
+	    var contractEndDate = new Date(parseInt(endDateParts[0]), parseInt(endDateParts[1]) - 1, 20);
+	    
+	    // 만료일로부터 3개월 전 날짜 계산
+	    var endDateMinus3 = new Date(contractEndDate);
+	    endDateMinus3.setMonth(endDateMinus3.getMonth() - 3);
+	    
+	    console.log('endDateMinus3: '+endDateMinus3);
 		
 		// 하이라이트할 td태그 조건
-		if (thisDate >= contractStartDate && thisDate <= contractEndDate) {
+		if (thisDate >= contractStartDate && thisDate < endDateMinus3) {
 			$(this).css("background-color", "skyblue");
+		}
+		if (thisDate >= endDateMinus3 && thisDate <= contractEndDate) {
+			$(this).css("background-color", "pink");
 		}
 	});
 </script>
