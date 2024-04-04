@@ -9,8 +9,8 @@
 <script>
 	var currentDate = new Date();
 	var currentYear = currentDate.getFullYear();
-// 	var setYear = ${param.year}; 자동완성 때문에 자꾸 오류나서
-	var setYear = 2024;
+	// 	var setYear = ${param.year}; 자동완성 때문에 자꾸 오류나서
+	var setYear = ${param.year};
 	console.log('setYear' + setYear);
 	if (setYear == null || setYear === "") {
 		setYear = currentYear;
@@ -204,8 +204,6 @@
 </style>
 
 
-
-
 <section class="mt-2 text-xl px-4">
 	<!-- 건물 선택 -->
 	<div>
@@ -267,63 +265,11 @@
 		</thead>
 		<tbody>
 
-
 			<c:forEach var="rentStatus" items="${rentStatus }">
 				<!-- rentStartDate를 이용하여 연도와 월 추출 -->
 				<c:set var="rentStartDate" value="${rentStatus.contractStartDate}" />
-				<c:set var="parts" value="${fn:split(rentStartDate, '-')}" />
-				<c:set var="startDateYear" value="${parts[0]}" />
-				<c:set var="startDateMonth" value="${parts[1]}" />
 				<!-- rentEndDate를 이용하여 연도와 월 추출 -->
 				<c:set var="rentEndDate" value="${rentStatus.contractEndDate}" />
-				<c:set var="parts" value="${fn:split(rentEndDate, '-')}" />
-				<c:set var="endDateYear" value="${parts[0]}" />
-				<c:set var="endDateMonth" value="${parts[1]}" />
-
-				<c:if test="${not empty startDateYear && not empty endDateYear }">
-					<c:set var="startDateYearInt" value="${Integer.parseInt(startDateYear)}" />
-					<c:set var="endDateYearInt" value="${Integer.parseInt(endDateYear)}" />
-					<c:set var="startDateMonthInt" value="${Integer.parseInt(startDateMonth)}" />
-					<c:set var="endDateMonthInt" value="${Integer.parseInt(endDateMonth)}" />
-				</c:if>
-
-
-				<c:set var="endDateMinus3MonthsYear" value="${endDateYearInt}" />
-				<c:set var="endDateMinus3MonthsMonth" value="${endDateMonthInt - 3}" />
-
-				<c:if test="${endDateMinus3MonthsMonth < 1}">
-					<c:set var="endDateMinus3MonthsYear" value="${endDateMinus3MonthsYear - 1}" />
-					<c:set var="endDateMinus3MonthsMonth" value="${12 + endDateMinus3MonthsMonth}" />
-				</c:if>
-
-				<c:out value='${rentStartDate}' />
-
-				<script>
-var startDate = new Date("${rentStartDate}");
-var endDate = new Date("${rentEndDate}");
-
-var startYear = startDate.getFullYear();
-var startMonth = startDate.getMonth() + 1;
-var endYear = endDate.getFullYear();
-var endMonth = endDate.getMonth() + 1;
-
-console.log("startYear: " + startYear);
-console.log("startMonth: " + startMonth);
-console.log("endYear: " + endYear);
-console.log("endMonth: " + endMonth);
-
-console.log("startDate: "+startDate);
-console.log("endDate: "+endDate);
-
-
-if( ${param.year} >= startYear && ${param.year} <= endYear ){
-$('.highlightContract').css("background-color", "skyblue");
-}
-
-
-</script>
-
-
 
 				<!-- 표 그리기 -->
 				<tr class="hover">
@@ -339,13 +285,9 @@ $('.highlightContract').css("background-color", "skyblue");
 					<td>${rentStatus.contractEndDate }</td>
 					<td>${rentStatus.rentDay }</td>
 
-
-
-
 					<c:forEach var="month" begin="1" end="12">
-
 						<c:set var="paymentStatusVar" value="paymentStatus${month}" />
-						<td class="ctrlBtnHover highlightContract">
+						<td class="ctrlBtnHover highlightContract contractStart-${rentStartDate } contractEnd-${rentEndDate } tagYear-${param.year } tagMonth-${month}">
 							<c:if test="${rentStatus.tenantId != 0}">
 								<!-- 납부일자 그려주는 태그 -->
 								<span id="${month}rent-${rentStatus.tenantId}">${rentStatus[paymentStatusVar]}</span>
@@ -427,12 +369,52 @@ $('.highlightContract').css("background-color", "skyblue");
 
 					<td>#</td>
 				</tr>
+				
 			</c:forEach>
 		</tbody>
 	</table>
 
 
 </section>
+
+<!-- 계약시작일과 계약만료일 기준 하이라이트 -->
+<script>
+	//각 td 태그에 대해 반복문 수행
+	$(".highlightContract").each(function() {
+		// td 태그의 클래스에서 연도와 월 추출
+		var classes = $(this).attr("class").split(" ");
+		var tagContractStart = null;
+		var tagContractEnd = null;
+		var tagYear = null;
+		var tagMonth = null;
+		for (var i = 0; i < classes.length; i++) {
+			if (classes[i].indexOf("tagYear-") === 0) {
+				tagYear = parseInt(classes[i].substring(8));
+			} else if (classes[i].indexOf("tagMonth-") === 0) {
+				tagMonth = parseInt(classes[i].substring(9));
+			}else if (classes[i].indexOf("contractStart-") === 0) {
+				tagContractStart = classes[i].substring(14);
+			}else if (classes[i].indexOf("contractEnd-") === 0) {
+				tagContractEnd = classes[i].substring(12);
+			}
+		}
+
+		
+		// tagContractStart와 tagContractEnd를 사용하여 Date 객체 생성
+	    var startDateParts = tagContractStart.split("-"); // '-'를 기준으로 문자열을 분리하여 배열로 저장
+	    var endDateParts = tagContractEnd.split("-");
+
+		// 년, 월, 일을 가지고 Date 객체 생성
+		var thisDate = new Date(tagYear, tagMonth - 1, 15); // 월은 0부터 시작하므로 tagMonth에서 1을 빼줍니다.
+	    var contractStartDate = new Date(parseInt(startDateParts[0]), parseInt(startDateParts[1]) - 1, 1); 
+	    var contractEndDate = new Date(parseInt(endDateParts[0]), parseInt(endDateParts[1]) - 1, 30);
+		
+		// 하이라이트할 td태그 조건
+		if (thisDate >= contractStartDate && thisDate <= contractEndDate) {
+			$(this).css("background-color", "skyblue");
+		}
+	});
+</script>
 
 
 
