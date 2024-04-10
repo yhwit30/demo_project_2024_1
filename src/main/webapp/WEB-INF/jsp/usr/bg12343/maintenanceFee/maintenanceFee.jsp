@@ -19,16 +19,27 @@
 	<div>
 		<c:forEach var="building" items="${buildings }">
 			<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
-				href="../maintenanceFee/maintenanceFee?bldgId=${building.id }">${building.bldgName }</a>
+				href="../maintenanceFee/maintenanceFee?bldgId=${building.id }&year=${param.year}"
+			>${building.bldgName }</a>
 		</c:forEach>
 	</div>
 
-	<a class="btn btn-sm btn-outline ${param.year == nowYear -1 ? 'btn-active' : '' }"
-		href="maintenanceFee?bldgId=${param.bldgId }&year=${nowYear -1}">전년도 보기</a>
-	<a class="btn btn-sm btn-outline ${param.year == nowYear ? 'btn-active' : '' }"
-		href="maintenanceFee?bldgId=${param.bldgId }&year=${nowYear}">올해(${nowYear}) 보기</a>
 
-해당 월의 관리비를 누르면 상세보기로 이동합니다
+	<p>선택 연도: ${param.year }</p>
+
+	<a class="btn btn-sm btn-outline ${param.year < nowYear ? 'btn-active' : '' }"
+		href="maintenanceFee?bldgId=${param.bldgId }&year=${param.year -1}"
+	>◀</a>
+	<a class="btn btn-sm btn-outline ${param.year == nowYear ? 'btn-active' : '' }"
+		href="maintenanceFee?bldgId=${param.bldgId }&year=${nowYear}"
+	>올해 보기</a>
+	<a class="btn btn-sm btn-outline ${param.year > nowYear ? 'btn-active' : '' }"
+		href="maintenanceFee?bldgId=${param.bldgId }&year=${param.year + 1}"
+	>▶</a>
+
+
+	<div>해당 월의 관리비를 누르면 상세보기로 이동합니다</div>
+
 	<!-- 관리비 표 -->
 	<div class="mx-auto overflow-x-auto">
 		<table class="table-box-1" border="1">
@@ -63,7 +74,7 @@
 						<c:forEach var="i" begin="1" end="12">
 							<c:set var="monthFee" value="monthlyMaintenanceFee${i }" />
 							<td>
-								<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId}&month=${i}">
+								<a href="../maintenanceFee/maintenanceFeeDetail?bldgId=${param.bldgId}&month=${i}&year=${param.year}">
 									${maintenanceFeeMonthly[monthFee]} </a>
 							</td>
 						</c:forEach>

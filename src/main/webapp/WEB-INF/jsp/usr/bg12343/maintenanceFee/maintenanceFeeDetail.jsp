@@ -7,7 +7,7 @@
 
 <section class="mt-2 text-xl px-4">
 	<div class="btns">
-		<a class="btn btn-outline" href="../maintenanceFee/maintenanceFee?bldgId=${param.bldgId }">월별 관리비 돌아가기</a>
+		<a class="btn btn-outline" href="../maintenanceFee/maintenanceFee?bldgId=${param.bldgId }&year=${param.year}">월별 관리비 돌아가기</a>
 	</div>
 
 	건물: ${building.bldgName } ${param.month }월
@@ -83,12 +83,12 @@
 						<td>
 							<c:if test="${maintenanceFee.tenantName != null }">
 								<a class="btn btn-sm"
-									href="../maintenanceFee/pdfExport?tenantId=${maintenanceFee.tenantId }&bldgId=${param.bldgId }&month=${param.month}"
+									href="../maintenanceFee/pdfExport?tenantId=${maintenanceFee.tenantId }&bldgId=${param.bldgId }&month=${param.month}&year=${param.year}"
 									target="_blank">PDF</a>
 							</c:if>
 							<c:if test="${maintenanceFee.tenantName != null }">
 								<a class="btn btn-sm"
-									href="../maintenanceFee/csvExport?tenantId=${maintenanceFee.tenantId }&bldgId=${param.bldgId }&month=${param.month}">CSV</a>
+									href="../maintenanceFee/csvExport?tenantId=${maintenanceFee.tenantId }&bldgId=${param.bldgId }&month=${param.month}&year=${param.year}">CSV</a>
 								<!-- csv는 브라우저가 못 읽어서 새창열기 안됨 -->
 							</c:if>
 						</td>
@@ -99,7 +99,7 @@
 	</div>
 
 	<div class="btns mt-5">
-		<a class="btn btn-outline" href="../maintenanceFee/maintenanceFeeModify?bldgId=${param.bldgId }&month=${param.month}">수정</a>
+		<a class="btn btn-outline" href="../maintenanceFee/maintenanceFeeModify?bldgId=${param.bldgId }&month=${param.month}&year=${param.year}">수정</a>
 		<button class="btn btn-outline resetBtnShow" onclick="toggleResetBtn();">관리비 재설정</button>
 		<button class="btn btn-outline resetBtn" onclick="toggleReset();" style="display: none;">재설정 취소</button>
 	</div>

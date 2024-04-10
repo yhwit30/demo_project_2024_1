@@ -10,7 +10,7 @@
 	var currentDate = new Date();
 	var currentYear = currentDate.getFullYear();
 	var setYear = ${param.year};
-	console.log('setYear' + setYear);
+
 	if (setYear == null || setYear === "") {
 		setYear = currentYear;
 	}
@@ -188,6 +188,10 @@
 </script>
 
 
+
+
+
+
 <!-- 수정버튼 hover -->
 <style type="text/css">
 .ctrlBtn {
@@ -229,6 +233,7 @@
 			<p>계약 및 수납현황을 추가하십시오.</p>
 		</c:otherwise>
 	</c:choose>
+
 
 
 
@@ -286,7 +291,9 @@
 
 					<c:forEach var="month" begin="1" end="12">
 						<c:set var="paymentStatusVar" value="paymentStatus${month}" />
-						<td class="ctrlBtnHover highlightContract contractStart-${rentStartDate } contractEnd-${rentEndDate } tagYear-${param.year } tagMonth-${month}">
+						<td
+							class="ctrlBtnHover highlightContract contractStart-${rentStartDate } contractEnd-${rentEndDate } tagYear-${param.year } tagMonth-${month}"
+						>
 							<c:if test="${rentStatus.tenantId != 0}">
 								<!-- 납부일자 그려주는 태그 -->
 								<span id="${month}rent-${rentStatus.tenantId}">${rentStatus[paymentStatusVar]}</span>
@@ -368,7 +375,7 @@
 
 					<td>#</td>
 				</tr>
-				
+
 			</c:forEach>
 		</tbody>
 	</table>
@@ -376,52 +383,59 @@
 
 </section>
 
+
+
 <!-- 계약시작일과 계약만료일 기준 하이라이트 -->
 <script>
 	//각 td 태그에 대해 반복문 수행
-	$(".highlightContract").each(function() {
-		// td 태그의 클래스에서 연도와 월 추출
-		var classes = $(this).attr("class").split(" ");
-		var tagContractStart = null;
-		var tagContractEnd = null;
-		var tagYear = null;
-		var tagMonth = null;
-		for (var i = 0; i < classes.length; i++) {
-			if (classes[i].indexOf("tagYear-") === 0) {
-				tagYear = parseInt(classes[i].substring(8));
-			} else if (classes[i].indexOf("tagMonth-") === 0) {
-				tagMonth = parseInt(classes[i].substring(9));
-			}else if (classes[i].indexOf("contractStart-") === 0) {
-				tagContractStart = classes[i].substring(14);
-			}else if (classes[i].indexOf("contractEnd-") === 0) {
-				tagContractEnd = classes[i].substring(12);
-			}
-		}
+	$(".highlightContract").each(
+			function() {
+				// td 태그의 클래스에서 연도와 월 추출
+				var classes = $(this).attr("class").split(" ");
+				var tagContractStart = null;
+				var tagContractEnd = null;
+				var tagYear = null;
+				var tagMonth = null;
+				for (var i = 0; i < classes.length; i++) {
+					if (classes[i].indexOf("tagYear-") === 0) {
+						tagYear = parseInt(classes[i].substring(8));
+					} else if (classes[i].indexOf("tagMonth-") === 0) {
+						tagMonth = parseInt(classes[i].substring(9));
+					} else if (classes[i].indexOf("contractStart-") === 0) {
+						tagContractStart = classes[i].substring(14);
+					} else if (classes[i].indexOf("contractEnd-") === 0) {
+						tagContractEnd = classes[i].substring(12);
+					}
+				}
 
-		
-		// tagContractStart와 tagContractEnd를 사용하여 Date 객체 생성
-	    var startDateParts = tagContractStart.split("-"); // '-'를 기준으로 문자열을 분리하여 배열로 저장
-	    var endDateParts = tagContractEnd.split("-");
+				// tagContractStart와 tagContractEnd를 사용하여 Date 객체 생성
+				var startDateParts = tagContractStart.split("-"); // '-'를 기준으로 문자열을 분리하여 배열로 저장
+				var endDateParts = tagContractEnd.split("-");
 
-		// 년, 월, 일을 가지고 Date 객체 생성
-		var thisDate = new Date(tagYear, tagMonth - 1, 15); // 월은 0부터 시작하므로 tagMonth에서 1을 빼줍니다.
-	    var contractStartDate = new Date(parseInt(startDateParts[0]), parseInt(startDateParts[1]) - 1, 1); 
-	    var contractEndDate = new Date(parseInt(endDateParts[0]), parseInt(endDateParts[1]) - 1, 20);
-	    
-	    // 만료일로부터 3개월 전 날짜 계산
-	    var endDateMinus3 = new Date(contractEndDate);
-	    endDateMinus3.setMonth(endDateMinus3.getMonth() - 3);
-	    
-	    console.log('endDateMinus3: '+endDateMinus3);
-		
-		// 하이라이트할 td태그 조건
-		if (thisDate >= contractStartDate && thisDate < endDateMinus3) {
-			$(this).css("background-color", "skyblue");
-		}
-		if (thisDate >= endDateMinus3 && thisDate <= contractEndDate) {
-			$(this).css("background-color", "pink");
-		}
-	});
+				// 년, 월, 일을 가지고 Date 객체 생성
+				var thisDate = new Date(tagYear, tagMonth - 1, 15); // 월은 0부터 시작하므로 tagMonth에서 1을 빼줍니다.
+				var contractStartDate = new Date(parseInt(startDateParts[0]),
+						parseInt(startDateParts[1]) - 1, 1);
+				var contractEndDate = new Date(parseInt(endDateParts[0]),
+						parseInt(endDateParts[1]) - 1, 20);
+
+				// 만료일로부터 3개월 전 날짜 계산
+				var endDateMinus3 = new Date(contractEndDate);
+				endDateMinus3.setMonth(endDateMinus3.getMonth() - 3);
+
+				// 	    console.log('endDateMinus3: '+endDateMinus3);
+
+				// 하이라이트할 td태그 조건
+				if (thisDate == contractStartDate) {
+					$(this).css("background-color", "gold");
+				}
+				if (thisDate > contractStartDate && thisDate < endDateMinus3) {
+					$(this).css("background-color", "skyblue");
+				}
+				if (thisDate >= endDateMinus3 && thisDate <= contractEndDate) {
+					$(this).css("background-color", "pink");
+				}
+			});
 </script>
 
 

@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <section class="mt-2 text-xl px-4">
 	<div class="btns">
-		<a class="btn btn-outline" href="../maintenanceFee/maintenanceFee?bldgId=${param.bldgId }">월별 관리비 돌아가기</a>
+		<a class="btn btn-outline" href="../maintenanceFee/maintenanceFee?bldgId=${param.bldgId }&year=${param.year}">월별 관리비 돌아가기</a>
 	</div>
 	${param.month }월
 
@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 			<form id="maintenanceFeeModifyForm" action="../maintenanceFee/doMaintenanceFeeModify" method="POST">
 			<input type="hidden" name="bldgId" value="${param.bldgId }" />
+			<input type="hidden" name="year" value="${param.year }" />
 			<input type="hidden" name="month" value="${param.month }" />
 			<table class="table-box-1" border="1">
 				<thead>

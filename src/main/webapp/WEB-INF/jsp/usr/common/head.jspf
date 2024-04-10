@@ -20,10 +20,15 @@
 <!-- 제이쿼리 불러오기 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
+<!-- 제이쿼리 ui 불러오기 -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
 <style>
 #logo {
-/* 	background-image: url("/resource/logo.png"); */
+	/* 	background-image: url("/resource/logo.png"); */
 	height: 65px;
 	width: 70px;
 	background-size: cover;
@@ -50,14 +55,16 @@
 				<c:if test="${rq.isLogined()}">
 					<li>
 						<a class="hover:underline" href="/usr/member/myPage">${rq.loginedMemberNickname }님<i
-								class="fa-solid fa-handshake"></i>
+								class="fa-solid fa-handshake"
+							></i>
 						</a>
 					</li>
 				</c:if>
 
 				<!-- 글쓰기 버튼 -->
 				<c:if
-					test="${fn:contains(pageContext.request.requestURI, '/usr/article') or fn:contains(pageContext.request.requestURI, '/usr/member/')}">
+					test="${fn:contains(pageContext.request.requestURI, '/usr/article') or fn:contains(pageContext.request.requestURI, '/usr/member/')}"
+				>
 					<c:if test="${rq.isLogined()}">
 						<li>
 							<a class="hover:underline" href="../article/write">
@@ -69,7 +76,8 @@
 
 				<!-- 목록 메뉴 -->
 				<c:if
-					test="${fn:contains(pageContext.request.requestURI, '/usr/article') or fn:contains(pageContext.request.requestURI, '/usr/member/')}">
+					test="${fn:contains(pageContext.request.requestURI, '/usr/article') or fn:contains(pageContext.request.requestURI, '/usr/member/')}"
+				>
 					<li>
 						<a class="hover:underline" href="../article/list?boardId=0">
 							<i class="fa-solid fa-table-list"></i>
@@ -102,7 +110,8 @@
 				<c:if test="${rq.isLogined()}">
 					<li>
 						<a onclick="if(confirm('로그아웃하시겠습니까?') == false) return false;" class="hover:underline"
-							href="/usr/member/doLogout?${rq.logoutUri }">LOGOUT</a>
+							href="/usr/member/doLogout?${rq.logoutUri }"
+						>LOGOUT</a>
 					</li>
 				</c:if>
 			</ul>

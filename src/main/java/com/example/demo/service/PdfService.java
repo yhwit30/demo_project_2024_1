@@ -27,7 +27,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class PdfService {
 
 	// 관리비 고지서
-	public void exportMaintenanceFee(HttpServletResponse response, MaintenanceFee maintenanceFee, String month)
+	public void exportMaintenanceFee(HttpServletResponse response, MaintenanceFee maintenanceFee, int year, String month)
 			throws DocumentException, IOException {
 
 		// pdf 파일 만들기
@@ -47,7 +47,7 @@ public class PdfService {
 		Font titleFont = new Font(baseFont, 18);
 
 		// 내용설정
-		Paragraph title = new Paragraph(month + "월 관리비 고지서", titleFont);
+		Paragraph title = new Paragraph(year + "년 " + month + "월 관리비 고지서", titleFont);
 		title.setAlignment(Paragraph.ALIGN_CENTER);
 
 //		Paragraph paragraph2 = new Paragraph("This is a paragraph", fontParagraph);
