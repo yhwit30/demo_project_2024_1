@@ -10,7 +10,6 @@
 	var currentDate = new Date();
 	var currentYear = currentDate.getFullYear();
 	var setYear = ${param.year};
-
 	if (setYear == null || setYear === "") {
 		setYear = currentYear;
 	}
