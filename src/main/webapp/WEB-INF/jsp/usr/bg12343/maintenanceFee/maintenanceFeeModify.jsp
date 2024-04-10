@@ -4,7 +4,7 @@
 <%@ include file="../../common/head.jspf"%>
 <%@ include file="../../common/sidebar.jspf"%>
 
-
+<!-- 관리비 수정 submit -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
 	 // 폼의 ID를 사용하여 폼 요소를 가져옵니다.
@@ -53,13 +53,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	<div class="mx-auto overflow-x-auto">
 
-		<form id="maintenanceFeeModifyForm" action="../maintenanceFee/doMaintenanceFeeModify" method="POST">
+			<form id="maintenanceFeeModifyForm" action="../maintenanceFee/doMaintenanceFeeModify" method="POST">
 			<input type="hidden" name="bldgId" value="${param.bldgId }" />
 			<input type="hidden" name="month" value="${param.month }" />
 			<table class="table-box-1" border="1">
 				<thead>
 					<tr>
-						<th colspan="4" style="text-align:center;">한번에 입력</th>
+						<th colspan="4" style="text-align: center;">한번에 입력</th>
 						<td>
 							<input id="bulkWriteCommonElec" size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요" />
 						</td>
@@ -133,60 +133,49 @@ document.addEventListener('DOMContentLoaded', function() {
 							<td>${maintenanceFee.leaseType }</td>
 							<td>
 								<input class="commonElecInput" size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요"
-									name="commonElec" value="${maintenanceFee.commonElec }"
-								/>
+									name="commonElec" value="${maintenanceFee.commonElec }" />
 							</td>
 							<td>
 								<input class="commonWaterInput" size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요"
-									name="commonWater" value="${maintenanceFee.commonWater }"
-								/>
+									name="commonWater" value="${maintenanceFee.commonWater }" />
 							</td>
 							<td>
 								<input class="elevInput" size="2" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="elevater"
-									value="${maintenanceFee.elevater }"
-								/>
+									value="${maintenanceFee.elevater }" />
 							</td>
 							<td>
 								<input class="internetInput" size="2" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="internetTV"
-									value="${maintenanceFee.internetTV }"
-								/>
+									value="${maintenanceFee.internetTV }" />
 							</td>
 							<td>
 								<input class="fireSafetyInput" size="2" autocomplete="off" type="text" placeholder="내용을 입력해주세요"
-									name="fireSafety" value="${maintenanceFee.fireSafety }"
-								/>
+									name="fireSafety" value="${maintenanceFee.fireSafety }" />
 							</td>
 							<td>
 								<input size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="waterUse"
-									value="${maintenanceFee.waterUse }"
-								/>
+									value="${maintenanceFee.waterUse }" />
 							</td>
 							<td>
 								<input class="waterCostInput" size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="waterCost"
-									value="${maintenanceFee.waterCost }"
-								/>
+									value="${maintenanceFee.waterCost }" />
 							</td>
 							<td>${maintenanceFee.waterBill }</td>
 							<td>
 								<input size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="elecUse"
-									value="${maintenanceFee.elecUse }"
-								/>
+									value="${maintenanceFee.elecUse }" />
 							</td>
 							<td>
 								<input class="elecCostInput" size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="elecCost"
-									value="${maintenanceFee.elecCost }"
-								/>
+									value="${maintenanceFee.elecCost }" />
 							</td>
 							<td>${maintenanceFee.elecBill }</td>
 							<td>
 								<input size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="gasUse"
-									value="${maintenanceFee.gasUse }"
-								/>
+									value="${maintenanceFee.gasUse }" />
 							</td>
 							<td>
 								<input class="gasCostInput" size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="gasCost"
-									value="${maintenanceFee.gasCost }"
-								/>
+									value="${maintenanceFee.gasCost }" />
 							</td>
 							<td>${maintenanceFee.gasBill }</td>
 							<td>${maintenanceFee.monthlyMaintenanceFee }</td>
@@ -194,8 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							<td>${maintenanceFee.lateMaintenanceFee }</td>
 							<td>
 								<input size="1" autocomplete="off" type="text" placeholder="내용을 입력해주세요" name="maintenanceFeeDate"
-									value="${maintenanceFee.maintenanceFeeDate }"
-								/>
+									value="${maintenanceFee.maintenanceFeeDate }" />
 							</td>
 						</tr>
 					</c:forEach>

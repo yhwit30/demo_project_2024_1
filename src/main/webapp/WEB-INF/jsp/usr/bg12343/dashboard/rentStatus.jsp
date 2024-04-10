@@ -9,7 +9,6 @@
 <script>
 	var currentDate = new Date();
 	var currentYear = currentDate.getFullYear();
-	// 	var setYear = ${param.year}; 자동완성 때문에 자꾸 오류나서
 	var setYear = ${param.year};
 	console.log('setYear' + setYear);
 	if (setYear == null || setYear === "") {
