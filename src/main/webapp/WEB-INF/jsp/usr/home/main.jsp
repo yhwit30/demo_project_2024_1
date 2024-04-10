@@ -3,26 +3,6 @@
 <c:set var="pageTitle" value="MAIN"></c:set>
 <%@ include file="../common/head.jspf"%>
 
-<!-- 검색창 -->
-<!-- <div class="mainSearch"> -->
-<!-- 	<form action=""> -->
-<%-- 		<input type="hidden" name="boardId" value="${param.boardId }" /> --%>
-
-<%-- 		<select data-value="${param.searchKeywordTypeCode }" class="select select-bordered select-sm max-w-xs" --%>
-<!-- 			name="searchKeywordTypeCode" -->
-<!-- 		> -->
-<!-- 			<option value="title">제목</option> -->
-<!-- 			<option value="extra__writer">작성자</option> -->
-<!-- 			<option value="body">내용</option> -->
-<!-- 		</select> -->
-<%-- 		<input value="${param.searchKeyword }" name="searchKeyword" type="text" placeholder="What is your searchKeyword?" --%>
-<!-- 			class="input-sm input input-bordered w-60 max-w-xs mt-3" -->
-<!-- 		/> -->
-<!-- 		<button class="btn btn-primary btn-sm" type="submit">검색</button> -->
-<!-- 	</form> -->
-<!-- </div> -->
-
-
 
 <div class="page mt-10 mx-auto">
 	<div>
