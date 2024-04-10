@@ -272,7 +272,7 @@ public class UsrDashboardController {
 		String headerValue = "inline; filename=pdf_" + currentDateTime + ".pdf";
 		response.setHeader(headerKey, headerValue);
 
-		pdfService.exportReportBusiness(response, rentStatus);
+		pdfService.exportReportBusiness(response, rentStatus, year);
 
 	}
 
@@ -298,7 +298,7 @@ public class UsrDashboardController {
 		String headerValue = "attachment; filename=csv_" + currentDateTime + ".csv";
 		response.setHeader(headerKey, headerValue);
 
-		csvService.exportReportBusiness(response, rentStatus);
+		csvService.exportReportBusiness(response, rentStatus, year);
 
 	}
 

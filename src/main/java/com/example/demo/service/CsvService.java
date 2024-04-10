@@ -115,7 +115,7 @@ public class CsvService {
 	}
 
 	// 사업장 현황보고
-	public void exportReportBusiness(HttpServletResponse response, List<Dashboard> rentStatus) throws DocumentException, IOException {
+	public void exportReportBusiness(HttpServletResponse response, List<Dashboard> rentStatus, int year) throws DocumentException, IOException {
 
 		BufferedWriter bw = null;
 
@@ -126,7 +126,7 @@ public class CsvService {
 			// 한글깨짐 해결하는 한 줄 코드
 			bw.write("\uFEFF");
 
-			writeReportBusinessTable(bw);
+			writeReportBusinessTable(bw, year);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -139,11 +139,14 @@ public class CsvService {
 		}
 	}
 
-	private void writeReportBusinessTable(BufferedWriter bw) throws IOException {
+	//todo
+	private void writeReportBusinessTable(BufferedWriter bw, int year) throws IOException {
 
 		String newline = System.lineSeparator();
 
 		// 헤더용 셀
+		bw.write(year+"년 사업장 현황신고");
+		bw.write(newline);
 		bw.write("건물, 호실, 이름");
 		bw.write(newline);
 

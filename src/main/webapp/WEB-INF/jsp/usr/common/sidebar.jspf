@@ -55,7 +55,7 @@
 			</li>
 			<li
 				style="${fn:contains(pageContext.request.requestURI, '/usr/bg12343/memo/expenses') ? 'background: linear-gradient(to right, #536976, #292e49); color: white;' : ''}">
-				<a href="/usr/bg12343/memo/expenses?year=<%= currentYear %>">지출내역</a>
+				<a href="/usr/bg12343/memo/expenses?bldgId=0&year=<%= currentYear %>">지출내역</a>
 			</li>
 			<li
 				style="${fn:contains(pageContext.request.requestURI, '/usr/bg12343/dashboard/reportBusiness') ? 'background: linear-gradient(to right, #536976, #292e49); color: white;' : ''}">

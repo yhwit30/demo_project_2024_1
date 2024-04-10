@@ -48,6 +48,7 @@ public class UsrMemoController {
 
 		List<Memo> expenses = memoService.getMemoExpenses(bldgId, year);
 
+		model.addAttribute("nowYear", nowYear);
 		model.addAttribute("expenses", expenses);
 		return "usr/bg12343/memo/expenses";
 	}

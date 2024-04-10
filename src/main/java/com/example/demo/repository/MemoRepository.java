@@ -67,7 +67,7 @@ public interface MemoRepository {
 			LEFT JOIN room AS R
 			ON M.roomId = R.id
 			LEFT JOIN building AS B
-			ON R.bldgId = B.id
+			ON M.bldgId = B.id
 			LEFT JOIN tenant AS T
 			ON M.tenantId = T.id
 			LEFT JOIN contract AS C

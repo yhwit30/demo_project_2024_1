@@ -159,7 +159,7 @@ public class PdfService {
 	}
 
 	// 사업장 현황보고
-	public void exportReportBusiness(HttpServletResponse response, List<Dashboard> rentStatus)
+	public void exportReportBusiness(HttpServletResponse response, List<Dashboard> rentStatus, int year)
 			throws DocumentException, IOException {
 
 		// pdf 파일 만들기
@@ -179,7 +179,7 @@ public class PdfService {
 		Font titleFont = new Font(baseFont, 18);
 
 		// 내용설정
-		Paragraph title = new Paragraph("사업장 현황신고서", titleFont);
+		Paragraph title = new Paragraph(year+"년 사업장 현황신고서", titleFont);
 		title.setAlignment(Paragraph.ALIGN_CENTER);
 
 		PdfPTable col16table = new PdfPTable(16);

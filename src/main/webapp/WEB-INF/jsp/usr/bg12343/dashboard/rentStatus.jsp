@@ -9,10 +9,7 @@
 <script>
 	var currentDate = new Date();
 	var currentYear = currentDate.getFullYear();
-	var setYear = $
-	{
-		param.year
-	};
+	var setYear = ${param.year};
 	if (setYear == null || setYear === "") {
 		setYear = currentYear;
 	}
@@ -221,6 +218,12 @@
 
 	<div>현재 설정 연도 : ${param.year}</div>
 
+
+	
+	
+	
+	
+
 	<!-- 건물에 해당하는 데이터 있는 연도만큼 그리기 <script>에 함수-->
 	<c:choose>
 		<c:when test="${not empty rentYears}">
@@ -229,6 +232,18 @@
 					<option value="${rentYear }">${rentYear }</option>
 				</c:forEach>
 			</select>
+			
+<!--연도 이동 -->
+			<a class="btn btn-sm btn-outline ${param.year < nowYear ? 'btn-active' : '' }"
+		href="rentStatus?bldgId=${param.bldgId }&year=${param.year -1}"
+	>◀</a>
+	<a class="btn btn-sm btn-outline ${param.year == nowYear ? 'btn-active' : '' }"
+		href="rentStatus?bldgId=${param.bldgId }&year=${nowYear}"
+	>올해 보기</a>
+	<a class="btn btn-sm btn-outline ${param.year > nowYear ? 'btn-active' : '' }"
+		href="rentStatus?bldgId=${param.bldgId }&year=${param.year + 1}"
+	>▶</a>
+			
 			<p>* 수납현황을 수정하려면 해당 월에 마우스를 올리세요</p>
 		</c:when>
 		<c:otherwise>

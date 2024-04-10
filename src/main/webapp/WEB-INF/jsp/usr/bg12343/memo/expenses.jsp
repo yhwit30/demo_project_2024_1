@@ -5,27 +5,38 @@
 <%@ include file="../../common/sidebar.jspf"%>
 
 
-<!-- 건물 카테고리 버튼 -->
-<div>
-	<c:forEach var="building" items="${buildings }">
-		<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
-			href="expenses?bldgId=${building.id }"
-		>${building.bldgName }</a>
-	</c:forEach>
-</div>
 
-<a class="btn btn-sm btn-outline ${param.year == nowYear -1 ? 'btn-active' : '' }"
-	href="expenses?bldgId=${param.bldgId }&year=${nowYear -1}"
->전년도 보기</a>
-<a class="btn btn-sm btn-outline ${param.year == nowYear ? 'btn-active' : '' }"
-	href="expenses?bldgId=${param.bldgId }&year=${nowYear}"
->올해(${nowYear}) 보기</a>
-
-
-24년도 지출내역
 
 
 <section class="mt-2 text-xl px-4">
+
+	<!-- 건물 카테고리 버튼 -->
+	<div class="btn btn-sm btn-outline ${param.bldgId == 0 ? 'btn-active' : '' }">
+		<a href="expenses?bldgId=0&year=${param.year}">전체 건물 보기</a>
+	</div>
+	<div>
+		<c:forEach var="building" items="${buildings }">
+			<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
+				href="expenses?bldgId=${building.id }&year=${param.year}"
+			>${building.bldgName }</a>
+		</c:forEach>
+	</div>
+
+
+
+	<p>${param.year }년도 지출내역</p>
+
+
+	<a class="btn btn-sm btn-outline ${param.year < nowYear ? 'btn-active' : '' }"
+		href="expenses?bldgId=${param.bldgId }&year=${param.year -1}"
+	>◀</a>
+	<a class="btn btn-sm btn-outline ${param.year == nowYear ? 'btn-active' : '' }"
+		href="expenses?bldgId=${param.bldgId }&year=${nowYear}"
+	>올해 보기</a>
+	<a class="btn btn-sm btn-outline ${param.year > nowYear ? 'btn-active' : '' }"
+		href="expenses?bldgId=${param.bldgId }&year=${param.year + 1}"
+	>▶</a>
+
 
 	<div class="mt-2">
 		<button class="btn btn-m btn-outline" id="modalOpen">추가</button>
@@ -34,14 +45,14 @@
 	<!-- 지출내역 월별 표 -->
 	<div class="flex justify-evenly">
 
-		1월
+		<p class="months">1월</p>
 		<table class="table-box-1 expenses-table modalAdd-01" border="1">
 			<thead>
 				<tr>
 					<th>지출일</th>
 					<th>비용</th>
 					<th>지출내용</th>
-					<th>비고</th>
+					<th>건물</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -52,7 +63,7 @@
 							<td>${expenses.memoDate }</td>
 							<td>${expenses.cost }</td>
 							<td>${expenses.body }</td>
-							<td>#</td>
+							<td>${expenses.bldgName }</td>
 						</tr>
 					</c:if>
 				</c:forEach>
@@ -61,14 +72,14 @@
 			</tbody>
 		</table>
 
-		2월
+		<p class="months">2월</p>
 		<table class="table-box-1 expenses-table modalAdd-02" border="1">
 			<thead>
 				<tr>
 					<th>지출일</th>
 					<th>비용</th>
 					<th>지출내용</th>
-					<th>비고</th>
+					<th>건물</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -78,7 +89,7 @@
 							<td>${expenses.memoDate }</td>
 							<td>${expenses.cost }</td>
 							<td>${expenses.body }</td>
-							<td>#</td>
+							<td>${expenses.bldgName }</td>
 						</tr>
 					</c:if>
 				</c:forEach>
@@ -86,14 +97,14 @@
 				<!-- 새로 추가한 지출내역 동적으로 그리는 부분 -->
 			</tbody>
 		</table>
-		3월
+		<p class="months">3월</p>
 		<table class="table-box-1 expenses-table modalAdd-03" border="1">
 			<thead>
 				<tr>
 					<th>지출일</th>
 					<th>비용</th>
 					<th>지출내용</th>
-					<th>비고</th>
+					<th>건물</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -103,7 +114,7 @@
 							<td>${expenses.memoDate }</td>
 							<td>${expenses.cost }</td>
 							<td>${expenses.body }</td>
-							<td>#</td>
+							<td>${expenses.bldgName }</td>
 						</tr>
 					</c:if>
 				</c:forEach>
@@ -113,14 +124,14 @@
 		</table>
 	</div>
 	<div class="flex justify-evenly">
-		4월
+		<p class="months">4월</p>
 		<table class="table-box-1 expenses-table modalAdd-04" border="1">
 			<thead>
 				<tr>
 					<th>지출일</th>
 					<th>비용</th>
 					<th>지출내용</th>
-					<th>비고</th>
+					<th>건물</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -130,7 +141,7 @@
 							<td>${expenses.memoDate }</td>
 							<td>${expenses.cost }</td>
 							<td>${expenses.body }</td>
-							<td>#</td>
+							<td>${expenses.bldgName }</td>
 						</tr>
 					</c:if>
 				</c:forEach>
@@ -138,14 +149,14 @@
 				<!-- 새로 추가한 지출내역 동적으로 그리는 부분 -->
 			</tbody>
 		</table>
-		5월
+		<p class="months">5월</p>
 		<table class="table-box-1 expenses-table modalAdd-05" border="1">
 			<thead>
 				<tr>
 					<th>지출일</th>
 					<th>비용</th>
 					<th>지출내용</th>
-					<th>비고</th>
+					<th>건물</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -155,7 +166,7 @@
 							<td>${expenses.memoDate }</td>
 							<td>${expenses.cost }</td>
 							<td>${expenses.body }</td>
-							<td>#</td>
+							<td>${expenses.bldgName }</td>
 						</tr>
 					</c:if>
 				</c:forEach>
@@ -163,14 +174,14 @@
 				<!-- 새로 추가한 지출내역 동적으로 그리는 부분 -->
 			</tbody>
 		</table>
-		6월
+		<p class="months">6월</p>
 		<table class="table-box-1 expenses-table modalAdd-06" border="1">
 			<thead>
 				<tr>
 					<th>지출일</th>
 					<th>비용</th>
 					<th>지출내용</th>
-					<th>비고</th>
+					<th>건물</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -180,7 +191,7 @@
 							<td>${expenses.memoDate }</td>
 							<td>${expenses.cost }</td>
 							<td>${expenses.body }</td>
-							<td>#</td>
+							<td>${expenses.bldgName }</td>
 						</tr>
 					</c:if>
 				</c:forEach>
@@ -190,14 +201,14 @@
 		</table>
 	</div>
 	<div class="flex justify-evenly">
-		7월
+		<p class="months">7월</p>
 		<table class="table-box-1 expenses-table modalAdd-07" border="1">
 			<thead>
 				<tr>
 					<th>지출일</th>
 					<th>비용</th>
 					<th>지출내용</th>
-					<th>비고</th>
+					<th>건물</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -207,7 +218,7 @@
 							<td>${expenses.memoDate }</td>
 							<td>${expenses.cost }</td>
 							<td>${expenses.body }</td>
-							<td>#</td>
+							<td>${expenses.bldgName }</td>
 						</tr>
 					</c:if>
 				</c:forEach>
@@ -215,14 +226,14 @@
 				<!-- 새로 추가한 지출내역 동적으로 그리는 부분 -->
 			</tbody>
 		</table>
-		8월
+		<p class="months">8월</p>
 		<table class="table-box-1 expenses-table modalAdd-08" border="1">
 			<thead>
 				<tr>
 					<th>지출일</th>
 					<th>비용</th>
 					<th>지출내용</th>
-					<th>비고</th>
+					<th>건물</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -232,7 +243,7 @@
 							<td>${expenses.memoDate }</td>
 							<td>${expenses.cost }</td>
 							<td>${expenses.body }</td>
-							<td>#</td>
+							<td>${expenses.bldgName }</td>
 						</tr>
 					</c:if>
 				</c:forEach>
@@ -240,14 +251,14 @@
 				<!-- 새로 추가한 지출내역 동적으로 그리는 부분 -->
 			</tbody>
 		</table>
-		9월
+		<p class="months">9월</p>
 		<table class="table-box-1 expenses-table modalAdd-09" border="1">
 			<thead>
 				<tr>
 					<th>지출일</th>
 					<th>비용</th>
 					<th>지출내용</th>
-					<th>비고</th>
+					<th>건물</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -257,7 +268,7 @@
 							<td>${expenses.memoDate }</td>
 							<td>${expenses.cost }</td>
 							<td>${expenses.body }</td>
-							<td>#</td>
+							<td>${expenses.bldgName }</td>
 						</tr>
 					</c:if>
 				</c:forEach>
@@ -267,14 +278,14 @@
 		</table>
 	</div>
 	<div class="flex justify-evenly">
-		10월
+		<p class="months">10월</p>
 		<table class="table-box-1 expenses-table modalAdd-10" border="1">
 			<thead>
 				<tr>
 					<th>지출일</th>
 					<th>비용</th>
 					<th>지출내용</th>
-					<th>비고</th>
+					<th>건물</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -284,7 +295,7 @@
 							<td>${expenses.memoDate }</td>
 							<td>${expenses.cost }</td>
 							<td>${expenses.body }</td>
-							<td>#</td>
+							<td>${expenses.bldgName }</td>
 						</tr>
 					</c:if>
 				</c:forEach>
@@ -292,14 +303,14 @@
 				<!-- 새로 추가한 지출내역 동적으로 그리는 부분 -->
 			</tbody>
 		</table>
-		11월
+		<p class="months">11월</p>
 		<table class="table-box-1 expenses-table modalAdd-11" border="1">
 			<thead>
 				<tr>
 					<th>지출일</th>
 					<th>비용</th>
 					<th>지출내용</th>
-					<th>비고</th>
+					<th>건물</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -309,7 +320,7 @@
 							<td>${expenses.memoDate }</td>
 							<td>${expenses.cost }</td>
 							<td>${expenses.body }</td>
-							<td>#</td>
+							<td>${expenses.bldgName }</td>
 						</tr>
 					</c:if>
 				</c:forEach>
@@ -317,14 +328,14 @@
 				<!-- 새로 추가한 지출내역 동적으로 그리는 부분 -->
 			</tbody>
 		</table>
-		12월
+		<p class="months">12월</p>
 		<table class="table-box-1 expenses-table modalAdd-12" border="1">
 			<thead>
 				<tr>
 					<th>지출일</th>
 					<th>비용</th>
 					<th>지출내용</th>
-					<th>비고</th>
+					<th>건물</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -334,7 +345,7 @@
 							<td>${expenses.memoDate }</td>
 							<td>${expenses.cost }</td>
 							<td>${expenses.body }</td>
-							<td>#</td>
+							<td>${expenses.bldgName }</td>
 						</tr>
 					</c:if>
 				</c:forEach>
@@ -441,6 +452,13 @@
 }
 </style>
 
+<!-- 지출표 보기 좋게 맞추는 중 -->
+<style>
+.months {
+	white-space: nowrap;
+}
+</style>
+
 
 <!-- 지출내역 추가 모달 스타일 -->
 <style>
@@ -472,6 +490,8 @@
 	margin-top: 20px;
 }
 </style>
+
+
 
 
 <!-- 모달 toggle 컨트롤 -->

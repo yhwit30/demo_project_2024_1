@@ -10,18 +10,26 @@
 	<div>
 		<c:forEach var="building" items="${buildings }">
 			<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
-				href="../dashboard/reportBusiness?bldgId=${building.id }"
+				href="../dashboard/reportBusiness?bldgId=${building.id }&year=${param.year}"
 			>${building.bldgName }</a>
 		</c:forEach>
 	</div>
 
-	<!-- 연도 버튼 -->
-	<a class="btn btn-sm btn-outline ${param.year == nowYear -1 ? 'btn-active' : '' }"
-		href="reportBusiness?bldgId=${param.bldgId }&year=${nowYear -1}"
-	>전년도 보기</a>
+	
+	<p>${param.year }년도 사업장 현황신고</p>
+
+
+	<a class="btn btn-sm btn-outline ${param.year < nowYear ? 'btn-active' : '' }"
+		href="reportBusiness?bldgId=${param.bldgId }&year=${param.year -1}"
+	>◀</a>
 	<a class="btn btn-sm btn-outline ${param.year == nowYear ? 'btn-active' : '' }"
 		href="reportBusiness?bldgId=${param.bldgId }&year=${nowYear}"
-	>올해(${nowYear}) 보기</a>
+	>올해 보기</a>
+	<a class="btn btn-sm btn-outline ${param.year > nowYear ? 'btn-active' : '' }"
+		href="reportBusiness?bldgId=${param.bldgId }&year=${param.year + 1}"
+	>▶</a>
+	
+	
 
 	<!-- pdf 출력버튼 -->
 	<a class="btn btn-sm" href="/usr/bg12343/dashboard/pdfExport?bldgId=${param.bldgId }&year=${nowYear}" target="_blank">PDF</a>
