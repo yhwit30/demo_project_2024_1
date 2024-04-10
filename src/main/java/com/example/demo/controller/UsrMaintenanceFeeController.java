@@ -67,14 +67,6 @@ public class UsrMaintenanceFeeController {
 	@RequestMapping("/usr/bg12343/maintenanceFee/maintenanceFeeDetail")
 	public String getMaintenanceFeeDetail(Model model, @RequestParam(defaultValue = "1") int bldgId, Integer year,
 			String month) {
-		// 레포지터리 월표현 정리
-		if (month.equals("010")) {
-			month = "10";
-		} else if (month.equals("011")) {
-			month = "11";
-		} else if (month.equals("012")) {
-			month = "12";
-		}
 
 		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
 		if (year == null) {
@@ -93,14 +85,6 @@ public class UsrMaintenanceFeeController {
 	@RequestMapping("/usr/bg12343/maintenanceFee/maintenanceFeeModify")
 	public String showMaintenanceFeeModify(Model model, @RequestParam(defaultValue = "1") int bldgId, Integer year,
 			String month) {
-		// 레포지터리 월표현 정리
-		if (month.equals("010")) {
-			month = "10";
-		} else if (month.equals("011")) {
-			month = "11";
-		} else if (month.equals("012")) {
-			month = "12";
-		}
 
 		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
 		if (year == null) {
@@ -118,15 +102,6 @@ public class UsrMaintenanceFeeController {
 	public String doMaintenanceFeeModify(int[] tenantId, int[] commonElec, int[] commonWater, int[] elevater,
 			int[] internetTV, int[] fireSafety, int[] waterUse, int[] waterCost, int[] elecUse, int[] elecCost,
 			int[] gasUse, int[] gasCost, int[] maintenanceFeeDate, int bldgId, Integer year, String month) {
-
-		// 레포지터리 월표현 정리
-		if (month.equals("010")) {
-			month = "10";
-		} else if (month.equals("011")) {
-			month = "11";
-		} else if (month.equals("012")) {
-			month = "12";
-		}
 
 		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
 		if (year == null) {
@@ -186,21 +161,12 @@ public class UsrMaintenanceFeeController {
 		}
 
 		return Ut.jsReplace(maintenanceFeeModifyRd.getResultCode(), maintenanceFeeModifyRd.getMsg(),
-				"../maintenanceFee/maintenanceFeeDetail?bldgId=" + bldgId + "&month=" + month);
+				"../maintenanceFee/maintenanceFeeDetail?bldgId=" + bldgId + "&month=" + month + "&year=" + year);
 	}
 
 	@RequestMapping("/usr/bg12343/maintenanceFee/doMaintenanceFeeDelete")
 	@ResponseBody
 	public String doMaintenanceFeeDelete(int tenantId, int bldgId, Integer year, String month) {
-
-		// 레포지터리 월표현 정리
-		if (month.equals("010")) {
-			month = "10";
-		} else if (month.equals("011")) {
-			month = "11";
-		} else if (month.equals("012")) {
-			month = "12";
-		}
 
 		// RequestParam 기본값문법으로 nowYear 데이터가 잘 안 들어가서 이렇게 체크
 		if (year == null) {
@@ -238,7 +204,7 @@ public class UsrMaintenanceFeeController {
 		String headerValue = "inline; filename=pdf_" + currentDateTime + ".pdf";
 		response.setHeader(headerKey, headerValue);
 
-		pdfService.exportMaintenanceFee(response, maintenanceFee, month);
+		pdfService.exportMaintenanceFee(response, maintenanceFee, year, month);
 
 	}
 
@@ -250,11 +216,10 @@ public class UsrMaintenanceFeeController {
 		if (year == null) {
 			year = nowYear;
 		}
-		
+
 		// 관리비 데이터 가져오기
 		MaintenanceFee maintenanceFee = maintenanceFeeService.getMaintenanceFee(tenantId, bldgId, year, month);
 
-		
 		// csv 파일에 시간정보 추가
 		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:mm:ss");
 		String currentDateTime = dateFormatter.format(new Date());
@@ -265,7 +230,7 @@ public class UsrMaintenanceFeeController {
 		String headerValue = "attachment; filename=csv_" + currentDateTime + ".csv";
 		response.setHeader(headerKey, headerValue);
 
-		csvService.exportMaintenanceFee(response, maintenanceFee, month);
+		csvService.exportMaintenanceFee(response, maintenanceFee, year, month);
 
 	}
 

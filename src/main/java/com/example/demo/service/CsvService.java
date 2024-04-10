@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class CsvService {
 
 	// 관리비 고지서
-	public void exportMaintenanceFee(HttpServletResponse response, MaintenanceFee maintenanceFee, String month)
+	public void exportMaintenanceFee(HttpServletResponse response, MaintenanceFee maintenanceFee, int year, String month)
 			throws DocumentException, IOException {
 
 		BufferedWriter bw = null;
@@ -29,7 +29,7 @@ public class CsvService {
 			// 한글깨짐 해결하는 한 줄 코드
 			bw.write("\uFEFF");
 
-			writeMaintenanceFeeTable(bw, maintenanceFee);
+			writeMaintenanceFeeTable(bw, maintenanceFee, year, month);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -42,11 +42,13 @@ public class CsvService {
 		}
 	}
 
-	private void writeMaintenanceFeeTable(BufferedWriter bw, MaintenanceFee maintenanceFee) throws IOException {
+	private void writeMaintenanceFeeTable(BufferedWriter bw, MaintenanceFee maintenanceFee, int year, String month) throws IOException {
 
 		String newline = System.lineSeparator();
 
 		// 헤더용 셀
+		bw.write(year + "년 " + month + "월 관리비 고지서");
+		bw.write(newline);
 		bw.write("건물, 호실, 이름");
 		bw.write(newline);
 		bw.write("" + maintenanceFee.getBldgName() + ", " + maintenanceFee.getRoomNum() + ", "

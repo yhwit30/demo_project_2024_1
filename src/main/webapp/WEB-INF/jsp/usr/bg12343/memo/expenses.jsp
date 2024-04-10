@@ -3,7 +3,7 @@
 <c:set var="pageTitle" value="EXPENSES"></c:set>
 <%@ include file="../../common/head.jspf"%>
 <%@ include file="../../common/sidebar.jspf"%>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 
 <!-- 건물 카테고리 버튼 -->
 <div>
@@ -393,7 +393,7 @@
 							<script>
    						     $(function() {
  					           $("#birthdate").datepicker({
-    				        	dateFormat: 'yy-mm-dd',
+    				        	dateFormat: 'yyyy-mm-dd',
          					    changeMonth: true,
            					    changeYear: true,
              					yearRange: 'c-100:c+0'
