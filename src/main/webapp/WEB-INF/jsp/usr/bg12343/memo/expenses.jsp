@@ -4,10 +4,6 @@
 <%@ include file="../../common/head.jspf"%>
 <%@ include file="../../common/sidebar.jspf"%>
 
-
-
-
-
 <section class="mt-2 text-xl px-4">
 
 	<!-- 건물 카테고리 버튼 -->
