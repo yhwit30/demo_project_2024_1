@@ -1510,7 +1510,7 @@ updateDate = NOW(),
 boardId = 6,
 memberId = 1,
 bldgId = 1,
-memoDate = '2024-04-3',
+memoDate = '2024-04-03',
 title = '11',
 `body`= '타일작업';
 
@@ -1521,7 +1521,7 @@ updateDate = NOW(),
 boardId = 6,
 memberId = 1,
 bldgId = 2,
-memoDate = '2024-01-3',
+memoDate = '2024-01-03',
 title = '22',
 `body`= '바닥작업';
 

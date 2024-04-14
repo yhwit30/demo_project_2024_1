@@ -13,25 +13,21 @@
 	<div>
 		<c:forEach var="building" items="${buildings }">
 			<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
-				href="expenses?bldgId=${building.id }&year=${param.year}"
-			>${building.bldgName }</a>
+				href="expenses?bldgId=${building.id }&year=${param.year}">${building.bldgName }</a>
 		</c:forEach>
 	</div>
 
 
 
-	<p>${param.year }년도 지출내역</p>
+	<p>${param.year }년도지출내역</p>
 
 
 	<a class="btn btn-sm btn-outline ${param.year < nowYear ? 'btn-active' : '' }"
-		href="expenses?bldgId=${param.bldgId }&year=${param.year -1}"
-	>◀</a>
+		href="expenses?bldgId=${param.bldgId }&year=${param.year -1}">◀</a>
 	<a class="btn btn-sm btn-outline ${param.year == nowYear ? 'btn-active' : '' }"
-		href="expenses?bldgId=${param.bldgId }&year=${nowYear}"
-	>올해 보기</a>
+		href="expenses?bldgId=${param.bldgId }&year=${nowYear}">올해 보기</a>
 	<a class="btn btn-sm btn-outline ${param.year > nowYear ? 'btn-active' : '' }"
-		href="expenses?bldgId=${param.bldgId }&year=${param.year + 1}"
-	>▶</a>
+		href="expenses?bldgId=${param.bldgId }&year=${param.year + 1}">▶</a>
 
 
 	<div class="mt-2">
@@ -354,6 +350,7 @@
 
 
 <!-- 지출내역 추가 모달 -->
+
 <!-- 모달 투명한 배경용 태그 -->
 <div id="modalBg"></div>
 <!-- 지출내역 추가 입력란 -->
@@ -366,8 +363,7 @@
 						<th>건물명</th>
 						<td>
 							<select class="select select-bordered select-sm w-20 max-w-xs" name="bldgId"
-								onchange="buildingSelect(this.value)"
-							>
+								onchange="buildingSelect(this.value)">
 								<c:forEach var="building" items="${buildings }">
 									<option value="${building.id }">${building.bldgName }</option>
 								</c:forEach>
@@ -393,36 +389,22 @@
 						<td>
 
 							<!-- 제이쿼리 ui 달력 -->
-							<div>
-								<label for="birth"></label>
-								<input type="date" id="birth" name="memoDate" required max="">
-							</div>
-							<script>
-   						     $(function() {
- 					           $("#birthdate").datepicker({
-    				        	dateFormat: 'yyyy-mm-dd',
-         					    changeMonth: true,
-           					    changeYear: true,
-             					yearRange: 'c-100:c+0'
-        					});
-							</script>
+							<input class="input input-bordered input-sm" autocomplete="off"  type="text" id="datepicker" placeholder="클릭하면 달력이 열립니다" name="memoDate" readonly>
 
 						</td>
 					</tr>
 					<tr>
 						<th>지출비용</th>
 						<td>
-							<input class="input input-bordered input-secondary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="숫자만 입력" name="cost"
-							/>
+							<input class="input input-bordered input-secondary input-sm" autocomplete="off" type="text"
+								placeholder="숫자만 입력" name="cost" />
 						</td>
 					</tr>
 					<tr>
 						<th>지출내용</th>
 						<td>
-							<input class="input input-bordered input-secondary w-full max-w-xs" autocomplete="off" type="text"
-								placeholder="지출내용 입력" name="body"
-							/>
+							<input class="input input-bordered input-secondary input-sm" autocomplete="off" type="text"
+								placeholder="지출내용 입력" name="body" />
 						</td>
 					</tr>
 					<tr>
@@ -488,144 +470,168 @@
 </style>
 
 
+<!-- 지출연월 달력 ui -->
+<script>
+	$(function() {
+		$("#datepicker")
+				.datepicker(
+						{
+							dateFormat : 'yy-mm-dd', //Input Display Format 변경
+							showOtherMonths : true, //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+							showMonthAfterYear : true, //년도 먼저 나오고, 뒤에 월 표시
+							changeYear : true, //콤보박스에서 년 선택 가능
+							changeMonth : true, //콤보박스에서 월 선택 가능                
+// 							showOn : "both", //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
+// 							buttonImage : "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif", //버튼 이미지 경로
+							buttonImageOnly : true, //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
+							buttonText : "선택", //버튼에 마우스 갖다 댔을 때 표시되는 텍스트                
+							yearSuffix : "년", //달력의 년도 부분 뒤에 붙는 텍스트
+							monthNamesShort : [ '1', '2', '3', '4', '5', '6',
+									'7', '8', '9', '10', '11', '12' ], //달력의 월 부분 텍스트
+							monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월',
+									'7월', '8월', '9월', '10월', '11월', '12월' ], //달력의 월 부분 Tooltip 텍스트
+							dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ], //달력의 요일 부분 텍스트
+							dayNames : [ '일요일', '월요일', '화요일', '수요일', '목요일',
+									'금요일', '토요일' ], //달력의 요일 부분 Tooltip 텍스트
+							yearRange : 'c-30:c+0'
+						});
+	});
+</script>
+
 
 
 <!-- 모달 toggle 컨트롤 -->
 <script>
-		$(document).ready(function() {
-			// 모달 띄우기
-			$('#modalOpen').click(function() {
-				$('#modalExpenses').show();
-				$('#modalBg').show();
-			});
-			// 모달 닫기
-			$('#modalClose').click(function() {
+	$(document).ready(function() {
+		// 모달 띄우기
+		$('#modalOpen').click(function() {
+			$('#modalExpenses').show();
+			$('#modalBg').show();
+		});
+		// 모달 닫기
+		$('#modalClose').click(function() {
+			$('#modalExpenses').hide();
+			$('#modalBg').hide();
+
+			var form = $('#memoAddForm');
+
+			// 입력 값들 초기화
+			form.find('input[name="body"]').val('');
+			form.find('input[name="memoDate"]').val('');
+			form.find('input[name="cost"]').val('');
+		});
+	});
+</script>
+
+
+<!-- 건물을 선택할 때 해당 호실을 불러오기 -->
+<script>
+	// 페이지 로드 시 기본값으로 bldgId를 1로 설정하고 호실 목록을 가져옴
+	window.onload = function() {
+		var defaultBldgId = 1;
+		buildingSelect(defaultBldgId);
+	};
+	function buildingSelect(bldgId) {
+		console.log('bldgId:' + bldgId);
+		$.post({
+			url : '/usr/bg12343/contract/getRoomsForContract',
+			type : 'POST',
+			data : {
+				bldgId : bldgId
+			},
+			success : function(data) {
+				console.log(data);
+				// 기존 option태그 초기화
+				var roomSelect = document.getElementById("roomNum");
+				roomSelect.innerHTML = "";
+				// 가져온 호실데이터를 option 태그로 그려주기
+				data.forEach(function(room) {
+					var option = document.createElement("option");
+					option.value = room.id;
+					option.text = room.roomNum;
+					roomSelect.appendChild(option);
+				});
+			},
+			error : function(xhr, status, error) {
+				alert('수정에 실패했습니다: ' + error);
+			}
+		});
+	}
+</script>
+
+<!-- 지출내역 추가 함수 -->
+<script>
+	// 추가 함수
+	function doAddMemo() {
+
+		// 해당 contractId를 가진 form 요소를 선택합니다.
+		var form = $('#memoAddForm');
+
+		// 수정할 데이터를 가져옵니다.
+		var bldgId = form.find('select[name="bldgId"]').val();
+		var roomId = form.find('select[name="roomId"]').val();
+		var boardId = form.find('input[name="boardId"]').val();
+		var body = form.find('input[name="body"]').val();
+		var memoDate = form.find('input[name="memoDate"]').val();
+		var cost = form.find('input[name="cost"]').val();
+
+		// 공백 체크
+		if (String(roomId).trim() === '' || String(boardId).trim() === ''
+				|| String(body).trim() === '' || String(memoDate).trim() === ''
+				|| String(cost).trim() === '') {
+			alert('공백을 채워주세요');
+			return;
+		}
+		// 숫자 체크
+		if (isNaN(cost)) {
+			alert('비용은 숫자만 입력 가능합니다');
+			$('input[name="cost"]').focus();
+			return;
+		}
+
+		$.post({
+			url : '/usr/bg12343/memo/doMemoAddAjax',
+			type : 'POST',
+			data : {
+				bldgId : bldgId,
+				roomId : roomId,
+				boardId : boardId,
+				body : body,
+				memoDate : memoDate,
+				cost : cost
+			},
+			success : function(data) {
+
+				// 태그이름찾기 위한 월 데이터 정제
+				var split = data.memoDate.split('-');
+				var date = split[1];
+
+				// 데이터를 성공적으로 가져왔다면 각 요소에 데이터를 그려줍니다.
+				// 빈 <tr> 태그 그리기
+				var newMemoTag = $('<tr style="background-color:gold">');
+				newMemoTag.append($('<td>').text(data.memoDate));
+				newMemoTag.append($('<td>').text(data.cost));
+				newMemoTag.append($('<td>').text(data.body));
+				newMemoTag.append($('<td>'));
+				$('.modalAdd-' + date).append(newMemoTag);
+
+				// 모달 숨김(class 사용)
 				$('#modalExpenses').hide();
 				$('#modalBg').hide();
-
-				var form = $('#memoAddForm');
+				$('#modalOpen').show();
 
 				// 입력 값들 초기화
 				form.find('input[name="body"]').val('');
 				form.find('input[name="memoDate"]').val('');
 				form.find('input[name="cost"]').val('');
-				// 달력 초기화
-				buildCalendar();
-			});
+
+			},
+			error : function(xhr, status, error) {
+				alert('수정에 실패했습니다: ' + error);
+			}
 		});
-	</script>
-
-
-<!-- 건물을 선택할 때 해당 호실을 불러오기 -->
-<script>
-		// 페이지 로드 시 기본값으로 bldgId를 1로 설정하고 호실 목록을 가져옴
-		window.onload = function() {
-			var defaultBldgId = 1;
-			buildingSelect(defaultBldgId);
-			buildCalendar(); // 로드 시 달력도 실행
-		};
-		function buildingSelect(bldgId) {
-			console.log('bldgId:' + bldgId);
-			$.post({
-				url : '/usr/bg12343/contract/getRoomsForContract',
-				type : 'POST',
-				data : {
-					bldgId : bldgId
-				},
-				success : function(data) {
-					console.log(data);
-					// 기존 option태그 초기화
-					var roomSelect = document.getElementById("roomNum");
-					roomSelect.innerHTML = "";
-					// 가져온 호실데이터를 option 태그로 그려주기
-					data.forEach(function(room) {
-						var option = document.createElement("option");
-						option.value = room.id;
-						option.text = room.roomNum;
-						roomSelect.appendChild(option);
-					});
-				},
-				error : function(xhr, status, error) {
-					alert('수정에 실패했습니다: ' + error);
-				}
-			});
-		}
+	}
 </script>
-
-<!-- 지출내역 추가 함수 -->
-<script>
-		// 추가 함수
-		function doAddMemo() {
-
-			// 해당 contractId를 가진 form 요소를 선택합니다.
-			var form = $('#memoAddForm');
-
-			// 수정할 데이터를 가져옵니다.
-			var bldgId = form.find('select[name="bldgId"]').val();
-			var roomId = form.find('select[name="roomId"]').val();
-			var boardId = form.find('input[name="boardId"]').val();
-			var body = form.find('input[name="body"]').val();
-			var memoDate = form.find('input[name="memoDate"]').val();
-			var cost = form.find('input[name="cost"]').val();
-
-			// 공백 체크
-			if (String(roomId).trim() === '' || String(boardId).trim() === ''
-					|| String(body).trim() === ''
-					|| String(memoDate).trim() === ''
-					|| String(cost).trim() === '') {
-				alert('공백을 채워주세요');
-				return;
-			}
-			// 숫자 체크
-			if (isNaN(cost)) {
-				alert('비용은 숫자만 입력 가능합니다');
-				$('input[name="cost"]').focus();
-				return;
-			}
-
-			$.post({
-				url : '/usr/bg12343/memo/doMemoAddAjax',
-				type : 'POST',
-				data : {
-					bldgId : bldgId,
-					roomId : roomId,
-					boardId : boardId,
-					body : body,
-					memoDate : memoDate,
-					cost : cost
-				},
-				success : function(data) {
-
-					// 태그이름찾기 위한 월 데이터 정제
-					var split = data.memoDate.split('-');
-					var date = split[1];
-
-					// 데이터를 성공적으로 가져왔다면 각 요소에 데이터를 그려줍니다.
-					// 빈 <tr> 태그 그리기
-					var newMemoTag = $('<tr style="background-color:gold">');
-					newMemoTag.append($('<td>').text(data.memoDate));
-					newMemoTag.append($('<td>').text(data.cost));
-					newMemoTag.append($('<td>').text(data.body));
-					newMemoTag.append($('<td>'));
-					$('.modalAdd-' + date).append(newMemoTag);
-
-					// 모달 숨김(class 사용)
-					$('#modalExpenses').hide();
-					$('#modalBg').hide();
-					$('#modalOpen').show();
-
-					// 입력 값들 초기화
-					form.find('input[name="body"]').val('');
-					form.find('input[name="memoDate"]').val('');
-					form.find('input[name="cost"]').val('');
-
-				},
-				error : function(xhr, status, error) {
-					alert('수정에 실패했습니다: ' + error);
-				}
-			});
-		}
-	</script>
 
 <!-- 지출내역 수정 ajax -->
 
