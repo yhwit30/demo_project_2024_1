@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="RENT SATUS"></c:set>
 <%@ include file="../../common/head.jspf"%>
@@ -210,40 +211,42 @@
 	<!-- 건물 선택 -->
 	<div>
 		<c:forEach var="building" items="${buildings }">
-			<a class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
-				href="rentStatus?bldgId=${building.id }&year=${param.year}"
-			>${building.bldgName }</a>
+			<a
+				class="btn btn-sm btn-outline ${building.id == param.bldgId ? 'btn-active' : '' }"
+				href="rentStatus?bldgId=${building.id }&year=${param.year}">${building.bldgName }</a>
 		</c:forEach>
 	</div>
 
 	<div>현재 설정 연도 : ${param.year}</div>
 
 
-	
-	
-	
-	
+
+
+
+
 
 	<!-- 건물에 해당하는 데이터 있는 연도만큼 그리기 <script>에 함수-->
 	<c:choose>
 		<c:when test="${not empty rentYears}">
-			<select data-value="${param.year }" class=" select select-bordered select-sm w-20 max-w-xs" name="year" id="year">
+			<select data-value="${param.year }"
+				class=" select select-bordered select-sm w-20 max-w-xs" name="year"
+				id="year">
 				<c:forEach var="rentYear" items="${rentYears }">
 					<option value="${rentYear }">${rentYear }</option>
 				</c:forEach>
 			</select>
-			
-<!--연도 이동 -->
-			<a class="btn btn-sm btn-outline ${param.year < nowYear ? 'btn-active' : '' }"
-		href="rentStatus?bldgId=${param.bldgId }&year=${param.year -1}"
-	>◀</a>
-	<a class="btn btn-sm btn-outline ${param.year == nowYear ? 'btn-active' : '' }"
-		href="rentStatus?bldgId=${param.bldgId }&year=${nowYear}"
-	>올해 보기</a>
-	<a class="btn btn-sm btn-outline ${param.year > nowYear ? 'btn-active' : '' }"
-		href="rentStatus?bldgId=${param.bldgId }&year=${param.year + 1}"
-	>▶</a>
-			
+
+			<!--연도 이동 -->
+			<a
+				class="btn btn-sm btn-outline ${param.year < nowYear ? 'btn-active' : '' }"
+				href="rentStatus?bldgId=${param.bldgId }&year=${param.year -1}">◀</a>
+			<a
+				class="btn btn-sm btn-outline ${param.year == nowYear ? 'btn-active' : '' }"
+				href="rentStatus?bldgId=${param.bldgId }&year=${nowYear}">올해 보기</a>
+			<a
+				class="btn btn-sm btn-outline ${param.year > nowYear ? 'btn-active' : '' }"
+				href="rentStatus?bldgId=${param.bldgId }&year=${param.year + 1}">▶</a>
+
 			<p>* 수납현황을 수정하려면 해당 월에 마우스를 올리세요</p>
 		</c:when>
 		<c:otherwise>
@@ -309,82 +312,100 @@
 					<c:forEach var="month" begin="1" end="12">
 						<c:set var="paymentStatusVar" value="paymentStatus${month}" />
 						<td
-							class="ctrlBtnHover highlightContract contractStart-${rentStartDate } contractEnd-${rentEndDate } tagYear-${param.year } tagMonth-${month}"
-						>
+							class="ctrlBtnHover highlightContract contractStart-${rentStartDate } contractEnd-${rentEndDate } tagYear-${param.year } tagMonth-${month}">
 							<c:if test="${rentStatus.tenantId != 0}">
 								<!-- 납부일자 그려주는 태그 -->
 								<span id="${month}rent-${rentStatus.tenantId}">${rentStatus[paymentStatusVar]}</span>
 
 								<!-- 수정기능 -->
 								<c:if test="${not empty rentStatus[paymentStatusVar]}">
-									<form onsubmit="return false;" method="POST" id="${month}modify-form-${rentStatus.tenantId}"
-										style="display: none" action="/usr/bg12343/dashboard/doRentStatusModify"
-									>
-										<input size="1" type="text" value="${rentStatus[paymentStatusVar]}"
-											name="${month}rent-text-${rentStatus.tenantId}" autocomplete="off"
-										/>
+									<form onsubmit="return false;" method="POST"
+										id="${month}modify-form-${rentStatus.tenantId}"
+										style="display: none"
+										action="/usr/bg12343/dashboard/doRentStatusModify">
+										<input size="1" type="text"
+											value="${rentStatus[paymentStatusVar]}"
+											name="${month}rent-text-${rentStatus.tenantId}"
+											autocomplete="off" />
 									</form>
 									<div class="ctrlBtn">
-										<button onclick="toggleModifybtn('${rentStatus.tenantId}', '${month}');"
-											id="${month}modify-btn-${rentStatus.tenantId}" style="white-space: nowrap" class="btn btn-xs btn-outline"
-										>수정</button>
+										<button
+											onclick="toggleModifybtn('${rentStatus.tenantId}', '${month}');"
+											id="${month}modify-btn-${rentStatus.tenantId}"
+											style="white-space: nowrap" class="btn btn-xs btn-outline">수정</button>
 									</div>
-									<button onclick="doModifyRentStatus('${rentStatus.tenantId}', '0${month}', '${month}');"
-										style="white-space: nowrap; display: none" id="${month}save-btn-${rentStatus.tenantId}"
-										class="btn btn-xs btn-outline"
-									>저장</button>
+									<button
+										onclick="doModifyRentStatus('${rentStatus.tenantId}', '0${month}', '${month}');"
+										style="white-space: nowrap; display: none"
+										id="${month}save-btn-${rentStatus.tenantId}"
+										class="btn btn-xs btn-outline">저장</button>
 
 									<!--수정 공백 저장 후 즉각 추가기능 -->
-									<form onsubmit="return false;" method="POST" id="${month}add-form-${rentStatus.tenantId}" style="display: none"
-										action="/usr/bg12343/dashboard/doRentStatusAdd"
-									>
-										<input size="1" type="text" name="${month}add-rent-text-${rentStatus.tenantId}" autocomplete="off" />
+									<form onsubmit="return false;" method="POST"
+										id="${month}add-form-${rentStatus.tenantId}"
+										style="display: none"
+										action="/usr/bg12343/dashboard/doRentStatusAdd">
+										<input size="1" type="text"
+											name="${month}add-rent-text-${rentStatus.tenantId}"
+											autocomplete="off" />
 									</form>
 									<div class="ctrlBtn">
-										<button onclick="toggleAddbtn('${rentStatus.tenantId}', '${month}');"
-											id="${month}add-btn-${rentStatus.tenantId}" style="white-space: nowrap; display: none"
-											class="btn btn-xs btn-outline"
-										>추가</button>
+										<button
+											onclick="toggleAddbtn('${rentStatus.tenantId}', '${month}');"
+											id="${month}add-btn-${rentStatus.tenantId}"
+											style="white-space: nowrap; display: none"
+											class="btn btn-xs btn-outline">추가</button>
 									</div>
-									<button onclick="doAddRentStatus('${rentStatus.tenantId}', '0${month}', '${month}');"
-										style="white-space: nowrap; display: none" id="${month}add-save-btn-${rentStatus.tenantId}"
-										class="btn btn-xs btn-outline"
-									>저장</button>
+									<button
+										onclick="doAddRentStatus('${rentStatus.tenantId}', '0${month}', '${month}');"
+										style="white-space: nowrap; display: none"
+										id="${month}add-save-btn-${rentStatus.tenantId}"
+										class="btn btn-xs btn-outline">저장</button>
 								</c:if>
 
 								<!-- 추가기능 -->
 								<c:if test="${empty rentStatus[paymentStatusVar]}">
-									<form onsubmit="return false;" method="POST" id="${month}add-form-${rentStatus.tenantId}" style="display: none"
-										action="/usr/bg12343/dashboard/doRentStatusAdd"
-									>
-										<input size="1" type="text" name="${month}add-rent-text-${rentStatus.tenantId}" autocomplete="off" />
+									<form onsubmit="return false;" method="POST"
+										id="${month}add-form-${rentStatus.tenantId}"
+										style="display: none"
+										action="/usr/bg12343/dashboard/doRentStatusAdd">
+										<input size="1" type="text"
+											name="${month}add-rent-text-${rentStatus.tenantId}"
+											autocomplete="off" />
 									</form>
 									<div class="ctrlBtn">
-										<button onclick="toggleAddbtn('${rentStatus.tenantId}', '${month}');"
-											id="${month}add-btn-${rentStatus.tenantId}" style="white-space: nowrap" class="btn btn-xs btn-outline"
-										>추가</button>
+										<button
+											onclick="toggleAddbtn('${rentStatus.tenantId}', '${month}');"
+											id="${month}add-btn-${rentStatus.tenantId}"
+											style="white-space: nowrap" class="btn btn-xs btn-outline">추가</button>
 									</div>
-									<button onclick="doAddRentStatus('${rentStatus.tenantId}', '0${month}', '${month}');"
-										style="white-space: nowrap; display: none" id="${month}add-save-btn-${rentStatus.tenantId}"
-										class="btn btn-xs btn-outline"
-									>저장</button>
+									<button
+										onclick="doAddRentStatus('${rentStatus.tenantId}', '0${month}', '${month}');"
+										style="white-space: nowrap; display: none"
+										id="${month}add-save-btn-${rentStatus.tenantId}"
+										class="btn btn-xs btn-outline">저장</button>
 
 									<!-- 추가 후 즉각 수정기능 -->
-									<form onsubmit="return false;" method="POST" id="${month}modify-form-${rentStatus.tenantId}"
-										style="display: none" action="/usr/bg12343/dashboard/doRentStatusModify"
-									>
-										<input size="1" type="text" name="${month}rent-text-${rentStatus.tenantId}" autocomplete="off" />
+									<form onsubmit="return false;" method="POST"
+										id="${month}modify-form-${rentStatus.tenantId}"
+										style="display: none"
+										action="/usr/bg12343/dashboard/doRentStatusModify">
+										<input size="1" type="text"
+											name="${month}rent-text-${rentStatus.tenantId}"
+											autocomplete="off" />
 									</form>
 									<div class="ctrlBtn">
-										<button onclick="toggleModifybtn('${rentStatus.tenantId}', '${month}');"
-											id="${month}modify-btn-${rentStatus.tenantId}" style="white-space: nowrap; display: none"
-											class="btn btn-xs btn-outline"
-										>수정</button>
+										<button
+											onclick="toggleModifybtn('${rentStatus.tenantId}', '${month}');"
+											id="${month}modify-btn-${rentStatus.tenantId}"
+											style="white-space: nowrap; display: none"
+											class="btn btn-xs btn-outline">수정</button>
 									</div>
-									<button onclick="doModifyRentStatus('${rentStatus.tenantId}', '0${month}', '${month}');"
-										style="white-space: nowrap; display: none" id="${month}save-btn-${rentStatus.tenantId}"
-										class="btn btn-xs btn-outline"
-									>저장</button>
+									<button
+										onclick="doModifyRentStatus('${rentStatus.tenantId}', '0${month}', '${month}');"
+										style="white-space: nowrap; display: none"
+										id="${month}save-btn-${rentStatus.tenantId}"
+										class="btn btn-xs btn-outline">저장</button>
 								</c:if>
 							</c:if>
 						</td>
@@ -399,6 +420,16 @@
 
 
 </section>
+
+<style>
+.verticalLine{
+position: absolute;
+    width: 1px; /* 세로선의 너비를 1px로 설정 */
+    height: 100%;
+    background-color: red; /* 빨간색 배경색 지정 */
+
+}
+</style>
 
 
 
@@ -440,15 +471,19 @@
 				var endDateMinus3 = new Date(contractEndDate);
 				endDateMinus3.setMonth(endDateMinus3.getMonth() - 3);
 
-				// 	    console.log('endDateMinus3: '+endDateMinus3);
+				// 현재날짜에 줄 그어주기위한 변수
+				var todayDate = new Date();
+				todayDate = new Date(todayDate.getFullYear(), todayDate.getMonth(), 15); // 현재 날짜와 시간에서 연도와 월 정보만 가져옵니다.
 
-				// 하이라이트할 td태그 조건
-				if (thisDate == contractStartDate) {
-					$(this).css("background-color", "gold");
+				// 현재날짜 해당 월 하이라이트
+				if (thisDate.getTime() === todayDate.getTime()) {
+					$(this).append("<div class='verticalLine'></div>");
 				}
+				// 계약시작일 하이라이트
 				if (thisDate > contractStartDate && thisDate < endDateMinus3) {
 					$(this).css("background-color", "skyblue");
 				}
+				// 계약만료일 3개월 전 하이라이트
 				if (thisDate >= endDateMinus3 && thisDate <= contractEndDate) {
 					$(this).css("background-color", "pink");
 				}
