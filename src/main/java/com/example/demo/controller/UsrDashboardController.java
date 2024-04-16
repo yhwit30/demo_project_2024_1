@@ -128,7 +128,7 @@ public class UsrDashboardController {
 				}
 			}
 		}
-		System.out.println("rentYears: " + rentYears);
+//		System.out.println("rentYears: " + rentYears);
 
 		model.addAttribute("buildings", buildings);
 		model.addAttribute("rentStatus", rentStatus);
