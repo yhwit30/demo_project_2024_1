@@ -92,12 +92,12 @@ public class UsrContractController {
 	@ResponseBody
 	public String doContractAdd(int roomId, String leaseType, int deposit, int rent, int maintenanceFee,
 			String contractStartDate, String contractEndDate, String depositDate, String rentDay, String tenantName,
-			int tenantPhone, String tenantCarNum) {
+			String tenantPhone, String tenantCarNum) {
 
 		// 세입자 먼저 생성해서 tenantId 얻기
 		tenantService.addTenantSetup(roomId, tenantName, tenantPhone, tenantCarNum);
 //		int tenantId = tenantService.getTenantIds(roomId); // 호실roomId 중복 시 오류나는데 이건 한 호실에 여러번 계약의 경우 체크할 때 하자
-		int tenantId = tenantService.getLastTenantIds(); 
+		int tenantId = tenantService.getLastTenantIds();
 
 		// 계약 작성 작업
 		ResultData contractAddRd = contractService.addContract(roomId, leaseType, deposit, rent, maintenanceFee,
@@ -121,7 +121,7 @@ public class UsrContractController {
 
 	@RequestMapping("/usr/bg12343/contract/doContractSetupAdd")
 	@ResponseBody
-	public String doContractSetupAdd(int roomId[], String[] tenantName, int[] tenantPhone, String[] tenantCarNum,
+	public String doContractSetupAdd(int roomId[], String[] tenantName, String[] tenantPhone, String[] tenantCarNum,
 			String[] leaseType, int[] deposit, int[] rent, int[] maintenanceFee, String[] contractStartDate,
 			String[] contractEndDate, String[] depositDate, String[] rentDay) {
 
@@ -252,7 +252,7 @@ public class UsrContractController {
 	@RequestMapping("/usr/bg12343/contract/doContractDelete")
 	@ResponseBody
 	public String doContractDelete(int contractId) {
-		
+
 		contractService.deleteContract(contractId);
 
 		return Ut.jsReplace("S-2", "삭제되었습니다", "/usr/bg12343/contract/contract");

@@ -63,14 +63,14 @@ public class UsrTenantController {
 
 	@RequestMapping("/usr/bg12343/tenant/doTenantAdd")
 	@ResponseBody
-	public String doTenantAdd(String tenantName, int tenantPhone, String tenantCarNum) {
+	public String doTenantAdd(String tenantName, String tenantPhone, String tenantCarNum) {
 		// 로그인 상태 체크 - 인터셉터에서
 
 		// 제목 내용 빈 칸 확인
 		if (Ut.isNullOrEmpty(tenantName)) {
 			return Ut.jsHistoryBack("F-1", "세입자이름을 입력해주세요");
 		}
-		if (Ut.isEmpty(tenantPhone)) {
+		if (Ut.isNullOrEmpty(tenantPhone)) {
 			return Ut.jsHistoryBack("F-2", "세입자휴대폰번호를 입력해주세요");
 		}
 		if (Ut.isNullOrEmpty(tenantCarNum)) {
@@ -116,7 +116,7 @@ public class UsrTenantController {
 
 	@RequestMapping("/usr/bg12343/tenant/doTenantModify")
 	@ResponseBody
-	public String doTenantModify(int[] id, String[] tenantName, int[] tenantPhone, String[] tenantCarNum) {
+	public String doTenantModify(int[] id, String[] tenantName, String[] tenantPhone, String[] tenantCarNum) {
 
 		ResultData tenantModifyRd = null;
 		for (int i = 0; i < id.length; i++) {
@@ -129,7 +129,7 @@ public class UsrTenantController {
 	// ajax
 	@RequestMapping("/usr/bg12343/tenant/doTenantModifyAjax")
 	@ResponseBody
-	public Tenant doTenantModifyAjax(int tenantId, String tenantName, int tenantPhone, String tenantCarNum) {
+	public Tenant doTenantModifyAjax(int tenantId, String tenantName, String tenantPhone, String tenantCarNum) {
 
 		// 세입자정보 수정
 		ResultData tenantModifyRd = tenantService.modifyTenant(tenantId, tenantName, tenantPhone, tenantCarNum);

@@ -110,6 +110,8 @@
 			<table class="table-box-1" border="1">
 				<thead>
 					<tr>
+						<th>번호</th>
+						<th>등록일</th>
 						<th>건물명</th>
 						<th>호실</th>
 						<th>세입자명</th>
@@ -133,6 +135,8 @@
 
 					<c:forEach var="tenant" items="${tenants }">
 						<tr class="hover">
+							<td>${tenant.id}</td>
+							<td>${tenant.regDate.substring(0,10)}</td>
 							<td>${tenant.bldgName }</td>
 							<td>${tenant.roomNum }</td>
 
@@ -162,7 +166,7 @@
 									<td>${tenant.contractStartDate }</td>
 									<td>${tenant.contractEndDate }</td>
 									<td>${tenant.depositDate }</td>
-									<td>${tenant.rentDate }</td>
+									<td>${tenant.rentDay }</td>
 								</c:when>
 								<c:otherwise>
 									<td colspan="8" style="text-align:center;">계약이 없습니다</td>

@@ -865,7 +865,7 @@ CREATE TABLE tenant(
     regDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL,
     tenantName CHAR(20) NOT NULL,
-    tenantPhone INT(10) NOT NULL,
+    tenantPhone CHAR(20) NOT NULL,
     tenantCarNum CHAR(20) NOT NULL,
     tenantRegNum INT(10),
     roomId INT(10) NOT NULL
@@ -878,7 +878,7 @@ INSERT INTO tenant
 SET regDate = NOW(),
 updateDate = NOW(),
 tenantName = '홍길동',
-tenantPhone = 01093939393,
+tenantPhone = '01093939393',
 tenantCarNum = '02라2032',
 roomId = 1;
 
@@ -887,7 +887,7 @@ INSERT INTO tenant
 SET regDate = NOW(),
 updateDate = NOW(),
 tenantName = '홍길순',
-tenantPhone = 0103453533,
+tenantPhone = '0103453533',
 tenantCarNum = '02다3454',
 roomId = 2;
 
@@ -896,7 +896,7 @@ INSERT INTO tenant
 SET regDate = NOW(),
 updateDate = NOW(),
 tenantName = '이상호',
-tenantPhone = 0106562324,
+tenantPhone = '0106562324',
 tenantCarNum = '05마4218',
 roomId = 6;
 
@@ -906,7 +906,7 @@ INSERT INTO tenant
 SET regDate = NOW(),
 updateDate = NOW(),
 tenantName = '김철수',
-tenantPhone = 0103453533,
+tenantPhone = '0103453533',
 tenantCarNum = '02다3454',
 roomId = 10;
 
@@ -915,7 +915,7 @@ INSERT INTO tenant
 SET regDate = NOW(),
 updateDate = NOW(),
 tenantName = '이보라',
-tenantPhone = 0103453533,
+tenantPhone = '0103453533',
 tenantCarNum = '02다3454',
 roomId = 15;
 
@@ -924,7 +924,7 @@ INSERT INTO tenant
 SET regDate = NOW(),
 updateDate = NOW(),
 tenantName = '강산해',
-tenantPhone = 0103453533,
+tenantPhone = '0103453533',
 tenantCarNum = '02다3454',
 roomId = 16;
 
@@ -933,7 +933,7 @@ INSERT INTO tenant
 SET regDate = NOW(),
 updateDate = NOW(),
 tenantName = '김미자',
-tenantPhone = 0103453533,
+tenantPhone = '0103453533',
 tenantCarNum = '02다3454',
 roomId = 17;
 
@@ -2095,7 +2095,7 @@ AND (CS.rentDate LIKE '2024-01%' OR CS.rentDate LIKE '2024-02%' OR CS.rentDate L
 	 CS.rentDate LIKE '2024-07%' OR CS.rentDate LIKE '2024-08%' OR CS.rentDate LIKE '2024-09%' OR
      CS.rentDate LIKE '2024-10%' OR CS.rentDate LIKE '2024-11%' OR CS.rentDate LIKE '2024-12%')
 GROUP BY R.id
-HAVING B.id = 2;
+HAVING B.id = 1;
 
 
 # 월별현황 하나 가져오기
