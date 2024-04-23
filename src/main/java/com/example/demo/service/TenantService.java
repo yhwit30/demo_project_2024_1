@@ -40,6 +40,11 @@ public class TenantService {
 	public int getTenantIds(int roomId) {
 		return tenantRepository.getTenantIds(roomId);
 	}
+	// contractController에서 사용
+	public int getLastTenantIds() {
+		int lastTenantId = tenantRepository.getLastInsertId();
+		return lastTenantId;
+	}
 
 	public boolean isTenantData(int roomId) {
 		int tenantData = tenantRepository.getTenantIdCnt(roomId);

@@ -18,7 +18,7 @@ public interface TenantRepository {
 			SELECT *
 			FROM tenant AS T
 			LEFT JOIN contract AS C
-			ON T.roomId = C.roomId
+			ON T.id = C.tenantId
 			LEFT JOIN room AS R
 			ON T.roomId = R.id
 			LEFT JOIN building AS B
@@ -27,6 +27,7 @@ public interface TenantRepository {
 			<if test="bldgId != 0">
 				AND B.id = #{bldgId}
 			</if>
+			GROUP BY T.id
 			</script>
 			""")
 	public List<Tenant> getForPrintTenants(int bldgId);

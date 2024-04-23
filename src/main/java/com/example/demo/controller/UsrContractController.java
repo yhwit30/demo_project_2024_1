@@ -96,7 +96,8 @@ public class UsrContractController {
 
 		// 세입자 먼저 생성해서 tenantId 얻기
 		tenantService.addTenantSetup(roomId, tenantName, tenantPhone, tenantCarNum);
-		int tenantId = tenantService.getTenantIds(roomId); // 호실roomId 중복 시 오류나는데 이건 한 호실에 여러번 계약의 경우 체크할 때 하자
+//		int tenantId = tenantService.getTenantIds(roomId); // 호실roomId 중복 시 오류나는데 이건 한 호실에 여러번 계약의 경우 체크할 때 하자
+		int tenantId = tenantService.getLastTenantIds(); 
 
 		// 계약 작성 작업
 		ResultData contractAddRd = contractService.addContract(roomId, leaseType, deposit, rent, maintenanceFee,
