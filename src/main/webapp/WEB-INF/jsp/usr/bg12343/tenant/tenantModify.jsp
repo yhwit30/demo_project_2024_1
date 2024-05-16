@@ -81,8 +81,8 @@
 							<td>${tenant.depositDate }
 								<input type="hidden" name="depositDate" value="${tenant.depositDate }" />
 							</td>
-							<td>${tenant.rentDate }
-								<input type="hidden" name="rentDate" value="${tenant.rentDate }" />
+							<td>${tenant.rentDay }
+								<input type="hidden" name="rentDate" value="${tenant.rentDay }" />
 							</td>
 						</tr>
 					</c:forEach>
