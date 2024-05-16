@@ -56,7 +56,7 @@ public interface TenantRepository {
 			tenantPhone = #{tenantPhone},
 			tenantCarNum = #{tenantCarNum}
 			""")
-	public void addTenant(String tenantName, int tenantPhone, String tenantCarNum);
+	public void addTenant(String tenantName, String tenantPhone, String tenantCarNum);
 
 	@Select("SELECT LAST_INSERT_ID()")
 	public int getLastInsertId();
@@ -68,7 +68,7 @@ public interface TenantRepository {
 			tenantCarNum = #{tenantCarNum}
 			WHERE id = #{id}
 			""")
-	public void modifyTenant(int id, String tenantName, int tenantPhone, String tenantCarNum);
+	public void modifyTenant(int id, String tenantName, String tenantPhone, String tenantCarNum);
 
 	@Insert("""
 			INSERT INTO tenant
@@ -79,7 +79,7 @@ public interface TenantRepository {
 			tenantPhone = #{tenantPhone},
 			tenantCarNum = #{tenantCarNum}
 			""")
-	public void addTenantSetup(int roomId, String tenantName, int tenantPhone, String tenantCarNum); // contractController에서
+	public void addTenantSetup(int roomId, String tenantName, String tenantPhone, String tenantCarNum); // contractController에서
 																										// 사용
 
 	@Select("""

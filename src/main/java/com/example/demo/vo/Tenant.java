@@ -12,7 +12,7 @@ public class Tenant {
 	private String regDate;
 	private String updateDate;
 	private String tenantName;
-	private int tenantPhone;
+	private String tenantPhone;
 	private String tenantCarNum;
 	
 	private int deposit;
@@ -21,7 +21,7 @@ public class Tenant {
 	private String contractStartDate;
 	private String contractEndDate;
 	private String depositDate;
-	private String rentDate;
+	private String rentDay;
 	private int roomNum;
 	private String bldgName;
 	private String leaseType;

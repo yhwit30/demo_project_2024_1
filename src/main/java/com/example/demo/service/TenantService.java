@@ -20,19 +20,19 @@ public class TenantService {
 		return tenantRepository.getForPrintTenants(bldgId);
 	}
 
-	public ResultData addTenant(String tenantName, int tenantPhone, String tenantCarNum) {
+	public ResultData addTenant(String tenantName, String tenantPhone, String tenantCarNum) {
 		tenantRepository.addTenant(tenantName, tenantPhone, tenantCarNum);
 		int id = tenantRepository.getLastInsertId();
 		return ResultData.from("S-1", Ut.f("%d번 글이 생성되었습니다", id), "id", id);
 	}
 
-	public ResultData modifyTenant(int id, String tenantName, int tenantPhone, String tenantCarNum) {
+	public ResultData modifyTenant(int id, String tenantName, String tenantPhone, String tenantCarNum) {
 		tenantRepository.modifyTenant(id, tenantName, tenantPhone, tenantCarNum);
 		return ResultData.from("S-1", "세입자정보가 수정되었습니다");
 	}
 
 	// contractController에서 사용
-	public void addTenantSetup(int roomId, String tenantName, int tenantPhone, String tenantCarNum) {
+	public void addTenantSetup(int roomId, String tenantName, String tenantPhone, String tenantCarNum) {
 		tenantRepository.addTenantSetup(roomId, tenantName, tenantPhone, tenantCarNum);
 	}
 

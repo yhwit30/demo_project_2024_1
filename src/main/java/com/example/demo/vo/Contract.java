@@ -25,7 +25,7 @@ public class Contract {
 	private String bldgName;
 	private String roomNum;
 	private String tenantName;
-	private int tenantPhone;
+	private String tenantPhone;
 	private String tenantCarNum;
 	
 	
