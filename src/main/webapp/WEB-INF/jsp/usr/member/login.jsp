@@ -67,8 +67,8 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<a class="btn btn-active btn-ghost" href="${rq.findLoginIdUri }">아이디 찾기</a>
-							<a class="btn btn-ghost btn-active" href="${rq.findLoginPwUri }">비밀번호찾기</a>
+							<a class="btn btn-active btn-ghost btn-sm" href="${rq.findLoginIdUri }">아이디 찾기</a>
+							<a class="btn btn-ghost btn-active btn-sm" href="${rq.findLoginPwUri }">비밀번호찾기</a>
 						</td>
 					</tr>
 				</tbody>

@@ -9,19 +9,19 @@
 		<a class="btn btn-outline w-full" href="/usr/bg12343/dashboard/dashboard?bldgId=1"> 임대현황 보기</a>
 		<img src="/resource/building.jpg" alt="" />
 	</div>
-	<div>
-		<a class="btn btn-outline w-full" href="/usr/article/list">커뮤니티 보기</a>
-		<img src="/resource/community.png" alt="" />
-	</div>
-	<div>
-		<a class="btn btn-outline w-full" href="/usr/news/news">부동산 관련 뉴스 보기</a>
-		<div>다음</div>
-		<img src="/resource/daum.png" alt="" />
-		<div>네이버</div>
-		<img src="/resource/naver.png" alt="" />
-		<div>구글</div>
-		<img src="/resource/google.png" alt="" />
-	</div>
+<!-- 	<div> -->
+<!-- 		<a class="btn btn-outline w-full" href="/usr/article/list">커뮤니티 보기</a> -->
+<!-- 		<img src="/resource/community.png" alt="" /> -->
+<!-- 	</div> -->
+<!-- 	<div> -->
+<!-- 		<a class="btn btn-outline w-full" href="/usr/news/news">부동산 관련 뉴스 보기</a> -->
+<!-- 		<div>다음</div> -->
+<!-- 		<img src="/resource/daum.png" alt="" /> -->
+<!-- 		<div>네이버</div> -->
+<!-- 		<img src="/resource/naver.png" alt="" /> -->
+<!-- 		<div>구글</div> -->
+<!-- 		<img src="/resource/google.png" alt="" /> -->
+<!-- 	</div> -->
 
 
 </div>

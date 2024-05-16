@@ -224,11 +224,18 @@
 	<!-- 건물에 해당하는 데이터 있는 연도만큼 그리기 <script>에 함수-->
 <%-- 	<c:choose> --%>
 <%-- 		<c:when test="${not empty rentYears}"> --%>
-			<select data-value="${param.year }" class=" select select-bordered select-sm w-20 max-w-xs" name="year" id="year">
-				<c:forEach var="rentYear" items="${rentYears }">
-					<option value="${rentYear }">${rentYear }</option>
-				</c:forEach>
-			</select>
+<%-- 			<select data-value="${param.year }" class=" select select-bordered select-sm w-20 max-w-xs" name="year" id="year"> --%>
+			
+<%-- 				<c:forEach var="rentYear" items="${rentYears }"> --%>
+<%-- 					<option value="${rentYear }">${rentYear }</option> --%>
+<%-- 				</c:forEach> --%>
+				
+<!-- 			</select> -->
+<%-- 					</c:when> --%>
+<%-- 		<c:otherwise> --%>
+<!-- 			<p>계약 및 수납현황을 추가하면 계약연도</p> -->
+<%-- 		</c:otherwise> --%>
+<%-- 	</c:choose> --%>
 
 			<!--연도 이동 -->
 			<a class="btn btn-sm btn-outline ${param.year < nowYear ? 'btn-active' : '' }"
@@ -239,11 +246,7 @@
 				href="rentStatus?bldgId=${param.bldgId }&year=${param.year + 1}">▶</a>
 
 			<p>* 수납현황을 수정하려면 해당 월에 마우스를 올리세요</p>
-<%-- 		</c:when> --%>
-<%-- 		<c:otherwise> --%>
-<!-- 			<p>계약 및 수납현황을 추가하십시오.</p> -->
-<%-- 		</c:otherwise> --%>
-<%-- 	</c:choose> --%>
+
 
 
 

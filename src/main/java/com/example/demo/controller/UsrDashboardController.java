@@ -98,21 +98,22 @@ public class UsrDashboardController {
 		// 건물 변환 버튼용
 		List<Building> buildings = buildingService.getForPrintBuildings();
 
-		// 연도별 데이터 가져오기
+		// 연도별 데이터 가져오기 -> 일단 안쓰는 걸로. 보류.
 		List<Dashboard> rentStatusYear = dashboardService.getRentStatusYear(bldgId);
-
-		// rentStatusYear에서 연도만 정제
+		
+		// rentStatusYear에서 연도만 정제 -> 일단 안쓰는 걸로. 보류.
 		List<String> rentYears = new ArrayList<>();
 		for (Dashboard dashboard : rentStatusYear) {
 			// contractStartDate와 contractEndDate 추출
 			String contractStartDate = dashboard.getContractStartDate();
 			String contractEndDate = dashboard.getContractEndDate();
+			
 
-			// contractStartDate를 '.'으로 분할하여 연도 부분 추출
+			// contractStartDate를 '-'으로 분할하여 연도 부분 추출
 			String[] startDateParts = contractStartDate.split("\\-");
 			String startYear = startDateParts[0]; // 연도는 첫 번째 요소
 
-			// contractEndDate를 '.'으로 분할하여 연도 부분 추출
+			// contractEndDate를 '-'으로 분할하여 연도 부분 추출
 			String[] endDateParts = contractEndDate.split("\\-");
 			String endYear = endDateParts[0]; // 연도는 첫 번째 요소
 
@@ -128,7 +129,7 @@ public class UsrDashboardController {
 				}
 			}
 		}
-//		System.out.println("rentYears: " + rentYears);
+		System.out.println("rentYears: " + rentYears);
 
 		model.addAttribute("buildings", buildings);
 		model.addAttribute("rentStatus", rentStatus);
