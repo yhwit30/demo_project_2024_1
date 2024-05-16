@@ -75,4 +75,5 @@
  
 ## 로컬실행 및 사용 설명서 
 
-[BG12343 사용설명서.pdf](https://github.com/yhwit30/demo_project_2024_1/files/15329578/BG12343.pdf)
+[BG12343 사용설명서.pdf](https://github.com/yhwit30/demo_project_2024_1/files/15330328/BG12343.pdf)
+
