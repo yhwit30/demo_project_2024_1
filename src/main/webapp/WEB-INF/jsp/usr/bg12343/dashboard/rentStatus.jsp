@@ -194,7 +194,7 @@
 .ctrlBtn {
 	display: none;
 	position: absolute;
-	background-color: white;
+/* 	background-color: white; */
 	z-index: 1;
 }
 
@@ -320,7 +320,7 @@
 									</form>
 									<div class="ctrlBtn">
 										<button onclick="toggleModifybtn('${rentStatus.tenantId}', '${month}');"
-											id="${month}modify-btn-${rentStatus.tenantId}" style="white-space: nowrap" class="btn btn-xs btn-outline">수정</button>
+											id="${month}modify-btn-${rentStatus.tenantId}" style="white-space: nowrap" class="btn btn-xs">수정</button>
 									</div>
 									<button onclick="doModifyRentStatus('${rentStatus.tenantId}', '0${month}', '${month}');"
 										style="white-space: nowrap; display: none" id="${month}save-btn-${rentStatus.tenantId}"
@@ -334,7 +334,7 @@
 									<div class="ctrlBtn">
 										<button onclick="toggleAddbtn('${rentStatus.tenantId}', '${month}');"
 											id="${month}add-btn-${rentStatus.tenantId}" style="white-space: nowrap; display: none"
-											class="btn btn-xs btn-outline">추가</button>
+											class="btn btn-xs btn-neutral">추가</button>
 									</div>
 									<button onclick="doAddRentStatus('${rentStatus.tenantId}', '0${month}', '${month}');"
 										style="white-space: nowrap; display: none" id="${month}add-save-btn-${rentStatus.tenantId}"
@@ -349,7 +349,7 @@
 									</form>
 									<div class="ctrlBtn">
 										<button onclick="toggleAddbtn('${rentStatus.tenantId}', '${month}');"
-											id="${month}add-btn-${rentStatus.tenantId}" style="white-space: nowrap" class="btn btn-xs btn-outline">추가</button>
+											id="${month}add-btn-${rentStatus.tenantId}" style="white-space: nowrap" class="btn btn-xs btn-neutral">추가</button>
 									</div>
 									<button onclick="doAddRentStatus('${rentStatus.tenantId}', '0${month}', '${month}');"
 										style="white-space: nowrap; display: none" id="${month}add-save-btn-${rentStatus.tenantId}"
@@ -363,7 +363,7 @@
 									<div class="ctrlBtn">
 										<button onclick="toggleModifybtn('${rentStatus.tenantId}', '${month}');"
 											id="${month}modify-btn-${rentStatus.tenantId}" style="white-space: nowrap; display: none"
-											class="btn btn-xs btn-outline">수정</button>
+											class="btn btn-xs">수정</button>
 									</div>
 									<button onclick="doModifyRentStatus('${rentStatus.tenantId}', '0${month}', '${month}');"
 										style="white-space: nowrap; display: none" id="${month}save-btn-${rentStatus.tenantId}"
