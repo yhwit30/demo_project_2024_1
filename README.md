@@ -77,3 +77,8 @@
 
 [BG12343 사용설명서.pdf](https://github.com/yhwit30/demo_project_2024_1/files/15330328/BG12343.pdf)
 
+## 발표 자료 
+
+[개인프로젝트(원유현).pptx](https://github.com/yhwit30/demo_project_2024_1/files/15426457/default.pptx)
+
+
